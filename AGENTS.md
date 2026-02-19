@@ -5,6 +5,7 @@
 
 ## Allgemeine Kommunikation
 - Kommunikation immer auf Deutsch.
+- Kommentare auf GitHub (Issues, PRs, Reviews) immer auf Englisch verfassen.
 - Bei der ersten Änderung an einer Datei pro Task: Datum im Header/Metadaten auf das aktuelle Datum setzen.
 - Wenn Dateien geändert werden: vorhandene Header/Metadaten an die neue Funktionalität anpassen, falls diese nicht mehr korrekt sind.
 
