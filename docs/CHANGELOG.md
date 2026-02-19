@@ -12,6 +12,7 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- CLI-Parser: Neue Stub-Unit `u_cli_validate` eingefuehrt und in `u_cli_parse` verdrahtet (`ValidateCommand(Cmd)` am Ende des Build-Flows, aktuell ohne Verhaltensaenderung mit `Result := True`). (2026-02-19)
 - Meta: `AGENTS.md` um Regel erweitert: GitHub-Kommentare (Issues/PRs/Reviews) werden immer auf Englisch verfasst. (2026-02-19)
 - Meta: `.vscode/` und `projekt_kontext.md` aus der Versionsverwaltung genommen (per `.gitignore` ausgeschlossen und aus dem Git-Index entfernt). (2026-02-19)
 - Meta: `scripts/projekt_kontext.sh` Git-Status auf `git status --short --branch` erweitert (Branch + Ahead/Behind im Export) und zwei neue Kurzblaecke fuer `git diff --stat` sowie `git diff --cached --stat` hinzugefuegt; `docs/README.md` aktualisiert. (2026-02-19)

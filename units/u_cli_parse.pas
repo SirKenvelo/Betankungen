@@ -20,7 +20,8 @@ unit u_cli_parse;
 interface
 
 uses
-  u_cli_types;
+  u_cli_types,
+  u_cli_validate;
 
 function ParseCommand: TCommand;
 
@@ -546,6 +547,9 @@ begin
       Cmd.PeriodFromIso := '';
     end;
   end;
+
+  if not ValidateCommand(Cmd) then
+    Exit(False);
 
   Result := True;
 end;
