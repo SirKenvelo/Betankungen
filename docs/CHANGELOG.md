@@ -12,6 +12,12 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Meta: `scripts/projekt_kontext.sh` Git-Status auf `git status --short --branch` erweitert (Branch + Ahead/Behind im Export) und zwei neue Kurzblaecke fuer `git diff --stat` sowie `git diff --cached --stat` hinzugefuegt; `docs/README.md` aktualisiert. (2026-02-19)
+- Meta: `AGENTS.md` um verbindlichen `Repo-Pflege-Rhythmus` erweitert (Session-Start-Sync, Pflege je logischer Einheit waehrend der Session, Abschluss-Sync + Commit/Push am Session-Ende). (2026-02-19)
+- Meta: `AGENTS.md` um Abschnitt `Repo-Pflege` erweitert (Codex uebernimmt auf Wunsch laufende Git-Repository-Pflege inkl. sicheren Leitplanken fuer Auth-Fallbacks und destruktive Aktionen); Stand-Datum aktualisiert. (2026-02-19)
+- Meta: `scripts/projekt_kontext.sh` um Snapshot des Arbeitsstands erweitert (`git status --short` als eigener Abschnitt im Export); Doku in `docs/README.md` nachgezogen. (2026-02-19)
+- Meta: Neues Skript `scripts/projekt_kontext.sh` fuer Session-Kontext ergaenzt (Git-tracked Struktur wie auf GitHub + Volltext-Export fuer `.pas`, `.lpr`, `.md`, `.sh` in `projekt_kontext.md`); `docs/README.md` um Nutzung/Beispiele erweitert. (2026-02-19)
+- Meta: Projektweite `.gitignore` im Root erstellt (FPC-Buildartefakte, Laufzeitdaten wie `.backup/.releases` und DB-Dateien sowie Editor-/OS-Tempdateien). (2026-02-19)
 - Docs: Zielversion im Unreleased-Block von `0.6.0` auf `0.5.6-0` umgestellt und Roadmap-Referenzen auf Zwischenversion/Folgeversion nachgezogen (`docs/STATUS.md`, `docs/ARCHITECTURE.md`, `docs/README.md`). (2026-02-19)
 
 ## 0.5.6 – 2026-02-19

@@ -262,6 +262,21 @@ Netzwerkdiagnose mit optionalem Interface-Neustart bei "verbunden, aber kein Int
 - Unterstuetzt `--info-only` fuer reine Diagnose ohne Neustart
 - Unterstuetzt `--only-if-offline` fuer einen konditionalen Reset nur bei erkannten Fehlern
 
+### `scripts/projekt_kontext.sh`
+Session-Helfer fuer AI-Kontext am Ende/Anfang einer Coding-Session.
+
+**Funktionen**
+- Nutzt die Git-tracked Dateiliste (`git ls-files`) als Struktur wie auf GitHub
+- Fuegt den aktuellen Arbeitsstand inkl. Branch/Ahead/Behind als `git status --short --branch` ein
+- Fuegt eine Kurzsicht der lokalen Diffs hinzu (`git diff --stat` und `git diff --cached --stat`)
+- Exportiert relevante Quellen in eine Markdown-Datei: `.pas`, `.lpr`, `.md`, `.sh`
+- Schreibt standardmaessig nach `projekt_kontext.md` (optional eigener Ausgabepfad)
+- Liefert zusaetzlich Repo-Metadaten (Root, Branch, Commit)
+
+Beispiel:
+- `scripts/projekt_kontext.sh`
+- `scripts/projekt_kontext.sh /tmp/projekt_kontext.md`
+
 ### Restore
 - Wiederherstellungsschritte sind in `docs/RESTORE.md` dokumentiert.
 
