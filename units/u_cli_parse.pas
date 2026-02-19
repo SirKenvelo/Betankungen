@@ -1,0 +1,558 @@
+{
+  u_cli_parse.pas
+  ---------------------------------------------------------------------------
+  CREATED: 2026-02-19
+  UPDATED: 2026-02-19
+  AUTHOR : Christof Kempinski
+  Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
+
+  Verantwortlichkeiten:
+  - Parst CLI-Argumente in den zentralen Zustand `TCommand`.
+  - Fuehrt die regelbasierte Validierung der CLI-Kombinationen aus.
+  - Liefert im Fehlerfall konsistente Fehlertexte und Fokus-Markierungen.
+  ---------------------------------------------------------------------------
+}
+
+unit u_cli_parse;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  u_cli_types;
+
+function ParseCommand: TCommand;
+
+implementation
+
+uses
+  SysUtils,
+  DateUtils;
+
+// Mapping-Helfer
+function CommandKindFromFlag(const S: string; out Kind: TCommandKind): boolean;
+begin
+  Result := True;
+  if S = '--add' then Kind := ckAdd
+  else if S = '--list' then Kind := ckList
+  else if S = '--edit' then Kind := ckEdit
+  else if S = '--delete' then Kind := ckDelete
+  else if S = '--stats' then Kind := ckStats
+  else Result := False;
+end;
+
+// Parst Tabellennamen in Aufzaehlungstyp und erlaubt Singular/Plural.
+function ParseTableKind(const S: string; out Kind: TTableKind): boolean;
+var
+  L: string;
+begin
+  L := LowerCase(S);
+  case L of
+    'station', 'stations':
+      begin
+        Kind := tkStations;
+        Exit(True);
+      end;
+    'fuelup', 'fuelups':
+      begin
+        Kind := tkFuelups;
+        Exit(True);
+      end;
+  end;
+  Result := False;
+end;
+
+function TryParseYYYYMM(const S: string; out Y, M: word): boolean;
+var
+  SY, SM: string;
+  iY, iM: integer;
+begin
+  Result := False;
+  if Length(S) <> 7 then Exit;
+  if S[5] <> '-' then Exit;
+
+  SY := Copy(S, 1, 4);
+  SM := Copy(S, 6, 2);
+
+  if (not TryStrToInt(SY, iY)) or (not TryStrToInt(SM, iM)) then Exit;
+  if (iY < 1900) or (iY > 2200) then Exit;
+  if (iM < 1) or (iM > 12) then Exit;
+
+  Y := word(iY);
+  M := word(iM);
+  Result := True;
+end;
+
+function TryParseYYYYMMDD(const S: string; out Y, M, D: word): boolean;
+var
+  SY, SM, SD: string;
+  iY, iM, iD: integer;
+  Dt: TDateTime;
+begin
+  Result := False;
+  if Length(S) <> 10 then Exit;
+  if (S[5] <> '-') or (S[8] <> '-') then Exit;
+
+  SY := Copy(S, 1, 4);
+  SM := Copy(S, 6, 2);
+  SD := Copy(S, 9, 2);
+
+  if (not TryStrToInt(SY, iY)) or (not TryStrToInt(SM, iM)) or (not TryStrToInt(SD, iD)) then Exit;
+  if (iY < 1900) or (iY > 2200) then Exit;
+
+  // echte Kalenderpruefung
+  if not TryEncodeDate(iY, iM, iD, Dt) then Exit;
+
+  Y := word(iY);
+  M := word(iM);
+  D := word(iD);
+  Result := True;
+end;
+
+// ------------------------------------------------------------
+// Zeitraum-Parsing (--from/--to) -> ISO + exklusives Ende
+function TryParseFromToValue(const S: string; out FromIso, ToExclIso: string): boolean;
+var
+  Y, M, D: word;
+  DtStart, DtEnd: TDateTime;
+begin
+  Result := False;
+  FromIso := '';
+  ToExclIso := '';
+
+  if TryParseYYYYMM(S, Y, M) then
+  begin
+    DtStart := EncodeDate(Y, M, 1);
+    DtEnd := IncMonth(DtStart, 1);
+    FromIso := FormatDateTime('yyyy-mm-dd hh:nn:ss', DtStart);
+    ToExclIso := FormatDateTime('yyyy-mm-dd hh:nn:ss', DtEnd);
+    Exit(True);
+  end;
+
+  if TryParseYYYYMMDD(S, Y, M, D) then
+  begin
+    DtStart := EncodeDate(Y, M, D);
+    DtEnd := IncDay(DtStart, 1);
+    FromIso := FormatDateTime('yyyy-mm-dd hh:nn:ss', DtStart);
+    ToExclIso := FormatDateTime('yyyy-mm-dd hh:nn:ss', DtEnd);
+    Exit(True);
+  end;
+end;
+
+// Zentrale CLI-Parsing- und Regelpruefung; liefert Fehlertext + Fokus-Flag.
+function BuildCommand(out Cmd: TCommand): boolean;
+var
+  i: integer;
+  TmpKind: TCommandKind;
+  TmpFromIso, TmpToExclIso: string;
+begin
+  FillChar(Cmd, SizeOf(Cmd), 0);
+  Cmd.Kind := ckNone;
+  Cmd.HasCommand := False;
+  Cmd.Target := tkStations; // Standard egal, wird gesetzt, wenn HasCommand True
+
+  Cmd.SeedStations := 10;
+  Cmd.SeedFuelups := 100;
+  Cmd.SeedValue := 0;
+  Cmd.SeedForce := False;
+  Cmd.UseDemoDb := False;
+
+  i := 1;
+  while i <= ParamCount do
+  begin
+    // Meta-Optionen
+    if ParamStr(i) = '--help' then begin Cmd.Help := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--version' then begin Cmd.Version := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--about' then begin Cmd.About := True; Inc(i); Continue; end;
+
+    // Optionen
+    if ParamStr(i) = '--debug' then begin Cmd.Debug := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--trace' then begin Cmd.Trace := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--quiet' then begin Cmd.Quiet := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--detail' then begin Cmd.Detail := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--json' then begin Cmd.Json := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--monthly' then begin Cmd.Monthly := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--yearly' then begin Cmd.Yearly := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--csv' then begin Cmd.Csv := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--dashboard' then begin Cmd.Dashboard := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--pretty' then begin Cmd.Pretty := True; Inc(i); Continue; end;
+
+    // ------------------------------------------------------------
+    // Zeitraum-Optionen: --from/--to (nur fuer --stats fuelups)
+    if ParamStr(i) = '--from' then
+    begin
+      if i + 1 > ParamCount then begin Cmd.ErrorMsg := 'Fehler: --from benoetigt einen Wert (YYYY-MM oder YYYY-MM-DD).'; Cmd.ErrorFocus := efStatsPeriod; Exit(False); end;
+      Cmd.FromProvided := True;
+      Cmd.PeriodEnabled := True;
+      if not TryParseFromToValue(ParamStr(i + 1), Cmd.PeriodFromIso, Cmd.PeriodToExclIso) then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --from hat ein ungueltiges Format. Erwartet: YYYY-MM oder YYYY-MM-DD.';
+        Cmd.ErrorFocus := efStatsPeriod;
+        Exit(False);
+      end;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--to' then
+    begin
+      if i + 1 > ParamCount then begin Cmd.ErrorMsg := 'Fehler: --to benoetigt einen Wert (YYYY-MM oder YYYY-MM-DD).'; Cmd.ErrorFocus := efStatsPeriod; Exit(False); end;
+      Cmd.ToProvided := True;
+      Cmd.PeriodEnabled := True;
+
+      // Achtung: --to wird als *exklusives Ende* gespeichert:
+      // Wir parsen den Wert ebenfalls als Zeitraum und nehmen das ToExclIso.
+      // Beispiel: --to 2025-02-28 -> ToExcl = 2025-03-01 00:00:00
+      if not TryParseFromToValue(ParamStr(i + 1), TmpFromIso, TmpToExclIso) then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --to hat ein ungueltiges Format. Erwartet: YYYY-MM oder YYYY-MM-DD.';
+        Cmd.ErrorFocus := efStatsPeriod;
+        Exit(False);
+      end;
+
+      Cmd.PeriodToExclIso := TmpToExclIso;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    // Seed/Demo-Optionen: --seed ist ein exklusives Hauptkommando, die uebrigen sind Zusatzparameter.
+    if ParamStr(i) = '--seed' then
+    begin
+      if Cmd.HasCommand then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --seed darf nicht mit anderen Kommandos kombiniert werden.';
+        Cmd.ErrorFocus := efSeed;
+        Exit(False);
+      end;
+      Cmd.Kind := ckSeed;
+      Cmd.HasCommand := True;
+      Inc(i);
+      Continue;
+    end;
+
+    // Laufzeit-Schalter fuer Seed/Demo
+    if ParamStr(i) = '--demo' then
+    begin
+      Cmd.UseDemoDb := True;
+      Inc(i);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--force' then
+    begin
+      Cmd.SeedForce := True;
+      Inc(i);
+      Continue;
+    end;
+
+    // Seed-Parameter mit Zahlenwert
+    if ParamStr(i) = '--stations' then
+    begin
+      if i + 1 > ParamCount then begin Cmd.ErrorMsg := 'Fehler: --stations benötigt eine Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      if not TryStrToInt(ParamStr(i + 1), Cmd.SeedStations) then begin Cmd.ErrorMsg := 'Fehler: --stations benötigt eine gültige Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--fuelups' then
+    begin
+      if i + 1 > ParamCount then begin Cmd.ErrorMsg := 'Fehler: --fuelups benötigt eine Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      if not TryStrToInt(ParamStr(i + 1), Cmd.SeedFuelups) then begin Cmd.ErrorMsg := 'Fehler: --fuelups benötigt eine gültige Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--seed-value' then
+    begin
+      if i + 1 > ParamCount then begin Cmd.ErrorMsg := 'Fehler: --seed-value benötigt eine Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      if not TryStrToInt(ParamStr(i + 1), Cmd.SeedValue) then begin Cmd.ErrorMsg := 'Fehler: --seed-value benötigt eine gültige Zahl.'; Cmd.ErrorFocus := efSeed; Exit(False); end;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--show-config' then begin Cmd.ShowConfig := True; Inc(i); Continue; end;
+    if ParamStr(i) = '--reset-config' then begin Cmd.ResetConfig := True; Inc(i); Continue; end;
+
+    // DB-Optionen (2 Parameter)
+    if ParamStr(i) = '--db' then
+    begin
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --db benötigt einen Pfad.';
+        Cmd.ErrorFocus := efDb;
+        Exit(False);
+      end;
+      Cmd.DbOverride := ParamStr(i + 1);
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--db-set' then
+    begin
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --db-set benötigt einen Pfad.';
+        Cmd.ErrorFocus := efDbSet;
+        Exit(False);
+      end;
+      Cmd.DbSet := ParamStr(i + 1);
+      Inc(i, 2);
+      Continue;
+    end;
+
+    // Hauptkommandos: --add/--list/--edit/--delete <stations|fuelups>
+    if CommandKindFromFlag(ParamStr(i), TmpKind) then
+    begin
+      if Cmd.HasCommand then
+      begin
+        Cmd.ErrorMsg := 'Fehler: Genau EIN Kommando ist erlaubt.';
+        Cmd.ErrorFocus := efCommand;
+        Exit(False);
+      end;
+
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'Fehler: ' + ParamStr(i) + ' benötigt eine Tabelle.';
+        Cmd.ErrorFocus := efCommand;
+        Exit(False);
+      end;
+
+      // Tabellenart parsen (Singular/Plural)
+      if not ParseTableKind(ParamStr(i + 1), Cmd.Target) then
+      begin
+        Cmd.ErrorMsg := 'Fehler: "' + ParamStr(i + 1) +
+          '" ist keine gültige Tabelle (erlaubt: stations|fuelups).';
+        Cmd.ErrorFocus := efTarget;
+        Exit(False);
+      end;
+
+      Cmd.Kind := TmpKind;
+      Cmd.HasCommand := True;
+
+      Inc(i, 2);
+      Continue;
+    end;
+
+    // Unbekannt
+    Cmd.ErrorMsg := 'Fehler: Unbekanntes Argument: ' + ParamStr(i);
+    Cmd.ErrorFocus := efNone;
+    Exit(False);
+  end;
+
+  // ----------------
+  // Zentrale Validierung (Regeln)
+
+  if (Cmd.DbOverride <> '') and (Cmd.DbSet <> '') then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --db und --db-set können nicht zusammen verwendet werden.';
+    Cmd.ErrorFocus := efDbSet;
+    Exit(False);
+  end;
+
+  // --seed ist eine isolierte Aktion (Demo-DB)
+  // Keine Kombination mit --db / --db-set / --demo oder anderen Commands
+  if Cmd.HasCommand and (Cmd.Kind = ckSeed) then
+  begin
+    if (Cmd.DbOverride <> '') or (Cmd.DbSet <> '') or Cmd.UseDemoDb then
+    begin
+      Cmd.ErrorMsg :=
+        'Fehler: --seed verwendet immer die Demo-DB und darf nicht mit ' +
+        '--db, --db-set oder --demo kombiniert werden.';
+      Cmd.ErrorFocus := efSeed;
+      Exit(False);
+    end;
+  end;
+
+  if Cmd.HasCommand and (Cmd.Kind = ckSeed) and Cmd.UseDemoDb then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --demo ist bei --seed nicht erforderlich.';
+    Cmd.ErrorFocus := efSeed;
+    Exit(False);
+  end;
+
+  // Meta darf alleine stehen
+  if Cmd.Help or Cmd.Version or Cmd.About then Exit(True);
+
+  // --db-set / show / reset sind Aktionen ohne Hauptkommando
+  if Cmd.DbSet <> '' then Exit(True);
+  if Cmd.ShowConfig or Cmd.ResetConfig then Exit(True);
+
+  // sonst: Hauptkommando noetig
+  if not Cmd.HasCommand then
+  begin
+    Cmd.ErrorMsg := 'Fehler: Kein Kommando angegeben.';
+    Cmd.ErrorFocus := efNone;
+    Exit(False);
+  end;
+
+  // Fachregel: fuelups nur add/list
+  if (Cmd.Target = tkFuelups) and ((Cmd.Kind = ckEdit) or (Cmd.Kind = ckDelete)) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: fuelups unterstützt nur add/list (append-only).';
+    Cmd.ErrorFocus := efTarget;
+    Exit(False);
+  end;
+
+  if Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target <> tkFuelups) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --stats ist aktuell nur fuer fuelups verfuegbar.';
+    Cmd.ErrorFocus := efStats;
+    Exit(False);
+  end;
+
+  // --dashboard ist nur fuer "--stats fuelups" erlaubt und exklusiv zu json/csv
+  if Cmd.Dashboard then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --dashboard ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Json or Cmd.Csv then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --dashboard kann nicht mit --json oder --csv kombiniert werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --json ist nur fuer "--stats fuelups" erlaubt
+  if Cmd.Json then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --json ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --csv ist nur fuer "--stats fuelups" erlaubt und exklusiv
+  if Cmd.Csv then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --csv ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Json then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --csv und --json koennen nicht zusammen verwendet werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --pretty ist nur zusammen mit --json erlaubt (und damit nur bei --stats fuelups)
+  if Cmd.Pretty then
+  begin
+    if not Cmd.Json then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit --json erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit "--stats fuelups --json" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --monthly ist nur fuer "--stats fuelups" erlaubt
+  if Cmd.Monthly then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --monthly ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --yearly ist nur fuer "--stats fuelups" erlaubt
+  if Cmd.Yearly then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Monthly then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly und --monthly können nicht zusammen verwendet werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Dashboard then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly kann nicht mit --dashboard kombiniert werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Csv then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly ist aktuell nicht als CSV verfügbar (nur Text/JSON).';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // Zeitraum-Flags nur fuer --stats fuelups erlaubt
+  // ------------------------------------------------------------
+  // Zeitraum-Regeln und Open-Ended-Normalisierung
+  if Cmd.PeriodEnabled then
+  begin
+    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --from/--to sind nur in Kombination mit --stats fuelups erlaubt.';
+      Cmd.ErrorFocus := efStatsPeriod;
+      Exit(False);
+    end;
+
+    // Beide gesetzt: from <= to (exklusiv) pruefen
+    if Cmd.FromProvided and Cmd.ToProvided then
+    begin
+      if Cmd.PeriodFromIso >= Cmd.PeriodToExclIso then
+      begin
+        Cmd.ErrorMsg := 'Fehler: Ungueltiger Zeitraum: --from muss vor --to liegen.';
+        Cmd.ErrorFocus := efStatsRange;
+        Exit(False);
+      end;
+    end;
+
+    // Open-ended: wird datengetrieben in Schritt 2 gefuellt.
+    // Hier nur sicherstellen, dass wir *wissen*, was offen ist.
+    if Cmd.FromProvided and (not Cmd.ToProvided) then
+    begin
+      // PeriodToExclIso ist aktuell vom --from gesetzt (naechster Tag/Monat),
+      // das ist nur ein Platzhalter und wird in Schritt 2 ersetzt.
+      Cmd.PeriodToExclIso := '';
+    end;
+
+    if Cmd.ToProvided and (not Cmd.FromProvided) then
+    begin
+      Cmd.PeriodFromIso := '';
+    end;
+  end;
+
+  Result := True;
+end;
+
+function ParseCommand: TCommand;
+begin
+  BuildCommand(Result);
+end;
+
+end.

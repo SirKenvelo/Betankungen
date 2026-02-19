@@ -1,0 +1,10 @@
+{
+  "id": "2026-02-13_1757",
+  "created_at": "2026-02-13 17:57:21",
+  "archive": "Betankungen_0_5_2.tar",
+  "archive_sha256": "bc919d8b766ccc45c4036852a031a0067dc51e5bd6b3327a2690d6e1e6755142",
+  "archive_size_bytes": 215040,
+  "source_archive": ".releases/Betankungen_0_5_2.tar",
+  "source_release_log": ".releases/release_log.json",
+  "note": "Initial 0.5.3 workflow"
+}
