@@ -12,6 +12,7 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Meta: `.vscode/` und `projekt_kontext.md` aus der Versionsverwaltung genommen (per `.gitignore` ausgeschlossen und aus dem Git-Index entfernt). (2026-02-19)
 - Meta: `scripts/projekt_kontext.sh` Git-Status auf `git status --short --branch` erweitert (Branch + Ahead/Behind im Export) und zwei neue Kurzblaecke fuer `git diff --stat` sowie `git diff --cached --stat` hinzugefuegt; `docs/README.md` aktualisiert. (2026-02-19)
 - Meta: `AGENTS.md` um verbindlichen `Repo-Pflege-Rhythmus` erweitert (Session-Start-Sync, Pflege je logischer Einheit waehrend der Session, Abschluss-Sync + Commit/Push am Session-Ende). (2026-02-19)
 - Meta: `AGENTS.md` um Abschnitt `Repo-Pflege` erweitert (Codex uebernimmt auf Wunsch laufende Git-Repository-Pflege inkl. sicheren Leitplanken fuer Auth-Fallbacks und destruktive Aktionen); Stand-Datum aktualisiert. (2026-02-19)

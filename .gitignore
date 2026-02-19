@@ -30,10 +30,10 @@ build/
 
 # IDE / Editor
 .idea/
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
+.vscode/
+
+# Lokaler Session-/Export-Kontext
+projekt_kontext.md
 
 # Lazarus / FreePascal Session-Dateien
 *.lps
