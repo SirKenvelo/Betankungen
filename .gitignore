@@ -1,0 +1,45 @@
+# Betankungen - .gitignore
+# Stand: 2026-02-19
+
+# Build-Artefakte (FPC)
+bin/
+build/
+*.o
+*.ppu
+*.rst
+*.s
+*.a
+*.or
+
+# Laufzeit-/Daten-Artefakte
+.backup/
+.releases/
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Temporäre Dateien
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE / Editor
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Lazarus / FreePascal Session-Dateien
+*.lps
+*.bak
+*.compiled
+
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
