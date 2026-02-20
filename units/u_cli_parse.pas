@@ -372,21 +372,6 @@ begin
     Exit(False);
   end;
 
-  // Fachregel: fuelups nur add/list
-  if (Cmd.Target = tkFuelups) and ((Cmd.Kind = ckEdit) or (Cmd.Kind = ckDelete)) then
-  begin
-    Cmd.ErrorMsg := 'Fehler: fuelups unterstützt nur add/list (append-only).';
-    Cmd.ErrorFocus := efTarget;
-    Exit(False);
-  end;
-
-  if Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target <> tkFuelups) then
-  begin
-    Cmd.ErrorMsg := 'Fehler: --stats ist aktuell nur fuer fuelups verfuegbar.';
-    Cmd.ErrorFocus := efStats;
-    Exit(False);
-  end;
-
   // --dashboard ist nur fuer "--stats fuelups" erlaubt und exklusiv zu json/csv
   if Cmd.Dashboard then
   begin
