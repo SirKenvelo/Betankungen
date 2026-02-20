@@ -10,6 +10,7 @@
   - Bietet den Einstiegspunkt fuer die zentrale Kommando-Validierung.
   - Kapselt deklarative Zustandspruefungen fuer Meta-/Action-Flow.
   - Kapselt domain-nahe Command-/Target-Policies ohne Ausgabeformat-Logik.
+  - Kapselt Output-/Format-Policies fuer Stats-Flags (dashboard/json/csv/pretty/monthly/yearly).
   - Ermoeglicht die schrittweise Auslagerung von Regelpruefungen aus dem Parser.
   ---------------------------------------------------------------------------
 }
@@ -46,6 +47,11 @@ begin
   Result := Cmd.Kind <> ckNone;
 end;
 
+function IsStatsFuelups(const Cmd: TCommand): boolean;
+begin
+  Result := Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups);
+end;
+
 function ValidateFuelupsPolicy(var Cmd: TCommand): boolean;
 begin
   Result := True;
@@ -69,6 +75,128 @@ begin
     Cmd.ErrorMsg := '--stats ist aktuell nur fuer fuelups verfuegbar.';
     Cmd.ErrorFocus := efTarget;
     Exit(False);
+  end;
+end;
+
+function ValidateDashboardFormatPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  if Cmd.Dashboard then
+  begin
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --dashboard ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Json or Cmd.Csv then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --dashboard kann nicht mit --json oder --csv kombiniert werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+end;
+
+function ValidateJsonCsvPrettyPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  // --json ist nur fuer "--stats fuelups" erlaubt
+  if Cmd.Json then
+  begin
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --json ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --csv ist nur fuer "--stats fuelups" erlaubt und exklusiv zu --json
+  if Cmd.Csv then
+  begin
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --csv ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Json then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --csv und --json koennen nicht zusammen verwendet werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --pretty ist nur zusammen mit --json erlaubt (und damit nur bei --stats fuelups)
+  if Cmd.Pretty then
+  begin
+    if not Cmd.Json then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit --json erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit "--stats fuelups --json" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+end;
+
+function ValidateMonthlyYearlyPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  // --monthly ist nur fuer "--stats fuelups" erlaubt
+  if Cmd.Monthly then
+  begin
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --monthly ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+  end;
+
+  // --yearly ist nur fuer "--stats fuelups" erlaubt + Konfliktregeln
+  if Cmd.Yearly then
+  begin
+    if not IsStatsFuelups(Cmd) then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly ist nur zusammen mit "--stats fuelups" erlaubt.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Monthly then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly und --monthly koennen nicht zusammen verwendet werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Dashboard then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly kann nicht mit --dashboard kombiniert werden.';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
+
+    if Cmd.Csv then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --yearly ist aktuell nicht als CSV verfuegbar (nur Text/JSON).';
+      Cmd.ErrorFocus := efStatsFormat;
+      Exit(False);
+    end;
   end;
 end;
 
@@ -96,6 +224,15 @@ begin
     Exit(False);
 
   if not ValidateStatsTargetPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateDashboardFormatPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateJsonCsvPrettyPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateMonthlyYearlyPolicy(Cmd) then
     Exit(False);
 end;
 
