@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-02-19
+**Stand:** 2026-02-20
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -12,6 +12,7 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- CLI-Validate: Meta-/Action-Flow aus `u_cli_parse` in `u_cli_validate` verschoben (`IsStandaloneMeta`, `IsStandaloneAction`, `HasMainCommand`); Fehlerfall ohne Hauptkommando zentral als `Kein Kommando angegeben.` mit Fokus `efTarget`. (2026-02-20)
 - CLI-Parser: Neue Stub-Unit `u_cli_validate` eingefuehrt und in `u_cli_parse` verdrahtet (`ValidateCommand(Cmd)` am Ende des Build-Flows, aktuell ohne Verhaltensaenderung mit `Result := True`). (2026-02-19)
 - Meta: `AGENTS.md` um Regel erweitert: GitHub-Kommentare (Issues/PRs/Reviews) werden immer auf Englisch verfasst. (2026-02-19)
 - Meta: `.vscode/` und `projekt_kontext.md` aus der Versionsverwaltung genommen (per `.gitignore` ausgeschlossen und aus dem Git-Index entfernt). (2026-02-19)

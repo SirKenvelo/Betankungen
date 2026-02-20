@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-19
+  UPDATED: 2026-02-20
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -369,21 +369,6 @@ begin
   begin
     Cmd.ErrorMsg := 'Fehler: --demo ist bei --seed nicht erforderlich.';
     Cmd.ErrorFocus := efSeed;
-    Exit(False);
-  end;
-
-  // Meta darf alleine stehen
-  if Cmd.Help or Cmd.Version or Cmd.About then Exit(True);
-
-  // --db-set / show / reset sind Aktionen ohne Hauptkommando
-  if Cmd.DbSet <> '' then Exit(True);
-  if Cmd.ShowConfig or Cmd.ResetConfig then Exit(True);
-
-  // sonst: Hauptkommando noetig
-  if not Cmd.HasCommand then
-  begin
-    Cmd.ErrorMsg := 'Fehler: Kein Kommando angegeben.';
-    Cmd.ErrorFocus := efNone;
     Exit(False);
   end;
 
