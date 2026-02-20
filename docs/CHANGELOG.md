@@ -12,7 +12,7 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
-- Keine Eintraege.
+- Meta: `aktuelle_aenderungen.md` in `.gitignore` aufgenommen (lokale Session-Datei bleibt bewusst untracked); `.gitignore`-Stand auf 2026-02-20 aktualisiert. (2026-02-20)
 
 ## 0.5.6-0 – 2026-02-20
 
