@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-02-18
+# UPDATED: 2026-02-20
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -130,6 +130,7 @@ print_plan() {
   printf '[LIST] --reset-config Fehlerpfad: Config nicht loeschbar (falls simulierbar)\n'
   printf '[LIST] --demo ohne Seed: sauberer Fehler ohne Prompt\n'
   printf '[LIST] --db Fehlerpfad bleibt non-interactive (kein Prompt)\n'
+  printf '[LIST] Unit-Tests: tests/run_unit_tests.sh\n'
 
   if $RUN_MONTHLY_SUITE; then
     printf '[LIST] (Monthly) --demo --stats fuelups --monthly\n'
@@ -926,6 +927,7 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_reset_config_delete_failure_if_possible
   test_demo_without_seed_fails_non_interactive
   test_db_override_error_no_prompt
+  run_check "Unit-Tests: CLI-Validate" "$ROOT_DIR/tests/run_unit_tests.sh"
   if $RUN_MONTHLY_SUITE; then
     run_monthly_suite
   fi

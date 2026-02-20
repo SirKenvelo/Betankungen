@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-02-19
+**Stand:** 2026-02-20
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -11,12 +11,13 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 *   **Single-Table Source of Truth:** Bevorzugung einer klaren Tabellenstruktur gegenüber künstlicher Über-Normalisierung, um die Abfrage-Logik (SQL) simpel und performant zu halten.
 *   **Command-Exclusivity:** Das CLI-Interface folgt einem strikten Dispatcher-Modell. Pro Aufruf wird genau eine Hauptaktion (Add, List, Edit, Delete, Seed oder Stats) ausgeführt, was Fehlbedienungen verhindert.
 *   **Separation of Concerns (SoC):** Strikte Trennung zwischen Geschäftslogik (`Business Logic`) und Anzeige/Eingabe (`UI`). Die Fach-Units (z. B. `u_stations`) enthalten keine CLI-Parsing-Logik.
+*   **CLI-Pipeline (Parse -> Validate -> Dispatch):** Parsing bleibt auf Syntax/Normalisierung begrenzt (`u_cli_parse`), Policy-Validierung liegt zentral in `u_cli_validate`, und fachliche Ausfuehrung erfolgt erst im Orchestrator-Dispatch.
 *   **Transaktions-Sicherheit:** Jede Datenbank-Mutation (Schreiben, Ändern, Löschen) wird als atomare Einheit behandelt. Schlägt ein Teil fehl, erfolgt ein vollständiger Rollback (All-or-Nothing).
 *   **Defensive Parsing:** "Garbage in, Garbage out" wird an der Systemgrenze verhindert. Eingaben werden über skalierte Integer-Funktionen (Fixed-Point) validiert, bevor sie die Fachlogik erreichen.
 
 ---
 
-## Aktueller Funktionsumfang (Stand 2026-02-19)
+## Aktueller Funktionsumfang (Stand 2026-02-20)
 Siehe `CHANGELOG.md`, Version `0.5.6` plus `[Unreleased]`.
 
 ### Infrastruktur & Tooling

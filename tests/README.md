@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-02-18
+**Stand:** 2026-02-20
 
 ## Smoke-Test
 - Script: `tests/smoke_cli.sh`
@@ -36,6 +36,14 @@ Ausfuehrung im Projektroot:
 - `tests/smoke_cli.sh -a`
 - `tests/smoke_cli.sh -a --keep-going`
 - `tests/smoke_cli.sh -a -l`
+
+## Unit-Tests (ohne Framework)
+- Script: `tests/run_unit_tests.sh`
+- Zweck: kompakter Policy-Check fuer `u_cli_validate` mit direktem `TCommand`-Aufbau (ohne DB/CLI-IO).
+- Aktueller Testkandidat: `tests/test_cli_validate.pas`.
+- Integration: Der Basis-Smoke (`tests/smoke_cli.sh`) fuehrt den Runner mit aus.
+- Direkter Lauf:
+  - `tests/run_unit_tests.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
 - Script: `tests/smoke_clean_home.sh`
