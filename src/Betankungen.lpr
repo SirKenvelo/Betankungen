@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-02-19
+  UPDATED: 2026-02-20
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -94,7 +94,7 @@ const
   
   // Anwendungsmetadaten fuer --version/--about
   APP_NAME    = 'Betankungen';
-  APP_VERSION = '0.5.6';
+  APP_VERSION = '0.5.6-0';
   APP_AUTHOR  = 'Christof Kempinski';
 
 var

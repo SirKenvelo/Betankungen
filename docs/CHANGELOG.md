@@ -5,13 +5,25 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-0.5.6-0
-Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
+0.6.0
+Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Domain-Haertegrade).
 
 ### Changed (User-Edits)
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Keine Eintraege.
+
+## 0.5.6-0 – 2026-02-20
+
+### Changed (User-Edits)
+- Keine Eintraege.
+
+### Changed (Codex)
+- Refactor: CLI validation extracted into dedicated layer (`u_cli_validate`) mit klarer CLI-Pipeline Parse -> Validate -> Dispatch (`u_cli_parse` / `u_cli_validate` / Orchestrator). (2026-02-20)
+- Meta: `src/Betankungen.lpr` auf `APP_VERSION 0.5.6-0` angehoben. (2026-02-20)
+- Docs: Releaseabschluss 0.5.6-0 im Changelog durchgefuehrt; `[Unreleased]` auf Zielversion `0.6.0` vorbereitet. (2026-02-20)
+- Meta: Finales Release-Archiv `Betankungen_0_5_6-0.tar` per `scripts/kpr.sh --note "Release 0.5.6-0 final"` erzeugt und in `.releases/release_log.json` protokolliert (`sha256=f0f0028392ef7c794068120ed964ce0c10b96ecac08f73ef6602ebc1b66b2028`). (2026-02-20)
 - Tests/CLI-Validate: Neuer Framework-freier Unit-Test `tests/test_cli_validate.pas` plus Runner `tests/run_unit_tests.sh` eingefuehrt und in den Basis-Smoke integriert (`tests/smoke_cli.sh`); Runner auf Smoke-konforme Prefix-Farbcodierung (`[INFO]`, `[OK]`, `[FAIL]`) erweitert, Testdoku (`tests/README.md`) und Architekturhinweis Parse/Validate/Dispatch (`docs/ARCHITECTURE.md`) aktualisiert. (2026-02-20)
 - CLI-Validate: Zeitraum-Policy in `ValidatePeriodPolicy` nach `u_cli_validate` verschoben (Kontext `--stats fuelups`, Range `--from < --to`, Open-Ended-Normalisierung); verbleibende Period-Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Output-/Format-Policies fuer `--stats fuelups` granular nach `u_cli_validate` verschoben (`IsStatsFuelups`, `ValidateDashboardFormatPolicy`, `ValidateJsonCsvPrettyPolicy`, `ValidateMonthlyYearlyPolicy`); entsprechende Checks aus `u_cli_parse` entfernt. (2026-02-20)

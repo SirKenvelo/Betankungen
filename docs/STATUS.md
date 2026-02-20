@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-02-19
-**Zielversion:** 0.5.6-0
+**Stand:** 2026-02-20
+**Zielversion:** 0.6.0
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -112,10 +112,12 @@ Bereits erledigt:
 - Doku- und CLI-Ausgabe fuer Flags (`--monthly`, `--yearly`, `--csv`, `--dashboard`, `--pretty`) inhaltlich synchron halten.
 - Keine neue Fachlogik; Fokus auf UX-Klarheit und Konsistenz.
 
-## Roadmap 0.5.6-0 – Zwischenversion Unit-Vorbereitung (naechster Fokus)
+## Roadmap 0.5.6-0 – Zwischenversion Unit-Vorbereitung (abgeschlossen)
 - Ziel: gezielte Zwischenversion vor 0.6.0 zur Einfuehrung einer zusaetzlichen Unit.
 - Fokus: strukturierte Extraktion in eine neue Unit mit sauberer Verdrahtung im bestehenden CLI-Flow.
-- Keine neue Fachlogik als Pflicht; Schwerpunkt auf Struktur, Lesbarkeit und wartbarer Zustandsfuehrung.
+- Erreicht: Parse/Validate-Trennung mit dedizierter Unit `u_cli_validate` (Meta-/Action-Flow, Domain-Policies, Output-/Format-Policies, Period-Policies).
+- Erreicht: Framework-freie Unit-Tests fuer den Validate-Layer (`tests/test_cli_validate.pas`) und Runner-Integration in den Basis-Smoke.
+- Keine neue Fachlogik eingefuehrt; Schwerpunkt auf Struktur, Lesbarkeit und wartbarer Zustandsfuehrung umgesetzt.
 
 ## Roadmap 0.6.0 – Fundament fuer Fahrzeug-Domain (geplant/konsolidierend, danach)
 - Ziel: stabile Grundlage fuer spaeteres Multi-Car, ohne sofort Multi-Car-Feature auszurollen.
@@ -149,7 +151,8 @@ Bereits erledigt:
 - 0.5.6 freigegeben (Help/Usage Rework inkl. strukturierter Vollhilfe und konsistentem Kurz-Fehlerpfad).
 - 0.5.5-Release-Artefakt final inkl. Post-Release-Doku-Sync erstellt (siehe `.releases/release_log.json`).
 - 0.5.6-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
-- Naechster Fokus: 0.5.6-0 (Zwischenversion fuer zusaetzliche Unit)
+- 0.5.6-0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
+- 0.5.6-0 freigegeben (CLI-Validate-Layer finalisiert inkl. Unit-Tests + Smoke-Integration).
 - Danach: 0.6.0 (Fahrzeug-Domain konsolidieren)
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar

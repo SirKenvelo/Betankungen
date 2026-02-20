@@ -18,7 +18,7 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 ---
 
 ## Aktueller Funktionsumfang (Stand 2026-02-20)
-Siehe `CHANGELOG.md`, Version `0.5.6` plus `[Unreleased]`.
+Siehe `CHANGELOG.md`, Version `0.5.6-0` plus `[Unreleased]`.
 
 ### Infrastruktur & Tooling
 - [x] **XDG-Konformität:** Trennung von Daten (`~/.local/share/`) und Konfiguration (`~/.config/`).
@@ -129,11 +129,12 @@ Siehe `CHANGELOG.md`, Version `0.5.6` plus `[Unreleased]`.
 - [x] Validierungsfehler sprachlich/strukturell harmonisieren.
 - [x] Doku und CLI-Hilfe auf denselben Flag-/Kombi-Stand bringen.
 
-### Version 0.5.6-0 – Zwischenversion Unit-Vorbereitung
+### Version 0.5.6-0 – Zwischenversion Unit-Vorbereitung — abgeschlossen
 *Ziel: Zwischenversion vor 0.6.0 fuer die Einfuehrung einer zusaetzlichen Unit.*
-- [ ] Zusaetzliche Unit erstellen und sauber in den bestehenden CLI-Flow integrieren.
-- [ ] Verantwortung/Abgrenzung der neuen Unit in Doku und Headern klarziehen.
-- [ ] Keine verpflichtende neue Fachlogik; Fokus auf Struktur und Wartbarkeit.
+- [x] Zusaetzliche Unit erstellt und sauber in den bestehenden CLI-Flow integriert (`u_cli_validate`).
+- [x] Verantwortung/Abgrenzung der neuen Unit in Doku und Headern klargezogen.
+- [x] Keine neue Fachlogik eingefuehrt; Fokus auf Struktur und Wartbarkeit eingehalten.
+- [x] Parse/Validate/Dispatch-Pipeline explizit verankert und durch Unit-Tests (`tests/test_cli_validate.pas`) abgesichert.
 
 ### Version 0.6.0 – Fundament fuer Fahrzeug-Domain (danach)
 *Ziel: stabile Struktur fuer spaeteres Multi-Car ohne sofortigen Feature-Ausbau.*
@@ -146,7 +147,7 @@ Siehe `CHANGELOG.md`, Version `0.5.6` plus `[Unreleased]`.
 - [x] `0.5.3`: Reife, Struktur, Vorbereitung.
 - [x] `0.5.5`: `--yearly` (Text/JSON) + Validation + Smoke.
 - [x] `0.5.6`: Help/Usage Rework (kurzer Fehlerpfad + strukturierter `--help`).
-- [ ] `0.5.6-0`: Zwischenversion fuer zusaetzliche Unit.
+- [x] `0.5.6-0`: Zwischenversion fuer zusaetzliche Unit (Parse/Validate-Entkopplung + Tests).
 - [ ] `0.6.0`: Fahrzeug-Struktur konsolidieren (Hauptauto + FK als stabiles Fundament).
 - [ ] `0.7.x`: echtes Multi-Car-Feature.
 - [ ] `0.8.x` (optional): Export/Output Contracts (CSV/JSON Versionierung, Schema/Headers, Escape-Regeln).
