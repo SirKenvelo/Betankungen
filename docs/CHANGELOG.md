@@ -12,6 +12,7 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- CLI-Validate: Zeitraum-Policy in `ValidatePeriodPolicy` nach `u_cli_validate` verschoben (Kontext `--stats fuelups`, Range `--from < --to`, Open-Ended-Normalisierung); verbleibende Period-Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Output-/Format-Policies fuer `--stats fuelups` granular nach `u_cli_validate` verschoben (`IsStatsFuelups`, `ValidateDashboardFormatPolicy`, `ValidateJsonCsvPrettyPolicy`, `ValidateMonthlyYearlyPolicy`); entsprechende Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Domain-Policies fuer `fuelups` (append-only bei edit/delete) und `--stats`-Target (nur `fuelups`) in eigene Helper (`ValidateFuelupsPolicy`, `ValidateStatsTargetPolicy`) ausgelagert; entsprechende Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Meta-/Action-Flow aus `u_cli_parse` in `u_cli_validate` verschoben (`IsStandaloneMeta`, `IsStandaloneAction`, `HasMainCommand`); Fehlerfall ohne Hauptkommando zentral als `Kein Kommando angegeben.` mit Fokus `efTarget`. (2026-02-20)

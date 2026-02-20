@@ -372,44 +372,6 @@ begin
     Exit(False);
   end;
 
-  // Zeitraum-Flags nur fuer --stats fuelups erlaubt
-  // ------------------------------------------------------------
-  // Zeitraum-Regeln und Open-Ended-Normalisierung
-  if Cmd.PeriodEnabled then
-  begin
-    if not (Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups)) then
-    begin
-      Cmd.ErrorMsg := 'Fehler: --from/--to sind nur in Kombination mit --stats fuelups erlaubt.';
-      Cmd.ErrorFocus := efStatsPeriod;
-      Exit(False);
-    end;
-
-    // Beide gesetzt: from <= to (exklusiv) pruefen
-    if Cmd.FromProvided and Cmd.ToProvided then
-    begin
-      if Cmd.PeriodFromIso >= Cmd.PeriodToExclIso then
-      begin
-        Cmd.ErrorMsg := 'Fehler: Ungueltiger Zeitraum: --from muss vor --to liegen.';
-        Cmd.ErrorFocus := efStatsRange;
-        Exit(False);
-      end;
-    end;
-
-    // Open-ended: wird datengetrieben in Schritt 2 gefuellt.
-    // Hier nur sicherstellen, dass wir *wissen*, was offen ist.
-    if Cmd.FromProvided and (not Cmd.ToProvided) then
-    begin
-      // PeriodToExclIso ist aktuell vom --from gesetzt (naechster Tag/Monat),
-      // das ist nur ein Platzhalter und wird in Schritt 2 ersetzt.
-      Cmd.PeriodToExclIso := '';
-    end;
-
-    if Cmd.ToProvided and (not Cmd.FromProvided) then
-    begin
-      Cmd.PeriodFromIso := '';
-    end;
-  end;
-
   if not ValidateCommand(Cmd) then
     Exit(False);
 

@@ -49,7 +49,9 @@ end;
 
 function IsStatsFuelups(const Cmd: TCommand): boolean;
 begin
-  Result := Cmd.HasCommand and (Cmd.Kind = ckStats) and (Cmd.Target = tkFuelups);
+  Result := HasMainCommand(Cmd)
+        and (Cmd.Kind = ckStats)
+        and (Cmd.Target = tkFuelups);
 end;
 
 function ValidateFuelupsPolicy(var Cmd: TCommand): boolean;
@@ -200,6 +202,40 @@ begin
   end;
 end;
 
+function ValidatePeriodPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  if not Cmd.PeriodEnabled then
+    Exit(True);
+
+  // 1) Nur bei stats fuelups erlaubt
+  if not IsStatsFuelups(Cmd) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" erlaubt.';
+    Cmd.ErrorFocus := efStatsPeriod;
+    Exit(False);
+  end;
+
+  // 2) Range-Check nur wenn beide gesetzt
+  if Cmd.FromProvided and Cmd.ToProvided then
+  begin
+    if Cmd.PeriodFromIso >= Cmd.PeriodToExclIso then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --from muss vor --to liegen.';
+      Cmd.ErrorFocus := efStatsRange;
+      Exit(False);
+    end;
+  end;
+
+  // 3) Open-ended Normalisierung
+  if Cmd.FromProvided and (not Cmd.ToProvided) then
+    Cmd.PeriodToExclIso := '';
+
+  if Cmd.ToProvided and (not Cmd.FromProvided) then
+    Cmd.PeriodFromIso := '';
+end;
+
 function ValidateCommand(var Cmd: TCommand): boolean;
 begin
   Result := True;
@@ -233,6 +269,9 @@ begin
     Exit(False);
 
   if not ValidateMonthlyYearlyPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidatePeriodPolicy(Cmd) then
     Exit(False);
 end;
 
