@@ -12,7 +12,7 @@ Ziel: Zwischenversion fuer die Vorbereitung einer zusaetzlichen Unit.
 - Keine Eintraege.
 
 ### Changed (Codex)
-- Tests/CLI-Validate: Neuer Framework-freier Unit-Test `tests/test_cli_validate.pas` plus Runner `tests/run_unit_tests.sh` eingefuehrt und in den Basis-Smoke integriert (`tests/smoke_cli.sh`); Testdoku (`tests/README.md`) und Architekturhinweis Parse/Validate/Dispatch (`docs/ARCHITECTURE.md`) aktualisiert. (2026-02-20)
+- Tests/CLI-Validate: Neuer Framework-freier Unit-Test `tests/test_cli_validate.pas` plus Runner `tests/run_unit_tests.sh` eingefuehrt und in den Basis-Smoke integriert (`tests/smoke_cli.sh`); Runner auf Smoke-konforme Prefix-Farbcodierung (`[INFO]`, `[OK]`, `[FAIL]`) erweitert, Testdoku (`tests/README.md`) und Architekturhinweis Parse/Validate/Dispatch (`docs/ARCHITECTURE.md`) aktualisiert. (2026-02-20)
 - CLI-Validate: Zeitraum-Policy in `ValidatePeriodPolicy` nach `u_cli_validate` verschoben (Kontext `--stats fuelups`, Range `--from < --to`, Open-Ended-Normalisierung); verbleibende Period-Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Output-/Format-Policies fuer `--stats fuelups` granular nach `u_cli_validate` verschoben (`IsStatsFuelups`, `ValidateDashboardFormatPolicy`, `ValidateJsonCsvPrettyPolicy`, `ValidateMonthlyYearlyPolicy`); entsprechende Checks aus `u_cli_parse` entfernt. (2026-02-20)
 - CLI-Validate: Domain-Policies fuer `fuelups` (append-only bei edit/delete) und `--stats`-Target (nur `fuelups`) in eigene Helper (`ValidateFuelupsPolicy`, `ValidateStatsTargetPolicy`) ausgelagert; entsprechende Checks aus `u_cli_parse` entfernt. (2026-02-20)
