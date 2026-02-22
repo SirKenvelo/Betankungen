@@ -12,6 +12,7 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/Domain-Policy: P-012-Shell-Cases robuster gemacht (Input-Mapping dokumentiert, NO-Case prueft explizite Distanzluecken-Abbruchmeldung, YES-Case prueft genau einen Insert bei Ziel-Odometer). (2026-02-22)
 - Tests/Runner: `tests/domain_policy/run_domain_policy_tests.sh` um Fail-Fast-Pruefung fuer `sqlite3`/`fpc` erweitert und Prefix-Farbformatierung auf `stderr` ausgedehnt. (2026-02-22)
 - Fuelups/Domain: Gap-Confirm-Policy geschaerft (`GAP_THRESHOLD_KM=1500`): bei Distanzwarnung fuehrt Antwort `n` jetzt zu einem harten Abbruch ohne Insert; nur `y` speichert und setzt `missed_previous=1`. (2026-02-20)
 - Tests/Domain-Policy: Golden-Template P-012 eingefuehrt (`tests/domain_policy/fixtures/p012_base.sql`, `tests/domain_policy/cases/t_p012__01__gap_confirm_yes.sh`, `tests/domain_policy/cases/t_p012__02__gap_confirm_no.sh`) inkl. STDIN-Simulation und DB-Assertions. (2026-02-20)
