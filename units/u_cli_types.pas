@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -71,6 +71,8 @@ type
     efCommand,
     // Fehler bei stations/fuelups-Target.
     efTarget,
+    // Fehler bei --car-id.
+    efCarId,
     // Fehler bei --db.
     efDb,
     // Fehler bei --db-set.
@@ -139,6 +141,8 @@ type
     // Datenbankoptionen.
     DbOverride: string;
     DbSet: string;
+    CarId: integer;
+    CarIdProvided: boolean;
 
     // Fehlertransport aus dem Parser.
     ErrorMsg: string;
@@ -189,6 +193,7 @@ begin
   // Liefert das Flag, das fuer Hilfe/Usage am sinnvollsten ist.
   // Das Mapping ist bewusst pragmatisch und nicht 1:1.
   case F of
+    efCarId:       Result := '--car-id';
     efDb:          Result := '--db';
     efDbSet:       Result := '--db-set';
     efDemo:        Result := '--demo';

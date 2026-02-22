@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -34,7 +34,7 @@ uses
 // Oeffentliche Schnittstelle
 
 // Startet den interaktiven Dialog zum Hinzufuegen einer Betankung.
-procedure AddFuelupInteractive(const DbPath: string);
+procedure AddFuelupInteractive(const DbPath: string; const CarIdProvided: boolean = False; const CarId: integer = 0);
 
 // Zeigt die Liste aller Betankungen an (Detailed steuert Zusatzinfos).
 procedure ListFuelups(const DbPath: string; Detailed: boolean);
@@ -292,7 +292,7 @@ begin
 end;
 
 // Hauptprozedur zum Erfassen neuer Daten
-procedure AddFuelupInteractive(const DbPath: string);
+procedure AddFuelupInteractive(const DbPath: string; const CarIdProvided: boolean; const CarId: integer);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
@@ -342,7 +342,17 @@ begin
       Tran.StartTransaction;
     
     try
-      Inp.CarId := 1; // v4 Minimalumfang: Default-Car (Hauptauto)
+      if CarIdProvided then
+      begin
+        if CarId <= 0 then
+          raise Exception.Create('P-001: car_id fehlt/ungueltig (erwartet > 0).');
+        if not CarExists(QS, CarId) then
+          raise Exception.Create('P-002: car_id existiert nicht (FK).');
+        Inp.CarId := CarId;
+      end
+      else
+        Inp.CarId := 1; // v4 Minimalumfang: Default-Car (Hauptauto)
+
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');
 
@@ -395,10 +405,12 @@ begin
       Inp.MissedPrevious := False;
       if (LastKm >= 0) and (DiffKm > GAP_THRESHOLD_KM) then
       begin
-        Inp.MissedPrevious := AskYesNo(
+        if not AskYesNo(
           Format('Warnung: Distanz seit letzter Betankung ist %d km (> %d). Hast du evtl. eine Betankung vergessen?', [DiffKm, GAP_THRESHOLD_KM]),
           False
-        );
+        ) then
+          raise Exception.Create('Abbruch durch Benutzer (Distanzluecke).');
+        Inp.MissedPrevious := True;
       end;
 
       Inp.FuelType    := AskOptional('Spritart (optional, z.B. E10): ');

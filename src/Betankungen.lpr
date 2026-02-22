@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-02-20
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -373,6 +373,8 @@ begin
     ' Csv=' + BoolToStr(Cmd.Csv, True) +
     ' Dashboard=' + BoolToStr(Cmd.Dashboard, True) +
     ' Pretty=' + BoolToStr(Cmd.Pretty, True) +
+    ' CarIdProvided=' + BoolToStr(Cmd.CarIdProvided, True) +
+    ' CarId=' + IntToStr(Cmd.CarId) +
     ' DbOverride=' + BoolToStr(Cmd.DbOverride <> '', True) +
     ' UseDemoDb=' + BoolToStr(Cmd.UseDemoDb, True)
   );
@@ -524,7 +526,7 @@ begin
 
       tkFuelups:
         case Cmd.Kind of
-          ckAdd: AddFuelupInteractive(DbPath);
+          ckAdd: AddFuelupInteractive(DbPath, Cmd.CarIdProvided, Cmd.CarId);
           ckList: ListFuelups(DbPath, Cmd.Detail);
           ckStats:
             begin

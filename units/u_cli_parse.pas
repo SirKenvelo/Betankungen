@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-20
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -158,6 +158,8 @@ begin
   Cmd.SeedValue := 0;
   Cmd.SeedForce := False;
   Cmd.UseDemoDb := False;
+  Cmd.CarId := 0;
+  Cmd.CarIdProvided := False;
 
   i := 1;
   while i <= ParamCount do
@@ -298,6 +300,25 @@ begin
         Exit(False);
       end;
       Cmd.DbSet := ParamStr(i + 1);
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--car-id' then
+    begin
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'P-001: --car-id benoetigt eine Zahl.';
+        Cmd.ErrorFocus := efCarId;
+        Exit(False);
+      end;
+      if not TryStrToInt(ParamStr(i + 1), Cmd.CarId) then
+      begin
+        Cmd.ErrorMsg := 'P-001: --car-id muss eine gueltige Ganzzahl sein.';
+        Cmd.ErrorFocus := efCarId;
+        Exit(False);
+      end;
+      Cmd.CarIdProvided := True;
       Inc(i, 2);
       Continue;
     end;

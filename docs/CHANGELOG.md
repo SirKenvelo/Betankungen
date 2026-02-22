@@ -12,6 +12,9 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- CLI/Fuelups: `--car-id <id>` fuer `--add fuelups` eingefuehrt; P-001/P-002 sauber getrennt (`P-001` bei fehlend/ungueltig <= 0, `P-002` bei nicht existenter car_id/FK), jeweils als Hard Error ohne Write. (2026-02-22)
+- Tests/Domain-Policy: Golden-Templates fuer P-001/P-002 ergaenzt (`tests/domain_policy/fixtures/p001_base.sql`, `tests/domain_policy/fixtures/p002_base.sql`, `tests/domain_policy/cases/t_p001__01__car_id_zero.sh`, `tests/domain_policy/cases/t_p001__02__car_id_negative.sh`, `tests/domain_policy/cases/t_p002__01__car_id_missing_fk.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
+- Docs/Tests: Policy-Doku fuer P-001/P-002 und Domain-Policy-Fixtures aktualisiert (`tests/domain_policy/p001.md`, `tests/domain_policy/p002.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)
 - Tests/Domain-Policy: Golden-Template P-022 eingefuehrt (`tests/domain_policy/fixtures/p022_base.sql`, `tests/domain_policy/cases/t_p022__01__consumption_warn_yes.sh`, `tests/domain_policy/cases/t_p022__02__consumption_warn_no.sh`) inkl. STDIN-Mapping und YES/NO-Assertions auf Exitcode, Meldung und DB-State. (2026-02-22)
 - Docs/Tests: P-022-Template-Doku und Fixture-/Domain-Policy-README nachgezogen (`tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`, `tests/domain_policy/p022.md`). (2026-02-22)
 - Meta: `AGENTS.md` Repo-Pflege-Rhythmus auf "Commit+Push pro logischer Einheit" geschwenkt und Release-Disziplin ergaenzt (Tags/Release erst bei `Done`). (2026-02-22)

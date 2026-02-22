@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-20
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -47,11 +47,40 @@ begin
   Result := Cmd.Kind <> ckNone;
 end;
 
+function IsAddFuelups(const Cmd: TCommand): boolean;
+begin
+  Result := HasMainCommand(Cmd)
+        and (Cmd.Kind = ckAdd)
+        and (Cmd.Target = tkFuelups);
+end;
+
 function IsStatsFuelups(const Cmd: TCommand): boolean;
 begin
   Result := HasMainCommand(Cmd)
         and (Cmd.Kind = ckStats)
         and (Cmd.Target = tkFuelups);
+end;
+
+function ValidateCarIdPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  if not Cmd.CarIdProvided then
+    Exit(True);
+
+  if not IsAddFuelups(Cmd) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups" erlaubt.';
+    Cmd.ErrorFocus := efCarId;
+    Exit(False);
+  end;
+
+  if Cmd.CarId <= 0 then
+  begin
+    Cmd.ErrorMsg := 'P-001: car_id fehlt/ungueltig (erwartet > 0).';
+    Cmd.ErrorFocus := efCarId;
+    Exit(False);
+  end;
 end;
 
 function ValidateFuelupsPolicy(var Cmd: TCommand): boolean;
@@ -257,6 +286,9 @@ begin
   end;
 
   if not ValidateFuelupsPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateCarIdPolicy(Cmd) then
     Exit(False);
 
   if not ValidateStatsTargetPolicy(Cmd) then
