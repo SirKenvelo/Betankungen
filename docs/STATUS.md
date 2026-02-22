@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-02-20
+**Stand:** 2026-02-22
 **Zielversion:** 0.6.0
 
 ## Fundament & Architektur (erledigt)
@@ -33,6 +33,17 @@
   - kein Edit/Delete bei `fuelups`
   - defensive Validierung
   - Odometer muss pro Fahrzeug monoton steigen; grosse Luecken triggern Golden-Info-Abfrage
+
+## Domain-Policy-Matrix v1 (abgeschlossen)
+- Matrix v1 ist in `tests/domain_policy/` durchgaengig umgesetzt und per Runner regression-gesichert.
+- Abgedeckte Bloecke:
+  - `P-001..P-002` (Car-ID Hard Errors)
+  - `P-010..P-013` (Odometer + Gap Confirm)
+  - `P-020..P-022` (Fuel/Plausibility)
+  - `P-030..P-032` (Cost/Price)
+  - `P-040..P-041` (Date)
+  - `P-050..P-051` (Gap-Flag Design Guards)
+  - `P-060` inkl. `P-060/02` Car-Isolation (kein Cross-Car-Zyklus)
 
 ## CLI & Usability (weitgehend erledigt)
 - Subcommand-Modell (`TCommand`)
@@ -153,6 +164,7 @@ Bereits erledigt:
 - 0.5.6-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.5.6-0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.5.6-0 freigegeben (CLI-Validate-Layer finalisiert inkl. Unit-Tests + Smoke-Integration).
+- Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
 - Danach: 0.6.0 (Fahrzeug-Domain konsolidieren)
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar

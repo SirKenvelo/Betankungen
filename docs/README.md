@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-02-20
+**Stand:** 2026-02-22
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -54,6 +54,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
+
+## Domain-Policy-Matrix v1 (Kurzueberblick)
+
+- Matrix v1 ist fachlich umgesetzt und in `tests/domain_policy/` regressionsgesichert.
+- Abgedeckte Policy-Bloecke:
+  - `P-001..P-002` (Car-ID Hard Errors)
+  - `P-010..P-013` (Odometer + Gap Confirm)
+  - `P-020..P-022` (Fuel/Plausibility)
+  - `P-030..P-032` (Cost/Price)
+  - `P-040..P-041` (Date)
+  - `P-050..P-051` (Gap-Flag Design Guards)
+  - `P-060` inkl. Car-Isolation (`P-060/02`)
 
 ---
 
@@ -136,6 +148,8 @@ Fachlogik für Betankungen (`fuelups`).
 - Golden-Info-Flag `missed_previous` (vorheriger Tankstopp fehlt) wird bei grosser KM-Luecke gezielt abgefragt
 - Bei Ablehnung der Gap-Rueckfrage (`n`) wird der Add-Flow abgebrochen (kein Fuelup-Insert)
 - Plausibilitaetsregeln: `odometer_km >= car.odometer_start_km`, streng monoton pro Fahrzeug, Warnung bei sehr grosser Tankmenge
+- Policy-Haertegrade (Matrix v1): Hard Errors (`P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`) brechen ohne Write ab.
+- Warning+Confirm (`P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`) speichern nur bei expliziter Bestaetigung.
 - Append-only (keine Edit/Delete)
 
 ---

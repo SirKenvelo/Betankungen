@@ -12,6 +12,7 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Docs: Doku-Konsistenz auf Matrix-v1-Stand nachgezogen (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`) und Commit-Abgleich der Matrix-v1-Serie gegen `[Unreleased]` verifiziert (abgedeckt von `a8eaf83` bis `7a6474d`). (2026-02-22)
 - Tests/Domain-Policy: P-060 um Car-Isolation-Case ergaenzt (`tests/domain_policy/cases/t_p060__02__car_isolation.sh`, `tests/domain_policy/fixtures/p060_car_isolation_base.sql`) fuer Guardrail gegen Cross-Car-Zyklen. (2026-02-22)
 - Tests/Domain-Policy: P-050 um NO-Case ergaenzt (`tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`) inkl. Assert auf normales Speichern mit `missed_previous=0`. (2026-02-22)
 - Fuelups/Domain: Gap-Flag-Policies ergaenzt (`P-050` Warning+Confirm fuer bewusstes `missed_previous=1` bei kleiner Distanz, `P-051` Guardrail gegen automatisches Setzen ohne Confirm). (2026-02-22)

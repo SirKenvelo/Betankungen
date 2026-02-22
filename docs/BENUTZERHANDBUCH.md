@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-02-20
+**Stand:** 2026-02-22
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -71,6 +71,10 @@ Eingabe bei `--add fuelups`:
 - Vollgetankt? (y/n)
 - Bei sehr grosser Tankmenge (> 150 L) kommt eine Warnung mit Bestaetigungsabfrage
 - Optional: Spritart, Bezahlart, Zapfsaeule, Notiz
+
+Policy-Hinweis (Matrix v1):
+- Hard Error ohne Write: `P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`.
+- Warning+Confirm (nur speichern bei `y`): `P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`.
 
 **Statistiken: Volltank-Zyklen, Monate und Jahre**
 - Textausgabe: `Betankungen --stats fuelups`
