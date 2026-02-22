@@ -5,13 +5,25 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-0.6.0
-Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Domain-Haertegrade).
+0.7.x
+Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 
 ### Changed (User-Edits)
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Keine Eintraege.
+
+## 0.6.0 – 2026-02-22
+
+### Changed (User-Edits)
+- Keine Eintraege.
+
+### Changed (Codex)
+- Meta: `src/Betankungen.lpr` auf `APP_VERSION 0.6.0` angehoben. (2026-02-22)
+- Docs: Releaseabschluss 0.6.0 im Changelog durchgefuehrt; `[Unreleased]` auf Zielversion `0.7.x` vorbereitet. (2026-02-22)
+- Docs: `docs/STATUS.md`, `docs/ARCHITECTURE.md` und `docs/README.md` auf 0.6.0-Abschluss und naechsten Fokus 0.7.x aktualisiert. (2026-02-22)
+- Meta: Finales Release-Archiv `Betankungen_0_6_0.tar` per `scripts/kpr.sh --note "Release 0.6.0 final"` erzeugt und in `.releases/release_log.json` protokolliert (`sha256=32fc7d6f8361e857fa42e0389c7bd0b62c4ab0f6553eba671ad68a080f1d87ed`). (2026-02-22)
 - Docs: Doku-Konsistenz auf Matrix-v1-Stand nachgezogen (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`) und Commit-Abgleich der Matrix-v1-Serie gegen `[Unreleased]` verifiziert (abgedeckt von `a8eaf83` bis `7a6474d`). (2026-02-22)
 - Tests/Domain-Policy: P-060 um Car-Isolation-Case ergaenzt (`tests/domain_policy/cases/t_p060__02__car_isolation.sh`, `tests/domain_policy/fixtures/p060_car_isolation_base.sql`) fuer Guardrail gegen Cross-Car-Zyklen. (2026-02-22)
 - Tests/Domain-Policy: P-050 um NO-Case ergaenzt (`tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`) inkl. Assert auf normales Speichern mit `missed_previous=0`. (2026-02-22)

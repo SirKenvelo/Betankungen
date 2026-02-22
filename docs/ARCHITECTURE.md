@@ -18,7 +18,7 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 ---
 
 ## Aktueller Funktionsumfang (Stand 2026-02-22)
-Siehe `CHANGELOG.md` (`[Unreleased]`, inkl. Domain-Policy-Matrix v1).
+Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
 
 ### Infrastruktur & Tooling
 - [x] **XDG-Konformität:** Trennung von Daten (`~/.local/share/`) und Konfiguration (`~/.config/`).
@@ -137,20 +137,20 @@ Siehe `CHANGELOG.md` (`[Unreleased]`, inkl. Domain-Policy-Matrix v1).
 - [x] Keine neue Fachlogik eingefuehrt; Fokus auf Struktur und Wartbarkeit eingehalten.
 - [x] Parse/Validate/Dispatch-Pipeline explizit verankert und durch Domain-Policy-Cases (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`) abgesichert.
 
-### Version 0.6.0 – Fundament fuer Fahrzeug-Domain (danach)
+### Version 0.6.0 – Fundament fuer Fahrzeug-Domain — abgeschlossen
 *Ziel: stabile Struktur fuer spaeteres Multi-Car ohne sofortigen Feature-Ausbau.*
 - [x] Projektstruktur fuer Wissensarchiv/Backups/Skripte/Tests ist etabliert (`knowledge_archive/`, `.backup/`, `scripts/`, `tests/`).
 - [x] Technische Basis `cars` + `fuelups.car_id` + `missed_previous` ist im aktuellen Arbeitsstand vorhanden.
 - [x] Domain-Policy-Matrix v1 als Regression-Fundament aufgebaut (inkl. Gap-/Date-/Cost-/Price-/Stats-Guards).
-- [ ] Release-Zuordnung und fachliche Konsolidierung als 0.6.0-Rahmen dokumentieren (Hauptauto-Flow ohne Multi-Car-CLI-Ausbau).
-- [ ] Migrations-/Domainregeln weiter konsolidieren (Immutability, Hard-Errors vs Warnings, Gap-Semantik fuer Stats).
+- [x] Release-Zuordnung und fachliche Konsolidierung als 0.6.0-Rahmen dokumentiert (Hauptauto-Flow ohne Multi-Car-CLI-Ausbau).
+- [x] Migrations-/Domainregeln weiter konsolidiert (Immutability, Hard-Errors vs Warnings, Gap-Semantik fuer Stats).
 
 ### Langfristige Evolutionslinie
 - [x] `0.5.3`: Reife, Struktur, Vorbereitung.
 - [x] `0.5.5`: `--yearly` (Text/JSON) + Validation + Smoke.
 - [x] `0.5.6`: Help/Usage Rework (kurzer Fehlerpfad + strukturierter `--help`).
 - [x] `0.5.6-0`: Zwischenversion fuer zusaetzliche Unit (Parse/Validate-Entkopplung + Tests).
-- [ ] `0.6.0`: Fahrzeug-Struktur konsolidieren (Hauptauto + FK als stabiles Fundament).
+- [x] `0.6.0`: Fahrzeug-Struktur konsolidiert (Hauptauto + FK als stabiles Fundament).
 - [ ] `0.7.x`: echtes Multi-Car-Feature.
 - [ ] `0.8.x` (optional): Export/Output Contracts (CSV/JSON Versionierung, Schema/Headers, Escape-Regeln).
 - [ ] `1.0.0`: stabile Domain + Export + ausgereifte Stats.

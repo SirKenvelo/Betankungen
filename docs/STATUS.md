@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-02-22
-**Zielversion:** 0.6.0
+**Zielversion:** 0.7.x
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -130,11 +130,12 @@ Bereits erledigt:
 - Erreicht: Framework-freie Domain-Policy-Cases fuer den Validate-Layer (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`) und Runner-Integration in den Basis-Smoke.
 - Keine neue Fachlogik eingefuehrt; Schwerpunkt auf Struktur, Lesbarkeit und wartbarer Zustandsfuehrung umgesetzt.
 
-## Roadmap 0.6.0 – Fundament fuer Fahrzeug-Domain (geplant/konsolidierend, danach)
+## Roadmap 0.6.0 – Fundament fuer Fahrzeug-Domain (abgeschlossen)
 - Ziel: stabile Grundlage fuer spaeteres Multi-Car, ohne sofort Multi-Car-Feature auszurollen.
-- Hinweis zum Ist-Stand: `cars`, `fuelups.car_id` und `missed_previous` sind im aktuellen Arbeitsstand bereits technisch vorhanden.
-- 0.6.0 fokussiert die saubere fachliche Konsolidierung (Hauptauto-Flow, Migrationsregeln, Validierungsregeln, Gap-Semantik fuer Stats).
-- Nicht-Ziele 0.6.0: keine GUI, keine Web-API, kein Subcommand-Umbau, kein Overengineering.
+- Erreicht: Hauptauto-Flow und Fahrzeugbasis (`cars`, `fuelups.car_id`, `missed_previous`) als konsolidiertes Fundament stabilisiert.
+- Erreicht: Domain-Policy-Matrix v1 vollstaendig umgesetzt und regressionsgesichert (`P-001..P-060` inkl. Car-Isolation `P-060/02`).
+- Erreicht: Migrations-/Domainregeln und Policy-Haertegrade (Hard Error vs Warning+Confirm) als konsistenter Rahmen dokumentiert und getestet.
+- Nicht-Ziele 0.6.0 eingehalten: keine GUI, keine Web-API, kein Subcommand-Umbau, kein Overengineering.
 
 ## Entscheidungen 0.5.0 (festgezurrt, 2026-02-09)
 - Offene Grenzen bei Filtern sind datengetrieben: nur `--from` => `to = MAX(fueled_at)`, nur `--to` => `from = MIN(fueled_at)` (kein "heute").
@@ -164,7 +165,9 @@ Bereits erledigt:
 - 0.5.6-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.5.6-0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.5.6-0 freigegeben (CLI-Validate-Layer finalisiert inkl. Unit-Tests + Smoke-Integration).
+- 0.6.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
+- 0.6.0 freigegeben (Fahrzeug-Domain konsolidiert inkl. Domain-Policy-Matrix v1 und Car-Isolation-Regression).
 - Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
-- Danach: 0.6.0 (Fahrzeug-Domain konsolidieren)
+- Danach: 0.7.x (echtes Multi-Car-Feature)
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar

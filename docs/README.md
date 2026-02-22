@@ -50,7 +50,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.5.5`: Jahres-Summary fuer Stats (`--yearly`) auf Basis der Monatsaggregation
 - `0.5.6`: Help/Usage Rework (abgeschlossen)
 - `0.5.6-0`: Zwischenversion fuer die Einfuehrung einer zusaetzlichen Unit (abgeschlossen)
-- `0.6.0`: Fahrzeug-Domain konsolidieren (naechster Fokus; stabile Grundlage, noch kein echtes Multi-Car-Feature)
+- `0.6.0`: Fahrzeug-Domain konsolidieren (abgeschlossen)
+- `0.7.x`: echtes Multi-Car-Feature (naechster Fokus)
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
