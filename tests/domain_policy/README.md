@@ -64,6 +64,7 @@
 - Gap-Flag-Block P-050..P-051:
   - `P-050` Warning+Confirm (bewusstes `missed_previous=1` bei kleiner Distanz):
     - `cases/t_p050__01__manual_gap_flag_yes.sh`
+    - `cases/t_p050__02__manual_gap_flag_no.sh`
     - `fixtures/p050_base.sql`
   - `P-051` Hard Error (Design: kein automatisches `missed_previous` ohne Confirm):
     - `cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`
