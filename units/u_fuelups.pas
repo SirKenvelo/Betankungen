@@ -382,19 +382,20 @@ begin
         @ParseEuroToCents, @FmtEuroFromCents, 'Gesamtpreis', False
       );
 
-      Inp.LitersMl := AskAndParseInt64(
-        'Getankte Menge (Liter, z.B. 28,76): ',
-        @ParseLitersToMl, @FmtLiterFromMl, 'Liter', False
-      );
+      // P-020 (Hard Error): Liter <= 0 oder NaN fuehren zum direkten Abbruch.
+      S := AskRequired('Getankte Menge (Liter, z.B. 28,76): ');
+      Inp.LitersMl := ParseLitersToMl(S);
+      WriteLn('OK: Liter = ', FmtLiterFromMl(Inp.LitersMl),
+              '  [raw=', Inp.LitersMl, ']');
 
       // Plausibilitaet: sehr grosse Tankmenge (Warning + Confirm)
       if Inp.LitersMl > MAX_TANK_ML_WARNING then
       begin
         if not AskYesNo(
-          Format('Warnung: Sehr grosse Tankmenge (%s L). Tippfehler? Trotzdem speichern?', [FmtLiterFromMl(Inp.LitersMl)]),
+          Format('P-021: Warnung: Sehr grosse Tankmenge (%s L). Tippfehler? Trotzdem speichern?', [FmtLiterFromMl(Inp.LitersMl)]),
           False
         ) then
-          raise Exception.Create('Abbruch durch Benutzer (Tankmenge).');
+          raise Exception.Create('P-021: Abbruch durch Benutzer (Tankmenge).');
       end;
 
       Inp.PricePerLiterMilliEur := AskAndParseInt64(

@@ -10,6 +10,8 @@
 - `p011_base.sql`: minimaler P-011-Zustand fuer Odometer-Last-KM-Hard-Error.
 - `p012_base.sql`: minimaler P-012-Zustand fuer Gap-Confirm YES/NO-Template.
 - `p013_base.sql`: minimaler P-013-Zustand fuer Odometer-Duplikat-KM-Hard-Error.
+- `p020_base.sql`: minimaler P-020-Zustand fuer Fuel-Hard-Error (`liters <= 0`/NaN).
+- `p021_base.sql`: minimaler P-021-Zustand fuer Fuel-Warning+Confirm (`liters > 150`).
 - `p022_base.sql`: minimaler P-022-Zustand fuer Consumption-Warn-Confirm YES/NO-Template.
 
 ## Generierte DB-Dateien

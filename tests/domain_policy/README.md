@@ -28,10 +28,19 @@
   - `P-013` Hard Error (Duplikat-KM / delta=0):
     - `cases/t_p013__01__odometer_duplicate_km.sh`
     - `fixtures/p013_base.sql`
-- P-022 Referenz fuer Warning+Confirm-Flows:
-  - `cases/t_p022__01__consumption_warn_yes.sh`
-  - `cases/t_p022__02__consumption_warn_no.sh`
-  - `fixtures/p022_base.sql`
+- Fuel-/Plausibility-Block P-020..P-022:
+  - `P-020` Hard Error (`liters <= 0` oder NaN):
+    - `cases/t_p020__01__liters_zero.sh`
+    - `cases/t_p020__02__liters_nan.sh`
+    - `fixtures/p020_base.sql`
+  - `P-021` Warning+Confirm (`liters > 150`):
+    - `cases/t_p021__01__fuel_warning_yes.sh`
+    - `cases/t_p021__02__fuel_warning_no.sh`
+    - `fixtures/p021_base.sql`
+  - `P-022` Warning+Confirm (bereits vorhanden):
+    - `cases/t_p022__01__consumption_warn_yes.sh`
+    - `cases/t_p022__02__consumption_warn_no.sh`
+    - `fixtures/p022_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`

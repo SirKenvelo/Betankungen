@@ -2,7 +2,7 @@
   u_db_common.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-02-22
   AUTHOR : Christof Kempinski
   Zentrale Eingabe- und Parse-Utilities fuer den CLI-Dialogfluss.
 
@@ -290,7 +290,15 @@ end;
 
 function ParseLitersToMl(const S: string): Int64;
 begin
-  // Exakt zwei oder drei Nachkommastellen (bon-abhaengig), gespeichert als ml
-  Result := ParseScaledIntExactOneOf(S, 2, 3, 'Liter');
+  // P-020: Liter muessen > 0 sein; ungueltige Werte (z. B. NaN) sind Hard Error.
+  try
+    Result := ParseScaledIntExactOneOf(S, 2, 3, 'Liter');
+  except
+    on E: Exception do
+      raise Exception.Create('P-020: liters <= 0 oder NaN.');
+  end;
+
+  if Result <= 0 then
+    raise Exception.Create('P-020: liters <= 0 oder NaN.');
 end;
 end.

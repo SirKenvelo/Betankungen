@@ -12,6 +12,9 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Fuelups/Domain: Fuel-Policy-Tags fuer Literwerte eingefuehrt (`P-020` als Hard Error fuer `liters <= 0`/NaN, `P-021` als Warning+Confirm bei `liters > 150`). (2026-02-22)
+- Tests/Domain-Policy: Golden-Templates fuer P-020/P-021 ergaenzt (`tests/domain_policy/fixtures/p020_base.sql`, `tests/domain_policy/fixtures/p021_base.sql`, `tests/domain_policy/cases/t_p020__01__liters_zero.sh`, `tests/domain_policy/cases/t_p020__02__liters_nan.sh`, `tests/domain_policy/cases/t_p021__01__fuel_warning_yes.sh`, `tests/domain_policy/cases/t_p021__02__fuel_warning_no.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
+- Docs/Tests: Fuel-/Plausibility-Block `P-020..P-022` als gemeinsamer Doku-Block aufgebaut (`tests/domain_policy/p020.md`, `tests/domain_policy/p021.md`, `tests/domain_policy/p022.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)
 - Docs/Tests: Domain-Policy-README um expliziten Odometer-Policy-Block `P-010..P-013` erweitert (inkl. P-012 als Warning+Confirm innerhalb desselben Blocks). (2026-02-22)
 - Fuelups/Domain: Odometer-Hard-Error-Klassifikation explizit nach Policy getrennt (`P-010` unter Start-KM, `P-011` unter Last-KM pro Fahrzeug, `P-013` bei Duplikat-KM delta=0). (2026-02-22)
 - Tests/Domain-Policy: Golden-Templates fuer P-010/P-011/P-013 ergaenzt (`tests/domain_policy/fixtures/p010_base.sql`, `tests/domain_policy/fixtures/p011_base.sql`, `tests/domain_policy/fixtures/p013_base.sql`, `tests/domain_policy/cases/t_p010__01__odometer_below_start_km.sh`, `tests/domain_policy/cases/t_p011__01__odometer_below_last_km.sh`, `tests/domain_policy/cases/t_p013__01__odometer_duplicate_km.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
