@@ -53,6 +53,14 @@
     - `cases/t_p032__01__price_zero_warn_yes.sh`
     - `cases/t_p032__02__price_zero_warn_no.sh`
     - `fixtures/p032_base.sql`
+- Date-Block P-040..P-041:
+  - `P-040` Hard Error (Datum/Zeit fehlt oder ungueltig):
+    - `cases/t_p040__01__datetime_invalid.sh`
+    - `fixtures/p040_base.sql`
+  - `P-041` Warning+Confirm (Datum in der Zukunft `> now + 10 min`):
+    - `cases/t_p041__01__future_date_warn_yes.sh`
+    - `cases/t_p041__02__future_date_warn_no.sh`
+    - `fixtures/p041_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`

@@ -16,6 +16,8 @@
 - `p030_base.sql`: minimaler P-030-Zustand fuer Cost-Hard-Error (`cost_cents < 0`).
 - `p031_base.sql`: minimaler P-031-Zustand fuer Cost-Warning+Confirm (`cost_cents == 0`).
 - `p032_base.sql`: minimaler P-032-Zustand fuer Price-Warning+Confirm (`price_cents_per_liter <= 0`).
+- `p040_base.sql`: minimaler P-040-Zustand fuer Date-Hard-Error (Datum/Zeit fehlt/ungueltig).
+- `p041_base.sql`: minimaler P-041-Zustand fuer Date-Warning+Confirm (Datum in der Zukunft).
 
 ## Generierte DB-Dateien
 Diese Dateien werden bewusst nicht versioniert und vom Helper erzeugt:

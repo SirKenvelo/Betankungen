@@ -12,6 +12,9 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Fuelups/Domain: Date-Policies ergaenzt (`P-040` Hard Error bei fehlendem/ungueltigem Datum, `P-041` Warning+Confirm bei Zukunftsdatum `> now + 10 min`). (2026-02-22)
+- Tests/Domain-Policy: Golden-Templates fuer P-040/P-041 ergaenzt (`tests/domain_policy/fixtures/p040_base.sql`, `tests/domain_policy/fixtures/p041_base.sql`, `tests/domain_policy/cases/t_p040__01__datetime_invalid.sh`, `tests/domain_policy/cases/t_p041__01__future_date_warn_yes.sh`, `tests/domain_policy/cases/t_p041__02__future_date_warn_no.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
+- Docs/Tests: Date-Block `P-040..P-041` als Doku-Block aufgebaut (`tests/domain_policy/p040.md`, `tests/domain_policy/p041.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)
 - Fuelups/Domain: Cost-/Price-Policies ergaenzt (`P-030` Hard Error bei negativem Gesamtpreis, `P-031` Warning+Confirm bei `cost_cents=0`, `P-032` Warning+Confirm bei `price_cents_per_liter<=0`). (2026-02-22)
 - Tests/Domain-Policy: Golden-Templates fuer P-030/P-031/P-032 ergaenzt (`tests/domain_policy/fixtures/p030_base.sql`, `tests/domain_policy/fixtures/p031_base.sql`, `tests/domain_policy/fixtures/p032_base.sql`, `tests/domain_policy/cases/t_p030__01__cost_negative.sh`, `tests/domain_policy/cases/t_p031__01__cost_zero_warn_yes.sh`, `tests/domain_policy/cases/t_p031__02__cost_zero_warn_no.sh`, `tests/domain_policy/cases/t_p032__01__price_zero_warn_yes.sh`, `tests/domain_policy/cases/t_p032__02__price_zero_warn_no.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
 - Docs/Tests: Cost-/Price-Block `P-030..P-032` als Doku-Block aufgebaut (`tests/domain_policy/p030.md`, `tests/domain_policy/p031.md`, `tests/domain_policy/p032.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)

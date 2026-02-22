@@ -28,7 +28,7 @@ unit u_fuelups;
 interface
 
 uses
-  Classes, SysUtils, StrUtils, SQLDB, SQLite3Conn;
+  Classes, SysUtils, StrUtils, DateUtils, SQLDB, SQLite3Conn;
 
 // ----------------
 // Oeffentliche Schnittstelle
@@ -72,6 +72,34 @@ const
   GAP_THRESHOLD_KM = 1500;
   // Warnschwelle fuer aussergewoehnlich grosse Tankmengen.
   MAX_TANK_ML_WARNING = 150000; // 150 L
+
+// Prueft strikt das erwartete ISO-Format "YYYY-MM-DD HH:MM:SS".
+function TryParseFueledAtIso(const S: string; out DT: TDateTime): boolean;
+var
+  T: string;
+  Y, M, D, H, N, Sec: Integer;
+begin
+  Result := False;
+  T := Trim(S);
+
+  if Length(T) <> 19 then Exit;
+  if (T[5] <> '-') or (T[8] <> '-') or (T[11] <> ' ') or (T[14] <> ':') or (T[17] <> ':') then Exit;
+
+  if not TryStrToInt(Copy(T, 1, 4), Y) then Exit;
+  if not TryStrToInt(Copy(T, 6, 2), M) then Exit;
+  if not TryStrToInt(Copy(T, 9, 2), D) then Exit;
+  if not TryStrToInt(Copy(T, 12, 2), H) then Exit;
+  if not TryStrToInt(Copy(T, 15, 2), N) then Exit;
+  if not TryStrToInt(Copy(T, 18, 2), Sec) then Exit;
+
+  try
+    DT := EncodeDateTime(Y, M, D, H, N, Sec, 0);
+    Result := True;
+  except
+    on E: Exception do
+      Exit(False);
+  end;
+end;
 
 // ----------------
 // Interne Hilfsfunktion: Listet alle verfuegbaren Tankstellen zur Auswahl auf
@@ -299,6 +327,7 @@ var
   Q, QS: TSQLQuery;
   Inp: TFuelupInput;
   S: string;
+  FueledAtDt: TDateTime;
   StartKm: integer;
   LastKm: integer;
   DiffKm: integer;
@@ -355,6 +384,17 @@ begin
 
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');
+      if not TryParseFueledAtIso(Inp.FueledAt, FueledAtDt) then
+        raise Exception.Create('P-040: Datum/Zeit fehlt/ungueltig (erwartet YYYY-MM-DD HH:MM:SS).');
+
+      if FueledAtDt > (Now + (10.0 / 1440.0)) then
+      begin
+        if not AskYesNo(
+          Format('P-041: Warnung: Datum liegt in der Zukunft (%s). Trotzdem speichern?', [Inp.FueledAt]),
+          False
+        ) then
+          raise Exception.Create('P-041: Abbruch durch Benutzer (Datum in der Zukunft).');
+      end;
 
       S := AskRequired('Kilometerstand (km): ');
       if not TryStrToInt(S, Inp.OdometerKm) then
