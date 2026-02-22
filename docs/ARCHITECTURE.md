@@ -30,8 +30,8 @@ Siehe `CHANGELOG.md`, Version `0.5.6-0` plus `[Unreleased]`.
 - [x] **Release-Logging:** Archiv + SHA-256 in `.releases/release_log.json` via `scripts/kpr.sh` (Root-Wrapper: `kpr.sh`).
 - [x] **Backup-Index:** Zeitgestempelte Snapshots in `.backup/YYYY-MM-DD_HHMM` plus Register `.backup/index.json` via `scripts/backup_snapshot.sh`.
 - [x] **Recovery-Doku:** Wiederherstellungsablauf dokumentiert in `docs/RESTORE.md`.
-- [x] **Lokale Smoke-Checks:** Schnelle Plausibilitaetstests unter `tests/smoke_cli.sh`.
-- [x] **Sauberer Final-Smoke:** Wrapper fuer isolierte HOME/XDG-Laeufe unter `tests/smoke_clean_home.sh`.
+- [x] **Lokale Smoke-Checks:** Schnelle Plausibilitaetstests unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`).
+- [x] **Sauberer Final-Smoke:** Wrapper fuer isolierte HOME/XDG-Laeufe unter `tests/smoke/smoke_clean_home.sh` (kompatibel via `tests/smoke_clean_home.sh`).
 
 ### Daten & Logik
 - [x] **DB-Bootstrap:** Idempotente Initialisierung des SQLite-Schemas inkl. Metadaten-Tracking.
@@ -134,7 +134,7 @@ Siehe `CHANGELOG.md`, Version `0.5.6-0` plus `[Unreleased]`.
 - [x] Zusaetzliche Unit erstellt und sauber in den bestehenden CLI-Flow integriert (`u_cli_validate`).
 - [x] Verantwortung/Abgrenzung der neuen Unit in Doku und Headern klargezogen.
 - [x] Keine neue Fachlogik eingefuehrt; Fokus auf Struktur und Wartbarkeit eingehalten.
-- [x] Parse/Validate/Dispatch-Pipeline explizit verankert und durch Unit-Tests (`tests/test_cli_validate.pas`) abgesichert.
+- [x] Parse/Validate/Dispatch-Pipeline explizit verankert und durch Domain-Policy-Cases (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`) abgesichert.
 
 ### Version 0.6.0 – Fundament fuer Fahrzeug-Domain (danach)
 *Ziel: stabile Struktur fuer spaeteres Multi-Car ohne sofortigen Feature-Ausbau.*

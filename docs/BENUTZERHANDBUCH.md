@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-02-17
+**Stand:** 2026-02-20
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -64,6 +64,7 @@ Eingabe bei `--add fuelups`:
   - muss >= Fahrzeug-Start-KM sein
   - muss strikt groesser als der letzte Odometer des Fahrzeugs sein
 - Bei grosser Distanzluecke (> 1500 km) wird gezielt nach "fehlender vorheriger Betankung" gefragt (`missed_previous`)
+- Wird diese Rueckfrage mit `n` beantwortet, wird der Add-Flow abgebrochen (kein Insert).
 - Gesamtpreis (EUR, z.B. `50,01`)
 - Getankte Menge (Liter, z.B. `28,76`)
 - Preis pro Liter (EUR/L, z.B. `1,739`)

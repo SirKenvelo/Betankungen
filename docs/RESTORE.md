@@ -1,5 +1,5 @@
 # Restore-Anleitung
-**Stand:** 2026-02-13
+**Stand:** 2026-02-20
 
 Diese Anleitung beschreibt den Wiederherstellungsprozess ohne Git.
 
@@ -30,7 +30,7 @@ Das Archiv enthaelt standardmaessig:
 
 ## 4. Plausibilitaetscheck
 - Build/Run-Test starten (z. B. `bin/Betankungen --version` sofern vorhanden).
-- Optional: `tests/smoke_cli.sh` ausfuehren.
+- Optional: `tests/smoke/smoke_cli.sh` ausfuehren (kompatibel via `tests/smoke_cli.sh`).
 - Doku-Stand und `docs/CHANGELOG.md` prüfen.
 
 ## 5. Optionalen Backup-Snapshot anlegen

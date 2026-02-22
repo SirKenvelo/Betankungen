@@ -17,7 +17,7 @@
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)
 - Restore-Ablauf dokumentiert in `RESTORE.md`
 - Wissens-Archiv fuer verworfene Snippets in `knowledge_archive/`
-- Smoke-Checks unter `tests/smoke_cli.sh`
+- Smoke-Checks unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`)
 
 ## Datenmodell & Domain-Logik (erledigt)
 - SQLite-Schema v4 stabil (`cars`, `fuelups.car_id`, `fuelups.missed_previous`)
@@ -97,7 +97,7 @@ Bereits erledigt:
 - Frischstart ohne Argumente laeuft still (kein Fehler "Kein Kommando"), sofern Bootstrap fehlt.
 - Bei vorhandener Config und fehlender DB wird die DB still am konfigurierten Pfad neu angelegt.
 - Interaktiv nur als Fallback bei nicht nutzbarem DB-Pfad; Retry ist moeglich.
-- Smoke-Abdeckung erweitert (`tests/smoke_cli.sh`, `tests/smoke_clean_home.sh`).
+- Smoke-Abdeckung erweitert (`tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_clean_home.sh`).
 
 ## 0.5.5 – Jahres-Summary (abgeschlossen)
 - CLI umgesetzt: `Betankungen --stats fuelups --yearly` und `Betankungen --stats fuelups --json --yearly`.
@@ -116,7 +116,7 @@ Bereits erledigt:
 - Ziel: gezielte Zwischenversion vor 0.6.0 zur Einfuehrung einer zusaetzlichen Unit.
 - Fokus: strukturierte Extraktion in eine neue Unit mit sauberer Verdrahtung im bestehenden CLI-Flow.
 - Erreicht: Parse/Validate-Trennung mit dedizierter Unit `u_cli_validate` (Meta-/Action-Flow, Domain-Policies, Output-/Format-Policies, Period-Policies).
-- Erreicht: Framework-freie Unit-Tests fuer den Validate-Layer (`tests/test_cli_validate.pas`) und Runner-Integration in den Basis-Smoke.
+- Erreicht: Framework-freie Domain-Policy-Cases fuer den Validate-Layer (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`) und Runner-Integration in den Basis-Smoke.
 - Keine neue Fachlogik eingefuehrt; Schwerpunkt auf Struktur, Lesbarkeit und wartbarer Zustandsfuehrung umgesetzt.
 
 ## Roadmap 0.6.0 – Fundament fuer Fahrzeug-Domain (geplant/konsolidierend, danach)

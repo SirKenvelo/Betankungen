@@ -134,6 +134,7 @@ Fachlogik für Betankungen (`fuelups`).
 - Auflisten (Standard / Detail)
 - Zuordnung zu Fahrzeugen (`car_id`, aktuell Default-Fahrzeug bei Single-Car-Workflow)
 - Golden-Info-Flag `missed_previous` (vorheriger Tankstopp fehlt) wird bei grosser KM-Luecke gezielt abgefragt
+- Bei Ablehnung der Gap-Rueckfrage (`n`) wird der Add-Flow abgebrochen (kein Fuelup-Insert)
 - Plausibilitaetsregeln: `odometer_km >= car.odometer_start_km`, streng monoton pro Fahrzeug, Warnung bei sehr grosser Tankmenge
 - Append-only (keine Edit/Delete)
 

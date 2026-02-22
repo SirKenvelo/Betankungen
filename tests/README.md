@@ -1,56 +1,89 @@
 # Tests
-**Stand:** 2026-02-20
+**Stand:** 2026-02-22
+
+## Ordnerstruktur
+- `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
+- `tests/domain_policy/cases/`: kleine, fokussierte Policy-Cases.
+- `tests/domain_policy/fixtures/`: SQL-Seeds und generierte Test-DBs.
+- `tests/domain_policy/helpers/`: Mini-Utilities (z. B. DB-Build).
+- `tests/regression/`: Bugs, die nicht zurueckkommen duerfen.
+- `tests/smoke/`: End-to-End-CLI-Sanity-Checks.
+
+Kompatibilitaets-Wrapper bleiben im Root erhalten:
+- `tests/smoke_cli.sh` -> `tests/smoke/smoke_cli.sh`
+- `tests/smoke_clean_home.sh` -> `tests/smoke/smoke_clean_home.sh`
+- `tests/run_unit_tests.sh` -> `tests/domain_policy/run_domain_policy_tests.sh`
+
+## Namenskonvention (Policy-Cases)
+- Case-Dateien: `t_<policy>__<nn>__<kurzname>.*`
+- Beispiel:
+  - `t_p012__01__gap_confirm_yes.*`
+  - `t_p012__02__gap_confirm_no.*`
+  - `t_p022__01__consumption_warn_yes.*`
+- Golden-Template P-012:
+  - `tests/domain_policy/fixtures/p012_base.sql`
+  - `tests/domain_policy/cases/t_p012__01__gap_confirm_yes.sh`
+  - `tests/domain_policy/cases/t_p012__02__gap_confirm_no.sh`
+- Golden-Template P-022:
+  - `tests/domain_policy/fixtures/p022_base.sql`
+  - `tests/domain_policy/cases/t_p022__01__consumption_warn_yes.sh`
+  - `tests/domain_policy/cases/t_p022__02__consumption_warn_no.sh`
+
+## Test-DB-Strategie
+Die Testlandschaft ist bewusst zweigleisig:
+- `Betankungen_Big.db`: grosser Datensatz fuer Output-/Performance-/Dashboard-Checks.
+- `Betankungen_Policy.db`: kleiner, deterministischer Datensatz fuer Policy-Cases.
+
+SQL-Seeds:
+- `tests/domain_policy/fixtures/seed_big.sql` (~500 Fuelups)
+- `tests/domain_policy/fixtures/seed_policy.sql` (1-3 relevante Fuelups, Default-Car + optional zweites Car)
+
+DB-Erzeugung (aus Projektroot):
+- `tests/domain_policy/helpers/build_test_dbs.sh`
+
+Erzeugte Dateien:
+- `tests/domain_policy/fixtures/Betankungen_Big.db`
+- `tests/domain_policy/fixtures/Betankungen_Policy.db`
+
+## Domain-Policy-Runner
+- Script: `tests/domain_policy/run_domain_policy_tests.sh`
+- Verhalten:
+  - erzeugt zuerst beide Test-DBs,
+  - kompiliert alle `t_*.pas` in `tests/domain_policy/cases/`,
+  - fuehrt die Cases nacheinander aus.
+- Runner-Konvention: ein Case entspricht genau einem Aufruf, Assertions laufen ueber Exit-Code sowie Stdout/Stderr.
+- Interaktive Bestaetigungen werden in Cases ueber STDIN simuliert.
+
+Direktlauf:
+- `tests/domain_policy/run_domain_policy_tests.sh`
+- kompatibel: `tests/run_unit_tests.sh`
 
 ## Smoke-Test
-- Script: `tests/smoke_cli.sh`
+- Script: `tests/smoke/smoke_cli.sh`
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
-- Default-Lauf ohne Zusatzflags bleibt kurz (Basis-Smoke + Core-Guardrails).
-- Enthaltene First-Run-Faelle:
-  - Frischer Start ohne Config/DB -> stille Anlage von Config + DB.
-  - Config vorhanden, DB fehlt -> stille Neuanlage der DB am konfigurierten Pfad.
-  - Nicht schreibbarer Default-Pfad -> Prompt-Fallback mit Retry.
-- Weitere CLI-Guardrails:
-  - `--help` wird als Struktur-Stabilitaet geprueft (Keywords: `Commands`, `Stats options`, `Examples`, `--yearly`, `--dashboard`).
-  - `--stats stations` muss im Fehlerfall `Fehler` + `Usage` + `Tipp` liefern.
-  - `--stats fuelups --json --csv` muss als Kurzfehler im 3-Zeilen-Format laufen (kein Voll-Help).
-  - `--show-config` funktioniert auch in frischer HOME-Umgebung.
-  - `--reset-config` loescht nur die Config, nicht die DB-Datei.
-  - `--reset-config` prueft optional den Fehlerpfad bei nicht loeschbarer Config (Skip, falls im System nicht reproduzierbar).
-  - `--demo` ohne Seed liefert einen sauberen Fehler ohne interaktiven Prompt.
-  - Fehlerhafter `--db`-Pfad bleibt non-interactive (kein Prompt-Fallback).
-- Zusatzsuiten (optional):
-  - `-m`: Monthly-Regression-Suite (Text/JSON compact+pretty, Zeitraum, Validierung, No-Data-Fall).
-  - `-y`: Yearly-Regression-Suite (Text/JSON compact+pretty, Zeitraum, Validierungskonflikte, JSON-Struktur, No-Data-Fall).
-  - `-a`: beide Zusatzsuiten (`-m` + `-y`).
+- Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
+- Zusatzsuiten:
+  - `-m`: Monthly-Suite
+  - `-y`: Yearly-Suite
+  - `-a`: beide Suiten
 - Steuerung:
-  - Default ist **fail-fast** (Abbruch beim ersten Fehler).
-  - `--keep-going` sammelt Fehler und liefert am Ende eine Gesamtsumme.
-  - `-l` bzw. `--list` zeigt nur die geplanten Checks (keine Ausfuehrung).
-- Ausgabe:
-  - Prefixe sind farblich markiert (`[INFO]` gelb, `[OK]` gruen, `[FAIL]` rot; `[LIST]` cyan in `smoke_cli.sh`).
+  - Default: fail-fast
+  - `--keep-going`: Fehler sammeln
+  - `-l`/`--list`: nur Testplan
 
-Ausfuehrung im Projektroot:
-- `tests/smoke_cli.sh`
-- `tests/smoke_cli.sh -m`
-- `tests/smoke_cli.sh -y`
-- `tests/smoke_cli.sh -a`
-- `tests/smoke_cli.sh -a --keep-going`
-- `tests/smoke_cli.sh -a -l`
-
-## Unit-Tests (ohne Framework)
-- Script: `tests/run_unit_tests.sh`
-- Zweck: kompakter Policy-Check fuer `u_cli_validate` mit direktem `TCommand`-Aufbau (ohne DB/CLI-IO).
-- Aktueller Testkandidat: `tests/test_cli_validate.pas`.
-- Integration: Der Basis-Smoke (`tests/smoke_cli.sh`) fuehrt den Runner mit aus.
-- Direkter Lauf:
-  - `tests/run_unit_tests.sh`
+Ausfuehrung:
+- `tests/smoke/smoke_cli.sh`
+- `tests/smoke/smoke_cli.sh -m|-y|-a`
+- kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
-- Script: `tests/smoke_clean_home.sh`
+- Script: `tests/smoke/smoke_clean_home.sh`
 - Zweck: reproduzierbarer End-to-End-Lauf in isolierter HOME/XDG-Umgebung.
-- Ausfuehrung:
-  - `tests/smoke_clean_home.sh`
-  - `tests/smoke_clean_home.sh -m|-y|-a`
-  - `tests/smoke_clean_home.sh -a --keep-going`
-  - `tests/smoke_clean_home.sh -a -l`
-  - optional: `tests/smoke_clean_home.sh --keep-home` (Sandbox bleibt zur Analyse erhalten)
+
+Ausfuehrung:
+- `tests/smoke/smoke_clean_home.sh`
+- `tests/smoke/smoke_clean_home.sh -m|-y|-a`
+- `tests/smoke/smoke_clean_home.sh -a --keep-going`
+- `tests/smoke/smoke_clean_home.sh -a -l`
+- optional: `tests/smoke/smoke_clean_home.sh --keep-home`
+- kompatibel: `tests/smoke_clean_home.sh`

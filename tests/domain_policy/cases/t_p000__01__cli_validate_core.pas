@@ -1,4 +1,4 @@
-program test_cli_validate;
+program t_p000__01__cli_validate_core;
 
 {$mode objfpc}{$H+}
 
