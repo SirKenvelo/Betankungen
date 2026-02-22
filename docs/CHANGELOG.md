@@ -12,6 +12,9 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Fuelups/Domain: Odometer-Hard-Error-Klassifikation explizit nach Policy getrennt (`P-010` unter Start-KM, `P-011` unter Last-KM pro Fahrzeug, `P-013` bei Duplikat-KM delta=0). (2026-02-22)
+- Tests/Domain-Policy: Golden-Templates fuer P-010/P-011/P-013 ergaenzt (`tests/domain_policy/fixtures/p010_base.sql`, `tests/domain_policy/fixtures/p011_base.sql`, `tests/domain_policy/fixtures/p013_base.sql`, `tests/domain_policy/cases/t_p010__01__odometer_below_start_km.sh`, `tests/domain_policy/cases/t_p011__01__odometer_below_last_km.sh`, `tests/domain_policy/cases/t_p013__01__odometer_duplicate_km.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
+- Docs/Tests: Policy-Doku fuer P-010/P-011/P-013 und Domain-Policy-Fixtures aktualisiert (`tests/domain_policy/p010.md`, `tests/domain_policy/p011.md`, `tests/domain_policy/p013.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)
 - CLI/Fuelups: `--car-id <id>` fuer `--add fuelups` eingefuehrt; P-001/P-002 sauber getrennt (`P-001` bei fehlend/ungueltig <= 0, `P-002` bei nicht existenter car_id/FK), jeweils als Hard Error ohne Write. (2026-02-22)
 - Tests/Domain-Policy: Golden-Templates fuer P-001/P-002 ergaenzt (`tests/domain_policy/fixtures/p001_base.sql`, `tests/domain_policy/fixtures/p002_base.sql`, `tests/domain_policy/cases/t_p001__01__car_id_zero.sh`, `tests/domain_policy/cases/t_p001__02__car_id_negative.sh`, `tests/domain_policy/cases/t_p002__01__car_id_missing_fk.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
 - Docs/Tests: Policy-Doku fuer P-001/P-002 und Domain-Policy-Fixtures aktualisiert (`tests/domain_policy/p001.md`, `tests/domain_policy/p002.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)

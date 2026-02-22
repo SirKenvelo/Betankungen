@@ -14,10 +14,19 @@
 - P-002 Referenz fuer Hard-Error ohne Write (FK):
   - `cases/t_p002__01__car_id_missing_fk.sh`
   - `fixtures/p002_base.sql`
+- P-010 Referenz fuer Odometer-Start-KM-Hard-Error:
+  - `cases/t_p010__01__odometer_below_start_km.sh`
+  - `fixtures/p010_base.sql`
+- P-011 Referenz fuer Odometer-Last-KM-Hard-Error:
+  - `cases/t_p011__01__odometer_below_last_km.sh`
+  - `fixtures/p011_base.sql`
 - P-012 Referenz fuer Warning+Confirm-Flows:
   - `cases/t_p012__01__gap_confirm_yes.sh`
   - `cases/t_p012__02__gap_confirm_no.sh`
   - `fixtures/p012_base.sql`
+- P-013 Referenz fuer Duplikat-KM-Hard-Error:
+  - `cases/t_p013__01__odometer_duplicate_km.sh`
+  - `fixtures/p013_base.sql`
 - P-022 Referenz fuer Warning+Confirm-Flows:
   - `cases/t_p022__01__consumption_warn_yes.sh`
   - `cases/t_p022__02__consumption_warn_no.sh`

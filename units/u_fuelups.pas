@@ -363,11 +363,14 @@ begin
       // Domain-Validation: Startpunkt + Monotonie pro Fahrzeug
       StartKm := GetCarOdometerStartKm(QS, Inp.CarId);
       if Inp.OdometerKm < StartKm then
-        raise Exception.Create(Format('Odometer unter Start-KM (start=%d, current=%d).', [StartKm, Inp.OdometerKm]));
+        raise Exception.Create(Format('P-010: odometer_km < cars.odometer_start_km (start=%d, current=%d).', [StartKm, Inp.OdometerKm]));
 
       LastKm := GetLastOdometerKm(QS, Inp.CarId);
-      if (LastKm >= 0) and (Inp.OdometerKm <= LastKm) then
-        raise Exception.Create(Format('Odometer mismatch. Current=%d, Last=%d. Cars don''t travel back in time.', [Inp.OdometerKm, LastKm]));
+      if (LastKm >= 0) and (Inp.OdometerKm = LastKm) then
+        raise Exception.Create(Format('P-013: odometer_km - last_odometer_km = 0 (duplicate-km, current=%d, last=%d).', [Inp.OdometerKm, LastKm]));
+
+      if (LastKm >= 0) and (Inp.OdometerKm < LastKm) then
+        raise Exception.Create(Format('P-011: odometer_km <= last_odometer_km (pro car, current=%d, last=%d).', [Inp.OdometerKm, LastKm]));
 
       DiffKm := 0;
       if LastKm >= 0 then

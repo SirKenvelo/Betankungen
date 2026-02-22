@@ -6,7 +6,10 @@
 - `seed_policy.sql`: erzeugt den kleinen, deterministischen Policy-Datensatz (3 Fuelups).
 - `p001_base.sql`: minimaler P-001-Zustand fuer car_id-Invalid-Hard-Error-Cases.
 - `p002_base.sql`: minimaler P-002-Zustand fuer car_id-FK-Hard-Error-Cases.
+- `p010_base.sql`: minimaler P-010-Zustand fuer Odometer-Start-KM-Hard-Error.
+- `p011_base.sql`: minimaler P-011-Zustand fuer Odometer-Last-KM-Hard-Error.
 - `p012_base.sql`: minimaler P-012-Zustand fuer Gap-Confirm YES/NO-Template.
+- `p013_base.sql`: minimaler P-013-Zustand fuer Odometer-Duplikat-KM-Hard-Error.
 - `p022_base.sql`: minimaler P-022-Zustand fuer Consumption-Warn-Confirm YES/NO-Template.
 
 ## Generierte DB-Dateien
