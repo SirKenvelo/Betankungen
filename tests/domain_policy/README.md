@@ -61,6 +61,17 @@
     - `cases/t_p041__01__future_date_warn_yes.sh`
     - `cases/t_p041__02__future_date_warn_no.sh`
     - `fixtures/p041_base.sql`
+- Gap-Flag-Block P-050..P-051:
+  - `P-050` Warning+Confirm (bewusstes `missed_previous=1` bei kleiner Distanz):
+    - `cases/t_p050__01__manual_gap_flag_yes.sh`
+    - `fixtures/p050_base.sql`
+  - `P-051` Hard Error (Design: kein automatisches `missed_previous` ohne Confirm):
+    - `cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`
+    - `fixtures/p051_base.sql`
+- Stats-Block P-060:
+  - `P-060` OK-Policy (Intervall mit `missed_previous=1` wird fuer Verbrauch uebersprungen):
+    - `cases/t_p060__01__stats_skip_interval_missed_previous.sh`
+    - `fixtures/p060_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`

@@ -331,6 +331,7 @@ var
   StartKm: integer;
   LastKm: integer;
   DiffKm: integer;
+  MissedPreviousConfirmed: boolean;
 
   // Setzt optionale String-Parameter (leerer String wird zu NULL)
   procedure SetOptStr(const P, V: string);
@@ -467,17 +468,33 @@ begin
 
       Inp.IsFullTank := AskYesNo('Vollgetankt?', True);
 
-      // Golden Information: nur bei grosser Distanz nachfragen
+      // Gap-Flag-Policies (P-012/P-050/P-051)
       Inp.MissedPrevious := False;
+      MissedPreviousConfirmed := False;
       if (LastKm >= 0) and (DiffKm > GAP_THRESHOLD_KM) then
       begin
         if not AskYesNo(
-          Format('Warnung: Distanz seit letzter Betankung ist %d km (> %d). Hast du evtl. eine Betankung vergessen?', [DiffKm, GAP_THRESHOLD_KM]),
+          Format('P-012: Warnung: Distanz seit letzter Betankung ist %d km (> %d). Hast du evtl. eine Betankung vergessen?', [DiffKm, GAP_THRESHOLD_KM]),
           False
         ) then
           raise Exception.Create('Abbruch durch Benutzer (Distanzluecke).');
         Inp.MissedPrevious := True;
+        MissedPreviousConfirmed := True;
+      end
+      else if (LastKm >= 0) and (DiffKm <= GAP_THRESHOLD_KM) then
+      begin
+        if AskYesNo(
+          Format('P-050: Warnung: Distanz seit letzter Betankung ist nur %d km (<= %d). Zyklus bewusst resetten (missed_previous=1)?', [DiffKm, GAP_THRESHOLD_KM]),
+          True
+        ) then
+        begin
+          Inp.MissedPrevious := True;
+          MissedPreviousConfirmed := True;
+        end;
       end;
+
+      if Inp.MissedPrevious and (not MissedPreviousConfirmed) then
+        raise Exception.Create('P-051: missed_previous ohne bestaetigtes Confirm ist nicht erlaubt.');
 
       Inp.FuelType    := AskOptional('Spritart (optional, z.B. E10): ');
       Inp.PaymentType := AskOptional('Bezahlart (optional, z.B. EC): ');

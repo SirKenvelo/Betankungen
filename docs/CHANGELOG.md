@@ -12,6 +12,10 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Fuelups/Domain: Gap-Flag-Policies ergaenzt (`P-050` Warning+Confirm fuer bewusstes `missed_previous=1` bei kleiner Distanz, `P-051` Guardrail gegen automatisches Setzen ohne Confirm). (2026-02-22)
+- Tests/Domain-Policy: Golden-Templates fuer P-050/P-051/P-060 ergaenzt (`tests/domain_policy/fixtures/p050_base.sql`, `tests/domain_policy/fixtures/p051_base.sql`, `tests/domain_policy/fixtures/p060_base.sql`, `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`, `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`, `tests/domain_policy/cases/t_p060__01__stats_skip_interval_missed_previous.sh`) inkl. Assertions auf Flag-Integritaet und deterministische Stats-Intervalle. (2026-02-22)
+- Stats/Policy: P-060 explizit abgesichert (Intervalle ueber `missed_previous=1` werden fuer Verbrauch uebersprungen). (2026-02-22)
+- Docs/Tests: Gap-Flag-/Stats-Blocke `P-050..P-051` und `P-060` als Doku-Referenzen aufgebaut (`tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`, `tests/domain_policy/p060.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)
 - Fuelups/Domain: Date-Policies ergaenzt (`P-040` Hard Error bei fehlendem/ungueltigem Datum, `P-041` Warning+Confirm bei Zukunftsdatum `> now + 10 min`). (2026-02-22)
 - Tests/Domain-Policy: Golden-Templates fuer P-040/P-041 ergaenzt (`tests/domain_policy/fixtures/p040_base.sql`, `tests/domain_policy/fixtures/p041_base.sql`, `tests/domain_policy/cases/t_p040__01__datetime_invalid.sh`, `tests/domain_policy/cases/t_p041__01__future_date_warn_yes.sh`, `tests/domain_policy/cases/t_p041__02__future_date_warn_no.sh`) inkl. Exitcode-/Policy-Tag-/No-Write-Assertions. (2026-02-22)
 - Docs/Tests: Date-Block `P-040..P-041` als Doku-Block aufgebaut (`tests/domain_policy/p040.md`, `tests/domain_policy/p041.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`). (2026-02-22)

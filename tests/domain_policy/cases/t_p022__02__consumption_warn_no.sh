@@ -48,10 +48,11 @@ sqlite3 "$DB_POLICY" < "$FIXTURE_SQL"
 #  6) confirm_large_tank_warning (y/n)
 #  7) price_per_liter_eur
 #  8) is_full_tank (y/n)
-#  9) fuel_type (optional)
-# 10) payment_type (optional)
-# 11) pump_no (optional)
-# 12) note (optional)
+#  9) confirm_manual_missed_previous_reset (y/n)
+# 10) fuel_type (optional)
+# 11) payment_type (optional)
+# 12) pump_no (optional)
+# 13) note (optional)
 INPUT_LINES=(
   '1'
   '2025-02-01 08:00:00'
@@ -61,6 +62,7 @@ INPUT_LINES=(
   'n'
   '1,655'
   'y'
+  ''
   ''
   ''
   ''
