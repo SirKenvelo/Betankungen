@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-02-20
+**Stand:** 2026-02-22
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -12,6 +12,14 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/Runner: `tests/domain_policy/run_domain_policy_tests.sh` um Fail-Fast-Pruefung fuer `sqlite3`/`fpc` erweitert und Prefix-Farbformatierung auf `stderr` ausgedehnt. (2026-02-22)
+- Fuelups/Domain: Gap-Confirm-Policy geschaerft (`GAP_THRESHOLD_KM=1500`): bei Distanzwarnung fuehrt Antwort `n` jetzt zu einem harten Abbruch ohne Insert; nur `y` speichert und setzt `missed_previous=1`. (2026-02-20)
+- Tests/Domain-Policy: Golden-Template P-012 eingefuehrt (`tests/domain_policy/fixtures/p012_base.sql`, `tests/domain_policy/cases/t_p012__01__gap_confirm_yes.sh`, `tests/domain_policy/cases/t_p012__02__gap_confirm_no.sh`) inkl. STDIN-Simulation und DB-Assertions. (2026-02-20)
+- Tests/Runner: `tests/domain_policy/run_domain_policy_tests.sh` erweitert und startet jetzt Case-Dateien als `.pas` und `.sh`. (2026-02-20)
+- Docs: Gap-Confirm-Abbruchregel und P-012-Template-Doku nachgezogen (`docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `tests/README.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`, `tests/domain_policy/p012.md`). (2026-02-20)
+- Tests: Teststruktur auf `domain_policy`/`regression`/`smoke` konsolidiert, Domain-Policy-Runner eingefuehrt (`tests/domain_policy/run_domain_policy_tests.sh`) und kompatible Wrapper (`tests/smoke_cli.sh`, `tests/smoke_clean_home.sh`, `tests/run_unit_tests.sh`) auf die neuen Pfade umgestellt. (2026-02-20)
+- Tests/DB: Zweigleisige Test-DB-Strategie umgesetzt mit SQL-Fixtures und Builder (`tests/domain_policy/helpers/build_test_dbs.sh`), der reproduzierbar `tests/domain_policy/fixtures/Betankungen_Big.db` (500 Fuelups) und `tests/domain_policy/fixtures/Betankungen_Policy.db` (deterministische Minimalfaelle) erzeugt. (2026-02-20)
+- Docs: Testdoku auf neue Struktur/Namenskonvention/Runner-Konvention aktualisiert (`tests/README.md`, `tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`, `docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/RESTORE.md`). (2026-02-20)
 - Meta: `aktuelle_aenderungen.md` in `.gitignore` aufgenommen (lokale Session-Datei bleibt bewusst untracked); `.gitignore`-Stand auf 2026-02-20 aktualisiert. (2026-02-20)
 
 ## 0.5.6-0 – 2026-02-20
