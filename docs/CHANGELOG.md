@@ -12,6 +12,7 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/DB-Fixtures: `tests/domain_policy/fixtures/seed_big.sql` auf voll deterministische Fuelup-IDs umgestellt (`id = n` aus CTE, stabiles `ORDER BY n` fuer Seed-Reihenfolge). (2026-02-22)
 - Tests/Domain-Policy: P-012-Shell-Cases robuster gemacht (Input-Mapping dokumentiert, NO-Case prueft explizite Distanzluecken-Abbruchmeldung, YES-Case prueft genau einen Insert bei Ziel-Odometer). (2026-02-22)
 - Tests/Runner: `tests/domain_policy/run_domain_policy_tests.sh` um Fail-Fast-Pruefung fuer `sqlite3`/`fpc` erweitert und Prefix-Farbformatierung auf `stderr` ausgedehnt. (2026-02-22)
 - Fuelups/Domain: Gap-Confirm-Policy geschaerft (`GAP_THRESHOLD_KM=1500`): bei Distanzwarnung fuehrt Antwort `n` jetzt zu einem harten Abbruch ohne Insert; nur `y` speichert und setzt `missed_previous=1`. (2026-02-20)
