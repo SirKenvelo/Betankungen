@@ -21,6 +21,7 @@
 - `p050_base.sql`: minimaler P-050-Zustand fuer manuellen Gap-Flag-Reset bei kleiner Distanz.
 - `p051_base.sql`: minimaler P-051-Zustand fuer Guardrail gegen automatisches `missed_previous`.
 - `p060_base.sql`: minimaler P-060-Zustand fuer Stats-Intervallskip an `missed_previous=1`.
+- `p060_car_isolation_base.sql`: 2-Car-Fixture fuer P-060-Car-Isolation (kein Cross-Car-Zyklus).
 
 ## Generierte DB-Dateien
 Diese Dateien werden bewusst nicht versioniert und vom Helper erzeugt:

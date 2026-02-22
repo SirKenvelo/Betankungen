@@ -72,7 +72,9 @@
 - Stats-Block P-060:
   - `P-060` OK-Policy (Intervall mit `missed_previous=1` wird fuer Verbrauch uebersprungen):
     - `cases/t_p060__01__stats_skip_interval_missed_previous.sh`
+    - `cases/t_p060__02__car_isolation.sh`
     - `fixtures/p060_base.sql`
+    - `fixtures/p060_car_isolation_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`
