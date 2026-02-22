@@ -41,6 +41,18 @@
     - `cases/t_p022__01__consumption_warn_yes.sh`
     - `cases/t_p022__02__consumption_warn_no.sh`
     - `fixtures/p022_base.sql`
+- Cost-/Price-Block P-030..P-032:
+  - `P-030` Hard Error (`cost_cents < 0`):
+    - `cases/t_p030__01__cost_negative.sh`
+    - `fixtures/p030_base.sql`
+  - `P-031` Warning+Confirm (`cost_cents == 0`):
+    - `cases/t_p031__01__cost_zero_warn_yes.sh`
+    - `cases/t_p031__02__cost_zero_warn_no.sh`
+    - `fixtures/p031_base.sql`
+  - `P-032` Warning+Confirm (`price_cents_per_liter <= 0`):
+    - `cases/t_p032__01__price_zero_warn_yes.sh`
+    - `cases/t_p032__02__price_zero_warn_no.sh`
+    - `fixtures/p032_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`

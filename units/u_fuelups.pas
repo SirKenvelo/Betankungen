@@ -376,11 +376,23 @@ begin
       if LastKm >= 0 then
         DiffKm := Inp.OdometerKm - LastKm;
 
-      // Erfassung der skalierten Ganzzahl-Werte
-      Inp.TotalCents := AskAndParseInt64(
-        'Gesamtpreis (EUR, z.B. 50,01): ',
-        @ParseEuroToCents, @FmtEuroFromCents, 'Gesamtpreis', False
-      );
+      // P-030 (Hard Error): negativer Gesamtpreis fuehrt zum direkten Abbruch.
+      S := AskRequired('Gesamtpreis (EUR, z.B. 50,01): ');
+      if (Length(S) > 0) and (Trim(S)[1] = '-') then
+        raise Exception.Create('P-030: cost_cents < 0.');
+      Inp.TotalCents := ParseEuroToCents(S);
+      WriteLn('OK: Gesamtpreis = ', FmtEuroFromCents(Inp.TotalCents),
+              '  [raw=', Inp.TotalCents, ']');
+
+      // P-031 (Warning+Confirm): Gesamtpreis=0 ist erlaubt, muss aber bestaetigt werden.
+      if Inp.TotalCents = 0 then
+      begin
+        if not AskYesNo(
+          'P-031: Warnung: Gesamtpreis ist 0,00 EUR. Sonderfall? Trotzdem speichern?',
+          False
+        ) then
+          raise Exception.Create('P-031: Abbruch durch Benutzer (Gesamtpreis=0).');
+      end;
 
       // P-020 (Hard Error): Liter <= 0 oder NaN fuehren zum direkten Abbruch.
       S := AskRequired('Getankte Menge (Liter, z.B. 28,76): ');
@@ -402,6 +414,16 @@ begin
         'Preis pro Liter (EUR/L, z.B. 1,739): ',
         @ParseEurPerLiterToMilli, @FmtEurPerLiterFromMilli, 'Preis/L', False
       );
+
+      // P-032 (Warning+Confirm): Preis/Liter <= 0 ist erlaubt, aber unplausibel.
+      if Inp.PricePerLiterMilliEur <= 0 then
+      begin
+        if not AskYesNo(
+          Format('P-032: Warnung: Preis/Liter <= 0 (%s EUR/L). Trotzdem speichern?', [FmtEurPerLiterFromMilli(Inp.PricePerLiterMilliEur)]),
+          False
+        ) then
+          raise Exception.Create('P-032: Abbruch durch Benutzer (Preis/Liter<=0).');
+      end;
 
       Inp.IsFullTank := AskYesNo('Vollgetankt?', True);
 

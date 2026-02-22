@@ -13,6 +13,9 @@
 - `p020_base.sql`: minimaler P-020-Zustand fuer Fuel-Hard-Error (`liters <= 0`/NaN).
 - `p021_base.sql`: minimaler P-021-Zustand fuer Fuel-Warning+Confirm (`liters > 150`).
 - `p022_base.sql`: minimaler P-022-Zustand fuer Consumption-Warn-Confirm YES/NO-Template.
+- `p030_base.sql`: minimaler P-030-Zustand fuer Cost-Hard-Error (`cost_cents < 0`).
+- `p031_base.sql`: minimaler P-031-Zustand fuer Cost-Warning+Confirm (`cost_cents == 0`).
+- `p032_base.sql`: minimaler P-032-Zustand fuer Price-Warning+Confirm (`price_cents_per_liter <= 0`).
 
 ## Generierte DB-Dateien
 Diese Dateien werden bewusst nicht versioniert und vom Helper erzeugt:
