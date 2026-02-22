@@ -12,6 +12,9 @@ Ziel: Fahrzeug-Domain konsolidieren (Hauptauto-Flow, Migrations-/Gap-Regeln, Dom
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/Domain-Policy: Golden-Template P-022 eingefuehrt (`tests/domain_policy/fixtures/p022_base.sql`, `tests/domain_policy/cases/t_p022__01__consumption_warn_yes.sh`, `tests/domain_policy/cases/t_p022__02__consumption_warn_no.sh`) inkl. STDIN-Mapping und YES/NO-Assertions auf Exitcode, Meldung und DB-State. (2026-02-22)
+- Docs/Tests: P-022-Template-Doku und Fixture-/Domain-Policy-README nachgezogen (`tests/domain_policy/README.md`, `tests/domain_policy/fixtures/README.md`, `tests/domain_policy/p022.md`). (2026-02-22)
+- Meta: `AGENTS.md` Repo-Pflege-Rhythmus auf "Commit+Push pro logischer Einheit" geschwenkt und Release-Disziplin ergaenzt (Tags/Release erst bei `Done`). (2026-02-22)
 - Tests/DB-Fixtures: `tests/domain_policy/fixtures/seed_big.sql` auf voll deterministische Fuelup-IDs umgestellt (`id = n` aus CTE, stabiles `ORDER BY n` fuer Seed-Reihenfolge). (2026-02-22)
 - Tests/Domain-Policy: P-012-Shell-Cases robuster gemacht (Input-Mapping dokumentiert, NO-Case prueft explizite Distanzluecken-Abbruchmeldung, YES-Case prueft genau einen Insert bei Ziel-Odometer). (2026-02-22)
 - Tests/Runner: `tests/domain_policy/run_domain_policy_tests.sh` um Fail-Fast-Pruefung fuer `sqlite3`/`fpc` erweitert und Prefix-Farbformatierung auf `stderr` ausgedehnt. (2026-02-22)
