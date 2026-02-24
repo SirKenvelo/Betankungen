@@ -14,6 +14,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 ### Changed (Codex)
 - Docs: Neues Vision-Dokument `docs/VISION.md` als strategisches Brainstorming hinzugefuegt (Version 0.2 inkl. Vision-, Non-Goals- und Contribution-Leitlinien). (2026-02-24)
 - Docs: Neues Dokument `docs/UI_ASCII_DRAW.md` fuer CLI-UI-Polishing und ASCII-Draw-Notizen angelegt (formatiert, emoji-frei, ohne Roadmap-Commitment). (2026-02-24)
+- Core: Neue Domain-Unit `units/u_cars.pas` mit DB-basiertem CRUD eingefuehrt (`CarsAdd`, `CarsList`, `CarsEdit`, `CarsDelete`) sowie Pruef-APIs `CarsExists` und `CarsHasFuelups` ohne CLI-Abhaengigkeit. (2026-02-24)
 
 ## 0.6.0 – 2026-02-22
 
