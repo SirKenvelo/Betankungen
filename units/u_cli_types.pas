@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-22
+  UPDATED: 2026-02-24
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -45,7 +45,8 @@ type
   // nach erfolgreichem Parsing weiterverarbeitet.
   TTableKind = (
     tkStations,
-    tkFuelups
+    tkFuelups,
+    tkCars
   );
 
   // Hauptkommandos der CLI.
@@ -167,6 +168,7 @@ begin
   case K of
     tkStations: Result := 'stations';
     tkFuelups : Result := 'fuelups';
+    tkCars    : Result := 'cars';
   else
     Result := '';
   end;

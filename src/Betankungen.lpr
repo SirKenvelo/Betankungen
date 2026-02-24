@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-02-22
+  UPDATED: 2026-02-24
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -37,6 +37,7 @@
   Tabellen / Operationen:
   - Stations: hinzufuegen/auflisten/bearbeiten/loeschen
   - Fuelups: hinzufuegen/auflisten (nur anhaengen)
+  - Cars: hinzufuegen/auflisten/bearbeiten/loeschen
 
   Design-Entscheidungen:
   - Minimalismus: Das Hauptprogramm enthaelt keine SQL-Statements oder
@@ -79,11 +80,13 @@ uses
   u_db_seed,
   u_log,
   u_stations,
+  u_cars,
   u_fuelups,
   u_stats,
   u_cli_help,
   u_cli_types,
-  u_cli_parse;
+  u_cli_parse,
+  u_cli_validate;
 
 const
   EXIT_OK = 0;
@@ -301,6 +304,136 @@ var
     FirstRun := True;
   end;
 
+  function AskKeepLocal(const Prompt, Current: string): string;
+  var
+    Input: string;
+  begin
+    Write(Prompt, ' [', Current, ']: ');
+    ReadLn(Input);
+    Input := Trim(Input);
+    if Input = '' then
+      Result := Current
+    else
+      Result := Input;
+  end;
+
+  function TryFindCarById(const Cars: TCarsArray; const CarId: Integer; out Car: TCar): Boolean;
+  var
+    I: Integer;
+  begin
+    for I := 0 to High(Cars) do
+      if Cars[I].Id = CarId then
+      begin
+        Car := Cars[I];
+        Exit(True);
+      end;
+    Result := False;
+  end;
+
+  procedure HandleCarsAdd(const ADbPath: string);
+  var
+    Name, Plate, Note, StartDate, S: string;
+    StartKm: Integer;
+    NewId: Integer;
+  begin
+    WriteLn('Car hinzufuegen');
+    WriteLn('---------------');
+
+    Write('Name*: ');
+    ReadLn(Name);
+    Name := Trim(Name);
+    if Name = '' then
+      raise Exception.Create('Name darf nicht leer sein.');
+
+    Write('Plate: ');
+    ReadLn(Plate);
+    Plate := Trim(Plate);
+
+    Write('Note: ');
+    ReadLn(Note);
+    Note := Trim(Note);
+
+    Write('Start-KM* (>0): ');
+    ReadLn(S);
+    if (not TryStrToInt(Trim(S), StartKm)) or (StartKm <= 0) then
+      raise Exception.Create('Start-KM muss > 0 sein.');
+
+    Write('Start-Datum* (YYYY-MM-DD): ');
+    ReadLn(StartDate);
+    StartDate := Trim(StartDate);
+    if StartDate = '' then
+      raise Exception.Create('Start-Datum darf nicht leer sein.');
+
+    NewId := CarsAdd(ADbPath, Name, Plate, Note, StartKm, StartDate);
+    Msg('OK: Car gespeichert (id=' + IntToStr(NewId) + ').');
+  end;
+
+  procedure HandleCarsList(const ADbPath: string);
+  var
+    Cars: TCarsArray;
+    I: Integer;
+  begin
+    Cars := CarsList(ADbPath);
+    if Length(Cars) = 0 then
+    begin
+      Msg('Keine Cars vorhanden.');
+      Exit;
+    end;
+
+    for I := 0 to High(Cars) do
+      WriteLn(
+        IntToStr(Cars[I].Id) + ': ' +
+        Cars[I].Name + ' | plate=' + Cars[I].Plate +
+        ' | start_km=' + IntToStr(Cars[I].OdometerStartKm) +
+        ' | start_date=' + Cars[I].OdometerStartDate
+      );
+  end;
+
+  procedure HandleCarsEdit(const ADbPath: string; const CarId: Integer);
+  var
+    Cars: TCarsArray;
+    Car: TCar;
+    NewName, NewPlate, NewNote: string;
+  begin
+    Cars := CarsList(ADbPath);
+    if not TryFindCarById(Cars, CarId, Car) then
+      raise Exception.Create('P-002: car_id existiert nicht (FK).');
+
+    WriteLn('Car bearbeiten (id=', CarId, ')');
+    WriteLn('--------------------------');
+
+    NewName := AskKeepLocal('Name*', Car.Name);
+    if Trim(NewName) = '' then
+      raise Exception.Create('Name darf nicht leer sein.');
+
+    NewPlate := AskKeepLocal('Plate', Car.Plate);
+    NewNote := AskKeepLocal('Note', Car.Note);
+
+    if not CarsEdit(ADbPath, CarId, NewName, NewPlate, NewNote) then
+      raise Exception.Create('Car konnte nicht aktualisiert werden (keine Zeile betroffen).');
+
+    Msg('OK: Car aktualisiert (id=' + IntToStr(CarId) + ').');
+  end;
+
+  procedure HandleCarsDelete(const ADbPath: string; const CarId: Integer);
+  var
+    Confirm: string;
+  begin
+    Write('Car id ' + IntToStr(CarId) + ' loeschen (y/N): ');
+    ReadLn(Confirm);
+    Confirm := LowerCase(Trim(Confirm));
+    if (Confirm <> 'y') and (Confirm <> 'yes') then
+    begin
+      Msg('Abgebrochen.');
+      Exit;
+    end;
+
+    if not CarsDelete(ADbPath, CarId) then
+      raise Exception.Create('Car konnte nicht geloescht werden (nicht gefunden).');
+
+    Msg('OK: Car geloescht (id=' + IntToStr(CarId) + ').');
+  end;
+
 begin
   // 0.5.4: Kein Kommando + fehlender Bootstrap -> stille Initialisierung.
   // Deckt Erststart und "Config vorhanden, DB fehlt" ohne Prompt/Fehler ab.
@@ -511,6 +644,10 @@ begin
       Msg('Tipp: Betankungen --help');
     end;
 
+    // DB-abhaengige Command-Policies (z. B. cars edit/delete Exists/HasFuelups).
+    if not ValidateCommandDb(Cmd, DbPath) then
+      FailUsage(Cmd.ErrorMsg, Cmd.ErrorFocus);
+
     // ----------------
     // Weiterleitung
     case Cmd.Target of
@@ -571,6 +708,16 @@ begin
             end;
         else
           FailUsage('Interner Fehler: Ungültiges fuelups-Kommando.');
+        end;
+
+      tkCars:
+        case Cmd.Kind of
+          ckAdd: HandleCarsAdd(DbPath);
+          ckList: HandleCarsList(DbPath);
+          ckEdit: HandleCarsEdit(DbPath, Cmd.CarId);
+          ckDelete: HandleCarsDelete(DbPath, Cmd.CarId);
+        else
+          FailUsage('Interner Fehler: Ungültiges cars-Kommando.');
         end;
     else
       FailUsage('Interner Fehler: Unbekannter Target.');

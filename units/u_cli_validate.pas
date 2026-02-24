@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-22
+  UPDATED: 2026-02-24
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -25,8 +25,12 @@ uses
   u_cli_types;
 
 function ValidateCommand(var Cmd: TCommand): boolean;
+function ValidateCommandDb(var Cmd: TCommand; const DbPath: string): boolean;
 
 implementation
+
+uses
+  u_cars;
 
 function IsStandaloneMeta(const Cmd: TCommand): boolean;
 begin
@@ -61,16 +65,32 @@ begin
         and (Cmd.Target = tkFuelups);
 end;
 
+function IsCarsEditOrDelete(const Cmd: TCommand): boolean;
+begin
+  Result := HasMainCommand(Cmd)
+        and (Cmd.Target = tkCars)
+        and (Cmd.Kind in [ckEdit, ckDelete]);
+end;
+
 function ValidateCarIdPolicy(var Cmd: TCommand): boolean;
 begin
   Result := True;
 
-  if not Cmd.CarIdProvided then
+  if IsCarsEditOrDelete(Cmd) then
+  begin
+    if not Cmd.CarIdProvided then
+    begin
+      Cmd.ErrorMsg := 'Fehler: --car-id ist fuer "--edit cars" und "--delete cars" erforderlich.';
+      Cmd.ErrorFocus := efCarId;
+      Exit(False);
+    end;
+  end
+  else if not Cmd.CarIdProvided then
     Exit(True);
 
-  if not IsAddFuelups(Cmd) then
+  if (not IsAddFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
   begin
-    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups" erlaubt.';
+    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--edit cars" oder "--delete cars" erlaubt.';
     Cmd.ErrorFocus := efCarId;
     Exit(False);
   end;
@@ -305,6 +325,28 @@ begin
 
   if not ValidatePeriodPolicy(Cmd) then
     Exit(False);
+end;
+
+function ValidateCommandDb(var Cmd: TCommand; const DbPath: string): boolean;
+begin
+  Result := True;
+
+  if not IsCarsEditOrDelete(Cmd) then
+    Exit(True);
+
+  if not CarsExists(DbPath, Cmd.CarId) then
+  begin
+    Cmd.ErrorMsg := 'P-002: car_id existiert nicht (FK).';
+    Cmd.ErrorFocus := efCarId;
+    Exit(False);
+  end;
+
+  if (Cmd.Kind = ckDelete) and CarsHasFuelups(DbPath, Cmd.CarId) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: Fahrzeug kann nicht geloescht werden (fuelups vorhanden).';
+    Cmd.ErrorFocus := efCarId;
+    Exit(False);
+  end;
 end;
 
 end.

@@ -16,7 +16,8 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Docs: Neues Dokument `docs/UI_ASCII_DRAW.md` fuer CLI-UI-Polishing und ASCII-Draw-Notizen angelegt (formatiert, emoji-frei, ohne Roadmap-Commitment). (2026-02-24)
 - Core: Neue Domain-Unit `units/u_cars.pas` mit DB-basiertem CRUD eingefuehrt (`CarsAdd`, `CarsList`, `CarsEdit`, `CarsDelete`) sowie Pruef-APIs `CarsExists` und `CarsHasFuelups` ohne CLI-Abhaengigkeit. (2026-02-24)
 - Core: `u_cars` nachgezogen: einheitlich `Q.Params.ParamByName`, Read-Pfade ohne erzwungene Write-Transaktion (read-only Rollback-Cleanup) und neutralere UNIQUE-Fehlermeldungen. (2026-02-24)
-- Meta: `.gitignore` fuer lokale Arbeitsdateien generalisiert (`aktuelle_aenderungen_<datum>.md` via Pattern sowie fortlaufende `sprint_*.md`), Header-Stand aktualisiert. (2026-02-24)
+- CLI/Core: `cars` als CLI-Target verdrahtet (`--add/--list/--edit/--delete cars`) inkl. DB-Validierung fuer `--car-id` via `CarsExists`/`CarsHasFuelups`; Dispatch ruft Core-Funktionen aus `u_cars` direkt auf. (2026-02-24)
+- Meta: `.gitignore` fuer lokale Arbeitsdateien generalisiert (`aktuelle_aenderungen_<datum>.md` via Pattern sowie `sprint_<nr>_commit_<nr>_von_<nr>.md`, plus Legacy-Muster `sprint_<d>.md` und `sprint_<dd>.md`), Header-Stand aktualisiert. (2026-02-24)
 
 ## 0.6.0 – 2026-02-22
 
