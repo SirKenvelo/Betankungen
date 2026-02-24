@@ -2,7 +2,7 @@
   u_fmt.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-02-24
   AUTHOR : Christof Kempinski
   Zentrales Modul fuer CLI-Formatierung, Tabellenlayout und Dashboard-Rendering.
 
@@ -28,7 +28,8 @@ unit u_fmt;
 
 interface
 
-uses SysUtils, u_table, StrUtils;
+uses
+  SysUtils, u_table, StrUtils, u_cars;
 
 // ----------------
 // Oeffentliche Formatter fuer fachliche Basiswerte.
@@ -88,6 +89,9 @@ procedure PrintFuelupDetail(
   const AIsFull, AMissedPrevious: Boolean;
   const ACarName, AFuelType, APayment, APump, ANote, AAddress: string
 );
+
+// Gibt Cars in einem einheitlichen Tabellenlayout aus.
+procedure RenderCarsTable(const Cars: TCarsArray; const Detailed: Boolean = False);
 
 // ----------------
 // Unicode Box-Engine (Basis fuer Dashboards/kompakte Statusausgaben)
@@ -598,6 +602,68 @@ begin
 
   // Adresse
   WriteLn(DetailLine('Addr: ' + AAddress));
+end;
+
+procedure RenderCarsTable(const Cars: TCarsArray; const Detailed: Boolean = False);
+var
+  T: TTable;
+  I: Integer;
+
+  function SafeCell(const S: string): string;
+  begin
+    if Trim(S) = '' then
+      Result := '-'
+    else
+      Result := S;
+  end;
+begin
+  if Length(Cars) = 0 then
+  begin
+    WriteLn('Keine Cars vorhanden.');
+    Exit;
+  end;
+
+  T := TTable.Create;
+  try
+    T.AddCol('id', taRight);
+    T.AddCol('name', taLeft);
+    T.AddCol('plate', taLeft);
+    T.AddCol('start_km', taRight);
+    T.AddCol('start_date', taLeft);
+    if Detailed then
+    begin
+      T.AddCol('note', taLeft);
+      T.AddCol('created_at', taLeft);
+      T.AddCol('updated_at', taLeft);
+    end;
+
+    for I := 0 to High(Cars) do
+    begin
+      if Detailed then
+        T.AddRow([
+          IntToStr(Cars[I].Id),
+          SafeCell(Cars[I].Name),
+          SafeCell(Cars[I].Plate),
+          IntToStr(Cars[I].OdometerStartKm),
+          SafeCell(Cars[I].OdometerStartDate),
+          SafeCell(Cars[I].Note),
+          SafeCell(Cars[I].CreatedAt),
+          SafeCell(Cars[I].UpdatedAt)
+        ])
+      else
+        T.AddRow([
+          IntToStr(Cars[I].Id),
+          SafeCell(Cars[I].Name),
+          SafeCell(Cars[I].Plate),
+          IntToStr(Cars[I].OdometerStartKm),
+          SafeCell(Cars[I].OdometerStartDate)
+        ]);
+    end;
+
+    T.Write;
+  finally
+    T.Free;
+  end;
 end;
 
 end.

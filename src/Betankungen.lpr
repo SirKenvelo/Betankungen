@@ -79,6 +79,7 @@ uses
   u_db_init,
   u_db_seed,
   u_log,
+  u_fmt,
   u_stations,
   u_cars,
   u_fuelups,
@@ -355,25 +356,12 @@ var
     Msg('OK: Car gespeichert (id=' + IntToStr(NewId) + ').');
   end;
 
-  procedure HandleCarsList(const ADbPath: string);
+  procedure HandleCarsList(const ADbPath: string; const Detailed: Boolean);
   var
     Cars: TCarsArray;
-    I: Integer;
   begin
     Cars := CarsList(ADbPath);
-    if Length(Cars) = 0 then
-    begin
-      Msg('Keine Cars vorhanden.');
-      Exit;
-    end;
-
-    for I := 0 to High(Cars) do
-      WriteLn(
-        IntToStr(Cars[I].Id) + ': ' +
-        Cars[I].Name + ' | plate=' + Cars[I].Plate +
-        ' | start_km=' + IntToStr(Cars[I].OdometerStartKm) +
-        ' | start_date=' + Cars[I].OdometerStartDate
-      );
+    RenderCarsTable(Cars, Detailed);
   end;
 
   procedure HandleCarsEdit(const ADbPath: string; const CarId: Integer);
@@ -698,7 +686,7 @@ begin
       tkCars:
         case Cmd.Kind of
           ckAdd: HandleCarsAdd(DbPath);
-          ckList: HandleCarsList(DbPath);
+          ckList: HandleCarsList(DbPath, Cmd.Detail);
           ckEdit: HandleCarsEdit(DbPath, Cmd.CarId);
           ckDelete: HandleCarsDelete(DbPath, Cmd.CarId);
         else

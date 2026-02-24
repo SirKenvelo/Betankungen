@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-22
+  UPDATED: 2026-02-24
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,7 +59,7 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--db <pfad>|--demo]')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
@@ -71,7 +71,7 @@ begin
   else if FocusFlag = '--demo' then
     Writeln('Usage: Betankungen --demo <command> [options]')
   else if (FocusFlag = '--add') or (FocusFlag = '--list') then
-    Writeln('Usage: Betankungen --add|--list stations|fuelups [--db <pfad>|--demo] [--detail] [--debug|--trace|--quiet]')
+    Writeln('Usage: Betankungen --add|--list stations|fuelups|cars [--db <pfad>|--demo] [--detail] [--debug|--trace|--quiet]')
   else if FocusFlag = '--about' then
     Writeln('Usage: Betankungen --about')
   else
@@ -106,10 +106,10 @@ begin
   Line('  Betankungen --help | --version | --about');
 
   Sec('Commands');
-  Item('--add stations|fuelups',     'Datensatz interaktiv erfassen.');
-  Item('--list stations|fuelups',    'Auflisten (optional mit --detail).');
-  Item('--edit stations',            'Station bearbeiten (fuelups ist verboten).');
-  Item('--delete stations',          'Station loeschen (fuelups ist verboten).');
+  Item('--add stations|fuelups|cars','Datensatz interaktiv erfassen.');
+  Item('--list stations|fuelups|cars','Auflisten (optional mit --detail).');
+  Item('--edit stations|cars',       'Datensatz bearbeiten (fuelups ist verboten).');
+  Item('--delete stations|cars',     'Datensatz loeschen (fuelups ist verboten).');
   Item('--stats fuelups',            'Auswertung der Betankungen (read-only).');
   Item('--seed',                     'Demo-DB erzeugen/auffuellen (exklusiv).');
   Item('--about',                    'Projekt-/Autor-Informationen anzeigen.');
@@ -119,7 +119,7 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Nur bei --add fuelups: setzt explizite Fahrzeug-ID.');
+  Item('--car-id <id>',              'Bei --add fuelups sowie --edit/--delete cars.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');
@@ -142,8 +142,12 @@ begin
 
   Sec('Examples');
   Line('  Betankungen --add stations');
+  Line('  Betankungen --add cars');
   Line('  Betankungen --add fuelups');
   Line('  Betankungen --add fuelups --car-id 1');
+  Line('  Betankungen --list cars --detail');
+  Line('  Betankungen --edit cars --car-id 2');
+  Line('  Betankungen --delete cars --car-id 3');
   Line('  Betankungen --list fuelups --detail');
   Line('  Betankungen --stats fuelups');
   Line('  Betankungen --stats fuelups --from 2025-01 --to 2025-03');
