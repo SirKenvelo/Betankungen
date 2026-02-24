@@ -12,6 +12,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Meta: `src/Betankungen.lpr` auf `APP_VERSION v0.7.0-sprint1` angehoben (interner Sprint-Stand, ohne Release-Tag). (2026-02-24)
 - Docs: Neues Vision-Dokument `docs/VISION.md` als strategisches Brainstorming hinzugefuegt (Version 0.2 inkl. Vision-, Non-Goals- und Contribution-Leitlinien). (2026-02-24)
 - Docs: Neues Dokument `docs/UI_ASCII_DRAW.md` fuer CLI-UI-Polishing und ASCII-Draw-Notizen angelegt (formatiert, emoji-frei, ohne Roadmap-Commitment). (2026-02-24)
 - Core: Neue Domain-Unit `units/u_cars.pas` mit DB-basiertem CRUD eingefuehrt (`CarsAdd`, `CarsList`, `CarsEdit`, `CarsDelete`) sowie Pruef-APIs `CarsExists` und `CarsHasFuelups` ohne CLI-Abhaengigkeit. (2026-02-24)
@@ -21,6 +22,8 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - CLI: Cars-Edit-Race/Missing-Row-Fehlertext praezisiert (`Fahrzeug nicht gefunden`) statt internem Sammelfehler. (2026-02-24)
 - Core/CLI: Mini-Polish fuer Cars-Edit/GetById: Race-Fehlertext auf `P-002`-Kontext vereinheitlicht und `CarsGetById` ohne `FillChar` auf explizite Feldinitialisierung umgestellt. (2026-02-24)
 - UI/CLI: Cars-Listenansicht auf Renderer umgestellt (`RenderCarsTable` in `u_fmt`) und Help/Usage um `cars`-Kommandos inkl. `--car-id`-Kontext erweitert. (2026-02-24)
+- Tests: Neuer dedizierter Cars-CRUD-Smoke `tests/smoke/smoke_cars_crud.sh` (add/list/edit/delete ohne Referenzen + delete mit Referenzen als Fehler) inkl. Root-Wrapper und Integration in die `-c`-Smoke-Suite. (2026-02-24)
+- Domain/Policy: Neue Guard-Policy `P-070` fuer Cars-Delete bei vorhandenen fuelup-Referenzen inkl. Domain-Policy-Fixture/Case (`tests/domain_policy/fixtures/p070_base.sql`, `tests/domain_policy/cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`) und Doku-Updates in `docs/README.md`, `docs/STATUS.md`, `docs/ARCHITECTURE.md`, `tests/README.md`. (2026-02-24)
 - Meta: `.gitignore` fuer lokale Arbeitsdateien generalisiert (`aktuelle_aenderungen_<datum>.md` via Pattern sowie `sprint_<nr>_commit_<nr>_von_<nr>.md`, plus Legacy-Muster `sprint_<d>.md` und `sprint_<dd>.md`), Header-Stand aktualisiert. (2026-02-24)
 - Tests: Smoke-Suite um optionale Cars-Zusatzsuite erweitert (`-c`/`--cars`) inkl. Add/List-Flow und Edit/Delete-Validierungschecks; Clean-Home-Runner und `tests/README.md` entsprechend aktualisiert. (2026-02-24)
 
