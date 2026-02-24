@@ -19,6 +19,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - CLI/Core: `cars` als CLI-Target verdrahtet (`--add/--list/--edit/--delete cars`) inkl. DB-Validierung fuer `--car-id` via `CarsExists`/`CarsHasFuelups`; Dispatch ruft Core-Funktionen aus `u_cars` direkt auf. (2026-02-24)
 - Core/CLI: Doppelpruefung bei Cars-Edit reduziert: `u_cars` um `CarsGetById` erweitert und `HandleCarsEdit` auf direkten Record-Load umgestellt (kein `CarsList`+lokale ID-Suche mehr). (2026-02-24)
 - CLI: Cars-Edit-Race/Missing-Row-Fehlertext praezisiert (`Fahrzeug nicht gefunden`) statt internem Sammelfehler. (2026-02-24)
+- Core/CLI: Mini-Polish fuer Cars-Edit/GetById: Race-Fehlertext auf `P-002`-Kontext vereinheitlicht und `CarsGetById` ohne `FillChar` auf explizite Feldinitialisierung umgestellt. (2026-02-24)
 - Meta: `.gitignore` fuer lokale Arbeitsdateien generalisiert (`aktuelle_aenderungen_<datum>.md` via Pattern sowie `sprint_<nr>_commit_<nr>_von_<nr>.md`, plus Legacy-Muster `sprint_<d>.md` und `sprint_<dd>.md`), Header-Stand aktualisiert. (2026-02-24)
 - Tests: Smoke-Suite um optionale Cars-Zusatzsuite erweitert (`-c`/`--cars`) inkl. Add/List-Flow und Edit/Delete-Validierungschecks; Clean-Home-Runner und `tests/README.md` entsprechend aktualisiert. (2026-02-24)
 

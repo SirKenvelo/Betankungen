@@ -217,10 +217,18 @@ var
   Tran: TSQLTransaction;
   Q: TSQLQuery;
 begin
+  Car.Id := 0;
+  Car.Name := '';
+  Car.Plate := '';
+  Car.Note := '';
+  Car.OdometerStartKm := 0;
+  Car.OdometerStartDate := '';
+  Car.CreatedAt := '';
+  Car.UpdatedAt := '';
+
   if Id <= 0 then
     Exit(False);
 
-  FillChar(Car, SizeOf(Car), 0);
   Result := False;
   PrepareDb(DbPath, False, Conn, Tran, Q);
   try
