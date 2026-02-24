@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-02-22
+**Stand:** 2026-02-24
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -12,7 +12,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
-- Keine Eintraege.
+- Docs: Neues Vision-Dokument `docs/VISION.md` als strategisches Brainstorming hinzugefuegt (Version 0.2 inkl. Vision-, Non-Goals- und Contribution-Leitlinien). (2026-02-24)
 
 ## 0.6.0 – 2026-02-22
 
