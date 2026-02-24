@@ -1,5 +1,5 @@
 # Betankungen - .gitignore
-# Stand: 2026-02-20
+# Stand: 2026-02-24
 
 # Build-Artefakte (FPC)
 bin/
@@ -35,7 +35,9 @@ build/
 # Lokaler Session-/Export-Kontext
 projekt_kontext.md
 aktuelle_aenderungen.md
-aktuelle_aenderungen_20260220.md
+aktuelle_aenderungen_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].md
+aktuelle_aenderungen_[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
+sprint_*.md
 
 # Lazarus / FreePascal Session-Dateien
 *.lps

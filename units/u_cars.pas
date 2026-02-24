@@ -66,6 +66,7 @@ uses
 
 procedure PrepareDb(
   const DbPath: string;
+  const ForWrite: Boolean;
   out Conn: TSQLite3Connection;
   out Tran: TSQLTransaction;
   out Q: TSQLQuery
@@ -81,11 +82,13 @@ begin
   Q.Transaction := Tran;
 
   Conn.Open;
-  if not Tran.Active then
-    Tran.StartTransaction;
-
-  Q.SQL.Text := 'PRAGMA foreign_keys = ON;';
-  Q.ExecSQL;
+  if ForWrite then
+  begin
+    if not Tran.Active then
+      Tran.StartTransaction;
+    Q.SQL.Text := 'PRAGMA foreign_keys = ON;';
+    Q.ExecSQL;
+  end;
 end;
 
 procedure FinishDb(
@@ -118,7 +121,7 @@ begin
     raise Exception.Create('CarsAdd: odometer_start_date darf nicht leer sein.');
 
   Result := 0;
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, True, Conn, Tran, Q);
   try
     try
       Q.SQL.Text :=
@@ -147,7 +150,7 @@ begin
           Tran.Rollback;
 
         if Pos('UNIQUE', UpperCase(E.Message)) > 0 then
-          raise Exception.Create('CarsAdd: Fahrzeugname existiert bereits.')
+          raise Exception.Create('CarsAdd: UNIQUE constraint verletzt.')
         else
           raise Exception.Create('CarsAdd fehlgeschlagen: ' + E.Message);
       end;
@@ -167,7 +170,7 @@ var
 begin
   Result := nil;
   SetLength(Cars, 0);
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, False, Conn, Tran, Q);
   try
     try
       Q.SQL.Text :=
@@ -193,17 +196,16 @@ begin
       end;
 
       Q.Close;
-      Tran.Commit;
       Result := Cars;
     except
       on E: Exception do
       begin
-        if Tran.Active then
-          Tran.Rollback;
         raise Exception.Create('CarsList fehlgeschlagen: ' + E.Message);
       end;
     end;
   finally
+    if Tran.Active then
+      Tran.Rollback;
     FinishDb(Conn, Tran, Q);
   end;
 end;
@@ -224,7 +226,7 @@ begin
     raise Exception.Create('CarsEdit: name darf nicht leer sein.');
 
   Result := False;
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, True, Conn, Tran, Q);
   try
     try
       Q.SQL.Text :=
@@ -246,7 +248,7 @@ begin
           Tran.Rollback;
 
         if Pos('UNIQUE', UpperCase(E.Message)) > 0 then
-          raise Exception.Create('CarsEdit: Fahrzeugname existiert bereits.')
+          raise Exception.Create('CarsEdit: UNIQUE constraint verletzt.')
         else
           raise Exception.Create('CarsEdit fehlgeschlagen: ' + E.Message);
       end;
@@ -266,19 +268,19 @@ begin
     raise Exception.Create('CarsDelete: id muss > 0 sein.');
 
   Result := False;
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, True, Conn, Tran, Q);
   try
     try
       Q.Close;
       Q.SQL.Text := 'SELECT 1 FROM fuelups WHERE car_id = :id LIMIT 1;';
-      Q.ParamByName('id').AsInteger := Id;
+      Q.Params.ParamByName('id').AsInteger := Id;
       Q.Open;
       if not Q.EOF then
         raise Exception.Create('CarsDelete: Fahrzeug hat verknuepfte fuelups.');
       Q.Close;
 
       Q.SQL.Text := 'DELETE FROM cars WHERE id = :id;';
-      Q.ParamByName('id').AsInteger := Id;
+      Q.Params.ParamByName('id').AsInteger := Id;
       Q.ExecSQL;
 
       Result := Q.RowsAffected > 0;
@@ -306,24 +308,23 @@ begin
     Exit(False);
 
   Result := False;
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, False, Conn, Tran, Q);
   try
     try
       Q.SQL.Text := 'SELECT 1 FROM cars WHERE id = :id LIMIT 1;';
-      Q.ParamByName('id').AsInteger := Id;
+      Q.Params.ParamByName('id').AsInteger := Id;
       Q.Open;
       Result := not Q.EOF;
       Q.Close;
-      Tran.Commit;
     except
       on E: Exception do
       begin
-        if Tran.Active then
-          Tran.Rollback;
         raise Exception.Create('CarsExists fehlgeschlagen: ' + E.Message);
       end;
     end;
   finally
+    if Tran.Active then
+      Tran.Rollback;
     FinishDb(Conn, Tran, Q);
   end;
 end;
@@ -338,24 +339,23 @@ begin
     Exit(False);
 
   Result := False;
-  PrepareDb(DbPath, Conn, Tran, Q);
+  PrepareDb(DbPath, False, Conn, Tran, Q);
   try
     try
       Q.SQL.Text := 'SELECT 1 FROM fuelups WHERE car_id = :id LIMIT 1;';
-      Q.ParamByName('id').AsInteger := Id;
+      Q.Params.ParamByName('id').AsInteger := Id;
       Q.Open;
       Result := not Q.EOF;
       Q.Close;
-      Tran.Commit;
     except
       on E: Exception do
       begin
-        if Tran.Active then
-          Tran.Rollback;
         raise Exception.Create('CarsHasFuelups fehlgeschlagen: ' + E.Message);
       end;
     end;
   finally
+    if Tran.Active then
+      Tran.Rollback;
     FinishDb(Conn, Tran, Q);
   end;
 end;
