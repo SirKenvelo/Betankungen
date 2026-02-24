@@ -382,7 +382,7 @@ var
     NewName, NewPlate, NewNote: string;
   begin
     if not CarsGetById(ADbPath, CarId, Car) then
-      raise Exception.Create('Interner Fehler: car_id nicht aufloesbar.');
+      raise Exception.Create('Fehler: Fahrzeug nicht gefunden (car_id nicht mehr vorhanden).');
 
     WriteLn('Car bearbeiten (id=', CarId, ')');
     WriteLn('--------------------------');
