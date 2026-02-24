@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-02-22
+**Stand:** 2026-02-24
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -65,6 +65,7 @@ Direktlauf:
 - Zusatzsuiten:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite
+  - `-c`: Cars-Suite
   - `-a`: beide Suiten
 - Steuerung:
   - Default: fail-fast
@@ -73,7 +74,7 @@ Direktlauf:
 
 Ausfuehrung:
 - `tests/smoke/smoke_cli.sh`
-- `tests/smoke/smoke_cli.sh -m|-y|-a`
+- `tests/smoke/smoke_cli.sh -m|-y|-c|-a`
 - kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
@@ -82,7 +83,7 @@ Ausfuehrung:
 
 Ausfuehrung:
 - `tests/smoke/smoke_clean_home.sh`
-- `tests/smoke/smoke_clean_home.sh -m|-y|-a`
+- `tests/smoke/smoke_clean_home.sh -m|-y|-c|-a`
 - `tests/smoke/smoke_clean_home.sh -a --keep-going`
 - `tests/smoke/smoke_clean_home.sh -a -l`
 - optional: `tests/smoke/smoke_clean_home.sh --keep-home`

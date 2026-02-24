@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_clean_home.sh
-# UPDATED: 2026-02-20
+# UPDATED: 2026-02-24
 # Fuehrt tests/smoke/smoke_cli.sh in einer sauberen HOME/XDG-Sandbox aus.
 
 SCRIPT_NAME="$(basename "$0")"
@@ -16,12 +16,13 @@ usage() {
 $SCRIPT_NAME - Finaler Smoke-Run in sauberer HOME-Sandbox
 
 Usage:
-  tests/smoke/$SCRIPT_NAME [--keep-home] [-m] [-y] [-a] [-l] [--keep-going]
+  tests/smoke/$SCRIPT_NAME [--keep-home] [-m] [-y] [-c] [-a] [-l] [--keep-going]
 
 Options:
   --keep-home   Temp-HOME nach dem Lauf behalten (zur Analyse)
   -m            Monthly-Zusatzsuite an smoke_cli.sh durchreichen
   -y            Yearly-Zusatzsuite an smoke_cli.sh durchreichen
+  -c            Cars-Zusatzsuite an smoke_cli.sh durchreichen
   -a            Beide Zusatzsuiten an smoke_cli.sh durchreichen
   -l, --list    Nur Testliste anzeigen (keine Ausfuehrung)
   --keep-going  Fehler sammeln statt fail-fast
@@ -64,7 +65,7 @@ while [[ $# -gt 0 ]]; do
       usage
       exit 0
       ;;
-    -m|-y|-a|-l|--list|--keep-going)
+    -m|-y|-c|--cars|-a|-l|--list|--keep-going)
       EXTRA_ARGS+=("$1")
       shift
       ;;

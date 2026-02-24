@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-02-20
+# UPDATED: 2026-02-24
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -11,6 +11,7 @@ FAILS=0
 TMP_DIRS=()
 RUN_MONTHLY_SUITE=false
 RUN_YEARLY_SUITE=false
+RUN_CARS_SUITE=false
 LIST_ONLY=false
 KEEP_GOING=false
 
@@ -19,11 +20,12 @@ usage() {
 smoke_cli.sh - Basis-Smoke + optionale Stats-Zusatzsuiten
 
 Usage:
-  tests/smoke/smoke_cli.sh [-m] [-y] [-a] [-l] [--keep-going] [-h]
+  tests/smoke/smoke_cli.sh [-m] [-y] [-c] [-a] [-l] [--keep-going] [-h]
 
 Optionen:
   -m    Monthly-Zusatzsuite ausfuehren
   -y    Yearly-Zusatzsuite ausfuehren
+  -c    Cars-Zusatzsuite ausfuehren
   -a    Beide Zusatzsuiten ausfuehren (-m + -y)
   -l, --list
         Nur Testliste ausgeben (Dry-List, keine Ausfuehrung)
@@ -75,6 +77,10 @@ while [[ $# -gt 0 ]]; do
     -a)
       RUN_MONTHLY_SUITE=true
       RUN_YEARLY_SUITE=true
+      shift
+      ;;
+    -c|--cars)
+      RUN_CARS_SUITE=true
       shift
       ;;
     -l|--list)
@@ -158,6 +164,15 @@ print_plan() {
     printf '[LIST] (Yearly) --stats fuelups --pretty --yearly -> Fehler\n'
     printf '[LIST] (Yearly) leere DB + --stats fuelups --yearly\n'
     printf '[LIST] (Yearly) --demo --stats fuelups --json --pretty --from 2023-01 --yearly\n'
+  fi
+
+  if $RUN_CARS_SUITE; then
+    printf '[LIST] (Cars) --add cars + --list cars\n'
+    printf '[LIST] (Cars) --edit cars ohne --car-id -> Fehler\n'
+    printf '[LIST] (Cars) --delete cars ohne --car-id -> Fehler\n'
+    printf '[LIST] (Cars) --edit cars --car-id 999 -> Fehler (P-002)\n'
+    printf '[LIST] (Cars) --delete cars --car-id 999 -> Fehler (P-002)\n'
+    printf '[LIST] (Cars) --delete cars mit fuelups -> geblockt\n'
   fi
 
   printf '[INFO] Ende der Testliste.\n'
@@ -892,6 +907,153 @@ run_yearly_suite() {
   test_yearly_json_pretty_period_demo_ok
 }
 
+test_cars_add_and_list_ok() {
+  local home add_out add_err list_out list_err rc_add rc_list car_name
+
+  home="$(register_tmp_dir)"
+  add_out="$home/add_out.txt"
+  add_err="$home/add_err.txt"
+  list_out="$home/list_out.txt"
+  list_err="$home/list_err.txt"
+  car_name="SmokeCar_${RANDOM}"
+
+  set +e
+  printf '%s\n%s\n%s\n%s\n%s\n' \
+    "$car_name" \
+    "" \
+    "" \
+    "1234" \
+    "2026-02-24" \
+    | HOME="$home" "$ROOT_DIR/bin/Betankungen" --add cars >"$add_out" 2>"$add_err"
+  rc_add=$?
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --list cars >"$list_out" 2>"$list_err"
+  rc_list=$?
+  set -e
+
+  if [[ $rc_add -eq 0 ]] && [[ $rc_list -eq 0 ]] && grep -q "$car_name" "$list_out"; then
+    printf '[OK] Cars: --add cars + --list cars\n'
+  else
+    printf '[FAIL] Cars: --add cars + --list cars\n'
+    add_fail
+  fi
+}
+
+test_cars_edit_requires_id_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --edit cars >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q -- '--car-id ist fuer "--edit cars" und "--delete cars" erforderlich' "$err"; then
+    printf '[OK] Cars: --edit cars ohne --car-id -> Fehler\n'
+  else
+    printf '[FAIL] Cars: --edit cars ohne --car-id -> Fehler\n'
+    add_fail
+  fi
+}
+
+test_cars_delete_requires_id_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --delete cars >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q -- '--car-id ist fuer "--edit cars" und "--delete cars" erforderlich' "$err"; then
+    printf '[OK] Cars: --delete cars ohne --car-id -> Fehler\n'
+  else
+    printf '[FAIL] Cars: --delete cars ohne --car-id -> Fehler\n'
+    add_fail
+  fi
+}
+
+test_cars_edit_missing_id_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --edit cars --car-id 999 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'P-002: car_id existiert nicht (FK).' "$err"; then
+    printf '[OK] Cars: --edit cars --car-id 999 -> Fehler (P-002)\n'
+  else
+    printf '[FAIL] Cars: --edit cars --car-id 999 -> Fehler (P-002)\n'
+    add_fail
+  fi
+}
+
+test_cars_delete_missing_id_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --delete cars --car-id 999 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'P-002: car_id existiert nicht (FK).' "$err"; then
+    printf '[OK] Cars: --delete cars --car-id 999 -> Fehler (P-002)\n'
+  else
+    printf '[FAIL] Cars: --delete cars --car-id 999 -> Fehler (P-002)\n'
+    add_fail
+  fi
+}
+
+test_cars_delete_blocked_when_fuelups_exist() {
+  local home out err rc db
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+  db="$home/.local/share/Betankungen/betankungen.db"
+
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" >/dev/null 2>&1
+  sqlite3 "$db" \
+    "INSERT OR IGNORE INTO stations(id,brand,street,house_no,zip,city,phone,owner,created_at) VALUES(1,'Smoke','Road','1','12345','City','','',datetime('now'));" \
+    "INSERT OR IGNORE INTO fuelups(id,station_id,car_id,fueled_at,odometer_km,liters_ml,total_cents,price_per_liter_milli_eur,is_full_tank,missed_previous,created_at) VALUES(1,1,1,datetime('now'),1000,10000,1500,1500,1,0,datetime('now'));"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --delete cars --car-id 1 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'Fahrzeug kann nicht geloescht werden (fuelups vorhanden).' "$err"; then
+    printf '[OK] Cars: --delete cars mit fuelups -> geblockt\n'
+  else
+    printf '[FAIL] Cars: --delete cars mit fuelups -> geblockt\n'
+    add_fail
+  fi
+}
+
+run_cars_suite() {
+  printf '[INFO] Zusatzsuite aktiv: Cars (-c)\n'
+  test_cars_add_and_list_ok
+  test_cars_edit_requires_id_fails
+  test_cars_delete_requires_id_fails
+  test_cars_edit_missing_id_fails
+  test_cars_delete_missing_id_fails
+  test_cars_delete_blocked_when_fuelups_exist
+}
+
 trap cleanup_tmp_dirs EXIT
 
 require_path() {
@@ -941,6 +1103,9 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   fi
   if $RUN_YEARLY_SUITE; then
     run_yearly_suite
+  fi
+  if $RUN_CARS_SUITE; then
+    run_cars_suite
   fi
 else
   printf '[INFO] Binärdatei fehlt: %s\n' "$ROOT_DIR/bin/Betankungen"
