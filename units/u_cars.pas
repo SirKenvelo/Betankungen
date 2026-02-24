@@ -47,6 +47,7 @@ function CarsAdd(
 ): Integer;
 
 function CarsList(const DbPath: string): TCarsArray;
+function CarsGetById(const DbPath: string; const Id: Integer; out Car: TCar): Boolean;
 
 function CarsEdit(
   const DbPath: string;
@@ -201,6 +202,54 @@ begin
       on E: Exception do
       begin
         raise Exception.Create('CarsList fehlgeschlagen: ' + E.Message);
+      end;
+    end;
+  finally
+    if Tran.Active then
+      Tran.Rollback;
+    FinishDb(Conn, Tran, Q);
+  end;
+end;
+
+function CarsGetById(const DbPath: string; const Id: Integer; out Car: TCar): Boolean;
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+begin
+  if Id <= 0 then
+    Exit(False);
+
+  FillChar(Car, SizeOf(Car), 0);
+  Result := False;
+  PrepareDb(DbPath, False, Conn, Tran, Q);
+  try
+    try
+      Q.SQL.Text :=
+        'SELECT id, name, plate, note, odometer_start_km, odometer_start_date, created_at, updated_at ' +
+        'FROM cars ' +
+        'WHERE id = :id ' +
+        'LIMIT 1;';
+      Q.Params.ParamByName('id').AsInteger := Id;
+      Q.Open;
+
+      if not Q.EOF then
+      begin
+        Car.Id := Q.FieldByName('id').AsInteger;
+        Car.Name := Q.FieldByName('name').AsString;
+        Car.Plate := Q.FieldByName('plate').AsString;
+        Car.Note := Q.FieldByName('note').AsString;
+        Car.OdometerStartKm := Q.FieldByName('odometer_start_km').AsInteger;
+        Car.OdometerStartDate := Q.FieldByName('odometer_start_date').AsString;
+        Car.CreatedAt := Q.FieldByName('created_at').AsString;
+        Car.UpdatedAt := Q.FieldByName('updated_at').AsString;
+        Result := True;
+      end;
+      Q.Close;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create('CarsGetById fehlgeschlagen: ' + E.Message);
       end;
     end;
   finally

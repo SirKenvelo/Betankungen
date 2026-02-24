@@ -317,19 +317,6 @@ var
       Result := Input;
   end;
 
-  function TryFindCarById(const Cars: TCarsArray; const CarId: Integer; out Car: TCar): Boolean;
-  var
-    I: Integer;
-  begin
-    for I := 0 to High(Cars) do
-      if Cars[I].Id = CarId then
-      begin
-        Car := Cars[I];
-        Exit(True);
-      end;
-    Result := False;
-  end;
-
   procedure HandleCarsAdd(const ADbPath: string);
   var
     Name, Plate, Note, StartDate, S: string;
@@ -391,13 +378,11 @@ var
 
   procedure HandleCarsEdit(const ADbPath: string; const CarId: Integer);
   var
-    Cars: TCarsArray;
     Car: TCar;
     NewName, NewPlate, NewNote: string;
   begin
-    Cars := CarsList(ADbPath);
-    if not TryFindCarById(Cars, CarId, Car) then
-      raise Exception.Create('P-002: car_id existiert nicht (FK).');
+    if not CarsGetById(ADbPath, CarId, Car) then
+      raise Exception.Create('Interner Fehler: car_id nicht aufloesbar.');
 
     WriteLn('Car bearbeiten (id=', CarId, ')');
     WriteLn('--------------------------');
