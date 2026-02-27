@@ -1,5 +1,5 @@
 # Domain-Policy-Tests
-**Stand:** 2026-02-22
+**Stand:** 2026-02-24
 
 ## Inhalt
 - `cases/`: fokussierte Case-Dateien nach Policy-ID (`t_<policy>__<nn>__<kurzname>.*`, `.pas` oder `.sh`)
@@ -75,6 +75,10 @@
     - `cases/t_p060__02__car_isolation.sh`
     - `fixtures/p060_base.sql`
     - `fixtures/p060_car_isolation_base.sql`
+- Cars-Delete-Guard P-070:
+  - `P-070` Hard Error (cars delete bei vorhandenen fuelup-Referenzen verboten):
+    - `cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`
+    - `fixtures/p070_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`

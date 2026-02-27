@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-02-22
+**Stand:** 2026-02-24
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -45,7 +45,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
 - [x] **Cars-Datenmodell:** `cars` fuehrt Start-KM/Start-Datum (`odometer_start_km`, `odometer_start_date`) als Domain-Startpunkt.
 - [x] **Car-sichere Stats:** Zyklusbildung trennt Daten strikt pro `car_id`.
 - [x] **Golden-Info-Reset:** `missed_previous` unterbricht bewusst laufende Zyklen in der Auswertung.
-- [x] **Domain-Policy-Matrix v1:** Abgedeckte Policy-Bloecke `P-001..P-002`, `P-010..P-013`, `P-020..P-022`, `P-030..P-032`, `P-040..P-041`, `P-050..P-051`, `P-060` (inkl. Car-Isolation-Guardrail `P-060/02`).
+- [x] **Domain-Policy-Matrix v1:** Abgedeckte Policy-Bloecke `P-001..P-002`, `P-010..P-013`, `P-020..P-022`, `P-030..P-032`, `P-040..P-041`, `P-050..P-051`, `P-060` (inkl. Car-Isolation-Guardrail `P-060/02`) und `P-070` (Cars-Delete-Guard bei Referenzen).
 
 ---
 

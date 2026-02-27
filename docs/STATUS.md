@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-02-22
+**Stand:** 2026-02-24
 **Zielversion:** 0.7.x
 
 ## Fundament & Architektur (erledigt)
@@ -44,6 +44,7 @@
   - `P-040..P-041` (Date)
   - `P-050..P-051` (Gap-Flag Design Guards)
   - `P-060` inkl. `P-060/02` Car-Isolation (kein Cross-Car-Zyklus)
+  - `P-070` Cars-Delete-Guard (kein Loeschen bei vorhandenen fuelup-Referenzen)
 
 ## CLI & Usability (weitgehend erledigt)
 - Subcommand-Modell (`TCommand`)

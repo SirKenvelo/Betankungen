@@ -67,6 +67,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
   - `P-040..P-041` (Date)
   - `P-050..P-051` (Gap-Flag Design Guards)
   - `P-060` inkl. Car-Isolation (`P-060/02`)
+  - `P-070` (Cars-Delete-Guard bei vorhandenen fuelup-Referenzen)
 
 ---
 
@@ -78,7 +79,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
 - `.releases/`: finale Release-Artefakte (`.tar`) + `release_log.json`
 - `.backup/`: zeitgestempelte Snapshot-Backups + `index.json`
-- `tests/`: Smoke-/Plausibilitaetstests fuer den lokalen Workflow
+- `tests/`: Smoke-/Plausibilitaetstests fuer den lokalen Workflow (inkl. dediziertem Cars-CRUD-Smoke)
 
 ### `Betankungen.lpr`
 Einstiegspunkt und Orchestrator der Anwendung.
