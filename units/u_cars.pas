@@ -2,7 +2,7 @@
   u_cars.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-24
-  UPDATED: 2026-02-24
+  UPDATED: 2026-02-27
   AUTHOR : Christof Kempinski
   Domain-Unit fuer DB-basiertes CRUD auf der Tabelle `cars`.
 
@@ -12,6 +12,7 @@
   - Bearbeitet Fahrzeug-Stammdaten (name/plate/note).
   - Loescht Fahrzeuge (mit Schutz vor bestehenden fuelups-Referenzen).
   - Liefert Pruef-Helfer fuer Existenz und fuelup-Referenzen.
+  - Liefert kompakte Car-Kontext-Helfer (Anzahl/Single-ID-Aufloesung).
 
   Design:
   - Keine CLI-Abhaengigkeit.
@@ -58,6 +59,8 @@ function CarsEdit(
 function CarsDelete(const DbPath: string; const Id: Integer): Boolean;
 
 function CarsExists(const DbPath: string; const Id: Integer): Boolean;
+function CarsCount(const DbPath: string): Integer;
+function CarsGetSingleId(const DbPath: string): Integer;
 function CarsHasFuelups(const DbPath: string; const Id: Integer): Boolean;
 
 implementation
@@ -333,7 +336,7 @@ begin
       Q.Params.ParamByName('id').AsInteger := Id;
       Q.Open;
       if not Q.EOF then
-        raise Exception.Create('CarsDelete: Fahrzeug hat verknuepfte fuelups.');
+        raise Exception.Create('P-070: Fahrzeug hat verknuepfte fuelups.');
       Q.Close;
 
       Q.SQL.Text := 'DELETE FROM cars WHERE id = :id;';
@@ -377,6 +380,63 @@ begin
       on E: Exception do
       begin
         raise Exception.Create('CarsExists fehlgeschlagen: ' + E.Message);
+      end;
+    end;
+  finally
+    if Tran.Active then
+      Tran.Rollback;
+    FinishDb(Conn, Tran, Q);
+  end;
+end;
+
+function CarsCount(const DbPath: string): Integer;
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+begin
+  Result := 0;
+  PrepareDb(DbPath, False, Conn, Tran, Q);
+  try
+    try
+      Q.SQL.Text := 'SELECT COUNT(*) AS cnt FROM cars;';
+      Q.Open;
+      if not Q.EOF then
+        Result := Q.FieldByName('cnt').AsInteger;
+      Q.Close;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create('CarsCount fehlgeschlagen: ' + E.Message);
+      end;
+    end;
+  finally
+    if Tran.Active then
+      Tran.Rollback;
+    FinishDb(Conn, Tran, Q);
+  end;
+end;
+
+function CarsGetSingleId(const DbPath: string): Integer;
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+begin
+  Result := 0;
+  PrepareDb(DbPath, False, Conn, Tran, Q);
+  try
+    try
+      Q.SQL.Text := 'SELECT id FROM cars ORDER BY id LIMIT 1;';
+      Q.Open;
+      if Q.EOF then
+        raise Exception.Create('CarsGetSingleId: keine Fahrzeuge vorhanden.');
+      Result := Q.FieldByName('id').AsInteger;
+      Q.Close;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create('CarsGetSingleId fehlgeschlagen: ' + E.Message);
       end;
     end;
   finally
