@@ -64,6 +64,7 @@ Direktlauf:
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
+- Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
 - Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:
   - `--add fuelups` ohne `--car-id` bei 1 Car = OK
   - `--add fuelups` ohne `--car-id` bei >1 Cars = Hard Error

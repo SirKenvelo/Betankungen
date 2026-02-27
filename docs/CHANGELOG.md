@@ -12,6 +12,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/Smoke: Cars-Suite (`tests/smoke/smoke_cli.sh -c`) auf den kompatiblen Wrapper `tests/smoke_cars_crud.sh` umgestellt, sodass der Wrapper-Pfad selbst regressionsgesichert ist. (2026-02-27)
 - Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` um die heute eingefuehrten Car-Resolver-Checks erweitert (`--add/--list fuelups` bei 1 Car vs. >1 Cars inkl. Hard-Error-Pfad und car-scoped `--car-id`-Listing); `tests/smoke/smoke_cli.sh` Dry-List und `tests/README.md` entsprechend nachgezogen. (2026-02-27)
 - Core/Fuelups: `--list fuelups` auf strikten Car-Scope umgestellt (`units/u_fuelups.pas`): Car-Kontext wird ueber `ResolveCarIdOrFail` aufgeloest und SQL listet nur noch `WHERE f.car_id = :car_id`; dadurch gelten 0/1/>1-Car-Regeln identisch zu `--add fuelups`. (2026-02-27)
 - CLI/Validate+Help: `--car-id` fuer `--list fuelups` freigeschaltet (`units/u_cli_validate.pas`) und Help-/Usage-Texte entsprechend erweitert (`units/u_cli_help.pas`). (2026-02-27)

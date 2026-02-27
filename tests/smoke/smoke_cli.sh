@@ -167,7 +167,7 @@ print_plan() {
   fi
 
   if $RUN_CARS_SUITE; then
-    printf '[LIST] (Cars) tests/smoke/smoke_cars_crud.sh\n'
+    printf '[LIST] (Cars) tests/smoke_cars_crud.sh (Wrapper)\n'
     printf '[LIST] (Cars) --add cars + --list cars\n'
     printf '[LIST] (Cars) --add fuelups ohne --car-id bei 1 Car -> OK\n'
     printf '[LIST] (Cars) --add fuelups ohne --car-id bei 2 Cars -> Hard Error\n'
@@ -1061,10 +1061,10 @@ SQL
 }
 
 test_cars_crud_script_ok() {
-  if "$ROOT_DIR/tests/smoke/smoke_cars_crud.sh" >/dev/null 2>&1; then
-    printf '[OK] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke/smoke_cars_crud.sh'
+  if "$ROOT_DIR/tests/smoke_cars_crud.sh" >/dev/null 2>&1; then
+    printf '[OK] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke_cars_crud.sh'
   else
-    printf '[FAIL] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke/smoke_cars_crud.sh'
+    printf '[FAIL] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke_cars_crud.sh'
     add_fail
   fi
 }
