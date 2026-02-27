@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-24
+  UPDATED: 2026-02-27
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,7 +59,7 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
@@ -119,7 +119,7 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Bei --add fuelups sowie --edit/--delete cars.');
+  Item('--car-id <id>',              'Bei --add fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');

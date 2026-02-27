@@ -12,6 +12,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- CLI/Help: `units/u_cli_help.pas` um klaren Hinweis erweitert, dass `--car-id` bei `--add fuelups` in Multi-Car-Szenarien erforderlich ist (Kurz-Usage und Common-Options-Text nachgeschaerft). (2026-02-27)
 - Core/Fuelups: `units/u_fuelups.pas` im Add-Flow auf Car-Resolver umgestellt (`ResolveCarIdOrFail`); harter Fallback `car_id=1` entfernt. Ohne `--car-id` wird jetzt genau 1 Fahrzeug automatisch aufgeloest, bei 0 oder >1 Fahrzeugen folgt ein Hard Error. (2026-02-27)
 - Docs: Car-Resolver-Verhalten fuer `--add fuelups` in `docs/BENUTZERHANDBUCH.md` dokumentiert (inkl. 0/1/>1 Fahrzeuge ohne `--car-id`). (2026-02-27)
 - UX/Core: `ResolveCarIdOrFail` (`units/u_car_context.pas`) fuer den Fall ohne Fahrzeuge praezisiert: `ERROR: no cars found.` mit zielgerichtetem Hinweis `Hint: create one first using --add cars` (statt Listen-Hinweis). (2026-02-27)
