@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # t_p002__01__car_id_missing_fk.sh
-# UPDATED: 2026-02-22
-# Policy P-002: nicht existente car_id (FK) muss als Hard Error abbrechen (kein Write).
+# UPDATED: 2026-02-27
+# Policy P-002: nicht existente car_id muss als Hard Error abbrechen (kein Write).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 DB_POLICY="$ROOT_DIR/tests/domain_policy/fixtures/Betankungen_Policy.db"
@@ -54,8 +54,8 @@ if [[ $RC -eq 0 ]]; then
   fail 'Erwartet Exitcode != 0 fuer --car-id 999999, erhalten: 0'
 fi
 
-if ! grep -q 'P-002' "$ERR_FILE"; then
-  fail 'Erwartete P-002-Fehlermeldung nicht gefunden.'
+if ! grep -q 'ERROR: unknown car_id=999999.' "$ERR_FILE"; then
+  fail 'Erwartete Resolver-Fehlermeldung fuer unknown car_id nicht gefunden.'
 fi
 
 if grep -q 'P-001' "$ERR_FILE"; then
@@ -67,4 +67,4 @@ if [[ "$COUNT_AFTER" != "$COUNT_BEFORE" ]]; then
   fail "Erwartet unveraenderten fuelups-Count ($COUNT_BEFORE), erhalten: $COUNT_AFTER"
 fi
 
-printf '[OK] P-002/01: --car-id 999999 fuehrt zu FK-Hard-Error ohne Insert.\n'
+printf '[OK] P-002/01: --car-id 999999 fuehrt zu unknown-car Hard-Error ohne Insert.\n'
