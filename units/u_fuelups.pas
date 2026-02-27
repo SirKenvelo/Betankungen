@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-22
+  UPDATED: 2026-02-27
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -42,6 +42,7 @@ procedure ListFuelups(const DbPath: string; Detailed: boolean);
 implementation
 
 uses
+  u_car_context,
   u_db_common,
   u_fmt,
   u_log;
@@ -326,6 +327,7 @@ var
   Tran: TSQLTransaction;
   Q, QS: TSQLQuery;
   Inp: TFuelupInput;
+  ProvidedCarId: Integer;
   S: string;
   FueledAtDt: TDateTime;
   StartKm: integer;
@@ -373,15 +375,10 @@ begin
     
     try
       if CarIdProvided then
-      begin
-        if CarId <= 0 then
-          raise Exception.Create('P-001: car_id fehlt/ungueltig (erwartet > 0).');
-        if not CarExists(QS, CarId) then
-          raise Exception.Create('P-002: car_id existiert nicht (FK).');
-        Inp.CarId := CarId;
-      end
+        ProvidedCarId := CarId
       else
-        Inp.CarId := 1; // v4 Minimalumfang: Default-Car (Hauptauto)
+        ProvidedCarId := 0;
+      Inp.CarId := ResolveCarIdOrFail(DbPath, ProvidedCarId);
 
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');

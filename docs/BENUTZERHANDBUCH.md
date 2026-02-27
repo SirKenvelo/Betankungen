@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-02-22
+**Stand:** 2026-02-27
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -56,7 +56,10 @@ Kommandos:
 - `Betankungen --list fuelups --detail`
 
 Eingabe bei `--add fuelups`:
-- Fahrzeugauswahl (`cars`) - bei genau einem Fahrzeug automatische Auswahl
+- Fahrzeugauswahl (`cars`) via Resolver:
+  - mit `--car-id <id>`: diese ID wird auf Existenz validiert
+  - ohne `--car-id`: bei genau einem Fahrzeug automatische Auswahl
+  - ohne `--car-id` und 0 oder >1 Fahrzeuge: Hard Error mit Hinweis
 - Auswahl der Tankstelle (Liste mit IDs)
 - Datum+Uhrzeit: `YYYY-MM-DD HH:MM:SS`
 - Kilometerstand (km)

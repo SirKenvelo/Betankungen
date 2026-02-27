@@ -12,6 +12,8 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Core/Fuelups: `units/u_fuelups.pas` im Add-Flow auf Car-Resolver umgestellt (`ResolveCarIdOrFail`); harter Fallback `car_id=1` entfernt. Ohne `--car-id` wird jetzt genau 1 Fahrzeug automatisch aufgeloest, bei 0 oder >1 Fahrzeugen folgt ein Hard Error. (2026-02-27)
+- Docs: Car-Resolver-Verhalten fuer `--add fuelups` in `docs/BENUTZERHANDBUCH.md` dokumentiert (inkl. 0/1/>1 Fahrzeuge ohne `--car-id`). (2026-02-27)
 - UX/Core: `ResolveCarIdOrFail` (`units/u_car_context.pas`) fuer den Fall ohne Fahrzeuge praezisiert: `ERROR: no cars found.` mit zielgerichtetem Hinweis `Hint: create one first using --add cars` (statt Listen-Hinweis). (2026-02-27)
 - Core: `units/u_car_context.pas` Fehlermeldungen geschaerft und vereinheitlicht: negative `car_id` jetzt als `invalid` (statt `unknown`), Hint-Zeilen konsistent in exaktem Format (`Hint: --list cars` / `Hint: specify --car-id <id>`), interne Resolver-Fehler ebenfalls englisch vereinheitlicht. (2026-02-27)
 - Core: Neue Units `units/u_db_types.pas` (`TDB` als DB-Kontext-Alias) und `units/u_car_context.pas` eingefuehrt; `ResolveCarIdOrFail` implementiert als Single-Source-of-Truth fuer Car-ID-Aufloesung inkl. konsistenter Hard-Errors (0 Cars, unknown `car_id`, multiple cars ohne `--car-id`). (2026-02-27)
