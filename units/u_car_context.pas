@@ -36,30 +36,38 @@ begin
   if ProvidedCarId > 0 then
   begin
     if not CarsExists(DB, ProvidedCarId) then
-      raise Exception.CreateFmt('ERROR: unknown car_id=%d. Use --list cars.', [ProvidedCarId]);
+      raise Exception.CreateFmt(
+        'ERROR: unknown car_id=%d.' + LineEnding +
+        'Hint: --list cars',
+        [ProvidedCarId]
+      );
     Exit(ProvidedCarId);
   end;
 
   if ProvidedCarId < 0 then
-    raise Exception.CreateFmt('ERROR: unknown car_id=%d. Use --list cars.', [ProvidedCarId]);
+    raise Exception.CreateFmt(
+      'ERROR: invalid car_id=%d (must be > 0).' + LineEnding +
+      'Hint: specify --car-id <id>',
+      [ProvidedCarId]
+    );
 
   CarCount := CarsCount(DB);
 
   if CarCount = 0 then
     raise Exception.Create(
       'ERROR: no cars found. Create one first: --add cars ...' + LineEnding +
-      'Hint: use --list cars'
+      'Hint: --list cars'
     );
 
   if CarCount > 1 then
     raise Exception.Create(
-      'ERROR: multiple cars found. Please specify --car-id.' + LineEnding +
-      'Hint: --list cars'
+      'ERROR: multiple cars found.' + LineEnding +
+      'Hint: specify --car-id <id>'
     );
 
   Result := CarsGetSingleId(DB);
   if Result <= 0 then
-    raise Exception.Create('ResolveCarIdOrFail: internal error (resolved car_id <= 0).');
+    raise Exception.Create('ERROR: internal resolver state (resolved car_id <= 0).');
 end;
 
 end.

@@ -12,6 +12,7 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Core: `units/u_car_context.pas` Fehlermeldungen geschaerft und vereinheitlicht: negative `car_id` jetzt als `invalid` (statt `unknown`), Hint-Zeilen konsistent in exaktem Format (`Hint: --list cars` / `Hint: specify --car-id <id>`), interne Resolver-Fehler ebenfalls englisch vereinheitlicht. (2026-02-27)
 - Core: Neue Units `units/u_db_types.pas` (`TDB` als DB-Kontext-Alias) und `units/u_car_context.pas` eingefuehrt; `ResolveCarIdOrFail` implementiert als Single-Source-of-Truth fuer Car-ID-Aufloesung inkl. konsistenter Hard-Errors (0 Cars, unknown `car_id`, multiple cars ohne `--car-id`). (2026-02-27)
 - Core: `units/u_cars.pas` um `CarsCount` (`SELECT COUNT(*) FROM cars`) und `CarsGetSingleId` (`SELECT id FROM cars ORDER BY id LIMIT 1`) erweitert als Resolver-Bausteine. (2026-02-27)
 - Meta: `src/Betankungen.lpr` auf `APP_VERSION v0.7.0-sprint1` angehoben (interner Sprint-Stand, ohne Release-Tag). (2026-02-24)
