@@ -8,10 +8,12 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 0.7.x
 Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 
-### Changed (User-Edits)
-- Keine Eintraege.
-
-### Changed (Codex)
+### Changed
+- Core/Stats: `--stats fuelups` auf strikten Car-Scope umgestellt (`src/Betankungen.lpr`, `units/u_stats.pas`): Resolver-Aufloesung via `ResolveCarIdOrFail`, SQL-Filterung `WHERE car_id = :car_id` (inkl. Period-Bounds), keine Cross-Car-Vermischung mehr ohne explizite Fahrzeugauswahl. (2026-02-27)
+- CLI/Validate+Help: `--car-id` fuer `--stats fuelups` freigeschaltet (`units/u_cli_validate.pas`) und Usage/Help entsprechend erweitert (`units/u_cli_help.pas`). (2026-02-27)
+- Tests/Domain-Policy: `P-060/02` auf strict car-scope angepasst (`tests/domain_policy/cases/t_p060__02__car_isolation.sh`, `tests/domain_policy/p060.md`), damit Car-Isolation gezielt pro `--car-id` validiert wird. (2026-02-27)
+- Tests/Smoke: Cars-CRUD-Smoke um Stats-Resolver-Faelle erweitert (`tests/smoke/smoke_cars_crud.sh`: 1 Car OK, >1 Cars Hard Error, car-scoped CSV-Checks), Dry-List in `tests/smoke/smoke_cli.sh` und Testdoku in `tests/README.md` nachgezogen. (2026-02-27)
+- Docs: `docs/BENUTZERHANDBUCH.md` fuer strict car-scoped `--stats fuelups` aktualisiert. (2026-02-27)
 - Tests/Domain-Policy: P-002-Case auf aktuellen Resolver-Fehlertext angepasst (`ERROR: unknown car_id=...` statt hartem `P-002`-String), damit Runner und Smoke-Suite wieder konsistent gruene Laeufe liefern. (2026-02-27)
 - Tests/Smoke: Cars-Suite (`tests/smoke/smoke_cli.sh -c`) auf den kompatiblen Wrapper `tests/smoke_cars_crud.sh` umgestellt, sodass der Wrapper-Pfad selbst regressionsgesichert ist. (2026-02-27)
 - Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` um die heute eingefuehrten Car-Resolver-Checks erweitert (`--add/--list fuelups` bei 1 Car vs. >1 Cars inkl. Hard-Error-Pfad und car-scoped `--car-id`-Listing); `tests/smoke/smoke_cli.sh` Dry-List und `tests/README.md` entsprechend nachgezogen. (2026-02-27)
@@ -39,6 +41,9 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Domain/Policy: Neue Guard-Policy `P-070` fuer Cars-Delete bei vorhandenen fuelup-Referenzen inkl. Domain-Policy-Fixture/Case (`tests/domain_policy/fixtures/p070_base.sql`, `tests/domain_policy/cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`) und Doku-Updates in `docs/README.md`, `docs/STATUS.md`, `docs/ARCHITECTURE.md`, `tests/README.md`. (2026-02-24)
 - Meta: `.gitignore` fuer lokale Arbeitsdateien generalisiert (`aktuelle_aenderungen_<datum>.md` via Pattern sowie `sprint_<nr>_commit_<nr>_von_<nr>.md`, plus Legacy-Muster `sprint_<d>.md` und `sprint_<dd>.md`), Header-Stand aktualisiert. (2026-02-24)
 - Tests: Smoke-Suite um optionale Cars-Zusatzsuite erweitert (`-c`/`--cars`) inkl. Add/List-Flow und Edit/Delete-Validierungschecks; Clean-Home-Runner und `tests/README.md` entsprechend aktualisiert. (2026-02-24)
+
+### Tooling / Assistance
+- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools (u. a. Codex/ChatGPT) als Sparringspartner. Autorenschaft und fachliche Entscheidungen liegen beim Projekt. (2026-02-27)
 
 ## 0.6.0 – 2026-02-22
 

@@ -647,7 +647,8 @@ begin
                   Cmd.PeriodToExclIso,
                   Cmd.FromProvided,
                   Cmd.ToProvided,
-                  Cmd.Monthly)
+                  Cmd.Monthly,
+                  Cmd.CarId)
               else if Cmd.Json then
                 ShowFuelupStatsJson(DbPath,
                   Cmd.PeriodEnabled,
@@ -657,7 +658,8 @@ begin
                   Cmd.ToProvided,
                   Cmd.Monthly,
                   Cmd.Yearly,
-                  Cmd.Pretty)
+                  Cmd.Pretty,
+                  Cmd.CarId)
               else
               begin
                 if Cmd.Dashboard then
@@ -667,7 +669,8 @@ begin
                     Cmd.PeriodToExclIso,
                     Cmd.FromProvided,
                     Cmd.ToProvided,
-                    Cmd.Monthly)
+                    Cmd.Monthly,
+                    Cmd.CarId)
                 else
                   ShowFuelupStats(DbPath,
                     Cmd.PeriodEnabled,
@@ -676,7 +679,8 @@ begin
                     Cmd.FromProvided,
                     Cmd.ToProvided,
                     Cmd.Monthly,
-                    Cmd.Yearly);
+                    Cmd.Yearly,
+                    Cmd.CarId);
               end;
             end;
         else

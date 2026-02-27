@@ -4,7 +4,7 @@ set -euo pipefail
 # smoke_cars_crud.sh
 # UPDATED: 2026-02-27
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
-# und Car-Resolver-Scope fuer fuelups add/list.
+# und Car-Resolver-Scope fuer fuelups add/list/stats.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 APP_BIN="$ROOT_DIR/bin/Betankungen"
@@ -152,6 +152,14 @@ OUT_SCOPE_LIST_CAR1="$TMP_DIR/scope_list_car1.out"
 ERR_SCOPE_LIST_CAR1="$TMP_DIR/scope_list_car1.err"
 OUT_SCOPE_LIST_CAR2="$TMP_DIR/scope_list_car2.out"
 ERR_SCOPE_LIST_CAR2="$TMP_DIR/scope_list_car2.err"
+OUT_SCOPE_STATS_ONE_NOID="$TMP_DIR/scope_stats_one_noid.out"
+ERR_SCOPE_STATS_ONE_NOID="$TMP_DIR/scope_stats_one_noid.err"
+OUT_SCOPE_STATS_TWO_NOID="$TMP_DIR/scope_stats_two_noid.out"
+ERR_SCOPE_STATS_TWO_NOID="$TMP_DIR/scope_stats_two_noid.err"
+OUT_SCOPE_STATS_CAR1="$TMP_DIR/scope_stats_car1.out"
+ERR_SCOPE_STATS_CAR1="$TMP_DIR/scope_stats_car1.err"
+OUT_SCOPE_STATS_CAR2="$TMP_DIR/scope_stats_car2.out"
+ERR_SCOPE_STATS_CAR2="$TMP_DIR/scope_stats_car2.err"
 
 set +e
 printf 'ScopeBrand\nScopeStreet\n1\n12345\nScopeCity\n\n\n' \
@@ -183,6 +191,15 @@ if [[ $RC -ne 0 ]] || ! grep -q '2026-02-01 12:00:00' "$OUT_SCOPE_LIST_ONE_NOID"
   fail 'Scope-Smoke: --list fuelups ohne --car-id (1 Car) fehlgeschlagen.'
 fi
 printf '[OK] Fuelups Scope: list ohne --car-id bei 1 Car\n'
+
+set +e
+"$APP_BIN" --db "$RES_DB" --stats fuelups >"$OUT_SCOPE_STATS_ONE_NOID" 2>"$ERR_SCOPE_STATS_ONE_NOID"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]]; then
+  fail 'Scope-Smoke: --stats fuelups ohne --car-id (1 Car) fehlgeschlagen.'
+fi
+printf '[OK] Fuelups Scope: stats ohne --car-id bei 1 Car\n'
 
 set +e
 printf 'ScopeCarTwo\nSC-002\n\n100\n2026-01-01\n' \
@@ -231,6 +248,17 @@ fi
 printf '[OK] Fuelups Scope: list ohne --car-id bei 2 Cars -> Hard Error\n'
 
 set +e
+"$APP_BIN" --db "$RES_DB" --stats fuelups >"$OUT_SCOPE_STATS_TWO_NOID" 2>"$ERR_SCOPE_STATS_TWO_NOID"
+RC=$?
+set -e
+if [[ $RC -eq 0 ]] ||
+   ! grep -q 'ERROR: multiple cars found.' "$ERR_SCOPE_STATS_TWO_NOID" ||
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_STATS_TWO_NOID"; then
+  fail 'Scope-Smoke: --stats fuelups ohne --car-id bei 2 Cars wurde nicht sauber geblockt.'
+fi
+printf '[OK] Fuelups Scope: stats ohne --car-id bei 2 Cars -> Hard Error\n'
+
+set +e
 "$APP_BIN" --db "$RES_DB" --list fuelups --car-id 1 >"$OUT_SCOPE_LIST_CAR1" 2>"$ERR_SCOPE_LIST_CAR1"
 RC=$?
 set -e
@@ -250,5 +278,41 @@ if [[ $RC -ne 0 ]] ||
   fail 'Scope-Smoke: --list fuelups --car-id <id> ist nicht car-scoped.'
 fi
 printf '[OK] Fuelups Scope: list mit --car-id ist strikt scoped\n'
+
+sqlite3 "$RES_DB" <<SQL
+INSERT INTO fuelups(
+  station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents,
+  price_per_liter_milli_eur, is_full_tank, missed_previous, created_at
+) VALUES (
+  1, 1, '2026-02-03 12:00:00', 220, 50000, 8000, 1600, 1, 0, datetime('now')
+);
+INSERT INTO fuelups(
+  station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents,
+  price_per_liter_milli_eur, is_full_tank, missed_previous, created_at
+) VALUES (
+  1, $CAR2_ID, '2026-02-04 12:00:00', 240, 55000, 9000, 1636, 1, 0, datetime('now')
+);
+SQL
+
+set +e
+"$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id 1 >"$OUT_SCOPE_STATS_CAR1" 2>"$ERR_SCOPE_STATS_CAR1"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR1" ||
+   grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR1"; then
+  fail 'Scope-Smoke: --stats fuelups --csv --car-id 1 ist nicht strikt car-scoped.'
+fi
+
+set +e
+"$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id "$CAR2_ID" >"$OUT_SCOPE_STATS_CAR2" 2>"$ERR_SCOPE_STATS_CAR2"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR2" ||
+   grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR2"; then
+  fail 'Scope-Smoke: --stats fuelups --csv --car-id <id> ist nicht strikt car-scoped.'
+fi
+printf '[OK] Fuelups Scope: stats mit --car-id ist strikt scoped\n'
 
 printf '[OK] smoke_cars_crud: alle Cars-CRUD-Checks erfolgreich.\n'

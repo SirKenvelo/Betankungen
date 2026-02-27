@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-02-22
+**Stand:** 2026-02-27
 
 <INSTRUCTIONS>
 
@@ -28,11 +28,10 @@
 ## Dokumentations-Management
 - Dokumentation im `docs`-Ordner bei Hoch/Mittel-Priorität selbstständig mitpflegen.
 - `docs/CHANGELOG.md` bei JEDER Änderung aktualisieren (inkl. aktuellem Datum).
-- CHANGELOG-Einträge im bestehenden Stil der Datei pflegen (gleiches Format/Abschnitt wie bisherige Codex-Einträge).
-- CHANGELOG-Kennzeichnung: Änderungen von Usern unter „Changed (User-Edits)“, Änderungen von Codex unter „Changed (Codex)“.
-- CHANGELOG-Ort: Einträge immer unter `[Unreleased]` und in den bestehenden Unterabschnitten erfassen.
-- Beispiel (Format, `[Unreleased] -> Changed (Codex)`): `- u_fmt: CSV-Helper ergaenzt. (YYYY-MM-DD)`
-- Beispiel (Format, `[Unreleased] -> Changed (User-Edits)`): `- README: Abschnitt zu u_stats aktualisiert. (YYYY-MM-DD)`
+- CHANGELOG-Einträge neutral und feature-zentriert unter `[Unreleased] -> Changed` erfassen (kein personenbezogenes Framing als Abschnittsueberschrift).
+- Attribution transparent, aber dezent ueber `[Unreleased] -> Tooling / Assistance` halten (ein kurzer Sammelhinweis reicht).
+- Beispiel (Format, `[Unreleased] -> Changed`): `- u_fmt: CSV-Helper ergaenzt. (YYYY-MM-DD)`
+- Beispiel (Format, `[Unreleased] -> Tooling / Assistance`): `- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (YYYY-MM-DD)`
 
 ## Priorisierung von Änderungen & Dokumentations-Pflicht
 Nach Änderungen muss die KI die Relevanz für die Dokumentation (insb. im `docs`-Ordner) wie folgt bewerten:

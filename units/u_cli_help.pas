@@ -59,13 +59,13 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
   else if (FocusFlag = '--from') then
-    Writeln('Usage: Betankungen --stats fuelups [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
   else if FocusFlag = '--db' then
     Writeln('Usage: Betankungen [--db <pfad>|--demo] <command> [options]')
   else if FocusFlag = '--demo' then
@@ -119,7 +119,7 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Bei --add/--list fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
+  Item('--car-id <id>',              'Bei --add/--list/--stats fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');

@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-02-27
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -35,7 +35,8 @@ procedure ShowFuelupStats(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const Monthly: boolean; const Yearly: boolean = False); overload;
+  const Monthly: boolean; const Yearly: boolean = False;
+  const CarId: integer = 0); overload;
 
 // Liefert CSV-Statistik mit Standardparametern.
 procedure ShowFuelupStatsCsv(const DbPath: string); overload;
@@ -44,7 +45,8 @@ procedure ShowFuelupStatsCsv(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const Monthly: boolean); overload;
+  const Monthly: boolean;
+  const CarId: integer = 0); overload;
 
 // Liefert JSON-Statistik (compact) mit Standardparametern.
 procedure ShowFuelupStatsJson(const DbPath: string); overload;
@@ -55,7 +57,8 @@ procedure ShowFuelupStatsJson(const DbPath: string;
   const FromProvided, ToProvided: boolean;
   const Monthly: boolean;
   const Yearly: boolean = False;
-  const Pretty: boolean = False); overload;
+  const Pretty: boolean = False;
+  const CarId: integer = 0); overload;
 
 // Liefert Dashboard-Statistik mit Standardparametern.
 procedure ShowFuelupDashboard(const DbPath: string); overload;
@@ -64,19 +67,21 @@ procedure ShowFuelupDashboard(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const Monthly: boolean); overload;
+  const Monthly: boolean;
+  const CarId: integer = 0); overload;
 
 implementation
 
 uses
   SysUtils,
-  SQLite3Conn, SQLDB, u_log, u_table, u_fmt;
+  SQLite3Conn, SQLDB, u_log, u_table, u_fmt, u_car_context;
 
 // ------------------------------------------------------------
 // Zeitraum-Helper inkl. Debug des effektiven Zeitraums
 procedure ResolvePeriodBounds(
   Q: TSQLQuery;
   const PeriodEnabled: boolean;
+  const ResolvedCarId: integer;
   var FromIso, ToExclIso: string;
   const FromProvided, ToProvided: boolean);
 begin
@@ -89,7 +94,9 @@ begin
     Q.SQL.Text :=
       'SELECT datetime(MAX(fueled_at), ''+1 second'') AS to_excl ' +
       'FROM fuelups ' +
-      'WHERE fueled_at >= :from;';
+      'WHERE car_id = :car_id ' +
+      '  AND fueled_at >= :from;';
+    Q.Params.ParamByName('car_id').AsInteger := ResolvedCarId;
     Q.Params.ParamByName('from').AsString := FromIso;
     Q.Open;
     ToExclIso := Q.FieldByName('to_excl').AsString; // kann '' sein bei 0 Rows
@@ -103,7 +110,9 @@ begin
     Q.SQL.Text :=
       'SELECT MIN(fueled_at) AS min_dt ' +
       'FROM fuelups ' +
-      'WHERE fueled_at < :to_excl;';
+      'WHERE car_id = :car_id ' +
+      '  AND fueled_at < :to_excl;';
+    Q.Params.ParamByName('car_id').AsInteger := ResolvedCarId;
     Q.Params.ParamByName('to_excl').AsString := ToExclIso;
     Q.Open;
     FromIso := Q.FieldByName('min_dt').AsString; // kann '' sein bei 0 Rows
@@ -306,6 +315,7 @@ procedure CollectFuelupStats(
   const FromProvided, ToProvided: boolean;
   const Monthly: boolean;
   const Yearly: boolean;
+  const CarId: integer;
   out R: TStatsCollected);
 var
   Conn: TSQLite3Connection;
@@ -319,7 +329,7 @@ var
   AccTotalCents: Int64;
 
   Odo, IsFull: integer;
-  CarId, CurrentCarId: integer;
+  RowCarId, CurrentCarId: integer;
   MissedPrev: integer;
   LitersMl: Int64;
   TotalCents: Int64;
@@ -329,6 +339,7 @@ var
 
   EndDtIso: string;
   MKey: string;
+  ResolvedCarId: integer;
 begin
   CollectMonths := Monthly or Yearly;
 
@@ -350,10 +361,15 @@ begin
     Conn.Open;
     Tran.StartTransaction;
 
+    ResolvedCarId := ResolveCarIdOrFail(DbPath, CarId);
+    Dbg('StatsFuelups: monthly=' + IntToStr(ord(Monthly)) +
+        ' yearly=' + IntToStr(ord(Yearly)) +
+        ' car_id=' + IntToStr(ResolvedCarId));
+
     R.H.EffFromIso := PeriodFromIso;
     R.H.EffToExclIso := PeriodToExclIso;
 
-    ResolvePeriodBounds(Q, PeriodEnabled, R.H.EffFromIso, R.H.EffToExclIso, FromProvided, ToProvided);
+    ResolvePeriodBounds(Q, PeriodEnabled, ResolvedCarId, R.H.EffFromIso, R.H.EffToExclIso, FromProvided, ToProvided);
     Dbg('Stats: period_enabled=' + IntToStr(ord(PeriodEnabled)) +
         ' from=' + R.H.EffFromIso + ' to_excl=' + R.H.EffToExclIso +
         ' monthly=' + IntToStr(ord(Monthly)) +
@@ -368,17 +384,18 @@ begin
       '  MIN(fueled_at) AS min_dt, ' +
       '  MAX(fueled_at) AS max_dt, ' +
       '  SUM(total_cents) AS total_cents ' +
-      'FROM fuelups ';
+      'FROM fuelups ' +
+      'WHERE car_id = :car_id ';
 
     if PeriodEnabled and ((R.H.EffFromIso <> '') or (R.H.EffToExclIso <> '')) then
     begin
-      Q.SQL.Text := Q.SQL.Text + 'WHERE 1=1 ';
       if R.H.EffFromIso <> '' then Q.SQL.Text := Q.SQL.Text + 'AND fueled_at >= :from ';
       if R.H.EffToExclIso <> '' then Q.SQL.Text := Q.SQL.Text + 'AND fueled_at < :to_excl ';
     end;
 
     Q.SQL.Text := Q.SQL.Text + ';';
 
+    Q.Params.ParamByName('car_id').AsInteger := ResolvedCarId;
     ApplyPeriodWhere(Q, PeriodEnabled, R.H.EffFromIso, R.H.EffToExclIso);
     Q.Open;
 
@@ -395,16 +412,17 @@ begin
     // 2) Zyklus-Iteration
     Q.SQL.Text :=
       'SELECT id, car_id, fueled_at, odometer_km, liters_ml, is_full_tank, total_cents, missed_previous ' +
-      'FROM fuelups ';
+      'FROM fuelups ' +
+      'WHERE car_id = :car_id ';
 
     if PeriodEnabled and ((R.H.EffFromIso <> '') or (R.H.EffToExclIso <> '')) then
     begin
-      Q.SQL.Text := Q.SQL.Text + 'WHERE 1=1 ';
       if R.H.EffFromIso <> '' then Q.SQL.Text := Q.SQL.Text + 'AND fueled_at >= :from ';
       if R.H.EffToExclIso <> '' then Q.SQL.Text := Q.SQL.Text + 'AND fueled_at < :to_excl ';
     end;
 
-    Q.SQL.Text := Q.SQL.Text + 'ORDER BY car_id ASC, odometer_km ASC, fueled_at ASC, id ASC;';
+    Q.SQL.Text := Q.SQL.Text + 'ORDER BY odometer_km ASC, fueled_at ASC, id ASC;';
+    Q.Params.ParamByName('car_id').AsInteger := ResolvedCarId;
     ApplyPeriodWhere(Q, PeriodEnabled, R.H.EffFromIso, R.H.EffToExclIso);
     Q.Open;
 
@@ -422,15 +440,15 @@ begin
     while not Q.EOF do
     begin
       // v4: pro Car getrennte Zeitachse (Safety, auch wenn aktuell Default-Car=1)
-      CarId := Q.FieldByName('car_id').AsInteger;
+      RowCarId := Q.FieldByName('car_id').AsInteger;
       MissedPrev := Q.FieldByName('missed_previous').AsInteger;
 
       // Car-Wechsel: Collector resetten, damit keine Auto-uebergreifenden Zyklen entstehen
       if (CurrentCarId = 0) then
-        CurrentCarId := CarId
-      else if CarId <> CurrentCarId then
+        CurrentCarId := RowCarId
+      else if RowCarId <> CurrentCarId then
       begin
-        CurrentCarId := CarId;
+        CurrentCarId := RowCarId;
         HaveStartFull := False;
         StartOdo := 0;
         AccLitersMl := 0;
@@ -1012,34 +1030,36 @@ procedure ShowFuelupStats(const DbPath: string;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
   const Monthly: boolean;
-  const Yearly: boolean); overload;
+  const Yearly: boolean;
+  const CarId: integer); overload;
 var
   R: TStatsCollected;
 begin
-  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, Yearly, R);
+  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, Yearly, CarId, R);
   RenderFuelupStatsText(R, Monthly, Yearly);
 end;
 
 procedure ShowFuelupStats(const DbPath: string); overload;
 begin
-  ShowFuelupStats(DbPath, False, '', '', False, False, False, False);
+  ShowFuelupStats(DbPath, False, '', '', False, False, False, False, 0);
 end;
 
 procedure ShowFuelupStatsCsv(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const Monthly: boolean); overload;
+  const Monthly: boolean;
+  const CarId: integer); overload;
 var
   R: TStatsCollected;
 begin
-  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, False, R);
+  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, False, CarId, R);
   RenderFuelupStatsCsv(R, Monthly);
 end;
 
 procedure ShowFuelupStatsCsv(const DbPath: string); overload;
 begin
-  ShowFuelupStatsCsv(DbPath, False, '', '', False, False, False);
+  ShowFuelupStatsCsv(DbPath, False, '', '', False, False, False, 0);
 end;
 
 procedure ShowFuelupStatsJson(const DbPath: string;
@@ -1048,17 +1068,18 @@ procedure ShowFuelupStatsJson(const DbPath: string;
   const FromProvided, ToProvided: boolean;
   const Monthly: boolean;
   const Yearly: boolean;
-  const Pretty: boolean); overload;
+  const Pretty: boolean;
+  const CarId: integer); overload;
 var
   R: TStatsCollected;
 begin
-  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, Yearly, R);
+  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, Yearly, CarId, R);
   RenderFuelupStatsJson(R, Monthly, Yearly, Pretty);
 end;
 
 procedure ShowFuelupStatsJson(const DbPath: string); overload;
 begin
-  ShowFuelupStatsJson(DbPath, False, '', '', False, False, False, False, False);
+  ShowFuelupStatsJson(DbPath, False, '', '', False, False, False, False, False, 0);
 end;
 
 procedure RenderFuelupDashboardText(const C: TStatsCollected; const Monthly: boolean);
@@ -1153,7 +1174,7 @@ procedure ShowFuelupDashboard(const DbPath: string);
 var
   R: TStatsCollected;
 begin
-  CollectFuelupStats(DbPath, False, '', '', False, False, False, False, R);
+  CollectFuelupStats(DbPath, False, '', '', False, False, False, False, 0, R);
   RenderFuelupDashboardText(R, False);
 end;
 
@@ -1161,11 +1182,12 @@ procedure ShowFuelupDashboard(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const Monthly: boolean);
+  const Monthly: boolean;
+  const CarId: integer);
 var
   R: TStatsCollected;
 begin
-  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, False, R);
+  CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, False, CarId, R);
   RenderFuelupDashboardText(R, Monthly);
 end;
 

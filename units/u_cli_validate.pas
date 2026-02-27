@@ -95,9 +95,9 @@ begin
   else if not Cmd.CarIdProvided then
     Exit(True);
 
-  if (not IsAddFuelups(Cmd)) and (not IsListFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
+  if (not IsAddFuelups(Cmd)) and (not IsListFuelups(Cmd)) and (not IsStatsFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
   begin
-    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--list fuelups", "--edit cars" oder "--delete cars" erlaubt.';
+    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--list fuelups", "--stats fuelups", "--edit cars" oder "--delete cars" erlaubt.';
     Cmd.ErrorFocus := efCarId;
     Exit(False);
   end;

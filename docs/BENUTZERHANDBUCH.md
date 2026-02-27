@@ -86,6 +86,7 @@ Policy-Hinweis (Matrix v1):
 
 **Statistiken: Volltank-Zyklen, Monate und Jahre**
 - Textausgabe: `Betankungen --stats fuelups`
+- Textausgabe (gezielt fuer ein Fahrzeug): `Betankungen --stats fuelups --car-id <id>`
 - Dashboard-Ausgabe (exklusiv): `Betankungen --stats fuelups --dashboard` (kein Mix mit `--json`/`--csv`)
 - JSON-Ausgabe (kompakt): `Betankungen --stats fuelups --json`
 - JSON-Ausgabe (pretty): `Betankungen --stats fuelups --json --pretty` (nur mit `--json`)
@@ -97,7 +98,10 @@ Policy-Hinweis (Matrix v1):
 - Zeitraum-Filter:  
   `Betankungen --stats fuelups --from YYYY-MM[-DD] --to YYYY-MM[-DD]`
 - Regeln: `--from` ist inklusiv, `--to` ist exklusiv. Zyklen zaehlen nur, wenn Start- und End-Volltank im Zeitraum liegen. Bei nur `--from` oder nur `--to` werden die fehlenden Grenzen datengetrieben gesetzt.
-- Bei mehreren Fahrzeugen werden Zyklen intern strikt pro `car_id` gebildet.
+- Fahrzeugauswahl (`cars`) via Resolver:
+  - mit `--car-id <id>`: diese ID wird auf Existenz validiert
+  - ohne `--car-id`: bei genau einem Fahrzeug automatische Auswahl
+  - ohne `--car-id` und 0 oder >1 Fahrzeuge: Hard Error mit Hinweis
 - Falls `missed_previous=1` gesetzt wurde, wird der laufende Zyklus bewusst resettet.
 - Yearly-Regeln: `--yearly` und `--monthly` sind exklusiv; `--yearly` ist nicht mit `--csv` oder `--dashboard` kombinierbar.
 

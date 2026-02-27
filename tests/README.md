@@ -71,6 +71,9 @@ Direktlauf:
   - `--list fuelups` ohne `--car-id` bei 1 Car = OK
   - `--list fuelups` ohne `--car-id` bei >1 Cars = Hard Error
   - `--list fuelups --car-id <id>` ist strikt auf dieses Fahrzeug gescoped
+  - `--stats fuelups` ohne `--car-id` bei 1 Car = OK
+  - `--stats fuelups` ohne `--car-id` bei >1 Cars = Hard Error
+  - `--stats fuelups --car-id <id>` ist strikt auf dieses Fahrzeug gescoped
 - Zusatzsuiten:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite
