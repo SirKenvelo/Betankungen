@@ -55,8 +55,8 @@ begin
 
   if CarCount = 0 then
     raise Exception.Create(
-      'ERROR: no cars found. Create one first: --add cars ...' + LineEnding +
-      'Hint: --list cars'
+      'ERROR: no cars found.' + LineEnding +
+      'Hint: create one first using --add cars'
     );
 
   if CarCount > 1 then
