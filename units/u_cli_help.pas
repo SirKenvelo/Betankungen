@@ -59,7 +59,7 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
@@ -119,7 +119,7 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Bei --add fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
+  Item('--car-id <id>',              'Bei --add/--list fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');
@@ -145,6 +145,7 @@ begin
   Line('  Betankungen --add cars');
   Line('  Betankungen --add fuelups');
   Line('  Betankungen --add fuelups --car-id 1');
+  Line('  Betankungen --list fuelups --car-id 1');
   Line('  Betankungen --list cars --detail');
   Line('  Betankungen --edit cars --car-id 2');
   Line('  Betankungen --delete cars --car-id 3');

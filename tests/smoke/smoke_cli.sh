@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-02-24
+# UPDATED: 2026-02-27
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -167,7 +167,13 @@ print_plan() {
   fi
 
   if $RUN_CARS_SUITE; then
+    printf '[LIST] (Cars) tests/smoke/smoke_cars_crud.sh\n'
     printf '[LIST] (Cars) --add cars + --list cars\n'
+    printf '[LIST] (Cars) --add fuelups ohne --car-id bei 1 Car -> OK\n'
+    printf '[LIST] (Cars) --add fuelups ohne --car-id bei 2 Cars -> Hard Error\n'
+    printf '[LIST] (Cars) --list fuelups ohne --car-id bei 1 Car -> OK\n'
+    printf '[LIST] (Cars) --list fuelups ohne --car-id bei 2 Cars -> Hard Error\n'
+    printf '[LIST] (Cars) --list fuelups --car-id <id> ist strikt car-scoped\n'
     printf '[LIST] (Cars) --edit cars ohne --car-id -> Fehler\n'
     printf '[LIST] (Cars) --delete cars ohne --car-id -> Fehler\n'
     printf '[LIST] (Cars) --edit cars --car-id 999 -> Fehler (P-002)\n'
@@ -1027,16 +1033,26 @@ test_cars_delete_blocked_when_fuelups_exist() {
   db="$home/.local/share/Betankungen/betankungen.db"
 
   HOME="$home" "$ROOT_DIR/bin/Betankungen" >/dev/null 2>&1
-  sqlite3 "$db" \
-    "INSERT OR IGNORE INTO stations(id,brand,street,house_no,zip,city,phone,owner,created_at) VALUES(1,'Smoke','Road','1','12345','City','','',datetime('now'));" \
-    "INSERT OR IGNORE INTO fuelups(id,station_id,car_id,fueled_at,odometer_km,liters_ml,total_cents,price_per_liter_milli_eur,is_full_tank,missed_previous,created_at) VALUES(1,1,1,datetime('now'),1000,10000,1500,1500,1,0,datetime('now'));"
+  sqlite3 "$db" <<'SQL'
+INSERT OR IGNORE INTO stations(
+  id, brand, street, house_no, zip, city, phone, owner, created_at
+) VALUES (
+  1, 'Smoke', 'Road', '1', '12345', 'City', '', '', datetime('now')
+);
+INSERT OR IGNORE INTO fuelups(
+  id, station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents,
+  price_per_liter_milli_eur, is_full_tank, missed_previous, created_at
+) VALUES (
+  1, 1, 1, datetime('now'), 1000, 10000, 1500, 1500, 1, 0, datetime('now')
+);
+SQL
 
   set +e
   HOME="$home" "$ROOT_DIR/bin/Betankungen" --delete cars --car-id 1 >"$out" 2>"$err"
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'Fahrzeug kann nicht geloescht werden (fuelups vorhanden).' "$err"; then
+  if [[ $rc -ne 0 ]] && grep -q 'P-070: Fahrzeug kann nicht geloescht werden (fuelups vorhanden).' "$err"; then
     printf '[OK] Cars: --delete cars mit fuelups -> geblockt\n'
   else
     printf '[FAIL] Cars: --delete cars mit fuelups -> geblockt\n'
@@ -1044,8 +1060,18 @@ test_cars_delete_blocked_when_fuelups_exist() {
   fi
 }
 
+test_cars_crud_script_ok() {
+  if "$ROOT_DIR/tests/smoke/smoke_cars_crud.sh" >/dev/null 2>&1; then
+    printf '[OK] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke/smoke_cars_crud.sh'
+  else
+    printf '[FAIL] Cars: dedizierter CRUD-Smoke (%s)\n' 'tests/smoke/smoke_cars_crud.sh'
+    add_fail
+  fi
+}
+
 run_cars_suite() {
   printf '[INFO] Zusatzsuite aktiv: Cars (-c)\n'
+  test_cars_crud_script_ok
   test_cars_add_and_list_ok
   test_cars_edit_requires_id_fails
   test_cars_delete_requires_id_fails

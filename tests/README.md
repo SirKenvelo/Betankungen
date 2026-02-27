@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-02-24
+**Stand:** 2026-02-27
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -12,6 +12,7 @@
 Kompatibilitaets-Wrapper bleiben im Root erhalten:
 - `tests/smoke_cli.sh` -> `tests/smoke/smoke_cli.sh`
 - `tests/smoke_clean_home.sh` -> `tests/smoke/smoke_clean_home.sh`
+- `tests/smoke_cars_crud.sh` -> `tests/smoke/smoke_cars_crud.sh`
 - `tests/run_unit_tests.sh` -> `tests/domain_policy/run_domain_policy_tests.sh`
 
 ## Namenskonvention (Policy-Cases)
@@ -62,6 +63,13 @@ Direktlauf:
 - Script: `tests/smoke/smoke_cli.sh`
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
+- Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
+- Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:
+  - `--add fuelups` ohne `--car-id` bei 1 Car = OK
+  - `--add fuelups` ohne `--car-id` bei >1 Cars = Hard Error
+  - `--list fuelups` ohne `--car-id` bei 1 Car = OK
+  - `--list fuelups` ohne `--car-id` bei >1 Cars = Hard Error
+  - `--list fuelups --car-id <id>` ist strikt auf dieses Fahrzeug gescoped
 - Zusatzsuiten:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite
@@ -75,6 +83,7 @@ Direktlauf:
 Ausfuehrung:
 - `tests/smoke/smoke_cli.sh`
 - `tests/smoke/smoke_cli.sh -m|-y|-c|-a`
+- `tests/smoke/smoke_cars_crud.sh`
 - kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox

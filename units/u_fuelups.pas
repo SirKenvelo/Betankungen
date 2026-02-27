@@ -36,8 +36,8 @@ uses
 // Startet den interaktiven Dialog zum Hinzufuegen einer Betankung.
 procedure AddFuelupInteractive(const DbPath: string; const CarIdProvided: boolean = False; const CarId: integer = 0);
 
-// Zeigt die Liste aller Betankungen an (Detailed steuert Zusatzinfos).
-procedure ListFuelups(const DbPath: string; Detailed: boolean);
+// Zeigt die Betankungen des aufgeloesten Fahrzeugs an (Detailed steuert Zusatzinfos).
+procedure ListFuelups(const DbPath: string; Detailed: boolean; const CarId: integer = 0);
 
 implementation
 
@@ -540,11 +540,12 @@ begin
 end;
 
 // Listet die Tankhistorie tabellarisch auf
-procedure ListFuelups(const DbPath: string; Detailed: boolean);
+procedure ListFuelups(const DbPath: string; Detailed: boolean; const CarId: integer);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
   Q: TSQLQuery;
+  ResolvedCarId: Integer;
   IsFirstRow: boolean;
   RowCount: integer;
 
@@ -556,7 +557,9 @@ var
     raise Exception.Create(Prefix + E.Message);
   end;
 begin
-  Dbg('ListFuelups: detailed=' + BoolToStr(Detailed, True));
+  ResolvedCarId := ResolveCarIdOrFail(DbPath, CarId);
+  Dbg('ListFuelups: detailed=' + BoolToStr(Detailed, True) +
+      ' car_id=' + IntToStr(ResolvedCarId));
   Conn := TSQLite3Connection.Create(nil);
   Tran := TSQLTransaction.Create(nil);
   Q := TSQLQuery.Create(nil);
@@ -584,7 +587,9 @@ begin
         'FROM fuelups f ' +
         'LEFT JOIN cars c ON c.id = f.car_id ' +
         'JOIN stations s ON s.id = f.station_id ' +
+        'WHERE f.car_id = :car_id ' +
         'ORDER BY f.fueled_at DESC, f.id DESC;';
+      Q.ParamByName('car_id').AsInteger := ResolvedCarId;
       Q.Open;
 
       if Q.EOF then

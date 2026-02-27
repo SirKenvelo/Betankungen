@@ -53,6 +53,7 @@ Eingabe bei `--add stations`:
 Kommandos:
 - `Betankungen --add fuelups`
 - `Betankungen --list fuelups`
+- `Betankungen --list fuelups --car-id <id>`
 - `Betankungen --list fuelups --detail`
 
 Eingabe bei `--add fuelups`:
@@ -78,6 +79,10 @@ Eingabe bei `--add fuelups`:
 Policy-Hinweis (Matrix v1):
 - Hard Error ohne Write: `P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`.
 - Warning+Confirm (nur speichern bei `y`): `P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`.
+- `--list fuelups` nutzt dasselbe Car-Resolver-Regelwerk wie Add:
+  - bei 0 Fahrzeugen: Hard Error
+  - bei genau 1 Fahrzeug: automatische Aufloesung
+  - bei mehreren Fahrzeugen: `--car-id` erforderlich
 
 **Statistiken: Volltank-Zyklen, Monate und Jahre**
 - Textausgabe: `Betankungen --stats fuelups`

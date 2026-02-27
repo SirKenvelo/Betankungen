@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-24
+  UPDATED: 2026-02-27
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -65,6 +65,13 @@ begin
         and (Cmd.Target = tkFuelups);
 end;
 
+function IsListFuelups(const Cmd: TCommand): boolean;
+begin
+  Result := HasMainCommand(Cmd)
+        and (Cmd.Kind = ckList)
+        and (Cmd.Target = tkFuelups);
+end;
+
 function IsCarsEditOrDelete(const Cmd: TCommand): boolean;
 begin
   Result := HasMainCommand(Cmd)
@@ -88,9 +95,9 @@ begin
   else if not Cmd.CarIdProvided then
     Exit(True);
 
-  if (not IsAddFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
+  if (not IsAddFuelups(Cmd)) and (not IsListFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
   begin
-    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--edit cars" oder "--delete cars" erlaubt.';
+    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--list fuelups", "--edit cars" oder "--delete cars" erlaubt.';
     Cmd.ErrorFocus := efCarId;
     Exit(False);
   end;
@@ -343,7 +350,7 @@ begin
 
   if (Cmd.Kind = ckDelete) and CarsHasFuelups(DbPath, Cmd.CarId) then
   begin
-    Cmd.ErrorMsg := 'Fehler: Fahrzeug kann nicht geloescht werden (fuelups vorhanden).';
+    Cmd.ErrorMsg := 'P-070: Fahrzeug kann nicht geloescht werden (fuelups vorhanden).';
     Cmd.ErrorFocus := efCarId;
     Exit(False);
   end;

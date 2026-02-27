@@ -12,6 +12,10 @@ Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 - Keine Eintraege.
 
 ### Changed (Codex)
+- Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` um die heute eingefuehrten Car-Resolver-Checks erweitert (`--add/--list fuelups` bei 1 Car vs. >1 Cars inkl. Hard-Error-Pfad und car-scoped `--car-id`-Listing); `tests/smoke/smoke_cli.sh` Dry-List und `tests/README.md` entsprechend nachgezogen. (2026-02-27)
+- Core/Fuelups: `--list fuelups` auf strikten Car-Scope umgestellt (`units/u_fuelups.pas`): Car-Kontext wird ueber `ResolveCarIdOrFail` aufgeloest und SQL listet nur noch `WHERE f.car_id = :car_id`; dadurch gelten 0/1/>1-Car-Regeln identisch zu `--add fuelups`. (2026-02-27)
+- CLI/Validate+Help: `--car-id` fuer `--list fuelups` freigeschaltet (`units/u_cli_validate.pas`) und Help-/Usage-Texte entsprechend erweitert (`units/u_cli_help.pas`). (2026-02-27)
+- Docs: `docs/BENUTZERHANDBUCH.md` um Car-Scope-Regeln fuer `--list fuelups` ergaenzt. (2026-02-27)
 - CLI/Help: `units/u_cli_help.pas` um klaren Hinweis erweitert, dass `--car-id` bei `--add fuelups` in Multi-Car-Szenarien erforderlich ist (Kurz-Usage und Common-Options-Text nachgeschaerft). (2026-02-27)
 - Core/Fuelups: `units/u_fuelups.pas` im Add-Flow auf Car-Resolver umgestellt (`ResolveCarIdOrFail`); harter Fallback `car_id=1` entfernt. Ohne `--car-id` wird jetzt genau 1 Fahrzeug automatisch aufgeloest, bei 0 oder >1 Fahrzeugen folgt ein Hard Error. (2026-02-27)
 - Docs: Car-Resolver-Verhalten fuer `--add fuelups` in `docs/BENUTZERHANDBUCH.md` dokumentiert (inkl. 0/1/>1 Fahrzeuge ohne `--car-id`). (2026-02-27)
