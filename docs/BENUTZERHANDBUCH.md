@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-02-27
+**Stand:** 2026-02-28
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -9,7 +9,15 @@ CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 - Erfassen von Tankstellen und Betankungen (interaktiv).
 - Listen mit Standard- und Detailansicht.
 - Volltank-Zyklus-Statistiken (Text und JSON).
+- Mehrere Fahrzeuge pro Datenbank mit strikter Isolation (Resolver-Regelwerk).
 - XDG-konforme Speicherung von Konfiguration und Datenbank.
+
+**Fahrzeug-Kontext (Resolver-Regelwerk)**
+Alle car-sensitiven Kommandos (`--add fuelups`, `--list fuelups`, `--stats fuelups`) folgen derselben Logik:
+- 0 Fahrzeuge: Hard Error.
+- 1 Fahrzeug: automatische Auswahl.
+- >1 Fahrzeuge: `--car-id <id>` verpflichtend.
+- Mit `--car-id <id>`: ID wird auf Existenz validiert, ungueltige/fehlende IDs sind Hard Errors.
 
 **Start und Hilfe**
 - Hilfe: `Betankungen --help`

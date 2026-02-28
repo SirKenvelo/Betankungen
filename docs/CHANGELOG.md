@@ -9,6 +9,7 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 Ziel: Release-Reife des umgesetzten Multi-Car-Features (Konsistenz, Doku, Testhaertung).
 
 ### Changed
+- Docs: `docs/README.md` und `docs/BENUTZERHANDBUCH.md` auf 0.7.x-Ist-Zustand synchronisiert (Roadmap-Kurzstand korrigiert, Multi-Car-Strategie/Resolver-Regelwerk zentral dokumentiert, kein implizites `car_id=1`). (2026-02-28)
 - Docs: `docs/ARCHITECTURE.md`, `docs/STATUS.md` und `docs/VISION.md` auf den Ist-Zustand synchronisiert: Multi-Car-CLI als umgesetzt markiert (Resolver, strict car scope, kein implizites `car_id=1`), 0.7.x auf Release-Reife-Fokus geschwenkt und Vision um einen Reality-Check erweitert. (2026-02-28)
 - Tests/Smoke: Finale Resolver-/CLI-Matrix als dedizierte Suite ergaenzt (`tests/smoke/smoke_multi_car_context.sh` + Wrapper `tests/smoke_multi_car_context.sh`) mit 0/1/>1-Car-Faellen fuer `--add/--list/--stats fuelups`, scoped Output-Checks, Cross-Car-Isolation sowie Guards fuer `--edit/--delete cars` inkl. `--car-id 0` (`P-001`). (2026-02-28)
 - Tests/Smoke: Cars-Suite (`tests/smoke/smoke_cli.sh -c`) um die neue Resolver-Matrix-Suite erweitert (Dry-List + Runner-Integration). (2026-02-28)

@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-02-22
+**Stand:** 2026-02-28
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -41,6 +41,16 @@ Das Projekt ist **lernorientiert**, aber nicht als Spielzeug gedacht.
 **Zentrale Idee:**
 Das Hauptprogramm steuert – die Units arbeiten.
 
+## Multi-Car-Strategie (ab 0.7.x)
+
+- Mehrere Fahrzeuge in einer Datenbank.
+- Strikte Isolation pro `car_id`.
+- Kein implizites Default `car_id=1`.
+- Resolver-Regelwerk:
+  - 0 Cars: Hard Error.
+  - 1 Car: automatische Auswahl.
+  - >1 Cars: `--car-id` verpflichtend.
+
 ---
 
 ## Roadmap – Kurzstand
@@ -51,7 +61,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.5.6`: Help/Usage Rework (abgeschlossen)
 - `0.5.6-0`: Zwischenversion fuer die Einfuehrung einer zusaetzlichen Unit (abgeschlossen)
 - `0.6.0`: Fahrzeug-Domain konsolidieren (abgeschlossen)
-- `0.7.x`: echtes Multi-Car-Feature (naechster Fokus)
+- `0.7.x`: Multi-Car-CLI (Cars-CRUD + Resolver + strict car scoping) - Fokus: Release-Reife
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
@@ -146,7 +156,7 @@ Fachlogik für Betankungen (`fuelups`).
 **Funktionen**
 - Hinzufügen
 - Auflisten (Standard / Detail)
-- Zuordnung zu Fahrzeugen (`car_id`, aktuell Default-Fahrzeug bei Single-Car-Workflow)
+- Zuordnung zu Fahrzeugen via Resolver (kein implizites `car_id=1`; bei >1 Cars ist `--car-id` Pflicht)
 - Golden-Info-Flag `missed_previous` (vorheriger Tankstopp fehlt) wird bei grosser KM-Luecke gezielt abgefragt
 - Bei Ablehnung der Gap-Rueckfrage (`n`) wird der Add-Flow abgebrochen (kein Fuelup-Insert)
 - Plausibilitaetsregeln: `odometer_km >= car.odometer_start_km`, streng monoton pro Fahrzeug, Warnung bei sehr grosser Tankmenge
