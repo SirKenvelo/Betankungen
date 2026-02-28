@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-02-27
+# UPDATED: 2026-02-28
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -168,7 +168,11 @@ print_plan() {
 
   if $RUN_CARS_SUITE; then
     printf '[LIST] (Cars) tests/smoke_cars_crud.sh (Wrapper)\n'
+    printf '[LIST] (Cars) tests/smoke_multi_car_context.sh (Wrapper)\n'
     printf '[LIST] (Cars) --add cars + --list cars\n'
+    printf '[LIST] (Cars) Resolver-Matrix 0/1/>1 Cars fuer add/list/stats\n'
+    printf '[LIST] (Cars) Cross-Car-Isolation fuer stats --car-id\n'
+    printf '[LIST] (Cars) Guards fuer --edit/--delete cars (required/unknown/valid)\n'
     printf '[LIST] (Cars) --add fuelups ohne --car-id bei 1 Car -> OK\n'
     printf '[LIST] (Cars) --add fuelups ohne --car-id bei 2 Cars -> Hard Error\n'
     printf '[LIST] (Cars) --list fuelups ohne --car-id bei 1 Car -> OK\n'
@@ -1072,9 +1076,19 @@ test_cars_crud_script_ok() {
   fi
 }
 
+test_multi_car_context_script_ok() {
+  if "$ROOT_DIR/tests/smoke_multi_car_context.sh" >/dev/null 2>&1; then
+    printf '[OK] Cars: Resolver-Matrix-Smoke (%s)\n' 'tests/smoke_multi_car_context.sh'
+  else
+    printf '[FAIL] Cars: Resolver-Matrix-Smoke (%s)\n' 'tests/smoke_multi_car_context.sh'
+    add_fail
+  fi
+}
+
 run_cars_suite() {
   printf '[INFO] Zusatzsuite aktiv: Cars (-c)\n'
   test_cars_crud_script_ok
+  test_multi_car_context_script_ok
   test_cars_add_and_list_ok
   test_cars_edit_requires_id_fails
   test_cars_delete_requires_id_fails

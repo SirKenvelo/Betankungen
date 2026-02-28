@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-02-27
+**Stand:** 2026-02-28
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -13,6 +13,7 @@ Kompatibilitaets-Wrapper bleiben im Root erhalten:
 - `tests/smoke_cli.sh` -> `tests/smoke/smoke_cli.sh`
 - `tests/smoke_clean_home.sh` -> `tests/smoke/smoke_clean_home.sh`
 - `tests/smoke_cars_crud.sh` -> `tests/smoke/smoke_cars_crud.sh`
+- `tests/smoke_multi_car_context.sh` -> `tests/smoke/smoke_multi_car_context.sh`
 - `tests/run_unit_tests.sh` -> `tests/domain_policy/run_domain_policy_tests.sh`
 
 ## Namenskonvention (Policy-Cases)
@@ -64,7 +65,9 @@ Direktlauf:
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
+- Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.
 - Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
+- Die `-c`-Cars-Suite prueft zusaetzlich den Wrapper `tests/smoke_multi_car_context.sh` (inkl. Transit auf `tests/smoke/smoke_multi_car_context.sh`).
 - Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:
   - `--add fuelups` ohne `--car-id` bei 1 Car = OK
   - `--add fuelups` ohne `--car-id` bei >1 Cars = Hard Error
@@ -74,6 +77,12 @@ Direktlauf:
   - `--stats fuelups` ohne `--car-id` bei 1 Car = OK
   - `--stats fuelups` ohne `--car-id` bei >1 Cars = Hard Error
   - `--stats fuelups --car-id <id>` ist strikt auf dieses Fahrzeug gescoped
+- Resolver-Matrix-Smoke deckt zusaetzlich die finale 0/1/>1-Car-Matrix und Guardrails ab:
+  - 0 Cars: `--add/--list/--stats fuelups` => Hard Error (`no cars found`)
+  - 1 Car: ohne `--car-id` OK, mit gueltiger `--car-id` OK, mit ungueltiger `--car-id` Hard Error
+  - >1 Cars: ohne `--car-id` Hard Error (`multiple cars found`), mit gueltiger `--car-id` strikt scoped
+  - Cross-Car-Isolation: `--stats fuelups --car-id <id>` aggregiert niemals fremde Fahrzeuge
+  - Cars-Guards: `--edit/--delete cars` ohne `--car-id` required, unknown `--car-id` => P-002, `--car-id 0` => P-001
 - Zusatzsuiten:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite
@@ -88,6 +97,7 @@ Ausfuehrung:
 - `tests/smoke/smoke_cli.sh`
 - `tests/smoke/smoke_cli.sh -m|-y|-c|-a`
 - `tests/smoke/smoke_cars_crud.sh`
+- `tests/smoke/smoke_multi_car_context.sh`
 - kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
