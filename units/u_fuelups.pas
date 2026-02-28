@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-27
+  UPDATED: 2026-02-28
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -34,7 +34,7 @@ uses
 // Oeffentliche Schnittstelle
 
 // Startet den interaktiven Dialog zum Hinzufuegen einer Betankung.
-procedure AddFuelupInteractive(const DbPath: string; const CarIdProvided: boolean = False; const CarId: integer = 0);
+procedure AddFuelupInteractive(const DbPath: string; const CarId: integer = 0);
 
 // Zeigt die Betankungen des aufgeloesten Fahrzeugs an (Detailed steuert Zusatzinfos).
 procedure ListFuelups(const DbPath: string; Detailed: boolean; const CarId: integer = 0);
@@ -321,13 +321,12 @@ begin
 end;
 
 // Hauptprozedur zum Erfassen neuer Daten
-procedure AddFuelupInteractive(const DbPath: string; const CarIdProvided: boolean; const CarId: integer);
+procedure AddFuelupInteractive(const DbPath: string; const CarId: integer);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
   Q, QS: TSQLQuery;
   Inp: TFuelupInput;
-  ProvidedCarId: Integer;
   S: string;
   FueledAtDt: TDateTime;
   StartKm: integer;
@@ -374,11 +373,7 @@ begin
       Tran.StartTransaction;
     
     try
-      if CarIdProvided then
-        ProvidedCarId := CarId
-      else
-        ProvidedCarId := 0;
-      Inp.CarId := ResolveCarIdOrFail(DbPath, ProvidedCarId);
+      Inp.CarId := ResolveCarIdOrFail(DbPath, CarId);
 
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');

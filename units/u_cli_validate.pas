@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-27
+  UPDATED: 2026-02-28
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -85,14 +85,14 @@ begin
 
   if IsCarsEditOrDelete(Cmd) then
   begin
-    if not Cmd.CarIdProvided then
+    if Cmd.CarId = 0 then
     begin
       Cmd.ErrorMsg := 'Fehler: --car-id ist fuer "--edit cars" und "--delete cars" erforderlich.';
       Cmd.ErrorFocus := efCarId;
       Exit(False);
     end;
   end
-  else if not Cmd.CarIdProvided then
+  else if Cmd.CarId = 0 then
     Exit(True);
 
   if (not IsAddFuelups(Cmd)) and (not IsListFuelups(Cmd)) and (not IsStatsFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then

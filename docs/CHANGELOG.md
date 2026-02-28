@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-02-27
+**Stand:** 2026-02-28
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -9,6 +9,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 Ziel: echtes Multi-Car-Feature auf stabiler Fahrzeug-Domain-Basis.
 
 ### Changed
+- CLI/Core: Presence-Flag `CarIdProvided` entfernt; `--car-id`-Presence wird jetzt ueber `Cmd.CarId` (0 = nicht gesetzt) abgebildet (`units/u_cli_types.pas`, `units/u_cli_parse.pas`, `units/u_cli_validate.pas`, `src/Betankungen.lpr`, `units/u_fuelups.pas`). (2026-02-28)
+- CLI/Parser: `--car-id` validiert bereits beim Parsing auf `> 0`, sodass ungueltige Werte (`<= 0`) weiterhin als `P-001` abgewiesen werden. (2026-02-28)
 - Core/Stats: `--stats fuelups` auf strikten Car-Scope umgestellt (`src/Betankungen.lpr`, `units/u_stats.pas`): Resolver-Aufloesung via `ResolveCarIdOrFail`, SQL-Filterung `WHERE car_id = :car_id` (inkl. Period-Bounds), keine Cross-Car-Vermischung mehr ohne explizite Fahrzeugauswahl. (2026-02-27)
 - CLI/Validate+Help: `--car-id` fuer `--stats fuelups` freigeschaltet (`units/u_cli_validate.pas`) und Usage/Help entsprechend erweitert (`units/u_cli_help.pas`). (2026-02-27)
 - Tests/Domain-Policy: `P-060/02` auf strict car-scope angepasst (`tests/domain_policy/cases/t_p060__02__car_isolation.sh`, `tests/domain_policy/p060.md`), damit Car-Isolation gezielt pro `--car-id` validiert wird. (2026-02-27)

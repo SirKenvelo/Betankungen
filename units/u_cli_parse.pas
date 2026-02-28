@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-24
+  UPDATED: 2026-02-28
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -164,7 +164,6 @@ begin
   Cmd.SeedForce := False;
   Cmd.UseDemoDb := False;
   Cmd.CarId := 0;
-  Cmd.CarIdProvided := False;
 
   i := 1;
   while i <= ParamCount do
@@ -323,7 +322,12 @@ begin
         Cmd.ErrorFocus := efCarId;
         Exit(False);
       end;
-      Cmd.CarIdProvided := True;
+      if Cmd.CarId <= 0 then
+      begin
+        Cmd.ErrorMsg := 'P-001: car_id fehlt/ungueltig (erwartet > 0).';
+        Cmd.ErrorFocus := efCarId;
+        Exit(False);
+      end;
       Inc(i, 2);
       Continue;
     end;

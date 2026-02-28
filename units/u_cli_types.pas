@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-24
+  UPDATED: 2026-02-28
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -143,7 +143,6 @@ type
     DbOverride: string;
     DbSet: string;
     CarId: integer;
-    CarIdProvided: boolean;
 
     // Fehlertransport aus dem Parser.
     ErrorMsg: string;
