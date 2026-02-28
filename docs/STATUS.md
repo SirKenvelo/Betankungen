@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-02-24
+**Stand:** 2026-02-28
 **Zielversion:** 0.7.x
 
 ## Fundament & Architektur (erledigt)
@@ -25,6 +25,9 @@
 - `fuelups` append-only, historisch korrekt
 - Fuelups referenzieren `stations` und `cars` (FK)
 - `cars` enthaelt Startwerte (`odometer_start_km`, `odometer_start_date`) als Validierungsbasis pro Fahrzeug
+- Car-Kontext wird zentral ueber `ResolveCarIdOrFail` aufgeloest (0/1/>1 Cars, unknown/invalid `car_id`)
+- Kein implizites Default `car_id=1` mehr; bei mehreren Fahrzeugen ist `--car-id` Pflicht
+- `--add/--list fuelups` und `--stats fuelups` sind strikt car-gescoped (`WHERE car_id = :car_id`)
 - Fixed-Point-Arithmetik:
   - Geld: Cent
   - Volumen: ml
@@ -138,6 +141,14 @@ Bereits erledigt:
 - Erreicht: Migrations-/Domainregeln und Policy-Haertegrade (Hard Error vs Warning+Confirm) als konsistenter Rahmen dokumentiert und getestet.
 - Nicht-Ziele 0.6.0 eingehalten: keine GUI, keine Web-API, kein Subcommand-Umbau, kein Overengineering.
 
+## Roadmap 0.7.x – Multi-Car CLI (in Arbeit / Sprint 4: Release-Reife)
+- Cars-CRUD: umgesetzt.
+- Resolver + kein implizites Default: umgesetzt.
+- Strict Scoping fuer `--add/--list fuelups` und `--stats fuelups`: umgesetzt.
+- Tests/Smokes fuer Resolver-Matrix und Cross-Car-Isolation: umgesetzt.
+- Docs/Vision/Status-Sync auf Ist-Zustand: in Arbeit (Sprint 4).
+- Optional: Policy-ID-Strategie fuer Resolver-/Runtime-Errors reviewen.
+
 ## Entscheidungen 0.5.0 (festgezurrt, 2026-02-09)
 - Offene Grenzen bei Filtern sind datengetrieben: nur `--from` => `to = MAX(fueled_at)`, nur `--to` => `from = MIN(fueled_at)` (kein "heute").
 - Zyklusregel am Rand: Zyklus zählt nur, wenn Start- und End-Volltank im Zeitraum liegen (vollständig im Zeitraum).
@@ -169,6 +180,6 @@ Bereits erledigt:
 - 0.6.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.6.0 freigegeben (Fahrzeug-Domain konsolidiert inkl. Domain-Policy-Matrix v1 und Car-Isolation-Regression).
 - Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
-- Danach: 0.7.x (echtes Multi-Car-Feature)
+- 0.7.x: Multi-Car-CLI ist funktional umgesetzt; aktueller Fokus liegt auf Release-Reife (Doku-Konsistenz, Test-Haertung, Abschluss-Polish).
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar

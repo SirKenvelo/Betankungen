@@ -6,9 +6,9 @@
 **Dokumenttyp:** Strategisches Brainstorming  
 **Projekt:** Betankungen  
 **Status:** Intern - Konzeptphase  
-**Stand:** 2026-02-24  
+**Stand:** 2026-02-28  
 **Version:** 0.2 (Vision + Contribution Draft)  
-**Kompatibel mit:** >= 0.6.x Architekturvision
+**Kompatibel mit:** >= 0.7.x Architekturvision
 
 ---
 
@@ -36,6 +36,15 @@ Rahmenbedingungen:
 - Privatnutzer im Fokus
 - Kein GUI-Zwang
 - Kein Enterprise-Flottenmanagement
+
+---
+
+## Reality Check (Ist-Stand, 0.7.x)
+
+- Multi-Car im Produktivsinn ist umgesetzt: mehrere Fahrzeuge in einer DB mit strikter Isolation pro `car_id`.
+- Car-Kontext wird zentral ueber den Resolver `ResolveCarIdOrFail` aufgeloest (0/1/>1 Cars, unknown/invalid konsistent behandelt).
+- Es gibt kein implizites `car_id=1` mehr; bei mehreren Fahrzeugen ist `--car-id` verpflichtend.
+- Multi-User bleibt weiterhin bewusst out of scope fuer die aktuelle Produktphase (siehe Abschnitt 2.2).
 
 ---
 

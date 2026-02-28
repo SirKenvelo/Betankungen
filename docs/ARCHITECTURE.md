@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-02-24
+**Stand:** 2026-02-28
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -12,13 +12,14 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 *   **Command-Exclusivity:** Das CLI-Interface folgt einem strikten Dispatcher-Modell. Pro Aufruf wird genau eine Hauptaktion (Add, List, Edit, Delete, Seed oder Stats) ausgeführt, was Fehlbedienungen verhindert.
 *   **Separation of Concerns (SoC):** Strikte Trennung zwischen Geschäftslogik (`Business Logic`) und Anzeige/Eingabe (`UI`). Die Fach-Units (z. B. `u_stations`) enthalten keine CLI-Parsing-Logik.
 *   **CLI-Pipeline (Parse -> Validate -> Dispatch):** Parsing bleibt auf Syntax/Normalisierung begrenzt (`u_cli_parse`), Policy-Validierung liegt zentral in `u_cli_validate`, und fachliche Ausfuehrung erfolgt erst im Orchestrator-Dispatch.
+*   **Car Context Layer:** `ResolveCarIdOrFail` ist die zentrale Instanz fuer die Car-Aufloesung. Das Regelwerk (0/1/>1 Cars, unknown/invalid `--car-id`) ist einmalig implementiert und wird in car-sensitiven Flows konsistent wiederverwendet.
 *   **Transaktions-Sicherheit:** Jede Datenbank-Mutation (Schreiben, Ändern, Löschen) wird als atomare Einheit behandelt. Schlägt ein Teil fehl, erfolgt ein vollständiger Rollback (All-or-Nothing).
 *   **Defensive Parsing:** "Garbage in, Garbage out" wird an der Systemgrenze verhindert. Eingaben werden über skalierte Integer-Funktionen (Fixed-Point) validiert, bevor sie die Fachlogik erreichen.
 
 ---
 
-## Aktueller Funktionsumfang (Stand 2026-02-22)
-Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
+## Aktueller Funktionsumfang (Stand 2026-02-28)
+Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 
 ### Infrastruktur & Tooling
 - [x] **XDG-Konformität:** Trennung von Daten (`~/.local/share/`) und Konfiguration (`~/.config/`).
@@ -43,6 +44,9 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
 - [x] **Stats:** `--stats fuelups` mit Volltank-Zyklus-Auswertung inkl. Kosten.
 - [x] **Schema v4:** Tabelle `fuelups` mit Foreign Keys auf `stations` und `cars` plus `missed_previous`.
 - [x] **Cars-Datenmodell:** `cars` fuehrt Start-KM/Start-Datum (`odometer_start_km`, `odometer_start_date`) als Domain-Startpunkt.
+- [x] **Car Context Resolver:** Zentraler Resolver `ResolveCarIdOrFail` als Single Source of Truth fuer Car-Auswahl (0/1/>1 Cars, unknown/invalid `car_id`).
+- [x] **Kein implizites Default `car_id=1` mehr:** Car-ID wird nicht geraten; bei mehreren Fahrzeugen ist `--car-id` verpflichtend.
+- [x] **Strict Car Scoping:** `--add fuelups`, `--list fuelups` und `--stats fuelups` laufen strikt car-gescoped (`WHERE car_id = :car_id`).
 - [x] **Car-sichere Stats:** Zyklusbildung trennt Daten strikt pro `car_id`.
 - [x] **Golden-Info-Reset:** `missed_previous` unterbricht bewusst laufende Zyklen in der Auswertung.
 - [x] **Domain-Policy-Matrix v1:** Abgedeckte Policy-Bloecke `P-001..P-002`, `P-010..P-013`, `P-020..P-022`, `P-030..P-032`, `P-040..P-041`, `P-050..P-051`, `P-060` (inkl. Car-Isolation-Guardrail `P-060/02`) und `P-070` (Cars-Delete-Guard bei Referenzen).
@@ -144,6 +148,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
 - [x] Domain-Policy-Matrix v1 als Regression-Fundament aufgebaut (inkl. Gap-/Date-/Cost-/Price-/Stats-Guards).
 - [x] Release-Zuordnung und fachliche Konsolidierung als 0.6.0-Rahmen dokumentiert (Hauptauto-Flow ohne Multi-Car-CLI-Ausbau).
 - [x] Migrations-/Domainregeln weiter konsolidiert (Immutability, Hard-Errors vs Warnings, Gap-Semantik fuer Stats).
+- [x] Anschluss in 0.7.x umgesetzt: Multi-Car-CLI mit Resolver und strict car scope.
 
 ### Langfristige Evolutionslinie
 - [x] `0.5.3`: Reife, Struktur, Vorbereitung.
@@ -151,7 +156,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]`.
 - [x] `0.5.6`: Help/Usage Rework (kurzer Fehlerpfad + strukturierter `--help`).
 - [x] `0.5.6-0`: Zwischenversion fuer zusaetzliche Unit (Parse/Validate-Entkopplung + Tests).
 - [x] `0.6.0`: Fahrzeug-Struktur konsolidiert (Hauptauto + FK als stabiles Fundament).
-- [ ] `0.7.x`: echtes Multi-Car-Feature.
+- [x] `0.7.x`: Multi-Car-CLI (Cars-CRUD + Car-Resolver + strict scoping fuer fuelups/list/stats, keine impliziten Defaults).
 - [ ] `0.8.x` (optional): Export/Output Contracts (CSV/JSON Versionierung, Schema/Headers, Escape-Regeln).
 - [ ] `1.0.0`: stabile Domain + Export + ausgereifte Stats.
 
@@ -163,7 +168,8 @@ Festgezurrte Detailentscheidungen (2026-02-09)
 ### Langfristig (v1.0.0+)
 - [ ] Daten-Interoperabilitaet: vollstaendiger CSV-Export fuer externe Analysen.
 - [ ] Batch-Import: Migrationstools für Altdaten aus Drittsystemen.
-- [ ] Vollstaendige CLI-Unterstuetzung fuer mehrere Fahrzeuge innerhalb einer Datenbank.
+- [x] Vollstaendige CLI-Unterstuetzung fuer mehrere Fahrzeuge innerhalb einer Datenbank (strict car scope, `--car-id` Pflicht bei >1 Cars).
+- [ ] Cross-Car/Fleet-Analytics als optionaler zusaetzlicher Report-Layer (ohne Aufweichen des strict car scope in bestehenden Commands).
 
 ---
 
