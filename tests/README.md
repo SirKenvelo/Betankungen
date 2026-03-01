@@ -82,7 +82,7 @@ Direktlauf:
   - 1 Car: ohne `--car-id` OK, mit gueltiger `--car-id` OK, mit ungueltiger `--car-id` Hard Error
   - >1 Cars: ohne `--car-id` Hard Error (`multiple cars found`), mit gueltiger `--car-id` strikt scoped
   - Cross-Car-Isolation: `--stats fuelups --car-id <id>` aggregiert niemals fremde Fahrzeuge
-  - Cars-Guards: `--edit/--delete cars` ohne `--car-id` required, unknown `--car-id` => P-002, `--car-id 0` => P-001
+  - Cars-Guards: `--edit/--delete cars` ohne `--car-id` required, unknown `--car-id` wird geblockt, `--car-id 0` wird als invalid input geblockt
 - 0-Cars-Test-Guard:
   - Der Resolver-Pfad fuer 0 Cars wird im Smoke explizit ueber einen Test-Trigger erzwungen (`trg_block_default_car_insert`) und danach per `DELETE FROM cars` validiert.
   - Bei Schema-/Migrationsaenderungen muss dieser Guard explizit mitgeprueft und bei Bedarf angepasst werden, damit Resolver-Hard-Errors fuer 0/1/>1 Cars stabil bleiben.

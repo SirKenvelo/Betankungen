@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p001__01__car_id_zero.sh
-# UPDATED: 2026-02-22
+# UPDATED: 2026-03-01
 # Policy P-001: explizites --car-id 0 muss als Hard Error abbrechen (kein Write).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -50,12 +50,12 @@ if [[ $RC -eq 0 ]]; then
   fail 'Erwartet Exitcode != 0 fuer --car-id 0, erhalten: 0'
 fi
 
-if ! grep -q 'P-001' "$ERR_FILE"; then
-  fail 'Erwartete P-001-Fehlermeldung nicht gefunden.'
+if ! grep -q 'car_id fehlt/ungueltig' "$ERR_FILE"; then
+  fail 'Erwarteter Kernhinweis fuer invalid car_id nicht gefunden.'
 fi
 
-if grep -q 'P-002' "$ERR_FILE"; then
-  fail 'Fehler wurde faelschlich als P-002 klassifiziert.'
+if grep -q 'unknown car_id=' "$ERR_FILE"; then
+  fail 'Fehler wurde faelschlich als unknown-car (statt invalid input) klassifiziert.'
 fi
 
 COUNT_AFTER="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM fuelups;")"

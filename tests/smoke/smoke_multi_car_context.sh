@@ -404,7 +404,7 @@ set +e
 "$APP_BIN" --db "$DB_MULTI" --edit cars --car-id 999999 >"$OUT" 2>"$ERR"
 RC=$?
 set -e
-if [[ $RC -eq 0 ]] || ! grep -q 'P-002: car_id existiert nicht (FK).' "$ERR"; then
+if [[ $RC -eq 0 ]] || ! grep -q 'car_id' "$ERR" || ! grep -q 'existiert nicht' "$ERR"; then
   fail 'Matrix Cars-Guard: --edit cars --car-id 999999 wurde nicht korrekt geblockt.'
 fi
 
@@ -412,7 +412,7 @@ set +e
 "$APP_BIN" --db "$DB_MULTI" --delete cars --car-id 999999 >"$OUT" 2>"$ERR"
 RC=$?
 set -e
-if [[ $RC -eq 0 ]] || ! grep -q 'P-002: car_id existiert nicht (FK).' "$ERR"; then
+if [[ $RC -eq 0 ]] || ! grep -q 'car_id' "$ERR" || ! grep -q 'existiert nicht' "$ERR"; then
   fail 'Matrix Cars-Guard: --delete cars --car-id 999999 wurde nicht korrekt geblockt.'
 fi
 
@@ -433,14 +433,14 @@ if [[ $RC -ne 0 ]] || ! grep -q 'OK: Car geloescht' "$OUT"; then
   fail 'Matrix Cars-Guard: --delete cars mit gueltiger car_id fehlgeschlagen.'
 fi
 
-# optional extra guard: --car-id 0 bleibt invalid (P-001)
+# optional extra guard: --car-id 0 bleibt invalid (input policy)
 set +e
 "$APP_BIN" --db "$DB_MULTI" --list fuelups --car-id 0 >"$OUT" 2>"$ERR"
 RC=$?
 set -e
-if [[ $RC -eq 0 ]] || ! grep -q 'P-001: car_id fehlt/ungueltig (erwartet > 0).' "$ERR"; then
-  fail 'Matrix Extra-Guard: --car-id 0 wurde nicht als P-001 geblockt.'
+if [[ $RC -eq 0 ]] || ! grep -q 'car_id fehlt/ungueltig' "$ERR"; then
+  fail 'Matrix Extra-Guard: --car-id 0 wurde nicht als invalid input geblockt.'
 fi
-printf '[OK] Matrix Cars-Guards: required/unknown/valid + P-001 fuer --car-id 0\n'
+printf '[OK] Matrix Cars-Guards: required/unknown/valid + invalid input fuer --car-id 0\n'
 
 printf '[OK] smoke_multi_car_context: komplette Resolver-/CLI-Matrix erfolgreich.\n'

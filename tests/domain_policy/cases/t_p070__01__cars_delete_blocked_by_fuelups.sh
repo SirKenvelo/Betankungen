@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p070__01__cars_delete_blocked_by_fuelups.sh
-# UPDATED: 2026-02-24
+# UPDATED: 2026-03-01
 # Policy P-070: cars delete darf bei vorhandenen fuelup-Referenzen nicht durchrutschen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -51,8 +51,8 @@ if [[ $RC -eq 0 ]]; then
   fail 'Erwartet Exitcode != 0 fuer delete cars bei Referenzen, erhalten: 0'
 fi
 
-if ! grep -q 'P-070' "$ERR_FILE"; then
-  fail 'Erwartete P-070-Fehlermeldung nicht gefunden.'
+if ! grep -q 'geloescht' "$ERR_FILE"; then
+  fail 'Erwarteter Kernhinweis auf blockiertes Loeschen nicht gefunden.'
 fi
 
 if ! grep -q 'fuelups vorhanden' "$ERR_FILE"; then
@@ -60,7 +60,7 @@ if ! grep -q 'fuelups vorhanden' "$ERR_FILE"; then
 fi
 
 if grep -q 'loeschen (y/N)' "$OUT_FILE"; then
-  fail 'Delete-Prompt erschien trotz P-070-Guard (Policy greift zu spaet).'
+  fail 'Delete-Prompt erschien trotz Delete-Guard (Policy greift zu spaet).'
 fi
 
 COUNT_CARS_AFTER="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM cars WHERE id = 1;")"

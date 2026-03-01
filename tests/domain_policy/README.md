@@ -1,5 +1,5 @@
 # Domain-Policy-Tests
-**Stand:** 2026-02-24
+**Stand:** 2026-03-01
 
 ## Inhalt
 - `cases/`: fokussierte Case-Dateien nach Policy-ID (`t_<policy>__<nn>__<kurzname>.*`, `.pas` oder `.sh`)
@@ -83,3 +83,8 @@
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`
 - Nur DBs erzeugen: `tests/domain_policy/helpers/build_test_dbs.sh`
+
+## Runtime-Text vs. Policy-ID
+- Policy-IDs (`P-001`, `P-002`, `P-060`, `P-070`, ...) sind der Engineering-Contract der Matrix.
+- Runtime-Fehlertexte sind der User-Contract und duerfen sprachlich angepasst werden, solange Semantik/Guardrail gleich bleibt.
+- Cases bevorzugen deshalb stabile Signale: Exitcode, Kernhinweis, Prompt-/No-Write-Guard und DB-State.

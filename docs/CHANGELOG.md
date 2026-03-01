@@ -9,6 +9,7 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 Ziel: Release-Reife des umgesetzten Multi-Car-Features (Konsistenz, Doku, Testhaertung).
 
 ### Changed
+- Tests/Domain-Policy: Commit-4-Konsistenzschritt umgesetzt (Runtime unveraendert): Smoke-/Policy-Checks fuer Car-Guards von fragilen Policy-String-Matches entkoppelt (stabile Kernsignale via Exitcode/Kernhinweis/No-Write/DB-State), Domain-Policy-Doku um klare Trennung `Policy-ID = Engineering-Contract` vs. `Runtime-Text = User-Contract` ergaenzt. (2026-03-01)
 - Tests/Docs: Smoke-Feinschliff fuer Commit 3 umgesetzt: CSV-Scope-Assertions in `tests/smoke/smoke_cars_crud.sh` und `tests/smoke/smoke_multi_car_context.sh` mit TODOs fuer spaeteres feldbasiertes Token-Parsing vorbereitet (ohne Verhaltensaenderung), plus 0-Cars-Trigger-/Migrations-Guard explizit in `tests/README.md` und `docs/ARCHITECTURE.md` dokumentiert. (2026-03-01)
 - Docs: `docs/README.md` und `docs/BENUTZERHANDBUCH.md` auf 0.7.x-Ist-Zustand synchronisiert (Roadmap-Kurzstand korrigiert, Multi-Car-Strategie/Resolver-Regelwerk zentral dokumentiert, kein implizites `car_id=1`). (2026-02-28)
 - Docs: `docs/ARCHITECTURE.md`, `docs/STATUS.md` und `docs/VISION.md` auf den Ist-Zustand synchronisiert: Multi-Car-CLI als umgesetzt markiert (Resolver, strict car scope, kein implizites `car_id=1`), 0.7.x auf Release-Reife-Fokus geschwenkt und Vision um einen Reality-Check erweitert. (2026-02-28)

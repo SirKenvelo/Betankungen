@@ -122,16 +122,16 @@ set -e
 if [[ $RC -eq 0 ]]; then
   fail '--delete cars mit fuelups wurde faelschlich erlaubt.'
 fi
-if ! grep -q 'P-070' "$ERR_DEL_BLOCK"; then
-  fail 'Delete-Guard meldet nicht P-070.'
+if ! grep -q 'geloescht' "$ERR_DEL_BLOCK" || ! grep -q 'fuelups' "$ERR_DEL_BLOCK"; then
+  fail 'Delete-Guard meldet keinen stabilen Kernhinweis auf blockiertes Loeschen bei fuelups.'
 fi
 if grep -q 'loeschen (y/N)' "$OUT_DEL_BLOCK"; then
-  fail 'Delete-Guard greift zu spaet (Prompt erschien trotz P-070).'
+  fail 'Delete-Guard greift zu spaet (Prompt erschien trotz Guard).'
 fi
 if [[ "$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM cars WHERE id = 1;")" != "1" ]]; then
   fail 'Delete-Guard verletzt: car_id=1 wurde trotz Referenzen geloescht.'
 fi
-printf '[OK] Cars CRUD: delete mit fuelups -> P-070-Guard\n'
+printf '[OK] Cars CRUD: delete mit fuelups -> Guard aktiv\n'
 
 RES_DB="$TMP_DIR/fuelups_scope.db"
 OUT_SCOPE_ADD_STATION="$TMP_DIR/scope_add_station.out"

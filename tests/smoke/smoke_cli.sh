@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-02-28
+# UPDATED: 2026-03-01
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -183,8 +183,8 @@ print_plan() {
     printf '[LIST] (Cars) --stats fuelups --car-id <id> ist strikt car-scoped\n'
     printf '[LIST] (Cars) --edit cars ohne --car-id -> Fehler\n'
     printf '[LIST] (Cars) --delete cars ohne --car-id -> Fehler\n'
-    printf '[LIST] (Cars) --edit cars --car-id 999 -> Fehler (P-002)\n'
-    printf '[LIST] (Cars) --delete cars --car-id 999 -> Fehler (P-002)\n'
+    printf '[LIST] (Cars) --edit cars --car-id 999 -> Fehler (unknown car)\n'
+    printf '[LIST] (Cars) --delete cars --car-id 999 -> Fehler (unknown car)\n'
     printf '[LIST] (Cars) --delete cars mit fuelups -> geblockt\n'
   fi
 
@@ -1003,10 +1003,10 @@ test_cars_edit_missing_id_fails() {
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'P-002: car_id existiert nicht (FK).' "$err"; then
-    printf '[OK] Cars: --edit cars --car-id 999 -> Fehler (P-002)\n'
+  if [[ $rc -ne 0 ]] && grep -q 'car_id' "$err" && grep -q 'existiert nicht' "$err"; then
+    printf '[OK] Cars: --edit cars --car-id 999 -> Fehler (unknown car)\n'
   else
-    printf '[FAIL] Cars: --edit cars --car-id 999 -> Fehler (P-002)\n'
+    printf '[FAIL] Cars: --edit cars --car-id 999 -> Fehler (unknown car)\n'
     add_fail
   fi
 }
@@ -1023,10 +1023,10 @@ test_cars_delete_missing_id_fails() {
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'P-002: car_id existiert nicht (FK).' "$err"; then
-    printf '[OK] Cars: --delete cars --car-id 999 -> Fehler (P-002)\n'
+  if [[ $rc -ne 0 ]] && grep -q 'car_id' "$err" && grep -q 'existiert nicht' "$err"; then
+    printf '[OK] Cars: --delete cars --car-id 999 -> Fehler (unknown car)\n'
   else
-    printf '[FAIL] Cars: --delete cars --car-id 999 -> Fehler (P-002)\n'
+    printf '[FAIL] Cars: --delete cars --car-id 999 -> Fehler (unknown car)\n'
     add_fail
   fi
 }
@@ -1059,7 +1059,7 @@ SQL
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'P-070: Fahrzeug kann nicht geloescht werden (fuelups vorhanden).' "$err"; then
+  if [[ $rc -ne 0 ]] && grep -q 'geloescht' "$err" && grep -q 'fuelups vorhanden' "$err"; then
     printf '[OK] Cars: --delete cars mit fuelups -> geblockt\n'
   else
     printf '[FAIL] Cars: --delete cars mit fuelups -> geblockt\n'
