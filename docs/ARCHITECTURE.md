@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-02-28
+**Stand:** 2026-03-01
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -47,6 +47,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **Car Context Resolver:** Zentraler Resolver `ResolveCarIdOrFail` als Single Source of Truth fuer Car-Auswahl (0/1/>1 Cars, unknown/invalid `car_id`).
 - [x] **Kein implizites Default `car_id=1` mehr:** Car-ID wird nicht geraten; bei mehreren Fahrzeugen ist `--car-id` verpflichtend.
 - [x] **Strict Car Scoping:** `--add fuelups`, `--list fuelups` und `--stats fuelups` laufen strikt car-gescoped (`WHERE car_id = :car_id`).
+- [x] **0-Cars Architektur-Guard (Smoke):** Der 0-Cars-Pfad wird in der Smoke-Suite explizit erzwungen (Test-Trigger + leere `cars`) und prueft konsistente Resolver-Hard-Errors fuer 0/1/>1 Cars; bei Schema-/Migrationsaenderungen ist dieser Guard verpflichtend mitzudenken.
 - [x] **Car-sichere Stats:** Zyklusbildung trennt Daten strikt pro `car_id`.
 - [x] **Golden-Info-Reset:** `missed_previous` unterbricht bewusst laufende Zyklen in der Auswertung.
 - [x] **Domain-Policy-Matrix v1:** Abgedeckte Policy-Bloecke `P-001..P-002`, `P-010..P-013`, `P-020..P-022`, `P-030..P-032`, `P-040..P-041`, `P-050..P-051`, `P-060` (inkl. Car-Isolation-Guardrail `P-060/02`) und `P-070` (Cars-Delete-Guard bei Referenzen).

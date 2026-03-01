@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-02-28
+# UPDATED: 2026-03-01
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -327,6 +327,9 @@ set +e
 "$APP_BIN" --db "$DB_MULTI" --stats fuelups --csv --car-id "$CAR_A_ID" >"$OUT_STATS_A" 2>"$ERR_STATS_A"
 RC=$?
 set -e
+# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
+# Aktuell bleibt der Vollzeilen-Check bewusst stabil, spaeter gezielt auf CSV-Felder
+# (z. B. dist_km, liters_ml, total_cents) umstellen.
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^1,100,50000,5000,8000$' "$OUT_STATS_A" ||
    grep -q '^1,100,55000,5500,9000$' "$OUT_STATS_A"; then
@@ -337,6 +340,7 @@ set +e
 "$APP_BIN" --db "$DB_MULTI" --stats fuelups --csv --car-id "$CAR_B_ID" >"$OUT_STATS_B" 2>"$ERR_STATS_B"
 RC=$?
 set -e
+# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^1,100,55000,5500,9000$' "$OUT_STATS_B" ||
    grep -q '^1,100,50000,5000,8000$' "$OUT_STATS_B"; then

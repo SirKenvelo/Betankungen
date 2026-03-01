@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cars_crud.sh
-# UPDATED: 2026-02-27
+# UPDATED: 2026-03-01
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
 # und Car-Resolver-Scope fuer fuelups add/list/stats.
 
@@ -298,6 +298,9 @@ set +e
 "$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id 1 >"$OUT_SCOPE_STATS_CAR1" 2>"$ERR_SCOPE_STATS_CAR1"
 RC=$?
 set -e
+# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
+# Aktuell bleibt der Vollzeilen-Check bewusst stabil, spaeter gezielt auf CSV-Felder
+# (z. B. dist_km, liters_ml, total_cents) umstellen.
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR1" ||
    grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR1"; then
@@ -308,6 +311,7 @@ set +e
 "$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id "$CAR2_ID" >"$OUT_SCOPE_STATS_CAR2" 2>"$ERR_SCOPE_STATS_CAR2"
 RC=$?
 set -e
+# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR2" ||
    grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR2"; then

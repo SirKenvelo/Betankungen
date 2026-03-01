@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-02-28
+**Stand:** 2026-03-01
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -9,6 +9,7 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 Ziel: Release-Reife des umgesetzten Multi-Car-Features (Konsistenz, Doku, Testhaertung).
 
 ### Changed
+- Tests/Docs: Smoke-Feinschliff fuer Commit 3 umgesetzt: CSV-Scope-Assertions in `tests/smoke/smoke_cars_crud.sh` und `tests/smoke/smoke_multi_car_context.sh` mit TODOs fuer spaeteres feldbasiertes Token-Parsing vorbereitet (ohne Verhaltensaenderung), plus 0-Cars-Trigger-/Migrations-Guard explizit in `tests/README.md` und `docs/ARCHITECTURE.md` dokumentiert. (2026-03-01)
 - Docs: `docs/README.md` und `docs/BENUTZERHANDBUCH.md` auf 0.7.x-Ist-Zustand synchronisiert (Roadmap-Kurzstand korrigiert, Multi-Car-Strategie/Resolver-Regelwerk zentral dokumentiert, kein implizites `car_id=1`). (2026-02-28)
 - Docs: `docs/ARCHITECTURE.md`, `docs/STATUS.md` und `docs/VISION.md` auf den Ist-Zustand synchronisiert: Multi-Car-CLI als umgesetzt markiert (Resolver, strict car scope, kein implizites `car_id=1`), 0.7.x auf Release-Reife-Fokus geschwenkt und Vision um einen Reality-Check erweitert. (2026-02-28)
 - Tests/Smoke: Finale Resolver-/CLI-Matrix als dedizierte Suite ergaenzt (`tests/smoke/smoke_multi_car_context.sh` + Wrapper `tests/smoke_multi_car_context.sh`) mit 0/1/>1-Car-Faellen fuer `--add/--list/--stats fuelups`, scoped Output-Checks, Cross-Car-Isolation sowie Guards fuer `--edit/--delete cars` inkl. `--car-id 0` (`P-001`). (2026-02-28)
