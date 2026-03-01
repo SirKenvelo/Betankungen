@@ -8,9 +8,16 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 0.8.x
 Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 
+### Sprint / Commit References
+- S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
+
 ### Changed
-- Tests/Smoke: `tests/smoke/smoke_multi_car_context.sh` auf feldbasierte CSV-Assertions fuer Multi-Car-Stats umgestellt (Helper-Sourcing, Header-/Spalten-Checks auf `car_id` und `fueled_at`, row-basierte Scope-Validierung pro Car-ID, Foreign-Row-Guards). (2026-03-01)
-- Tests/Helpers: `tests/helpers/csv.sh` Header-Parser fuer `set -e` stabilisiert (`((i += 1))` statt `((i++))`). (2026-03-01)
+- [S1C1/4] Tests/Smoke: `tests/smoke/smoke_multi_car_context.sh` auf feldbasierte CSV-Assertions fuer Multi-Car-Stats umgestellt (Helper-Sourcing, Header-/Spalten-Checks auf `car_id` und `fueled_at`, row-basierte Scope-Validierung pro Car-ID, Foreign-Row-Guards). (2026-03-01)
+- [S1C1/4] Tests/Helpers: `tests/helpers/csv.sh` Header-Parser fuer `set -e` stabilisiert (`((i += 1))` statt `((i++))`). (2026-03-01)
+- [S1C1/4] Tests/Helpers: `csv_assert_has_cols` erweitert, damit fehlende Pflichtspalten die vorhandene Header-Liste im Fehlertext ausgeben (`have: ...`) fuer schnellere Contract-Diagnose. (2026-03-01)
+- [S1C1/4] Tests/Smoke: Cross-Car-Isolation-Guardrail in `tests/smoke/smoke_multi_car_context.sh` geschaerft (`ROWS_* == DB_COUNT_*` statt Mindestanzahl), damit CSV-Output strikt gegen DB-Realitaet validiert wird. (2026-03-01)
+- [S1C1/4] Tests/Smoke: Multi-Car-Stats-Assertions auf den aktuellen Aggregat-CSV-Contract ausgerichtet (`idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents` inkl. feldbasierter Wertpruefung je Car) und Isolation auf `stats_rows = fuelups_count - 1` validiert. (2026-03-01)
+- [S1C1/4] Tests/Helpers: `tests/helpers/assert.sh` mit finalem Newline am Dateiende vereinheitlicht. (2026-03-01)
 
 ### Tooling / Assistance
 - Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)

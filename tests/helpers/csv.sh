@@ -52,7 +52,15 @@ csv_assert_has_cols() {
   for col in "$@"; do
     csv_has_col "$col" || missing+=("$col")
   done
-  ((${#missing[@]}==0)) || _fail "CSV missing columns: ${missing[*]}"
+  if ((${#missing[@]}!=0)); then
+    local have=""
+    if ((${#CSV_HEADER[@]}!=0)); then
+      have="${CSV_HEADER[*]}"
+    else
+      have="<empty>"
+    fi
+    _fail "CSV missing columns: ${missing[*]} (have: ${have})"
+  fi
 }
 
 # Read Nth data row (1 = first data row after header) into array variable name.

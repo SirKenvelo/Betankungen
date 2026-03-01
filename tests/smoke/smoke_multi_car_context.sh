@@ -340,32 +340,19 @@ fi
 
 # CSV scoped checks (feldbasiert)
 csv_read_header "$OUT_STATS_A"
-csv_assert_has_cols car_id fueled_at
+csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_A="$(($(wc -l < "$OUT_STATS_A") - 1))"
-(( ROWS_A >= 1 )) || fail "Matrix >1 Cars: stats carA: expected >=1 data row, got $ROWS_A"
+(( ROWS_A == 1 )) || fail "Matrix >1 Cars: stats carA: expected 1 data row, got $ROWS_A"
 
-found_0201=0
-found_0202=0
-found_0203=0
+declare -a R_A=()
+csv_read_row "$OUT_STATS_A" 1 R_A
 
-for ((i=1; i<=ROWS_A; i++)); do
-  declare -a R=()
-  csv_read_row "$OUT_STATS_A" "$i" R
-
-  csv_assert_eq R car_id "$CAR_A_ID"
-
-  ts="$(csv_get R fueled_at)"
-  [[ -n "$ts" ]] || fail "Matrix >1 Cars: stats carA: empty fueled_at in row $i"
-
-  if [[ "$ts" == "2026-02-01 08:00:00" ]]; then found_0201=1; fi
-  if [[ "$ts" == "2026-02-02 08:00:00" ]]; then found_0202=1; fi
-  if [[ "$ts" == "2026-02-03 08:00:00" ]]; then found_0203=1; fi
-done
-
-(( found_0201 == 1 )) || fail "Matrix >1 Cars: stats carA: missing fueled_at 2026-02-01 08:00:00"
-(( found_0202 == 1 )) || fail "Matrix >1 Cars: stats carA: missing fueled_at 2026-02-02 08:00:00"
-(( found_0203 == 0 )) || fail "Matrix >1 Cars: stats carA: contains foreign fueled_at 2026-02-03 08:00:00"
+csv_assert_eq R_A idx "1"
+csv_assert_eq R_A dist_km "100"
+csv_assert_eq R_A liters_ml "50000"
+csv_assert_eq R_A avg_l_per_100km_x100 "5000"
+csv_assert_eq R_A total_cents "8000"
 
 set +e
 "$APP_BIN" --db "$DB_MULTI" --stats fuelups --csv --car-id "$CAR_B_ID" >"$OUT_STATS_B" 2>"$ERR_STATS_B"
@@ -376,36 +363,25 @@ if [[ $RC -ne 0 ]]; then
 fi
 
 csv_read_header "$OUT_STATS_B"
-csv_assert_has_cols car_id fueled_at
+csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_B="$(($(wc -l < "$OUT_STATS_B") - 1))"
-(( ROWS_B >= 1 )) || fail "Matrix >1 Cars: stats carB: expected >=1 data row, got $ROWS_B"
+(( ROWS_B == 1 )) || fail "Matrix >1 Cars: stats carB: expected 1 data row, got $ROWS_B"
 
-found_0203=0
-found_0204=0
-found_0201=0
+declare -a R_B=()
+csv_read_row "$OUT_STATS_B" 1 R_B
 
-for ((i=1; i<=ROWS_B; i++)); do
-  declare -a R=()
-  csv_read_row "$OUT_STATS_B" "$i" R
-
-  csv_assert_eq R car_id "$CAR_B_ID"
-
-  ts="$(csv_get R fueled_at)"
-  [[ -n "$ts" ]] || fail "Matrix >1 Cars: stats carB: empty fueled_at in row $i"
-
-  if [[ "$ts" == "2026-02-03 08:00:00" ]]; then found_0203=1; fi
-  if [[ "$ts" == "2026-02-04 08:00:00" ]]; then found_0204=1; fi
-  if [[ "$ts" == "2026-02-01 08:00:00" ]]; then found_0201=1; fi
-done
-
-(( found_0203 == 1 )) || fail "Matrix >1 Cars: stats carB: missing fueled_at 2026-02-03 08:00:00"
-(( found_0204 == 1 )) || fail "Matrix >1 Cars: stats carB: missing fueled_at 2026-02-04 08:00:00"
-(( found_0201 == 0 )) || fail "Matrix >1 Cars: stats carB: contains foreign fueled_at 2026-02-01 08:00:00"
+csv_assert_eq R_B idx "1"
+csv_assert_eq R_B dist_km "100"
+csv_assert_eq R_B liters_ml "55000"
+csv_assert_eq R_B avg_l_per_100km_x100 "5500"
+csv_assert_eq R_B total_cents "9000"
 
 DB_COUNT_A="$(sqlite3 "$DB_MULTI" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR_A_ID;")"
 DB_COUNT_B="$(sqlite3 "$DB_MULTI" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR_B_ID;")"
-if [[ "$DB_COUNT_A" != "2" || "$DB_COUNT_B" != "2" || "$ROWS_A" -lt "1" || "$ROWS_B" -lt "1" ]]; then
+EXP_ROWS_A="$((DB_COUNT_A - 1))"
+EXP_ROWS_B="$((DB_COUNT_B - 1))"
+if [[ "$ROWS_A" != "$EXP_ROWS_A" || "$ROWS_B" != "$EXP_ROWS_B" ]]; then
   fail 'Matrix >1 Cars: Cross-Car-Isolation Check ist nicht konsistent (DB vs. Stats).'
 fi
 printf '[OK] Matrix >1 Cars: scoped add/list/stats + Cross-Car-Isolation\n'
