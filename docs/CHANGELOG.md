@@ -9,10 +9,11 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 
 ### Changed
-- Keine Eintraege.
+- Tests/Smoke: `tests/smoke/smoke_multi_car_context.sh` auf feldbasierte CSV-Assertions fuer Multi-Car-Stats umgestellt (Helper-Sourcing, Header-/Spalten-Checks auf `car_id` und `fueled_at`, row-basierte Scope-Validierung pro Car-ID, Foreign-Row-Guards). (2026-03-01)
+- Tests/Helpers: `tests/helpers/csv.sh` Header-Parser fuer `set -e` stabilisiert (`((i += 1))` statt `((i++))`). (2026-03-01)
 
 ### Tooling / Assistance
-- Keine Eintraege.
+- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)
 
 ## 0.7.0 – 2026-03-01
 

@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+
+# Helpers (Sprint 1)
+# shellcheck source=tests/helpers/assert.sh
+source "$ROOT_DIR/tests/helpers/assert.sh"
+# shellcheck source=tests/helpers/csv.sh
+source "$ROOT_DIR/tests/helpers/csv.sh"
+
 # smoke_multi_car_context.sh
 # UPDATED: 2026-03-01
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
-
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 APP_BIN="$ROOT_DIR/bin/Betankungen"
 
 TMP_DIR="$(mktemp -d /tmp/betankungen_smoke_multi_car_context_XXXXXX)"
@@ -327,31 +334,78 @@ set +e
 "$APP_BIN" --db "$DB_MULTI" --stats fuelups --csv --car-id "$CAR_A_ID" >"$OUT_STATS_A" 2>"$ERR_STATS_A"
 RC=$?
 set -e
-# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
-# Aktuell bleibt der Vollzeilen-Check bewusst stabil, spaeter gezielt auf CSV-Felder
-# (z. B. dist_km, liters_ml, total_cents) umstellen.
-if [[ $RC -ne 0 ]] ||
-   ! grep -q '^1,100,50000,5000,8000$' "$OUT_STATS_A" ||
-   grep -q '^1,100,55000,5500,9000$' "$OUT_STATS_A"; then
-  fail 'Matrix >1 Cars: stats scope fuer carA ist nicht korrekt.'
+if [[ $RC -ne 0 ]]; then
+  fail "Matrix >1 Cars: stats scope fuer carA: command failed (rc=$RC)."
 fi
+
+# CSV scoped checks (feldbasiert)
+csv_read_header "$OUT_STATS_A"
+csv_assert_has_cols car_id fueled_at
+
+ROWS_A="$(($(wc -l < "$OUT_STATS_A") - 1))"
+(( ROWS_A >= 1 )) || fail "Matrix >1 Cars: stats carA: expected >=1 data row, got $ROWS_A"
+
+found_0201=0
+found_0202=0
+found_0203=0
+
+for ((i=1; i<=ROWS_A; i++)); do
+  declare -a R=()
+  csv_read_row "$OUT_STATS_A" "$i" R
+
+  csv_assert_eq R car_id "$CAR_A_ID"
+
+  ts="$(csv_get R fueled_at)"
+  [[ -n "$ts" ]] || fail "Matrix >1 Cars: stats carA: empty fueled_at in row $i"
+
+  if [[ "$ts" == "2026-02-01 08:00:00" ]]; then found_0201=1; fi
+  if [[ "$ts" == "2026-02-02 08:00:00" ]]; then found_0202=1; fi
+  if [[ "$ts" == "2026-02-03 08:00:00" ]]; then found_0203=1; fi
+done
+
+(( found_0201 == 1 )) || fail "Matrix >1 Cars: stats carA: missing fueled_at 2026-02-01 08:00:00"
+(( found_0202 == 1 )) || fail "Matrix >1 Cars: stats carA: missing fueled_at 2026-02-02 08:00:00"
+(( found_0203 == 0 )) || fail "Matrix >1 Cars: stats carA: contains foreign fueled_at 2026-02-03 08:00:00"
 
 set +e
 "$APP_BIN" --db "$DB_MULTI" --stats fuelups --csv --car-id "$CAR_B_ID" >"$OUT_STATS_B" 2>"$ERR_STATS_B"
 RC=$?
 set -e
-# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
-if [[ $RC -ne 0 ]] ||
-   ! grep -q '^1,100,55000,5500,9000$' "$OUT_STATS_B" ||
-   grep -q '^1,100,50000,5000,8000$' "$OUT_STATS_B"; then
-  fail 'Matrix >1 Cars: stats scope fuer carB ist nicht korrekt.'
+if [[ $RC -ne 0 ]]; then
+  fail "Matrix >1 Cars: stats scope fuer carB: command failed (rc=$RC)."
 fi
+
+csv_read_header "$OUT_STATS_B"
+csv_assert_has_cols car_id fueled_at
+
+ROWS_B="$(($(wc -l < "$OUT_STATS_B") - 1))"
+(( ROWS_B >= 1 )) || fail "Matrix >1 Cars: stats carB: expected >=1 data row, got $ROWS_B"
+
+found_0203=0
+found_0204=0
+found_0201=0
+
+for ((i=1; i<=ROWS_B; i++)); do
+  declare -a R=()
+  csv_read_row "$OUT_STATS_B" "$i" R
+
+  csv_assert_eq R car_id "$CAR_B_ID"
+
+  ts="$(csv_get R fueled_at)"
+  [[ -n "$ts" ]] || fail "Matrix >1 Cars: stats carB: empty fueled_at in row $i"
+
+  if [[ "$ts" == "2026-02-03 08:00:00" ]]; then found_0203=1; fi
+  if [[ "$ts" == "2026-02-04 08:00:00" ]]; then found_0204=1; fi
+  if [[ "$ts" == "2026-02-01 08:00:00" ]]; then found_0201=1; fi
+done
+
+(( found_0203 == 1 )) || fail "Matrix >1 Cars: stats carB: missing fueled_at 2026-02-03 08:00:00"
+(( found_0204 == 1 )) || fail "Matrix >1 Cars: stats carB: missing fueled_at 2026-02-04 08:00:00"
+(( found_0201 == 0 )) || fail "Matrix >1 Cars: stats carB: contains foreign fueled_at 2026-02-01 08:00:00"
 
 DB_COUNT_A="$(sqlite3 "$DB_MULTI" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR_A_ID;")"
 DB_COUNT_B="$(sqlite3 "$DB_MULTI" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR_B_ID;")"
-ROW_COUNT_A="$(grep -Ec '^[0-9]+,' "$OUT_STATS_A" || true)"
-ROW_COUNT_B="$(grep -Ec '^[0-9]+,' "$OUT_STATS_B" || true)"
-if [[ "$DB_COUNT_A" != "2" || "$DB_COUNT_B" != "2" || "$ROW_COUNT_A" != "1" || "$ROW_COUNT_B" != "1" ]]; then
+if [[ "$DB_COUNT_A" != "2" || "$DB_COUNT_B" != "2" || "$ROWS_A" -lt "1" || "$ROWS_B" -lt "1" ]]; then
   fail 'Matrix >1 Cars: Cross-Car-Isolation Check ist nicht konsistent (DB vs. Stats).'
 fi
 printf '[OK] Matrix >1 Cars: scoped add/list/stats + Cross-Car-Isolation\n'
