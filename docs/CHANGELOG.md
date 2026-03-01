@@ -5,10 +5,22 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-0.7.x
-Ziel: Release-Reife des umgesetzten Multi-Car-Features (Konsistenz, Doku, Testhaertung).
+0.8.x
+Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 
 ### Changed
+- Keine Eintraege.
+
+### Tooling / Assistance
+- Keine Eintraege.
+
+## 0.7.0 – 2026-03-01
+
+### Changed
+- Meta: `src/Betankungen.lpr` auf `APP_VERSION 0.7.0` angehoben (Release-Stand ohne Sprint-Suffix). (2026-03-01)
+- Docs: Releaseabschluss 0.7.0 im Changelog durchgefuehrt; `[Unreleased]` auf Zielversion `0.8.x` vorbereitet. (2026-03-01)
+- Docs: `docs/STATUS.md` und `docs/README.md` auf 0.7.0-Abschluss und naechsten Fokus `0.8.x` aktualisiert. (2026-03-01)
+- Meta: Finales Release-Archiv `Betankungen_0_7_0.tar` per `scripts/kpr.sh --note "Release 0.7.0 final"` erzeugt und in `.releases/release_log.json` protokolliert (`sha256=bb4769ec0b63c6299c3bfd6cac2f93c57df9efc50503ad87d2a02179ce1466ef`). (2026-03-01)
 - Tests/Domain-Policy: Commit-4-Konsistenzschritt umgesetzt (Runtime unveraendert): Smoke-/Policy-Checks fuer Car-Guards von fragilen Policy-String-Matches entkoppelt (stabile Kernsignale via Exitcode/Kernhinweis/No-Write/DB-State), Domain-Policy-Doku um klare Trennung `Policy-ID = Engineering-Contract` vs. `Runtime-Text = User-Contract` ergaenzt. (2026-03-01)
 - Tests/Docs: Smoke-Feinschliff fuer Commit 3 umgesetzt: CSV-Scope-Assertions in `tests/smoke/smoke_cars_crud.sh` und `tests/smoke/smoke_multi_car_context.sh` mit TODOs fuer spaeteres feldbasiertes Token-Parsing vorbereitet (ohne Verhaltensaenderung), plus 0-Cars-Trigger-/Migrations-Guard explizit in `tests/README.md` und `docs/ARCHITECTURE.md` dokumentiert. (2026-03-01)
 - Docs: `docs/README.md` und `docs/BENUTZERHANDBUCH.md` auf 0.7.x-Ist-Zustand synchronisiert (Roadmap-Kurzstand korrigiert, Multi-Car-Strategie/Resolver-Regelwerk zentral dokumentiert, kein implizites `car_id=1`). (2026-02-28)

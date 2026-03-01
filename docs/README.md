@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-02-28
+**Stand:** 2026-03-01
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -61,7 +61,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.5.6`: Help/Usage Rework (abgeschlossen)
 - `0.5.6-0`: Zwischenversion fuer die Einfuehrung einer zusaetzlichen Unit (abgeschlossen)
 - `0.6.0`: Fahrzeug-Domain konsolidieren (abgeschlossen)
-- `0.7.x`: Multi-Car-CLI (Cars-CRUD + Resolver + strict car scoping) - Fokus: Release-Reife
+- `0.7.0`: Multi-Car-CLI (Cars-CRUD + Resolver + strict car scoping) freigegeben
+- `0.8.x`: Export-/Output-Contracts (CSV/JSON) und Konsistenz-Haertung (naechster Fokus)
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.

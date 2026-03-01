@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-02-28
-**Zielversion:** 0.7.x
+**Stand:** 2026-03-01
+**Zielversion:** 0.8.x
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -141,13 +141,18 @@ Bereits erledigt:
 - Erreicht: Migrations-/Domainregeln und Policy-Haertegrade (Hard Error vs Warning+Confirm) als konsistenter Rahmen dokumentiert und getestet.
 - Nicht-Ziele 0.6.0 eingehalten: keine GUI, keine Web-API, kein Subcommand-Umbau, kein Overengineering.
 
-## Roadmap 0.7.x – Multi-Car CLI (in Arbeit / Sprint 4: Release-Reife)
+## Roadmap 0.7.x – Multi-Car CLI (abgeschlossen / 0.7.0 freigegeben)
 - Cars-CRUD: umgesetzt.
 - Resolver + kein implizites Default: umgesetzt.
 - Strict Scoping fuer `--add/--list fuelups` und `--stats fuelups`: umgesetzt.
 - Tests/Smokes fuer Resolver-Matrix und Cross-Car-Isolation: umgesetzt.
-- Docs/Vision/Status-Sync auf Ist-Zustand: in Arbeit (Sprint 4).
-- Optional: Policy-ID-Strategie fuer Resolver-/Runtime-Errors reviewen.
+- Docs/Vision/Status-Sync auf Ist-Zustand: umgesetzt.
+- Konsistenzschritt Policy-Contract vs. Runtime-Text: umgesetzt (Tests/Doku entkoppelt, Runtime unveraendert).
+
+## Roadmap 0.8.x – Export-/Contract-Phase (naechster Fokus)
+- Feldbasierte CSV-Assertions (Token-Parsing) finalisieren.
+- Export-/Output-Contracts fuer CSV/JSON definieren (Versionierung/Headers/Escape-Regeln).
+- Release-Haertung der Testmatrix auf Contract-Ebene.
 
 ## Entscheidungen 0.5.0 (festgezurrt, 2026-02-09)
 - Offene Grenzen bei Filtern sind datengetrieben: nur `--from` => `to = MAX(fueled_at)`, nur `--to` => `from = MIN(fueled_at)` (kein "heute").
@@ -180,6 +185,8 @@ Bereits erledigt:
 - 0.6.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`).
 - 0.6.0 freigegeben (Fahrzeug-Domain konsolidiert inkl. Domain-Policy-Matrix v1 und Car-Isolation-Regression).
 - Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
-- 0.7.x: Multi-Car-CLI ist funktional umgesetzt; aktueller Fokus liegt auf Release-Reife (Doku-Konsistenz, Test-Haertung, Abschluss-Polish).
+- 0.7.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`, `sha256=bb4769ec0b63c6299c3bfd6cac2f93c57df9efc50503ad87d2a02179ce1466ef`).
+- 0.7.0 freigegeben (Multi-Car-CLI inkl. Resolver, strict car scope und finaler Matrix-Haertung).
+- Naechster Fokus: 0.8.x (Export-/Output-Contracts und Contract-Tests).
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar
