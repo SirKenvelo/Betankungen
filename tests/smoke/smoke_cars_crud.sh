@@ -2,12 +2,18 @@
 set -euo pipefail
 
 # smoke_cars_crud.sh
-# UPDATED: 2026-03-01
+# UPDATED: 2026-03-02
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
 # und Car-Resolver-Scope fuer fuelups add/list/stats.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 APP_BIN="$ROOT_DIR/bin/Betankungen"
+
+# Helpers (Sprint 1)
+# shellcheck source=tests/helpers/assert.sh
+source "$ROOT_DIR/tests/helpers/assert.sh"
+# shellcheck source=tests/helpers/csv.sh
+source "$ROOT_DIR/tests/helpers/csv.sh"
 
 TMP_DIR="$(mktemp -d /tmp/betankungen_smoke_cars_crud_XXXXXX)"
 DB_PATH="$TMP_DIR/cars_crud.db"
@@ -298,25 +304,75 @@ set +e
 "$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id 1 >"$OUT_SCOPE_STATS_CAR1" 2>"$ERR_SCOPE_STATS_CAR1"
 RC=$?
 set -e
-# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
-# Aktuell bleibt der Vollzeilen-Check bewusst stabil, spaeter gezielt auf CSV-Felder
-# (z. B. dist_km, liters_ml, total_cents) umstellen.
-if [[ $RC -ne 0 ]] ||
-   ! grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR1" ||
-   grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR1"; then
-  fail 'Scope-Smoke: --stats fuelups --csv --car-id 1 ist nicht strikt car-scoped.'
+if [[ $RC -ne 0 ]]; then
+  fail 'Scope-Smoke: --stats fuelups --csv --car-id 1 fehlgeschlagen.'
 fi
+
+csv_read_header "$OUT_SCOPE_STATS_CAR1"
+csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+
+ROWS_CAR1="$(($(wc -l < "$OUT_SCOPE_STATS_CAR1") - 1))"
+DB_COUNT_CAR1="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = 1;")"
+EXP_ROWS_CAR1="$((DB_COUNT_CAR1 - 1))"
+if [[ "$ROWS_CAR1" != "$EXP_ROWS_CAR1" ]]; then
+  fail "Scope-Smoke: --stats fuelups --csv --car-id 1: expected $EXP_ROWS_CAR1 row(s), got $ROWS_CAR1"
+fi
+(( EXP_ROWS_CAR1 >= 1 )) || fail 'Scope-Smoke: --stats fuelups --csv --car-id 1: keine Intervallzeile vorhanden.'
+
+declare -a R1=()
+csv_read_row "$OUT_SCOPE_STATS_CAR1" 1 R1
+csv_assert_eq R1 idx "1"
+csv_assert_int_ge R1 dist_km 0
+csv_assert_int_ge R1 liters_ml 0
+csv_assert_int_ge R1 avg_l_per_100km_x100 0
+csv_assert_int_ge R1 total_cents 0
+
+EXP_DIST_CAR1="$(sqlite3 "$RES_DB" "SELECT MAX(odometer_km) - MIN(odometer_km) FROM fuelups WHERE car_id = 1;")"
+EXP_LITERS_CAR1="$(sqlite3 "$RES_DB" "SELECT liters_ml FROM fuelups WHERE car_id = 1 ORDER BY fueled_at DESC, id DESC LIMIT 1;")"
+EXP_CENTS_CAR1="$(sqlite3 "$RES_DB" "SELECT total_cents FROM fuelups WHERE car_id = 1 ORDER BY fueled_at DESC, id DESC LIMIT 1;")"
+csv_assert_eq R1 dist_km "$EXP_DIST_CAR1"
+csv_assert_eq R1 liters_ml "$EXP_LITERS_CAR1"
+csv_assert_eq R1 total_cents "$EXP_CENTS_CAR1"
 
 set +e
 "$APP_BIN" --db "$RES_DB" --stats fuelups --csv --car-id "$CAR2_ID" >"$OUT_SCOPE_STATS_CAR2" 2>"$ERR_SCOPE_STATS_CAR2"
 RC=$?
 set -e
-# TODO(0.8.x Export/Contract): Feldbasierter Vergleich (Token-Parsing) vorgesehen.
-if [[ $RC -ne 0 ]] ||
-   ! grep -q '^1,100,55000,5500,9000$' "$OUT_SCOPE_STATS_CAR2" ||
-   grep -q '^1,100,50000,5000,8000$' "$OUT_SCOPE_STATS_CAR2"; then
-  fail 'Scope-Smoke: --stats fuelups --csv --car-id <id> ist nicht strikt car-scoped.'
+if [[ $RC -ne 0 ]]; then
+  fail 'Scope-Smoke: --stats fuelups --csv --car-id <id> fehlgeschlagen.'
 fi
+
+csv_read_header "$OUT_SCOPE_STATS_CAR2"
+csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+
+ROWS_CAR2="$(($(wc -l < "$OUT_SCOPE_STATS_CAR2") - 1))"
+DB_COUNT_CAR2="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR2_ID;")"
+EXP_ROWS_CAR2="$((DB_COUNT_CAR2 - 1))"
+if [[ "$ROWS_CAR2" != "$EXP_ROWS_CAR2" ]]; then
+  fail "Scope-Smoke: --stats fuelups --csv --car-id <id>: expected $EXP_ROWS_CAR2 row(s), got $ROWS_CAR2"
+fi
+(( EXP_ROWS_CAR2 >= 1 )) || fail 'Scope-Smoke: --stats fuelups --csv --car-id <id>: keine Intervallzeile vorhanden.'
+
+declare -a R2=()
+csv_read_row "$OUT_SCOPE_STATS_CAR2" 1 R2
+csv_assert_eq R2 idx "1"
+csv_assert_int_ge R2 dist_km 0
+csv_assert_int_ge R2 liters_ml 0
+csv_assert_int_ge R2 avg_l_per_100km_x100 0
+csv_assert_int_ge R2 total_cents 0
+
+EXP_DIST_CAR2="$(sqlite3 "$RES_DB" "SELECT MAX(odometer_km) - MIN(odometer_km) FROM fuelups WHERE car_id = $CAR2_ID;")"
+EXP_LITERS_CAR2="$(sqlite3 "$RES_DB" "SELECT liters_ml FROM fuelups WHERE car_id = $CAR2_ID ORDER BY fueled_at DESC, id DESC LIMIT 1;")"
+EXP_CENTS_CAR2="$(sqlite3 "$RES_DB" "SELECT total_cents FROM fuelups WHERE car_id = $CAR2_ID ORDER BY fueled_at DESC, id DESC LIMIT 1;")"
+csv_assert_eq R2 dist_km "$EXP_DIST_CAR2"
+csv_assert_eq R2 liters_ml "$EXP_LITERS_CAR2"
+csv_assert_eq R2 total_cents "$EXP_CENTS_CAR2"
+
+csv_assert_ne R1 liters_ml "$EXP_LITERS_CAR2"
+csv_assert_ne R1 total_cents "$EXP_CENTS_CAR2"
+csv_assert_ne R2 liters_ml "$EXP_LITERS_CAR1"
+csv_assert_ne R2 total_cents "$EXP_CENTS_CAR1"
+
 printf '[OK] Fuelups Scope: stats mit --car-id ist strikt scoped\n'
 
 printf '[OK] smoke_cars_crud: alle Cars-CRUD-Checks erfolgreich.\n'

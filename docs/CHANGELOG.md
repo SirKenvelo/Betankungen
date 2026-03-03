@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-01
+**Stand:** 2026-03-02
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
+- S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
 
 ### Changed
 - [S1C1/4] Tests/Smoke: `tests/smoke/smoke_multi_car_context.sh` auf feldbasierte CSV-Assertions fuer Multi-Car-Stats umgestellt (Helper-Sourcing, Header-/Spalten-Checks auf `car_id` und `fueled_at`, row-basierte Scope-Validierung pro Car-ID, Foreign-Row-Guards). (2026-03-01)
@@ -18,9 +19,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C1/4] Tests/Smoke: Cross-Car-Isolation-Guardrail in `tests/smoke/smoke_multi_car_context.sh` geschaerft (`ROWS_* == DB_COUNT_*` statt Mindestanzahl), damit CSV-Output strikt gegen DB-Realitaet validiert wird. (2026-03-01)
 - [S1C1/4] Tests/Smoke: Multi-Car-Stats-Assertions auf den aktuellen Aggregat-CSV-Contract ausgerichtet (`idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents` inkl. feldbasierter Wertpruefung je Car) und Isolation auf `stats_rows = fuelups_count - 1` validiert. (2026-03-01)
 - [S1C1/4] Tests/Helpers: `tests/helpers/assert.sh` mit finalem Newline am Dateiende vereinheitlicht. (2026-03-01)
+- [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
 - Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)
+- Sprint-Umsetzung und Test-Review in S1C2/4 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-02)
 
 ## 0.7.0 – 2026-03-01
 
