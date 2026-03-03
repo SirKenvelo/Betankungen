@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-02
+**Stand:** 2026-03-03
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -13,6 +13,8 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
 
 ### Changed
+- [General] Meta/Process: `AGENTS.md` um verbindliche Sprint-Disziplin erweitert (Commit-Message-Prefix `[SxCy/z]` fuer Sprint-Arbeit, annotierter Abschluss-Tag `sprint-<nr>-done` nur nach Sprint-Freigabe). (2026-03-03)
+- [General] Docs: Neues Sprint-Narrative-Dokument `docs/SPRINTS.md` angelegt (Status, Commit-Folge, Artefakte und geplanter Abschluss-Tag je Sprint). (2026-03-03)
 - [S1C1/4] Tests/Smoke: `tests/smoke/smoke_multi_car_context.sh` auf feldbasierte CSV-Assertions fuer Multi-Car-Stats umgestellt (Helper-Sourcing, Header-/Spalten-Checks auf `car_id` und `fueled_at`, row-basierte Scope-Validierung pro Car-ID, Foreign-Row-Guards). (2026-03-01)
 - [S1C1/4] Tests/Helpers: `tests/helpers/csv.sh` Header-Parser fuer `set -e` stabilisiert (`((i += 1))` statt `((i++))`). (2026-03-01)
 - [S1C1/4] Tests/Helpers: `csv_assert_has_cols` erweitert, damit fehlende Pflichtspalten die vorhandene Header-Liste im Fehlertext ausgeben (`have: ...`) fuer schnellere Contract-Diagnose. (2026-03-01)
@@ -24,6 +26,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 ### Tooling / Assistance
 - Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)
 - Sprint-Umsetzung und Test-Review in S1C2/4 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-02)
+- Dokumentationspflege und Prozess-Schaerfung erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-03)
 
 ## 0.7.0 – 2026-03-01
 

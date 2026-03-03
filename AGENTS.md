@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-01
+**Stand:** 2026-03-03
 
 <INSTRUCTIONS>
 
@@ -20,6 +20,8 @@
 - Session-Ende: finaler Sync-Check (`fetch`/ggf. `pull --rebase`), danach Abschluss-Commit(s) und Push.
 - Bei laengeren Tasks: mehrere Zwischen-Commits sind gewuenscht; bei kurzen Tasks reicht in der Regel ein Abschluss-Commit.
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
+- Commit-Message-Konvention fuer Sprint-Arbeit: Betreff beginnt mit Prefix `[SxCy/z]` (Beispiel: `[S1C2/4] tests: cars_crud csv scope field-based`).
+- Sprint-Tagging: Nach komplett abgeschlossenem und freigegebenem Sprint wird genau ein annotierter Tag im Format `sprint-<nr>-done` erstellt und gepusht; keine Sprint-Tags auf Zwischenstaenden.
 
 ## Build-Standard
 - FPC-Compile immer mit folgendem Befehl aus dem Projektroot ausfuehren:
@@ -28,6 +30,7 @@
 ## Dokumentations-Management
 - Dokumentation im `docs`-Ordner bei Hoch/Mittel-Priorität selbstständig mitpflegen.
 - `docs/CHANGELOG.md` bei JEDER Änderung aktualisieren (inkl. aktuellem Datum).
+- `docs/SPRINTS.md` als Sprint-Narrative mitfuehren (Status, Zielbild, Commit-Reihenfolge, relevante Hashes/Artefakte, Abschluss-Tag pro Sprint).
 - CHANGELOG-Einträge neutral und feature-zentriert unter `[Unreleased] -> Changed` erfassen (kein personenbezogenes Framing als Abschnittsueberschrift).
 - Attribution transparent, aber dezent ueber `[Unreleased] -> Tooling / Assistance` halten (ein kurzer Sammelhinweis reicht).
 - Sprint-/Commit-Traceability ist verpflichtend: Bei Sprint-Arbeit muessen Eintraege unter `[Unreleased] -> Changed` mit einem Prefix im Format `[SxCy/z]` beginnen (Beispiel: `[S1C1/4]`).
