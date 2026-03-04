@@ -14,6 +14,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `e460cc7`. (2026-03-04)
 
 ### Changed
+- [General] Meta: `src/Betankungen.lpr` auf `APP_VERSION 0.8.0-dev` angehoben (aktuelle Entwicklungsbasis fuer 0.8.x). (2026-03-04)
 - [S1C3/4] Tests/Smoke: `tests/smoke/smoke_clean_home.sh` auf CSV-/Stats-Contract-Matches geprueft; keine CSV-Textmatches oder helper-relevanten CSV-Header/Rowcount-Checks gefunden, daher keine Migration in diesem Skript erforderlich. (2026-03-04)
 - [S1C3/4] Tests/Helpers: `tests/helpers/csv.sh` um `csv_row_count <file>` erweitert (Datenzeilen ohne Header), und Smoke-Skripte auf die zentrale Helper-Semantik umgestellt (`tests/smoke/smoke_multi_car_context.sh`, `tests/smoke/smoke_cars_crud.sh`). (2026-03-04)
 - [S1C3/4] Meta/Process: `AGENTS.md` um verbindliche `knowledge_archive`-Regeln erweitert (Loeschungen verpflichtend archivieren, funktionale Verhaltensaenderungen ebenfalls archivieren und in `knowledge_archive/README.md` dokumentieren). (2026-03-04)
