@@ -34,7 +34,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
-- Sprint-4-Abschluss (Konsistenzpass, Wrapper-Check, Lint und Tagging) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-04)
+- Sprint-1-Abschluss (Konsistenzpass, Wrapper-Check, Lint und Tagging) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-04)
 - Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)
 - Sprint-Umsetzung und Test-Review in S1C2/4 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-02)
 - Dokumentationspflege und Prozess-Schaerfung erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-03)
