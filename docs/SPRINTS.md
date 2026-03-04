@@ -22,9 +22,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 3. S1C3/4
 - Thema: smoke_clean_home Audit + CSV-Helper-Polish (`csv_row_count`) + knowledge_archive-Regeln.
-- Status: geplant
-- Git-Commit: spaeter
-- Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff` (spaeter)
+- Status: done
+- Git-Commit: `a658745`
+- Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`
 
 ### Abschluss-Tag
 

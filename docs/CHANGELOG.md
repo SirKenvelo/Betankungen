@@ -11,10 +11,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
 - S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
-- S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `e460cc7`. (2026-03-04)
+- S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `a658745`. (2026-03-04)
 
 ### Changed
 - [General] Meta: `src/Betankungen.lpr` auf `APP_VERSION 0.8.0-dev` angehoben (aktuelle Entwicklungsbasis fuer 0.8.x). (2026-03-04)
+- [S1C3/4] Docs: `docs/SPRINTS.md` auf finalen S1C3/4-Status synchronisiert (`done`, Commit `a658745`, Artefakte ohne Placeholder-Suffix). (2026-03-04)
 - [S1C3/4] Tests/Smoke: `tests/smoke/smoke_clean_home.sh` auf CSV-/Stats-Contract-Matches geprueft; keine CSV-Textmatches oder helper-relevanten CSV-Header/Rowcount-Checks gefunden, daher keine Migration in diesem Skript erforderlich. (2026-03-04)
 - [S1C3/4] Tests/Helpers: `tests/helpers/csv.sh` um `csv_row_count <file>` erweitert (Datenzeilen ohne Header), und Smoke-Skripte auf die zentrale Helper-Semantik umgestellt (`tests/smoke/smoke_multi_car_context.sh`, `tests/smoke/smoke_cars_crud.sh`). (2026-03-04)
 - [S1C3/4] Meta/Process: `AGENTS.md` um verbindliche `knowledge_archive`-Regeln erweitert (Loeschungen verpflichtend archivieren, funktionale Verhaltensaenderungen ebenfalls archivieren und in `knowledge_archive/README.md` dokumentieren). (2026-03-04)
