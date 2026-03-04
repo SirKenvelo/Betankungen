@@ -36,6 +36,16 @@
 - Sprint-/Commit-Traceability ist verpflichtend: Bei Sprint-Arbeit muessen Eintraege unter `[Unreleased] -> Changed` mit einem Prefix im Format `[SxCy/z]` beginnen (Beispiel: `[S1C1/4]`).
 - `docs/CHANGELOG.md` muss unter `[Unreleased]` zusaetzlich eine Sektion `Sprint / Commit References` enthalten; dort pro Sprint-Commit mindestens Kurzbezeichnung, Bezug zu Artefaktdateien (z. B. `sprint_1_commit_1_von_4.md`, `.diff`) und vorhandener Git-Commit-Hash dokumentieren.
 - Der Hash in `docs/CHANGELOG.md` und `docs/SPRINTS.md` muss immer der Commit sein, der die jeweilige Aenderung tatsaechlich einfuehrt (kein spaeterer Doku-Sync-Commit).
+- Der Git-Commit-Hash muss unmittelbar nach dem Commit ermittelt und in `docs/CHANGELOG.md` sowie `docs/SPRINTS.md` eingetragen werden, bevor der Task abgeschlossen wird.
+- Der Hash darf nicht erst in einem spaeteren Dokumentations-Commit ergaenzt werden.
+- Fuer die Dokumentation wird der Short-Hash mit 7 Zeichen verwendet (z. B. `701b34f`).
+- Der Hash muss immer direkt aus dem lokalen Git-Repo stammen (`git rev-parse --short=7 HEAD`) und darf nicht geschaetzt werden.
+- Empfohlener Workflow:
+  1. Aenderung implementieren
+  2. Commit durchfuehren
+  3. Commit-Hash mit `git rev-parse --short=7 HEAD` ermitteln
+  4. Hash sofort in `docs/CHANGELOG.md` und `docs/SPRINTS.md` eintragen
+  5. Doku-Update committen
 - Falls ein Task nicht sprintgebunden ist, den Prefix `[General]` verwenden.
 - Beispiel (Format, `[Unreleased] -> Changed`): `- u_fmt: CSV-Helper ergaenzt. (YYYY-MM-DD)`
 - Beispiel (Format, `[Unreleased] -> Tooling / Assistance`): `- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (YYYY-MM-DD)`

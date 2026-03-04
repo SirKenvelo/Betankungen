@@ -45,5 +45,5 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 2. S2C2/4
 - Thema: JSON-Stats-Export um Meta-Felder (`contract_version`, `generated_at`, `app_version`) erweitert; Smoke-Guardrails fuer Presence-Checks nachgezogen.
-- Git-Commit: siehe `[S2C2/4]` im Git-Log
+- Git-Commit: `701b34f`
 - Artefakte: `sprint_2_commit_2_von_4.md`, `sprint_2_commit_2_von_4.diff`
