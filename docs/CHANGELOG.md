@@ -12,10 +12,15 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
 - S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
 - S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `b4273c4`. (2026-03-04)
+- S2C1/4 - Export-Contract v1-Baseline in `docs/EXPORT_CONTRACT.md`; Artefakte: `sprint_2_commit_1_von_4.md`, `sprint_2_commit_1_von_4.diff`; Basis-Commit: `4feba89`. (2026-03-04)
 - S2C2/4 - JSON-Export-Meta (contract_version/generated_at/app_version) in Stats-JSON und Smoke-Guardrails fuer Presence-Checks; Artefakte: `sprint_2_commit_2_von_4.md`, `sprint_2_commit_2_von_4.diff`; Basis-Commit: `701b34f`. (2026-03-04)
 - S2C3/4 - CSV-Contract-Versionierung in Stats-CSV (erste Spalte `contract_version`) inkl. Smoke-/Policy-Testsynchronisierung; Artefakte: `sprint_2_commit_3_von_4.md`, `sprint_2_commit_3_von_4.diff`; Basis-Commit: `b08a4a6`. (2026-03-04)
+- S2C4/4 - Doku-Schaerfung und Sprint-2-Finalisierung (CSV-yearly-Grenze, Status/Hashes, Volltest-Verifikation); Artefakte: `sprint_2_commit_4_von_4.md`, `sprint_2_commit_4_von_4.diff`; Basis-Commit: `94f502c`. (2026-03-04)
 
 ### Changed
+- [S2C4/4] Docs: `docs/EXPORT_CONTRACT.md` praezisiert, dass `--yearly` keinen CSV-Export besitzt und `--yearly --csv` ungueltig ist. (2026-03-04)
+- [S2C4/4] QA/Verification: Volltestlauf erfolgreich verifiziert (`tests/smoke/smoke_cli.sh -a -c` und `tests/domain_policy/run_domain_policy_tests.sh`). (2026-03-04)
+- [S2C4/4] Docs/Process: Sprint-2-Narrative finalisiert (`docs/SPRINTS.md`: Status `done`, S2C4/4-Commit ergänzt, Abschluss-Tag `sprint-2-done` als pending bis Freigabe markiert). (2026-03-04)
 - [S2C3/4] Core/Stats: Stats-CSV auf Contract-v1-Spalte `contract_version` umgestellt (erste Spalte fuer monthly und full-tank-cycles; Datenzeilen prefixed mit `1`). (2026-03-04)
 - [S2C3/4] Tests/Smoke+Policy: Feldbasierte Smoke-Checks (`smoke_cars_crud`, `smoke_multi_car_context`) sowie Domain-Policy-Cases `P-060/01` und `P-060/02` auf neuen CSV-Header/Rows mit `contract_version=1` synchronisiert. (2026-03-04)
 - [S2C2/4] Meta/Process: `AGENTS.md` um verbindliche Hash-Disziplin erweitert (unmittelbare Ermittlung nach Commit, Short-Hash-Format `7` Zeichen, lokale Hash-Quelle via `git rev-parse --short=7 HEAD`, kein nachgelagerter Doku-Sync fuer Hash-Nachtrag). (2026-03-04)

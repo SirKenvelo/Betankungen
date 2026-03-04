@@ -33,7 +33,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 2 - Export Contract Rollout
 
-- Status: in progress
+- Status: done
 - Ziel: JSON-/CSV-Export-Contract v1 schrittweise in Runtime und Smoke-Tests verankern.
 
 ### Commit-Folge
@@ -52,3 +52,13 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Thema: Stats-CSV um Contract-Versionierung erweitert (Spalte `contract_version` als erste Spalte) und betroffene Smoke-/Policy-Tests auf den neuen Header/Rows synchronisiert.
 - Git-Commit: `b08a4a6`
 - Artefakte: `sprint_2_commit_3_von_4.md`, `sprint_2_commit_3_von_4.diff`
+
+4. S2C4/4
+- Thema: Abschluss Sprint 2 mit Doku-Schaerfung (`yearly` ohne CSV), Hash-/Status-Finalisierung und Volltest-Verifikation.
+- Git-Commit: `94f502c`
+- Artefakte: `sprint_2_commit_4_von_4.md`, `sprint_2_commit_4_von_4.diff`
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S2C4/4 (Doku-Finalisierung + Volltest-Verifikation)
+- Abschluss-Tag: `sprint-2-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
