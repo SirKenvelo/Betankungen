@@ -5,7 +5,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 1 - Road to 0.8.x
 
-- Status: In Arbeit
+- Status: done
 - Ziel: CSV/JSON-Output-Contracts haerten und Smoke-Tests auf feldbasierte Contract-Checks umstellen.
 
 ### Commit-Folge
@@ -23,10 +23,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 3. S1C3/4
 - Thema: smoke_clean_home Audit + CSV-Helper-Polish (`csv_row_count`) + knowledge_archive-Regeln.
 - Status: done
-- Git-Commit: `a658745`
+- Git-Commit: `b4273c4`
 - Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`
 
 ### Abschluss-Tag
 
-- Geplanter Tag bei Sprint-Abschluss: `sprint-1-done`
-- Hinweis: Tag wird erst nach kompletter Sprint-Freigabe gesetzt.
+- Sprint-Abschluss: S1C4/4 (Konsistenz-Pass, Wrapper-Check, Lint, Tagging)
+- Abschluss-Tag: `sprint-1-done` (gesetzt)
