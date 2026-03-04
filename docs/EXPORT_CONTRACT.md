@@ -24,6 +24,7 @@ Payload (v1, aktueller Stand):
 - Erste Spalte: `contract_version`
 - Header ist API (stabil)
 - Strict CSV: keine Kommentare, keine impliziten Escaping-Annahmen
+- `--yearly` hat keinen CSV-Export (Kombination `--yearly --csv` ist ungueltig).
 
 ## Scope-Regeln
 
