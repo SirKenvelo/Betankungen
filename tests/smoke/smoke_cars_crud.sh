@@ -309,7 +309,7 @@ if [[ $RC -ne 0 ]]; then
 fi
 
 csv_read_header "$OUT_SCOPE_STATS_CAR1"
-csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+csv_assert_has_cols contract_version idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_CAR1="$(csv_row_count "$OUT_SCOPE_STATS_CAR1")"
 DB_COUNT_CAR1="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = 1;")"
@@ -321,6 +321,7 @@ fi
 
 declare -a R1=()
 csv_read_row "$OUT_SCOPE_STATS_CAR1" 1 R1
+csv_assert_eq R1 contract_version "1"
 csv_assert_eq R1 idx "1"
 csv_assert_int_ge R1 dist_km 0
 csv_assert_int_ge R1 liters_ml 0
@@ -343,7 +344,7 @@ if [[ $RC -ne 0 ]]; then
 fi
 
 csv_read_header "$OUT_SCOPE_STATS_CAR2"
-csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+csv_assert_has_cols contract_version idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_CAR2="$(csv_row_count "$OUT_SCOPE_STATS_CAR2")"
 DB_COUNT_CAR2="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR2_ID;")"
@@ -355,6 +356,7 @@ fi
 
 declare -a R2=()
 csv_read_row "$OUT_SCOPE_STATS_CAR2" 1 R2
+csv_assert_eq R2 contract_version "1"
 csv_assert_eq R2 idx "1"
 csv_assert_int_ge R2 dist_km 0
 csv_assert_int_ge R2 liters_ml 0

@@ -763,6 +763,8 @@ begin
 end;
 
 procedure RenderFuelupStatsCsv(const R: TStatsCollected; const Monthly: boolean);
+const
+  CSV_CONTRACT_VERSION = 1;
 var
   i: integer;
   MonthsSorted: TMonthAggArray;
@@ -770,7 +772,7 @@ begin
   if Monthly then
   begin
     // Kopfzeile immer
-    WriteLn('month,dist_km,liters_ml,avg_l_per_100km_x100,total_cents');
+    WriteLn('contract_version,month,dist_km,liters_ml,avg_l_per_100km_x100,total_cents');
 
     if R.MonthN <= 0 then Exit;
 
@@ -782,6 +784,7 @@ begin
 
     for i := 0 to R.MonthN - 1 do
       WriteLn(CsvJoin([
+        IntToStr(CSV_CONTRACT_VERSION),
         CsvTokenStrict(MonthsSorted[i].Month),
         IntToStr(MonthsSorted[i].DistKm),
         IntToStr(MonthsSorted[i].LitersMl),
@@ -791,12 +794,13 @@ begin
   end
   else
   begin
-    WriteLn('idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents');
+    WriteLn('contract_version,idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents');
 
     if Length(R.Cycles) = 0 then Exit;
 
     for i := 0 to High(R.Cycles) do
       WriteLn(CsvJoin([
+        IntToStr(CSV_CONTRACT_VERSION),
         IntToStr(R.Cycles[i].Idx),
         IntToStr(R.Cycles[i].DistKm),
         IntToStr(R.Cycles[i].LitersMl),

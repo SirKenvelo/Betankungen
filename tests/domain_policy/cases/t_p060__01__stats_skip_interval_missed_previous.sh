@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p060__01__stats_skip_interval_missed_previous.sh
-# UPDATED: 2026-02-22
+# UPDATED: 2026-03-04
 # Policy P-060: Stats ueberspringen Intervallbildung ueber Datensaetze mit missed_previous=1.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -48,11 +48,11 @@ if [[ $RC -ne 0 ]]; then
   fail "Erwartet Exitcode 0 fuer Stats-CSV, erhalten: $RC"
 fi
 
-if ! grep -q '^idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE"; then
+if ! grep -q '^contract_version,idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE"; then
   fail 'CSV-Header fuer Stats nicht gefunden.'
 fi
 
-if ! grep -q '^1,150,40000,2667,6000$' "$OUT_FILE"; then
+if ! grep -q '^1,1,150,40000,2667,6000$' "$OUT_FILE"; then
   fail 'Erwartete Einzel-Zykluszeile nach missed_previous-Reset nicht gefunden.'
 fi
 

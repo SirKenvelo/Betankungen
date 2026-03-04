@@ -340,7 +340,7 @@ fi
 
 # CSV scoped checks (feldbasiert)
 csv_read_header "$OUT_STATS_A"
-csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+csv_assert_has_cols contract_version idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_A="$(csv_row_count "$OUT_STATS_A")"
 (( ROWS_A == 1 )) || fail "Matrix >1 Cars: stats carA: expected 1 data row, got $ROWS_A"
@@ -348,6 +348,7 @@ ROWS_A="$(csv_row_count "$OUT_STATS_A")"
 declare -a R_A=()
 csv_read_row "$OUT_STATS_A" 1 R_A
 
+csv_assert_eq R_A contract_version "1"
 csv_assert_eq R_A idx "1"
 csv_assert_eq R_A dist_km "100"
 csv_assert_eq R_A liters_ml "50000"
@@ -363,7 +364,7 @@ if [[ $RC -ne 0 ]]; then
 fi
 
 csv_read_header "$OUT_STATS_B"
-csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
+csv_assert_has_cols contract_version idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
 ROWS_B="$(csv_row_count "$OUT_STATS_B")"
 (( ROWS_B == 1 )) || fail "Matrix >1 Cars: stats carB: expected 1 data row, got $ROWS_B"
@@ -371,6 +372,7 @@ ROWS_B="$(csv_row_count "$OUT_STATS_B")"
 declare -a R_B=()
 csv_read_row "$OUT_STATS_B" 1 R_B
 
+csv_assert_eq R_B contract_version "1"
 csv_assert_eq R_B idx "1"
 csv_assert_eq R_B dist_km "100"
 csv_assert_eq R_B liters_ml "55000"

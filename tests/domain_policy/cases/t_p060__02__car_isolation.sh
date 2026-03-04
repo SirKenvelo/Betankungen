@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p060__02__car_isolation.sh
-# UPDATED: 2026-02-27
+# UPDATED: 2026-03-04
 # Policy P-060: Stats-Zyklen muessen pro Car isoliert bleiben (strict car-scope).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -58,12 +58,12 @@ if [[ $RC -ne 0 ]]; then
   fail "Erwartet Exitcode 0 fuer Stats-CSV (car-id=2), erhalten: $RC"
 fi
 
-if ! grep -q '^idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE_CAR2"; then
+if ! grep -q '^contract_version,idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE_CAR2"; then
   fail 'CSV-Header fuer Stats nicht gefunden.'
 fi
 
 # Erwartet: Nur Car-2 liefert einen gueltigen Zyklus (120 km, 42.000 ml, 6.300 cents).
-if ! grep -q '^1,120,42000,3500,6300$' "$OUT_FILE_CAR2"; then
+if ! grep -q '^1,1,120,42000,3500,6300$' "$OUT_FILE_CAR2"; then
   fail 'Erwartete Car-2-Zykluszeile nicht gefunden (Car-Isolation fehlerhaft).'
 fi
 
@@ -85,7 +85,7 @@ if [[ $RC -ne 0 ]]; then
   fail "Erwartet Exitcode 0 fuer Stats-CSV (car-id=1), erhalten: $RC"
 fi
 
-if ! grep -q '^idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE_CAR1"; then
+if ! grep -q '^contract_version,idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents$' "$OUT_FILE_CAR1"; then
   fail 'CSV-Header fuer Stats (car-id=1) nicht gefunden.'
 fi
 
@@ -94,7 +94,7 @@ if [[ "$ROW_COUNT" != "0" ]]; then
   fail "Erwartet 0 Zykluszeilen fuer car-id=1, erhalten: $ROW_COUNT"
 fi
 
-if grep -q '^1,120,42000,3500,6300$' "$OUT_FILE_CAR1"; then
+if grep -q '^1,1,120,42000,3500,6300$' "$OUT_FILE_CAR1"; then
   fail 'Car-2-Zyklus ist in car-id=1 Ausgabe aufgetaucht (Car-Isolation verletzt).'
 fi
 
