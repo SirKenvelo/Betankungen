@@ -14,6 +14,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `b4273c4`. (2026-03-04)
 
 ### Changed
+- [S2C1/4] Docs: Neues Export-Contract-Dokument `docs/EXPORT_CONTRACT.md` eingefuehrt (v1-Minimalvertrag fuer Versionierung, JSON/CSV-Pflichtfelder, Scope-/Period-Regeln und Stabilitaetsregeln). (2026-03-04)
 - [S1C4/4] Docs/Process: Konsistenz-Pass fuer `AGENTS.md`, `docs/CHANGELOG.md`, `docs/SPRINTS.md` und `docs/README.md` abgeschlossen; keine Placeholder-Eintraege im Sprint-1-Aktivbereich. (2026-03-04)
 - [S1C4/4] Tests/Smoke: Wrapper-Konsistenz geprueft (`tests/smoke/*.sh`, `tests/smoke_*.sh`); Wrapper bleiben unveraendert, da nur delegierende `exec`-Durchreicher. (2026-03-04)
 - [S1C4/4] Tests/Lint: Schnell-Lint `bash -n tests/**/*.sh` erfolgreich. (2026-03-04)
