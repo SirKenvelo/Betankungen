@@ -658,7 +658,8 @@ begin
                   Cmd.Monthly,
                   Cmd.Yearly,
                   Cmd.Pretty,
-                  Cmd.CarId)
+                  Cmd.CarId,
+                  APP_VERSION)
               else
               begin
                 if Cmd.Dashboard then

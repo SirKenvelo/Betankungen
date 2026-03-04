@@ -30,3 +30,20 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S1C4/4 (Konsistenz-Pass, Wrapper-Check, Lint, Tagging)
 - Abschluss-Tag: `sprint-1-done` (gesetzt)
+
+## Sprint 2 - Export Contract Rollout
+
+- Status: in progress
+- Ziel: JSON-/CSV-Export-Contract v1 schrittweise in Runtime und Smoke-Tests verankern.
+
+### Commit-Folge
+
+1. S2C1/4
+- Thema: Export-Contract-Basis in `docs/EXPORT_CONTRACT.md` eingefuehrt.
+- Git-Commit: `4feba89`
+- Artefakte: `sprint_2_commit_1_von_4.md`, `sprint_2_commit_1_von_4.diff`
+
+2. S2C2/4
+- Thema: JSON-Stats-Export um Meta-Felder (`contract_version`, `generated_at`, `app_version`) erweitert; Smoke-Guardrails fuer Presence-Checks nachgezogen.
+- Git-Commit: siehe `[S2C2/4]` im Git-Log
+- Artefakte: `sprint_2_commit_2_von_4.md`, `sprint_2_commit_2_von_4.diff`

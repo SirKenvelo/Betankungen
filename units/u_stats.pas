@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-27
+  UPDATED: 2026-03-04
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -58,7 +58,8 @@ procedure ShowFuelupStatsJson(const DbPath: string;
   const Monthly: boolean;
   const Yearly: boolean = False;
   const Pretty: boolean = False;
-  const CarId: integer = 0); overload;
+  const CarId: integer = 0;
+  const AppVersion: string = ''); overload;
 
 // Liefert Dashboard-Statistik mit Standardparametern.
 procedure ShowFuelupDashboard(const DbPath: string); overload;
@@ -873,7 +874,40 @@ begin
   end;
 end;
 
-procedure RenderFuelupStatsJson(const R: TStatsCollected; const Monthly: boolean; const Yearly: boolean; const Pretty: boolean);
+function IsoUtcNow: string;
+var
+  UtcNow: TDateTime;
+begin
+  UtcNow := Now - (GetLocalTimeOffset / (24 * 60));
+  Result := FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss"Z"', UtcNow);
+end;
+
+function EffectiveAppVersion(const AppVersion: string): string;
+begin
+  if Trim(AppVersion) = '' then
+    Exit('unknown');
+  Result := AppVersion;
+end;
+
+procedure WriteJsonMetaHeader(
+  var J: TJsonWriter;
+  const ReportName: string;
+  const AppVersion: string);
+const
+  JSON_CONTRACT_VERSION = 1;
+begin
+  J.IndentWrite; J.W('"contract_version":'); J.SP; J.W(IntToStr(JSON_CONTRACT_VERSION)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"generated_at":'); J.SP; J.W('"'); J.W(IsoUtcNow); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"app_version":'); J.SP; J.W('"'); J.W(JsonEscape(EffectiveAppVersion(AppVersion))); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"kind":'); J.SP; J.W('"'); J.W(JsonEscape(ReportName)); J.W('",'); J.NL;
+end;
+
+procedure RenderFuelupStatsJson(
+  const R: TStatsCollected;
+  const Monthly: boolean;
+  const Yearly: boolean;
+  const Pretty: boolean;
+  const AppVersion: string);
 var
   J: TJsonWriter;
   i: integer;
@@ -899,7 +933,7 @@ begin
     J.W('{'); J.NL;
     J.IndentInc;
 
-    J.IndentWrite; J.W('"kind":'); J.SP; J.W('"fuelups_yearly",'); J.NL;
+    WriteJsonMetaHeader(J, 'fuelups_yearly', AppVersion);
 
     J.IndentWrite; J.W('"period":'); J.SP; J.W('{"from":'); J.SP;
     J.W('"'); J.W(JsonEscape(R.H.MinDt)); J.W('"'); J.W(',');
@@ -941,7 +975,7 @@ begin
     J.W('{'); J.NL;
     J.IndentInc;
 
-    J.IndentWrite; J.W('"kind":'); J.SP; J.W('"fuelups_monthly",'); J.NL;
+    WriteJsonMetaHeader(J, 'fuelups_monthly', AppVersion);
 
     J.IndentWrite; J.W('"period":'); J.SP; J.W('{"from":'); J.SP;
     J.W('"'); J.W(JsonEscape(R.H.MinDt)); J.W('"'); J.W(',');
@@ -978,7 +1012,7 @@ begin
     J.W('{'); J.NL;
     J.IndentInc;
 
-    J.IndentWrite; J.W('"kind":'); J.SP; J.W('"fuelups_full_tank_cycles",'); J.NL;
+    WriteJsonMetaHeader(J, 'fuelups_full_tank_cycles', AppVersion);
 
     J.IndentWrite; J.W('"period":'); J.SP; J.W('{"from":'); J.SP;
     J.W('"'); J.W(JsonEscape(R.H.MinDt)); J.W('"'); J.W(',');
@@ -1069,17 +1103,18 @@ procedure ShowFuelupStatsJson(const DbPath: string;
   const Monthly: boolean;
   const Yearly: boolean;
   const Pretty: boolean;
-  const CarId: integer); overload;
+  const CarId: integer;
+  const AppVersion: string); overload;
 var
   R: TStatsCollected;
 begin
   CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, Yearly, CarId, R);
-  RenderFuelupStatsJson(R, Monthly, Yearly, Pretty);
+  RenderFuelupStatsJson(R, Monthly, Yearly, Pretty, AppVersion);
 end;
 
 procedure ShowFuelupStatsJson(const DbPath: string); overload;
 begin
-  ShowFuelupStatsJson(DbPath, False, '', '', False, False, False, False, False, 0);
+  ShowFuelupStatsJson(DbPath, False, '', '', False, False, False, False, False, 0, '');
 end;
 
 procedure RenderFuelupDashboardText(const C: TStatsCollected; const Monthly: boolean);

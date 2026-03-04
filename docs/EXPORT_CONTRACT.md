@@ -14,7 +14,10 @@ Pflichtfelder:
 - `contract_version`
 - `generated_at`
 - `app_version`
-- `report` / `data` (projektabhaengige Payload-Bezeichnung)
+
+Payload (v1, aktueller Stand):
+- Report-Kennung: Feld `kind` (z. B. `fuelups_monthly`, `fuelups_yearly`, `fuelups_full_tank_cycles`)
+- Nutzdaten: vorhandene Payload-Felder (`rows` bei monthly/yearly, `cycles`/`sum` bei full_tank_cycles)
 
 ## CSV Contract
 

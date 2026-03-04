@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-01
+# UPDATED: 2026-03-04
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -112,6 +112,13 @@ add_fail() {
   fi
 }
 
+json_has_export_meta_v1() {
+  local file="$1"
+  grep -Eq '"contract_version"[[:space:]]*:[[:space:]]*1([[:space:]]*[,}])' "$file" &&
+  grep -Eq '"generated_at"[[:space:]]*:[[:space:]]*"' "$file" &&
+  grep -Eq '"app_version"[[:space:]]*:[[:space:]]*"' "$file"
+}
+
 print_plan() {
   printf '[INFO] List-Mode aktiv: folgende Checks wuerden laufen.\n'
   printf '[LIST] Pfad vorhanden: docs\n'
@@ -145,6 +152,7 @@ print_plan() {
   if $RUN_MONTHLY_SUITE; then
     printf '[LIST] (Monthly) --demo --stats fuelups --monthly\n'
     printf '[LIST] (Monthly) --demo --stats fuelups --json --monthly\n'
+    printf '[LIST] (Monthly) JSON Export-Meta vorhanden (contract_version/generated_at/app_version)\n'
     printf '[LIST] (Monthly) --demo --stats fuelups --json --pretty --monthly\n'
     printf '[LIST] (Monthly) --demo --stats fuelups --from 2024-01 --to 2025-12 --monthly\n'
     printf '[LIST] (Monthly) --monthly ohne stats -> Fehler\n'
@@ -155,6 +163,7 @@ print_plan() {
   if $RUN_YEARLY_SUITE; then
     printf '[LIST] (Yearly) --demo --stats fuelups --yearly\n'
     printf '[LIST] (Yearly) --demo --stats fuelups --json --yearly\n'
+    printf '[LIST] (Yearly) JSON Export-Meta vorhanden (contract_version/generated_at/app_version)\n'
     printf '[LIST] (Yearly) --demo --stats fuelups --json --pretty --yearly\n'
     printf '[LIST] (Yearly) --demo --stats fuelups --from 2022-01 --to 2024-01 --yearly\n'
     printf '[LIST] (Yearly) --yearly ohne stats -> Fehler\n'
@@ -554,10 +563,11 @@ test_monthly_json_compact_demo_ok() {
      grep -q '"kind":"fuelups_monthly"' "$out" &&
      grep -q '"fuelups_total"' "$out" &&
      grep -q '"fuelups_full"' "$out" &&
-     grep -q '"rows"' "$out"; then
-    printf '[OK] Monthly JSON compact: kind + Schluessel vorhanden\n'
+     grep -q '"rows"' "$out" &&
+     json_has_export_meta_v1 "$out"; then
+    printf '[OK] Monthly JSON compact: Schluessel + Export-Meta vorhanden\n'
   else
-    printf '[FAIL] Monthly JSON compact: kind + Schluessel vorhanden\n'
+    printf '[FAIL] Monthly JSON compact: Schluessel + Export-Meta vorhanden\n'
     add_fail
   fi
 }
@@ -577,11 +587,12 @@ test_monthly_json_pretty_demo_ok() {
   line_count="$(wc -l < "$out" | tr -d ' ')"
   if [[ $rc -eq 0 ]] &&
      grep -q 'fuelups_monthly' "$out" &&
+     json_has_export_meta_v1 "$out" &&
      [[ "$(head -n 1 "$out")" == "{" ]] &&
      [[ "${line_count:-0}" -gt 1 ]]; then
-    printf '[OK] Monthly JSON pretty: kind + Pretty-Mehrzeilenformat\n'
+    printf '[OK] Monthly JSON pretty: Export-Meta + Pretty-Mehrzeilenformat\n'
   else
-    printf '[FAIL] Monthly JSON pretty: kind + Pretty-Mehrzeilenformat\n'
+    printf '[FAIL] Monthly JSON pretty: Export-Meta + Pretty-Mehrzeilenformat\n'
     add_fail
   fi
 }
@@ -713,10 +724,11 @@ test_yearly_json_compact_demo_ok() {
      grep -q '"kind":"fuelups_yearly"' "$out" &&
      grep -q '"fuelups_total"' "$out" &&
      grep -q '"fuelups_full"' "$out" &&
-     grep -q '"rows"' "$out"; then
-    printf '[OK] Yearly JSON compact: kind + Schluessel vorhanden\n'
+     grep -q '"rows"' "$out" &&
+     json_has_export_meta_v1 "$out"; then
+    printf '[OK] Yearly JSON compact: Schluessel + Export-Meta vorhanden\n'
   else
-    printf '[FAIL] Yearly JSON compact: kind + Schluessel vorhanden\n'
+    printf '[FAIL] Yearly JSON compact: Schluessel + Export-Meta vorhanden\n'
     add_fail
   fi
 }
@@ -736,11 +748,12 @@ test_yearly_json_pretty_demo_ok() {
   line_count="$(wc -l < "$out" | tr -d ' ')"
   if [[ $rc -eq 0 ]] &&
      grep -q 'fuelups_yearly' "$out" &&
+     json_has_export_meta_v1 "$out" &&
      [[ "$(head -n 1 "$out")" == "{" ]] &&
      [[ "${line_count:-0}" -gt 1 ]]; then
-    printf '[OK] Yearly JSON pretty: kind + Pretty-Mehrzeilenformat\n'
+    printf '[OK] Yearly JSON pretty: Export-Meta + Pretty-Mehrzeilenformat\n'
   else
-    printf '[FAIL] Yearly JSON pretty: kind + Pretty-Mehrzeilenformat\n'
+    printf '[FAIL] Yearly JSON pretty: Export-Meta + Pretty-Mehrzeilenformat\n'
     add_fail
   fi
 }
