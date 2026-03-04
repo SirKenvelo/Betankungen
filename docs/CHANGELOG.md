@@ -13,8 +13,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
 - S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `b4273c4`. (2026-03-04)
 - S2C2/4 - JSON-Export-Meta (contract_version/generated_at/app_version) in Stats-JSON und Smoke-Guardrails fuer Presence-Checks; Artefakte: `sprint_2_commit_2_von_4.md`, `sprint_2_commit_2_von_4.diff`; Basis-Commit: `701b34f`. (2026-03-04)
+- S2C3/4 - CSV-Contract-Versionierung in Stats-CSV (erste Spalte `contract_version`) inkl. Smoke-/Policy-Testsynchronisierung; Artefakte: `sprint_2_commit_3_von_4.md`, `sprint_2_commit_3_von_4.diff`; Basis-Commit: `b08a4a6`. (2026-03-04)
 
 ### Changed
+- [S2C3/4] Core/Stats: Stats-CSV auf Contract-v1-Spalte `contract_version` umgestellt (erste Spalte fuer monthly und full-tank-cycles; Datenzeilen prefixed mit `1`). (2026-03-04)
+- [S2C3/4] Tests/Smoke+Policy: Feldbasierte Smoke-Checks (`smoke_cars_crud`, `smoke_multi_car_context`) sowie Domain-Policy-Cases `P-060/01` und `P-060/02` auf neuen CSV-Header/Rows mit `contract_version=1` synchronisiert. (2026-03-04)
 - [S2C2/4] Meta/Process: `AGENTS.md` um verbindliche Hash-Disziplin erweitert (unmittelbare Ermittlung nach Commit, Short-Hash-Format `7` Zeichen, lokale Hash-Quelle via `git rev-parse --short=7 HEAD`, kein nachgelagerter Doku-Sync fuer Hash-Nachtrag). (2026-03-04)
 - [S2C2/4] Core/Stats: JSON-Stats-Export um v1-Metafelder erweitert (`contract_version=1`, `generated_at` als UTC-ISO-Timestamp, `app_version` aus `APP_VERSION`) fuer monthly/yearly/full-tank-cycles. (2026-03-04)
 - [S2C2/4] Tests/Smoke: `tests/smoke/smoke_cli.sh` um JSON-Meta-Presence-Guards erweitert und bestehende Monthly/Yearly-JSON-Checks auf Contract-v1-Metafelder gehaertet. (2026-03-04)
