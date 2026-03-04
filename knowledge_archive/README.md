@@ -1,16 +1,93 @@
-# Knowledge Archive
-**Stand:** 2026-02-13
+# knowledge_archive
+**Stand:** 2026-03-04
 
-Dieser Ordner ist ein Wissens-Archiv fuer Code-Snippets, die bewusst nicht in der finalen Implementierung gelandet sind.
+Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 
-## Zweck
-- Ideen, Loesungsansaetze und verworfene Varianten nachvollziehbar aufbewahren.
-- Bei spaeteren Refactors gezielt auf fruehere Ansätze zurueckgreifen.
-
-## Ablage-Regeln
-- Dateiname mit klarem Bezug zur Funktion, z. B. `archive_ParseEuroToCents.pas`.
-- Jede Datei enthaelt kurz den Kontext (warum verworfen, wann hilfreich).
+## Regeln
+- Bei Loeschung von Prozeduren/Funktionen: Original verpflichtend archivieren.
+- Bei funktionalen Verhaltensaenderungen: Original ebenfalls archivieren.
 - Keine produktive Nutzung direkt aus diesem Ordner.
 
-## Hinweis
-Dieses Archiv ersetzt keine Release-Sicherung. Finale, reproduzierbare Staende liegen unter `.releases/` und `.backup/`.
+## Pflicht-Doku pro Archiv-Datei
+- Quelle (Dateipfad)
+- Symbol/Topic
+- Anlass (`loeschung` oder `behavior change`)
+- Datum
+- Commit (Hash; falls historisch nicht bekannt: `n/a (historisch)`)
+
+## Namenskonvention
+- Neu: `archive_<symbol_or_topic>_<YYYY-MM-DD>.<ext>`
+- Bestand: Historische Dateien ohne Datum im Namen bleiben gueltig, werden nicht rueckwirkend umbenannt.
+
+## Header-Template fuer Archiv-Dateien
+```pascal
+{
+  ARCHIVE-SNIPPET
+  -----------------------------------------------------------------------
+  ORIGIN   : <source-file>
+  REMOVED  : <YYYY-MM-DD>               // oder CHANGED: <YYYY-MM-DD>
+  REASON   : <kurzer Anlass>
+  CONTEXT  : <fachlicher Kontext 1>
+  CONTEXT  : <fachlicher Kontext 2>
+  BEISPIEL : <kurzer Code-Ausschnitt 1>
+  BEISPIEL : <kurzer Code-Ausschnitt 2>
+}
+```
+
+## Inventar (Bestand)
+
+1. `archive_ExactlyOne.pas`
+- Quelle: `Betankungen.lpr`
+- Symbol/Topic: `ExactlyOne`
+- Anlass: loeschung (Umstellung auf internes Command-Modell)
+- Datum: `2026-01-31`
+- Commit: `n/a (historisch)`
+
+2. `archive_ParseFlagWithArg.pas`
+- Quelle: `Betankungen.lpr`
+- Symbol/Topic: `ParseFlagWithArg`
+- Anlass: loeschung (Umstellung auf internes Command-Modell / `BuildCommand`)
+- Datum: `2026-01-31`
+- Commit: `n/a (historisch)`
+
+3. `archive_ParseRequiredValueFlag.pas`
+- Quelle: `Betankungen.lpr`
+- Symbol/Topic: `ParseRequiredValueFlag`
+- Anlass: loeschung (Umstellung auf internes Command-Modell / `BuildCommand`)
+- Datum: `2026-01-31`
+- Commit: `n/a (historisch)`
+
+4. `archive_TryParseFlag.pas`
+- Quelle: `Betankungen.lpr`
+- Symbol/Topic: `TryParseFlag`
+- Anlass: loeschung (Umstellung auf internes Command-Modell / `BuildCommand`)
+- Datum: `2026-01-31`
+- Commit: `n/a (historisch)`
+
+5. `archive_ParseEuroToCents.pas`
+- Quelle: `u_db_common.pas`
+- Symbol/Topic: `ParseEuroToCents`
+- Anlass: loeschung (ersetzt durch stringbasiertes Parsing, bon-exakt)
+- Datum: `2026-01-21`
+- Commit: `n/a (historisch)`
+
+6. `archive_ParseEurPerLiterToMilli.pas`
+- Quelle: `u_db_common.pas`
+- Symbol/Topic: `ParseEurPerLiterToMilli`
+- Anlass: loeschung (ersetzt durch stringbasiertes Parsing, bon-exakt)
+- Datum: `2026-01-21`
+- Commit: `n/a (historisch)`
+
+7. `archive_ParseLitersToMl.pas`
+- Quelle: `u_db_common.pas`
+- Symbol/Topic: `ParseLitersToMl`
+- Anlass: loeschung (ersetzt durch stringbasiertes Parsing, bon-exakt)
+- Datum: `2026-01-21`
+- Commit: `n/a (historisch)`
+
+8. `archive_ParseToMinorUnit.pas`
+- Quelle: `u_db_common.pas`
+- Symbol/Topic: `ParseToMinorUnit`
+- Anlass: loeschung (ersetzt durch spezialisierte Parser)
+- Datum: `2026-01-21`
+- Commit: `n/a (historisch)`

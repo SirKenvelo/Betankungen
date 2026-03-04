@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-03
+**Stand:** 2026-03-04
 
 <INSTRUCTIONS>
 
@@ -38,6 +38,13 @@
 - Falls ein Task nicht sprintgebunden ist, den Prefix `[General]` verwenden.
 - Beispiel (Format, `[Unreleased] -> Changed`): `- u_fmt: CSV-Helper ergaenzt. (YYYY-MM-DD)`
 - Beispiel (Format, `[Unreleased] -> Tooling / Assistance`): `- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (YYYY-MM-DD)`
+
+## Knowledge-Archive-Regeln
+- Bei Loeschung von Prozeduren/Funktionen muss die urspruengliche Version vor dem Entfernen in `knowledge_archive/` gesichert werden.
+- Bei funktionalen Verhaltensaenderungen (nicht nur Refactoring/Formatierung) soll die urspruengliche Version ebenfalls in `knowledge_archive/` gesichert werden, damit die Historie ohne Git-Dive nachvollziehbar bleibt.
+- Jede neue Archivdatei wird in `knowledge_archive/README.md` dokumentiert (Quelle/Datei, Symbolname, Anlass, Datum, zugehoeriger Commit-Hash falls vorhanden).
+- Dateinamenskonvention fuer neue Archive: `archive_<symbol_or_topic>_<YYYY-MM-DD>.<ext>`.
+- Archiv-Snippets verwenden einen standardisierten Header im Stil `ARCHIVE-SNIPPET` gemaess Template in `knowledge_archive/README.md`.
 
 ## Priorisierung von Änderungen & Dokumentations-Pflicht
 Nach Änderungen muss die KI die Relevanz für die Dokumentation (insb. im `docs`-Ordner) wie folgt bewerten:

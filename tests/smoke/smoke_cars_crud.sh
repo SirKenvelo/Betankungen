@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cars_crud.sh
-# UPDATED: 2026-03-02
+# UPDATED: 2026-03-04
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
 # und Car-Resolver-Scope fuer fuelups add/list/stats.
 
@@ -311,7 +311,7 @@ fi
 csv_read_header "$OUT_SCOPE_STATS_CAR1"
 csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
-ROWS_CAR1="$(($(wc -l < "$OUT_SCOPE_STATS_CAR1") - 1))"
+ROWS_CAR1="$(csv_row_count "$OUT_SCOPE_STATS_CAR1")"
 DB_COUNT_CAR1="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = 1;")"
 EXP_ROWS_CAR1="$((DB_COUNT_CAR1 - 1))"
 if [[ "$ROWS_CAR1" != "$EXP_ROWS_CAR1" ]]; then
@@ -345,7 +345,7 @@ fi
 csv_read_header "$OUT_SCOPE_STATS_CAR2"
 csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
-ROWS_CAR2="$(($(wc -l < "$OUT_SCOPE_STATS_CAR2") - 1))"
+ROWS_CAR2="$(csv_row_count "$OUT_SCOPE_STATS_CAR2")"
 DB_COUNT_CAR2="$(sqlite3 "$RES_DB" "SELECT COUNT(*) FROM fuelups WHERE car_id = $CAR2_ID;")"
 EXP_ROWS_CAR2="$((DB_COUNT_CAR2 - 1))"
 if [[ "$ROWS_CAR2" != "$EXP_ROWS_CAR2" ]]; then

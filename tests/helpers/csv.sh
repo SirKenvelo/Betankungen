@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # csv.sh
-# UPDATED: 2026-03-01
+# UPDATED: 2026-03-04
 # Requires: tests/helpers/assert.sh
 # Strict CSV assumption: comma-separated, NO quoted commas/escapes.
 
@@ -61,6 +61,27 @@ csv_assert_has_cols() {
     fi
     _fail "CSV missing columns: ${missing[*]} (have: ${have})"
   fi
+}
+
+# Count CSV data rows (without header). Empty/only-header file => 0.
+csv_row_count() {
+  local file="${1-}"
+  local lines
+  local rows
+  assert_file_exists "$file"
+  lines="$(wc -l < "$file" | tr -d '[:space:]')"
+  [[ "$lines" =~ ^[0-9]+$ ]] || _fail "csv_row_count: invalid line count for '$file': '$lines'"
+
+  if (( lines == 0 )); then
+    echo "0"
+    return 0
+  fi
+
+  rows=$((lines - 1))
+  if (( rows < 0 )); then
+    rows=0
+  fi
+  echo "$rows"
 }
 
 # Read Nth data row (1 = first data row after header) into array variable name.

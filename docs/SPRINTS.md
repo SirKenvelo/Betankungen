@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-03
+**Stand:** 2026-03-04
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -19,6 +19,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Thema: cars_crud Stats-CSV Scope in `tests/smoke/smoke_cars_crud.sh` auf feldbasierte Contract-Checks migriert.
 - Git-Commit: `aefca0d`
 - Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`
+
+3. S1C3/4
+- Thema: smoke_clean_home Audit + CSV-Helper-Polish (`csv_row_count`) + knowledge_archive-Regeln.
+- Status: geplant
+- Git-Commit: spaeter
+- Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff` (spaeter)
 
 ### Abschluss-Tag
 

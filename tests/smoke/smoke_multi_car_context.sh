@@ -11,7 +11,7 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-03-01
+# UPDATED: 2026-03-04
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -342,7 +342,7 @@ fi
 csv_read_header "$OUT_STATS_A"
 csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
-ROWS_A="$(($(wc -l < "$OUT_STATS_A") - 1))"
+ROWS_A="$(csv_row_count "$OUT_STATS_A")"
 (( ROWS_A == 1 )) || fail "Matrix >1 Cars: stats carA: expected 1 data row, got $ROWS_A"
 
 declare -a R_A=()
@@ -365,7 +365,7 @@ fi
 csv_read_header "$OUT_STATS_B"
 csv_assert_has_cols idx dist_km liters_ml avg_l_per_100km_x100 total_cents
 
-ROWS_B="$(($(wc -l < "$OUT_STATS_B") - 1))"
+ROWS_B="$(csv_row_count "$OUT_STATS_B")"
 (( ROWS_B == 1 )) || fail "Matrix >1 Cars: stats carB: expected 1 data row, got $ROWS_B"
 
 declare -a R_B=()
