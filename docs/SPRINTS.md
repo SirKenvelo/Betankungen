@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-04
+**Stand:** 2026-03-06
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -62,3 +62,16 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S2C4/4 (Doku-Finalisierung + Volltest-Verifikation)
 - Abschluss-Tag: `sprint-2-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+
+## Sprint 3 - DB-Migrationsdisziplin ab Schema v4
+
+- Status: in progress
+- Ziel: Ab `schema_version >= 4` keine Neuinitialisierung mehr, sondern konsequente Schema-Migration pro Version.
+
+### Commit-Folge
+
+1. S3C1/3
+- Thema: Cars-Schema fuer VIN + Registrierungs-Metadaten vorbereitet (`vin`, `reg_doc_path`, `reg_doc_sha256`) ohne CLI-Wiring und ohne aktive Runtime-Nutzung.
+- Status: in progress
+- Git-Commit: pending (wird nach Commit mit 7-stelligem Short-Hash nachgetragen)
+- Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff` (pending)

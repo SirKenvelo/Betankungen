@@ -2,7 +2,7 @@
   u_db_init.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-03-06
   AUTHOR : Christof Kempinski
   Datenbank-Bootstrapper und Schema-Verwaltung fuer SQLite.
 
@@ -30,6 +30,7 @@
   v2: Stammdaten für Tankstellen (stations)
   v3: Transaktionsdaten für Betankungen (fuelups) inkl. Start-KM Logik
   v4: Fuelups erweitert um car_id + missed_previous, neue cars-Tabelle
+  v5: cars erweitert um vin, reg_doc_path, reg_doc_sha256
 
   Hinweis: Bei Schema-Änderungen bitte die 'schema_version' in der 
   EnsureDatabase-Prozedur UND hier im Header inkrementieren.
@@ -148,7 +149,7 @@ begin
       // Schema-Version setzen (fuer spaetere Migrationen)
       Q.SQL.Text := 'INSERT OR REPLACE INTO meta(key, value) VALUES(:k, :v);';
       Q.Params.ParamByName('k').AsString := 'schema_version';
-      Q.Params.ParamByName('v').AsString := '4';
+      Q.Params.ParamByName('v').AsString := '5';
       Q.ExecSQL;
 
       // App-Name (rein informativ)
@@ -241,7 +242,7 @@ begin
       end;
       Q.Close;
 
-      // Fach-Tabelle: cars (v4 inkl. evtl. Migration von frueherem v4-light)
+      // Fach-Tabelle: cars (v5, Migrationen bleiben ALTER-basiert)
       HasCarsTable := TableExists('cars');
       HasCarPlate := HasCarsTable and ColumnExists('cars', 'plate');
       HasCarNote := HasCarsTable and ColumnExists('cars', 'note');
@@ -250,13 +251,16 @@ begin
 
       if not HasCarsTable then
       begin
-        Dbg('Ensuring cars table (v4 fresh create)...');
+        Dbg('Ensuring cars table (v5 fresh create)...');
         Q.SQL.Text :=
           'CREATE TABLE IF NOT EXISTS cars (' +
           '  id                  INTEGER PRIMARY KEY,' +
           '  name                TEXT    NOT NULL,' +
           '  plate               TEXT,' +
           '  note                TEXT,' +
+          '  vin                 TEXT,' +
+          '  reg_doc_path        TEXT,' +
+          '  reg_doc_sha256      TEXT,' +
           '  odometer_start_km   INTEGER NOT NULL CHECK (odometer_start_km > 0),' +
           '  odometer_start_date TEXT    NOT NULL,' +
           '  created_at          TEXT    NOT NULL DEFAULT (datetime(''now'')),' +
@@ -303,6 +307,24 @@ begin
         Q.ExecSQL;
 
         Q.SQL.Text := 'ALTER TABLE cars_new RENAME TO cars;';
+        Q.ExecSQL;
+      end;
+
+      if not ColumnExists('cars', 'vin') then
+      begin
+        Q.SQL.Text := 'ALTER TABLE cars ADD COLUMN vin TEXT;';
+        Q.ExecSQL;
+      end;
+
+      if not ColumnExists('cars', 'reg_doc_path') then
+      begin
+        Q.SQL.Text := 'ALTER TABLE cars ADD COLUMN reg_doc_path TEXT;';
+        Q.ExecSQL;
+      end;
+
+      if not ColumnExists('cars', 'reg_doc_sha256') then
+      begin
+        Q.SQL.Text := 'ALTER TABLE cars ADD COLUMN reg_doc_sha256 TEXT;';
         Q.ExecSQL;
       end;
 
@@ -506,7 +528,7 @@ begin
       // Schema-Version final absichern (nach evtl. Migration)
       Q.SQL.Text := 'INSERT OR REPLACE INTO meta(key, value) VALUES(:k, :v);';
       Q.Params.ParamByName('k').AsString := 'schema_version';
-      Q.Params.ParamByName('v').AsString := '4';
+      Q.Params.ParamByName('v').AsString := '5';
       Q.ExecSQL;
 
       // Transaktion abschliessen

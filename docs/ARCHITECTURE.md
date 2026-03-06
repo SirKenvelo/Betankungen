@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-03-01
+**Stand:** 2026-03-06
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -44,6 +44,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **Stats:** `--stats fuelups` mit Volltank-Zyklus-Auswertung inkl. Kosten.
 - [x] **Schema v4:** Tabelle `fuelups` mit Foreign Keys auf `stations` und `cars` plus `missed_previous`.
 - [x] **Cars-Datenmodell:** `cars` fuehrt Start-KM/Start-Datum (`odometer_start_km`, `odometer_start_date`) als Domain-Startpunkt.
+- [x] **Cars-Schema v5 (Vorbereitung):** `cars` enthaelt optionale VIN-/Dokument-Metadaten (`vin`, `reg_doc_path`, `reg_doc_sha256`); aktuell rein strukturell, noch ohne CLI-Wiring/Validierung und ohne aktive Runtime-Nutzung.
 - [x] **Car Context Resolver:** Zentraler Resolver `ResolveCarIdOrFail` als Single Source of Truth fuer Car-Auswahl (0/1/>1 Cars, unknown/invalid `car_id`).
 - [x] **Kein implizites Default `car_id=1` mehr:** Car-ID wird nicht geraten; bei mehreren Fahrzeugen ist `--car-id` verpflichtend.
 - [x] **Strict Car Scoping:** `--add fuelups`, `--list fuelups` und `--stats fuelups` laufen strikt car-gescoped (`WHERE car_id = :car_id`).

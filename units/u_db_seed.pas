@@ -2,7 +2,7 @@
   u_db_seed.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-03-06
   AUTHOR : Christof Kempinski
   Demo-Datenbank-Seeding fuer Betankungen.
 
@@ -149,13 +149,16 @@ begin
     ');'
   );
 
-  // cars (v4)
+  // cars (v5)
   ExecSQL(Conn, Tran,
     'CREATE TABLE IF NOT EXISTS cars (' +
     '  id                  INTEGER PRIMARY KEY,' +
     '  name                TEXT    NOT NULL,' +
     '  plate               TEXT,' +
     '  note                TEXT,' +
+    '  vin                 TEXT,' +
+    '  reg_doc_path        TEXT,' +
+    '  reg_doc_sha256      TEXT,' +
     '  odometer_start_km   INTEGER NOT NULL CHECK (odometer_start_km > 0),' +
     '  odometer_start_date TEXT    NOT NULL,' +
     '  created_at          TEXT    NOT NULL DEFAULT (datetime(''now'')),' +
@@ -164,11 +167,17 @@ begin
     ');'
   );
 
-  // Kompatibel fuer bestehende cars-Tabellen (v4-light -> v4-full)
+  // Kompatibel fuer bestehende cars-Tabellen (v4-Varianten -> v5)
   if not ColumnExists(Conn, Tran, 'cars', 'plate') then
     ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN plate TEXT;');
   if not ColumnExists(Conn, Tran, 'cars', 'note') then
     ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN note TEXT;');
+  if not ColumnExists(Conn, Tran, 'cars', 'vin') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN vin TEXT;');
+  if not ColumnExists(Conn, Tran, 'cars', 'reg_doc_path') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN reg_doc_path TEXT;');
+  if not ColumnExists(Conn, Tran, 'cars', 'reg_doc_sha256') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN reg_doc_sha256 TEXT;');
   if not ColumnExists(Conn, Tran, 'cars', 'odometer_start_km') then
     ExecSQL(Conn, Tran, 'ALTER TABLE cars ADD COLUMN odometer_start_km INTEGER NOT NULL DEFAULT 1;');
   if not ColumnExists(Conn, Tran, 'cars', 'odometer_start_date') then

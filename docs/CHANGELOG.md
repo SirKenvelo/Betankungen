@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-04
+**Stand:** 2026-03-06
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -16,8 +16,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S2C2/4 - JSON-Export-Meta (contract_version/generated_at/app_version) in Stats-JSON und Smoke-Guardrails fuer Presence-Checks; Artefakte: `sprint_2_commit_2_von_4.md`, `sprint_2_commit_2_von_4.diff`; Basis-Commit: `701b34f`. (2026-03-04)
 - S2C3/4 - CSV-Contract-Versionierung in Stats-CSV (erste Spalte `contract_version`) inkl. Smoke-/Policy-Testsynchronisierung; Artefakte: `sprint_2_commit_3_von_4.md`, `sprint_2_commit_3_von_4.diff`; Basis-Commit: `b08a4a6`. (2026-03-04)
 - S2C4/4 - Doku-Schaerfung und Sprint-2-Finalisierung (CSV-yearly-Grenze, Status/Hashes, Volltest-Verifikation); Artefakte: `sprint_2_commit_4_von_4.md`, `sprint_2_commit_4_von_4.diff`; Basis-Commit: `94f502c`. (2026-03-04)
+- S3C1/3 - Cars-Schema v5-Vorbereitung (vin/reg-doc Felder) und ALTER-basierte Migration fuer Bestands-DBs; Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff`; Basis-Commit: `pending`. (2026-03-06)
 
 ### Changed
+- [S3C1/3] DB/Cars: Schema auf VIN-Vorbereitung erweitert (`vin`, `reg_doc_path`, `reg_doc_sha256`), ohne CLI-Wiring oder aktive Runtime-Nutzung. (2026-03-06)
+- [S3C1/3] DB/Migration: `schema_version` von `4` auf `5` angehoben; Migration fuer Bestands-DBs erfolgt per `ALTER TABLE`-Nachzug in `u_db_init` und `u_db_seed` (Rebuild-Pfad unveraendert nur fuer historische v4-Faelle). (2026-03-06)
 - [S2C4/4] Docs: `docs/EXPORT_CONTRACT.md` praezisiert, dass `--yearly` keinen CSV-Export besitzt und `--yearly --csv` ungueltig ist. (2026-03-04)
 - [S2C4/4] QA/Verification: Volltestlauf erfolgreich verifiziert (`tests/smoke/smoke_cli.sh -a -c` und `tests/domain_policy/run_domain_policy_tests.sh`). (2026-03-04)
 - [S2C4/4] Docs/Process: Sprint-2-Narrative finalisiert (`docs/SPRINTS.md`: Status `done`, S2C4/4-Commit ergänzt, Abschluss-Tag `sprint-2-done` als pending bis Freigabe markiert). (2026-03-04)
@@ -48,6 +51,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Umsetzung S3C1/3 (DB-Schema v5 + Migrations-/Doku-Pflege) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Sprint-1-Abschluss (Konsistenzpass, Wrapper-Check, Lint und Tagging) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-04)
 - Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-01)
 - Sprint-Umsetzung und Test-Review in S1C2/4 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-02)
