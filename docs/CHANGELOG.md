@@ -18,8 +18,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S2C4/4 - Doku-Schaerfung und Sprint-2-Finalisierung (CSV-yearly-Grenze, Status/Hashes, Volltest-Verifikation); Artefakte: `sprint_2_commit_4_von_4.md`, `sprint_2_commit_4_von_4.diff`; Basis-Commit: `94f502c`. (2026-03-04)
 - S3C1/3 - Cars-Schema v5-Vorbereitung (vin/reg-doc Felder) und ALTER-basierte Migration fuer Bestands-DBs; Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff`; Basis-Commit: `f25c3ca`. (2026-03-06)
 - S3C2/3 - Migration-Smoke-Framework mit Flag-Strategie (`--v4-to-v5`) und CLI-Integration (`--migrations`); Artefakte: `sprint_3_commit_2_von_3.md`, `sprint_3_commit_2_von_3.diff`; Basis-Commit: `ff5fb27`. (2026-03-06)
+- S3C3/3 - VIN-Policy-/UX-Prep dokumentiert (optionaler VIN-Ansatz, Normalisierung, Policy-light, Dokument-Referenzen) und Sprint-3-Doku finalisiert; Artefakte: `sprint_3_commit_3_von_3.md`, `sprint_3_commit_3_von_3.diff`; Basis-Commit: `pending`. (2026-03-06)
 
 ### Changed
+- [S3C3/3] Docs: Neues Dokument `docs/VIN_POLICY_UX_PREP.md` eingefuehrt (VIN optional statt Pflicht, spaetere Normalisierung/Validierung, Registrierungsdokumente nur als Referenzen, CLI-UX-Richtung und Test-Ideen). (2026-03-06)
+- [S3C3/3] Docs/Architecture: `docs/ARCHITECTURE.md` um expliziten VIN-Policy-/UX-Prep-Verweis erweitert; `docs/SPRINTS.md` Sprint-3-Folge um S3C3/3 inkl. Abschluss-Tag-Plan ergänzt. (2026-03-06)
 - [S3C2/3] Tests/Smoke: Neue dedizierte Migrations-Suite `tests/smoke/smoke_migrations.sh` inkl. Wrapper `tests/smoke_migrations.sh` eingefuehrt; erster Check validiert Upgrade `v4 -> v5` (ALTER-Spalten `vin`, `reg_doc_path`, `reg_doc_sha256`, `schema_version=5`, idempotenter Re-Run). (2026-03-06)
 - [S3C2/3] Tests/Runner+Docs: `tests/smoke/smoke_cli.sh` und `tests/smoke/smoke_clean_home.sh` um Flag `--migrations` erweitert; `tests/README.md` um Wrapper/Suite/Run-Beispiele fuer Migration-Smokes aktualisiert. (2026-03-06)
 - [S3C1/3] DB/Cars: Schema auf VIN-Vorbereitung erweitert (`vin`, `reg_doc_path`, `reg_doc_sha256`), ohne CLI-Wiring oder aktive Runtime-Nutzung. (2026-03-06)
@@ -54,6 +57,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Umsetzung S3C3/3 (VIN-Policy-/UX-Doku und Sprint-3-Finalisierung) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Umsetzung S3C2/3 (Migrations-Smoke-Framework und Runner-Integration) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Umsetzung S3C1/3 (DB-Schema v5 + Migrations-/Doku-Pflege) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Sprint-1-Abschluss (Konsistenzpass, Wrapper-Check, Lint und Tagging) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-04)

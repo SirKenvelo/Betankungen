@@ -45,6 +45,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **Schema v4:** Tabelle `fuelups` mit Foreign Keys auf `stations` und `cars` plus `missed_previous`.
 - [x] **Cars-Datenmodell:** `cars` fuehrt Start-KM/Start-Datum (`odometer_start_km`, `odometer_start_date`) als Domain-Startpunkt.
 - [x] **Cars-Schema v5 (Vorbereitung):** `cars` enthaelt optionale VIN-/Dokument-Metadaten (`vin`, `reg_doc_path`, `reg_doc_sha256`); aktuell rein strukturell, noch ohne CLI-Wiring/Validierung und ohne aktive Runtime-Nutzung.
+- [x] **VIN-Policy/UX-Prep dokumentiert:** VIN ist empfohlen, aber optional (kein Primaerschluessel-Ersatz); Registrierungsdokumente bleiben Referenzen via `reg_doc_path`/`reg_doc_sha256` (siehe `docs/VIN_POLICY_UX_PREP.md`).
 - [x] **Car Context Resolver:** Zentraler Resolver `ResolveCarIdOrFail` als Single Source of Truth fuer Car-Auswahl (0/1/>1 Cars, unknown/invalid `car_id`).
 - [x] **Kein implizites Default `car_id=1` mehr:** Car-ID wird nicht geraten; bei mehreren Fahrzeugen ist `--car-id` verpflichtend.
 - [x] **Strict Car Scoping:** `--add fuelups`, `--list fuelups` und `--stats fuelups` laufen strikt car-gescoped (`WHERE car_id = :car_id`).
