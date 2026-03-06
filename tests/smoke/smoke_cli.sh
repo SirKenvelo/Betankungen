@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-04
+# UPDATED: 2026-03-06
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -12,6 +12,7 @@ TMP_DIRS=()
 RUN_MONTHLY_SUITE=false
 RUN_YEARLY_SUITE=false
 RUN_CARS_SUITE=false
+RUN_MIGRATIONS_SUITE=false
 LIST_ONLY=false
 KEEP_GOING=false
 
@@ -20,12 +21,14 @@ usage() {
 smoke_cli.sh - Basis-Smoke + optionale Stats-Zusatzsuiten
 
 Usage:
-  tests/smoke/smoke_cli.sh [-m] [-y] [-c] [-a] [-l] [--keep-going] [-h]
+  tests/smoke/smoke_cli.sh [-m] [-y] [-c] [--migrations] [-a] [-l] [--keep-going] [-h]
 
 Optionen:
   -m    Monthly-Zusatzsuite ausfuehren
   -y    Yearly-Zusatzsuite ausfuehren
   -c    Cars-Zusatzsuite ausfuehren
+  --migrations
+        Migrations-Zusatzsuite ausfuehren
   -a    Beide Zusatzsuiten ausfuehren (-m + -y)
   -l, --list
         Nur Testliste ausgeben (Dry-List, keine Ausfuehrung)
@@ -81,6 +84,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     -c|--cars)
       RUN_CARS_SUITE=true
+      shift
+      ;;
+    --migrations)
+      RUN_MIGRATIONS_SUITE=true
       shift
       ;;
     -l|--list)
@@ -195,6 +202,14 @@ print_plan() {
     printf '[LIST] (Cars) --edit cars --car-id 999 -> Fehler (unknown car)\n'
     printf '[LIST] (Cars) --delete cars --car-id 999 -> Fehler (unknown car)\n'
     printf '[LIST] (Cars) --delete cars mit fuelups -> geblockt\n'
+  fi
+
+  if $RUN_MIGRATIONS_SUITE; then
+    printf '[LIST] (Migrations) tests/smoke_migrations.sh (Wrapper)\n'
+    printf '[LIST] (Migrations) v4 -> v5 per Flag (--v4-to-v5)\n'
+    printf '[LIST] (Migrations) schema_version wird auf 5 angehoben\n'
+    printf '[LIST] (Migrations) cars-Spalten vin/reg_doc_path/reg_doc_sha256 vorhanden\n'
+    printf '[LIST] (Migrations) Re-Run ist idempotent\n'
   fi
 
   printf '[INFO] Ende der Testliste.\n'
@@ -1110,6 +1125,20 @@ run_cars_suite() {
   test_cars_delete_blocked_when_fuelups_exist
 }
 
+test_migrations_script_ok() {
+  if "$ROOT_DIR/tests/smoke_migrations.sh" --v4-to-v5 >/dev/null 2>&1; then
+    printf '[OK] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --v4-to-v5'
+  else
+    printf '[FAIL] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --v4-to-v5'
+    add_fail
+  fi
+}
+
+run_migrations_suite() {
+  printf '[INFO] Zusatzsuite aktiv: Migrations (--migrations)\n'
+  test_migrations_script_ok
+}
+
 trap cleanup_tmp_dirs EXIT
 
 require_path() {
@@ -1162,6 +1191,9 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   fi
   if $RUN_CARS_SUITE; then
     run_cars_suite
+  fi
+  if $RUN_MIGRATIONS_SUITE; then
+    run_migrations_suite
   fi
 else
   printf '[INFO] Binärdatei fehlt: %s\n' "$ROOT_DIR/bin/Betankungen"

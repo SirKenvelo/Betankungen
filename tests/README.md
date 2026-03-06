@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-01
+**Stand:** 2026-03-06
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -14,6 +14,7 @@ Kompatibilitaets-Wrapper bleiben im Root erhalten:
 - `tests/smoke_clean_home.sh` -> `tests/smoke/smoke_clean_home.sh`
 - `tests/smoke_cars_crud.sh` -> `tests/smoke/smoke_cars_crud.sh`
 - `tests/smoke_multi_car_context.sh` -> `tests/smoke/smoke_multi_car_context.sh`
+- `tests/smoke_migrations.sh` -> `tests/smoke/smoke_migrations.sh`
 - `tests/run_unit_tests.sh` -> `tests/domain_policy/run_domain_policy_tests.sh`
 
 ## Namenskonvention (Policy-Cases)
@@ -66,6 +67,7 @@ Direktlauf:
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.
+- Dedizierter Migrations-Smoke: `tests/smoke/smoke_migrations.sh` (aktuell: `--v4-to-v5`).
 - Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
 - Die `-c`-Cars-Suite prueft zusaetzlich den Wrapper `tests/smoke_multi_car_context.sh` (inkl. Transit auf `tests/smoke/smoke_multi_car_context.sh`).
 - Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:
@@ -94,6 +96,7 @@ Direktlauf:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite
   - `-c`: Cars-Suite
+  - `--migrations`: Migrations-Suite
   - `-a`: beide Suiten
 - Steuerung:
   - Default: fail-fast
@@ -105,6 +108,7 @@ Ausfuehrung:
 - `tests/smoke/smoke_cli.sh -m|-y|-c|-a`
 - `tests/smoke/smoke_cars_crud.sh`
 - `tests/smoke/smoke_multi_car_context.sh`
+- `tests/smoke/smoke_migrations.sh --v4-to-v5`
 - kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
@@ -113,7 +117,7 @@ Ausfuehrung:
 
 Ausfuehrung:
 - `tests/smoke/smoke_clean_home.sh`
-- `tests/smoke/smoke_clean_home.sh -m|-y|-c|-a`
+- `tests/smoke/smoke_clean_home.sh -m|-y|-c|--migrations|-a`
 - `tests/smoke/smoke_clean_home.sh -a --keep-going`
 - `tests/smoke/smoke_clean_home.sh -a -l`
 - optional: `tests/smoke/smoke_clean_home.sh --keep-home`
