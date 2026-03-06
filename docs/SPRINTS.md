@@ -72,6 +72,6 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 1. S3C1/3
 - Thema: Cars-Schema fuer VIN + Registrierungs-Metadaten vorbereitet (`vin`, `reg_doc_path`, `reg_doc_sha256`) ohne CLI-Wiring und ohne aktive Runtime-Nutzung.
-- Status: in progress
-- Git-Commit: pending (wird nach Commit mit 7-stelligem Short-Hash nachgetragen)
+- Status: done
+- Git-Commit: `f25c3ca`
 - Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff` (pending)
