@@ -17,7 +17,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S2C3/4 - CSV-Contract-Versionierung in Stats-CSV (erste Spalte `contract_version`) inkl. Smoke-/Policy-Testsynchronisierung; Artefakte: `sprint_2_commit_3_von_4.md`, `sprint_2_commit_3_von_4.diff`; Basis-Commit: `b08a4a6`. (2026-03-04)
 - S2C4/4 - Doku-Schaerfung und Sprint-2-Finalisierung (CSV-yearly-Grenze, Status/Hashes, Volltest-Verifikation); Artefakte: `sprint_2_commit_4_von_4.md`, `sprint_2_commit_4_von_4.diff`; Basis-Commit: `94f502c`. (2026-03-04)
 - S3C1/3 - Cars-Schema v5-Vorbereitung (vin/reg-doc Felder) und ALTER-basierte Migration fuer Bestands-DBs; Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff`; Basis-Commit: `f25c3ca`. (2026-03-06)
-- S3C2/3 - Migration-Smoke-Framework mit Flag-Strategie (`--v4-to-v5`) und CLI-Integration (`--migrations`); Artefakte: `sprint_3_commit_2_von_3.md`, `sprint_3_commit_2_von_3.diff`; Basis-Commit: `pending`. (2026-03-06)
+- S3C2/3 - Migration-Smoke-Framework mit Flag-Strategie (`--v4-to-v5`) und CLI-Integration (`--migrations`); Artefakte: `sprint_3_commit_2_von_3.md`, `sprint_3_commit_2_von_3.diff`; Basis-Commit: `ff5fb27`. (2026-03-06)
 
 ### Changed
 - [S3C2/3] Tests/Smoke: Neue dedizierte Migrations-Suite `tests/smoke/smoke_migrations.sh` inkl. Wrapper `tests/smoke_migrations.sh` eingefuehrt; erster Check validiert Upgrade `v4 -> v5` (ALTER-Spalten `vin`, `reg_doc_path`, `reg_doc_sha256`, `schema_version=5`, idempotenter Re-Run). (2026-03-06)
