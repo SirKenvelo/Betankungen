@@ -27,6 +27,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S4C3/3] Core/i18n: `units/u_i18n.pas` um eine kleine, klar abgegrenzte Menge an Meta-Message-IDs erweitert (Config-Status, First-Run-Hinweise, generische Systemmeldung) fuer den ersten Runtime-Rollout ueber `Tr()`. (2026-03-07)
 - [S4C3/3] Runtime/Orchestrator: In `src/Betankungen.lpr` wurden nur ausgewaehlte risikoarme Texte auf i18n-Lookup umgestellt (`--show-config`-Rahmentexte, Reset-Config-Hinweise, First-Run-Hinweise, generische Meldung "Datenbank angelegt"), ohne breite Help-/Fehlertext-Migration. (2026-03-07)
 - [S4C3/3] Docs: Sprint-4-Abschlussstand und Mini-Rollout dokumentiert (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`). (2026-03-07)
+- [General] Docs/Migrations: `migrations/` als historisches SQL-Archiv festgezogen (`migrations/README.md` neu); aktive Schema-Migrationen als Runtime-Source-of-Truth (`units/u_db_init.pas`) und zugehoerige Validierung (`tests/smoke/smoke_migrations.sh`) in der Doku klar verankert (`docs/README.md`, `docs/ARCHITECTURE.md`). (2026-03-07)
 - [General] Tools/Artifacts: Neues Skript `scripts/sprint_artifact.sh` eingefuehrt (lokale Sprint-Artefakte `.md/.diff` mit Default-Ziel `.artifacts`, optional `--commit`, `--outdir`, `--force`, robusteres Arg-Parsing und Schutz vor stillem Ueberschreiben). (2026-03-07)
 - [General] Docs/Tools: Neue Nutzungsdoku `scripts/README_sprint_artifact.md` erstellt und Werkzeugabschnitt in `docs/README.md` um `scripts/sprint_artifact.sh` inkl. Beispiele ergaenzt. (2026-03-07)
 - [General] Meta/Process: Lokale Sprint-Artefakte auf den zentralen Ordner `.artifacts/` umgestellt; bestehende lokale `sprint_*_commit_*`-Dateien wurden dorthin verschoben, `.gitignore` ignoriert nun `.artifacts/`, und `AGENTS.md` nutzt `.artifacts/...` als verbindlichen Pfad. (2026-03-07)
@@ -74,6 +75,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Dokumentationsschaerfung zum historischen Migrationsordner (`migrations/`) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C3/3 (kontrollierte Runtime-Mini-Migration auf `Tr()` + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C2/3 (i18n-Skeleton + Config-Flow-Verankerung + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C1/3 (i18n-Policy-/Architektur-Doku, Status-Roadmap und Leitplanken) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)

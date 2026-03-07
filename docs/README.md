@@ -103,7 +103,7 @@ Details zur Regelbasis:
 
 ### Root-Ordner (Workflow ohne Git)
 - `scripts/`: Wartungsskripte (Release/Backup/Netzwerkdiagnose)
-- `migrations/`: manuelle SQL-Migrationen fuer Schema-Upgrades
+- `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
 - `.releases/`: finale Release-Artefakte (`.tar`) + `release_log.json`
 - `.backup/`: zeitgestempelte Snapshot-Backups + `index.json`
@@ -130,8 +130,9 @@ Technisches DB-Bootstrapping.
 - Anlegen der Datenbankdatei
 - Erstellen und Aktualisieren des Schemas (idempotent)
 - Pflege technischer Metadaten (`meta`)
-- Schema-Versionierung (aktuell v4: `cars`, `fuelups.car_id`, `fuelups.missed_previous`)
+- Schema-Versionierung (aktuell v5 inkl. `cars.vin`, `cars.reg_doc_path`, `cars.reg_doc_sha256`)
 - Migriert v3-Startwerte aus `meta` nach `cars.odometer_start_km` / `cars.odometer_start_date`
+- Produktive Upgrade-Pfade laufen runtime-idempotent in `u_db_init` (nicht primaer ueber `migrations/`)
 
 ---
 
