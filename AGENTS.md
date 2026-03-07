@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-04
+**Stand:** 2026-03-07
 
 <INSTRUCTIONS>
 
@@ -22,6 +22,9 @@
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
 - Commit-Message-Konvention fuer Sprint-Arbeit: Betreff beginnt mit Prefix `[SxCy/z]` (Beispiel: `[S1C2/4] tests: cars_crud csv scope field-based`).
 - Sprint-Tagging: Nach komplett abgeschlossenem und freigegebenem Sprint wird genau ein annotierter Tag im Format `sprint-<nr>-done` erstellt und gepusht; keine Sprint-Tags auf Zwischenstaenden.
+- Sprint-Artefakte nach Push: Nach jedem erfolgreichen Push eines Sprint-Commits erstellt Codex selbststaendig lokale Artefakte `sprint_<nr>_commit_<nr>_von_<nr>.diff` und `sprint_<nr>_commit_<nr>_von_<nr>.md`.
+- Reihenfolge fuer Sprint-Artefakte: 1) Commit und Push abschliessen. 2) `.diff` aus dem gepushten Commit erzeugen (z. B. `git show --stat --patch <hash> > sprint_<...>.diff`). 3) Begleit-`.md` mit Ziel, Hash, Message und Artefaktverweisen erstellen.
+- Sprint-Artefakte bleiben lokal: `.md`/`.diff` werden grundsaetzlich nicht committed oder gepusht (nur bei expliziter User-Freigabe).
 
 ## Build-Standard
 - FPC-Compile immer mit folgendem Befehl aus dem Projektroot ausfuehren:
