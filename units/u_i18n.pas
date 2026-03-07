@@ -34,7 +34,16 @@ type
   TMsgId = (
     midI18nSkeletonReady,
     midConfigLanguageInvalid,
-    midConfigLanguageDefaulted
+    midConfigLanguageDefaulted,
+    midMetaConfigStatusHeader,
+    midMetaConfigLanguageUnset,
+    midMetaConfigStatusFooter,
+    midMetaNoConfigToDelete,
+    midMetaDbNotDeletedHint,
+    midMetaFirstRunConfigCreatedFmt,
+    midMetaFirstRunDbFmt,
+    midMetaHelpHint,
+    midMetaDatabaseCreated
   );
 
 const
@@ -145,6 +154,24 @@ begin
       Result := 'Config language ist ungueltig; fallback auf Default.';
     midConfigLanguageDefaulted:
       Result := 'Config language fehlt; Default wurde gesetzt.';
+    midMetaConfigStatusHeader:
+      Result := '--- Betankungen: Config-Status ---';
+    midMetaConfigLanguageUnset:
+      Result := 'Config Sprache:     (nicht gesetzt; default=de)';
+    midMetaConfigStatusFooter:
+      Result := '---------------------------------';
+    midMetaNoConfigToDelete:
+      Result := 'Keine Config vorhanden (nichts zu loeschen).';
+    midMetaDbNotDeletedHint:
+      Result := 'Hinweis: Die DB-Datei wurde NICHT geloescht.';
+    midMetaFirstRunConfigCreatedFmt:
+      Result := 'Erststart: Config angelegt: %s';
+    midMetaFirstRunDbFmt:
+      Result := 'Erststart: DB: %s';
+    midMetaHelpHint:
+      Result := 'Tipp: Betankungen --help';
+    midMetaDatabaseCreated:
+      Result := 'Datenbank angelegt';
   else
     Result := '';
   end;
@@ -159,6 +186,24 @@ begin
       Result := 'Config language is invalid; fallback to default.';
     midConfigLanguageDefaulted:
       Result := 'Config language missing; default was set.';
+    midMetaConfigStatusHeader:
+      Result := '--- Betankungen: Config status ---';
+    midMetaConfigLanguageUnset:
+      Result := 'Config language:    (not set; default=de)';
+    midMetaConfigStatusFooter:
+      Result := '-------------------------------';
+    midMetaNoConfigToDelete:
+      Result := 'No config present (nothing to delete).';
+    midMetaDbNotDeletedHint:
+      Result := 'Hint: The DB file was NOT deleted.';
+    midMetaFirstRunConfigCreatedFmt:
+      Result := 'First run: Config created: %s';
+    midMetaFirstRunDbFmt:
+      Result := 'First run: DB: %s';
+    midMetaHelpHint:
+      Result := 'Hint: Betankungen --help';
+    midMetaDatabaseCreated:
+      Result := 'Database created';
   else
     Result := '';
   end;
@@ -173,6 +218,24 @@ begin
       Result := 'Jezyk w config jest nieprawidlowy; fallback na domyslny.';
     midConfigLanguageDefaulted:
       Result := 'Brak jezyka w config; ustawiono domyslny.';
+    midMetaConfigStatusHeader:
+      Result := '--- Betankungen: Status konfiguracji ---';
+    midMetaConfigLanguageUnset:
+      Result := 'Jezyk config:       (brak; domyslny=de)';
+    midMetaConfigStatusFooter:
+      Result := '---------------------------------------';
+    midMetaNoConfigToDelete:
+      Result := 'Brak konfiguracji (nic do usuniecia).';
+    midMetaDbNotDeletedHint:
+      Result := 'Wskazowka: Plik DB NIE zostal usuniety.';
+    midMetaFirstRunConfigCreatedFmt:
+      Result := 'Pierwsze uruchomienie: Config utworzony: %s';
+    midMetaFirstRunDbFmt:
+      Result := 'Pierwsze uruchomienie: DB: %s';
+    midMetaHelpHint:
+      Result := 'Wskazowka: Betankungen --help';
+    midMetaDatabaseCreated:
+      Result := 'Baza danych utworzona';
   else
     Result := '';
   end;

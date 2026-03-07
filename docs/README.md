@@ -78,6 +78,7 @@ Sprachscope in Sprint 4: `language=de|en|pl`.
 Aktueller Stand:
 - `S4C1/3` abgeschlossen (Policy-/Architektur-Basis).
 - `S4C2/3` abgeschlossen (technisches Skeleton mit `u_i18n`, `TMsgId`, `Tr()`, Config-Flow fuer `language`).
+- `S4C3/3` abgeschlossen (erste risikoarme Runtime-Meta-Texte ueber `Tr()`, ohne breite Help-/Fehlertextmigration).
 
 Details zur Regelbasis:
 - Architektur: `docs/ARCHITECTURE.md` (Abschnitt "I18n Policy (Sprint 4)")

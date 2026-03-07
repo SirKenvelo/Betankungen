@@ -156,7 +156,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 
-- Status: in progress (`S4C1/3` + `S4C2/3` umgesetzt)
+- Status: done (`S4C1/3` + `S4C2/3` + `S4C3/3` umgesetzt)
 - Ziel: klare i18n-Regelbasis vor jeglicher Skeleton-Verdrahtung
 
 ### S4C1/3 - Policy- und Architektur-Doku
@@ -176,9 +176,9 @@ Bereits erledigt:
 
 ### S4C3/3 - Kontrollierte Textmigration + Testhaertung
 
-- Priorisierte Runtime-Texte auf `TMsgId` + `Tr()` migrieren
-- Tests von fragilen Volltext-Matches auf stabile Signale umstellen
-- Guardrails pruefen: Exitcodes, Policy-IDs, DB-State, Contract-Struktur unveraendert
+- Erreicht: Kleine Auswahl risikoarmer Runtime-Meta-Texte auf `TMsgId` + `Tr()` migriert (Config-/First-Run-/generische Systemmeldungen).
+- Erreicht: Keine breite Help-Uebersetzung und keine vollstaendige Fehlertext-Migration.
+- Erreicht: Teststrategie bleibt stabil (keine textgetriebenen Test-Anpassungen, keine Contract-Aenderungen in JSON/CSV).
 
 ### Sprint-4 Nicht-Ziele
 

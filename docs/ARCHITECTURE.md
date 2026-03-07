@@ -80,6 +80,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **XDG-Konformität:** Trennung von Daten (`~/.local/share/`) und Konfiguration (`~/.config/`).
 - [x] **Zentrales DB-Handling:** Unterstützung für Default-Pfade, persistente INI-Konfiguration und CLI-Overrides via `--db`.
 - [x] **I18n-Skeleton (Sprint 4):** Sprachkontext `language=de|en|pl` ist im Config-Flow verankert; zentrale i18n-Unit `u_i18n` stellt `TMsgId` und `Tr()` als Einstiegspunkt bereit (ohne breite Textmigration).
+- [x] **I18n Runtime Mini-Rollout (S4C3/3):** Erste risikoarme Meta-/Konfigurationsmeldungen laufen ueber `Tr()` (u. a. Config-Status, First-Run-Hinweise, generische Systemmeldung), ohne breite Help-/Fehlertext-Migration.
 - [x] **Build-Integration:** Vollständige Synchronisation zwischen Lazarus-IDE und VS Code Build-Tasks.
 - [x] **Logging-System:** Global steuerbares Logging mit Debug-Tabelle und Trace-Ausgaben.
 - [x] **Demo-DB:** Separater Seed-Workflow via `--seed` und Nutzung via `--demo`.

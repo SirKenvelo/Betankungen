@@ -247,7 +247,7 @@ var
     CfgPath := GetConfigPath;
     DefaultDb := GetDefaultDbPath;
 
-    WriteLn('--- Betankungen: Config-Status ---');
+    WriteLn(Tr(midMetaConfigStatusHeader));
     WriteLn('Config-Datei:      ', CfgPath);
     WriteLn('Config existiert:   ', BoolToStr(FileExists(CfgPath), True));
 
@@ -265,12 +265,12 @@ var
     if LoadLanguageFromConfig(CfgLangCode) then
       WriteLn('Config Sprache:     ', CfgLangCode)
     else
-      WriteLn('Config Sprache:     (nicht gesetzt; default=de)');
+      WriteLn(Tr(midMetaConfigLanguageUnset));
 
     WriteLn('Default DB-Pfad:    ', DefaultDb);
     WriteLn('Default existiert:  ', BoolToStr(FileExists(DefaultDb), True));
     WriteLn('Aktive Sprache:     ', GetLanguageCode);
-    WriteLn('---------------------------------');
+    WriteLn(Tr(midMetaConfigStatusFooter));
     Halt(EXIT_OK);
   end;
 
@@ -288,9 +288,9 @@ var
         FailUsage('Konnte Config nicht loeschen: ' + CfgPath, efMeta, EXIT_CONFIG);
     end
     else
-      Msg('Keine Config vorhanden (nichts zu loeschen).');
+      Msg(Tr(midMetaNoConfigToDelete));
 
-    Msg('Hinweis: Die DB-Datei wurde NICHT geloescht.');
+    Msg(Tr(midMetaDbNotDeletedHint));
     Halt(EXIT_OK);
   end;
 
@@ -691,9 +691,9 @@ begin
     // (CfgExisted ist vor ResolveDbPath gesetzt; FirstRun wird in ResolveDbPath gesetzt)
     if (not Cmd.Quiet) and (not CfgExisted) and FirstRun then
     begin
-      Msg('Erststart: Config angelegt: ' + GetConfigPath);
-      Msg('Erststart: DB: ' + ExpandFileName(DbPath));
-      Msg('Tipp: Betankungen --help');
+      Msg(Format(Tr(midMetaFirstRunConfigCreatedFmt), [GetConfigPath]));
+      Msg(Format(Tr(midMetaFirstRunDbFmt), [ExpandFileName(DbPath)]));
+      Msg(Tr(midMetaHelpHint));
     end;
 
     // DB-abhaengige Command-Policies (z. B. cars edit/delete Exists/HasFuelups).
@@ -785,7 +785,7 @@ begin
     // Nur melden, wenn die DB wirklich neu angelegt wurde.
     
     if (not Cmd.Debug) and WasCreated then
-      Msg('Datenbank angelegt');
+      Msg(Tr(midMetaDatabaseCreated));
 
     // ----------------
     // Debug-Tabelle (nur bei Debug)

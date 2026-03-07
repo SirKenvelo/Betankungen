@@ -21,8 +21,12 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S3C3/3 - VIN-Policy-/UX-Prep dokumentiert (optionaler VIN-Ansatz, Normalisierung, Policy-light, Dokument-Referenzen) und Sprint-3-Doku finalisiert; Artefakte: `sprint_3_commit_3_von_3.md`, `sprint_3_commit_3_von_3.diff`; Basis-Commit: `c518fda`. (2026-03-06)
 - S4C1/3 - i18n-Policy-/Architektur-Basis vor Runtime-Wiring dokumentiert (inkl. Sprint-4-Roadmap und Leitplanken in Einstieg/Prinzipien); Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`; Basis-Commit: `dd25860`. (2026-03-07)
 - S4C2/3 - technisches i18n-Skeleton mit `u_i18n` (`TMsgId`, `Tr()`) und Config-Flow-Verankerung fuer `language=de|en|pl`; Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`; Basis-Commit: `c1a6348`. (2026-03-07)
+- S4C3/3 - erster kontrollierter Runtime-Mini-Rollout mit wenigen Meta-Texten ueber `Tr()` (ohne breite Help-/Fehlertext-Migration); Artefakte: `.artifacts/sprint_4_commit_3_von_3.md`, `.artifacts/sprint_4_commit_3_von_3.diff`; Basis-Commit: `pending`. (2026-03-07)
 
 ### Changed
+- [S4C3/3] Core/i18n: `units/u_i18n.pas` um eine kleine, klar abgegrenzte Menge an Meta-Message-IDs erweitert (Config-Status, First-Run-Hinweise, generische Systemmeldung) fuer den ersten Runtime-Rollout ueber `Tr()`. (2026-03-07)
+- [S4C3/3] Runtime/Orchestrator: In `src/Betankungen.lpr` wurden nur ausgewaehlte risikoarme Texte auf i18n-Lookup umgestellt (`--show-config`-Rahmentexte, Reset-Config-Hinweise, First-Run-Hinweise, generische Meldung "Datenbank angelegt"), ohne breite Help-/Fehlertext-Migration. (2026-03-07)
+- [S4C3/3] Docs: Sprint-4-Abschlussstand und Mini-Rollout dokumentiert (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`). (2026-03-07)
 - [General] Tools/Artifacts: Neues Skript `scripts/sprint_artifact.sh` eingefuehrt (lokale Sprint-Artefakte `.md/.diff` mit Default-Ziel `.artifacts`, optional `--commit`, `--outdir`, `--force`, robusteres Arg-Parsing und Schutz vor stillem Ueberschreiben). (2026-03-07)
 - [General] Docs/Tools: Neue Nutzungsdoku `scripts/README_sprint_artifact.md` erstellt und Werkzeugabschnitt in `docs/README.md` um `scripts/sprint_artifact.sh` inkl. Beispiele ergaenzt. (2026-03-07)
 - [General] Meta/Process: Lokale Sprint-Artefakte auf den zentralen Ordner `.artifacts/` umgestellt; bestehende lokale `sprint_*_commit_*`-Dateien wurden dorthin verschoben, `.gitignore` ignoriert nun `.artifacts/`, und `AGENTS.md` nutzt `.artifacts/...` als verbindlichen Pfad. (2026-03-07)
@@ -70,6 +74,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Umsetzung S4C3/3 (kontrollierte Runtime-Mini-Migration auf `Tr()` + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C2/3 (i18n-Skeleton + Config-Flow-Verankerung + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C1/3 (i18n-Policy-/Architektur-Doku, Status-Roadmap und Leitplanken) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S3C3/3 (VIN-Policy-/UX-Doku und Sprint-3-Finalisierung) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
