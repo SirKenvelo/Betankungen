@@ -139,4 +139,4 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S5C1/1 (Domain-Policy-CSV-Assertions final feldbasiert)
-- Abschluss-Tag: `sprint-5-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+- Abschluss-Tag: `sprint-5-done` (gesetzt)

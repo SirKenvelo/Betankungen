@@ -224,6 +224,8 @@ Bereits erledigt:
 - Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
 - 0.7.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`, `sha256=bb4769ec0b63c6299c3bfd6cac2f93c57df9efc50503ad87d2a02179ce1466ef`).
 - 0.7.0 freigegeben (Multi-Car-CLI inkl. Resolver, strict car scope und finaler Matrix-Haertung).
+- 0.8.0-Release-Artefakt final erstellt (lokal via `kpr.sh`, `sha256=72c26a025bfeaf166af7212e05e2baf688ba6f39ea41a8317c35c0f54435414d`).
+- Backup-Snapshot nach 0.8.0 erstellt (`.backup/2026-03-07_2010`, via `scripts/backup_snapshot.sh`).
 - Naechster Fokus: 0.9.x (Scope-Freeze + priorisierte Folgeziele).
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar
