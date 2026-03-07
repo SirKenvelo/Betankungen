@@ -9,10 +9,11 @@
 - Kein Overengineering, keine externen Frameworks
 - Dokumentation als First-Class-Artifacts:
   - `ARCHITECTURE.md`
+  - `BACKLOG.md`
   - `CHANGELOG.md`
   - `DESIGN_PRINCIPLES.md`
-  - `WAS_WIR_NICHT_TUN.md`
-  - `INITIAL_CONTEXT.md`
+  - `SPRINTS.md`
+  - `ADR/README.md`
 - Release-Logging via `scripts/kpr.sh` (kompatibel via Root-Wrapper `kpr.sh`)
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)
 - Restore-Ablauf dokumentiert in `RESTORE.md`

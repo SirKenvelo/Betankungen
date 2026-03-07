@@ -7,6 +7,9 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 
 ## Zentrale Designentscheidungen (ADR)
 
+Formalisierte Entscheidungsprotokolle liegen unter `docs/ADR/` (Index: `docs/ADR/README.md`).
+Die folgenden Punkte sind die dauerhaften Architekturleitlinien auf hoher Ebene.
+
 *   **Immutable IDs:** Primärschlüssel (IDs) werden niemals neu vergeben. Einmal vergebene IDs bleiben permanent mit ihrem Datensatz verknüpft, um die Referenzintegrität (z. B. in Backups oder Log-Files) zu garantieren.
 *   **Single-Table Source of Truth:** Bevorzugung einer klaren Tabellenstruktur gegenüber künstlicher Über-Normalisierung, um die Abfrage-Logik (SQL) simpel und performant zu halten.
 *   **Command-Exclusivity:** Das CLI-Interface folgt einem strikten Dispatcher-Modell. Pro Aufruf wird genau eine Hauptaktion (Add, List, Edit, Delete, Seed oder Stats) ausgeführt, was Fehlbedienungen verhindert.

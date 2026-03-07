@@ -68,6 +68,13 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
+## Doku-Navigation
+
+- `docs/BACKLOG.md`: bewusst verschobene, spaeter umzusetzende Themen.
+- `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).
+- `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
+- `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
+
 ## i18n-Hinweis (Sprint 4)
 
 Internationalisierung wird in Sprint 4 bewusst in zwei Schritten umgesetzt:
@@ -106,6 +113,8 @@ Details zur Regelbasis:
 - `scripts/`: Wartungsskripte (Release/Backup/Netzwerkdiagnose)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
+- `docs/ADR/`: Entscheidungen im ADR-Format (accepted/proposed)
+- `docs/BACKLOG.md`: verschobene oder bewusst spaeter geplante Themen
 - `.releases/`: finale Release-Artefakte (`.tar`) + `release_log.json`
 - `.backup/`: zeitgestempelte Snapshot-Backups + `index.json`
 - `tests/`: Smoke-/Plausibilitaetstests fuer den lokalen Workflow (inkl. dediziertem Cars-CRUD-Smoke)

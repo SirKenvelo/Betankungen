@@ -25,6 +25,9 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Docs/Backlog: Neues Backlog-Dokument `docs/BACKLOG.md` eingefuehrt (klare Trennung von spaeteren Themen inkl. `BL-001` Policy-Structure-Coverage-Check und `BL-002` optionales Developer-Flag `--ndt`). (2026-03-07)
+- [General] Docs/ADR: ADR-Unterordner `docs/ADR/` eingefuehrt (`README` + `ADR-0001..ADR-0004`) fuer entschiedene und offene Produkt-/Architekturentscheidungen (u. a. CSV-Contract-Versionierung, VIN-Validierungs-Haertegrad, Schema-Bump-Strategie, Fleet-Stats-Naming). (2026-03-07)
+- [General] Docs/Navigation: `docs/README.md`, `docs/ARCHITECTURE.md` und `docs/STATUS.md` um strukturierte Verweise/Artefaktlisten fuer Backlog-/ADR-Dokumente erweitert; gezielte Unterordner-Struktur ueber `docs/ADR/` eingefuehrt, ohne riskante Massenverschiebung bestehender Doku-Dateien. (2026-03-07)
 - [General] Tools/Backup: `scripts/backup_snapshot.sh` um automatische Retention erweitert (`--keep N`, Default `10`); alte Snapshot-Ordner werden nach dem Lauf bereinigt und `.backup/index.json` auf bestehende Snapshots gepruned. `docs/README.md` um Usage-/Beispiele aktualisiert. (2026-03-07)
 - [General] Release/Artifacts: `kpr.sh --note "Release 0.8.0 final"` ausgefuehrt; lokales Release-Archiv `Betankungen_0_8_0.tar` erstellt (`sha256=72c26a025bfeaf166af7212e05e2baf688ba6f39ea41a8317c35c0f54435414d`) und `release_log.json` aktualisiert. (2026-03-07)
 - [General] Backup/Snapshot: `scripts/backup_snapshot.sh --note "Backup after release 0.8.0"` ausgefuehrt; Snapshot `.backup/2026-03-07_2010` und aktualisierter Backup-Index erstellt. (2026-03-07)
@@ -84,6 +87,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Backlog-/ADR-Strukturierung und Doku-Navigation erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Retention-Erweiterung fuer `scripts/backup_snapshot.sh` (inkl. Doku-Update) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Release-/Backup-Durchlauf (`kpr.sh`, `backup_snapshot.sh`) und zugehoerige Traceability-Pflege erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Prozessschaerfung zur Versionierungsautomatik (`AGENTS.md`, inkl. `APP_VERSION`-Sync-Regel) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
