@@ -25,6 +25,8 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Data/Easter-Egg: Zusaetzliche Multi-Line-Message fuer die geplante Maintainer-Variante `--cookie` in `data/dev_messages.b64` aufgenommen (feste drei Zeilen: SEARCHING/DOGGO FOUND/TAIL.PROPELLER). (2026-03-07)
+- [General] Docs/Backlog: `docs/BACKLOG.md` um die optionale, versteckte CLI-Variante `--cookie` erweitert (feste Ausgabe, isoliert von normalen Flows). (2026-03-07)
 - [General] Data/Easter-Egg: Entkoppelte Message-Sammlung `data/dev_messages.b64` eingefuehrt (eine base64-kodierte Message pro Zeile, inkl. initialem Bestand fuer das optionale `--ndt`-Backlog-Feature). (2026-03-07)
 - [General] Tools/Data: Neues Hilfsskript `scripts/dev_messages_encode.sh` eingefuehrt (Input mit Delimiter `---`, Multi-Line-Support, Ausgabe als base64-Zeilenformat fuer `data/dev_messages.b64`). (2026-03-07)
 - [General] Docs/Backlog: Rohtexte der Developer-Messages aus `docs/BACKLOG.md` entfernt und auf entkoppelte Datenablage umgestellt; Referenzen auf `data/dev_messages.b64` und Pflegeworkflow ergaenzt. (2026-03-07)
@@ -91,6 +93,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Erweiterung der Easter-Egg-Message-Liste und Backlog-Praezisierung fuer `--cookie` erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Auslagerung/Obfuskation der Developer-Messages (`data/dev_messages.b64`) und Einrichtung des Encode-Helfers erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Backlog-/ADR-Strukturierung und Doku-Navigation erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Retention-Erweiterung fuer `scripts/backup_snapshot.sh` (inkl. Doku-Update) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)

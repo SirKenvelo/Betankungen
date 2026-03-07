@@ -44,6 +44,13 @@ Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produkten
   - Pflegehelfer: `scripts/dev_messages_encode.sh`
 - Startbestand:
   - ist aus diesem Backlog-Dokument ausgelagert nach `data/dev_messages.b64` (Spoiler-Schutz durch Obfuskation)
+- Optionale Maintainer-Variante:
+  - versteckter CLI-Befehl `--cookie`
+  - feste Ausgabe (kein Zufall):
+    - `SEARCHING FOR DOGGO...`
+    - `DOGGO FOUND AT: SOFA.LNK`
+    - `STATUS: TAIL.PROPELLER = MAX_RPM`
+  - bleibt klar als Easter-Egg isoliert (kein Einfluss auf normale Flows)
 
 ## Verknuepfte Entscheidungen
 
