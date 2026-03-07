@@ -23,6 +23,8 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S4C2/3 - technisches i18n-Skeleton mit `u_i18n` (`TMsgId`, `Tr()`) und Config-Flow-Verankerung fuer `language=de|en|pl`; Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`; Basis-Commit: `c1a6348`. (2026-03-07)
 
 ### Changed
+- [General] Tools/Artifacts: Neues Skript `scripts/sprint_artifact.sh` eingefuehrt (lokale Sprint-Artefakte `.md/.diff` mit Default-Ziel `.artifacts`, optional `--commit`, `--outdir`, `--force`, robusteres Arg-Parsing und Schutz vor stillem Ueberschreiben). (2026-03-07)
+- [General] Docs/Tools: Neue Nutzungsdoku `scripts/README_sprint_artifact.md` erstellt und Werkzeugabschnitt in `docs/README.md` um `scripts/sprint_artifact.sh` inkl. Beispiele ergaenzt. (2026-03-07)
 - [General] Meta/Process: Lokale Sprint-Artefakte auf den zentralen Ordner `.artifacts/` umgestellt; bestehende lokale `sprint_*_commit_*`-Dateien wurden dorthin verschoben, `.gitignore` ignoriert nun `.artifacts/`, und `AGENTS.md` nutzt `.artifacts/...` als verbindlichen Pfad. (2026-03-07)
 - [S4C2/3] Core/i18n: Neue Unit `units/u_i18n.pas` als zentraler i18n-Einstiegspunkt eingefuehrt (`TMsgId`, `Tr()`, Sprachraum `de|en|pl`, Normalisierungs-/Parsing-Helfer), ohne breite Migration bestehender Runtime-Texte. (2026-03-07)
 - [S4C2/3] Core/Config-Flow: Sprachkontext `language=de|en|pl` im Konfigurationsfluss verankert (`src/Betankungen.lpr`): Laden/Normalisieren aus `config.ini`, Default `de`, Persistenz bei Config-Schreibpfaden (`--db-set`, Erststart/Fallback). (2026-03-07)

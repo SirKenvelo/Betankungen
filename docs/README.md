@@ -321,6 +321,23 @@ Beispiel:
 - `scripts/projekt_kontext.sh`
 - `scripts/projekt_kontext.sh /tmp/projekt_kontext.md`
 
+### `scripts/sprint_artifact.sh`
+Hilfsskript fuer lokale Sprint-Artefakte aus einem bestehenden Commit.
+
+**Funktionen**
+- Erzeugt `.diff` + `.md` fuer einen Sprint-Commit in `.artifacts/`
+- Nutzt standardmaessig `HEAD` oder optional `--commit <hash>`
+- Schuetzt vor unbeabsichtigtem Ueberschreiben (nur mit `--force`)
+- Erstellt eine kompakte Markdown-Zusammenfassung inkl. geaenderter Dateien
+
+Beispiel:
+- `scripts/sprint_artifact.sh 4 2 3`
+- `scripts/sprint_artifact.sh 4 2 3 --commit c1a6348`
+- `scripts/sprint_artifact.sh 4 2 3 --force`
+
+Details:
+- `scripts/README_sprint_artifact.md`
+
 ### Restore
 - Wiederherstellungsschritte sind in `docs/RESTORE.md` dokumentiert.
 
