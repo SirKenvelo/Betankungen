@@ -298,6 +298,12 @@ Backup-Skript fuer zeitgestempelte Snapshots in `.backup/`.
 - Kopiert ein Release-Archiv (`.tar`) und optional `.releases/release_log.json`
 - Schreibt Snapshot-Metadaten in `metadata.json`
 - Pflegt das zentrale Backup-Register `.backup/index.json`
+- Wendet automatische Retention an (`--keep N`, Default `10`) und bereinigt alte Snapshot-Ordner + Index-Eintraege
+
+Beispiel:
+- `scripts/backup_snapshot.sh`
+- `scripts/backup_snapshot.sh --keep 10`
+- `scripts/backup_snapshot.sh --archive .releases/Betankungen_0_8_0.tar --note "Vor Hotfix" --keep 15`
 
 ### `scripts/net_recover.sh`
 Netzwerkdiagnose mit optionalem Interface-Neustart bei "verbunden, aber kein Internet".

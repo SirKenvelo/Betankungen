@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # backup_snapshot.sh
-# UPDATED: 2026-02-13
+# UPDATED: 2026-03-07
 # Erstellt einen Snapshot in .backup/YYYY-MM-DD_HHMM und pflegt .backup/index.json.
 
 SCRIPT_NAME="$(basename "$0")"
@@ -14,6 +14,7 @@ INDEX_FILE="$BACKUP_ROOT/index.json"
 ARCHIVE_INPUT=""
 NOTE=""
 DRY_RUN=false
+KEEP_COUNT=10
 
 usage() {
   cat <<EOF_USAGE
@@ -25,12 +26,14 @@ Usage:
 Options:
   -a, --archive FILE    Release-Archiv waehlen (Default: neuestes .releases/Betankungen_*.tar)
   --note TEXT           Optionaler Kommentar fuer index/metadaten
+  -k, --keep N          Anzahl Snapshot-Ordner behalten (Default: 10)
   -n, --dry-run         Nur anzeigen, nichts schreiben
   -h, --help            Hilfe anzeigen
 
 Beispiele:
   $SCRIPT_NAME
   $SCRIPT_NAME --archive .releases/Betankungen_0_5_2.tar --note "Vor Hotfix"
+  $SCRIPT_NAME --keep 10
   $SCRIPT_NAME --dry-run
 EOF_USAGE
 }
@@ -38,6 +41,10 @@ EOF_USAGE
 die() {
   printf 'Fehler: %s\n' "$*" >&2
   exit 1
+}
+
+is_posint() {
+  [[ "${1:-}" =~ ^[1-9][0-9]*$ ]]
 }
 
 sha256_file() {
@@ -72,6 +79,71 @@ resolve_archive() {
   printf '%s\n' "$latest"
 }
 
+list_snapshot_ids_desc() {
+  find "$BACKUP_ROOT" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
+    | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}$' \
+    | sort -r || true
+}
+
+prune_index_to_existing_snapshots() {
+  local updated_ts="$1"
+  python3 - <<'PY' "$INDEX_FILE" "$BACKUP_ROOT" "$updated_ts"
+import json
+import pathlib
+import re
+import sys
+
+index_file = pathlib.Path(sys.argv[1])
+backup_root = pathlib.Path(sys.argv[2])
+updated_ts = sys.argv[3]
+
+if not index_file.exists():
+    raise SystemExit(0)
+
+try:
+    data = json.loads(index_file.read_text())
+except Exception:
+    data = {"schema": "backup_index_v1", "updated": updated_ts, "entries": []}
+
+if not isinstance(data, dict):
+    data = {"schema": "backup_index_v1", "updated": updated_ts, "entries": []}
+
+entries = data.get("entries", [])
+if not isinstance(entries, list):
+    entries = []
+
+pat = re.compile(r"^\d{4}-\d{2}-\d{2}_\d{4}$")
+existing = {p.name for p in backup_root.iterdir() if p.is_dir() and pat.match(p.name)}
+entries = [e for e in entries if isinstance(e, dict) and str(e.get("id", "")) in existing]
+entries = sorted(entries, key=lambda e: str(e.get("id", "")), reverse=True)
+
+data["schema"] = data.get("schema", "backup_index_v1")
+data["updated"] = updated_ts
+data["entries"] = entries
+index_file.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+PY
+}
+
+apply_retention() {
+  local keep="$1"
+  local updated_ts="$2"
+  local -a ids=()
+  local i
+  mapfile -t ids < <(list_snapshot_ids_desc)
+
+  if (( ${#ids[@]} <= keep )); then
+    printf '[INFO] Retention: %d Snapshot(s) vorhanden, Keep=%d (keine Loeschung).\n' "${#ids[@]}" "$keep"
+    return
+  fi
+
+  for (( i = keep; i < ${#ids[@]}; i += 1 )); do
+    rm -rf "$BACKUP_ROOT/${ids[$i]}"
+    printf '[INFO] Retention: alter Snapshot entfernt: %s\n' "$BACKUP_ROOT/${ids[$i]}"
+  done
+
+  prune_index_to_existing_snapshots "$updated_ts"
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -a|--archive)
@@ -82,6 +154,11 @@ while [[ $# -gt 0 ]]; do
     --note)
       [[ $# -ge 2 ]] || die "Option $1 braucht einen Text."
       NOTE="$2"
+      shift 2
+      ;;
+    -k|--keep)
+      [[ $# -ge 2 ]] || die "Option $1 braucht eine positive Ganzzahl."
+      KEEP_COUNT="$2"
       shift 2
       ;;
     -n|--dry-run)
@@ -100,6 +177,7 @@ done
 
 [[ -d "$RELEASE_DIR" ]] || die ".releases/ nicht gefunden."
 mkdir -p "$BACKUP_ROOT"
+is_posint "$KEEP_COUNT" || die "Ungueltiger Wert fuer --keep: $KEEP_COUNT (erwartet: >= 1)"
 
 ARCHIVE_PATH="$(resolve_archive "$ARCHIVE_INPUT")"
 ARCHIVE_NAME="$(basename "$ARCHIVE_PATH")"
@@ -123,6 +201,7 @@ if $DRY_RUN; then
   fi
   printf 'Dry-Run: wuerde Metadaten schreiben: %s\n' "$TARGET_META"
   printf 'Dry-Run: wuerde Index aktualisieren: %s\n' "$INDEX_FILE"
+  printf 'Dry-Run: wuerde Retention anwenden (keep=%s)\n' "$KEEP_COUNT"
   exit 0
 fi
 
@@ -192,3 +271,4 @@ PY
 
 printf 'OK: Backup erstellt: %s\n' "$TARGET_DIR"
 printf 'Index: %s\n' "$INDEX_FILE"
+apply_retention "$KEEP_COUNT" "$TS"
