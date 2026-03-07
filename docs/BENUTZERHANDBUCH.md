@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-02-28
+**Stand:** 2026-03-07
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -28,6 +28,8 @@ Alle car-sensitiven Kommandos (`--add fuelups`, `--list fuelups`, `--stats fuelu
 - Standard-DB: `~/.local/share/Betankungen/betankungen.db`
 - Demo-DB: `~/.local/share/Betankungen/betankungen_demo.db`
 - Config-Datei: `~/.config/Betankungen/config.ini`
+- Config-Sprache: `language=de|en|pl` unter Sektion `[ui]` (Default `de`).
+- Fehlende/ungueltige Config-Sprache wird auf `de` normalisiert; i18n ist aktuell als Skeleton vorbereitet (noch keine breite Lauftext-Migration).
 - Erststart ohne vorhandene Config: Standard-DB wird automatisch genutzt und in der Config gespeichert.
 - Frischer Start ohne Argumente: Config + DB werden still angelegt, kein Fehler "Kein Kommando".
 - Config vorhanden, DB fehlt: Die DB wird automatisch am konfigurierten Pfad neu angelegt (ohne Prompt).

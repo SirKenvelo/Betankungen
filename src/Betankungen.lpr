@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-04
+  UPDATED: 2026-03-07
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -13,7 +13,8 @@
   - Demo-Datenbank: Erstellen/aktualisieren der Demo-DB (--seed) und Nutzung
     der Demo-DB fuer einen Lauf (--demo).
   - Konfigurations-Management: XDG-konforme Persistenz von DB-Pfaden per INI
-    sowie direkte Speicherung via --db-set.
+    sowie direkte Speicherung via --db-set; Sprach-Setting `language=de|en|pl`
+    wird zentral in der Config mitgefuehrt.
   - Zustandspruefung: Exklusivitaet von Kommandos, Konfliktpruefung bei DB-Optionen
     sowie Validierung erforderlicher Argumente (ParseCommand).
   - Abhaengigkeitsinjektion: Initialisierung der Datenbankverbindung und
@@ -84,6 +85,7 @@ uses
   u_cars,
   u_fuelups,
   u_stats,
+  u_i18n,
   u_cli_help,
   u_cli_types,
   u_cli_parse,
@@ -153,16 +155,86 @@ var
     end;
   end;
 
+  function LoadLanguageFromConfig(out ALangCode: string): boolean;
+  var
+    Ini: TIniFile;
+    Cfg: string;
+    RawCode: string;
+  begin
+    ALangCode := '';
+    Cfg := GetConfigPath;
+    Result := FileExists(Cfg);
+    if not Result then Exit;
+
+    Ini := TIniFile.Create(Cfg);
+    try
+      RawCode := Ini.ReadString('ui', 'language', '');
+      ALangCode := NormalizeLanguageCode(RawCode);
+      Result := ALangCode <> '';
+    finally
+      Ini.Free;
+    end;
+  end;
+
+  // Liest den Sprachkontext aus der Config und normalisiert auf `de|en|pl`.
+  // Bei fehlendem/ungueltigem Eintrag wird `de` als Default gesetzt.
+  procedure ApplyLanguageFromConfig;
+  var
+    CfgPath: string;
+    Ini: TIniFile;
+    RawCode: string;
+    LangCode: string;
+    PersistNeeded: Boolean;
+  begin
+    SetLanguage(DEFAULT_LANGUAGE);
+    CfgPath := GetConfigPath;
+    if not FileExists(CfgPath) then Exit;
+
+    Ini := TIniFile.Create(CfgPath);
+    try
+      RawCode := Ini.ReadString('ui', 'language', '');
+      LangCode := NormalizeLanguageCode(RawCode);
+      PersistNeeded := False;
+
+      if LangCode = '' then
+      begin
+        LangCode := DEFAULT_LANGUAGE_CODE;
+        PersistNeeded := True;
+      end
+      else if RawCode <> LangCode then
+        PersistNeeded := True;
+
+      SetLanguageByCodeOrDefault(LangCode, DEFAULT_LANGUAGE);
+
+      if PersistNeeded then
+      begin
+        try
+          Ini.WriteString('ui', 'language', LangCode);
+        except
+          // Read-only Config ist kein Hard-Error fuer den Runtime-Flow.
+        end;
+      end;
+    finally
+      Ini.Free;
+    end;
+  end;
+
   procedure SaveDbPathToConfig(const APath: string);
   var
     Ini: TIniFile;
     CfgPath: string;
+    LangCode: string;
   begin
     CfgPath := GetConfigPath;
     ForceDirectories(ExtractFileDir(CfgPath));
     Ini := TIniFile.Create(CfgPath);
     try
       Ini.WriteString('database', 'path', APath);
+      // Sprachkontext bleibt zentral in derselben Config verankert.
+      LangCode := NormalizeLanguageCode(Ini.ReadString('ui', 'language', ''));
+      if LangCode = '' then
+        LangCode := GetLanguageCode;
+      Ini.WriteString('ui', 'language', NormalizeLanguageCodeOrDefault(LangCode));
     finally
       Ini.Free;
     end;
@@ -170,7 +242,7 @@ var
 
   procedure ShowConfigAndExit;
   var
-    CfgPath, CfgDbPath, DefaultDb: string;
+    CfgPath, CfgDbPath, DefaultDb, CfgLangCode: string;
   begin
     CfgPath := GetConfigPath;
     DefaultDb := GetDefaultDbPath;
@@ -190,8 +262,14 @@ var
       WriteLn('Config DB-Pfad:     (nicht gesetzt)');
     end;
 
+    if LoadLanguageFromConfig(CfgLangCode) then
+      WriteLn('Config Sprache:     ', CfgLangCode)
+    else
+      WriteLn('Config Sprache:     (nicht gesetzt; default=de)');
+
     WriteLn('Default DB-Pfad:    ', DefaultDb);
     WriteLn('Default existiert:  ', BoolToStr(FileExists(DefaultDb), True));
+    WriteLn('Aktive Sprache:     ', GetLanguageCode);
     WriteLn('---------------------------------');
     Halt(EXIT_OK);
   end;
@@ -408,6 +486,8 @@ var
   end;
 
 begin
+  ApplyLanguageFromConfig;
+
   // 0.5.4: Kein Kommando + fehlender Bootstrap -> stille Initialisierung.
   // Deckt Erststart und "Config vorhanden, DB fehlt" ohne Prompt/Fehler ab.
   NoCommandInitNeeded := False;
@@ -722,6 +802,7 @@ begin
       DbgRow('db_last_run', ReadMetaValue(DbPath, 'db_last_run'));
       DbgRow('odometer_start_km', ReadMetaValue(DbPath, 'odometer_start_km'));
       DbgRow('odometer_start_date', ReadMetaValue(DbPath, 'odometer_start_date'));
+      DbgRow('language', GetLanguageCode);
       DbgSep;
     end;
 

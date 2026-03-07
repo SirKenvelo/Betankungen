@@ -75,6 +75,10 @@ Internationalisierung wird in Sprint 4 bewusst in zwei Schritten umgesetzt:
 
 Sprachscope in Sprint 4: `language=de|en|pl`.
 
+Aktueller Stand:
+- `S4C1/3` abgeschlossen (Policy-/Architektur-Basis).
+- `S4C2/3` abgeschlossen (technisches Skeleton mit `u_i18n`, `TMsgId`, `Tr()`, Config-Flow fuer `language`).
+
 Details zur Regelbasis:
 - Architektur: `docs/ARCHITECTURE.md` (Abschnitt "I18n Policy (Sprint 4)")
 - Umsetzungsstatus: `docs/STATUS.md` (Abschnitt "Roadmap Sprint 4 - i18n First")

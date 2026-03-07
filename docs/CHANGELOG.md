@@ -20,8 +20,12 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S3C2/3 - Migration-Smoke-Framework mit Flag-Strategie (`--v4-to-v5`) und CLI-Integration (`--migrations`); Artefakte: `sprint_3_commit_2_von_3.md`, `sprint_3_commit_2_von_3.diff`; Basis-Commit: `ff5fb27`. (2026-03-06)
 - S3C3/3 - VIN-Policy-/UX-Prep dokumentiert (optionaler VIN-Ansatz, Normalisierung, Policy-light, Dokument-Referenzen) und Sprint-3-Doku finalisiert; Artefakte: `sprint_3_commit_3_von_3.md`, `sprint_3_commit_3_von_3.diff`; Basis-Commit: `c518fda`. (2026-03-06)
 - S4C1/3 - i18n-Policy-/Architektur-Basis vor Runtime-Wiring dokumentiert (inkl. Sprint-4-Roadmap und Leitplanken in Einstieg/Prinzipien); Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`; Basis-Commit: `dd25860`. (2026-03-07)
+- S4C2/3 - technisches i18n-Skeleton mit `u_i18n` (`TMsgId`, `Tr()`) und Config-Flow-Verankerung fuer `language=de|en|pl`; Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`; Basis-Commit: `pending`. (2026-03-07)
 
 ### Changed
+- [S4C2/3] Core/i18n: Neue Unit `units/u_i18n.pas` als zentraler i18n-Einstiegspunkt eingefuehrt (`TMsgId`, `Tr()`, Sprachraum `de|en|pl`, Normalisierungs-/Parsing-Helfer), ohne breite Migration bestehender Runtime-Texte. (2026-03-07)
+- [S4C2/3] Core/Config-Flow: Sprachkontext `language=de|en|pl` im Konfigurationsfluss verankert (`src/Betankungen.lpr`): Laden/Normalisieren aus `config.ini`, Default `de`, Persistenz bei Config-Schreibpfaden (`--db-set`, Erststart/Fallback). (2026-03-07)
+- [S4C2/3] Docs: Sprint-4-Status auf Skeleton-Stand aktualisiert (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`). (2026-03-07)
 - [General] Meta/Process: `AGENTS.md` um verbindliche Regel fuer Sprint-Artefakte nach Push erweitert (lokale Erstellung von `sprint_<nr>_commit_<nr>_von_<nr>.md/.diff`, definierte Reihenfolge, kein Commit/Push ohne explizite Freigabe). (2026-03-07)
 - [General] Meta: Sprint-Artefakte `sprint_4_commit_1_von_3.md/.diff` aus dem Repository entfernt (nur lokal), und `.gitignore` um Pattern `sprint_[0-9]*_commit_[0-9]*_von_[0-9]*.diff` erweitert, damit diese Artefakte kuenftig nicht mehr versehentlich versioniert werden. (2026-03-07)
 - [S4C1/3] Docs/Architecture: i18n-Policy als verbindliche Architekturregelbasis vor Runtime-Wiring dokumentiert (`language=de|en|pl`, Rolle von `u_i18n.pas`/`TMsgId`/`Tr()`, Testentkopplung von lokalisierten Volltexten, Sprint-4-Migrationsgrenzen in/out of scope). (2026-03-07)
@@ -63,6 +67,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Umsetzung S4C2/3 (i18n-Skeleton + Config-Flow-Verankerung + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C1/3 (i18n-Policy-/Architektur-Doku, Status-Roadmap und Leitplanken) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S3C3/3 (VIN-Policy-/UX-Doku und Sprint-3-Finalisierung) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Umsetzung S3C2/3 (Migrations-Smoke-Framework und Runner-Integration) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)

@@ -156,7 +156,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 
-- Status: in Vorbereitung
+- Status: in progress (`S4C1/3` + `S4C2/3` umgesetzt)
 - Ziel: klare i18n-Regelbasis vor jeglicher Skeleton-Verdrahtung
 
 ### S4C1/3 - Policy- und Architektur-Doku
@@ -168,10 +168,11 @@ Bereits erledigt:
 
 ### S4C2/3 - Minimaler i18n-Skeleton (nach Doku-Freigabe)
 
-- `u_i18n.pas` als zentrale i18n-Unit einfuehren
-- `TMsgId` als stabilen Message-Key-Contract definieren
-- `Tr()` als einzigen Zugriff fuer translatierbare Runtime-Texte verdrahten
-- Sprachparameter `language=de|en|pl` technisch anbinden
+- Erreicht: `u_i18n.pas` als zentrale i18n-Unit eingefuehrt.
+- Erreicht: `TMsgId` als stabiler Message-Key-Contract angelegt.
+- Erreicht: `Tr()` als zentraler Lookup-Einstiegspunkt vorbereitet.
+- Erreicht: `language=de|en|pl` im Config-Flow verankert (Normalisierung, Default `de`, Persistenz in `config.ini`).
+- Guardrails eingehalten: keine breite Lauftext-Migration, keine invasive Massenaenderung bestehender Flows.
 
 ### S4C3/3 - Kontrollierte Textmigration + Testhaertung
 

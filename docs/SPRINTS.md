@@ -106,6 +106,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `dd25860`
 - Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`
 
+2. S4C2/3
+- Thema: technisches i18n-Skeleton verdrahtet (`units/u_i18n.pas` mit `TMsgId`/`Tr()`, Config-Flow auf `language=de|en|pl` normalisiert/persistiert, keine breite Textmigration).
+- Status: done
+- Git-Commit: pending
+- Artefakte: pending
+
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S4C3/3 (Policy umgesetzt, Skeleton verdrahtet, Textmigration + Testhaertung abgeschlossen)
