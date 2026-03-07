@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-06
+**Stand:** 2026-03-07
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -92,3 +92,21 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S3C3/3 (Doku-Finalisierung VIN-Policy/UX + Traceability)
 - Abschluss-Tag: `sprint-3-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+
+## Sprint 4 - i18n Policy First
+
+- Status: in progress
+- Ziel: verbindliche i18n-Regelbasis vor jeglichem Runtime-Wiring schaffen.
+
+### Commit-Folge
+
+1. S4C1/3
+- Thema: i18n-Policy und Architektur-Doku vor technischer Verdrahtung eingefuehrt (`docs/ARCHITECTURE.md`, `docs/STATUS.md`, optionaler Einstieg in `docs/README.md`, Leitplanke in `docs/DESIGN_PRINCIPLES.md`).
+- Status: done
+- Git-Commit: pending
+- Artefakte: pending
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S4C3/3 (Policy umgesetzt, Skeleton verdrahtet, Textmigration + Testhaertung abgeschlossen)
+- Abschluss-Tag: `sprint-4-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)

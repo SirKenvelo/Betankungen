@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-01
+**Stand:** 2026-03-07
 **Zielversion:** 0.8.x
 
 ## Fundament & Architektur (erledigt)
@@ -153,6 +153,37 @@ Bereits erledigt:
 - Feldbasierte CSV-Assertions (Token-Parsing) finalisieren.
 - Export-/Output-Contracts fuer CSV/JSON definieren (Versionierung/Headers/Escape-Regeln).
 - Release-Haertung der Testmatrix auf Contract-Ebene.
+
+## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
+
+- Status: in Vorbereitung
+- Ziel: klare i18n-Regelbasis vor jeglicher Skeleton-Verdrahtung
+
+### S4C1/3 - Policy- und Architektur-Doku
+
+- i18n-Begruendung und Zielbild dokumentieren
+- Sprachscope `language=de|en|pl` festlegen
+- Testregel "keine Kopplung an lokalisierte Vollsaetze" verbindlich festhalten
+- Migrationsgrenzen fuer Sprint 4 dokumentieren (in/out of scope)
+
+### S4C2/3 - Minimaler i18n-Skeleton (nach Doku-Freigabe)
+
+- `u_i18n.pas` als zentrale i18n-Unit einfuehren
+- `TMsgId` als stabilen Message-Key-Contract definieren
+- `Tr()` als einzigen Zugriff fuer translatierbare Runtime-Texte verdrahten
+- Sprachparameter `language=de|en|pl` technisch anbinden
+
+### S4C3/3 - Kontrollierte Textmigration + Testhaertung
+
+- Priorisierte Runtime-Texte auf `TMsgId` + `Tr()` migrieren
+- Tests von fragilen Volltext-Matches auf stabile Signale umstellen
+- Guardrails pruefen: Exitcodes, Policy-IDs, DB-State, Contract-Struktur unveraendert
+
+### Sprint-4 Nicht-Ziele
+
+- Keine Aenderung an JSON-/CSV-Contracts
+- Keine Aenderung an CLI-Flag-Semantik
+- Keine automatische Locale-Erkennung ausserhalb des expliziten Sprachparameters
 
 ## Entscheidungen 0.5.0 (festgezurrt, 2026-02-09)
 - Offene Grenzen bei Filtern sind datengetrieben: nur `--from` => `to = MAX(fueled_at)`, nur `--to` => `from = MIN(fueled_at)` (kein "heute").

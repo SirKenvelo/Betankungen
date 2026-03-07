@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-06
+**Stand:** 2026-03-07
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -21,6 +21,9 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S3C3/3 - VIN-Policy-/UX-Prep dokumentiert (optionaler VIN-Ansatz, Normalisierung, Policy-light, Dokument-Referenzen) und Sprint-3-Doku finalisiert; Artefakte: `sprint_3_commit_3_von_3.md`, `sprint_3_commit_3_von_3.diff`; Basis-Commit: `c518fda`. (2026-03-06)
 
 ### Changed
+- [S4C1/3] Docs/Architecture: i18n-Policy als verbindliche Architekturregelbasis vor Runtime-Wiring dokumentiert (`language=de|en|pl`, Rolle von `u_i18n.pas`/`TMsgId`/`Tr()`, Testentkopplung von lokalisierten Volltexten, Sprint-4-Migrationsgrenzen in/out of scope). (2026-03-07)
+- [S4C1/3] Docs/Status: Sprint-4-Roadmap "i18n First" ergaenzt (`S4C1/3` Policy-Doku, `S4C2/3` Skeleton, `S4C3/3` kontrollierte Textmigration + Testhaertung) inkl. expliziter Nicht-Ziele. (2026-03-07)
+- [S4C1/3] Docs/Readme+Principles: Kurzverweis in `docs/README.md` und i18n-Leitplanke in `docs/DESIGN_PRINCIPLES.md` aufgenommen, damit die neue Regelbasis an den zentralen Einstiegspunkten sichtbar ist. (2026-03-07)
 - [S3C3/3] Docs: Neues Dokument `docs/VIN_POLICY_UX_PREP.md` eingefuehrt (VIN optional statt Pflicht, spaetere Normalisierung/Validierung, Registrierungsdokumente nur als Referenzen, CLI-UX-Richtung und Test-Ideen). (2026-03-06)
 - [S3C3/3] Docs/Architecture: `docs/ARCHITECTURE.md` um expliziten VIN-Policy-/UX-Prep-Verweis erweitert; `docs/SPRINTS.md` Sprint-3-Folge um S3C3/3 inkl. Abschluss-Tag-Plan ergänzt. (2026-03-06)
 - [S3C2/3] Tests/Smoke: Neue dedizierte Migrations-Suite `tests/smoke/smoke_migrations.sh` inkl. Wrapper `tests/smoke_migrations.sh` eingefuehrt; erster Check validiert Upgrade `v4 -> v5` (ALTER-Spalten `vin`, `reg_doc_path`, `reg_doc_sha256`, `schema_version=5`, idempotenter Re-Run). (2026-03-06)
@@ -57,6 +60,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Umsetzung S4C1/3 (i18n-Policy-/Architektur-Doku, Status-Roadmap und Leitplanken) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S3C3/3 (VIN-Policy-/UX-Doku und Sprint-3-Finalisierung) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Umsetzung S3C2/3 (Migrations-Smoke-Framework und Runner-Integration) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)
 - Umsetzung S3C1/3 (DB-Schema v5 + Migrations-/Doku-Pflege) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-06)

@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-03-06
+**Stand:** 2026-03-07
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -17,6 +17,61 @@ Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturpr
 *   **Defensive Parsing:** "Garbage in, Garbage out" wird an der Systemgrenze verhindert. Eingaben werden über skalierte Integer-Funktionen (Fixed-Point) validiert, bevor sie die Fachlogik erreichen.
 
 ---
+
+## I18n Policy (Sprint 4)
+
+### Ziel und Reihenfolge
+
+Fuer Sprint 4 gilt bewusst: zuerst Doku und Policy, danach technisches Wiring.
+Es wird kein i18n-Skeleton verdrahtet, bevor die Regelbasis dokumentiert und abgestimmt ist.
+
+### Warum i18n jetzt kommt
+
+Die Anwendung hat eine stabile Fachbasis und klare Policy-Contracts erreicht.
+Der naechste Schritt ist eine kontrollierte Internationalisierung der User-Texte, ohne bestehende Guards oder Output-Contracts zu destabilisieren.
+i18n wird als Architekturthema behandelt, nicht als reines Text-Refactoring.
+
+### Warum `language=de|en|pl`
+
+Die Sprachwahl ist in Sprint 4 bewusst explizit und begrenzt: `de`, `en`, `pl`.
+Diese kleine, feste Menge reduziert Komplexitaet, erlaubt klare Testbarkeit und verhindert implizite Locale-Guessing-Logik.
+Andere Sprachen sind kein Sprint-4-Ziel und werden spaeter ueber denselben Mechanismus erweiterbar gehalten.
+
+### Architekturrolle von `u_i18n.pas`, `TMsgId`, `Tr()`
+
+`u_i18n.pas` ist die zentrale i18n-Unit fuer Sprachkontext und Textauflosung.
+`TMsgId` ist der stabile interne Contract fuer Message-Keys (statt freier String-Literale im Code).
+`Tr()` ist der einzige erlaubte Zugriffspfad fuer translatierbare Runtime-Texte.
+
+Regel:
+- User-facing Runtime-Text wird ueber `TMsgId` + `Tr()` erzeugt.
+- Direkte, frei formulierte Runtime-Strings in Domain-/Orchestrator-Code werden fuer migrierte Bereiche vermieden.
+
+### Test-Policy: keine Kopplung an uebersetzte Runtime-Texte
+
+Tests duerfen nicht auf vollstaendige, lokalisierte Saetze gematcht werden.
+Stattdessen nutzen Tests stabile Signale:
+- Exit-Code
+- Policy-ID (z. B. `P-041`)
+- DB-State / No-Write-Guard
+- Contract-Felder und Struktur (JSON/CSV)
+
+Runtime-Text darf sprachlich evolvieren, solange Semantik und Guardrails stabil bleiben.
+
+### Scope Sprint 4: was migriert wird
+
+- User-facing Fehler-/Hinweis-/Prompt-Texte in zentralen CLI-Pfaden
+- Resolver-Hinweise fuer Car-Kontext
+- Validierungs- und Confirm-Texte in interaktiven Flows
+- Help-/Usage-Texte, soweit sie direkte Nutzerfuehrung sind
+
+### Scope Sprint 4: was nicht migriert wird
+
+- JSON-/CSV-Contract-Felder, Header, Keys, `kind`-Werte
+- CLI-Flags, Commands und technische Tokens
+- Policy-IDs (`P-xxx`) als Engineering-Contract
+- Reine Debug-/Trace-Metaausgaben
+- Testskript-interne Ausgaben
 
 ## Aktueller Funktionsumfang (Stand 2026-02-28)
 Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).

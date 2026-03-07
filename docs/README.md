@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-01
+**Stand:** 2026-03-07
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -66,6 +66,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
+
+## i18n-Hinweis (Sprint 4)
+
+Internationalisierung wird in Sprint 4 bewusst in zwei Schritten umgesetzt:
+1. erst Policy/Architektur-Doku,
+2. danach technisches Wiring.
+
+Sprachscope in Sprint 4: `language=de|en|pl`.
+
+Details zur Regelbasis:
+- Architektur: `docs/ARCHITECTURE.md` (Abschnitt "I18n Policy (Sprint 4)")
+- Umsetzungsstatus: `docs/STATUS.md` (Abschnitt "Roadmap Sprint 4 - i18n First")
 
 ## Domain-Policy-Matrix v1 (Kurzueberblick)
 

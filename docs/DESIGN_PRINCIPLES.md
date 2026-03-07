@@ -1,5 +1,5 @@
 # DESIGN-PRINZIPIEN – Projekt „Betankungen“
-**Stand:** 2026-02-13
+**Stand:** 2026-03-07
 
 Diese Prinzipien beschreiben die bewusst gewählten Leitlinien
 für Architektur, Code und Weiterentwicklung.
@@ -84,6 +84,15 @@ für Architektur, Code und Weiterentwicklung.
 ## 9. Output-Formate (Policy)
 - CSV ist exklusiv: `--csv` nur bei `--stats fuelups` und ohne `--json`.
 - Pretty ist JSON-only: `--pretty` nur zusammen mit `--json`.
+
+### i18n-Leitplanke (Sprint 4)
+- User-facing Runtime-Texte werden in migrierten Bereichen ausschliesslich ueber `TMsgId` + `Tr()` erzeugt (zentral in `u_i18n.pas`).
+- Tests sind nicht an lokalisierte Vollsaetze gekoppelt.
+- Stabile Testsignale bleiben:
+  - Exit-Code
+  - Policy-ID
+  - DB-State / No-Write-Guard
+  - Contract-Struktur (JSON/CSV)
 
 ---
 
