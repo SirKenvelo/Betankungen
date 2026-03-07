@@ -37,6 +37,7 @@ projekt_kontext.md
 aktuelle_aenderungen.md
 aktuelle_aenderungen_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].md
 aktuelle_aenderungen_[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
+.artifacts/
 sprint_[0-9]*_commit_[0-9]*_von_[0-9]*.md
 sprint_[0-9]*_commit_[0-9]*_von_[0-9]*.diff
 sprint_[0-9].md
