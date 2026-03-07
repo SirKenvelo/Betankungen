@@ -40,15 +40,10 @@ Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produkten
   - kein Einfluss auf Skript-/Maschinen-Ausgaben
   - keine unnoetige Kopplung mit i18n oder Domain-Logik
 - Moegliche Datenquelle:
-  - `data/dev_messages.txt` (bevorzugt)
-  - alternativ `assets/dev_messages.txt`
-- Startbestand (erste Vorschlagsliste):
-  - `Interrupt Cookie_Interaction { Play_Mode("ausgelassen"); Body.ingest("Winterbier"); } Catch (Frog_Detected) { Cookie.jump(); Frog.panic(); }`
-  - `ss -tulpen`
-  - `Wenn dir alles zu viel wird: kurz innehalten, Systemstatus pruefen - du bist nicht allein im Netz.`
-  - `Fuel efficiency is temporary. Good architecture is forever.`
-  - `Remember: tests are cheaper than debugging.`
-  - `If this tool helped you, Cookie demands one treat.`
+  - `data/dev_messages.b64` (entkoppelt, nur base64-kodierte Zeilen)
+  - Pflegehelfer: `scripts/dev_messages_encode.sh`
+- Startbestand:
+  - ist aus diesem Backlog-Dokument ausgelagert nach `data/dev_messages.b64` (Spoiler-Schutz durch Obfuskation)
 
 ## Verknuepfte Entscheidungen
 

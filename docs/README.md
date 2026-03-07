@@ -111,6 +111,7 @@ Details zur Regelbasis:
 
 ### Root-Ordner (Workflow ohne Git)
 - `scripts/`: Wartungsskripte (Release/Backup/Netzwerkdiagnose)
+- `data/`: entkoppelte Daten-Assets (u. a. `dev_messages.b64` fuer optionale Easter-Egg-Messages)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
 - `docs/ADR/`: Entscheidungen im ADR-Format (accepted/proposed)
@@ -355,6 +356,17 @@ Beispiel:
 
 Details:
 - `scripts/README_sprint_artifact.md`
+
+### `scripts/dev_messages_encode.sh`
+Hilfsskript zum Erzeugen von `data/dev_messages.b64` aus einer getrennten Input-Datei.
+
+**Funktionen**
+- Trennt Messages per Delimiter-Zeile `---`
+- Unterstuetzt Multi-Line-Messages
+- Schreibt pro Message eine base64-Zeile (entkoppelte Ablage, leichter Spoiler-Schutz)
+
+Beispiel:
+- `scripts/dev_messages_encode.sh --in /tmp/dev_messages_input.txt --out data/dev_messages.b64 --force`
 
 ### Restore
 - Wiederherstellungsschritte sind in `docs/RESTORE.md` dokumentiert.
