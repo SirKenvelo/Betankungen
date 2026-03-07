@@ -109,8 +109,8 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 2. S4C2/3
 - Thema: technisches i18n-Skeleton verdrahtet (`units/u_i18n.pas` mit `TMsgId`/`Tr()`, Config-Flow auf `language=de|en|pl` normalisiert/persistiert, keine breite Textmigration).
 - Status: done
-- Git-Commit: pending
-- Artefakte: pending
+- Git-Commit: `c1a6348`
+- Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`
 
 ### Abschluss-Tag
 
