@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-06
+**Stand:** 2026-03-07
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -90,8 +90,8 @@ Direktlauf:
   - Bei Schema-/Migrationsaenderungen muss dieser Guard explizit mitgeprueft und bei Bedarf angepasst werden, damit Resolver-Hard-Errors fuer 0/1/>1 Cars stabil bleiben.
   - Optionaler Migrations-Check: in einer reinen Test-DB temporaer alle Cars loeschen (nicht Produktions-Flow), um den 0-Cars-Pfad gezielt zu validieren.
 - Hinweis zu CSV-Scope-Assertions:
-  - Aktuell werden erwartete CSV-Zeilen bewusst als Vollzeilen geprueft.
-  - Feldbasierte Vergleiche (Token-Parsing, gezielte Feld-Checks wie `dist_km`, `liters_ml`, `total_cents`) sind fuer die 0.8.x Export-/Contract-Phase vorbereitet.
+  - Feldbasierte Vergleiche (Token-Parsing via `tests/helpers/csv.sh`) sind fuer Stats-CSV in Smoke und Domain-Policy der Standard.
+  - Contract-Checks fuer Stats-CSV laufen ueber Header-/Spalten-/Rowcount-/Feldassertions statt Vollzeilen-Regex-Matches.
 - Zusatzsuiten:
   - `-m`: Monthly-Suite
   - `-y`: Yearly-Suite

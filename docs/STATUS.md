@@ -150,7 +150,7 @@ Bereits erledigt:
 - Konsistenzschritt Policy-Contract vs. Runtime-Text: umgesetzt (Tests/Doku entkoppelt, Runtime unveraendert).
 
 ## Roadmap 0.8.x – Export-/Contract-Phase (naechster Fokus)
-- Feldbasierte CSV-Assertions (Token-Parsing) finalisieren.
+- Feldbasierte CSV-Assertions (Token-Parsing) finalisiert (`S5C1/1`: Domain-Policy `P-060/01` und `P-060/02`).
 - Export-/Output-Contracts fuer CSV/JSON definieren (Versionierung/Headers/Escape-Regeln).
 - Release-Haertung der Testmatrix auf Contract-Ebene.
 
