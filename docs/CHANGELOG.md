@@ -19,6 +19,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S3C1/3 - Cars-Schema v5-Vorbereitung (vin/reg-doc Felder) und ALTER-basierte Migration fuer Bestands-DBs; Artefakte: `sprint_3_commit_1_von_3.md`, `sprint_3_commit_1_von_3.diff`; Basis-Commit: `f25c3ca`. (2026-03-06)
 - S3C2/3 - Migration-Smoke-Framework mit Flag-Strategie (`--v4-to-v5`) und CLI-Integration (`--migrations`); Artefakte: `sprint_3_commit_2_von_3.md`, `sprint_3_commit_2_von_3.diff`; Basis-Commit: `ff5fb27`. (2026-03-06)
 - S3C3/3 - VIN-Policy-/UX-Prep dokumentiert (optionaler VIN-Ansatz, Normalisierung, Policy-light, Dokument-Referenzen) und Sprint-3-Doku finalisiert; Artefakte: `sprint_3_commit_3_von_3.md`, `sprint_3_commit_3_von_3.diff`; Basis-Commit: `c518fda`. (2026-03-06)
+- S4C1/3 - i18n-Policy-/Architektur-Basis vor Runtime-Wiring dokumentiert (inkl. Sprint-4-Roadmap und Leitplanken in Einstieg/Prinzipien); Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`; Basis-Commit: `dd25860`. (2026-03-07)
 
 ### Changed
 - [S4C1/3] Docs/Architecture: i18n-Policy als verbindliche Architekturregelbasis vor Runtime-Wiring dokumentiert (`language=de|en|pl`, Rolle von `u_i18n.pas`/`TMsgId`/`Tr()`, Testentkopplung von lokalisierten Volltexten, Sprint-4-Migrationsgrenzen in/out of scope). (2026-03-07)
