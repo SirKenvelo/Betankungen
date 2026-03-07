@@ -22,6 +22,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S4C1/3 - i18n-Policy-/Architektur-Basis vor Runtime-Wiring dokumentiert (inkl. Sprint-4-Roadmap und Leitplanken in Einstieg/Prinzipien); Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`; Basis-Commit: `dd25860`. (2026-03-07)
 
 ### Changed
+- [General] Meta: Sprint-Artefakte `sprint_4_commit_1_von_3.md/.diff` aus dem Repository entfernt (nur lokal), und `.gitignore` um Pattern `sprint_[0-9]*_commit_[0-9]*_von_[0-9]*.diff` erweitert, damit diese Artefakte kuenftig nicht mehr versehentlich versioniert werden. (2026-03-07)
 - [S4C1/3] Docs/Architecture: i18n-Policy als verbindliche Architekturregelbasis vor Runtime-Wiring dokumentiert (`language=de|en|pl`, Rolle von `u_i18n.pas`/`TMsgId`/`Tr()`, Testentkopplung von lokalisierten Volltexten, Sprint-4-Migrationsgrenzen in/out of scope). (2026-03-07)
 - [S4C1/3] Docs/Status: Sprint-4-Roadmap "i18n First" ergaenzt (`S4C1/3` Policy-Doku, `S4C2/3` Skeleton, `S4C3/3` kontrollierte Textmigration + Testhaertung) inkl. expliziter Nicht-Ziele. (2026-03-07)
 - [S4C1/3] Docs/Readme+Principles: Kurzverweis in `docs/README.md` und i18n-Leitplanke in `docs/DESIGN_PRINCIPLES.md` aufgenommen, damit die neue Regelbasis an den zentralen Einstiegspunkten sichtbar ist. (2026-03-07)
