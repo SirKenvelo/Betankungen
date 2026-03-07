@@ -26,6 +26,25 @@
 - Reihenfolge fuer Sprint-Artefakte: 1) Commit und Push abschliessen. 2) `.diff` aus dem gepushten Commit erzeugen (z. B. `git show --stat --patch <hash> > .artifacts/sprint_<...>.diff`). 3) Begleit-`.md` mit Ziel, Hash, Message und Artefaktverweisen in `.artifacts/` erstellen.
 - Sprint-Artefakte bleiben lokal: `.artifacts/*.md` und `.artifacts/*.diff` werden grundsaetzlich nicht committed oder gepusht (nur bei expliziter User-Freigabe).
 
+### Versionierungs-Policy (verbindlich)
+- Codex uebernimmt die Versionierung selbststaendig und haelt `APP_VERSION` in `src/Betankungen.lpr` aktiv synchron.
+- `road to X.Y.Z`:
+  - nur als Planungs-/Roadmap-Label in Doku (`docs/STATUS.md`, `docs/README.md`, `docs/ARCHITECTURE.md`);
+  - niemals als Wert in `APP_VERSION`.
+- `X.Y.Z-dev`:
+  - Standard fuer aktive Entwicklungsphase vor einem Release;
+  - bei neuem Feature-/Scope-Zyklus auf naechste Minor-Basis setzen (typisch `X.(Y+1).0-dev`).
+- `X.Y.(Z>0)-dev`:
+  - verwenden, wenn gezielt ein Patch-/Hotfix-Zyklus auf bereits freigegebenem Minor gefahren wird (z. B. `0.8.1-dev`).
+- `X.Y.Z` (final, ohne Suffix):
+  - nur bei expliziter Release-Freigabe des Users;
+  - vor finalem Release-Commit/Tag/Artefakt auf final setzen.
+- Nach einem finalen Release setzt Codex im naechsten Entwicklungs-Commit wieder auf eine `-dev`-Version der naechsten vereinbarten Linie.
+- Bei jeder Versionsaenderung sind mindestens diese Stellen konsistent zu halten:
+  - `src/Betankungen.lpr` (`APP_VERSION`) als technische Source of Truth,
+  - `docs/STATUS.md` Zielversion/Roadmap-Text,
+  - `docs/CHANGELOG.md` mit neutralem Eintrag unter `[Unreleased] -> Changed`.
+
 ## Build-Standard
 - FPC-Compile immer mit folgendem Befehl aus dem Projektroot ausfuehren:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`

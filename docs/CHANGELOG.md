@@ -24,6 +24,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S4C3/3 - erster kontrollierter Runtime-Mini-Rollout mit wenigen Meta-Texten ueber `Tr()` (ohne breite Help-/Fehlertext-Migration); Artefakte: `.artifacts/sprint_4_commit_3_von_3.md`, `.artifacts/sprint_4_commit_3_von_3.diff`; Basis-Commit: `87e5f6e`. (2026-03-07)
 
 ### Changed
+- [General] Meta/Process: `AGENTS.md` um eine verbindliche Versionierungs-Policy erweitert (klare Trennung `road to` vs. `-dev` vs. final, Patch-Zyklen, Release-Umschaltregeln) und die selbststaendige Synchronisierung von `APP_VERSION` in `src/Betankungen.lpr` als Standard festgelegt. (2026-03-07)
 - [S5C1/1] Tests/Domain-Policy: Verbleibende Stats-CSV-Checks in `tests/domain_policy/cases/t_p060__01__stats_skip_interval_missed_previous.sh` und `tests/domain_policy/cases/t_p060__02__car_isolation.sh` konsequent auf feldbasiertes Token-Parsing umgestellt (Header/Rowcount/Spaltenwerte via `tests/helpers/csv.sh`), ohne Vollzeilen-Regex-Matches. (2026-03-07)
 - [S4C3/3] Core/i18n: `units/u_i18n.pas` um eine kleine, klar abgegrenzte Menge an Meta-Message-IDs erweitert (Config-Status, First-Run-Hinweise, generische Systemmeldung) fuer den ersten Runtime-Rollout ueber `Tr()`. (2026-03-07)
 - [S4C3/3] Runtime/Orchestrator: In `src/Betankungen.lpr` wurden nur ausgewaehlte risikoarme Texte auf i18n-Lookup umgestellt (`--show-config`-Rahmentexte, Reset-Config-Hinweise, First-Run-Hinweise, generische Meldung "Datenbank angelegt"), ohne breite Help-/Fehlertext-Migration. (2026-03-07)
@@ -76,6 +77,7 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Prozessschaerfung zur Versionierungsautomatik (`AGENTS.md`, inkl. `APP_VERSION`-Sync-Regel) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S5C1/1 (Domain-Policy-CSV-Assertions auf feldbasiertes Token-Parsing) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Dokumentationsschaerfung zum historischen Migrationsordner (`migrations/`) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Umsetzung S4C3/3 (kontrollierte Runtime-Mini-Migration auf `Tr()` + Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
