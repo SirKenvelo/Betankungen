@@ -5,8 +5,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-0.8.x
-Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
+0.9.x
+Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze + klarer Folgefokus).
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -22,8 +22,11 @@ Ziel: Export-/Output-Contracts (CSV/JSON) und Contract-Haertung nach 0.7.0.
 - S4C1/3 - i18n-Policy-/Architektur-Basis vor Runtime-Wiring dokumentiert (inkl. Sprint-4-Roadmap und Leitplanken in Einstieg/Prinzipien); Artefakte: `sprint_4_commit_1_von_3.md`, `sprint_4_commit_1_von_3.diff`; Basis-Commit: `dd25860`. (2026-03-07)
 - S4C2/3 - technisches i18n-Skeleton mit `u_i18n` (`TMsgId`, `Tr()`) und Config-Flow-Verankerung fuer `language=de|en|pl`; Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`; Basis-Commit: `c1a6348`. (2026-03-07)
 - S4C3/3 - erster kontrollierter Runtime-Mini-Rollout mit wenigen Meta-Texten ueber `Tr()` (ohne breite Help-/Fehlertext-Migration); Artefakte: `.artifacts/sprint_4_commit_3_von_3.md`, `.artifacts/sprint_4_commit_3_von_3.diff`; Basis-Commit: `87e5f6e`. (2026-03-07)
+- S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Release/Versioning: `src/Betankungen.lpr` auf `APP_VERSION 0.8.0` (final) gesetzt; `0.8.0-dev` wurde damit auf finalen Release-Stand ohne Suffix abgeschlossen. (2026-03-07)
+- [General] Docs/Release: `docs/STATUS.md`, `docs/README.md`, `docs/ARCHITECTURE.md` und `docs/SPRINTS.md` auf 0.8.0-Abschluss und naechsten Fokus `0.9.x` nachgezogen (inkl. Sprint-5-Narrative). (2026-03-07)
 - [General] Meta/Process: `AGENTS.md` um eine verbindliche Versionierungs-Policy erweitert (klare Trennung `road to` vs. `-dev` vs. final, Patch-Zyklen, Release-Umschaltregeln) und die selbststaendige Synchronisierung von `APP_VERSION` in `src/Betankungen.lpr` als Standard festgelegt. (2026-03-07)
 - [S5C1/1] Tests/Domain-Policy: Verbleibende Stats-CSV-Checks in `tests/domain_policy/cases/t_p060__01__stats_skip_interval_missed_previous.sh` und `tests/domain_policy/cases/t_p060__02__car_isolation.sh` konsequent auf feldbasiertes Token-Parsing umgestellt (Header/Rowcount/Spaltenwerte via `tests/helpers/csv.sh`), ohne Vollzeilen-Regex-Matches. (2026-03-07)
 - [S4C3/3] Core/i18n: `units/u_i18n.pas` um eine kleine, klar abgegrenzte Menge an Meta-Message-IDs erweitert (Config-Status, First-Run-Hinweise, generische Systemmeldung) fuer den ersten Runtime-Rollout ueber `Tr()`. (2026-03-07)

@@ -62,7 +62,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.5.6-0`: Zwischenversion fuer die Einfuehrung einer zusaetzlichen Unit (abgeschlossen)
 - `0.6.0`: Fahrzeug-Domain konsolidieren (abgeschlossen)
 - `0.7.0`: Multi-Car-CLI (Cars-CRUD + Resolver + strict car scoping) freigegeben
-- `0.8.x`: Export-/Output-Contracts (CSV/JSON) und Konsistenz-Haertung (naechster Fokus)
+- `0.8.0`: Export-/Output-Contracts (CSV/JSON) und Konsistenz-Haertung abgeschlossen
+- `0.9.x`: naechster Fokus (priorisiert nach Scope-Freeze)
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.

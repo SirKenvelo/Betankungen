@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-07
-**Zielversion:** 0.8.x
+**Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -149,10 +149,15 @@ Bereits erledigt:
 - Docs/Vision/Status-Sync auf Ist-Zustand: umgesetzt.
 - Konsistenzschritt Policy-Contract vs. Runtime-Text: umgesetzt (Tests/Doku entkoppelt, Runtime unveraendert).
 
-## Roadmap 0.8.x – Export-/Contract-Phase (naechster Fokus)
+## Roadmap 0.8.x – Export-/Contract-Phase (abgeschlossen / 0.8.0 freigegeben)
 - Feldbasierte CSV-Assertions (Token-Parsing) finalisiert (`S5C1/1`: Domain-Policy `P-060/01` und `P-060/02`).
-- Export-/Output-Contracts fuer CSV/JSON definieren (Versionierung/Headers/Escape-Regeln).
-- Release-Haertung der Testmatrix auf Contract-Ebene.
+- Export-/Output-Contracts fuer CSV/JSON sind dokumentiert (`docs/EXPORT_CONTRACT.md`) und testseitig abgesichert.
+- DoD 0.8.x ist erreicht (CSV-Contract-Haertung, VIN-/i18n-Vorbereitung, Multi-Car-Smokes stabil gruen).
+
+## Roadmap 0.9.x – naechster Fokus
+- Priorisierung und Scope-Freeze fuer 0.9.x festziehen (keine Scope-Drift).
+- Performance Sweep nur trigger-basiert (kein Selbstzweck; nur bei messbarem Schmerz).
+- Weiterfuehrung entlang klarer Guardrails: erst korrekt, dann schnell, dann schoen.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 
@@ -219,6 +224,6 @@ Bereits erledigt:
 - Domain-Policy-Matrix v1 ist testseitig konsolidiert (inkl. Car-Isolation-Regression fuer Stats).
 - 0.7.0-Release-Artefakt final erstellt (siehe `.releases/release_log.json`, `sha256=bb4769ec0b63c6299c3bfd6cac2f93c57df9efc50503ad87d2a02179ce1466ef`).
 - 0.7.0 freigegeben (Multi-Car-CLI inkl. Resolver, strict car scope und finaler Matrix-Haertung).
-- Naechster Fokus: 0.8.x (Export-/Output-Contracts und Contract-Tests).
+- Naechster Fokus: 0.9.x (Scope-Freeze + priorisierte Folgeziele).
 - Architektur & Prinzipien klar und konsistent
 - Scope bleibt bewusst klein, explizit und testbar

@@ -218,7 +218,8 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] `0.5.6-0`: Zwischenversion fuer zusaetzliche Unit (Parse/Validate-Entkopplung + Tests).
 - [x] `0.6.0`: Fahrzeug-Struktur konsolidiert (Hauptauto + FK als stabiles Fundament).
 - [x] `0.7.x`: Multi-Car-CLI (Cars-CRUD + Car-Resolver + strict scoping fuer fuelups/list/stats, keine impliziten Defaults).
-- [ ] `0.8.x` (optional): Export/Output Contracts (CSV/JSON Versionierung, Schema/Headers, Escape-Regeln).
+- [x] `0.8.x` (abgeschlossen als `0.8.0`): Export/Output Contracts (CSV/JSON Versionierung, Schema/Headers, Escape-Regeln).
+- [ ] `0.9.x`: naechste priorisierte Entwicklungsphase nach Scope-Freeze.
 - [ ] `1.0.0`: stabile Domain + Export + ausgereifte Stats.
 
 Festgezurrte Detailentscheidungen (2026-02-09)
