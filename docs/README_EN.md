@@ -11,12 +11,13 @@ Detailed documents are currently maintained primarily in German.
 
 ## Recommended Reading Order
 
-1. `docs/README.md` (main project documentation, German)
-2. `docs/STATUS.md` (current roadmap and completion state)
-3. `docs/ARCHITECTURE.md` (system architecture and long-term design)
-4. `docs/ADR/README.md` (architecture decisions index)
-5. `docs/BACKLOG.md` (deferred/planned topics index)
-6. `docs/CHANGELOG.md` (dated change history)
+1. `docs/ARCHITECTURE_EN.md` (compact English architecture summary)
+2. `docs/README.md` (main project documentation, German)
+3. `docs/STATUS.md` (current roadmap and completion state)
+4. `docs/ARCHITECTURE.md` (full architecture and long-term design, German)
+5. `docs/ADR/README.md` (architecture decisions index)
+6. `docs/BACKLOG.md` (deferred/planned topics index)
+7. `docs/CHANGELOG.md` (dated change history)
 
 ## Language Policy
 
