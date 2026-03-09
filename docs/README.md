@@ -76,6 +76,12 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 
+## Open-Source-Hinweis
+
+- Lizenzziel fuer die oeffentliche V1-Schiene ist Apache-2.0 (`LICENSE` im Projektroot).
+- Contribution-Leitplanken fuer oeffentliche Zusammenarbeit stehen in `CONTRIBUTING.md`.
+- Detaillierte Projektdoku ist derzeit primaer auf Deutsch; GitHub-Issue/PR/Review-Kommunikation erfolgt auf Englisch.
+
 ## i18n-Hinweis (Sprint 4)
 
 Internationalisierung wird in Sprint 4 bewusst in zwei Schritten umgesetzt:

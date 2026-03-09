@@ -25,6 +25,9 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Meta/Open-Source: Apache-2.0-Lizenzdatei (`LICENSE`) im Projektroot eingefuehrt, um die spaetere Oeffentlichstellung in Richtung V1 vorzubereiten. (2026-03-09)
+- [General] Docs/Open-Source: Root-`README.md` (GitHub-Einstieg mit Sprach-/Lizenzhinweis) und `CONTRIBUTING.md` (Contribution-Policy, Kommunikations- und Scope-Leitplanken) neu aufgenommen. (2026-03-09)
+- [General] Docs/README: Open-Source-Hinweis um Lizenzziel, Contribution-Verweis und Sprach-/Kommunikationsrahmen erweitert. (2026-03-09)
 - [General] Docs/ADR: Neues ADR `ADR-0006` zu Household Drivers aufgenommen (optionales `driver`-Objekt, `fuelups.driver_id` nullable) und ADR-Index aktualisiert. (2026-03-09)
 - [General] Docs/Backlog: UI-Polishing-/ASCII-Draw-Notizen als Backlog-Item `BL-006` eingeordnet (CLI-Renderer-Fokus mit ASCII/Unicode-Fallback; Detailskizze in `docs/UI_ASCII_DRAW.md`). (2026-03-09)
 - [General] Docs/ADR: `docs/VIN_POLICY_UX_PREP.md` im ADR-Index als ADR-nahe Policy-/UX-Begleitnotiz verankert. (2026-03-09)
@@ -100,6 +103,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Open-Source-Readiness (Apache-2.0-Lizenz, Root-README, CONTRIBUTING und Doku-Hinweise) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
 - ADR-Erweiterung `ADR-0006`, Backlog-Einordnung `BL-006` und ADR-nahe Verankerung von `VIN_POLICY_UX_PREP.md` erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
 - ADR-Erweiterung `ADR-0005` (Modulstrategie) und Index-Update erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
 - Backlog-Refactoring (Index + Einzeldateien `BL-001..BL-005`) und Doku-Navigation-Update erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
