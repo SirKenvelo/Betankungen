@@ -13,6 +13,8 @@ die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
 - `ADR-0004` - Fleet-Stats-Naming `--stats fleet` (`accepted`)
 - `ADR-0005` - Modulstrategie fuer Betankungen (Core + Module, Companion-Binaries statt Runtime-Plugins) (`proposed`)
 - `ADR-0006` - Household Drivers (optionales `driver`-Objekt + `fuelups.driver_id`) (`proposed`)
+- `ADR-0007` - Core Boundary: Core vs Module (`accepted`)
+- `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)
 
 ## Ergaenzende Policy-/UX-Notizen
 

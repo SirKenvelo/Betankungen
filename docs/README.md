@@ -72,6 +72,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
+- `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
 - `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).

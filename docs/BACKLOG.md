@@ -8,6 +8,7 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 ## Status-Legende
 
 - `icebox`: bewusst nach hinten gestellt, kein aktiver Sprint-Commitment.
+- `geplant`: fachlich vorgesehen und priorisierbar, aber noch kein aktiver Sprint-Commitment.
 - `next`: fuer einen der naechsten Sprints priorisiert.
 - `blocked`: fachlich klar, aber durch Abhaengigkeiten blockiert.
 
@@ -19,6 +20,10 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-004 - Cross-Border Fuel Context (Currency / Country)](BACKLOG/BL-004-cross-border-fuel-context-currency-country.md) - Status: `icebox`, Typ: Domain-Erweiterung
 - [BL-005 - Modulstrategie fuer Betankungen](BACKLOG/BL-005-modulstrategie-fuer-betankungen.md) - Status: `next`, Typ: Architekturentscheidung
 - [BL-006 - UI Polishing & ASCII-Draw](BACKLOG/BL-006-ui-polishing-ascii-draw.md) - Status: `icebox`, Typ: UX-/Renderer-Erweiterung
+- [BL-007 - Maintenance System](BACKLOG/BL-007-maintenance.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
+- [BL-008 - Tire Management](BACKLOG/BL-008-tire-management.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
+- [BL-009 - Agriculture Module](BACKLOG/BL-009-agriculture-module.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
+- [BL-010 - Cost Analytics](BACKLOG/BL-010-cost-analytics.md) - Status: `geplant`, Typ: Stats-/Domain-Erweiterung (cross-module)
 
 ## Verknuepfte Entscheidungen
 

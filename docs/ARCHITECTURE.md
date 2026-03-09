@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-03-07
+**Stand:** 2026-03-09
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -16,6 +16,7 @@ Die folgenden Punkte sind die dauerhaften Architekturleitlinien auf hoher Ebene.
 *   **Separation of Concerns (SoC):** Strikte Trennung zwischen Geschäftslogik (`Business Logic`) und Anzeige/Eingabe (`UI`). Die Fach-Units (z. B. `u_stations`) enthalten keine CLI-Parsing-Logik.
 *   **CLI-Pipeline (Parse -> Validate -> Dispatch):** Parsing bleibt auf Syntax/Normalisierung begrenzt (`u_cli_parse`), Policy-Validierung liegt zentral in `u_cli_validate`, und fachliche Ausfuehrung erfolgt erst im Orchestrator-Dispatch.
 *   **Car Context Layer:** `ResolveCarIdOrFail` ist die zentrale Instanz fuer die Car-Aufloesung. Das Regelwerk (0/1/>1 Cars, unknown/invalid `--car-id`) ist einmalig implementiert und wird in car-sensitiven Flows konsistent wiederverwendet.
+*   **Module Contract:** Das verbindliche technische Integrationsmodell fuer Companion-Module (Build, CLI, DB, Stats) ist in `docs/MODULES_ARCHITECTURE.md` dokumentiert und wird bei neuen Modulen als Gate verwendet.
 *   **Transaktions-Sicherheit:** Jede Datenbank-Mutation (Schreiben, Ändern, Löschen) wird als atomare Einheit behandelt. Schlägt ein Teil fehl, erfolgt ein vollständiger Rollback (All-or-Nothing).
 *   **Defensive Parsing:** "Garbage in, Garbage out" wird an der Systemgrenze verhindert. Eingaben werden über skalierte Integer-Funktionen (Fixed-Point) validiert, bevor sie die Fachlogik erreichen.
 
