@@ -10,7 +10,7 @@ die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
 - `ADR-0001` - CSV-Contract-Versionierung ohne Kommentarzeilen im strict CSV (`accepted`)
 - `ADR-0002` - VIN-Validierung als Warning+Confirm statt Hard Error (`accepted`)
 - `ADR-0003` - Schema-Bump-Strategie in kleinen, getrennten Migrationen (`accepted`)
-- `ADR-0004` - Fleet-Stats-Naming `--stats fleet` vs. `--stats cars` (`proposed`)
+- `ADR-0004` - Fleet-Stats-Naming `--stats fleet` (`accepted`)
 - `ADR-0005` - Modulstrategie fuer Betankungen (Core + Module, Companion-Binaries statt Runtime-Plugins) (`proposed`)
 - `ADR-0006` - Household Drivers (optionales `driver`-Objekt + `fuelups.driver_id`) (`proposed`)
 

@@ -22,4 +22,4 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 
 ## Verknuepfte Entscheidungen
 
-- Siehe `docs/ADR/ADR-0004-fleet-stats-naming.md` fuer den noch offenen Naming-Entscheid zu `--stats fleet` vs. `--stats cars`.
+- Siehe `docs/ADR/ADR-0004-fleet-stats-naming.md` fuer die festgelegte Terminologie `--stats fleet` bei fahrzeuguebergreifenden Stats.

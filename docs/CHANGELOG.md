@@ -25,6 +25,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Docs/ADR: `ADR-0004` auf finalen Entscheidungsstand gesetzt (`accepted`) und Terminologie fuer aggregierte Fahrzeugstatistiken auf `--stats fleet` festgezogen; ADR-Index (`docs/ADR/README.md`) und Backlog-Verweis (`docs/BACKLOG.md`) entsprechend synchronisiert. (2026-03-09)
 - [General] Docs/Language: Kompakte englische Architektur-Zusammenfassung `docs/ARCHITECTURE_EN.md` eingefuehrt und in den Entry-Dokumenten (`README.md`, `docs/README.md`, `docs/README_EN.md`) verankert. (2026-03-09)
 - [General] Meta/Process: `AGENTS.md` um verbindliche Doku-Sprachstrategie fuer Public-Readiness erweitert (Deutsch-first fuer Detaildoku, inkrementelle englische Entry-Doku, kein Big-Bang-Umbau vor `1.0.0`). (2026-03-09)
 - [General] Docs/Language: Englischen Doku-Einstieg `docs/README_EN.md` eingefuehrt und in Root-`README.md` sowie `docs/README.md` verlinkt. (2026-03-09)
