@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-07
+**Stand:** 2026-03-09
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -70,7 +70,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
 ## Doku-Navigation
 
-- `docs/BACKLOG.md`: bewusst verschobene, spaeter umzusetzende Themen.
+- `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
+- `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
 - `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
@@ -115,7 +116,8 @@ Details zur Regelbasis:
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
 - `docs/ADR/`: Entscheidungen im ADR-Format (accepted/proposed)
-- `docs/BACKLOG.md`: verschobene oder bewusst spaeter geplante Themen
+- `docs/BACKLOG.md`: zentrale Backlog-Uebersicht
+- `docs/BACKLOG/`: einzelne Backlog-Eintraege `BL-xxx` als Detaildokumente
 - `.releases/`: finale Release-Artefakte (`.tar`) + `release_log.json`
 - `.backup/`: zeitgestempelte Snapshot-Backups + `index.json`
 - `tests/`: Smoke-/Plausibilitaetstests fuer den lokalen Workflow (inkl. dediziertem Cars-CRUD-Smoke)

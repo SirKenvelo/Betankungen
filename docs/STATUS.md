@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-07
+**Stand:** 2026-03-09
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -10,6 +10,7 @@
 - Dokumentation als First-Class-Artifacts:
   - `ARCHITECTURE.md`
   - `BACKLOG.md`
+  - `BACKLOG/` (Einzeldateien je Backlog-Item)
   - `CHANGELOG.md`
   - `DESIGN_PRINCIPLES.md`
   - `SPRINTS.md`

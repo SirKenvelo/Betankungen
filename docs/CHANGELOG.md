@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-07
+**Stand:** 2026-03-09
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -25,6 +25,13 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
 
 ### Changed
+- [General] Docs/ADR: Neues ADR `ADR-0006` zu Household Drivers aufgenommen (optionales `driver`-Objekt, `fuelups.driver_id` nullable) und ADR-Index aktualisiert. (2026-03-09)
+- [General] Docs/Backlog: UI-Polishing-/ASCII-Draw-Notizen als Backlog-Item `BL-006` eingeordnet (CLI-Renderer-Fokus mit ASCII/Unicode-Fallback; Detailskizze in `docs/UI_ASCII_DRAW.md`). (2026-03-09)
+- [General] Docs/ADR: `docs/VIN_POLICY_UX_PREP.md` im ADR-Index als ADR-nahe Policy-/UX-Begleitnotiz verankert. (2026-03-09)
+- [General] Docs/ADR: Neues ADR `ADR-0005` zur Modulstrategie aufgenommen (Core+Module, Companion-Binaries wie `betankungen-maintenance` statt dynamischer Runtime-Plugins) und ADR-Index aktualisiert. (2026-03-09)
+- [General] Docs/Backlog: Backlog auf Index+Einzeldatei-Struktur umgestellt (`docs/BACKLOG.md` als zentrale Uebersicht, Detaildokumente unter `docs/BACKLOG/BL-001..BL-005`), inkl. neuem Eintrag `BL-005` zur Modulstrategie fuer optionale Erweiterungen. (2026-03-09)
+- [General] Docs/Backlog: Neues Icebox-Backlog `BL-004` fuer "Cross-Border Fuel Context" aufgenommen (optionale Zusatzfelder `currency_code` [ISO-4217] und `country_code` [ISO-3166-1 alpha-2] an `fuelups`, ohne automatische FX-Umrechnung). (2026-03-09)
+- [General] Docs/Backlog: Neues Icebox-Backlog `BL-003` fuer "Household Drivers / Shared Cars" aufgenommen (optionale `driver_id`-Beziehung in `fuelups`, moegliche Tabelle `drivers`, klare Nicht-Ziele ohne Login/Auth/Rollen). (2026-03-09)
 - [General] Data/Easter-Egg: Zusaetzliche Multi-Line-Message fuer die geplante Maintainer-Variante `--cookie` in `data/dev_messages.b64` aufgenommen (feste drei Zeilen: SEARCHING/DOGGO FOUND/TAIL.PROPELLER). (2026-03-07)
 - [General] Docs/Backlog: `docs/BACKLOG.md` um die optionale, versteckte CLI-Variante `--cookie` erweitert (feste Ausgabe, isoliert von normalen Flows). (2026-03-07)
 - [General] Data/Easter-Egg: Entkoppelte Message-Sammlung `data/dev_messages.b64` eingefuehrt (eine base64-kodierte Message pro Zeile, inkl. initialem Bestand fuer das optionale `--ndt`-Backlog-Feature). (2026-03-07)
@@ -93,6 +100,11 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- ADR-Erweiterung `ADR-0006`, Backlog-Einordnung `BL-006` und ADR-nahe Verankerung von `VIN_POLICY_UX_PREP.md` erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
+- ADR-Erweiterung `ADR-0005` (Modulstrategie) und Index-Update erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
+- Backlog-Refactoring (Index + Einzeldateien `BL-001..BL-005`) und Doku-Navigation-Update erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-09)
+- Backlog-Erweiterung `BL-004` (Cross-Border Fuel Context) wurde mit Unterstuetzung durch AI-Tools als Sparringspartner eingepflegt. (2026-03-09)
+- Backlog-Erweiterung `BL-003` (Household Drivers / Shared Cars) wurde mit Unterstuetzung durch AI-Tools als Sparringspartner eingepflegt. (2026-03-09)
 - Erweiterung der Easter-Egg-Message-Liste und Backlog-Praezisierung fuer `--cookie` erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Auslagerung/Obfuskation der Developer-Messages (`data/dev_messages.b64`) und Einrichtung des Encode-Helfers erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
 - Backlog-/ADR-Strukturierung und Doku-Navigation erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-07)
