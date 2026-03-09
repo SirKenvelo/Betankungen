@@ -10,6 +10,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
 ## Documentation
 
+- English docs entry: `docs/README_EN.md`
 - Main project documentation (currently German): `docs/README.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Backlog index: `docs/BACKLOG.md`

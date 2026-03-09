@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-07
+**Stand:** 2026-03-09
 
 <INSTRUCTIONS>
 
@@ -8,6 +8,16 @@
 - Kommentare auf GitHub (Issues, PRs, Reviews) immer auf Englisch verfassen.
 - Bei der ersten Änderung an einer Datei pro Task: Datum im Header/Metadaten auf das aktuelle Datum setzen.
 - Wenn Dateien geändert werden: vorhandene Header/Metadaten an die neue Funktionalität anpassen, falls diese nicht mehr korrekt sind.
+
+## Doku-Sprachstrategie (Public-Readiness)
+- Interne und tiefe Projektdokumentation darf standardmaessig auf Deutsch bleiben, solange dies die Arbeitsgeschwindigkeit erhoeht.
+- Fuer oeffentliche Sichtbarkeit werden englische Einstiegsdokumente schrittweise gepflegt (inkrementell, kein Big-Bang-Umbau).
+- Prioritaet fuer Englisch:
+  1. Root-`README.md`
+  2. `CONTRIBUTING.md`
+  3. kuratierte Entry-Doku unter `docs/` (z. B. `docs/README_EN.md`)
+- Vollstaendige Uebersetzung der gesamten Historien-/Detaildoku ist vor `1.0.0` kein Pflichtziel.
+- Bei neuen oeffentlich relevanten Doku-Abschnitten ist eine knappe englische Einstiegs- oder Zusammenfassungsvariante aktiv mitzuplanen.
 
 ## Repo-Pflege
 - Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch/pull --rebase`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
