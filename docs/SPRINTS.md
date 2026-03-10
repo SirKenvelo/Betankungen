@@ -205,7 +205,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 4. S7C4/4
 - Thema: Sprint-7-Finalisierung (DoD-Check + Verifikationslauf + finaler Doku-Sync fuer Fleet-MVP Text/JSON/Guardrails).
 - Status: done
-- Git-Commit: `TBD`
+- Git-Commit: `aa9281e`
 - Artefakte: `.artifacts/sprint_7_commit_4_von_4.md`, `.artifacts/sprint_7_commit_4_von_4.diff`
 
 ### Abschluss-Tag
