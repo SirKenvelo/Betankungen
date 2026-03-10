@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # run_domain_policy_tests.sh
-# UPDATED: 2026-02-22
+# UPDATED: 2026-03-10
 # Kompiliert/startet alle Domain-Policy-Cases (t_*.pas, t_*.sh).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -10,6 +10,23 @@ CASE_DIR="$ROOT_DIR/tests/domain_policy/cases"
 BINDIR="$ROOT_DIR/bin"
 BUILDDIR="$ROOT_DIR/build"
 DB_HELPER="$ROOT_DIR/tests/domain_policy/helpers/build_test_dbs.sh"
+TEST_ENV_DIR=""
+
+setup_isolated_home() {
+  TEST_ENV_DIR="$(mktemp -d /tmp/betankungen_domain_policy_env_XXXXXX)"
+  export HOME="$TEST_ENV_DIR/home"
+  export XDG_CONFIG_HOME="$TEST_ENV_DIR/config"
+  export XDG_DATA_HOME="$TEST_ENV_DIR/data"
+  mkdir -p "$HOME" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME"
+}
+
+cleanup() {
+  if [[ -n "$TEST_ENV_DIR" && -d "$TEST_ENV_DIR" ]]; then
+    rm -rf "$TEST_ENV_DIR"
+  fi
+}
+
+trap cleanup EXIT
 
 format_prefixed_lines() {
   while IFS= read -r line || [[ -n "$line" ]]; do
@@ -53,6 +70,8 @@ require_tool() {
 
 require_tool sqlite3
 require_tool fpc
+
+setup_isolated_home
 
 mkdir -p "$BINDIR" "$BUILDDIR"
 

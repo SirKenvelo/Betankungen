@@ -55,6 +55,7 @@ Erzeugte Dateien:
   - erzeugt zuerst beide Test-DBs,
   - kompiliert alle `t_*.pas` in `tests/domain_policy/cases/`,
   - fuehrt die Cases nacheinander aus.
+  - nutzt eine isolierte `HOME`/`XDG`-Testumgebung, damit lokale User-Config den Lauf nicht beeinflusst.
 - Runner-Konvention: ein Case entspricht genau einem Aufruf, Assertions laufen ueber Exit-Code sowie Stdout/Stderr.
 - Interaktive Bestaetigungen werden in Cases ueber STDIN simuliert.
 
