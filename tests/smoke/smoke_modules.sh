@@ -8,6 +8,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MODULE_SRC="$ROOT_DIR/src/betankungen-maintenance.lpr"
 MODULE_BIN="$ROOT_DIR/bin/betankungen-maintenance"
+BUILD_DIR="$ROOT_DIR/build"
+UNITS_DIR="$ROOT_DIR/units"
 
 TMP_DIR="$(mktemp -d /tmp/betankungen_smoke_modules_XXXXXX)"
 OUT_HELP="$TMP_DIR/help.out"
@@ -43,8 +45,10 @@ if [[ ! -f "$MODULE_SRC" ]]; then
   fail "Modul-Source fehlt: $MODULE_SRC"
 fi
 
+mkdir -p "$ROOT_DIR/bin" "$BUILD_DIR"
+
 set +e
-fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits "$MODULE_SRC" >"$BUILD_LOG" 2>&1
+fpc -Mobjfpc -Sh -gl -gw -FE"$ROOT_DIR/bin" -FU"$BUILD_DIR" -Fu"$UNITS_DIR" "$MODULE_SRC" >"$BUILD_LOG" 2>&1
 RC=$?
 set -e
 if [[ $RC -ne 0 ]]; then
