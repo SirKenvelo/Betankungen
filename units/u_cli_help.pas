@@ -63,7 +63,7 @@ begin
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]]')
   else if (FocusFlag = '--from') then
     Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
   else if FocusFlag = '--db' then
@@ -110,7 +110,7 @@ begin
   Item('--list stations|fuelups|cars','Auflisten (optional mit --detail).');
   Item('--edit stations|cars',       'Datensatz bearbeiten (fuelups ist verboten).');
   Item('--delete stations|cars',     'Datensatz loeschen (fuelups ist verboten).');
-  Item('--stats fuelups|fleet',      'Auswertung fuer fuelups oder aggregierte Fleet-Basis (MVP).');
+  Item('--stats fuelups|fleet',      'Auswertung fuer fuelups oder aggregierte Fleet-Basis (MVP, Text/JSON).');
   Item('--seed',                     'Demo-DB erzeugen/auffuellen (exklusiv).');
   Item('--about',                    'Projekt-/Autor-Informationen anzeigen.');
   Item('--help',                     'Voll-Help anzeigen und beenden.');
@@ -130,15 +130,15 @@ begin
   Item('--trace',                    'Verbose Trace-Logging aktivieren.');
   Item('--quiet',                    'Ausgaben reduzieren (Fehler bleiben sichtbar).');
 
-  Sec('Stats options (nur bei --stats fuelups)');
-  Item('--from <YYYY-MM|YYYY-MM-DD>','Startzeitraum (Formatpflicht).');
-  Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (Formatpflicht; exklusive Obergrenze).');
-  Item('--monthly',                  'Monatliche Aggregation (nicht mit --yearly).');
-  Item('--yearly',                   'Jaehrliche Aggregation (nicht mit --monthly/--csv/--dashboard).');
-  Item('--json',                     'JSON-Ausgabe.');
-  Item('--pretty',                   'Pretty-JSON (nur zusammen mit --json).');
-  Item('--csv',                      'CSV-Ausgabe (nicht mit --json; nicht bei --yearly).');
-  Item('--dashboard',                'Kompakt-Dashboard (exklusiv; nicht mit --json/--csv; nicht bei --yearly).');
+  Sec('Stats options');
+  Item('--from <YYYY-MM|YYYY-MM-DD>','Startzeitraum (nur bei --stats fuelups).');
+  Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (nur fuelups; exklusive Obergrenze).');
+  Item('--monthly',                  'Monatliche Aggregation (nur fuelups; nicht mit --yearly).');
+  Item('--yearly',                   'Jaehrliche Aggregation (nur fuelups; nicht mit --monthly/--csv/--dashboard).');
+  Item('--json',                     'JSON-Ausgabe (fuelups/fleet).');
+  Item('--pretty',                   'Pretty-JSON (nur zusammen mit --json; fuelups/fleet).');
+  Item('--csv',                      'CSV-Ausgabe (nur fuelups; nicht mit --json; nicht bei --yearly).');
+  Item('--dashboard',                'Kompakt-Dashboard (nur fuelups; nicht mit --json/--csv; nicht bei --yearly).');
 
   Sec('Examples');
   Line('  Betankungen --add stations');
@@ -157,6 +157,7 @@ begin
   Line('  Betankungen --stats fuelups --yearly');
   Line('  Betankungen --stats fuelups --json --pretty --yearly');
   Line('  Betankungen --stats fleet');
+  Line('  Betankungen --stats fleet --json --pretty');
   Line('  Betankungen --seed --fuelups 400 --force');
 end;
 

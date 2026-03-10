@@ -117,8 +117,11 @@ Policy-Hinweis (Matrix v1):
 
 **Statistiken: Fleet (MVP-Basis)**
 - Fleet-MVP Textausgabe: `Betankungen --stats fleet`
-- Ausgabe enthaelt aktuell aggregierte Basiswerte ueber alle Fahrzeuge (`Cars`, `Fuelups`, `Total liters (ml)`, `Total cost (cents)`).
-- Aktuell bewusst keine Format-/Zeitraumoptionen fuer Fleet-MVP (`--json`, `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to` sind nur fuer `--stats fuelups` vorgesehen).
+- Fleet-MVP JSON compact: `Betankungen --stats fleet --json`
+- Fleet-MVP JSON pretty: `Betankungen --stats fleet --json --pretty`
+- Textausgabe enthaelt aggregierte Basiswerte ueber alle Fahrzeuge (`Cars`, `Fuelups`, `Total liters (ml)`, `Total cost (cents)`).
+- JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "fleet_mvp"`) und den Payload `fleet` mit `cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`.
+- Weiterhin nicht verfuegbar fuer Fleet-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`.
 
 **Schnellbeispiele (Dashboard)**
 - `Betankungen --stats fuelups --dashboard`

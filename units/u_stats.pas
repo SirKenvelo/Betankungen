@@ -15,7 +15,7 @@
   - CSV-Ausgabe der Zyklus-/Monatsdaten (maschinenlesbar, strict).
   - Monatsaggregation fuer `--stats fuelups --monthly` (Text + JSON kind "fuelups_monthly").
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
-  - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Textausgabe).
+  - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Text/JSON-Ausgabe).
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
@@ -74,6 +74,10 @@ procedure ShowFuelupDashboard(const DbPath: string;
 
 // Liefert die Fleet-Statistik als MVP-Textausgabe.
 procedure ShowFleetStats(const DbPath: string);
+// Liefert die Fleet-Statistik als MVP-JSON-Ausgabe.
+procedure ShowFleetStatsJson(const DbPath: string;
+  const Pretty: boolean = False;
+  const AppVersion: string = '');
 
 implementation
 
@@ -304,6 +308,13 @@ type
     Cycles: TCycleRowArray;   // nur befuellt wenn keine Monats/Jahresaggregation aktiv ist
     Months: TMonthAggArray;   // befuellt bei Monthly=True oder Yearly=True
     MonthN: integer;
+  end;
+
+  TFleetStats = record
+    CarsTotal: Int64;
+    FuelupsTotal: Int64;
+    LitersMlTotal: Int64;
+    TotalCentsAll: Int64;
   end;
 
 function AvgLPer100_x100(const LitersMlA: Int64; const DistKmA: Int64): Int64;
@@ -1234,20 +1245,13 @@ begin
   RenderFuelupDashboardText(R, Monthly);
 end;
 
-procedure ShowFleetStats(const DbPath: string);
+procedure CollectFleetStats(const DbPath: string; out R: TFleetStats);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
   Q: TSQLQuery;
-  CarsTotal: Int64;
-  FuelupsTotal: Int64;
-  LitersMlTotal: Int64;
-  TotalCents: Int64;
 begin
-  CarsTotal := 0;
-  FuelupsTotal := 0;
-  LitersMlTotal := 0;
-  TotalCents := 0;
+  FillChar(R, SizeOf(R), 0);
 
   Conn := TSQLite3Connection.Create(nil);
   Tran := TSQLTransaction.Create(nil);
@@ -1262,7 +1266,7 @@ begin
 
       Q.SQL.Text := 'SELECT COUNT(*) AS cars_total FROM cars;';
       Q.Open;
-      CarsTotal := FieldInt64OrZero(Q, 'cars_total');
+      R.CarsTotal := FieldInt64OrZero(Q, 'cars_total');
       Q.Close;
 
       Q.SQL.Text :=
@@ -1272,16 +1276,10 @@ begin
         '  COALESCE(SUM(total_cents), 0) AS total_cents_all ' +
         'FROM fuelups;';
       Q.Open;
-      FuelupsTotal := FieldInt64OrZero(Q, 'fuelups_total');
-      LitersMlTotal := FieldInt64OrZero(Q, 'liters_ml_total');
-      TotalCents := FieldInt64OrZero(Q, 'total_cents_all');
+      R.FuelupsTotal := FieldInt64OrZero(Q, 'fuelups_total');
+      R.LitersMlTotal := FieldInt64OrZero(Q, 'liters_ml_total');
+      R.TotalCentsAll := FieldInt64OrZero(Q, 'total_cents_all');
       Q.Close;
-
-      WriteLn('Fleet-Stats (MVP)');
-      WriteLn('Cars: ', CarsTotal);
-      WriteLn('Fuelups: ', FuelupsTotal);
-      WriteLn('Total liters (ml): ', LitersMlTotal);
-      WriteLn('Total cost (cents): ', TotalCents);
     except
       on E: Exception do
         raise Exception.Create('Fleet-Stats fehlgeschlagen: ' + E.Message);
@@ -1291,6 +1289,60 @@ begin
     Tran.Free;
     Conn.Free;
   end;
+end;
+
+procedure RenderFleetStatsText(const R: TFleetStats);
+begin
+  WriteLn('Fleet-Stats (MVP)');
+  WriteLn('Cars: ', R.CarsTotal);
+  WriteLn('Fuelups: ', R.FuelupsTotal);
+  WriteLn('Total liters (ml): ', R.LitersMlTotal);
+  WriteLn('Total cost (cents): ', R.TotalCentsAll);
+end;
+
+procedure RenderFleetStatsJson(const R: TFleetStats;
+  const Pretty: boolean;
+  const AppVersion: string);
+var
+  J: TJsonWriter;
+begin
+  J.Pretty := Pretty;
+  J.Ind := 0;
+
+  J.W('{'); J.NL;
+  J.IndentInc;
+
+  WriteJsonMetaHeader(J, 'fleet_mvp', AppVersion);
+
+  J.IndentWrite; J.W('"fleet":'); J.SP; J.W('{'); J.NL;
+  J.IndentInc;
+  J.IndentWrite; J.W('"cars_total":'); J.SP; J.W(IntToStr(R.CarsTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"fuelups_total":'); J.SP; J.W(IntToStr(R.FuelupsTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"liters_ml_total":'); J.SP; J.W(IntToStr(R.LitersMlTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"total_cents_all":'); J.SP; J.W(IntToStr(R.TotalCentsAll)); J.NL;
+  J.IndentDec;
+  J.IndentWrite; J.W('}'); J.NL;
+
+  J.IndentDec;
+  J.W('}'); J.NL;
+end;
+
+procedure ShowFleetStats(const DbPath: string);
+var
+  R: TFleetStats;
+begin
+  CollectFleetStats(DbPath, R);
+  RenderFleetStatsText(R);
+end;
+
+procedure ShowFleetStatsJson(const DbPath: string;
+  const Pretty: boolean;
+  const AppVersion: string);
+var
+  R: TFleetStats;
+begin
+  CollectFleetStats(DbPath, R);
+  RenderFleetStatsJson(R, Pretty, AppVersion);
 end;
 
 end.

@@ -228,7 +228,8 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Flag-Regeln fuer Yearly: exklusiv zu `--monthly`, nicht kombinierbar mit `--csv` oder `--dashboard`
 - JSON-avg als scaled Integer: `avg_l_per_100km_x100`
 - Debug: Effektiver Zeitraum wird einmalig nach der Kopf-Query geloggt (open-ended/closed, plus no-rows Hinweis)
-- Fleet-MVP-Basis (`--stats fleet`) mit aggregierten Kernwerten ueber alle Fahrzeuge (Textausgabe)
+- Fleet-MVP-Basis (`--stats fleet`) mit aggregierten Kernwerten ueber alle Fahrzeuge (Text + JSON)
+- Fleet-JSON (`--stats fleet --json`, optional `--pretty`) inkl. Export-Meta und `kind: "fleet_mvp"`
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`
@@ -241,6 +242,7 @@ Beispiele (Yearly):
 
 Beispiel (Fleet MVP):
 - `Betankungen --stats fleet`
+- `Betankungen --stats fleet --json --pretty`
 
 Beispiel (JSON, pretty formatiert, gekuerzt):
 ```json

@@ -66,7 +66,7 @@ Direktlauf:
 ## Smoke-Test
 - Script: `tests/smoke/smoke_cli.sh`
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
-- Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Textausgabe) ab.
+- Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Text + JSON compact/pretty) ab.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.

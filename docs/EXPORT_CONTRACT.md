@@ -1,5 +1,5 @@
 # EXPORT CONTRACT
-**Stand:** 2026-03-04
+**Stand:** 2026-03-10
 
 Zweck: Stabiler Export-Vertrag fuer maschinenlesbare Ausgabeformate (JSON/CSV).
 
@@ -16,8 +16,11 @@ Pflichtfelder:
 - `app_version`
 
 Payload (v1, aktueller Stand):
-- Report-Kennung: Feld `kind` (z. B. `fuelups_monthly`, `fuelups_yearly`, `fuelups_full_tank_cycles`)
-- Nutzdaten: vorhandene Payload-Felder (`rows` bei monthly/yearly, `cycles`/`sum` bei full_tank_cycles)
+- Report-Kennung: Feld `kind` (z. B. `fuelups_monthly`, `fuelups_yearly`, `fuelups_full_tank_cycles`, `fleet_mvp`)
+- Nutzdaten:
+  - fuelups monthly/yearly: `rows`
+  - fuelups full_tank_cycles: `cycles` + `sum`
+  - fleet_mvp: `fleet` (`cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`)
 
 ## CSV Contract
 

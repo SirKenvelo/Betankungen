@@ -779,7 +779,13 @@ begin
 
       tkFleet:
         case Cmd.Kind of
-          ckStats: ShowFleetStats(DbPath);
+          ckStats:
+            begin
+              if Cmd.Json then
+                ShowFleetStatsJson(DbPath, Cmd.Pretty, APP_VERSION)
+              else
+                ShowFleetStats(DbPath);
+            end;
         else
           FailUsage('Interner Fehler: Ungültiges fleet-Kommando.');
         end;

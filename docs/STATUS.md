@@ -162,6 +162,7 @@ Bereits erledigt:
 - Weiterfuehrung entlang klarer Guardrails: erst korrekt, dann schnell, dann schoen.
 - Erreicht (S6-Baseline): Modulstrategie ist auf `accepted`, technischer Modul-Handshake (`--module-info`) ist implementiert und per dediziertem Modules-Smoke regressionsgesichert.
 - Gestartet (S7C1/4): CLI-Wiring fuer `--stats fleet` inkl. Validate/Dispatch und MVP-Textausgabe.
+- Erreicht (S7C2/4): Fleet-JSON-MVP (`--stats fleet --json [--pretty]`) inkl. Export-Meta und Tests.
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
@@ -192,7 +193,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 7 - Fleet Stats MVP
 
-- Status: in progress (`S7C1/4` gestartet)
+- Status: in progress (`S7C1/4` + `S7C2/4` umgesetzt)
 - Ziel: schrittweise Einfuehrung von `--stats fleet` als klaren, fahrzeuguebergreifenden Stats-Modus.
 
 ### S7C1/4 - CLI Validate/Dispatch
@@ -200,6 +201,13 @@ Bereits erledigt:
 - Erreicht: CLI akzeptiert `--stats fleet` als eigenen Stats-Target-Pfad.
 - Erreicht: Dispatch im Orchestrator verdrahtet.
 - Erreicht: MVP-Textausgabe mit aggregierten Fleet-Basiswerten (Cars/Fuelups/Liters/Cost).
+
+### S7C2/4 - Fleet JSON MVP
+
+- Erreicht: `--stats fleet --json` und `--stats fleet --json --pretty` im Core verdrahtet.
+- Erreicht: JSON-Output mit Export-Meta (`contract_version`, `generated_at`, `app_version`) und `kind: "fleet_mvp"`.
+- Erreicht: Fleet-Payload `fleet` mit `cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`.
+- Erreicht: Smoke- und Validate-Tests fuer Fleet-JSON nachgezogen.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

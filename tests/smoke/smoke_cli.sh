@@ -154,6 +154,8 @@ print_plan() {
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
   printf '[LIST] --stats fuelups --json --csv -> Fehler im 3-Zeilen-Format ohne Voll-Help\n'
   printf '[LIST] --stats fleet -> MVP-Textausgabe\n'
+  printf '[LIST] --stats fleet --json -> JSON compact + Export-Meta\n'
+  printf '[LIST] --stats fleet --json --pretty -> JSON pretty + Export-Meta\n'
   printf '[LIST] First-Run: stiller Bootstrap (config+db)\n'
   printf '[LIST] Config vorhanden, DB fehlt: automatische DB-Anlage ohne Prompt\n'
   printf '[LIST] Default nicht schreibbar: Prompt-Fallback + Retry erfolgreich\n'
@@ -348,6 +350,61 @@ test_stats_fleet_mvp_ok() {
     printf '[OK] --stats fleet: MVP-Textausgabe\n'
   else
     printf '[FAIL] --stats fleet: MVP-Textausgabe\n'
+    add_fail
+  fi
+}
+
+test_stats_fleet_json_compact_ok() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats fleet --json >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q '"kind":"fleet_mvp"' "$out" &&
+     grep -q '"fleet":{' "$out" &&
+     grep -q '"cars_total":' "$out" &&
+     grep -q '"fuelups_total":' "$out" &&
+     grep -q '"liters_ml_total":' "$out" &&
+     grep -q '"total_cents_all":' "$out" &&
+     json_has_export_meta_v1 "$out"; then
+    printf '[OK] --stats fleet --json: JSON compact + Export-Meta\n'
+  else
+    printf '[FAIL] --stats fleet --json: JSON compact + Export-Meta\n'
+    add_fail
+  fi
+}
+
+test_stats_fleet_json_pretty_ok() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats fleet --json --pretty >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q '"kind": "fleet_mvp"' "$out" &&
+     grep -q '"fleet": {' "$out" &&
+     grep -q '"cars_total":' "$out" &&
+     grep -q '"fuelups_total":' "$out" &&
+     grep -q '"liters_ml_total":' "$out" &&
+     grep -q '"total_cents_all":' "$out" &&
+     json_has_export_meta_v1 "$out" &&
+     [[ "$(wc -l < "$out" | tr -d ' ')" -gt 5 ]]; then
+    printf '[OK] --stats fleet --json --pretty: JSON pretty + Export-Meta\n'
+  else
+    printf '[FAIL] --stats fleet --json --pretty: JSON pretty + Export-Meta\n'
     add_fail
   fi
 }
@@ -1230,6 +1287,8 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_stats_stations_fails_short_usage
   test_stats_json_csv_fails_short_3line_no_full_help
   test_stats_fleet_mvp_ok
+  test_stats_fleet_json_compact_ok
+  test_stats_fleet_json_pretty_ok
   test_first_run_bootstrap
   test_cfg_present_db_missing
   test_default_unwritable_prompt_retry
