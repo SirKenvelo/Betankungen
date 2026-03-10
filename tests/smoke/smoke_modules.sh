@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# smoke_modules.sh
+# UPDATED: 2026-03-10
+# Fokus-Smoke fuer Companion-Binary-Contract (`--module-info`) von Modulen.
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+MODULE_SRC="$ROOT_DIR/src/betankungen-maintenance.lpr"
+MODULE_BIN="$ROOT_DIR/bin/betankungen-maintenance"
+
+TMP_DIR="$(mktemp -d /tmp/betankungen_smoke_modules_XXXXXX)"
+OUT_HELP="$TMP_DIR/help.out"
+ERR_HELP="$TMP_DIR/help.err"
+OUT_VERSION="$TMP_DIR/version.out"
+ERR_VERSION="$TMP_DIR/version.err"
+OUT_INFO="$TMP_DIR/info.out"
+ERR_INFO="$TMP_DIR/info.err"
+OUT_INFO_PRETTY="$TMP_DIR/info_pretty.out"
+ERR_INFO_PRETTY="$TMP_DIR/info_pretty.err"
+OUT_BAD="$TMP_DIR/bad.out"
+ERR_BAD="$TMP_DIR/bad.err"
+BUILD_LOG="$TMP_DIR/build.log"
+
+cleanup() {
+  rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
+
+fail() {
+  printf '[FAIL] %s\n' "$1"
+  for f in "$TMP_DIR"/*.out "$TMP_DIR"/*.err "$BUILD_LOG"; do
+    [[ -e "$f" ]] || continue
+    if [[ -s "$f" ]]; then
+      printf '[INFO] %s:\n' "$(basename "$f")"
+      sed -n '1,120p' "$f"
+    fi
+  done
+  exit 1
+}
+
+if [[ ! -f "$MODULE_SRC" ]]; then
+  fail "Modul-Source fehlt: $MODULE_SRC"
+fi
+
+set +e
+fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits "$MODULE_SRC" >"$BUILD_LOG" 2>&1
+RC=$?
+set -e
+if [[ $RC -ne 0 ]]; then
+  fail 'Companion-Binary konnte nicht gebaut werden.'
+fi
+printf '[OK] Modules: Build erfolgreich (%s)\n' "src/betankungen-maintenance.lpr"
+
+if [[ ! -x "$MODULE_BIN" ]]; then
+  fail "Companion-Binary fehlt nach Build: $MODULE_BIN"
+fi
+
+set +e
+"$MODULE_BIN" --help >"$OUT_HELP" 2>"$ERR_HELP"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^Usage: betankungen-maintenance --module-info \[--pretty\]$' "$OUT_HELP" ||
+   ! grep -q '^       betankungen-maintenance --help | --version$' "$OUT_HELP"; then
+  fail '--help-Contract des Companion-Binary ist nicht stabil.'
+fi
+printf '[OK] Modules: --help Contract\n'
+
+set +e
+"$MODULE_BIN" --version >"$OUT_VERSION" 2>"$ERR_VERSION"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -Eq '^betankungen-maintenance [0-9]+\.[0-9]+\.[0-9]+([-.][A-Za-z0-9._]+)?$' "$OUT_VERSION"; then
+  fail '--version-Contract des Companion-Binary ist nicht stabil.'
+fi
+printf '[OK] Modules: --version Contract\n'
+
+set +e
+"$MODULE_BIN" --module-info >"$OUT_INFO" 2>"$ERR_INFO"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -Eq '^\{"module_name":"maintenance","module_version":"[^"]+","min_core_version":"[^"]+","db_schema_version":[0-9]+\}$' "$OUT_INFO"; then
+  fail '--module-info (compact) verletzt den JSON-Minimalcontract.'
+fi
+printf '[OK] Modules: --module-info compact JSON\n'
+
+set +e
+"$MODULE_BIN" --module-info --pretty >"$OUT_INFO_PRETTY" 2>"$ERR_INFO_PRETTY"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^{$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^  "module_name": "maintenance",$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^  "module_version": ' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^  "min_core_version": ' "$OUT_INFO_PRETTY" ||
+   ! grep -Eq '^  "db_schema_version": [0-9]+$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^}$' "$OUT_INFO_PRETTY"; then
+  fail '--module-info --pretty verletzt den JSON-Minimalcontract.'
+fi
+printf '[OK] Modules: --module-info --pretty JSON\n'
+
+set +e
+"$MODULE_BIN" --does-not-exist >"$OUT_BAD" 2>"$ERR_BAD"
+RC=$?
+set -e
+if [[ $RC -eq 0 ]] ||
+   ! grep -q 'Fehler: unbekannte Option.' "$ERR_BAD" ||
+   ! grep -q '^Usage: betankungen-maintenance --module-info \[--pretty\]$' "$OUT_BAD"; then
+  fail 'Unknown-Flag-Fehlerpfad des Companion-Binary ist nicht stabil.'
+fi
+printf '[OK] Modules: unknown flag -> sauberer Fehlerpfad\n'
+
+printf 'Smoke modules erfolgreich.\n'

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-06
+# UPDATED: 2026-03-10
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -13,6 +13,7 @@ RUN_MONTHLY_SUITE=false
 RUN_YEARLY_SUITE=false
 RUN_CARS_SUITE=false
 RUN_MIGRATIONS_SUITE=false
+RUN_MODULES_SUITE=false
 LIST_ONLY=false
 KEEP_GOING=false
 
@@ -21,7 +22,7 @@ usage() {
 smoke_cli.sh - Basis-Smoke + optionale Stats-Zusatzsuiten
 
 Usage:
-  tests/smoke/smoke_cli.sh [-m] [-y] [-c] [--migrations] [-a] [-l] [--keep-going] [-h]
+  tests/smoke/smoke_cli.sh [-m] [-y] [-c] [--migrations] [--modules] [-a] [-l] [--keep-going] [-h]
 
 Optionen:
   -m    Monthly-Zusatzsuite ausfuehren
@@ -29,6 +30,8 @@ Optionen:
   -c    Cars-Zusatzsuite ausfuehren
   --migrations
         Migrations-Zusatzsuite ausfuehren
+  --modules
+        Modul-Contract-Smoke fuer Companion-Binaries ausfuehren
   -a    Beide Zusatzsuiten ausfuehren (-m + -y)
   -l, --list
         Nur Testliste ausgeben (Dry-List, keine Ausfuehrung)
@@ -88,6 +91,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --migrations)
       RUN_MIGRATIONS_SUITE=true
+      shift
+      ;;
+    --modules)
+      RUN_MODULES_SUITE=true
       shift
       ;;
     -l|--list)
@@ -210,6 +217,14 @@ print_plan() {
     printf '[LIST] (Migrations) schema_version wird auf 5 angehoben\n'
     printf '[LIST] (Migrations) cars-Spalten vin/reg_doc_path/reg_doc_sha256 vorhanden\n'
     printf '[LIST] (Migrations) Re-Run ist idempotent\n'
+  fi
+
+  if $RUN_MODULES_SUITE; then
+    printf '[LIST] (Modules) tests/smoke_modules.sh (Wrapper)\n'
+    printf '[LIST] (Modules) Companion-Binary Build: src/betankungen-maintenance.lpr\n'
+    printf '[LIST] (Modules) --module-info compact liefert Pflichtfelder\n'
+    printf '[LIST] (Modules) --module-info --pretty liefert Mehrzeilen-JSON\n'
+    printf '[LIST] (Modules) unknown flag -> sauberer CLI-Fehlerpfad\n'
   fi
 
   printf '[INFO] Ende der Testliste.\n'
@@ -1139,6 +1154,20 @@ run_migrations_suite() {
   test_migrations_script_ok
 }
 
+test_modules_script_ok() {
+  if "$ROOT_DIR/tests/smoke_modules.sh" >/dev/null 2>&1; then
+    printf '[OK] Modules: dedizierter Contract-Smoke (%s)\n' 'tests/smoke_modules.sh'
+  else
+    printf '[FAIL] Modules: dedizierter Contract-Smoke (%s)\n' 'tests/smoke_modules.sh'
+    add_fail
+  fi
+}
+
+run_modules_suite() {
+  printf '[INFO] Zusatzsuite aktiv: Modules (--modules)\n'
+  test_modules_script_ok
+}
+
 trap cleanup_tmp_dirs EXIT
 
 require_path() {
@@ -1194,6 +1223,9 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   fi
   if $RUN_MIGRATIONS_SUITE; then
     run_migrations_suite
+  fi
+  if $RUN_MODULES_SUITE; then
+    run_modules_suite
   fi
 else
   printf '[INFO] Binärdatei fehlt: %s\n' "$ROOT_DIR/bin/Betankungen"

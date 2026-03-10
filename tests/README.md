@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-07
+**Stand:** 2026-03-10
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -15,6 +15,7 @@ Kompatibilitaets-Wrapper bleiben im Root erhalten:
 - `tests/smoke_cars_crud.sh` -> `tests/smoke/smoke_cars_crud.sh`
 - `tests/smoke_multi_car_context.sh` -> `tests/smoke/smoke_multi_car_context.sh`
 - `tests/smoke_migrations.sh` -> `tests/smoke/smoke_migrations.sh`
+- `tests/smoke_modules.sh` -> `tests/smoke/smoke_modules.sh`
 - `tests/run_unit_tests.sh` -> `tests/domain_policy/run_domain_policy_tests.sh`
 
 ## Namenskonvention (Policy-Cases)
@@ -68,6 +69,7 @@ Direktlauf:
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.
 - Dedizierter Migrations-Smoke: `tests/smoke/smoke_migrations.sh` (aktuell: `--v4-to-v5`).
+- Dedizierter Module-Contract-Smoke: `tests/smoke/smoke_modules.sh` (`--module-info` compact/pretty, unknown-flag-Fehlerpfad).
 - Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
 - Die `-c`-Cars-Suite prueft zusaetzlich den Wrapper `tests/smoke_multi_car_context.sh` (inkl. Transit auf `tests/smoke/smoke_multi_car_context.sh`).
 - Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:
@@ -97,6 +99,7 @@ Direktlauf:
   - `-y`: Yearly-Suite
   - `-c`: Cars-Suite
   - `--migrations`: Migrations-Suite
+  - `--modules`: Modules-Suite
   - `-a`: beide Suiten
 - Steuerung:
   - Default: fail-fast
@@ -105,10 +108,11 @@ Direktlauf:
 
 Ausfuehrung:
 - `tests/smoke/smoke_cli.sh`
-- `tests/smoke/smoke_cli.sh -m|-y|-c|-a`
+- `tests/smoke/smoke_cli.sh -m|-y|-c|--migrations|--modules|-a`
 - `tests/smoke/smoke_cars_crud.sh`
 - `tests/smoke/smoke_multi_car_context.sh`
 - `tests/smoke/smoke_migrations.sh --v4-to-v5`
+- `tests/smoke/smoke_modules.sh`
 - kompatibel: `tests/smoke_cli.sh`
 
 ## Finaler Smoke in sauberer HOME-Sandbox
@@ -117,7 +121,7 @@ Ausfuehrung:
 
 Ausfuehrung:
 - `tests/smoke/smoke_clean_home.sh`
-- `tests/smoke/smoke_clean_home.sh -m|-y|-c|--migrations|-a`
+- `tests/smoke/smoke_clean_home.sh -m|-y|-c|--migrations|--modules|-a`
 - `tests/smoke/smoke_clean_home.sh -a --keep-going`
 - `tests/smoke/smoke_clean_home.sh -a -l`
 - optional: `tests/smoke/smoke_clean_home.sh --keep-home`
