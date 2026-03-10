@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-09
+**Stand:** 2026-03-10
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -8,6 +8,7 @@ Detailed documents are currently maintained primarily in German.
 
 - Latest release: `0.8.0`
 - Current development line: road to `0.9.x`
+- S6 baseline is in place: module strategy accepted, companion handshake (`--module-info`) implemented, module smoke path available (`tests/smoke_modules.sh` / `--modules`)
 
 ## Recommended Reading Order
 

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-09
+**Stand:** 2026-03-10
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -160,6 +160,34 @@ Bereits erledigt:
 - Priorisierung und Scope-Freeze fuer 0.9.x festziehen (keine Scope-Drift).
 - Performance Sweep nur trigger-basiert (kein Selbstzweck; nur bei messbarem Schmerz).
 - Weiterfuehrung entlang klarer Guardrails: erst korrekt, dann schnell, dann schoen.
+- Erreicht (S6-Baseline): Modulstrategie ist auf `accepted`, technischer Modul-Handshake (`--module-info`) ist implementiert und per dediziertem Modules-Smoke regressionsgesichert.
+
+## Roadmap Sprint 6 - Modulstrategie operationalisieren
+
+- Status: done (`S6C1/4` + `S6C2/4` + `S6C3/4` + `S6C4/4` umgesetzt)
+- Ziel: Modulstrategie verbindlich machen und mit einem lauffaehigen Contract-Baseline-Flow absichern.
+
+### S6C1/4 - ADR-Finalisierung
+
+- Erreicht: `ADR-0005` auf `accepted` gesetzt.
+- Erreicht: Scope-Grenzen fuer Core-vs-Module verbindlich dokumentiert.
+
+### S6C2/4 - Minimaler Modul-Handshake
+
+- Erreicht: Shared Contract-Unit `u_module_info` fuer `--module-info` JSON eingefuehrt.
+- Erreicht: Companion-Skeleton `src/betankungen-maintenance.lpr` aufgebaut (`--help`, `--version`, `--module-info`, `--module-info --pretty`).
+- Erreicht: Core-Entwicklungslinie auf `APP_VERSION 0.9.0-dev` synchronisiert.
+
+### S6C3/4 - Smoke-Haertung
+
+- Erreicht: dedizierte Modules-Suite `tests/smoke/smoke_modules.sh` eingefuehrt.
+- Erreicht: Wrapper `tests/smoke_modules.sh` und Integration in `smoke_cli`/`smoke_clean_home` via `--modules`.
+
+### S6C4/4 - Contract-v1 Abschluss
+
+- Erreicht: `docs/MODULES_ARCHITECTURE.md` von Draft auf operative v1-Baseline gehoben.
+- Erreicht: Feldsemantik fuer `--module-info` eindeutig dokumentiert (`db_schema_version` = Modul-Schema, nicht Core-Schema).
+- Erreicht: Entry-Doku (DE/EN) und Sprint-/Statusdoku auf den S6-Abschluss synchronisiert.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

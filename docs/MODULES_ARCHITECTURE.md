@@ -1,6 +1,6 @@
 # Betankungen Module Architecture
-**Stand:** 2026-03-09
-**Status:** draft (v0.1)
+**Stand:** 2026-03-10
+**Status:** baseline v1 (operational)
 
 Dieses Dokument definiert den technischen Contract fuer optionale Module in
 Betankungen.
@@ -9,6 +9,11 @@ Ziel:
 - klare Grenze zwischen Core und Modulen
 - reproduzierbarer Modul-Build
 - konsistente CLI-/DB-/Stats-Integration
+
+Aktueller Baseline-Stand (S6):
+- Technischer Handshake ist implementiert (`--module-info` JSON-Contract).
+- Erstes Companion-Skeleton ist vorhanden (`src/betankungen-maintenance.lpr`).
+- Smoke-Absicherung fuer den Modul-Contract ist vorhanden (`tests/smoke/smoke_modules.sh`, integrierbar via `tests/smoke/smoke_cli.sh --modules`).
 
 ## Scope und Begriffe
 
@@ -35,6 +40,12 @@ Dieses Dokument basiert auf:
      - `module_version`
      - `min_core_version`
      - `db_schema_version`
+
+Bedeutung der Felder (verbindlich):
+- `module_name`: stabiler Modul-Identifier (z. B. `maintenance`)
+- `module_version`: Version des Modul-Binaries
+- `min_core_version`: minimale Core-App-Version, mit der das Modul kompatibel ist
+- `db_schema_version`: Version des Modul-Schemas (nicht identisch zur Core-`schema_version`)
 
 ## 2) CLI-Integrations-Contract
 
@@ -90,7 +101,22 @@ Ein Modul gilt erst als integrierbar, wenn mindestens vorhanden:
 4. Basis-Smoke-Tests
 5. Kurz-Doku zu Stats-/Export-Contract (falls Stats vorhanden)
 
-## 7) Startpunkt fuer erste Module
+## 7) Referenz-Handshake (v1-Baseline)
+
+Das Companion-Skeleton `betankungen-maintenance` liefert aktuell:
+
+- `--help`
+- `--version`
+- `--module-info`
+- `--module-info --pretty`
+
+Beispiel (`--module-info`, compact):
+
+```json
+{"module_name":"maintenance","module_version":"0.1.0-dev","min_core_version":"0.9.0-dev","db_schema_version":1}
+```
+
+## 8) Startpunkt fuer erste Module
 
 Priorisierte Kandidaten gemaess Backlog:
 
@@ -99,4 +125,4 @@ Priorisierte Kandidaten gemaess Backlog:
 - `betankungen-agriculture` (`BL-009`)
 
 Dieses Dokument ist bewusst ein technischer Start-Contract und wird mit den
-ersten realen Modul-Implementierungen praezisiert.
+ersten realen Modul-Implementierungen weiter praezisiert.
