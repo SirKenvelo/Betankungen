@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-03-09
+**Stand:** 2026-03-10
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer produkt- und architekturrelevante Entscheidungen.
 Backlog-Themen ohne finale Entscheidung stehen im Index `docs/BACKLOG.md`;
@@ -11,7 +11,7 @@ die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
 - `ADR-0002` - VIN-Validierung als Warning+Confirm statt Hard Error (`accepted`)
 - `ADR-0003` - Schema-Bump-Strategie in kleinen, getrennten Migrationen (`accepted`)
 - `ADR-0004` - Fleet-Stats-Naming `--stats fleet` (`accepted`)
-- `ADR-0005` - Modulstrategie fuer Betankungen (Core + Module, Companion-Binaries statt Runtime-Plugins) (`proposed`)
+- `ADR-0005` - Modulstrategie fuer Betankungen (Core + Module, Companion-Binaries statt Runtime-Plugins) (`accepted`)
 - `ADR-0006` - Household Drivers (optionales `driver`-Objekt + `fuelups.driver_id`) (`proposed`)
 - `ADR-0007` - Core Boundary: Core vs Module (`accepted`)
 - `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)

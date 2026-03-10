@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-09
+**Stand:** 2026-03-10
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -23,8 +23,10 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S4C2/3 - technisches i18n-Skeleton mit `u_i18n` (`TMsgId`, `Tr()`) und Config-Flow-Verankerung fuer `language=de|en|pl`; Artefakte: `sprint_4_commit_2_von_3.md`, `sprint_4_commit_2_von_3.diff`; Basis-Commit: `c1a6348`. (2026-03-07)
 - S4C3/3 - erster kontrollierter Runtime-Mini-Rollout mit wenigen Meta-Texten ueber `Tr()` (ohne breite Help-/Fehlertext-Migration); Artefakte: `.artifacts/sprint_4_commit_3_von_3.md`, `.artifacts/sprint_4_commit_3_von_3.diff`; Basis-Commit: `87e5f6e`. (2026-03-07)
 - S5C1/1 - Domain-Policy-CSV-Assertions final auf feldbasiertes Token-Parsing umgestellt (`P-060/01`, `P-060/02`); Artefakte: `.artifacts/sprint_5_commit_1_von_1.md`, `.artifacts/sprint_5_commit_1_von_1.diff`; Basis-Commit: `47fbc0a`. (2026-03-07)
+- S6C1/4 - ADR-0005 von `proposed` auf `accepted` finalisiert und Scope-Grenzen fuer Core-vs-Module verbindlich geschaerft; Artefakte: `.artifacts/sprint_6_commit_1_von_4.md`, `.artifacts/sprint_6_commit_1_von_4.diff`; Basis-Commit: `TBD`. (2026-03-10)
 
 ### Changed
+- [S6C1/4] Docs/ADR: `docs/ADR/ADR-0005-module-strategy.md` auf finalen Entscheidungsstand (`accepted`) gehoben und verbindliche Scope-Grenzen fuer Core-vs-Module festgezogen (inkl. Kriterien, Modulkandidaten und Verweis auf `docs/MODULES_ARCHITECTURE.md` als Gate). ADR-Index in `docs/ADR/README.md` synchronisiert. (2026-03-10)
 - [General] Docs/Architecture: Neues Dokument `docs/MODULES_ARCHITECTURE.md` als technischer Modul-Contract eingefuehrt (Build/Packaging, CLI-Integration, DB-Erweiterung, Stats-Integration, Kompatibilitaet und Mindest-Qualitaetsstandard) und in `docs/README.md` sowie `docs/ARCHITECTURE.md` verankert. (2026-03-09)
 - [General] Docs/Backlog: Neues Backlog-Item `BL-010` fuer Cost-Analytics aufgenommen (`--stats cost`, Kennzahlen fuer Fuel-/Maintenance-/Total-cost per km, Formel `total_cost = fuel_cost + maintenance_cost` und `cost_per_km = total_cost / gefahrene_km`). (2026-03-09)
 - [General] Docs/Backlog: Neues Backlog-Item `BL-009` fuer ein Agriculture-Modul aufgenommen (`betankungen-agriculture` mit Asset-Typen, Energietypen und Perspektive fuer `usage_unit` bei Betriebsstunden). (2026-03-09)

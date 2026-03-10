@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-07
+**Stand:** 2026-03-10
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -140,3 +140,21 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S5C1/1 (Domain-Policy-CSV-Assertions final feldbasiert)
 - Abschluss-Tag: `sprint-5-done` (gesetzt)
+
+## Sprint 6 - Modulstrategie operationalisieren
+
+- Status: in progress
+- Ziel: Modulstrategie auf finalen ADR-Status heben und Scope-Grenzen fuer Core-vs-Module verbindlich schaerfen.
+
+### Commit-Folge
+
+1. S6C1/4
+- Thema: `ADR-0005` auf `accepted` finalisiert und Scope-Kriterien fuer Core/Module verbindlich dokumentiert; ADR-Index synchronisiert.
+- Status: done
+- Git-Commit: `TBD`
+- Artefakte: `.artifacts/sprint_6_commit_1_von_4.md`, `.artifacts/sprint_6_commit_1_von_4.diff`
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S6C4/4 (Contract-Finalisierung, Smoke-Verifikation, Abschluss-Sync)
+- Abschluss-Tag: `sprint-6-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
