@@ -111,7 +111,18 @@ begin
 
   AssertFalse(ValidateCommand(Cmd), 'stats stations must fail');
   AssertEqInt(Ord(efTarget), Ord(Cmd.ErrorFocus), 'stats target focus');
-  Ok('Policy: --stats only fuelups');
+  Ok('Policy: --stats rejects stations');
+end;
+
+procedure Test_StatsFleet_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFleet);
+
+  AssertTrue(ValidateCommand(Cmd), 'stats fleet should validate');
+  Ok('Policy: --stats fleet allowed');
 end;
 
 procedure Test_Format_DashboardJson_Fails;
@@ -181,6 +192,7 @@ begin
   Test_NoCommand_Fails;
   Test_Fuelups_Edit_Fails;
   Test_StatsStations_Fails;
+  Test_StatsFleet_Ok;
   Test_Format_DashboardJson_Fails;
   Test_Format_JsonPretty_Ok;
   Test_Period_Range_Fails;

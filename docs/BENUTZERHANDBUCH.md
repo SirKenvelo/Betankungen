@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-07
+**Stand:** 2026-03-10
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -114,6 +114,11 @@ Policy-Hinweis (Matrix v1):
   - ohne `--car-id` und 0 oder >1 Fahrzeuge: Hard Error mit Hinweis
 - Falls `missed_previous=1` gesetzt wurde, wird der laufende Zyklus bewusst resettet.
 - Yearly-Regeln: `--yearly` und `--monthly` sind exklusiv; `--yearly` ist nicht mit `--csv` oder `--dashboard` kombinierbar.
+
+**Statistiken: Fleet (MVP-Basis)**
+- Fleet-MVP Textausgabe: `Betankungen --stats fleet`
+- Ausgabe enthaelt aktuell aggregierte Basiswerte ueber alle Fahrzeuge (`Cars`, `Fuelups`, `Total liters (ml)`, `Total cost (cents)`).
+- Aktuell bewusst keine Format-/Zeitraumoptionen fuer Fleet-MVP (`--json`, `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to` sind nur fuer `--stats fuelups` vorgesehen).
 
 **Schnellbeispiele (Dashboard)**
 - `Betankungen --stats fuelups --dashboard`

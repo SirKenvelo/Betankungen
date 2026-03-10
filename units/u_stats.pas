@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-04
+  UPDATED: 2026-03-10
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -15,6 +15,7 @@
   - CSV-Ausgabe der Zyklus-/Monatsdaten (maschinenlesbar, strict).
   - Monatsaggregation fuer `--stats fuelups --monthly` (Text + JSON kind "fuelups_monthly").
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
+  - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Textausgabe).
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
@@ -70,6 +71,9 @@ procedure ShowFuelupDashboard(const DbPath: string;
   const FromProvided, ToProvided: boolean;
   const Monthly: boolean;
   const CarId: integer = 0); overload;
+
+// Liefert die Fleet-Statistik als MVP-Textausgabe.
+procedure ShowFleetStats(const DbPath: string);
 
 implementation
 
@@ -1228,6 +1232,65 @@ var
 begin
   CollectFuelupStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, Monthly, False, CarId, R);
   RenderFuelupDashboardText(R, Monthly);
+end;
+
+procedure ShowFleetStats(const DbPath: string);
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+  CarsTotal: Int64;
+  FuelupsTotal: Int64;
+  LitersMlTotal: Int64;
+  TotalCents: Int64;
+begin
+  CarsTotal := 0;
+  FuelupsTotal := 0;
+  LitersMlTotal := 0;
+  TotalCents := 0;
+
+  Conn := TSQLite3Connection.Create(nil);
+  Tran := TSQLTransaction.Create(nil);
+  Q := TSQLQuery.Create(nil);
+  try
+    try
+      Conn.DatabaseName := DbPath;
+      Conn.Transaction := Tran;
+      Q.Database := Conn;
+      Q.Transaction := Tran;
+      Conn.Open;
+
+      Q.SQL.Text := 'SELECT COUNT(*) AS cars_total FROM cars;';
+      Q.Open;
+      CarsTotal := FieldInt64OrZero(Q, 'cars_total');
+      Q.Close;
+
+      Q.SQL.Text :=
+        'SELECT ' +
+        '  COUNT(*) AS fuelups_total, ' +
+        '  COALESCE(SUM(liters_ml), 0) AS liters_ml_total, ' +
+        '  COALESCE(SUM(total_cents), 0) AS total_cents_all ' +
+        'FROM fuelups;';
+      Q.Open;
+      FuelupsTotal := FieldInt64OrZero(Q, 'fuelups_total');
+      LitersMlTotal := FieldInt64OrZero(Q, 'liters_ml_total');
+      TotalCents := FieldInt64OrZero(Q, 'total_cents_all');
+      Q.Close;
+
+      WriteLn('Fleet-Stats (MVP)');
+      WriteLn('Cars: ', CarsTotal);
+      WriteLn('Fuelups: ', FuelupsTotal);
+      WriteLn('Total liters (ml): ', LitersMlTotal);
+      WriteLn('Total cost (cents): ', TotalCents);
+    except
+      on E: Exception do
+        raise Exception.Create('Fleet-Stats fehlgeschlagen: ' + E.Message);
+    end;
+  finally
+    Q.Free;
+    Tran.Free;
+    Conn.Free;
+  end;
 end;
 
 end.

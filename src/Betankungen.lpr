@@ -24,7 +24,7 @@
   - Typkonsistenz: Nutzung zentraler CLI-Typen aus `u_cli_types`
     (TCommand, TCommandKind, TTableKind, TErrorFocus).
   - Statistik-Dispatch: Weiterleitung von Zeitraum-, Monats- und Jahresoptionen
-    fuer `--stats fuelups` (Text/Dashboard/JSON/CSV, JSON optional pretty).
+    fuer `--stats fuelups` und Fleet-MVP via `--stats fleet`.
 
   Betriebsmodi:
   - Bootstrap-Modus: Aufruf ohne Argumente initialisiert fehlende Config/DB still.
@@ -775,6 +775,13 @@ begin
           ckDelete: HandleCarsDelete(DbPath, Cmd.CarId);
         else
           FailUsage('Interner Fehler: Ungültiges cars-Kommando.');
+        end;
+
+      tkFleet:
+        case Cmd.Kind of
+          ckStats: ShowFleetStats(DbPath);
+        else
+          FailUsage('Interner Fehler: Ungültiges fleet-Kommando.');
         end;
     else
       FailUsage('Interner Fehler: Unbekannter Target.');

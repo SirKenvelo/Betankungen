@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-28
+  UPDATED: 2026-03-10
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -63,6 +63,11 @@ begin
     'car', 'cars':
       begin
         Kind := tkCars;
+        Exit(True);
+      end;
+    'fleet':
+      begin
+        Kind := tkFleet;
         Exit(True);
       end;
   end;
@@ -353,7 +358,7 @@ begin
       if not ParseTableKind(ParamStr(i + 1), Cmd.Target) then
       begin
         Cmd.ErrorMsg := 'Fehler: "' + ParamStr(i + 1) +
-          '" ist keine gültige Tabelle (erlaubt: stations|fuelups|cars).';
+          '" ist keine gültige Tabelle (erlaubt: stations|fuelups|cars|fleet).';
         Cmd.ErrorFocus := efTarget;
         Exit(False);
       end;

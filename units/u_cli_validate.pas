@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-02-28
+  UPDATED: 2026-03-10
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -128,9 +128,17 @@ begin
   Result := True;
 
   if (Cmd.Kind = ckStats)
-     and (Cmd.Target <> tkFuelups) then
+     and (Cmd.Target <> tkFuelups)
+     and (Cmd.Target <> tkFleet) then
   begin
-    Cmd.ErrorMsg := '--stats ist aktuell nur fuer fuelups verfuegbar.';
+    Cmd.ErrorMsg := '--stats ist aktuell nur fuer fuelups und fleet verfuegbar.';
+    Cmd.ErrorFocus := efTarget;
+    Exit(False);
+  end;
+
+  if (Cmd.Kind <> ckStats) and (Cmd.Target = tkFleet) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: "fleet" ist nur zusammen mit "--stats" erlaubt.';
     Cmd.ErrorFocus := efTarget;
     Exit(False);
   end;

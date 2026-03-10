@@ -153,6 +153,7 @@ print_plan() {
   printf '[LIST] --help enthaelt Struktur-Keywords (Commands/Stats options/Examples/--yearly/--dashboard)\n'
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
   printf '[LIST] --stats fuelups --json --csv -> Fehler im 3-Zeilen-Format ohne Voll-Help\n'
+  printf '[LIST] --stats fleet -> MVP-Textausgabe\n'
   printf '[LIST] First-Run: stiller Bootstrap (config+db)\n'
   printf '[LIST] Config vorhanden, DB fehlt: automatische DB-Anlage ohne Prompt\n'
   printf '[LIST] Default nicht schreibbar: Prompt-Fallback + Retry erfolgreich\n'
@@ -322,6 +323,31 @@ test_stats_json_csv_fails_short_3line_no_full_help() {
     printf '[OK] --stats fuelups --json --csv: 3-Zeilen-Fehler ohne Voll-Help\n'
   else
     printf '[FAIL] --stats fuelups --json --csv: 3-Zeilen-Fehler ohne Voll-Help\n'
+    add_fail
+  fi
+}
+
+test_stats_fleet_mvp_ok() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats fleet >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'Fleet-Stats (MVP)' "$out" &&
+     grep -q '^Cars:' "$out" &&
+     grep -q '^Fuelups:' "$out" &&
+     grep -q '^Total liters (ml):' "$out" &&
+     grep -q '^Total cost (cents):' "$out"; then
+    printf '[OK] --stats fleet: MVP-Textausgabe\n'
+  else
+    printf '[FAIL] --stats fleet: MVP-Textausgabe\n'
     add_fail
   fi
 }
@@ -1203,6 +1229,7 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_help_keywords_stable
   test_stats_stations_fails_short_usage
   test_stats_json_csv_fails_short_3line_no_full_help
+  test_stats_fleet_mvp_ok
   test_first_run_bootstrap
   test_cfg_present_db_missing
   test_default_unwritable_prompt_retry

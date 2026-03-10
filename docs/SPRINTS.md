@@ -175,4 +175,22 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S6C4/4 (Contract-Finalisierung, Smoke-Verifikation, Abschluss-Sync)
-- Abschluss-Tag: `sprint-6-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+- Abschluss-Tag: `sprint-6-done` (gesetzt)
+
+## Sprint 7 - Fleet Stats MVP
+
+- Status: in progress
+- Ziel: `--stats fleet` als klaren, fahrzeuguebergreifenden Stats-Modus schrittweise einziehen.
+
+### Commit-Folge
+
+1. S7C1/4
+- Thema: CLI-Validate/Dispatch fuer `--stats fleet` eingefuehrt (Target parsing/validation, Orchestrator-Dispatch, MVP-Textausgabe in `u_stats`) und Basis-Smoke/Docs nachgezogen.
+- Status: done
+- Git-Commit: `TBD`
+- Artefakte: `.artifacts/sprint_7_commit_1_von_4.md`, `.artifacts/sprint_7_commit_1_von_4.diff`
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S7C4/4 (Fleet-MVP Text+JSON, Tests, Doku-Finalisierung)
+- Abschluss-Tag: `sprint-7-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)

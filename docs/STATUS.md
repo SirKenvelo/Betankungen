@@ -161,6 +161,7 @@ Bereits erledigt:
 - Performance Sweep nur trigger-basiert (kein Selbstzweck; nur bei messbarem Schmerz).
 - Weiterfuehrung entlang klarer Guardrails: erst korrekt, dann schnell, dann schoen.
 - Erreicht (S6-Baseline): Modulstrategie ist auf `accepted`, technischer Modul-Handshake (`--module-info`) ist implementiert und per dediziertem Modules-Smoke regressionsgesichert.
+- Gestartet (S7C1/4): CLI-Wiring fuer `--stats fleet` inkl. Validate/Dispatch und MVP-Textausgabe.
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
@@ -188,6 +189,17 @@ Bereits erledigt:
 - Erreicht: `docs/MODULES_ARCHITECTURE.md` von Draft auf operative v1-Baseline gehoben.
 - Erreicht: Feldsemantik fuer `--module-info` eindeutig dokumentiert (`db_schema_version` = Modul-Schema, nicht Core-Schema).
 - Erreicht: Entry-Doku (DE/EN) und Sprint-/Statusdoku auf den S6-Abschluss synchronisiert.
+
+## Roadmap Sprint 7 - Fleet Stats MVP
+
+- Status: in progress (`S7C1/4` gestartet)
+- Ziel: schrittweise Einfuehrung von `--stats fleet` als klaren, fahrzeuguebergreifenden Stats-Modus.
+
+### S7C1/4 - CLI Validate/Dispatch
+
+- Erreicht: CLI akzeptiert `--stats fleet` als eigenen Stats-Target-Pfad.
+- Erreicht: Dispatch im Orchestrator verdrahtet.
+- Erreicht: MVP-Textausgabe mit aggregierten Fleet-Basiswerten (Cars/Fuelups/Liters/Cost).
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-27
+  UPDATED: 2026-03-10
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -63,7 +63,7 @@ begin
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet')
   else if (FocusFlag = '--from') then
     Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
   else if FocusFlag = '--db' then
@@ -110,7 +110,7 @@ begin
   Item('--list stations|fuelups|cars','Auflisten (optional mit --detail).');
   Item('--edit stations|cars',       'Datensatz bearbeiten (fuelups ist verboten).');
   Item('--delete stations|cars',     'Datensatz loeschen (fuelups ist verboten).');
-  Item('--stats fuelups',            'Auswertung der Betankungen (read-only).');
+  Item('--stats fuelups|fleet',      'Auswertung fuer fuelups oder aggregierte Fleet-Basis (MVP).');
   Item('--seed',                     'Demo-DB erzeugen/auffuellen (exklusiv).');
   Item('--about',                    'Projekt-/Autor-Informationen anzeigen.');
   Item('--help',                     'Voll-Help anzeigen und beenden.');
@@ -156,6 +156,7 @@ begin
   Line('  Betankungen --stats fuelups --json --monthly');
   Line('  Betankungen --stats fuelups --yearly');
   Line('  Betankungen --stats fuelups --json --pretty --yearly');
+  Line('  Betankungen --stats fleet');
   Line('  Betankungen --seed --fuelups 400 --force');
 end;
 
