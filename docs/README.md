@@ -230,6 +230,7 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Debug: Effektiver Zeitraum wird einmalig nach der Kopf-Query geloggt (open-ended/closed, plus no-rows Hinweis)
 - Fleet-MVP-Basis (`--stats fleet`) mit aggregierten Kernwerten ueber alle Fahrzeuge (Text + JSON)
 - Fleet-JSON (`--stats fleet --json`, optional `--pretty`) inkl. Export-Meta und `kind: "fleet_mvp"`
+- Fleet-Guardrails bleiben strikt: keine Fleet-Unterstuetzung fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`

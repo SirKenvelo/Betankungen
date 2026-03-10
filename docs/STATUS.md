@@ -163,6 +163,7 @@ Bereits erledigt:
 - Erreicht (S6-Baseline): Modulstrategie ist auf `accepted`, technischer Modul-Handshake (`--module-info`) ist implementiert und per dediziertem Modules-Smoke regressionsgesichert.
 - Gestartet (S7C1/4): CLI-Wiring fuer `--stats fleet` inkl. Validate/Dispatch und MVP-Textausgabe.
 - Erreicht (S7C2/4): Fleet-JSON-MVP (`--stats fleet --json [--pretty]`) inkl. Export-Meta und Tests.
+- Erreicht (S7C3/4): Fleet-Guardrails gehaertet und regressionsgesichert (ungueltige Fleet-Optionen werden stabil abgefangen).
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
@@ -193,7 +194,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 7 - Fleet Stats MVP
 
-- Status: in progress (`S7C1/4` + `S7C2/4` umgesetzt)
+- Status: in progress (`S7C1/4` + `S7C2/4` + `S7C3/4` umgesetzt)
 - Ziel: schrittweise Einfuehrung von `--stats fleet` als klaren, fahrzeuguebergreifenden Stats-Modus.
 
 ### S7C1/4 - CLI Validate/Dispatch
@@ -208,6 +209,12 @@ Bereits erledigt:
 - Erreicht: JSON-Output mit Export-Meta (`contract_version`, `generated_at`, `app_version`) und `kind: "fleet_mvp"`.
 - Erreicht: Fleet-Payload `fleet` mit `cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`.
 - Erreicht: Smoke- und Validate-Tests fuer Fleet-JSON nachgezogen.
+
+### S7C3/4 - Fleet Guardrails Hardening
+
+- Erreicht: Fleet-Policy-Guardrails in Validate-Tests erweitert (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`).
+- Erreicht: Smoke-Baseline um Fleet-Fehlerpfade fuer ungueltige Optionen erweitert.
+- Erreicht: Doku auf den gehaerteten Fleet-MVP-Contract synchronisiert.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

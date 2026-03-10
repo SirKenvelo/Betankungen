@@ -10,6 +10,7 @@ Detailed documents are currently maintained primarily in German.
 - Current development line: road to `0.9.x`
 - S6 baseline is in place: module strategy accepted, companion handshake (`--module-info`) implemented, module smoke path available (`tests/smoke_modules.sh` / `--modules`)
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export meta baseline
+- S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 
 ## Recommended Reading Order
 

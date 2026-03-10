@@ -177,6 +177,60 @@ begin
   Ok('Format: fleet+csv rejected');
 end;
 
+procedure Test_Format_FleetMonthly_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFleet);
+  Cmd.Monthly := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'fleet+monthly must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'fleet monthly focus');
+  Ok('Format: fleet+monthly rejected');
+end;
+
+procedure Test_Format_FleetYearly_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFleet);
+  Cmd.Yearly := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'fleet+yearly must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'fleet yearly focus');
+  Ok('Format: fleet+yearly rejected');
+end;
+
+procedure Test_Format_FleetDashboard_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFleet);
+  Cmd.Dashboard := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'fleet+dashboard must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'fleet dashboard focus');
+  Ok('Format: fleet+dashboard rejected');
+end;
+
+procedure Test_Period_FleetFrom_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFleet);
+  Cmd.PeriodEnabled := True;
+  Cmd.FromProvided := True;
+  Cmd.PeriodFromIso := '2025-01-01';
+
+  AssertFalse(ValidateCommand(Cmd), 'fleet+period must fail');
+  AssertEqInt(Ord(efStatsPeriod), Ord(Cmd.ErrorFocus), 'fleet period focus');
+  Ok('Period: fleet rejects --from/--to');
+end;
+
 procedure Test_Format_JsonPretty_Ok;
 var
   Cmd: TCommand;
@@ -235,6 +289,10 @@ begin
   Test_Format_FleetJson_Ok;
   Test_Format_FleetJsonPretty_Ok;
   Test_Format_FleetCsv_Fails;
+  Test_Format_FleetMonthly_Fails;
+  Test_Format_FleetYearly_Fails;
+  Test_Format_FleetDashboard_Fails;
+  Test_Period_FleetFrom_Fails;
   Test_Format_JsonPretty_Ok;
   Test_Period_Range_Fails;
   Test_Period_Context_Fails;
