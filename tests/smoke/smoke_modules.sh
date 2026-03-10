@@ -45,6 +45,10 @@ if [[ ! -f "$MODULE_SRC" ]]; then
   fail "Modul-Source fehlt: $MODULE_SRC"
 fi
 
+if ! command -v fpc >/dev/null 2>&1; then
+  fail 'FPC Compiler nicht gefunden (erwartet: "fpc" im PATH).'
+fi
+
 mkdir -p "$ROOT_DIR/bin" "$BUILD_DIR"
 
 set +e
