@@ -151,7 +151,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 1. S6C1/4
 - Thema: `ADR-0005` auf `accepted` finalisiert und Scope-Kriterien fuer Core/Module verbindlich dokumentiert; ADR-Index synchronisiert.
 - Status: done
-- Git-Commit: `TBD`
+- Git-Commit: `2886ec5`
 - Artefakte: `.artifacts/sprint_6_commit_1_von_4.md`, `.artifacts/sprint_6_commit_1_von_4.diff`
 
 ### Abschluss-Tag
