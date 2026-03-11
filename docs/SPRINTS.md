@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-10
+**Stand:** 2026-03-11
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -211,4 +211,22 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S7C4/4 (Fleet-MVP Text+JSON, Tests, Doku-Finalisierung)
-- Abschluss-Tag: `sprint-7-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+- Abschluss-Tag: `sprint-7-done` (gesetzt)
+
+## Sprint 8 - Cost Analytics MVP
+
+- Status: in progress
+- Ziel: `--stats cost` als erste Kostenperspektive einziehen (fuel-basiert) und den Pfad fuer spaetere Maintenance-Integration vorbereiten.
+
+### Commit-Folge
+
+1. S8C1/4
+- Thema: Neuer CLI-Target-Pfad `--stats cost` inkl. Core-Dispatch und Cost-MVP-Textausgabe eingefuehrt; Validierung/Smoke/Domain-Policy sowie Entry-/Status-Doku auf Sprint-8-Start synchronisiert.
+- Status: done
+- Git-Commit: `TBD`
+- Artefakte: `.artifacts/sprint_8_commit_1_von_4.md`, `.artifacts/sprint_8_commit_1_von_4.diff`
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S8C4/4 (Cost-MVP Text+JSON/Contract, Tests, Doku-Finalisierung)
+- Abschluss-Tag: `sprint-8-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)

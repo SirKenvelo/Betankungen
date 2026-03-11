@@ -125,6 +125,29 @@ begin
   Ok('Policy: --stats fleet allowed');
 end;
 
+procedure Test_StatsCost_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+
+  AssertTrue(ValidateCommand(Cmd), 'stats cost should validate');
+  Ok('Policy: --stats cost allowed');
+end;
+
+procedure Test_Cost_NonStats_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckList, tkCost);
+
+  AssertFalse(ValidateCommand(Cmd), 'cost without stats must fail');
+  AssertEqInt(Ord(efTarget), Ord(Cmd.ErrorFocus), 'cost non-stats focus');
+  Ok('Policy: cost is stats-only');
+end;
+
 procedure Test_Format_DashboardJson_Fails;
 var
   Cmd: TCommand;
@@ -175,6 +198,19 @@ begin
   AssertFalse(ValidateCommand(Cmd), 'fleet+csv must fail');
   AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'fleet csv focus');
   Ok('Format: fleet+csv rejected');
+end;
+
+procedure Test_Format_CostJson_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Json := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+json must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost json focus');
+  Ok('Format: cost+json rejected');
 end;
 
 procedure Test_Format_FleetMonthly_Fails;
@@ -231,6 +267,21 @@ begin
   Ok('Period: fleet rejects --from/--to');
 end;
 
+procedure Test_Period_CostFrom_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.PeriodEnabled := True;
+  Cmd.FromProvided := True;
+  Cmd.PeriodFromIso := '2025-01-01';
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+period must fail');
+  AssertEqInt(Ord(efStatsPeriod), Ord(Cmd.ErrorFocus), 'cost period focus');
+  Ok('Period: cost rejects --from/--to');
+end;
+
 procedure Test_Format_JsonPretty_Ok;
 var
   Cmd: TCommand;
@@ -285,14 +336,18 @@ begin
   Test_Fuelups_Edit_Fails;
   Test_StatsStations_Fails;
   Test_StatsFleet_Ok;
+  Test_StatsCost_Ok;
+  Test_Cost_NonStats_Fails;
   Test_Format_DashboardJson_Fails;
   Test_Format_FleetJson_Ok;
   Test_Format_FleetJsonPretty_Ok;
   Test_Format_FleetCsv_Fails;
+  Test_Format_CostJson_Fails;
   Test_Format_FleetMonthly_Fails;
   Test_Format_FleetYearly_Fails;
   Test_Format_FleetDashboard_Fails;
   Test_Period_FleetFrom_Fails;
+  Test_Period_CostFrom_Fails;
   Test_Format_JsonPretty_Ok;
   Test_Period_Range_Fails;
   Test_Period_Context_Fails;

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-10
+# UPDATED: 2026-03-11
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -156,6 +156,8 @@ print_plan() {
   printf '[LIST] --stats fleet -> MVP-Textausgabe\n'
   printf '[LIST] --stats fleet --json -> JSON compact + Export-Meta\n'
   printf '[LIST] --stats fleet --json --pretty -> JSON pretty + Export-Meta\n'
+  printf '[LIST] --stats cost -> MVP-Textausgabe (fuel-basiert)\n'
+  printf '[LIST] --stats cost --json -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --csv -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --monthly/--yearly/--dashboard -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --from ... -> Validierungsfehler\n'
@@ -408,6 +410,54 @@ test_stats_fleet_json_pretty_ok() {
     printf '[OK] --stats fleet --json --pretty: JSON pretty + Export-Meta\n'
   else
     printf '[FAIL] --stats fleet --json --pretty: JSON pretty + Export-Meta\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_mvp_ok() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q '^Cost-Stats (MVP)$' "$out" &&
+     grep -q '^Cars total:' "$out" &&
+     grep -q '^Distance (km):' "$out" &&
+     grep -q '^Fuel cost (cents):' "$out" &&
+     grep -q '^Maintenance cost (cents):' "$out" &&
+     grep -q '^Total cost (cents):' "$out" &&
+     grep -q '^Total cost per km (EUR):' "$out"; then
+    printf '[OK] --stats cost: MVP-Textausgabe (fuel-basiert)\n'
+  else
+    printf '[FAIL] --stats cost: MVP-Textausgabe (fuel-basiert)\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_json_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --json >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] &&
+     grep -q 'Fehler: --json ist nur zusammen mit "--stats fuelups" oder "--stats fleet" erlaubt.' "$err"; then
+    printf '[OK] --stats cost --json: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --json: Validierungsfehler\n'
     add_fail
   fi
 }
@@ -1373,6 +1423,8 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_stats_fleet_mvp_ok
   test_stats_fleet_json_compact_ok
   test_stats_fleet_json_pretty_ok
+  test_stats_cost_mvp_ok
+  test_stats_cost_json_fails
   test_stats_fleet_csv_fails
   test_stats_fleet_monthly_yearly_dashboard_fails
   test_stats_fleet_period_fails

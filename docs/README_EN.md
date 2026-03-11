@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-10
+**Stand:** 2026-03-11
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -12,6 +12,7 @@ Detailed documents are currently maintained primarily in German.
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
+- Sprint 8 started with Cost MVP baseline: `--stats cost` (text, fuel-based; maintenance placeholder)
 
 ## Recommended Reading Order
 

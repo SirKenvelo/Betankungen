@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-10
+  UPDATED: 2026-03-11
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -47,7 +47,8 @@ type
     tkStations,
     tkFuelups,
     tkCars,
-    tkFleet
+    tkFleet,
+    tkCost
   );
 
   // Hauptkommandos der CLI.
@@ -170,6 +171,7 @@ begin
     tkFuelups : Result := 'fuelups';
     tkCars    : Result := 'cars';
     tkFleet   : Result := 'fleet';
+    tkCost    : Result := 'cost';
   else
     Result := '';
   end;

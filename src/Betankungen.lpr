@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-10
+  UPDATED: 2026-03-11
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -24,7 +24,8 @@
   - Typkonsistenz: Nutzung zentraler CLI-Typen aus `u_cli_types`
     (TCommand, TCommandKind, TTableKind, TErrorFocus).
   - Statistik-Dispatch: Weiterleitung von Zeitraum-, Monats- und Jahresoptionen
-    fuer `--stats fuelups` und Fleet-MVP via `--stats fleet`.
+    fuer `--stats fuelups`, Fleet-MVP via `--stats fleet` und Cost-MVP via
+    `--stats cost`.
 
   Betriebsmodi:
   - Bootstrap-Modus: Aufruf ohne Argumente initialisiert fehlende Config/DB still.
@@ -788,6 +789,13 @@ begin
             end;
         else
           FailUsage('Interner Fehler: Ungültiges fleet-Kommando.');
+        end;
+
+      tkCost:
+        case Cmd.Kind of
+          ckStats: ShowCostStats(DbPath);
+        else
+          FailUsage('Interner Fehler: Ungültiges cost-Kommando.');
         end;
     else
       FailUsage('Interner Fehler: Unbekannter Target.');

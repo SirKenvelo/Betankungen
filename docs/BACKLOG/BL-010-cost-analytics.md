@@ -1,6 +1,6 @@
 # BL-010 - Cost Analytics
-**Stand:** 2026-03-09
-**Status:** geplant
+**Stand:** 2026-03-11
+**Status:** next
 **Typ:** Stats-/Domain-Erweiterung (cross-module)
 
 ## Motivation
@@ -33,3 +33,10 @@ Integration von:
 
 - fuel
 - maintenance
+
+## Hinweis zum aktuellen Stand
+
+- Sprint 8 ist gestartet.
+- S8C1/4 liefert eine Cost-MVP-Basis (`--stats cost`) als Textausgabe:
+  - fuel-basierte Kosten ueber gueltige Volltank-Zyklen
+  - maintenance aktuell als Placeholder (`0`), bis Modul-Integration verfuegbar ist

@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-10
+**Stand:** 2026-03-11
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -122,6 +122,12 @@ Policy-Hinweis (Matrix v1):
 - Textausgabe enthaelt aggregierte Basiswerte ueber alle Fahrzeuge (`Cars`, `Fuelups`, `Total liters (ml)`, `Total cost (cents)`).
 - JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "fleet_mvp"`) und den Payload `fleet` mit `cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`.
 - Weiterhin nicht verfuegbar fuer Fleet-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`.
+
+**Statistiken: Cost (MVP-Basis)**
+- Cost-MVP Textausgabe: `Betankungen --stats cost`
+- Ausgabe enthaelt aktuell: `Cars total`, `Cars with valid full-tank cycles`, `Distance (km)`, `Fuel cost (cents)`, `Maintenance cost (cents)` (MVP-Placeholder), `Total cost (cents)`, `Total cost per km (EUR)`.
+- Cost-MVP basiert derzeit auf Fuel-Kosten aus gueltigen Volltank-Zyklen; Maintenance ist im Core noch nicht integriert und steht daher auf `0`.
+- Aktuell bewusst keine Format-/Zeitraumoptionen fuer Cost-MVP (`--json`, `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to` sind ungueltig).
 
 **Schnellbeispiele (Dashboard)**
 - `Betankungen --stats fuelups --dashboard`

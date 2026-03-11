@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-10
+  UPDATED: 2026-03-11
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -16,6 +16,7 @@
   - Monatsaggregation fuer `--stats fuelups --monthly` (Text + JSON kind "fuelups_monthly").
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
   - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Text/JSON-Ausgabe).
+  - Cost-Stats-Basis fuer `--stats cost` (MVP-Textausgabe, fuel-basiert).
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
@@ -78,6 +79,8 @@ procedure ShowFleetStats(const DbPath: string);
 procedure ShowFleetStatsJson(const DbPath: string;
   const Pretty: boolean = False;
   const AppVersion: string = '');
+// Liefert die Cost-Statistik als MVP-Textausgabe (fuel-basiert).
+procedure ShowCostStats(const DbPath: string);
 
 implementation
 
@@ -315,6 +318,15 @@ type
     FuelupsTotal: Int64;
     LitersMlTotal: Int64;
     TotalCentsAll: Int64;
+  end;
+
+  TCostStats = record
+    CarsTotal: Int64;
+    CarsWithCycles: Int64;
+    DistKmTotal: Int64;
+    FuelCentsTotal: Int64;
+    MaintenanceCentsTotal: Int64;
+    TotalCents: Int64;
   end;
 
 function AvgLPer100_x100(const LitersMlA: Int64; const DistKmA: Int64): Int64;
@@ -1343,6 +1355,103 @@ var
 begin
   CollectFleetStats(DbPath, R);
   RenderFleetStatsJson(R, Pretty, AppVersion);
+end;
+
+function FormatEuroPerKm(const TotalCents: Int64; const DistKm: Int64): string;
+var
+  Fs: TFormatSettings;
+  EurPerKm: Double;
+begin
+  if DistKm <= 0 then
+    Exit('n/a');
+
+  Fs := DefaultFormatSettings;
+  Fs.ThousandSeparator := '.';
+  Fs.DecimalSeparator := ',';
+
+  EurPerKm := (TotalCents / 100.0) / DistKm;
+  Result := FormatFloat('0.000', EurPerKm, Fs);
+end;
+
+procedure CollectCostStats(const DbPath: string; out R: TCostStats);
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+  CarIds: array of integer;
+  CarN: integer;
+  i: integer;
+  CarId: integer;
+  CarStats: TStatsCollected;
+begin
+  FillChar(R, SizeOf(R), 0);
+  SetLength(CarIds, 0);
+  CarN := 0;
+
+  Conn := TSQLite3Connection.Create(nil);
+  Tran := TSQLTransaction.Create(nil);
+  Q := TSQLQuery.Create(nil);
+  try
+    try
+      Conn.DatabaseName := DbPath;
+      Conn.Transaction := Tran;
+      Q.Database := Conn;
+      Q.Transaction := Tran;
+      Conn.Open;
+
+      Q.SQL.Text := 'SELECT id FROM cars ORDER BY id;';
+      Q.Open;
+      while not Q.EOF do
+      begin
+        SetLength(CarIds, CarN + 1);
+        CarIds[CarN] := Q.FieldByName('id').AsInteger;
+        Inc(CarN);
+        Q.Next;
+      end;
+      Q.Close;
+    except
+      on E: Exception do
+        raise Exception.Create('Cost-Stats fehlgeschlagen: ' + E.Message);
+    end;
+  finally
+    Q.Free;
+    Tran.Free;
+    Conn.Free;
+  end;
+
+  R.CarsTotal := CarN;
+
+  for i := 0 to CarN - 1 do
+  begin
+    CarId := CarIds[i];
+    CollectFuelupStats(DbPath, False, '', '', False, False, False, False, CarId, CarStats);
+
+    if CarStats.CyclesCount > 0 then
+      Inc(R.CarsWithCycles);
+
+    R.DistKmTotal += CarStats.SumDistKm;
+    R.FuelCentsTotal += CarStats.SumTotalCents;
+  end;
+
+  // MVP-Basis: maintenance liegt noch nicht im Core vor.
+  R.MaintenanceCentsTotal := 0;
+  R.TotalCents := R.FuelCentsTotal + R.MaintenanceCentsTotal;
+end;
+
+procedure ShowCostStats(const DbPath: string);
+var
+  R: TCostStats;
+begin
+  CollectCostStats(DbPath, R);
+
+  WriteLn('Cost-Stats (MVP)');
+  WriteLn('Cars total: ', R.CarsTotal);
+  WriteLn('Cars with valid full-tank cycles: ', R.CarsWithCycles);
+  WriteLn('Distance (km): ', R.DistKmTotal);
+  WriteLn('Fuel cost (cents): ', R.FuelCentsTotal);
+  WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (MVP placeholder)');
+  WriteLn('Total cost (cents): ', R.TotalCents);
+  WriteLn('Total cost per km (EUR): ', FormatEuroPerKm(R.TotalCents, R.DistKmTotal));
 end;
 
 end.
