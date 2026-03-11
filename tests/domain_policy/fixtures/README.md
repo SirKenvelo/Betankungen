@@ -1,5 +1,5 @@
 # Domain-Policy Fixtures
-**Stand:** 2026-02-24
+**Stand:** 2026-03-11
 
 ## SQL-Seeds
 - `seed_big.sql`: erzeugt den großen Last-/Output-Datensatz (500 Fuelups).
@@ -31,3 +31,4 @@ Diese Dateien werden bewusst nicht versioniert und vom Helper erzeugt:
 
 Erzeugung aus dem Projektroot:
 - `tests/domain_policy/helpers/build_test_dbs.sh`
+- Der Helper ist fuer parallele Aufrufe gehaertet (Lock + atomarer Austausch der Ziel-DBs).

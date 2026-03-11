@@ -1,5 +1,5 @@
 # Betankungen - .gitignore
-# Stand: 2026-03-07
+# Stand: 2026-03-11
 
 # Build-Artefakte (FPC)
 bin/
@@ -20,6 +20,8 @@ build/
 *.db-wal
 *.sqlite
 *.sqlite3
+tests/domain_policy/fixtures/.build_test_dbs.lock
+tests/domain_policy/fixtures/.build_test_dbs.lock.d/
 
 # Temporäre Dateien
 *.tmp

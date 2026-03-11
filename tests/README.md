@@ -48,6 +48,7 @@ DB-Erzeugung (aus Projektroot):
 Erzeugte Dateien:
 - `tests/domain_policy/fixtures/Betankungen_Big.db`
 - `tests/domain_policy/fixtures/Betankungen_Policy.db`
+- DB-Build ist jetzt race-safe: der Helper serialisiert parallele Aufrufe per Lock und ersetzt fertige DBs atomar.
 
 ## Domain-Policy-Runner
 - Script: `tests/domain_policy/run_domain_policy_tests.sh`
