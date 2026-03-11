@@ -168,6 +168,7 @@ Bereits erledigt:
 - Gestartet (S8C1/4): Cost-MVP-Basis via `--stats cost` (Text, fuel-basiert, maintenance-ready Placeholder).
 - Erreicht (S8C2/4): Cost-JSON-MVP (`--stats cost --json [--pretty]`) inkl. Export-Meta und Contract-Update.
 - Erreicht (S8C3/4): Cost-Guardrails gehaertet und regressionsgesichert fuer ungueltige Cost-Optionen.
+- Erreicht (S8C4/4): Sprint-8-Abschluss mit finaler Verifikation und Doku-Sync.
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
@@ -227,7 +228,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 8 - Cost Analytics MVP
 
-- Status: in progress (`S8C1/4` + `S8C2/4` + `S8C3/4`)
+- Status: done (`S8C1/4` + `S8C2/4` + `S8C3/4` + `S8C4/4`)
 - Ziel: `--stats cost` als erste Kostenperspektive einziehen und fuer spaetere Maintenance-Integration vorbereiten.
 
 ### S8C1/4 - CLI + Text MVP
@@ -247,6 +248,12 @@ Bereits erledigt:
 - Erreicht: Cost-Guardrails fuer ungueltige Optionen regressionsgesichert (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id`).
 - Erreicht: Domain-Policy-Case `t_p000__01__cli_validate_core` um Cost-Fehlerpfade erweitert.
 - Erreicht: Smoke-Baseline (`tests/smoke/smoke_cli.sh`) um dedizierte Cost-Guardrail-Checks erweitert.
+
+### S8C4/4 - Sprint-Abschluss
+
+- Erreicht: Sprint-8-DoD final verifiziert (Cost Text/JSON/Guardrails stabil in Domain-Policy + Smoke).
+- Erreicht: Abschluss-Verifikation inkl. Clean-Home-Smoke (`tests/smoke/smoke_clean_home.sh --modules`) erfolgreich.
+- Erreicht: Sprint-/Status-/Changelog-Narrative auf finalen Sprint-8-Stand synchronisiert.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

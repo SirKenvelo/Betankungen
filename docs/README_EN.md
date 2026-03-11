@@ -14,6 +14,7 @@ Detailed documents are currently maintained primarily in German.
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
 - Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export meta baseline (`kind: "cost_mvp"`)
 - Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id`) are regression-covered
+- Sprint 8 is functionally complete (Cost MVP text + JSON + guardrails, verified in domain-policy and smoke suites)
 
 ## Recommended Reading Order
 

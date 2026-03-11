@@ -215,7 +215,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 8 - Cost Analytics MVP
 
-- Status: in progress
+- Status: done
 - Ziel: `--stats cost` als erste Kostenperspektive einziehen (fuel-basiert) und den Pfad fuer spaetere Maintenance-Integration vorbereiten.
 
 ### Commit-Folge
@@ -238,7 +238,13 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `e7c1f6f`
 - Artefakte: `.artifacts/sprint_8_commit_3_von_4.md`, `.artifacts/sprint_8_commit_3_von_4.diff`
 
+4. S8C4/4
+- Thema: Sprint-8-Finalisierung mit DoD-Check, finalem Verifikationslauf und Abschluss-Sync der Sprint-/Status-/Entry-Doku.
+- Status: done
+- Git-Commit: `TBD`
+- Artefakte: `.artifacts/sprint_8_commit_4_von_4.md`, `.artifacts/sprint_8_commit_4_von_4.diff`
+
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S8C4/4 (Cost-MVP Text+JSON/Contract, Tests, Doku-Finalisierung)
-- Abschluss-Tag: `sprint-8-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+- Abschluss-Tag: `sprint-8-done` (gesetzt)
