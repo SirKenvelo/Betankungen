@@ -409,6 +409,20 @@ Hilfsskript zum Erzeugen von `data/dev_messages.b64` aus einer getrennten Input-
 Beispiel:
 - `scripts/dev_messages_encode.sh --in /tmp/dev_messages_input.txt --out data/dev_messages.b64 --force`
 
+## CI / Quality Gate
+
+- GitHub Actions Workflow: `.github/workflows/ci.yml`
+- Trigger:
+  - `push` auf `main`
+  - `pull_request` gegen `main`
+  - `push` von Tags
+- Gate-Schritte:
+  - FPC-Build (Projekt-Standard)
+  - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)
+  - Smoke-Suite (`tests/smoke/smoke_cli.sh --modules`)
+  - Clean-Home-Smoke (`tests/smoke/smoke_clean_home.sh --modules`)
+- Hinweis: Als verpflichtender Merge-Gate auf GitHub muss der Status-Check `CI / verify` in den Branch-Protection-Regeln von `main` als Required Check gesetzt sein.
+
 ### Restore
 - Wiederherstellungsschritte sind in `docs/RESTORE.md` dokumentiert.
 
