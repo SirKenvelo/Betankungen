@@ -225,6 +225,71 @@ begin
   Ok('Format: cost+json+pretty ok');
 end;
 
+procedure Test_Format_CostCsv_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Csv := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+csv must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost csv focus');
+  Ok('Format: cost+csv rejected');
+end;
+
+procedure Test_Format_CostMonthly_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Monthly := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+monthly must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost monthly focus');
+  Ok('Format: cost+monthly rejected');
+end;
+
+procedure Test_Format_CostYearly_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Yearly := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+yearly must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost yearly focus');
+  Ok('Format: cost+yearly rejected');
+end;
+
+procedure Test_Format_CostDashboard_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Dashboard := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+dashboard must fail');
+  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost dashboard focus');
+  Ok('Format: cost+dashboard rejected');
+end;
+
+procedure Test_CostCarId_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.CarId := 1;
+
+  AssertFalse(ValidateCommand(Cmd), 'cost+car-id must fail');
+  AssertEqInt(Ord(efCarId), Ord(Cmd.ErrorFocus), 'cost car-id focus');
+  Ok('Policy: cost rejects --car-id');
+end;
+
 procedure Test_Format_FleetMonthly_Fails;
 var
   Cmd: TCommand;
@@ -356,6 +421,11 @@ begin
   Test_Format_FleetCsv_Fails;
   Test_Format_CostJson_Ok;
   Test_Format_CostJsonPretty_Ok;
+  Test_Format_CostCsv_Fails;
+  Test_Format_CostMonthly_Fails;
+  Test_Format_CostYearly_Fails;
+  Test_Format_CostDashboard_Fails;
+  Test_CostCarId_Fails;
   Test_Format_FleetMonthly_Fails;
   Test_Format_FleetYearly_Fails;
   Test_Format_FleetDashboard_Fails;

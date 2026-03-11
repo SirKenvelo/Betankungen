@@ -13,6 +13,7 @@ Detailed documents are currently maintained primarily in German.
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
 - Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export meta baseline (`kind: "cost_mvp"`)
+- Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id`) are regression-covered
 
 ## Recommended Reading Order
 

@@ -234,7 +234,7 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Cost-MVP-Basis (`--stats cost`) als fuel-basierte Kosten-Sicht (Text + JSON)
 - Cost-MVP enthaelt Maintenance aktuell als Placeholder (`0`) fuer spaetere Modul-Integration
 - Cost-JSON (`--stats cost --json`, optional `--pretty`) inkl. Export-Meta und `kind: "cost_mvp"`
-- Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`
+- Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`, `--car-id` (regressionsgesichert in Domain-Policy + Smoke)
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`

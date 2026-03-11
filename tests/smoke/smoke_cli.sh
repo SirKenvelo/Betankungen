@@ -159,6 +159,10 @@ print_plan() {
   printf '[LIST] --stats cost -> MVP-Textausgabe (fuel-basiert)\n'
   printf '[LIST] --stats cost --json -> JSON compact + Export-Meta\n'
   printf '[LIST] --stats cost --json --pretty -> JSON pretty + Export-Meta\n'
+  printf '[LIST] --stats cost --csv -> Validierungsfehler\n'
+  printf '[LIST] --stats cost --monthly/--yearly/--dashboard -> Validierungsfehler\n'
+  printf '[LIST] --stats cost --from ... -> Validierungsfehler\n'
+  printf '[LIST] --stats cost --car-id ... -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --csv -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --monthly/--yearly/--dashboard -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --from ... -> Validierungsfehler\n'
@@ -505,6 +509,107 @@ test_stats_cost_json_pretty_ok() {
     printf '[OK] --stats cost --json --pretty: JSON pretty + Export-Meta\n'
   else
     printf '[FAIL] --stats cost --json --pretty: JSON pretty + Export-Meta\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_csv_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --csv >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'nur zusammen mit "--stats fuelups"' "$err"; then
+    printf '[OK] --stats cost --csv: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --csv: Validierungsfehler\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_monthly_yearly_dashboard_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --monthly >"$out" 2>"$err"
+  rc=$?
+  set -e
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --monthly ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
+    printf '[OK] --stats cost --monthly: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --monthly: Validierungsfehler\n'
+    add_fail
+  fi
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --yearly >"$out" 2>"$err"
+  rc=$?
+  set -e
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --yearly ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
+    printf '[OK] --stats cost --yearly: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --yearly: Validierungsfehler\n'
+    add_fail
+  fi
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --dashboard >"$out" 2>"$err"
+  rc=$?
+  set -e
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --dashboard ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
+    printf '[OK] --stats cost --dashboard: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --dashboard: Validierungsfehler\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_period_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --from 2025-01 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
+    printf '[OK] --stats cost --from: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --from: Validierungsfehler\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_car_id_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --car-id 1 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --car-id ist nur zusammen mit' "$err"; then
+    printf '[OK] --stats cost --car-id: Validierungsfehler\n'
+  else
+    printf '[FAIL] --stats cost --car-id: Validierungsfehler\n'
     add_fail
   fi
 }
@@ -1473,6 +1578,10 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_stats_cost_mvp_ok
   test_stats_cost_json_compact_ok
   test_stats_cost_json_pretty_ok
+  test_stats_cost_csv_fails
+  test_stats_cost_monthly_yearly_dashboard_fails
+  test_stats_cost_period_fails
+  test_stats_cost_car_id_fails
   test_stats_fleet_csv_fails
   test_stats_fleet_monthly_yearly_dashboard_fails
   test_stats_fleet_period_fails

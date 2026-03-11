@@ -41,3 +41,4 @@ Integration von:
   - fuel-basierte Kosten ueber gueltige Volltank-Zyklen
   - maintenance aktuell als Placeholder (`0`), bis Modul-Integration verfuegbar ist
 - S8C2/4 erweitert den MVP um JSON (`--stats cost --json [--pretty]`) mit Export-Meta und `kind: "cost_mvp"`.
+- S8C3/4 haertet Guardrails regressionssicher (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id` bleiben fuer Cost-MVP ungueltig).
