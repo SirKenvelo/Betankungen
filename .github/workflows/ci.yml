@@ -35,6 +35,7 @@ jobs:
 
       - name: Build (FPC standard)
         run: |
+          mkdir -p bin build units
           fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
       - name: Domain-Policy suite
