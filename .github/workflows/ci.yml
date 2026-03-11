@@ -31,7 +31,8 @@ jobs:
       - name: Install dependencies (FPC + sqlite3)
         run: |
           sudo apt-get update
-          sudo apt-get install -y fp-compiler sqlite3
+          # Vollstaendiges FPC-Set statt nur Compiler, damit FCL/IniFiles und DB-Units vorhanden sind.
+          sudo apt-get install -y fpc sqlite3
 
       - name: Build (FPC standard)
         run: |
