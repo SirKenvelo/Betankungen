@@ -72,6 +72,13 @@ begin
         and (Cmd.Target = tkFleet);
 end;
 
+function IsStatsCost(const Cmd: TCommand): boolean;
+begin
+  Result := HasMainCommand(Cmd)
+        and (Cmd.Kind = ckStats)
+        and (Cmd.Target = tkCost);
+end;
+
 function IsListFuelups(const Cmd: TCommand): boolean;
 begin
   Result := HasMainCommand(Cmd)
@@ -178,12 +185,12 @@ function ValidateJsonCsvPrettyPolicy(var Cmd: TCommand): boolean;
 begin
   Result := True;
 
-  // --json ist nur fuer "--stats fuelups" oder "--stats fleet" erlaubt
+  // --json ist nur fuer "--stats fuelups", "--stats fleet" oder "--stats cost" erlaubt
   if Cmd.Json then
   begin
-    if (not IsStatsFuelups(Cmd)) and (not IsStatsFleet(Cmd)) then
+    if (not IsStatsFuelups(Cmd)) and (not IsStatsFleet(Cmd)) and (not IsStatsCost(Cmd)) then
     begin
-      Cmd.ErrorMsg := 'Fehler: --json ist nur zusammen mit "--stats fuelups" oder "--stats fleet" erlaubt.';
+      Cmd.ErrorMsg := 'Fehler: --json ist nur zusammen mit "--stats fuelups", "--stats fleet" oder "--stats cost" erlaubt.';
       Cmd.ErrorFocus := efStatsFormat;
       Exit(False);
     end;
@@ -207,7 +214,7 @@ begin
     end;
   end;
 
-  // --pretty ist nur zusammen mit --json erlaubt (und damit nur bei --stats fuelups/fleet)
+  // --pretty ist nur zusammen mit --json erlaubt (und damit nur bei --stats fuelups/fleet/cost)
   if Cmd.Pretty then
   begin
     if not Cmd.Json then
@@ -217,9 +224,9 @@ begin
       Exit(False);
     end;
 
-    if (not IsStatsFuelups(Cmd)) and (not IsStatsFleet(Cmd)) then
+    if (not IsStatsFuelups(Cmd)) and (not IsStatsFleet(Cmd)) and (not IsStatsCost(Cmd)) then
     begin
-      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit "--stats fuelups --json" oder "--stats fleet --json" erlaubt.';
+      Cmd.ErrorMsg := 'Fehler: --pretty ist nur zusammen mit "--stats fuelups --json", "--stats fleet --json" oder "--stats cost --json" erlaubt.';
       Cmd.ErrorFocus := efStatsFormat;
       Exit(False);
     end;

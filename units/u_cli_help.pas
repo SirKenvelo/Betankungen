@@ -63,7 +63,7 @@ begin
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost [--json [--pretty]]')
   else if (FocusFlag = '--from') then
     Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
   else if FocusFlag = '--db' then
@@ -110,7 +110,7 @@ begin
   Item('--list stations|fuelups|cars','Auflisten (optional mit --detail).');
   Item('--edit stations|cars',       'Datensatz bearbeiten (fuelups ist verboten).');
   Item('--delete stations|cars',     'Datensatz loeschen (fuelups ist verboten).');
-  Item('--stats fuelups|fleet|cost', 'Auswertung fuer fuelups, Fleet-MVP (Text/JSON) oder Cost-MVP (Text).');
+  Item('--stats fuelups|fleet|cost', 'Auswertung fuer fuelups, Fleet-MVP (Text/JSON) oder Cost-MVP (Text/JSON).');
   Item('--seed',                     'Demo-DB erzeugen/auffuellen (exklusiv).');
   Item('--about',                    'Projekt-/Autor-Informationen anzeigen.');
   Item('--help',                     'Voll-Help anzeigen und beenden.');
@@ -135,8 +135,8 @@ begin
   Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (nur fuelups; exklusive Obergrenze).');
   Item('--monthly',                  'Monatliche Aggregation (nur fuelups; nicht mit --yearly).');
   Item('--yearly',                   'Jaehrliche Aggregation (nur fuelups; nicht mit --monthly/--csv/--dashboard).');
-  Item('--json',                     'JSON-Ausgabe (fuelups/fleet).');
-  Item('--pretty',                   'Pretty-JSON (nur zusammen mit --json; fuelups/fleet).');
+  Item('--json',                     'JSON-Ausgabe (fuelups/fleet/cost).');
+  Item('--pretty',                   'Pretty-JSON (nur zusammen mit --json; fuelups/fleet/cost).');
   Item('--csv',                      'CSV-Ausgabe (nur fuelups; nicht mit --json; nicht bei --yearly).');
   Item('--dashboard',                'Kompakt-Dashboard (nur fuelups; nicht mit --json/--csv; nicht bei --yearly).');
 
@@ -159,6 +159,7 @@ begin
   Line('  Betankungen --stats fleet');
   Line('  Betankungen --stats fleet --json --pretty');
   Line('  Betankungen --stats cost');
+  Line('  Betankungen --stats cost --json --pretty');
   Line('  Betankungen --seed --fuelups 400 --force');
 end;
 

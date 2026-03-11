@@ -166,6 +166,7 @@ Bereits erledigt:
 - Erreicht (S7C3/4): Fleet-Guardrails gehaertet und regressionsgesichert (ungueltige Fleet-Optionen werden stabil abgefangen).
 - Erreicht (S7C4/4): Sprint-7-Abschluss mit finalem Verifikationslauf und Doku-Sync.
 - Gestartet (S8C1/4): Cost-MVP-Basis via `--stats cost` (Text, fuel-basiert, maintenance-ready Placeholder).
+- Erreicht (S8C2/4): Cost-JSON-MVP (`--stats cost --json [--pretty]`) inkl. Export-Meta und Contract-Update.
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
@@ -225,14 +226,20 @@ Bereits erledigt:
 
 ## Roadmap Sprint 8 - Cost Analytics MVP
 
-- Status: in progress (`S8C1/4` gestartet)
+- Status: in progress (`S8C1/4` + `S8C2/4`)
 - Ziel: `--stats cost` als erste Kostenperspektive einziehen und fuer spaetere Maintenance-Integration vorbereiten.
 
 ### S8C1/4 - CLI + Text MVP
 
 - Erreicht: CLI akzeptiert `--stats cost` als eigenen Stats-Target-Pfad.
 - Erreicht: Cost-MVP-Textausgabe im Core verdrahtet (fuel-basiert, maintenance als Placeholder `0`).
-- Erreicht: Domain-Policy-/Smoke-Abdeckung fuer `--stats cost` und Guardrail `--stats cost --json` nachgezogen.
+- Erreicht: Domain-Policy-/Smoke-Abdeckung fuer den initialen Cost-Pfad (`--stats cost`) als Basis fuer den nachfolgenden JSON-Ausbau.
+
+### S8C2/4 - JSON MVP + Contract
+
+- Erreicht: `--stats cost --json [--pretty]` im Core verdrahtet (Dispatch + Renderer in `u_stats`).
+- Erreicht: Export-Meta fuer Cost-JSON aktiv (`contract_version`, `generated_at`, `app_version`, `kind: "cost_mvp"`).
+- Erreicht: Cost-Payload im Contract dokumentiert (`docs/EXPORT_CONTRACT.md`) und Domain-Policy-/Smoke-Abdeckung auf JSON compact/pretty umgestellt.
 
 ## Roadmap Sprint 4 - i18n First (Docs/Policy before Wiring)
 

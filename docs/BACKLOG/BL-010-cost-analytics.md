@@ -40,3 +40,4 @@ Integration von:
 - S8C1/4 liefert eine Cost-MVP-Basis (`--stats cost`) als Textausgabe:
   - fuel-basierte Kosten ueber gueltige Volltank-Zyklen
   - maintenance aktuell als Placeholder (`0`), bis Modul-Integration verfuegbar ist
+- S8C2/4 erweitert den MVP um JSON (`--stats cost --json [--pretty]`) mit Export-Meta und `kind: "cost_mvp"`.

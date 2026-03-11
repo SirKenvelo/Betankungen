@@ -24,8 +24,8 @@
   - Typkonsistenz: Nutzung zentraler CLI-Typen aus `u_cli_types`
     (TCommand, TCommandKind, TTableKind, TErrorFocus).
   - Statistik-Dispatch: Weiterleitung von Zeitraum-, Monats- und Jahresoptionen
-    fuer `--stats fuelups`, Fleet-MVP via `--stats fleet` und Cost-MVP via
-    `--stats cost`.
+    fuer `--stats fuelups`, Fleet-MVP via `--stats fleet` und Cost-MVP
+    (Text/JSON) via `--stats cost`.
 
   Betriebsmodi:
   - Bootstrap-Modus: Aufruf ohne Argumente initialisiert fehlende Config/DB still.
@@ -793,7 +793,13 @@ begin
 
       tkCost:
         case Cmd.Kind of
-          ckStats: ShowCostStats(DbPath);
+          ckStats:
+            begin
+              if Cmd.Json then
+                ShowCostStatsJson(DbPath, Cmd.Pretty, APP_VERSION)
+              else
+                ShowCostStats(DbPath);
+            end;
         else
           FailUsage('Interner Fehler: Ungültiges cost-Kommando.');
         end;

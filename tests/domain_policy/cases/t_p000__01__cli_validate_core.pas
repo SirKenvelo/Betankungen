@@ -200,7 +200,7 @@ begin
   Ok('Format: fleet+csv rejected');
 end;
 
-procedure Test_Format_CostJson_Fails;
+procedure Test_Format_CostJson_Ok;
 var
   Cmd: TCommand;
 begin
@@ -208,9 +208,21 @@ begin
   SetMainCommand(Cmd, ckStats, tkCost);
   Cmd.Json := True;
 
-  AssertFalse(ValidateCommand(Cmd), 'cost+json must fail');
-  AssertEqInt(Ord(efStatsFormat), Ord(Cmd.ErrorFocus), 'cost json focus');
-  Ok('Format: cost+json rejected');
+  AssertTrue(ValidateCommand(Cmd), 'cost+json must be ok');
+  Ok('Format: cost+json ok');
+end;
+
+procedure Test_Format_CostJsonPretty_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.Json := True;
+  Cmd.Pretty := True;
+
+  AssertTrue(ValidateCommand(Cmd), 'cost+json+pretty must be ok');
+  Ok('Format: cost+json+pretty ok');
 end;
 
 procedure Test_Format_FleetMonthly_Fails;
@@ -342,7 +354,8 @@ begin
   Test_Format_FleetJson_Ok;
   Test_Format_FleetJsonPretty_Ok;
   Test_Format_FleetCsv_Fails;
-  Test_Format_CostJson_Fails;
+  Test_Format_CostJson_Ok;
+  Test_Format_CostJsonPretty_Ok;
   Test_Format_FleetMonthly_Fails;
   Test_Format_FleetYearly_Fails;
   Test_Format_FleetDashboard_Fails;

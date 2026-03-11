@@ -12,7 +12,7 @@ Detailed documents are currently maintained primarily in German.
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
-- Sprint 8 started with Cost MVP baseline: `--stats cost` (text, fuel-based; maintenance placeholder)
+- Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export meta baseline (`kind: "cost_mvp"`)
 
 ## Recommended Reading Order
 

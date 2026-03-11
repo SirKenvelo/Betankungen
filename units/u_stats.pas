@@ -16,7 +16,7 @@
   - Monatsaggregation fuer `--stats fuelups --monthly` (Text + JSON kind "fuelups_monthly").
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
   - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Text/JSON-Ausgabe).
-  - Cost-Stats-Basis fuer `--stats cost` (MVP-Textausgabe, fuel-basiert).
+  - Cost-Stats-Basis fuer `--stats cost` (MVP-Text/JSON-Ausgabe, fuel-basiert).
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
@@ -81,6 +81,10 @@ procedure ShowFleetStatsJson(const DbPath: string;
   const AppVersion: string = '');
 // Liefert die Cost-Statistik als MVP-Textausgabe (fuel-basiert).
 procedure ShowCostStats(const DbPath: string);
+// Liefert die Cost-Statistik als MVP-JSON-Ausgabe.
+procedure ShowCostStatsJson(const DbPath: string;
+  const Pretty: boolean = False;
+  const AppVersion: string = '');
 
 implementation
 
@@ -1373,6 +1377,15 @@ begin
   Result := FormatFloat('0.000', EurPerKm, Fs);
 end;
 
+function CostPerKmEurX1000(const TotalCents: Int64; const DistKm: Int64): Int64;
+begin
+  if DistKm <= 0 then
+    Exit(0);
+
+  // ((cents / 100) / km) * 1000 => cents * 10 / km
+  Result := (TotalCents * 10 + (DistKm div 2)) div DistKm;
+end;
+
 procedure CollectCostStats(const DbPath: string; out R: TCostStats);
 var
   Conn: TSQLite3Connection;
@@ -1438,6 +1451,60 @@ begin
   R.TotalCents := R.FuelCentsTotal + R.MaintenanceCentsTotal;
 end;
 
+procedure RenderCostStatsJson(const R: TCostStats;
+  const Pretty: boolean;
+  const AppVersion: string);
+var
+  J: TJsonWriter;
+  CostPerKmAvailable: boolean;
+  FuelPerKmX1000: Int64;
+  MaintenancePerKmX1000: Int64;
+  TotalPerKmX1000: Int64;
+begin
+  CostPerKmAvailable := R.DistKmTotal > 0;
+
+  if CostPerKmAvailable then
+  begin
+    FuelPerKmX1000 := CostPerKmEurX1000(R.FuelCentsTotal, R.DistKmTotal);
+    MaintenancePerKmX1000 := CostPerKmEurX1000(R.MaintenanceCentsTotal, R.DistKmTotal);
+    TotalPerKmX1000 := CostPerKmEurX1000(R.TotalCents, R.DistKmTotal);
+  end
+  else
+  begin
+    FuelPerKmX1000 := 0;
+    MaintenancePerKmX1000 := 0;
+    TotalPerKmX1000 := 0;
+  end;
+
+  J.Pretty := Pretty;
+  J.Ind := 0;
+
+  J.W('{'); J.NL;
+  J.IndentInc;
+
+  WriteJsonMetaHeader(J, 'cost_mvp', AppVersion);
+
+  J.IndentWrite; J.W('"cost":'); J.SP; J.W('{'); J.NL;
+  J.IndentInc;
+  J.IndentWrite; J.W('"cars_total":'); J.SP; J.W(IntToStr(R.CarsTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"cars_with_cycles":'); J.SP; J.W(IntToStr(R.CarsWithCycles)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"distance_km_total":'); J.SP; J.W(IntToStr(R.DistKmTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"fuel_cents_total":'); J.SP; J.W(IntToStr(R.FuelCentsTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"maintenance_cents_total":'); J.SP; J.W(IntToStr(R.MaintenanceCentsTotal)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"total_cents":'); J.SP; J.W(IntToStr(R.TotalCents)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"cost_per_km_available":'); J.SP;
+  if CostPerKmAvailable then J.W('true') else J.W('false');
+  J.W(','); J.NL;
+  J.IndentWrite; J.W('"fuel_cost_per_km_eur_x1000":'); J.SP; J.W(IntToStr(FuelPerKmX1000)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"maintenance_cost_per_km_eur_x1000":'); J.SP; J.W(IntToStr(MaintenancePerKmX1000)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"total_cost_per_km_eur_x1000":'); J.SP; J.W(IntToStr(TotalPerKmX1000)); J.NL;
+  J.IndentDec;
+  J.IndentWrite; J.W('}'); J.NL;
+
+  J.IndentDec;
+  J.W('}'); J.NL;
+end;
+
 procedure ShowCostStats(const DbPath: string);
 var
   R: TCostStats;
@@ -1452,6 +1519,16 @@ begin
   WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (MVP placeholder)');
   WriteLn('Total cost (cents): ', R.TotalCents);
   WriteLn('Total cost per km (EUR): ', FormatEuroPerKm(R.TotalCents, R.DistKmTotal));
+end;
+
+procedure ShowCostStatsJson(const DbPath: string;
+  const Pretty: boolean;
+  const AppVersion: string);
+var
+  R: TCostStats;
+begin
+  CollectCostStats(DbPath, R);
+  RenderCostStatsJson(R, Pretty, AppVersion);
 end;
 
 end.

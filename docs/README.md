@@ -231,9 +231,10 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Fleet-MVP-Basis (`--stats fleet`) mit aggregierten Kernwerten ueber alle Fahrzeuge (Text + JSON)
 - Fleet-JSON (`--stats fleet --json`, optional `--pretty`) inkl. Export-Meta und `kind: "fleet_mvp"`
 - Fleet-Guardrails bleiben strikt: keine Fleet-Unterstuetzung fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`
-- Cost-MVP-Basis (`--stats cost`) als fuel-basierte Kosten-Sicht (Textausgabe)
+- Cost-MVP-Basis (`--stats cost`) als fuel-basierte Kosten-Sicht (Text + JSON)
 - Cost-MVP enthaelt Maintenance aktuell als Placeholder (`0`) fuer spaetere Modul-Integration
-- Cost-Guardrails bleiben strikt: keine Cost-Unterstuetzung fuer `--json`, `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`
+- Cost-JSON (`--stats cost --json`, optional `--pretty`) inkl. Export-Meta und `kind: "cost_mvp"`
+- Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`
@@ -250,6 +251,7 @@ Beispiel (Fleet MVP):
 
 Beispiel (Cost MVP):
 - `Betankungen --stats cost`
+- `Betankungen --stats cost --json --pretty`
 
 Beispiel (JSON, pretty formatiert, gekuerzt):
 ```json
