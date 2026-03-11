@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-10
+**Stand:** 2026-03-11
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -33,6 +33,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S7C4/4 - Sprint-7-Finalisierung mit DoD-Check, finalem Verifikationslauf und Abschluss-Sync der Sprint-/Status-/Entry-Doku; Artefakte: `.artifacts/sprint_7_commit_4_von_4.md`, `.artifacts/sprint_7_commit_4_von_4.diff`; Basis-Commit: `aa9281e`. (2026-03-10)
 
 ### Changed
+- [General] Docs/Backlog: Neues Backlog-Paket `BL-011` fuer einen separaten Projekt-Scaffolder aufgenommen (`docs/BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md`) und im Index `docs/BACKLOG.md` verankert. Scope fuer v0.1 festgezogen (Projektname als Pflichtinput, Grundstruktur + Basisdateien + `AGENTS.md` per Template, optionales `--git-init`). (2026-03-11)
 - [S7C4/4] Docs/Verification: Sprint 7 als abgeschlossen markiert (Fleet-MVP Text + JSON + Guardrails) und Abschlussnarrative in `docs/SPRINTS.md`, `docs/STATUS.md`, `docs/README_EN.md` sowie Sprint-Referenzen im Changelog finalisiert. Abschluss-Verifikation erneut durchgefuehrt (`tests/domain_policy/run_domain_policy_tests.sh`, `tests/smoke/smoke_cli.sh --modules`, `tests/smoke/smoke_clean_home.sh --modules`). (2026-03-10)
 - [S7C3/4] Tests/CLI-Policy: Fleet-Guardrails fuer ungueltige Optionen gehaertet. `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas` deckt jetzt zusaetzlich Fleet-Fehlerpfade fuer `--monthly`, `--yearly`, `--dashboard` sowie `--from/--to` ab; `tests/smoke/smoke_cli.sh` prueft dieselben Fleet-Error-Pfade end-to-end. Doku-Sync in `tests/README.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`, `docs/SPRINTS.md`. (2026-03-10)
 - [S7C2/4] Core/Stats: Fleet-JSON-MVP umgesetzt (`--stats fleet --json [--pretty]`) mit Export-Meta (`contract_version`, `generated_at`, `app_version`) und `kind: "fleet_mvp"` im neuen `fleet`-Payload (`cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`). Validierung/Help/Dispatch auf fleet-json erweitert (`u_cli_validate`, `u_cli_help`, `src/Betankungen.lpr`), Domain-Policy + Smoke fuer fleet-json nachgezogen (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/smoke/smoke_cli.sh`) und Doku synchronisiert (`docs/EXPORT_CONTRACT.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`, `docs/SPRINTS.md`, `tests/README.md`). (2026-03-10)
