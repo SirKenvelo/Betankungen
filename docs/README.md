@@ -367,6 +367,20 @@ Beispiel:
 - `scripts/projekt_kontext.sh`
 - `scripts/projekt_kontext.sh /tmp/projekt_kontext.md`
 
+### `scripts/repo_sync.sh`
+Repo-Pflege-Helfer fuer einen stabilen, sequentiellen Branch-Sync.
+
+**Funktionen**
+- Fuehrt `fetch` und `rebase` bewusst sequentiell aus (kein Parallel-Race auf `FETCH_HEAD`)
+- Nutzt standardmaessig `origin` und den aktuell ausgecheckten Branch
+- Unterstuetzt expliziten Ziel-Remote/-Branch via `--remote` und `--branch`
+- Liefert `--status-only` fuer einen schnellen Sync-Preflight ohne Netzoperationen
+
+Beispiel:
+- `scripts/repo_sync.sh`
+- `scripts/repo_sync.sh --status-only`
+- `scripts/repo_sync.sh --remote origin --branch main`
+
 ### `scripts/sprint_artifact.sh`
 Hilfsskript fuer lokale Sprint-Artefakte aus einem bestehenden Commit.
 
