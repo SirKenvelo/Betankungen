@@ -223,7 +223,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 1. S8C1/4
 - Thema: Neuer CLI-Target-Pfad `--stats cost` inkl. Core-Dispatch und Cost-MVP-Textausgabe eingefuehrt; Validierung/Smoke/Domain-Policy sowie Entry-/Status-Doku auf Sprint-8-Start synchronisiert.
 - Status: done
-- Git-Commit: `TBD`
+- Git-Commit: `f9e0cdb`
 - Artefakte: `.artifacts/sprint_8_commit_1_von_4.md`, `.artifacts/sprint_8_commit_1_von_4.diff`
 
 ### Abschluss-Tag
