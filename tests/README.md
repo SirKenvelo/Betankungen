@@ -76,6 +76,7 @@ Direktlauf:
 - Script: `tests/smoke/smoke_cli.sh`
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
 - Interne Struktur: Fleet-/Cost-/Bootstrap-Checks sind in dedizierte Helper unter `tests/smoke/helpers/` ausgelagert; `smoke_cli.sh` sourced diese zentral.
+- Prefix-Ausgabe ist in allen dedizierten Smoke-Skripten vereinheitlicht (TTY): `[OK]` gruen, `[INFO]` gelb, `[FAIL]` rot.
 - Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Text + JSON compact/pretty) inkl. Guardrails fuer ungueltige Fleet-Optionen (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`) ab.
 - Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails sind regressionsgesichert fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to` und `--car-id`.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.

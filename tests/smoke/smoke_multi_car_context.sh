@@ -11,11 +11,36 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-03-04
+# UPDATED: 2026-03-12
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
 APP_BIN="$ROOT_DIR/bin/Betankungen"
+
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+  C_RESET=$'\033[0m'
+  C_GREEN=$'\033[32m'
+  C_RED=$'\033[31m'
+  C_YELLOW=$'\033[33m'
+  exec > >(
+    while IFS= read -r line; do
+      case "$line" in
+        "[OK]"*)
+          printf '%b[OK]%b%s\n' "$C_GREEN" "$C_RESET" "${line#\[OK\]}"
+          ;;
+        "[FAIL]"*)
+          printf '%b[FAIL]%b%s\n' "$C_RED" "$C_RESET" "${line#\[FAIL\]}"
+          ;;
+        "[INFO]"*)
+          printf '%b[INFO]%b%s\n' "$C_YELLOW" "$C_RESET" "${line#\[INFO\]}"
+          ;;
+        *)
+          printf '%s\n' "$line"
+          ;;
+      esac
+    done
+  )
+fi
 
 TMP_DIR="$(mktemp -d /tmp/betankungen_smoke_multi_car_context_XXXXXX)"
 DB_ZERO="$TMP_DIR/zero_cars.db"

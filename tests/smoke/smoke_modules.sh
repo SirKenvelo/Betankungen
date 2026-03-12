@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_modules.sh
-# UPDATED: 2026-03-10
+# UPDATED: 2026-03-12
 # Fokus-Smoke fuer Companion-Binary-Contract (`--module-info`) von Modulen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -23,6 +23,31 @@ ERR_INFO_PRETTY="$TMP_DIR/info_pretty.err"
 OUT_BAD="$TMP_DIR/bad.out"
 ERR_BAD="$TMP_DIR/bad.err"
 BUILD_LOG="$TMP_DIR/build.log"
+
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+  C_RESET=$'\033[0m'
+  C_GREEN=$'\033[32m'
+  C_RED=$'\033[31m'
+  C_YELLOW=$'\033[33m'
+  exec > >(
+    while IFS= read -r line; do
+      case "$line" in
+        "[OK]"*)
+          printf '%b[OK]%b%s\n' "$C_GREEN" "$C_RESET" "${line#\[OK\]}"
+          ;;
+        "[FAIL]"*)
+          printf '%b[FAIL]%b%s\n' "$C_RED" "$C_RESET" "${line#\[FAIL\]}"
+          ;;
+        "[INFO]"*)
+          printf '%b[INFO]%b%s\n' "$C_YELLOW" "$C_RESET" "${line#\[INFO\]}"
+          ;;
+        *)
+          printf '%s\n' "$line"
+          ;;
+      esac
+    done
+  )
+fi
 
 cleanup() {
   rm -rf "$TMP_DIR"

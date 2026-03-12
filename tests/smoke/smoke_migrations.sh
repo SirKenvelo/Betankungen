@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_migrations.sh
-# UPDATED: 2026-03-06
+# UPDATED: 2026-03-12
 # Dedizierte Smoke-Checks fuer DB-Schema-Migrationen.
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,6 +26,35 @@ Optionen:
   -h, --help    Hilfe anzeigen
 EOF_USAGE
 }
+
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+  C_RESET=$'\033[0m'
+  C_GREEN=$'\033[32m'
+  C_RED=$'\033[31m'
+  C_YELLOW=$'\033[33m'
+  C_CYAN=$'\033[36m'
+  exec > >(
+    while IFS= read -r line; do
+      case "$line" in
+        "[OK]"*)
+          printf '%b[OK]%b%s\n' "$C_GREEN" "$C_RESET" "${line#\[OK\]}"
+          ;;
+        "[FAIL]"*)
+          printf '%b[FAIL]%b%s\n' "$C_RED" "$C_RESET" "${line#\[FAIL\]}"
+          ;;
+        "[INFO]"*)
+          printf '%b[INFO]%b%s\n' "$C_YELLOW" "$C_RESET" "${line#\[INFO\]}"
+          ;;
+        "[LIST]"*)
+          printf '%b[LIST]%b%s\n' "$C_CYAN" "$C_RESET" "${line#\[LIST\]}"
+          ;;
+        *)
+          printf '%s\n' "$line"
+          ;;
+      esac
+    done
+  )
+fi
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
