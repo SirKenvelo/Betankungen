@@ -421,6 +421,19 @@ Lint fuer Sprint-/Doku-Qualitaet.
 Beispiel:
 - `scripts/sprint_docs_lint.sh`
 
+### `scripts/artifacts_retention.sh`
+Retention-Skript fuer `.artifacts/` mit Schutz der Sprint-Historie.
+
+**Funktionen**
+- Bereinigt alte Nicht-Sprint-Artefakte (`*.md`, `*.diff`) in `.artifacts/`
+- Behaelt Sprint-Artefakte (`sprint_<nr>_commit_<nr>_von_<nr>.md|.diff`) immer vollstaendig
+- Gruppiert nach Dateistamm (z. B. `general_commit_abcd123`) und wendet Retention auf Gruppen an
+- Unterstuetzt Dry-Run fuer sichere Vorschau
+
+Beispiel:
+- `scripts/artifacts_retention.sh --dry-run`
+- `scripts/artifacts_retention.sh --keep 20`
+
 ## Task-Entrypoints (make)
 
 - `make verify`
