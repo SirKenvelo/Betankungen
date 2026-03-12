@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -418,6 +418,7 @@ Beispiel:
   - `push` von Tags
 - Gate-Schritte:
   - FPC-Build (Projekt-Standard)
+  - Export-Contract JSON-Check (`tests/regression/run_export_contract_json_check.sh`)
   - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)
   - Smoke-Suite (`tests/smoke/smoke_cli.sh --modules`)
   - Clean-Home-Smoke (`tests/smoke/smoke_clean_home.sh --modules`)

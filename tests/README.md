@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -63,6 +63,13 @@ Erzeugte Dateien:
 Direktlauf:
 - `tests/domain_policy/run_domain_policy_tests.sh`
 - kompatibel: `tests/run_unit_tests.sh`
+
+## Regression-Checks
+- Script: `tests/regression/run_export_contract_json_check.sh`
+- Zweck: Liest die JSON-Contract-Keys aus `docs/EXPORT_CONTRACT.md` und validiert sie gegen echte CLI-JSON-Ausgaben (`fuelups` full/monthly/yearly, `fleet`, `cost`).
+
+Direktlauf:
+- `tests/regression/run_export_contract_json_check.sh`
 
 ## Smoke-Test
 - Script: `tests/smoke/smoke_cli.sh`

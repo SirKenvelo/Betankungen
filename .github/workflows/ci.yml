@@ -39,6 +39,10 @@ jobs:
           mkdir -p bin build units
           fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
+      - name: Export-Contract JSON check
+        run: |
+          tests/regression/run_export_contract_json_check.sh
+
       - name: Domain-Policy suite
         run: |
           tests/domain_policy/run_domain_policy_tests.sh
