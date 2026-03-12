@@ -28,6 +28,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Sprint/Docs lint
+        run: |
+          scripts/sprint_docs_lint.sh
+
       - name: Install dependencies (FPC + sqlite3)
         run: |
           sudo apt-get update

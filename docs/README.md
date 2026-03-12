@@ -409,6 +409,18 @@ Hilfsskript zum Erzeugen von `data/dev_messages.b64` aus einer getrennten Input-
 Beispiel:
 - `scripts/dev_messages_encode.sh --in /tmp/dev_messages_input.txt --out data/dev_messages.b64 --force`
 
+### `scripts/sprint_docs_lint.sh`
+Lint fuer Sprint-/Doku-Qualitaet.
+
+**Checks**
+- `**Stand:** YYYY-MM-DD` vorhanden/gueltig in `docs/**/*.md` und `tests/**/*.md`
+- keine `TBD`-Marker
+- Sprint-Tags in `docs/CHANGELOG.md` unter `[Unreleased] -> Changed` nur als `[General]` oder `[SxCy/z]`
+- Hash-Referenzen formatgueltig (7-stellig, hex) in `docs/CHANGELOG.md` (`Basis-Commit`) und `docs/SPRINTS.md` (`Git-Commit`)
+
+Beispiel:
+- `scripts/sprint_docs_lint.sh`
+
 ## CI / Quality Gate
 
 - GitHub Actions Workflow: `.github/workflows/ci.yml`
@@ -417,6 +429,7 @@ Beispiel:
   - `pull_request` gegen `main`
   - `push` von Tags
 - Gate-Schritte:
+  - Sprint-/Doku-Lint (`scripts/sprint_docs_lint.sh`)
   - FPC-Build (Projekt-Standard)
   - Export-Contract JSON-Check (`tests/regression/run_export_contract_json_check.sh`)
   - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)
