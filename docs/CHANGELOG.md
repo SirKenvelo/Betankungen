@@ -37,6 +37,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S8C4/4 - Sprint-8-Finalisierung mit DoD-Check, finalem Verifikationslauf und Abschluss-Sync der Sprint-/Status-/Entry-Doku; Artefakte: `.artifacts/sprint_8_commit_4_von_4.md`, `.artifacts/sprint_8_commit_4_von_4.diff`; Basis-Commit: `680e962`. (2026-03-11)
 
 ### Changed
+- [General] CI/Workflow-Fix: GitHub-Action `actions/checkout` im Verify-Workflow von `@v4` auf `@v6` angehoben, um die Node-20-Deprecation-Warnung zu vermeiden und den Runner-Pfad auf aktuelle Node-24-basierte Action-Runtimes vorzubereiten. (2026-03-12)
 - [General] CI/Workflow-Fix: Verify-Workflow fuer frische GitHub-Runner gehaertet; vor den Module-Smokes werden jetzt `.releases/.backup` angelegt und ein minimales CI-Smoke-Archiv `Betankungen_0_0_0_ci_smoke.tar` erzeugt, damit `backup_snapshot --dry-run` in `tests/smoke/smoke_cli.sh --modules` nicht an fehlenden Release-Artefakten scheitert. (2026-03-12)
 - [General] CI/Workflow-Fix: Dependency-Setup in `.github/workflows/ci.yml` von `fp-compiler` auf `fpc` umgestellt, damit im GitHub-Runner neben dem Compiler auch benoetigte Standard-Units (u. a. `IniFiles` aus FCL) verfuegbar sind und `verify` nicht mehr mit `Can't find unit IniFiles` fehlschlaegt. (2026-03-11)
 - [General] CI/Workflow-Fix: Build-Step in `.github/workflows/ci.yml` gehaertet; FPC-Ausgabeordner (`bin`, `build`, `units`) werden vor dem Compile explizit angelegt, damit der Gate-Job `verify` im frischen GitHub-Checkout nicht mehr mit `Path "bin/" does not exist` fehlschlaegt. (2026-03-11)
