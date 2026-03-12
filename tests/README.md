@@ -8,6 +8,7 @@
 - `tests/domain_policy/helpers/`: Mini-Utilities (z. B. DB-Build).
 - `tests/regression/`: Bugs, die nicht zurueckkommen duerfen.
 - `tests/smoke/`: End-to-End-CLI-Sanity-Checks.
+- `tests/smoke/helpers/`: modulare Funktionsbloecke fuer `smoke_cli.sh` (Fleet/Cost/Bootstrap).
 
 Kompatibilitaets-Wrapper bleiben im Root erhalten:
 - `tests/smoke_cli.sh` -> `tests/smoke/smoke_cli.sh`
@@ -74,6 +75,7 @@ Direktlauf:
 ## Smoke-Test
 - Script: `tests/smoke/smoke_cli.sh`
 - Zweck: schneller Plausibilitaetscheck fuer Ordnerstruktur, Release-/Backup-Skripte und CLI-Binary.
+- Interne Struktur: Fleet-/Cost-/Bootstrap-Checks sind in dedizierte Helper unter `tests/smoke/helpers/` ausgelagert; `smoke_cli.sh` sourced diese zentral.
 - Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Text + JSON compact/pretty) inkl. Guardrails fuer ungueltige Fleet-Optionen (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`) ab.
 - Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails sind regressionsgesichert fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to` und `--car-id`.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
