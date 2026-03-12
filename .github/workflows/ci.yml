@@ -1,5 +1,5 @@
 # CREATED: 2026-03-11
-# UPDATED: 2026-03-11
+# UPDATED: 2026-03-12
 name: CI
 
 on:
@@ -42,6 +42,12 @@ jobs:
       - name: Domain-Policy suite
         run: |
           tests/domain_policy/run_domain_policy_tests.sh
+
+      - name: Prepare smoke fixtures
+        run: |
+          mkdir -p .releases .backup
+          # smoke_cli -> backup_snapshot --dry-run erwartet ein Betankungen_*.tar in .releases
+          tar -cf .releases/Betankungen_0_0_0_ci_smoke.tar docs/README.md
 
       - name: Smoke suite (--modules)
         run: |
