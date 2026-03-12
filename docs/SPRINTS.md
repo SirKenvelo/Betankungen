@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -248,3 +248,54 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S8C4/4 (Cost-MVP Text+JSON/Contract, Tests, Doku-Finalisierung)
 - Abschluss-Tag: `sprint-8-done` (gesetzt)
+
+## Sprint 9 - Cost Scoped Analytics v1.1
+
+- Status: gestartet
+- Ziel: `--stats cost` um Zeitraum-/Fahrzeug-Scope erweitern und Contract-seitig absichern.
+
+### Geplante Bloecke
+
+- S9C1/4: CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) inkl. Validate-/Help-/Dispatch-Anpassungen.
+- S9C2/4: Cost-Collector + Textausgabe auf Zeitraum-/Fahrzeug-Scope erweitern.
+- S9C3/4: Cost-JSON-Contract um Scope-/Period-Felder erweitern und Export-Contract-Checks nachziehen.
+- S9C4/4: Guardrails/Regression + Sprint-Finalisierung (Smoke/Domain-Policy/Doku-Sync).
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S9C4/4 (pending)
+- Abschluss-Tag: `sprint-9-done` (pending)
+
+## Sprint 10 - Maintenance Companion v0.2
+
+- Status: geplant
+- Ziel: `betankungen-maintenance` von Handshake-Skeleton auf fachliche Basisfunktionalitaet heben.
+
+### Geplante Bloecke
+
+- S10C1/4: Modul-Schema + idempotente Migration fuer Maintenance-Events.
+- S10C2/4: Companion-CLI fuer `--add maintenance` / `--list maintenance`.
+- S10C3/4: `--stats maintenance` (Text + JSON) inkl. Contract-Baseline.
+- S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S10C4/4 (pending)
+- Abschluss-Tag: `sprint-10-done` (pending)
+
+## Sprint 11 - Integration + 0.9.0 Readiness
+
+- Status: geplant
+- Ziel: Kostenintegration fuel + maintenance stabilisieren und 0.9.0-Readiness absichern.
+
+### Geplante Bloecke
+
+- S11C1/4: Core-zu-Modul-Integrationscontract fuer Kostenpfad definieren/verdrahten.
+- S11C2/4: Cost-Aggregation fuel + maintenance mit robustem Fallback ohne Modul.
+- S11C3/4: Regression/CI-Haertung fuer Modi mit und ohne Maintenance-Modul.
+- S11C4/4: 0.9.0-Readiness-Paket (Scope-Freeze, Doku-Finalisierung, Preflight).
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S11C4/4 (pending)
+- Abschluss-Tag: `sprint-11-done` (pending)

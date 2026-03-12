@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -169,6 +169,76 @@ Bereits erledigt:
 - Erreicht (S8C2/4): Cost-JSON-MVP (`--stats cost --json [--pretty]`) inkl. Export-Meta und Contract-Update.
 - Erreicht (S8C3/4): Cost-Guardrails gehaertet und regressionsgesichert fuer ungueltige Cost-Optionen.
 - Erreicht (S8C4/4): Sprint-8-Abschluss mit finaler Verifikation und Doku-Sync.
+- Gestartet (S9): Cost Scoped Analytics v1.1 (Period-/Car-Scope fuer `--stats cost`).
+- Geplant (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
+- Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
+
+## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
+
+- Status: gestartet (Planung abgeschlossen, Umsetzung beginnt mit `S9C1/4`)
+- Ziel: `--stats cost` von MVP auf nutzbaren Analysemodus mit kontrolliertem Scope heben.
+
+### S9C1/4 - CLI-Scope-Enablement
+
+- Geplant: Validate-/Help-/Dispatch-Freigabe fuer `--stats cost` mit `--from/--to` und `--car-id`.
+- Geplant: Konfliktregeln fuer ungueltige Kombinationen weiter strikt halten.
+
+### S9C2/4 - Collector + Textausgabe
+
+- Geplant: Cost-Collector um Zeitraum- und Fahrzeug-Scope erweitern.
+- Geplant: Textausgabe um klaren Scope-/Period-Hinweis ergaenzen.
+
+### S9C3/4 - JSON-Contract Ausbau
+
+- Geplant: Cost-JSON um Scope-/Period-Felder erweitern.
+- Geplant: `docs/EXPORT_CONTRACT.md` und Contract-Regression entsprechend synchronisieren.
+
+### S9C4/4 - Guardrails + Finalisierung
+
+- Geplant: Domain-Policy/Smoke fuer neue Cost-Scope-Pfade vollstaendig absichern.
+- Geplant: Sprint-/Status-/Entry-Doku final auf S9-Stand bringen.
+
+## Roadmap Sprint 10 - Maintenance Companion v0.2
+
+- Status: geplant
+- Ziel: `betankungen-maintenance` von Contract-Skeleton auf fachliche Nutzbarkeit heben.
+
+### S10C1/4 - Modul-Schema + Migration
+
+- Geplant: eigenes Maintenance-Schema und idempotente Modul-Migration.
+
+### S10C2/4 - Modul-CLI Basis
+
+- Geplant: `--add maintenance` und `--list maintenance` im Companion-Modul.
+
+### S10C3/4 - Modul-Stats + Export
+
+- Geplant: `--stats maintenance` (Text + JSON) mit klarem Contract.
+
+### S10C4/4 - Modul-Qualitaetsgate
+
+- Geplant: Smoke-/Contract-Abdeckung erweitern und Doku-Baseline finalisieren.
+
+## Roadmap Sprint 11 - Integration + 0.9.0 Readiness
+
+- Status: geplant
+- Ziel: fuel + maintenance konsistent integrieren und Release-Reife vorbereiten.
+
+### S11C1/4 - Integrationscontract
+
+- Geplant: expliziten Core-zu-Modul-Integrationsmodus fuer Kosten definieren.
+
+### S11C2/4 - Kostenaggregation
+
+- Geplant: Gesamtkostenpfad fuel + maintenance im Cost-Flow umsetzen (mit sauberem Fallback ohne Modul).
+
+### S11C3/4 - Regression + CI-Haertung
+
+- Geplant: Verify-/Smoke-/Policy-Kette fuer beide Modi (mit/ohne Modul) erweitern.
+
+### S11C4/4 - Release-Readiness
+
+- Geplant: Scope-Freeze, finale Doku-Synchronisierung und 0.9.0-Preflight.
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 

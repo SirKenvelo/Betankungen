@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -25,6 +25,7 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-009 - Agriculture Module](BACKLOG/BL-009-agriculture-module.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
 - [BL-010 - Cost Analytics](BACKLOG/BL-010-cost-analytics.md) - Status: `next`, Typ: Stats-/Domain-Erweiterung (cross-module)
 - [BL-011 - Projekt-Scaffolder (Repo Bootstrap)](BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md) - Status: `geplant`, Typ: Tooling-/Meta-Projekt (separates Repository)
+- [BL-012 - GitHub Wiki Enablement](BACKLOG/BL-012-github-wiki-enablement.md) - Status: `geplant`, Typ: Dokumentations-/Community-Enablement (Public-Readiness)
 
 ## Verknuepfte Entscheidungen
 
