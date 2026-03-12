@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-11
+**Stand:** 2026-03-12
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -9,10 +9,10 @@ Detailed documents are currently maintained primarily in German.
 - Latest release: `0.8.0`
 - Current development line: road to `0.9.x`
 - S6 baseline is in place: module strategy accepted, companion handshake (`--module-info`) implemented, module smoke path available (`tests/smoke_modules.sh` / `--modules`)
-- S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export meta baseline
+- S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export-meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
-- Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export meta baseline (`kind: "cost_mvp"`)
+- Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export-meta baseline (`kind: "cost_mvp"`)
 - Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id`) are regression-covered
 - Sprint 8 is functionally complete (Cost MVP text + JSON + guardrails, verified in domain-policy and smoke suites)
 
