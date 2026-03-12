@@ -421,6 +421,18 @@ Lint fuer Sprint-/Doku-Qualitaet.
 Beispiel:
 - `scripts/sprint_docs_lint.sh`
 
+## Task-Entrypoints (make)
+
+- `make verify`
+  - Lokales CI-Gate: `sprint_docs_lint` + FPC-Build + Export-Contract-Check + Domain-Policy + Smoke + Clean-Home-Smoke
+- `make smoke`
+  - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
+- `make release-dry`
+  - Fuehrt `kpr.sh --dry-run` aus
+- optional:
+  - `make build`
+  - `make smoke-clean`
+
 ## CI / Quality Gate
 
 - GitHub Actions Workflow: `.github/workflows/ci.yml`
