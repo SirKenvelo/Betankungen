@@ -268,6 +268,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `b757d3d`
 - Artefakte: `.artifacts/sprint_9_commit_2_von_4.md`, `.artifacts/sprint_9_commit_2_von_4.diff`
 
+3. S9C3/4
+- Thema: Cost-JSON-Contract um Scope-/Period-Felder erweitert (`scope_*`, `period_*`) und Contract-/Smoke-Checks auf den neuen Key-Stand synchronisiert.
+- Status: done
+- Git-Commit: `fcb4ab5`
+- Artefakte: `.artifacts/sprint_9_commit_3_von_4.md`, `.artifacts/sprint_9_commit_3_von_4.diff`
+
 ### Geplante Bloecke
 
 - S9C1/4: done - CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) inkl. Validate-/Help-/Dispatch-Anpassungen.
