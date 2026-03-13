@@ -251,7 +251,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 9 - Cost Scoped Analytics v1.1
 
-- Status: in Umsetzung (`S9C1/4` + `S9C2/4` + `S9C3/4` done)
+- Status: done (`S9C1/4` + `S9C2/4` + `S9C3/4` + `S9C4/4` done)
 - Ziel: `--stats cost` um Zeitraum-/Fahrzeug-Scope erweitern und Contract-seitig absichern.
 
 ### Commit-Folge
@@ -274,16 +274,22 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `fcb4ab5`
 - Artefakte: `.artifacts/sprint_9_commit_3_von_4.md`, `.artifacts/sprint_9_commit_3_von_4.diff`
 
+4. S9C4/4
+- Thema: Guardrails/Regression fuer Cost-Scope finalisiert: neue Domain-Policy `P-061` sichert Car-/Period-Isolation fuer `--stats cost`; Sprint-9-Doku auf Abschlussstand synchronisiert.
+- Status: done
+- Git-Commit: `297d588`
+- Artefakte: `.artifacts/sprint_9_commit_4_von_4.md`, `.artifacts/sprint_9_commit_4_von_4.diff`
+
 ### Geplante Bloecke
 
 - S9C1/4: done - CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) inkl. Validate-/Help-/Dispatch-Anpassungen.
 - S9C2/4: done - Cost-Collector + Textausgabe auf Zeitraum-/Fahrzeug-Scope erweitert.
 - S9C3/4: done - Cost-JSON-Contract um Scope-/Period-Felder erweitert und Export-Contract-Checks nachgezogen.
-- S9C4/4: Guardrails/Regression + Sprint-Finalisierung (Smoke/Domain-Policy/Doku-Sync).
+- S9C4/4: done - Guardrails/Regression + Sprint-Finalisierung (Smoke/Domain-Policy/Doku-Sync).
 
 ### Abschluss-Tag
 
-- Sprint-Abschluss: S9C4/4 (pending)
+- Sprint-Abschluss: S9C4/4 (done)
 - Abschluss-Tag: `sprint-9-done` (pending)
 
 ## Sprint 10 - Maintenance Companion v0.2

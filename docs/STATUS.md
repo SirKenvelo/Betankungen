@@ -173,12 +173,13 @@ Bereits erledigt:
 - Erreicht (S9C1/4): CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) in Validate/Help/Dispatch aktiviert.
 - Erreicht (S9C2/4): Cost-Collector und Textausgabe auf aktiven Period-/Car-Scope erweitert.
 - Erreicht (S9C3/4): Cost-JSON-Contract um Scope-/Period-Felder erweitert und Contract-Check synchronisiert.
+- Erreicht (S9C4/4): Cost-Scope-Guardrails via Domain-Policy `P-061` regressionssicher erweitert (Car-/Period-Isolation) und Sprint 9 fachlich abgeschlossen.
 - Geplant (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
 
-- Status: in Umsetzung (`S9C1/4` bis `S9C3/4` abgeschlossen)
+- Status: abgeschlossen (`S9C1/4` bis `S9C4/4`)
 - Ziel: `--stats cost` von MVP auf nutzbaren Analysemodus mit kontrolliertem Scope heben.
 
 ### S9C1/4 - CLI-Scope-Enablement
@@ -198,8 +199,8 @@ Bereits erledigt:
 
 ### S9C4/4 - Guardrails + Finalisierung
 
-- Geplant: Domain-Policy/Smoke fuer neue Cost-Scope-Pfade vollstaendig absichern.
-- Geplant: Sprint-/Status-/Entry-Doku final auf S9-Stand bringen.
+- Erreicht: Domain-Policy/Smoke fuer neue Cost-Scope-Pfade vollstaendig abgesichert (inkl. neuer Policy `P-061` fuer Car-/Period-Isolation bei `--stats cost`).
+- Erreicht: Sprint-/Status-/Entry-Doku auf finalen Sprint-9-Stand synchronisiert.
 
 ## Roadmap Sprint 10 - Maintenance Companion v0.2
 
