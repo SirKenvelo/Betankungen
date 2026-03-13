@@ -41,6 +41,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S9C4/4 - Cost-Scope-Guardrails via Domain-Policy `P-061` erweitert (Car-/Period-Isolation fuer `--stats cost`) und Sprint-9-Doku finalisiert; Artefakte: `.artifacts/sprint_9_commit_4_von_4.md`, `.artifacts/sprint_9_commit_4_von_4.diff`; Basis-Commit: `297d588`. (2026-03-13)
 
 ### Changed
+- [General] Meta/Process: `AGENTS.md` auf den aktuellen Tracker-/Quality-Gate-Stand aktualisiert (`Stand` auf `2026-03-13`, explizite Verankerung von `POL-001`, kanonischen Pfaden `docs/backlog`/`docs/issues`/`docs/policies`, Legacy-Hinweis fuer `docs/BACKLOG`/`docs/ADR`, Verifikationshinweis zu `make verify` inkl. `projtrack_lint`). Hash-Disziplin fuer Sprint-Traceability praezisiert (verbindlich fuer `[SxCy/z]`, ohne harte Ueberdehnung auf alle `[General]`-Tasks). (2026-03-13)
 - [General] Tools/Quality-Gate: `projtrack_lint` in die Standard-Gates integriert. `Makefile` erweitert um Target `tracker-lint`; `make verify` fuehrt jetzt `sprint_docs_lint` + `projtrack_lint` vor Build/Tests aus. CI-Workflow `.github/workflows/ci.yml` um den Schritt `Tracker lint` ergaenzt. Doku-Sync in `docs/README.md`. (2026-03-13)
 - [General] Docs/Tracker: Bereichs-READMEs fuer das neue Tracker-Schema ergaenzt (`docs/issues/README.md`, `docs/backlog/README.md`) und die BL-Kette auf dem neuen Pfad finalisiert (`docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md` + `tasks/TSK-0001...`), inklusive Referenz-Sync in `ISS-0001`/`TSK-0001`. (2026-03-13)
 - [General] Tools/Tracker: Neuer Linter `scripts/projtrack_lint.sh` eingefuehrt (Frontmatter-/ID-/Status-/Type-Checks, `related`/`parent`-Referenzpruefung, Duplicate-ID-Check, Code-Referenz-Scan fuer `TODO/FIXME/NOTE/REF`). Doku-Sync in `docs/README.md` und `docs/policies/POL-001-tracker-standard.md`. (2026-03-13)
@@ -172,6 +173,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Konsistenz-Update von `AGENTS.md` auf den aktuellen Tracker-/Gate-Stand erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)
 - Integration von `projtrack_lint` in lokale/CI-Quality-Gates (`make verify`, GitHub Actions) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)
 - Aufbau des initialen Tracker-Lints (`scripts/projtrack_lint.sh`) sowie Struktur-/Referenz-Sync fuer den neuen Tracker-Bereich erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)
 - Vervollstaendigung der Beispielkette `BL-0011 -> TSK-0001 -> ISS-0001` inklusive Referenz-Sync erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)

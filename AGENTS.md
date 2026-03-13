@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-09
+**Stand:** 2026-03-13
 
 <INSTRUCTIONS>
 
@@ -18,6 +18,18 @@
   3. kuratierte Entry-Doku unter `docs/` (z. B. `docs/README_EN.md`)
 - Vollstaendige Uebersetzung der gesamten Historien-/Detaildoku ist vor `1.0.0` kein Pflichtziel.
 - Bei neuen oeffentlich relevanten Doku-Abschnitten ist eine knappe englische Einstiegs- oder Zusammenfassungsvariante aktiv mitzuplanen.
+
+## Tracker-/Policy-Stand (verbindlich)
+- Der kanonische Tracker-Standard liegt in `docs/policies/POL-001-tracker-standard.md`.
+- Kanonische Tracker-Pfade fuer neue Eintraege:
+  - `docs/backlog/` (Backlog + Tasks)
+  - `docs/issues/` (Issues)
+  - `docs/policies/` (Policies/Standards)
+- Legacy-Bestand bleibt waehrend der Migration gueltig und lesbar:
+  - `docs/BACKLOG/`
+  - `docs/ADR/`
+- Neue `ADR`/`BL`/`ISS`/`TSK` werden 4-stellig angelegt; Legacy-IDs mit 3 Stellen bleiben les-/referenzierbar.
+- Neue Tracker-Eintraege werden ueber die Vorlagen in `docs/policies/templates/` gestartet.
 
 ## Repo-Pflege
 - Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch/pull --rebase`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
@@ -58,6 +70,10 @@
 ## Build-Standard
 - FPC-Compile immer mit folgendem Befehl aus dem Projektroot ausfuehren:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
+- Verifikations-Gate lokal:
+  - `make verify`
+  - enthaelt u. a. `scripts/sprint_docs_lint.sh` und `scripts/projtrack_lint.sh`
+- Wenn Tracker-Dateien (`docs/backlog/**`, `docs/issues/**`, `docs/policies/**`) geaendert werden, muss `scripts/projtrack_lint.sh` gruen laufen.
 
 ## Dokumentations-Management
 - Dokumentation im `docs`-Ordner bei Hoch/Mittel-Priorität selbstständig mitpflegen.
@@ -67,12 +83,13 @@
 - Attribution transparent, aber dezent ueber `[Unreleased] -> Tooling / Assistance` halten (ein kurzer Sammelhinweis reicht).
 - Sprint-/Commit-Traceability ist verpflichtend: Bei Sprint-Arbeit muessen Eintraege unter `[Unreleased] -> Changed` mit einem Prefix im Format `[SxCy/z]` beginnen (Beispiel: `[S1C1/4]`).
 - `docs/CHANGELOG.md` muss unter `[Unreleased]` zusaetzlich eine Sektion `Sprint / Commit References` enthalten; dort pro Sprint-Commit mindestens Kurzbezeichnung, Bezug zu Artefaktdateien (z. B. `.artifacts/sprint_1_commit_1_von_4.md`, `.diff`) und vorhandener Git-Commit-Hash dokumentieren.
-- Der Hash in `docs/CHANGELOG.md` und `docs/SPRINTS.md` muss immer der Commit sein, der die jeweilige Aenderung tatsaechlich einfuehrt (kein spaeterer Doku-Sync-Commit).
-- Der Git-Commit-Hash muss unmittelbar nach dem Commit ermittelt und in `docs/CHANGELOG.md` sowie `docs/SPRINTS.md` eingetragen werden, bevor der Task abgeschlossen wird.
-- Der Hash darf nicht erst in einem spaeteren Dokumentations-Commit ergaenzt werden.
+- Hash-Traceability ist fuer sprintgebundene Eintraege (`[SxCy/z]`) verpflichtend.
+- Der Hash in `docs/CHANGELOG.md` und `docs/SPRINTS.md` muss der Commit sein, der die jeweilige Sprint-Aenderung tatsaechlich einfuehrt (kein spaeterer Doku-Sync-Commit).
+- Der Git-Commit-Hash muss bei Sprint-Arbeit unmittelbar nach dem Commit ermittelt und in `docs/CHANGELOG.md` sowie `docs/SPRINTS.md` eingetragen werden, bevor der Task abgeschlossen wird.
+- Der Hash darf bei Sprint-Arbeit nicht erst in einem spaeteren Dokumentations-Commit ergaenzt werden.
 - Fuer die Dokumentation wird der Short-Hash mit 7 Zeichen verwendet (z. B. `701b34f`).
 - Der Hash muss immer direkt aus dem lokalen Git-Repo stammen (`git rev-parse --short=7 HEAD`) und darf nicht geschaetzt werden.
-- Empfohlener Workflow:
+- Empfohlener Workflow (Sprint-Traceability):
   1. Aenderung implementieren
   2. Commit durchfuehren
   3. Commit-Hash mit `git rev-parse --short=7 HEAD` ermitteln
