@@ -277,7 +277,7 @@ begin
   Ok('Format: cost+dashboard rejected');
 end;
 
-procedure Test_CostCarId_Fails;
+procedure Test_CostCarId_Ok;
 var
   Cmd: TCommand;
 begin
@@ -285,9 +285,8 @@ begin
   SetMainCommand(Cmd, ckStats, tkCost);
   Cmd.CarId := 1;
 
-  AssertFalse(ValidateCommand(Cmd), 'cost+car-id must fail');
-  AssertEqInt(Ord(efCarId), Ord(Cmd.ErrorFocus), 'cost car-id focus');
-  Ok('Policy: cost rejects --car-id');
+  AssertTrue(ValidateCommand(Cmd), 'cost+car-id must be ok');
+  Ok('Policy: cost allows --car-id');
 end;
 
 procedure Test_Format_FleetMonthly_Fails;
@@ -344,7 +343,7 @@ begin
   Ok('Period: fleet rejects --from/--to');
 end;
 
-procedure Test_Period_CostFrom_Fails;
+procedure Test_Period_CostFrom_Ok;
 var
   Cmd: TCommand;
 begin
@@ -354,9 +353,8 @@ begin
   Cmd.FromProvided := True;
   Cmd.PeriodFromIso := '2025-01-01';
 
-  AssertFalse(ValidateCommand(Cmd), 'cost+period must fail');
-  AssertEqInt(Ord(efStatsPeriod), Ord(Cmd.ErrorFocus), 'cost period focus');
-  Ok('Period: cost rejects --from/--to');
+  AssertTrue(ValidateCommand(Cmd), 'cost+period must be ok');
+  Ok('Period: cost allows --from/--to');
 end;
 
 procedure Test_Format_JsonPretty_Ok;
@@ -425,12 +423,12 @@ begin
   Test_Format_CostMonthly_Fails;
   Test_Format_CostYearly_Fails;
   Test_Format_CostDashboard_Fails;
-  Test_CostCarId_Fails;
+  Test_CostCarId_Ok;
   Test_Format_FleetMonthly_Fails;
   Test_Format_FleetYearly_Fails;
   Test_Format_FleetDashboard_Fails;
   Test_Period_FleetFrom_Fails;
-  Test_Period_CostFrom_Fails;
+  Test_Period_CostFrom_Ok;
   Test_Format_JsonPretty_Ok;
   Test_Period_Range_Fails;
   Test_Period_Context_Fails;

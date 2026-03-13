@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-12
+**Stand:** 2026-03-13
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -234,7 +234,8 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Cost-MVP-Basis (`--stats cost`) als fuel-basierte Kosten-Sicht (Text + JSON)
 - Cost-MVP enthaelt Maintenance aktuell als Placeholder (`0`) fuer spaetere Modul-Integration
 - Cost-JSON (`--stats cost --json`, optional `--pretty`) inkl. Export-Meta und `kind: "cost_mvp"`
-- Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`, `--car-id` (regressionsgesichert in Domain-Policy + Smoke)
+- Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`
+- Cost-CLI-Scope ist ab Sprint 9 freigeschaltet: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig (fachliche Scope-Auswertung folgt in den naechsten Sprint-9-Bloecken)
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`
@@ -251,6 +252,8 @@ Beispiel (Fleet MVP):
 
 Beispiel (Cost MVP):
 - `Betankungen --stats cost`
+- `Betankungen --stats cost --from 2025-01 --to 2025-03`
+- `Betankungen --stats cost --car-id 1 --from 2025-01`
 - `Betankungen --stats cost --json --pretty`
 
 Beispiel (JSON, pretty formatiert, gekuerzt):

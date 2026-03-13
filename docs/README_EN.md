@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-12
+**Stand:** 2026-03-13
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -13,7 +13,8 @@ Detailed documents are currently maintained primarily in German.
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
 - Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export-meta baseline (`kind: "cost_mvp"`)
-- Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id`) are regression-covered
+- Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`) are regression-covered
+- Sprint 9 C1 enabled cost CLI scope flags: `--stats cost` now accepts `--from/--to` and `--car-id` (data-level scoped aggregation follows in next sprint blocks)
 - Sprint 8 is functionally complete (Cost MVP text + JSON + guardrails, verified in domain-policy and smoke suites)
 
 ## Recommended Reading Order

@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-13
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -80,11 +80,27 @@ procedure ShowFleetStatsJson(const DbPath: string;
   const Pretty: boolean = False;
   const AppVersion: string = '');
 // Liefert die Cost-Statistik als MVP-Textausgabe (fuel-basiert).
-procedure ShowCostStats(const DbPath: string);
+procedure ShowCostStats(const DbPath: string); overload;
+// Liefert die Cost-Statistik mit CLI-Scope-Parametern
+// (funktionale Auswertung folgt in S9C2/4).
+procedure ShowCostStats(const DbPath: string;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer = 0); overload;
 // Liefert die Cost-Statistik als MVP-JSON-Ausgabe.
 procedure ShowCostStatsJson(const DbPath: string;
   const Pretty: boolean = False;
-  const AppVersion: string = '');
+  const AppVersion: string = ''); overload;
+// Liefert die Cost-JSON-Statistik mit CLI-Scope-Parametern
+// (funktionale Auswertung folgt in S9C2/4).
+procedure ShowCostStatsJson(const DbPath: string;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer;
+  const Pretty: boolean;
+  const AppVersion: string); overload;
 
 implementation
 
@@ -1505,10 +1521,38 @@ begin
   J.W('}'); J.NL;
 end;
 
+procedure MarkCostScopeParamsUsed(
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer);
+begin
+  if PeriodEnabled
+     or FromProvided
+     or ToProvided
+     or (PeriodFromIso <> '')
+     or (PeriodToExclIso <> '')
+     or (CarId <> 0) then
+    Exit;
+end;
+
 procedure ShowCostStats(const DbPath: string);
+begin
+  ShowCostStats(DbPath, False, '', '', False, False, 0);
+end;
+
+procedure ShowCostStats(const DbPath: string;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer);
 var
   R: TCostStats;
 begin
+  // Scope-Parameter werden in S9C2/4 fachlich in den Collector gezogen.
+  // S9C1/4 verdrahtet hier nur den CLI-Durchlauf bis in die Stats-Schicht.
+  MarkCostScopeParamsUsed(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId);
+
   CollectCostStats(DbPath, R);
 
   WriteLn('Cost-Stats (MVP)');
@@ -1524,9 +1568,24 @@ end;
 procedure ShowCostStatsJson(const DbPath: string;
   const Pretty: boolean;
   const AppVersion: string);
+begin
+  ShowCostStatsJson(DbPath, False, '', '', False, False, 0, Pretty, AppVersion);
+end;
+
+procedure ShowCostStatsJson(const DbPath: string;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer;
+  const Pretty: boolean;
+  const AppVersion: string);
 var
   R: TCostStats;
 begin
+  // Scope-Parameter werden in S9C2/4 fachlich in den Collector gezogen.
+  // S9C1/4 verdrahtet hier nur den CLI-Durchlauf bis in die Stats-Schicht.
+  MarkCostScopeParamsUsed(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId);
+
   CollectCostStats(DbPath, R);
   RenderCostStatsJson(R, Pretty, AppVersion);
 end;

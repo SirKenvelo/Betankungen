@@ -2,7 +2,7 @@
 
 # smoke_cost_helpers.sh
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-13
 # Cost-spezifische Smoke-Checks fuer tests/smoke/smoke_cli.sh
 
 test_stats_cost_mvp_ok() {
@@ -160,7 +160,7 @@ test_stats_cost_monthly_yearly_dashboard_fails() {
   fi
 }
 
-test_stats_cost_period_fails() {
+test_stats_cost_period_ok() {
   local home out err rc
 
   home="$(register_tmp_dir)"
@@ -172,15 +172,17 @@ test_stats_cost_period_fails() {
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
-    printf '[OK] --stats cost --from: Validierungsfehler\n'
+  if [[ $rc -eq 0 ]] &&
+     grep -q '^Cost-Stats (MVP)$' "$out" &&
+     grep -q '^Total cost (cents):' "$out"; then
+    printf '[OK] --stats cost --from: CLI-Scope akzeptiert\n'
   else
-    printf '[FAIL] --stats cost --from: Validierungsfehler\n'
+    printf '[FAIL] --stats cost --from: CLI-Scope akzeptiert\n'
     add_fail
   fi
 }
 
-test_stats_cost_car_id_fails() {
+test_stats_cost_car_id_ok() {
   local home out err rc
 
   home="$(register_tmp_dir)"
@@ -192,10 +194,12 @@ test_stats_cost_car_id_fails() {
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --car-id ist nur zusammen mit' "$err"; then
-    printf '[OK] --stats cost --car-id: Validierungsfehler\n'
+  if [[ $rc -eq 0 ]] &&
+     grep -q '^Cost-Stats (MVP)$' "$out" &&
+     grep -q '^Total cost (cents):' "$out"; then
+    printf '[OK] --stats cost --car-id: CLI-Scope akzeptiert\n'
   else
-    printf '[FAIL] --stats cost --car-id: Validierungsfehler\n'
+    printf '[FAIL] --stats cost --car-id: CLI-Scope akzeptiert\n'
     add_fail
   fi
 }

@@ -2,7 +2,7 @@
 
 # smoke_fleet_helpers.sh
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-13
 # Fleet-spezifische Smoke-Checks fuer tests/smoke/smoke_cli.sh
 
 test_stats_fleet_mvp_ok() {
@@ -158,7 +158,7 @@ test_stats_fleet_period_fails() {
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" erlaubt.' "$err"; then
+  if [[ $rc -ne 0 ]] && grep -q 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" oder "--stats cost" erlaubt.' "$err"; then
     printf '[OK] --stats fleet --from: Validierungsfehler\n'
   else
     printf '[FAIL] --stats fleet --from: Validierungsfehler\n'

@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-12
+**Stand:** 2026-03-13
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -37,6 +37,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S8C4/4 - Sprint-8-Finalisierung mit DoD-Check, finalem Verifikationslauf und Abschluss-Sync der Sprint-/Status-/Entry-Doku; Artefakte: `.artifacts/sprint_8_commit_4_von_4.md`, `.artifacts/sprint_8_commit_4_von_4.diff`; Basis-Commit: `680e962`. (2026-03-11)
 
 ### Changed
+- [S9C1/4] CLI/Stats: Cost-CLI-Scope freigeschaltet. `--stats cost` akzeptiert jetzt `--from/--to` und `--car-id` in Validate/Help/Dispatch (`units/u_cli_validate.pas`, `units/u_cli_help.pas`, `src/Betankungen.lpr`). Stats-Schicht fuer Scope-Parameter vorbereitet (`units/u_stats.pas`) und Testabdeckung auf den neuen CLI-Pfad synchronisiert (`tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/smoke/helpers/smoke_cost_helpers.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/helpers/smoke_fleet_helpers.sh`). Doku-Sync in `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`, `docs/README_EN.md`, `docs/BENUTZERHANDBUCH.md`, `docs/BACKLOG/BL-010-cost-analytics.md`, `tests/README.md`. (2026-03-13)
 - [General] Docs/Planung: Backlog um `BL-012` (GitHub Wiki Enablement) erweitert und Sprintlinie 9-11 in `docs/STATUS.md` sowie `docs/SPRINTS.md` verbindlich vorstrukturiert (S9 gestartet, S10/S11 geplant). `docs/BACKLOG.md` auf den neuen Indexstand synchronisiert. (2026-03-12)
 - [General] Tests/Smoke: Prefix-Farbkonvention in allen dedizierten Smoke-Skripten vereinheitlicht (`tests/smoke/smoke_cars_crud.sh`, `tests/smoke/smoke_multi_car_context.sh`, `tests/smoke/smoke_migrations.sh`, `tests/smoke/smoke_modules.sh`): `[OK]` gruen, `[INFO]` gelb, `[FAIL]` rot (TTY-basiert, `NO_COLOR` respektiert). Testdoku in `tests/README.md` synchronisiert. (2026-03-12)
 - [General] Tools/Repo-Pflege: Neues Retention-Skript `scripts/artifacts_retention.sh` fuer `.artifacts/` eingefuehrt. Das Skript bereinigt alte Nicht-Sprint-Artefakte (`*.md`, `*.diff`) gruppiert nach Dateistamm und schuetzt Sprint-Historie strikt (Muster `sprint_<nr>_commit_<nr>_von_<nr>.md|.diff` wird nie geloescht). Unterstuetzt `--dry-run`, `--keep` und optionalen Zielordner via `--dir`. Doku in `docs/README.md` ergänzt. (2026-03-12)

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-13
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -161,8 +161,8 @@ print_plan() {
   printf '[LIST] --stats cost --json --pretty -> JSON pretty + Export-Meta\n'
   printf '[LIST] --stats cost --csv -> Validierungsfehler\n'
   printf '[LIST] --stats cost --monthly/--yearly/--dashboard -> Validierungsfehler\n'
-  printf '[LIST] --stats cost --from ... -> Validierungsfehler\n'
-  printf '[LIST] --stats cost --car-id ... -> Validierungsfehler\n'
+  printf '[LIST] --stats cost --from ... -> CLI-Scope akzeptiert\n'
+  printf '[LIST] --stats cost --car-id ... -> CLI-Scope akzeptiert\n'
   printf '[LIST] --stats fleet --csv -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --monthly/--yearly/--dashboard -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --from ... -> Validierungsfehler\n'
@@ -1035,8 +1035,8 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_stats_cost_json_pretty_ok
   test_stats_cost_csv_fails
   test_stats_cost_monthly_yearly_dashboard_fails
-  test_stats_cost_period_fails
-  test_stats_cost_car_id_fails
+  test_stats_cost_period_ok
+  test_stats_cost_car_id_ok
   test_stats_fleet_csv_fails
   test_stats_fleet_monthly_yearly_dashboard_fails
   test_stats_fleet_period_fails

@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-13
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -796,9 +796,23 @@ begin
           ckStats:
             begin
               if Cmd.Json then
-                ShowCostStatsJson(DbPath, Cmd.Pretty, APP_VERSION)
+                ShowCostStatsJson(DbPath,
+                  Cmd.PeriodEnabled,
+                  Cmd.PeriodFromIso,
+                  Cmd.PeriodToExclIso,
+                  Cmd.FromProvided,
+                  Cmd.ToProvided,
+                  Cmd.CarId,
+                  Cmd.Pretty,
+                  APP_VERSION)
               else
-                ShowCostStats(DbPath);
+                ShowCostStats(DbPath,
+                  Cmd.PeriodEnabled,
+                  Cmd.PeriodFromIso,
+                  Cmd.PeriodToExclIso,
+                  Cmd.FromProvided,
+                  Cmd.ToProvided,
+                  Cmd.CarId);
             end;
         else
           FailUsage('Interner Fehler: Ungültiges cost-Kommando.');

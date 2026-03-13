@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-12
+**Stand:** 2026-03-13
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -78,7 +78,8 @@ Direktlauf:
 - Interne Struktur: Fleet-/Cost-/Bootstrap-Checks sind in dedizierte Helper unter `tests/smoke/helpers/` ausgelagert; `smoke_cli.sh` sourced diese zentral.
 - Prefix-Ausgabe ist in allen dedizierten Smoke-Skripten vereinheitlicht (TTY): `[OK]` gruen, `[INFO]` gelb, `[FAIL]` rot.
 - Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Text + JSON compact/pretty) inkl. Guardrails fuer ungueltige Fleet-Optionen (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`) ab.
-- Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails sind regressionsgesichert fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to` und `--car-id`.
+- Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails bleiben fuer `--csv`, `--monthly`, `--yearly`, `--dashboard` regressionsgesichert.
+- Cost-CLI-Scope ist in den Smokes abgesichert: `--stats cost --from ...` und `--stats cost --car-id ...` laufen im CLI-Pfad erfolgreich.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.

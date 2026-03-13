@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-12
+**Stand:** 2026-03-13
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -170,18 +170,19 @@ Bereits erledigt:
 - Erreicht (S8C3/4): Cost-Guardrails gehaertet und regressionsgesichert fuer ungueltige Cost-Optionen.
 - Erreicht (S8C4/4): Sprint-8-Abschluss mit finaler Verifikation und Doku-Sync.
 - Gestartet (S9): Cost Scoped Analytics v1.1 (Period-/Car-Scope fuer `--stats cost`).
+- Erreicht (S9C1/4): CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) in Validate/Help/Dispatch aktiviert.
 - Geplant (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
 
-- Status: gestartet (Planung abgeschlossen, Umsetzung beginnt mit `S9C1/4`)
+- Status: in Umsetzung (`S9C1/4` abgeschlossen)
 - Ziel: `--stats cost` von MVP auf nutzbaren Analysemodus mit kontrolliertem Scope heben.
 
 ### S9C1/4 - CLI-Scope-Enablement
 
-- Geplant: Validate-/Help-/Dispatch-Freigabe fuer `--stats cost` mit `--from/--to` und `--car-id`.
-- Geplant: Konfliktregeln fuer ungueltige Kombinationen weiter strikt halten.
+- Erreicht: Validate-/Help-/Dispatch-Freigabe fuer `--stats cost` mit `--from/--to` und `--car-id`.
+- Erreicht: Konfliktregeln fuer ungueltige Kombinationen bleiben fuer Cost-MVP-Formate weiter strikt (`--csv`, `--monthly`, `--yearly`, `--dashboard`).
 
 ### S9C2/4 - Collector + Textausgabe
 

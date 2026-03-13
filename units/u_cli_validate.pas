@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-13
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -109,9 +109,13 @@ begin
   else if Cmd.CarId = 0 then
     Exit(True);
 
-  if (not IsAddFuelups(Cmd)) and (not IsListFuelups(Cmd)) and (not IsStatsFuelups(Cmd)) and (not IsCarsEditOrDelete(Cmd)) then
+  if (not IsAddFuelups(Cmd))
+     and (not IsListFuelups(Cmd))
+     and (not IsStatsFuelups(Cmd))
+     and (not IsStatsCost(Cmd))
+     and (not IsCarsEditOrDelete(Cmd)) then
   begin
-    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--list fuelups", "--stats fuelups", "--edit cars" oder "--delete cars" erlaubt.';
+    Cmd.ErrorMsg := 'Fehler: --car-id ist nur zusammen mit "--add fuelups", "--list fuelups", "--stats fuelups", "--stats cost", "--edit cars" oder "--delete cars" erlaubt.';
     Cmd.ErrorFocus := efCarId;
     Exit(False);
   end;
@@ -288,10 +292,10 @@ begin
   if not Cmd.PeriodEnabled then
     Exit(True);
 
-  // 1) Nur bei stats fuelups erlaubt
-  if not IsStatsFuelups(Cmd) then
+  // 1) Nur bei stats fuelups/cost erlaubt
+  if (not IsStatsFuelups(Cmd)) and (not IsStatsCost(Cmd)) then
   begin
-    Cmd.ErrorMsg := 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" erlaubt.';
+    Cmd.ErrorMsg := 'Fehler: --from/--to ist nur zusammen mit "--stats fuelups" oder "--stats cost" erlaubt.';
     Cmd.ErrorFocus := efStatsPeriod;
     Exit(False);
   end;

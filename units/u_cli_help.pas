@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-13
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,13 +59,13 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost [--json [--pretty]]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--json [--pretty]]')
   else if (FocusFlag = '--from') then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--json [--pretty]]')
   else if FocusFlag = '--db' then
     Writeln('Usage: Betankungen [--db <pfad>|--demo] <command> [options]')
   else if FocusFlag = '--demo' then
@@ -119,7 +119,7 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Bei --add/--list/--stats fuelups sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
+  Item('--car-id <id>',              'Bei --add/--list/--stats fuelups, --stats cost sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');
@@ -131,8 +131,8 @@ begin
   Item('--quiet',                    'Ausgaben reduzieren (Fehler bleiben sichtbar).');
 
   Sec('Stats options');
-  Item('--from <YYYY-MM|YYYY-MM-DD>','Startzeitraum (nur bei --stats fuelups).');
-  Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (nur fuelups; exklusive Obergrenze).');
+  Item('--from <YYYY-MM|YYYY-MM-DD>','Startzeitraum (bei --stats fuelups und --stats cost).');
+  Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (fuelups/cost; exklusive Obergrenze).');
   Item('--monthly',                  'Monatliche Aggregation (nur fuelups; nicht mit --yearly).');
   Item('--yearly',                   'Jaehrliche Aggregation (nur fuelups; nicht mit --monthly/--csv/--dashboard).');
   Item('--json',                     'JSON-Ausgabe (fuelups/fleet/cost).');
@@ -159,6 +159,8 @@ begin
   Line('  Betankungen --stats fleet');
   Line('  Betankungen --stats fleet --json --pretty');
   Line('  Betankungen --stats cost');
+  Line('  Betankungen --stats cost --from 2025-01 --to 2025-03');
+  Line('  Betankungen --stats cost --car-id 1 --from 2025-01');
   Line('  Betankungen --stats cost --json --pretty');
   Line('  Betankungen --seed --fuelups 400 --force');
 end;

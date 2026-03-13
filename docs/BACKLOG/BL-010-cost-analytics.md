@@ -1,5 +1,5 @@
 # BL-010 - Cost Analytics
-**Stand:** 2026-03-11
+**Stand:** 2026-03-13
 **Status:** next
 **Typ:** Stats-/Domain-Erweiterung (cross-module)
 
@@ -41,4 +41,5 @@ Integration von:
   - fuel-basierte Kosten ueber gueltige Volltank-Zyklen
   - maintenance aktuell als Placeholder (`0`), bis Modul-Integration verfuegbar ist
 - S8C2/4 erweitert den MVP um JSON (`--stats cost --json [--pretty]`) mit Export-Meta und `kind: "cost_mvp"`.
-- S8C3/4 haertet Guardrails regressionssicher (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`, `--car-id` bleiben fuer Cost-MVP ungueltig).
+- S8C3/4 haertet Guardrails regressionssicher (`--csv`, `--monthly`, `--yearly`, `--dashboard` bleiben fuer Cost-MVP ungueltig).
+- S9C1/4 schaltet den Cost-CLI-Scope frei: `--stats cost` akzeptiert jetzt `--from/--to` und `--car-id` (fachliche Scope-Auswertung folgt in S9C2/4 und S9C3/4).

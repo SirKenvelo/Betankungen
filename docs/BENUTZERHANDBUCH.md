@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-11
+**Stand:** 2026-03-13
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -130,7 +130,9 @@ Policy-Hinweis (Matrix v1):
 - Ausgabe enthaelt aktuell: `Cars total`, `Cars with valid full-tank cycles`, `Distance (km)`, `Fuel cost (cents)`, `Maintenance cost (cents)` (MVP-Placeholder), `Total cost (cents)`, `Total cost per km (EUR)`.
 - Cost-MVP basiert derzeit auf Fuel-Kosten aus gueltigen Volltank-Zyklen; Maintenance ist im Core noch nicht integriert und steht daher auf `0`.
 - JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "cost_mvp"`) und den Payload `cost` mit Aggregaten sowie skalierten per-km-Werten (`*_eur_x1000`).
-- Weiterhin nicht verfuegbar fuer Cost-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from`, `--to`, `--car-id`.
+- Weiterhin nicht verfuegbar fuer Cost-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`.
+- Cost-CLI-Scope ist aktiviert: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig.
+- Hinweis: Die fachliche Scope-Auswertung (Filterwirkung in Collector/Output) folgt in den naechsten Sprint-9-Schritten.
 
 **Schnellbeispiele (Dashboard)**
 - `Betankungen --stats fuelups --dashboard`
