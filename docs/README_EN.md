@@ -14,7 +14,7 @@ Detailed documents are currently maintained primarily in German.
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
 - Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export-meta baseline (`kind: "cost_mvp"`)
 - Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`) are regression-covered
-- Sprint 9 C1 enabled cost CLI scope flags: `--stats cost` now accepts `--from/--to` and `--car-id` (data-level scoped aggregation follows in next sprint blocks)
+- Sprint 9 C1/C2: cost scope is active end-to-end. `--stats cost` accepts `--from/--to` and `--car-id`, and the collector/output now apply these filters.
 - Sprint 8 is functionally complete (Cost MVP text + JSON + guardrails, verified in domain-policy and smoke suites)
 
 ## Recommended Reading Order

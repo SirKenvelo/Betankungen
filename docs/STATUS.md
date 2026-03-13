@@ -171,12 +171,13 @@ Bereits erledigt:
 - Erreicht (S8C4/4): Sprint-8-Abschluss mit finaler Verifikation und Doku-Sync.
 - Gestartet (S9): Cost Scoped Analytics v1.1 (Period-/Car-Scope fuer `--stats cost`).
 - Erreicht (S9C1/4): CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) in Validate/Help/Dispatch aktiviert.
+- Erreicht (S9C2/4): Cost-Collector und Textausgabe auf aktiven Period-/Car-Scope erweitert.
 - Geplant (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
 
-- Status: in Umsetzung (`S9C1/4` abgeschlossen)
+- Status: in Umsetzung (`S9C1/4` und `S9C2/4` abgeschlossen)
 - Ziel: `--stats cost` von MVP auf nutzbaren Analysemodus mit kontrolliertem Scope heben.
 
 ### S9C1/4 - CLI-Scope-Enablement
@@ -186,8 +187,8 @@ Bereits erledigt:
 
 ### S9C2/4 - Collector + Textausgabe
 
-- Geplant: Cost-Collector um Zeitraum- und Fahrzeug-Scope erweitern.
-- Geplant: Textausgabe um klaren Scope-/Period-Hinweis ergaenzen.
+- Erreicht: Cost-Collector um Zeitraum- und Fahrzeug-Scope erweitert.
+- Erreicht: Textausgabe um klaren Scope-/Period-Hinweis ergaenzt.
 
 ### S9C3/4 - JSON-Contract Ausbau
 

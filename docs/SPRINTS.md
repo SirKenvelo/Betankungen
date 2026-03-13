@@ -251,7 +251,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 9 - Cost Scoped Analytics v1.1
 
-- Status: in Umsetzung (`S9C1/4` done)
+- Status: in Umsetzung (`S9C1/4` + `S9C2/4` done)
 - Ziel: `--stats cost` um Zeitraum-/Fahrzeug-Scope erweitern und Contract-seitig absichern.
 
 ### Commit-Folge
@@ -265,7 +265,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Geplante Bloecke
 
 - S9C1/4: done - CLI-Scope-Enablement fuer Cost (`--from/--to`, `--car-id`) inkl. Validate-/Help-/Dispatch-Anpassungen.
-- S9C2/4: Cost-Collector + Textausgabe auf Zeitraum-/Fahrzeug-Scope erweitern.
+- S9C2/4: done - Cost-Collector + Textausgabe auf Zeitraum-/Fahrzeug-Scope erweitert.
 - S9C3/4: Cost-JSON-Contract um Scope-/Period-Felder erweitern und Export-Contract-Checks nachziehen.
 - S9C4/4: Guardrails/Regression + Sprint-Finalisierung (Smoke/Domain-Policy/Doku-Sync).
 

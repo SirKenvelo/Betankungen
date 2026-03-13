@@ -132,7 +132,8 @@ Policy-Hinweis (Matrix v1):
 - JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "cost_mvp"`) und den Payload `cost` mit Aggregaten sowie skalierten per-km-Werten (`*_eur_x1000`).
 - Weiterhin nicht verfuegbar fuer Cost-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`.
 - Cost-CLI-Scope ist aktiviert: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig.
-- Hinweis: Die fachliche Scope-Auswertung (Filterwirkung in Collector/Output) folgt in den naechsten Sprint-9-Schritten.
+- Cost-Scope wirkt direkt auf die Aggregation (Collector): Zeitraum- und Fahrzeugfilter werden in Text- und JSON-Ausgabe angewendet.
+- Textausgabe zeigt den aktiven Scope explizit (`Scope: ...`, `Period filter: ...`).
 
 **Schnellbeispiele (Dashboard)**
 - `Betankungen --stats fuelups --dashboard`

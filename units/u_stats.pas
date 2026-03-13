@@ -16,7 +16,7 @@
   - Monatsaggregation fuer `--stats fuelups --monthly` (Text + JSON kind "fuelups_monthly").
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
   - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Text/JSON-Ausgabe).
-  - Cost-Stats-Basis fuer `--stats cost` (MVP-Text/JSON-Ausgabe, fuel-basiert).
+  - Cost-Stats-Basis fuer `--stats cost` (Text/JSON, fuel-basiert, inkl. Scope-Filter).
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
@@ -81,8 +81,7 @@ procedure ShowFleetStatsJson(const DbPath: string;
   const AppVersion: string = '');
 // Liefert die Cost-Statistik als MVP-Textausgabe (fuel-basiert).
 procedure ShowCostStats(const DbPath: string); overload;
-// Liefert die Cost-Statistik mit CLI-Scope-Parametern
-// (funktionale Auswertung folgt in S9C2/4).
+// Liefert die Cost-Statistik mit CLI-Scope-Parametern.
 procedure ShowCostStats(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
@@ -92,8 +91,7 @@ procedure ShowCostStats(const DbPath: string;
 procedure ShowCostStatsJson(const DbPath: string;
   const Pretty: boolean = False;
   const AppVersion: string = ''); overload;
-// Liefert die Cost-JSON-Statistik mit CLI-Scope-Parametern
-// (funktionale Auswertung folgt in S9C2/4).
+// Liefert die Cost-JSON-Statistik mit CLI-Scope-Parametern.
 procedure ShowCostStatsJson(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
@@ -1402,7 +1400,12 @@ begin
   Result := (TotalCents * 10 + (DistKm div 2)) div DistKm;
 end;
 
-procedure CollectCostStats(const DbPath: string; out R: TCostStats);
+procedure CollectCostStats(const DbPath: string;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const ScopeCarId: integer;
+  out R: TCostStats);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
@@ -1428,7 +1431,13 @@ begin
       Q.Transaction := Tran;
       Conn.Open;
 
-      Q.SQL.Text := 'SELECT id FROM cars ORDER BY id;';
+      if ScopeCarId > 0 then
+      begin
+        Q.SQL.Text := 'SELECT id FROM cars WHERE id = :car_id ORDER BY id;';
+        Q.Params.ParamByName('car_id').AsInteger := ScopeCarId;
+      end
+      else
+        Q.SQL.Text := 'SELECT id FROM cars ORDER BY id;';
       Q.Open;
       while not Q.EOF do
       begin
@@ -1453,7 +1462,17 @@ begin
   for i := 0 to CarN - 1 do
   begin
     CarId := CarIds[i];
-    CollectFuelupStats(DbPath, False, '', '', False, False, False, False, CarId, CarStats);
+    CollectFuelupStats(
+      DbPath,
+      PeriodEnabled,
+      PeriodFromIso,
+      PeriodToExclIso,
+      FromProvided,
+      ToProvided,
+      False,
+      False,
+      CarId,
+      CarStats);
 
     if CarStats.CyclesCount > 0 then
       Inc(R.CarsWithCycles);
@@ -1465,6 +1484,37 @@ begin
   // MVP-Basis: maintenance liegt noch nicht im Core vor.
   R.MaintenanceCentsTotal := 0;
   R.TotalCents := R.FuelCentsTotal + R.MaintenanceCentsTotal;
+end;
+
+function CostScopeLabel(const CarId: integer): string;
+begin
+  if CarId > 0 then
+    Exit('car_id=' + IntToStr(CarId));
+  Result := 'all cars';
+end;
+
+function CostPeriodLabel(
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean): string;
+var
+  FromLabel: string;
+  ToLabel: string;
+begin
+  if not PeriodEnabled then
+    Exit('none');
+
+  if FromProvided and (PeriodFromIso <> '') then
+    FromLabel := PeriodFromIso
+  else
+    FromLabel := 'open';
+
+  if ToProvided and (PeriodToExclIso <> '') then
+    ToLabel := PeriodToExclIso + ' (exclusive)'
+  else
+    ToLabel := 'open';
+
+  Result := FromLabel + ' ... ' + ToLabel;
 end;
 
 procedure RenderCostStatsJson(const R: TCostStats;
@@ -1521,21 +1571,6 @@ begin
   J.W('}'); J.NL;
 end;
 
-procedure MarkCostScopeParamsUsed(
-  const PeriodEnabled: boolean;
-  const PeriodFromIso, PeriodToExclIso: string;
-  const FromProvided, ToProvided: boolean;
-  const CarId: integer);
-begin
-  if PeriodEnabled
-     or FromProvided
-     or ToProvided
-     or (PeriodFromIso <> '')
-     or (PeriodToExclIso <> '')
-     or (CarId <> 0) then
-    Exit;
-end;
-
 procedure ShowCostStats(const DbPath: string);
 begin
   ShowCostStats(DbPath, False, '', '', False, False, 0);
@@ -1549,13 +1584,11 @@ procedure ShowCostStats(const DbPath: string;
 var
   R: TCostStats;
 begin
-  // Scope-Parameter werden in S9C2/4 fachlich in den Collector gezogen.
-  // S9C1/4 verdrahtet hier nur den CLI-Durchlauf bis in die Stats-Schicht.
-  MarkCostScopeParamsUsed(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId);
-
-  CollectCostStats(DbPath, R);
+  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, R);
 
   WriteLn('Cost-Stats (MVP)');
+  WriteLn('Scope: ', CostScopeLabel(CarId));
+  WriteLn('Period filter: ', CostPeriodLabel(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided));
   WriteLn('Cars total: ', R.CarsTotal);
   WriteLn('Cars with valid full-tank cycles: ', R.CarsWithCycles);
   WriteLn('Distance (km): ', R.DistKmTotal);
@@ -1582,11 +1615,7 @@ procedure ShowCostStatsJson(const DbPath: string;
 var
   R: TCostStats;
 begin
-  // Scope-Parameter werden in S9C2/4 fachlich in den Collector gezogen.
-  // S9C1/4 verdrahtet hier nur den CLI-Durchlauf bis in die Stats-Schicht.
-  MarkCostScopeParamsUsed(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId);
-
-  CollectCostStats(DbPath, R);
+  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, R);
   RenderCostStatsJson(R, Pretty, AppVersion);
 end;
 

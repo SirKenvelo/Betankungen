@@ -235,7 +235,8 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Cost-MVP enthaelt Maintenance aktuell als Placeholder (`0`) fuer spaetere Modul-Integration
 - Cost-JSON (`--stats cost --json`, optional `--pretty`) inkl. Export-Meta und `kind: "cost_mvp"`
 - Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`
-- Cost-CLI-Scope ist ab Sprint 9 freigeschaltet: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig (fachliche Scope-Auswertung folgt in den naechsten Sprint-9-Bloecken)
+- Cost-CLI-Scope ist ab Sprint 9 freigeschaltet: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig und wirken auf die Aggregation.
+- Cost-Textausgabe zeigt Scope/Zeitraum explizit (`Scope: ...`, `Period filter: ...`).
 
 Beispiele (Dashboard):
 - `Betankungen --stats fuelups --dashboard`

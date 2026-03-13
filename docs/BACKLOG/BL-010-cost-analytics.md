@@ -42,4 +42,5 @@ Integration von:
   - maintenance aktuell als Placeholder (`0`), bis Modul-Integration verfuegbar ist
 - S8C2/4 erweitert den MVP um JSON (`--stats cost --json [--pretty]`) mit Export-Meta und `kind: "cost_mvp"`.
 - S8C3/4 haertet Guardrails regressionssicher (`--csv`, `--monthly`, `--yearly`, `--dashboard` bleiben fuer Cost-MVP ungueltig).
-- S9C1/4 schaltet den Cost-CLI-Scope frei: `--stats cost` akzeptiert jetzt `--from/--to` und `--car-id` (fachliche Scope-Auswertung folgt in S9C2/4 und S9C3/4).
+- S9C1/4 schaltet den Cost-CLI-Scope frei: `--stats cost` akzeptiert jetzt `--from/--to` und `--car-id`.
+- S9C2/4 aktiviert die Scope-Auswertung im Collector/Textpfad: Zeitraum- und Fahrzeugfilter wirken jetzt auf die Cost-Aggregation.

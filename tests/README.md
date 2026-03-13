@@ -79,7 +79,7 @@ Direktlauf:
 - Prefix-Ausgabe ist in allen dedizierten Smoke-Skripten vereinheitlicht (TTY): `[OK]` gruen, `[INFO]` gelb, `[FAIL]` rot.
 - Baseline deckt jetzt zusaetzlich `--stats fleet` (MVP-Text + JSON compact/pretty) inkl. Guardrails fuer ungueltige Fleet-Optionen (`--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`) ab.
 - Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails bleiben fuer `--csv`, `--monthly`, `--yearly`, `--dashboard` regressionsgesichert.
-- Cost-CLI-Scope ist in den Smokes abgesichert: `--stats cost --from ...` und `--stats cost --car-id ...` laufen im CLI-Pfad erfolgreich.
+- Cost-Scope ist in den Smokes funktionsbezogen abgesichert: `--stats cost --from ...` und `--stats cost --car-id ...` werden mit wirksamer Aggregationsfilterung geprueft.
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.

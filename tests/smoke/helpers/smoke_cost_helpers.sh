@@ -5,6 +5,49 @@
 # UPDATED: 2026-03-13
 # Cost-spezifische Smoke-Checks fuer tests/smoke/smoke_cli.sh
 
+cost_read_metric() {
+  local file="$1"
+  local key="$2"
+  awk -F': ' -v k="$key" '$1 == k { print $2; exit }' "$file" | tr -d '[:space:]'
+}
+
+prepare_seeded_demo_home_for_cost_scope() {
+  local home
+  home="$(register_tmp_dir)"
+
+  if ! HOME="$home" "$ROOT_DIR/bin/Betankungen" --seed --force --seed-value 4242 >/dev/null 2>&1; then
+    printf '[FAIL] Cost-Scope-Setup: --seed --force fehlgeschlagen\n'
+    add_fail
+  fi
+
+  printf '%s\n' "$home"
+}
+
+inject_cost_scope_car_fixture() {
+  local home="$1"
+  local db station_id
+
+  db="$home/.local/share/Betankungen/betankungen_demo.db"
+  station_id="$(sqlite3 "$db" 'SELECT id FROM stations ORDER BY id LIMIT 1;')"
+  if [[ -z "$station_id" ]]; then
+    printf '[FAIL] Cost-Scope-Setup: keine Station in Demo-DB gefunden\n'
+    add_fail
+    printf '%s\n' ""
+    return
+  fi
+
+  sqlite3 "$db" "
+    INSERT INTO cars(name, plate, note, odometer_start_km, odometer_start_date)
+    VALUES('ScopeCar', 'SC-9002', 'scope-fixture', 1, '2025-01-01');
+    INSERT INTO fuelups(station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents, price_per_liter_milli_eur, is_full_tank, missed_previous)
+    VALUES($station_id, (SELECT id FROM cars WHERE name='ScopeCar'), '2025-01-01 10:00:00', 10000, 40000, 10000, 2500, 1, 0);
+    INSERT INTO fuelups(station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents, price_per_liter_milli_eur, is_full_tank, missed_previous)
+    VALUES($station_id, (SELECT id FROM cars WHERE name='ScopeCar'), '2025-02-01 10:00:00', 10500, 35000, 9000, 2571, 1, 0);
+  " >/dev/null
+
+  sqlite3 "$db" "SELECT id FROM cars WHERE name='ScopeCar' LIMIT 1;"
+}
+
 test_stats_cost_mvp_ok() {
   local home out err rc
 
@@ -19,6 +62,8 @@ test_stats_cost_mvp_ok() {
 
   if [[ $rc -eq 0 ]] &&
      grep -q '^Cost-Stats (MVP)$' "$out" &&
+     grep -q '^Scope: all cars$' "$out" &&
+     grep -q '^Period filter: none$' "$out" &&
      grep -q '^Cars total:' "$out" &&
      grep -q '^Distance (km):' "$out" &&
      grep -q '^Fuel cost (cents):' "$out" &&
@@ -161,45 +206,82 @@ test_stats_cost_monthly_yearly_dashboard_fails() {
 }
 
 test_stats_cost_period_ok() {
-  local home out err rc
+  local home out_base out_filtered err_base err_filtered rc_base rc_filtered
+  local total_base total_filtered
 
-  home="$(register_tmp_dir)"
-  out="$home/out.txt"
-  err="$home/err.txt"
+  home="$(prepare_seeded_demo_home_for_cost_scope)"
+  out_base="$home/out_base.txt"
+  out_filtered="$home/out_filtered.txt"
+  err_base="$home/err_base.txt"
+  err_filtered="$home/err_filtered.txt"
 
   set +e
-  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --from 2025-01 >"$out" 2>"$err"
-  rc=$?
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --stats cost >"$out_base" 2>"$err_base"
+  rc_base=$?
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --stats cost --from 2099-01 >"$out_filtered" 2>"$err_filtered"
+  rc_filtered=$?
   set -e
 
-  if [[ $rc -eq 0 ]] &&
-     grep -q '^Cost-Stats (MVP)$' "$out" &&
-     grep -q '^Total cost (cents):' "$out"; then
-    printf '[OK] --stats cost --from: CLI-Scope akzeptiert\n'
+  total_base="$(cost_read_metric "$out_base" 'Total cost (cents)')"
+  total_filtered="$(cost_read_metric "$out_filtered" 'Total cost (cents)')"
+
+  if [[ $rc_base -eq 0 ]] &&
+     [[ $rc_filtered -eq 0 ]] &&
+     [[ -n "$total_base" ]] &&
+     [[ -n "$total_filtered" ]] &&
+     [[ "$total_base" -gt "$total_filtered" ]] &&
+     [[ "$total_filtered" -eq 0 ]] &&
+     grep -q '^Period filter: 2099-01-01 00:00:00 ... open$' "$out_filtered"; then
+    printf '[OK] --stats cost --from: Period-Scope wirkt auf Aggregation\n'
   else
-    printf '[FAIL] --stats cost --from: CLI-Scope akzeptiert\n'
+    printf '[FAIL] --stats cost --from: Period-Scope wirkt auf Aggregation\n'
     add_fail
   fi
 }
 
 test_stats_cost_car_id_ok() {
-  local home out err rc
+  local home out_all out_scoped err_all err_scoped rc_all rc_scoped
+  local scope_car_id total_all total_scoped dist_scoped cars_scoped cycles_scoped
 
-  home="$(register_tmp_dir)"
-  out="$home/out.txt"
-  err="$home/err.txt"
+  home="$(prepare_seeded_demo_home_for_cost_scope)"
+  scope_car_id="$(inject_cost_scope_car_fixture "$home")"
+  out_all="$home/out_all.txt"
+  out_scoped="$home/out_scoped.txt"
+  err_all="$home/err_all.txt"
+  err_scoped="$home/err_scoped.txt"
+
+  if [[ -z "$scope_car_id" ]]; then
+    printf '[FAIL] --stats cost --car-id: Fixture car konnte nicht angelegt werden\n'
+    add_fail
+    return
+  fi
 
   set +e
-  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --car-id 1 >"$out" 2>"$err"
-  rc=$?
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --stats cost >"$out_all" 2>"$err_all"
+  rc_all=$?
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --stats cost --car-id "$scope_car_id" >"$out_scoped" 2>"$err_scoped"
+  rc_scoped=$?
   set -e
 
-  if [[ $rc -eq 0 ]] &&
-     grep -q '^Cost-Stats (MVP)$' "$out" &&
-     grep -q '^Total cost (cents):' "$out"; then
-    printf '[OK] --stats cost --car-id: CLI-Scope akzeptiert\n'
+  total_all="$(cost_read_metric "$out_all" 'Total cost (cents)')"
+  total_scoped="$(cost_read_metric "$out_scoped" 'Total cost (cents)')"
+  dist_scoped="$(cost_read_metric "$out_scoped" 'Distance (km)')"
+  cars_scoped="$(cost_read_metric "$out_scoped" 'Cars total')"
+  cycles_scoped="$(cost_read_metric "$out_scoped" 'Cars with valid full-tank cycles')"
+
+  if [[ $rc_all -eq 0 ]] &&
+     [[ $rc_scoped -eq 0 ]] &&
+     [[ -n "$total_all" ]] &&
+     [[ -n "$total_scoped" ]] &&
+     [[ "$total_all" -gt "$total_scoped" ]] &&
+     [[ "$total_scoped" -eq 9000 ]] &&
+     [[ "$dist_scoped" -eq 500 ]] &&
+     [[ "$cars_scoped" -eq 1 ]] &&
+     [[ "$cycles_scoped" -eq 1 ]] &&
+     grep -q "^Scope: car_id=$scope_car_id$" "$out_scoped"; then
+    printf '[OK] --stats cost --car-id: Car-Scope wirkt auf Aggregation\n'
   else
-    printf '[FAIL] --stats cost --car-id: CLI-Scope akzeptiert\n'
+    printf '[FAIL] --stats cost --car-id: Car-Scope wirkt auf Aggregation\n'
     add_fail
   fi
 }
