@@ -1,5 +1,5 @@
 # Domain-Policy Fixtures
-**Stand:** 2026-03-11
+**Stand:** 2026-03-13
 
 ## SQL-Seeds
 - `seed_big.sql`: erzeugt den großen Last-/Output-Datensatz (500 Fuelups).
@@ -22,6 +22,7 @@
 - `p051_base.sql`: minimaler P-051-Zustand fuer Guardrail gegen automatisches `missed_previous`.
 - `p060_base.sql`: minimaler P-060-Zustand fuer Stats-Intervallskip an `missed_previous=1`.
 - `p060_car_isolation_base.sql`: 2-Car-Fixture fuer P-060-Car-Isolation (kein Cross-Car-Zyklus).
+- `p061_cost_scope_base.sql`: 2-Car-Fixture fuer P-061-Cost-Scope-Isolation (Car + Period).
 - `p070_base.sql`: minimaler P-070-Zustand fuer Cars-Delete-Guard bei vorhandenen fuelup-Referenzen.
 
 ## Generierte DB-Dateien

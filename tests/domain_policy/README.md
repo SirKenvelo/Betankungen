@@ -1,5 +1,5 @@
 # Domain-Policy-Tests
-**Stand:** 2026-03-11
+**Stand:** 2026-03-13
 
 ## Inhalt
 - `cases/`: fokussierte Case-Dateien nach Policy-ID (`t_<policy>__<nn>__<kurzname>.*`, `.pas` oder `.sh`)
@@ -69,12 +69,15 @@
   - `P-051` Hard Error (Design: kein automatisches `missed_previous` ohne Confirm):
     - `cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`
     - `fixtures/p051_base.sql`
-- Stats-Block P-060:
+- Stats-Block P-060..P-061:
   - `P-060` OK-Policy (Intervall mit `missed_previous=1` wird fuer Verbrauch uebersprungen):
     - `cases/t_p060__01__stats_skip_interval_missed_previous.sh`
     - `cases/t_p060__02__car_isolation.sh`
     - `fixtures/p060_base.sql`
     - `fixtures/p060_car_isolation_base.sql`
+  - `P-061` OK-Policy (Cost-Stats bleiben strikt in Car-/Period-Scope):
+    - `cases/t_p061__01__cost_scope_isolation.sh`
+    - `fixtures/p061_cost_scope_base.sql`
 - Cars-Delete-Guard P-070:
   - `P-070` Hard Error (cars delete bei vorhandenen fuelup-Referenzen verboten):
     - `cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`
