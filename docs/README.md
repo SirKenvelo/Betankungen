@@ -77,6 +77,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
 - `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).
+- `docs/policies/`: formale Regeln/Standards/Vertraege (`POL-xxx`), inkl. Tracker-Standard.
+- `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 
@@ -128,6 +130,7 @@ Details zur Regelbasis:
 - `docs/ADR/`: Entscheidungen im ADR-Format (accepted/proposed)
 - `docs/BACKLOG.md`: zentrale Backlog-Uebersicht
 - `docs/BACKLOG/`: einzelne Backlog-Eintraege `BL-xxx` als Detaildokumente
+- `docs/policies/`: Policies/Contracts/Standards als `POL-xxx`
 - `.releases/`: finale Release-Artefakte (`.tar`) + `release_log.json`
 - `.backup/`: zeitgestempelte Snapshot-Backups + `index.json`
 - `tests/`: Smoke-/Plausibilitaetstests fuer den lokalen Workflow (inkl. dediziertem Cars-CRUD-Smoke)
@@ -427,6 +430,19 @@ Lint fuer Sprint-/Doku-Qualitaet.
 Beispiel:
 - `scripts/sprint_docs_lint.sh`
 
+### `scripts/projtrack_lint.sh`
+Lint fuer den Tracker-Bereich gemaess `docs/policies/POL-001-tracker-standard.md`.
+
+**Checks (v1-Scope)**
+- Frontmatter-Pflichtfelder in `docs/issues/**/issue.md`, `docs/backlog/**/item.md`, `docs/backlog/**/tasks/TSK-*.md`
+- ID-/Status-/Prioritaet-/Type-Validierung je Artefaktart
+- Referenzpruefung fuer `related` und `parent`
+- Duplicate-ID-Check innerhalb des neuen Tracker-Bereichs
+- Code-Referenzen `TODO(...)`, `FIXME(...)`, `NOTE(...)`, `REF(...)` auf vorhandene IDs
+
+Beispiel:
+- `scripts/projtrack_lint.sh`
+
 ### `scripts/artifacts_retention.sh`
 Retention-Skript fuer `.artifacts/` mit Schutz der Sprint-Historie.
 
@@ -443,7 +459,7 @@ Beispiel:
 ## Task-Entrypoints (make)
 
 - `make verify`
-  - Lokales CI-Gate: `sprint_docs_lint` + FPC-Build + Export-Contract-Check + Domain-Policy + Smoke + Clean-Home-Smoke
+  - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Domain-Policy + Smoke + Clean-Home-Smoke
 - `make smoke`
   - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
 - `make release-dry`
@@ -461,6 +477,7 @@ Beispiel:
   - `push` von Tags
 - Gate-Schritte:
   - Sprint-/Doku-Lint (`scripts/sprint_docs_lint.sh`)
+  - Tracker-Lint (`scripts/projtrack_lint.sh`)
   - FPC-Build (Projekt-Standard)
   - Export-Contract JSON-Check (`tests/regression/run_export_contract_json_check.sh`)
   - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)

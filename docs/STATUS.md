@@ -15,6 +15,7 @@
   - `DESIGN_PRINCIPLES.md`
   - `SPRINTS.md`
   - `ADR/README.md`
+  - `policies/` (POL-Standards, inkl. Tracker-Standard)
 - Release-Logging via `scripts/kpr.sh` (kompatibel via Root-Wrapper `kpr.sh`)
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)
 - Restore-Ablauf dokumentiert in `RESTORE.md`

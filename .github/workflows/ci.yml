@@ -1,5 +1,5 @@
 # CREATED: 2026-03-11
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-13
 name: CI
 
 on:
@@ -31,6 +31,10 @@ jobs:
       - name: Sprint/Docs lint
         run: |
           scripts/sprint_docs_lint.sh
+
+      - name: Tracker lint
+        run: |
+          scripts/projtrack_lint.sh
 
       - name: Install dependencies (FPC + sqlite3)
         run: |
