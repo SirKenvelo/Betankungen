@@ -92,6 +92,13 @@ test_stats_cost_json_compact_ok() {
   if [[ $rc -eq 0 ]] &&
      grep -q '"kind":"cost_mvp"' "$out" &&
      grep -q '"cost":{' "$out" &&
+     grep -q '"scope_mode":' "$out" &&
+     grep -q '"scope_car_id":' "$out" &&
+     grep -q '"period_enabled":' "$out" &&
+     grep -q '"period_from":' "$out" &&
+     grep -q '"period_to_exclusive":' "$out" &&
+     grep -q '"period_from_provided":' "$out" &&
+     grep -q '"period_to_provided":' "$out" &&
      grep -q '"cars_total":' "$out" &&
      grep -q '"cars_with_cycles":' "$out" &&
      grep -q '"distance_km_total":' "$out" &&
@@ -125,6 +132,13 @@ test_stats_cost_json_pretty_ok() {
   if [[ $rc -eq 0 ]] &&
      grep -q '"kind": "cost_mvp"' "$out" &&
      grep -q '"cost": {' "$out" &&
+     grep -q '"scope_mode":' "$out" &&
+     grep -q '"scope_car_id":' "$out" &&
+     grep -q '"period_enabled":' "$out" &&
+     grep -q '"period_from":' "$out" &&
+     grep -q '"period_to_exclusive":' "$out" &&
+     grep -q '"period_from_provided":' "$out" &&
+     grep -q '"period_to_provided":' "$out" &&
      grep -q '"cars_total":' "$out" &&
      grep -q '"cars_with_cycles":' "$out" &&
      grep -q '"distance_km_total":' "$out" &&
@@ -140,6 +154,40 @@ test_stats_cost_json_pretty_ok() {
     printf '[OK] --stats cost --json --pretty: JSON pretty + Export-Meta\n'
   else
     printf '[FAIL] --stats cost --json --pretty: JSON pretty + Export-Meta\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_json_scope_fields_ok() {
+  local home scope_car_id out err rc
+
+  home="$(prepare_seeded_demo_home_for_cost_scope)"
+  scope_car_id="$(inject_cost_scope_car_fixture "$home")"
+  out="$home/out_scope_json.txt"
+  err="$home/err_scope_json.txt"
+
+  if [[ -z "$scope_car_id" ]]; then
+    printf '[FAIL] --stats cost --json scope: Fixture car konnte nicht angelegt werden\n'
+    add_fail
+    return
+  fi
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --stats cost --json --car-id "$scope_car_id" --from 2099-01 >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q '"scope_mode":"single_car"' "$out" &&
+     grep -q "\"scope_car_id\":$scope_car_id" "$out" &&
+     grep -q '"period_enabled":true' "$out" &&
+     grep -q '"period_from_provided":true' "$out" &&
+     grep -q '"period_to_provided":false' "$out" &&
+     grep -q '"period_from":"2099-01-01 00:00:00"' "$out" &&
+     grep -q '"period_to_exclusive":""' "$out"; then
+    printf '[OK] --stats cost --json scope: Contract-Felder + Werte\n'
+  else
+    printf '[FAIL] --stats cost --json scope: Contract-Felder + Werte\n'
     add_fail
   fi
 }

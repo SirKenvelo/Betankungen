@@ -1,5 +1,5 @@
 # EXPORT CONTRACT
-**Stand:** 2026-03-11
+**Stand:** 2026-03-13
 
 Zweck: Stabiler Export-Vertrag fuer maschinenlesbare Ausgabeformate (JSON/CSV).
 
@@ -21,7 +21,7 @@ Payload (v1, aktueller Stand):
   - fuelups monthly/yearly: `rows`
   - fuelups full_tank_cycles: `cycles` + `sum`
   - fleet_mvp: `fleet` (`cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`)
-  - cost_mvp: `cost` (`cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
+  - cost_mvp: `cost` (`scope_mode`, `scope_car_id`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`, `cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
 
 ## CSV Contract
 

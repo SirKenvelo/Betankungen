@@ -1518,6 +1518,10 @@ begin
 end;
 
 procedure RenderCostStatsJson(const R: TCostStats;
+  const PeriodEnabled: boolean;
+  const PeriodFromIso, PeriodToExclIso: string;
+  const FromProvided, ToProvided: boolean;
+  const CarId: integer;
   const Pretty: boolean;
   const AppVersion: string);
 var
@@ -1526,8 +1530,13 @@ var
   FuelPerKmX1000: Int64;
   MaintenancePerKmX1000: Int64;
   TotalPerKmX1000: Int64;
+  ScopeMode: string;
 begin
   CostPerKmAvailable := R.DistKmTotal > 0;
+  if CarId > 0 then
+    ScopeMode := 'single_car'
+  else
+    ScopeMode := 'all_cars';
 
   if CostPerKmAvailable then
   begin
@@ -1552,6 +1561,19 @@ begin
 
   J.IndentWrite; J.W('"cost":'); J.SP; J.W('{'); J.NL;
   J.IndentInc;
+  J.IndentWrite; J.W('"scope_mode":'); J.SP; J.W('"'); J.W(ScopeMode); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"scope_car_id":'); J.SP; J.W(IntToStr(CarId)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"period_enabled":'); J.SP;
+  if PeriodEnabled then J.W('true') else J.W('false');
+  J.W(','); J.NL;
+  J.IndentWrite; J.W('"period_from":'); J.SP; J.W('"'); J.W(JsonEscape(PeriodFromIso)); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"period_to_exclusive":'); J.SP; J.W('"'); J.W(JsonEscape(PeriodToExclIso)); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"period_from_provided":'); J.SP;
+  if FromProvided then J.W('true') else J.W('false');
+  J.W(','); J.NL;
+  J.IndentWrite; J.W('"period_to_provided":'); J.SP;
+  if ToProvided then J.W('true') else J.W('false');
+  J.W(','); J.NL;
   J.IndentWrite; J.W('"cars_total":'); J.SP; J.W(IntToStr(R.CarsTotal)); J.W(','); J.NL;
   J.IndentWrite; J.W('"cars_with_cycles":'); J.SP; J.W(IntToStr(R.CarsWithCycles)); J.W(','); J.NL;
   J.IndentWrite; J.W('"distance_km_total":'); J.SP; J.W(IntToStr(R.DistKmTotal)); J.W(','); J.NL;
@@ -1616,7 +1638,16 @@ var
   R: TCostStats;
 begin
   CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, R);
-  RenderCostStatsJson(R, Pretty, AppVersion);
+  RenderCostStatsJson(
+    R,
+    PeriodEnabled,
+    PeriodFromIso,
+    PeriodToExclIso,
+    FromProvided,
+    ToProvided,
+    CarId,
+    Pretty,
+    AppVersion);
 end;
 
 end.
