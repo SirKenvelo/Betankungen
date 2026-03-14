@@ -12,6 +12,7 @@ Detailed documents are currently maintained primarily in German.
 - Sprint 10 C1 started: maintenance companion now has schema migration baseline via `--migrate [--db <path>]` (idempotent module schema init).
 - Sprint 10 C2 delivered CRUD baseline in the maintenance companion: `--add maintenance` and `--list maintenance`.
 - Sprint 10 C3 delivered maintenance stats baseline: `--stats maintenance` (text + JSON/pretty) with optional car scope (`--car-id`).
+- Sprint 10 C4 hardened the module contract and smoke coverage (invalid stats/json combinations now explicitly regression-tested).
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export-meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)

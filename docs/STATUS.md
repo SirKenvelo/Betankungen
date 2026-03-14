@@ -179,6 +179,7 @@ Bereits erledigt:
 - Erreicht (S10C1/4): Modul-Schema + idempotente Migration fuer `betankungen-maintenance` umgesetzt (`--migrate [--db <path>]`, `module_meta`, `maintenance_events`).
 - Erreicht (S10C2/4): Companion-CRUD-Basis umgesetzt (`--add maintenance`, `--list maintenance` inkl. Scope via `--car-id`).
 - Erreicht (S10C3/4): Companion-Stats-Basis umgesetzt (`--stats maintenance` Text + JSON/Pretty inkl. Scope via `--car-id` und Contract `maintenance_stats_v1`).
+- Erreicht (S10C4/4): Modul-Smoke-/Contract-Haertung finalisiert (Guardrails fuer ungueltige Stats-/JSON-Kombinationen regressionsgesichert, Contract-Doku synchronisiert).
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
@@ -208,7 +209,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 10 - Maintenance Companion v0.2
 
-- Status: in Umsetzung (`S10C1/4` + `S10C2/4` + `S10C3/4` abgeschlossen)
+- Status: abgeschlossen (`S10C1/4` bis `S10C4/4`)
 - Ziel: `betankungen-maintenance` von Contract-Skeleton auf fachliche Nutzbarkeit heben.
 
 ### S10C1/4 - Modul-Schema + Migration
@@ -228,7 +229,8 @@ Bereits erledigt:
 
 ### S10C4/4 - Modul-Qualitaetsgate
 
-- Geplant: Smoke-/Contract-Abdeckung erweitern und Doku-Baseline finalisieren.
+- Erreicht: Module-Smoke deckt Guardrails fuer ungueltige Stats-/JSON-Kombinationen explizit ab (`--stats maintenance --pretty` ohne `--json`, Add-Parameter im Stats-Kontext, `--module-info --json`).
+- Erreicht: Contract-Doku fuer `maintenance_stats_v1` in `docs/EXPORT_CONTRACT.md` finalisiert und Modul-/Entry-Doku auf den finalen S10-Stand synchronisiert.
 
 ## Roadmap Sprint 11 - Integration + 0.9.0 Readiness
 

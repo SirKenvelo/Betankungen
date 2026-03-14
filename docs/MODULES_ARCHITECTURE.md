@@ -10,12 +10,13 @@ Ziel:
 - reproduzierbarer Modul-Build
 - konsistente CLI-/DB-/Stats-Integration
 
-Aktueller Baseline-Stand (S6/S10C3):
+Aktueller Baseline-Stand (S6/S10C4):
 - Technischer Handshake ist implementiert (`--module-info` JSON-Contract).
 - Erstes Companion-Skeleton ist vorhanden (`src/betankungen-maintenance.lpr`).
 - Smoke-Absicherung fuer den Modul-Contract ist vorhanden (`tests/smoke/smoke_modules.sh`, integrierbar via `tests/smoke/smoke_cli.sh --modules`).
 - Modul-Schema-Basis ist vorhanden: `maintenance_events` + `module_meta(schema_version)` via idempotentem `--migrate`.
 - Maintenance-Companion liefert CRUD + Stats-Basis (`--add/--list/--stats maintenance`) inkl. JSON-Contract (`kind: "maintenance_stats_v1"`).
+- Contract-Guardrails sind regressionsgesichert (u. a. `--pretty` nur mit `--module-info` bzw. `--stats maintenance --json`, `--json` nur im Stats-Kontext).
 
 ## Scope und Begriffe
 
@@ -136,6 +137,7 @@ Schema-Baseline aus `S10C1/4` (Migration `--migrate`):
 Stats-Baseline aus `S10C3/4` (`--stats maintenance`):
 - Text: `Maintenance-Stats (MVP)` mit Scope (`all cars` oder `car_id=<id>`), Zeitraum (`period`) und Kennzahlen (`events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`).
 - JSON: `contract_version=1`, `kind="maintenance_stats_v1"`, `generated_at`, `app_version`, Payload `maintenance` mit `scope_mode`, `scope_car_id`, `events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`, `period_from`, `period_to`.
+- Contract-Referenz: siehe `docs/EXPORT_CONTRACT.md` (Abschnitt "Module JSON Contract (Maintenance Companion v1)").
 
 ## 8) Startpunkt fuer erste Module
 

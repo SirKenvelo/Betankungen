@@ -62,3 +62,6 @@ Optionales Modul:
   - `--stats maintenance` (Text)
   - `--stats maintenance --json [--pretty]` mit Contract `maintenance_stats_v1`
   - optionaler Scope ueber `--car-id`
+- S10C4/4 haertet den Modul-Contract:
+  - Module-Smoke deckt Guardrails fuer ungueltige Stats-/JSON-Kombinationen explizit ab
+  - Contract-Doku fuer `maintenance_stats_v1` finalisiert (`docs/EXPORT_CONTRACT.md`)

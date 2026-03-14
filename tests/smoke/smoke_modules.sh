@@ -42,6 +42,14 @@ OUT_STATS_JSON_SCOPE="$TMP_DIR/stats_json_scope.out"
 ERR_STATS_JSON_SCOPE="$TMP_DIR/stats_json_scope.err"
 OUT_BAD="$TMP_DIR/bad.out"
 ERR_BAD="$TMP_DIR/bad.err"
+OUT_FAIL_1="$TMP_DIR/fail_1.out"
+ERR_FAIL_1="$TMP_DIR/fail_1.err"
+OUT_FAIL_2="$TMP_DIR/fail_2.out"
+ERR_FAIL_2="$TMP_DIR/fail_2.err"
+OUT_FAIL_3="$TMP_DIR/fail_3.out"
+ERR_FAIL_3="$TMP_DIR/fail_3.err"
+OUT_FAIL_4="$TMP_DIR/fail_4.out"
+ERR_FAIL_4="$TMP_DIR/fail_4.err"
 BUILD_LOG="$TMP_DIR/build.log"
 MIGRATE_DB="$TMP_DIR/maintenance_module_test.db"
 
@@ -85,6 +93,22 @@ fail() {
     fi
   done
   exit 1
+}
+
+expect_cli_fail() {
+  local out_file="$1"
+  local err_file="$2"
+  local rc
+  shift 2
+
+  set +e
+  "$MODULE_BIN" "$@" >"$out_file" 2>"$err_file"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]]; then
+    fail "Erwarteter Fehler blieb aus: $*"
+  fi
 }
 
 if [[ ! -f "$MODULE_SRC" ]]; then
@@ -317,6 +341,30 @@ if [[ $RC -ne 0 ]] ||
   fail '--stats maintenance --car-id <id> verletzt den Scope-Contract.'
 fi
 printf '[OK] Modules: --stats maintenance --car-id scoped JSON\n'
+
+expect_cli_fail "$OUT_FAIL_1" "$ERR_FAIL_1" --stats maintenance --pretty --db "$MIGRATE_DB"
+if ! grep -q -- '--pretty ist nur zusammen mit --module-info oder --stats maintenance --json erlaubt' "$ERR_FAIL_1"; then
+  fail '--stats maintenance --pretty ohne --json muss klaren Validierungsfehler liefern.'
+fi
+printf '[OK] Modules: --stats maintenance --pretty ohne --json -> Validierungsfehler\n'
+
+expect_cli_fail "$OUT_FAIL_2" "$ERR_FAIL_2" --stats maintenance --db "$MIGRATE_DB" --date 2025-03-14
+if ! grep -q -- '--date ist fuer --stats maintenance nicht erlaubt' "$ERR_FAIL_2"; then
+  fail '--stats maintenance --date muss klaren Validierungsfehler liefern.'
+fi
+printf '[OK] Modules: --stats maintenance --date -> Validierungsfehler\n'
+
+expect_cli_fail "$OUT_FAIL_3" "$ERR_FAIL_3" --stats maintenance --db "$MIGRATE_DB" --cost-cents 1
+if ! grep -q -- '--cost-cents ist fuer --stats maintenance nicht erlaubt' "$ERR_FAIL_3"; then
+  fail '--stats maintenance --cost-cents muss klaren Validierungsfehler liefern.'
+fi
+printf '[OK] Modules: --stats maintenance --cost-cents -> Validierungsfehler\n'
+
+expect_cli_fail "$OUT_FAIL_4" "$ERR_FAIL_4" --module-info --json
+if ! grep -q -- '--json ist nur zusammen mit --stats maintenance erlaubt' "$ERR_FAIL_4"; then
+  fail '--module-info --json muss klaren Validierungsfehler liefern.'
+fi
+printf '[OK] Modules: --module-info --json -> Validierungsfehler\n'
 
 set +e
 "$MODULE_BIN" --does-not-exist >"$OUT_BAD" 2>"$ERR_BAD"

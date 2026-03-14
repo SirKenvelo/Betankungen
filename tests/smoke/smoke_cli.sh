@@ -243,6 +243,7 @@ print_plan() {
     printf '[LIST] (Modules) --add maintenance speichert Event-Datensaetze\n'
     printf '[LIST] (Modules) --list maintenance liefert all/scoped Ausgabe stabil\n'
     printf '[LIST] (Modules) --stats maintenance liefert Text + JSON(+pretty) + Scope-Contract\n'
+    printf '[LIST] (Modules) Stats-Guardrails: --pretty ohne --json, --date/--cost-cents bei stats, --module-info --json\n'
     printf '[LIST] (Modules) unknown flag -> sauberer CLI-Fehlerpfad\n'
   fi
 
