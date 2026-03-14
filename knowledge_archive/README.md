@@ -1,5 +1,5 @@
 # knowledge_archive
-**Stand:** 2026-03-04
+**Stand:** 2026-03-14
 
 Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 
@@ -91,3 +91,10 @@ Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 - Anlass: loeschung (ersetzt durch spezialisierte Parser)
 - Datum: `2026-01-21`
 - Commit: `n/a (historisch)`
+
+9. `archive_maintenance_cli_parse_helpers_2026-03-14.pas`
+- Quelle: `src/betankungen-maintenance.lpr`
+- Symbol/Topic: `HasFlag`, `HasUnknownFlags`, `TryReadDbArg`
+- Anlass: loeschung (ersetzt durch zentrales `ParseArgs`-Modell fuer S10C2/4)
+- Datum: `2026-03-14`
+- Commit: `aad05f8`
