@@ -55,3 +55,6 @@ Optionales Modul:
 - S10C1/4 liefert die technische Modul-Basis fuer eigene Fachdaten:
   - Modul-Schema `maintenance_events` + `module_meta(schema_version)`
   - idempotente Migration via `betankungen-maintenance --migrate [--db <path>]`
+- S10C2/4 liefert die erste CRUD-Basis im Modul:
+  - `--add maintenance` (Pflichtfelder: `--car-id`, `--date`, `--type`, `--cost-cents`)
+  - `--list maintenance` (optionaler Scope `--car-id`)

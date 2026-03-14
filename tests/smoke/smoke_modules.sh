@@ -24,6 +24,14 @@ OUT_MIGRATE_1="$TMP_DIR/migrate_1.out"
 ERR_MIGRATE_1="$TMP_DIR/migrate_1.err"
 OUT_MIGRATE_2="$TMP_DIR/migrate_2.out"
 ERR_MIGRATE_2="$TMP_DIR/migrate_2.err"
+OUT_ADD="$TMP_DIR/add.out"
+ERR_ADD="$TMP_DIR/add.err"
+OUT_LIST_ALL="$TMP_DIR/list_all.out"
+ERR_LIST_ALL="$TMP_DIR/list_all.err"
+OUT_LIST_FILTER="$TMP_DIR/list_filter.out"
+ERR_LIST_FILTER="$TMP_DIR/list_filter.err"
+OUT_LIST_EMPTY="$TMP_DIR/list_empty.out"
+ERR_LIST_EMPTY="$TMP_DIR/list_empty.err"
 OUT_BAD="$TMP_DIR/bad.out"
 ERR_BAD="$TMP_DIR/bad.err"
 BUILD_LOG="$TMP_DIR/build.log"
@@ -104,6 +112,8 @@ set -e
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^Usage: betankungen-maintenance --module-info \[--pretty\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --migrate \[--db <path>\]$' "$OUT_HELP" ||
+   ! grep -q '^       betankungen-maintenance --add maintenance --car-id <id> --date <YYYY-MM-DD> --type <name> --cost-cents <value> \[--notes <text>\] \[--db <path>\]$' "$OUT_HELP" ||
+   ! grep -q '^       betankungen-maintenance --list maintenance \[--car-id <id>\] \[--db <path>\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --help | --version$' "$OUT_HELP"; then
   fail '--help-Contract des Companion-Binary ist nicht stabil.'
 fi
@@ -173,6 +183,58 @@ if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT COUNT(*) FROM module_meta WHERE key='sche
   fail '--migrate Re-Run: schema_version-Key ist nicht eindeutig.'
 fi
 printf '[OK] Modules: --migrate ist idempotent\n'
+
+set +e
+"$MODULE_BIN" --add maintenance --db "$MIGRATE_DB" --car-id 2 --date 2025-03-14 --type service --cost-cents 12345 --notes "smoke-add" >"$OUT_ADD" 2>"$ERR_ADD"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^\[OK\] maintenance_event_id=[0-9][0-9]*$' "$OUT_ADD" ||
+   ! grep -q "^\[OK\] db=$MIGRATE_DB$" "$OUT_ADD"; then
+  fail '--add maintenance fehlgeschlagen oder Output-Contract instabil.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT COUNT(*) FROM maintenance_events;")" != "1" ]]; then
+  fail '--add maintenance: maintenance_events count ist nicht 1.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT car_id || '|' || event_date || '|' || event_type || '|' || cost_cents || '|' || COALESCE(notes,'') FROM maintenance_events LIMIT 1;")" != "2|2025-03-14|service|12345|smoke-add" ]]; then
+  fail '--add maintenance: gespeicherte Werte weichen vom Contract ab.'
+fi
+printf '[OK] Modules: --add maintenance speichert Event\n'
+
+set +e
+"$MODULE_BIN" --list maintenance --db "$MIGRATE_DB" >"$OUT_LIST_ALL" 2>"$ERR_LIST_ALL"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^Maintenance Events$' "$OUT_LIST_ALL" ||
+   ! grep -q '^Scope: all cars$' "$OUT_LIST_ALL" ||
+   ! grep -q '^id | car_id | event_date | event_type | cost_cents | notes$' "$OUT_LIST_ALL" ||
+   ! grep -Eq '^[0-9]+ \| 2 \| 2025-03-14 \| service \| 12345 \| smoke-add$' "$OUT_LIST_ALL"; then
+  fail '--list maintenance (all) verletzt den Text-Contract.'
+fi
+printf '[OK] Modules: --list maintenance (all cars)\n'
+
+set +e
+"$MODULE_BIN" --list maintenance --db "$MIGRATE_DB" --car-id 2 >"$OUT_LIST_FILTER" 2>"$ERR_LIST_FILTER"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^Scope: car_id=2$' "$OUT_LIST_FILTER" ||
+   ! grep -Eq '^[0-9]+ \| 2 \| 2025-03-14 \| service \| 12345 \| smoke-add$' "$OUT_LIST_FILTER"; then
+  fail '--list maintenance --car-id 2 verletzt den Filter-Contract.'
+fi
+printf '[OK] Modules: --list maintenance --car-id (scoped)\n'
+
+set +e
+"$MODULE_BIN" --list maintenance --db "$MIGRATE_DB" --car-id 999 >"$OUT_LIST_EMPTY" 2>"$ERR_LIST_EMPTY"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^Scope: car_id=999$' "$OUT_LIST_EMPTY" ||
+   ! grep -q '^No maintenance events found\.$' "$OUT_LIST_EMPTY"; then
+  fail '--list maintenance --car-id 999 muss leer, aber erfolgreich sein.'
+fi
+printf '[OK] Modules: --list maintenance leerer Scope ist stabil\n'
 
 set +e
 "$MODULE_BIN" --does-not-exist >"$OUT_BAD" 2>"$ERR_BAD"

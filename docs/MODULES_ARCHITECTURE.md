@@ -111,6 +111,8 @@ Das Companion-Skeleton `betankungen-maintenance` liefert aktuell:
 - `--module-info`
 - `--module-info --pretty`
 - `--migrate [--db <path>]`
+- `--add maintenance --car-id <id> --date <YYYY-MM-DD> --type <name> --cost-cents <value> [--notes <text>] [--db <path>]`
+- `--list maintenance [--car-id <id>] [--db <path>]`
 
 Beispiel (`--module-info`, compact):
 

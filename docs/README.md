@@ -66,6 +66,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.9.x`: naechster Fokus (priorisiert nach Scope-Freeze)
 - `0.9.x` Baseline erreicht: Modulstrategie `accepted`, Companion-Handshake `--module-info` inkl. Modules-Smoke (`--modules`) verfuegbar
 - Sprint 10 C1 gestartet: `betankungen-maintenance` besitzt jetzt den Migrationspfad `--migrate [--db <path>]` fuer ein idempotentes Modul-Schema (`module_meta`, `maintenance_events`)
+- Sprint 10 C2 umgesetzt: `betankungen-maintenance` bietet jetzt `--add maintenance` und `--list maintenance` als erste fachliche CRUD-Basis
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.

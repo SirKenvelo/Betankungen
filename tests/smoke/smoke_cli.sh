@@ -240,6 +240,8 @@ print_plan() {
     printf '[LIST] (Modules) --module-info --pretty liefert Mehrzeilen-JSON\n'
     printf '[LIST] (Modules) --migrate initialisiert Modul-Schema (module_meta + maintenance_events)\n'
     printf '[LIST] (Modules) --migrate Re-Run bleibt idempotent (schema_version stabil)\n'
+    printf '[LIST] (Modules) --add maintenance speichert Event-Datensaetze\n'
+    printf '[LIST] (Modules) --list maintenance liefert all/scoped Ausgabe stabil\n'
     printf '[LIST] (Modules) unknown flag -> sauberer CLI-Fehlerpfad\n'
   fi
 

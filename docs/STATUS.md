@@ -177,6 +177,7 @@ Bereits erledigt:
 - Erreicht (S9C4/4): Cost-Scope-Guardrails via Domain-Policy `P-061` regressionssicher erweitert (Car-/Period-Isolation) und Sprint 9 fachlich abgeschlossen.
 - Gestartet (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
 - Erreicht (S10C1/4): Modul-Schema + idempotente Migration fuer `betankungen-maintenance` umgesetzt (`--migrate [--db <path>]`, `module_meta`, `maintenance_events`).
+- Erreicht (S10C2/4): Companion-CRUD-Basis umgesetzt (`--add maintenance`, `--list maintenance` inkl. Scope via `--car-id`).
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
@@ -206,7 +207,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 10 - Maintenance Companion v0.2
 
-- Status: in Umsetzung (`S10C1/4` abgeschlossen)
+- Status: in Umsetzung (`S10C1/4` + `S10C2/4` abgeschlossen)
 - Ziel: `betankungen-maintenance` von Contract-Skeleton auf fachliche Nutzbarkeit heben.
 
 ### S10C1/4 - Modul-Schema + Migration
@@ -216,7 +217,8 @@ Bereits erledigt:
 
 ### S10C2/4 - Modul-CLI Basis
 
-- Geplant: `--add maintenance` und `--list maintenance` im Companion-Modul.
+- Erreicht: `--add maintenance` mit validierten Pflichtfeldern (`--car-id`, `--date`, `--type`, `--cost-cents`) im Companion-Modul umgesetzt.
+- Erreicht: `--list maintenance` inkl. optionalem Car-Scope (`--car-id`) mit stabilem Text-Output umgesetzt.
 
 ### S10C3/4 - Modul-Stats + Export
 

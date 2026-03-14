@@ -307,7 +307,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Geplante Bloecke
 
-- S10C2/4: Companion-CLI fuer `--add maintenance` / `--list maintenance`.
+- S10C2/4: Companion-CLI fuer Maintenance-CRUD-Basis (`--add maintenance`, `--list maintenance`, `--car-id`-Scope).
 - S10C3/4: `--stats maintenance` (Text + JSON) inkl. Contract-Baseline.
 - S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.
 

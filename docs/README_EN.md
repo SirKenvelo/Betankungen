@@ -10,6 +10,7 @@ Detailed documents are currently maintained primarily in German.
 - Current development line: road to `0.9.x`
 - S6 baseline is in place: module strategy accepted, companion handshake (`--module-info`) implemented, module smoke path available (`tests/smoke_modules.sh` / `--modules`)
 - Sprint 10 C1 started: maintenance companion now has schema migration baseline via `--migrate [--db <path>]` (idempotent module schema init).
+- Sprint 10 C2 delivered CRUD baseline in the maintenance companion: `--add maintenance` and `--list maintenance`.
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export-meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)

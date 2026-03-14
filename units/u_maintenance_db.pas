@@ -18,9 +18,33 @@ unit u_maintenance_db;
 
 interface
 
+type
+  TMaintenanceEventRow = record
+    Id: Int64;
+    CarId: Integer;
+    EventDate: string;
+    EventType: string;
+    CostCents: Int64;
+    Notes: string;
+    CreatedAt: string;
+  end;
+
+  TMaintenanceEventRows = array of TMaintenanceEventRow;
+
 function ResolveMaintenanceDbPath(const OverridePath: string): string;
 function CurrentModuleSchemaVersion: Integer;
 procedure EnsureMaintenanceSchema(const DbPath: string; out Changed: Boolean);
+function AddMaintenanceEvent(
+  const DbPath: string;
+  const CarId: Integer;
+  const EventDate: string;
+  const EventType: string;
+  const CostCents: Int64;
+  const Notes: string): Int64;
+procedure ListMaintenanceEvents(
+  const DbPath: string;
+  const CarIdFilter: Integer;
+  out Rows: TMaintenanceEventRows);
 
 implementation
 
@@ -174,6 +198,136 @@ begin
           Tran.Rollback;
         raise Exception.Create('Maintenance-Migration fehlgeschlagen: ' + E.Message);
       end;
+    end;
+  finally
+    Q.Free;
+    Tran.Free;
+    Conn.Free;
+  end;
+end;
+
+function AddMaintenanceEvent(
+  const DbPath: string;
+  const CarId: Integer;
+  const EventDate: string;
+  const EventType: string;
+  const CostCents: Int64;
+  const Notes: string): Int64;
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+  SchemaChanged: Boolean;
+begin
+  EnsureMaintenanceSchema(DbPath, SchemaChanged);
+
+  Conn := TSQLite3Connection.Create(nil);
+  Tran := TSQLTransaction.Create(nil);
+  Q := TSQLQuery.Create(nil);
+  try
+    Conn.DatabaseName := DbPath;
+    Conn.Transaction := Tran;
+    Q.Database := Conn;
+    Q.Transaction := Tran;
+    Conn.Open;
+    Tran.StartTransaction;
+
+    try
+      Q.SQL.Text :=
+        'INSERT INTO maintenance_events(' +
+        '  car_id, event_date, event_type, cost_cents, notes' +
+        ') VALUES(:car_id, :event_date, :event_type, :cost_cents, :notes);';
+      Q.Params.ParamByName('car_id').AsInteger := CarId;
+      Q.Params.ParamByName('event_date').AsString := EventDate;
+      Q.Params.ParamByName('event_type').AsString := EventType;
+      Q.Params.ParamByName('cost_cents').AsLargeInt := CostCents;
+      Q.Params.ParamByName('notes').AsString := Notes;
+      Q.ExecSQL;
+
+      Q.Close;
+      Q.SQL.Text := 'SELECT last_insert_rowid() AS id;';
+      Q.Open;
+      try
+        Result := Q.FieldByName('id').AsLargeInt;
+      finally
+        Q.Close;
+      end;
+
+      Tran.Commit;
+    except
+      on E: Exception do
+      begin
+        if Tran.Active then
+          Tran.Rollback;
+        raise Exception.Create('Maintenance-Insert fehlgeschlagen: ' + E.Message);
+      end;
+    end;
+  finally
+    Q.Free;
+    Tran.Free;
+    Conn.Free;
+  end;
+end;
+
+procedure ListMaintenanceEvents(
+  const DbPath: string;
+  const CarIdFilter: Integer;
+  out Rows: TMaintenanceEventRows);
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+  N: Integer;
+  SchemaChanged: Boolean;
+begin
+  SetLength(Rows, 0);
+  EnsureMaintenanceSchema(DbPath, SchemaChanged);
+
+  Conn := TSQLite3Connection.Create(nil);
+  Tran := TSQLTransaction.Create(nil);
+  Q := TSQLQuery.Create(nil);
+  try
+    Conn.DatabaseName := DbPath;
+    Conn.Transaction := Tran;
+    Q.Database := Conn;
+    Q.Transaction := Tran;
+    Conn.Open;
+
+    if CarIdFilter > 0 then
+    begin
+      Q.SQL.Text :=
+        'SELECT id, car_id, event_date, event_type, cost_cents, ' +
+        '       COALESCE(notes, '''') AS notes, created_at ' +
+        'FROM maintenance_events ' +
+        'WHERE car_id = :car_id ' +
+        'ORDER BY event_date DESC, id DESC;';
+      Q.Params.ParamByName('car_id').AsInteger := CarIdFilter;
+    end
+    else
+      Q.SQL.Text :=
+        'SELECT id, car_id, event_date, event_type, cost_cents, ' +
+        '       COALESCE(notes, '''') AS notes, created_at ' +
+        'FROM maintenance_events ' +
+        'ORDER BY event_date DESC, id DESC;';
+
+    Q.Open;
+    try
+      N := 0;
+      while not Q.EOF do
+      begin
+        SetLength(Rows, N + 1);
+        Rows[N].Id := Q.FieldByName('id').AsLargeInt;
+        Rows[N].CarId := Q.FieldByName('car_id').AsInteger;
+        Rows[N].EventDate := Q.FieldByName('event_date').AsString;
+        Rows[N].EventType := Q.FieldByName('event_type').AsString;
+        Rows[N].CostCents := Q.FieldByName('cost_cents').AsLargeInt;
+        Rows[N].Notes := Q.FieldByName('notes').AsString;
+        Rows[N].CreatedAt := Q.FieldByName('created_at').AsString;
+        Inc(N);
+        Q.Next;
+      end;
+    finally
+      Q.Close;
     end;
   finally
     Q.Free;
