@@ -297,9 +297,16 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Status: in Umsetzung (`S10C1/4` done)
 - Ziel: `betankungen-maintenance` von Handshake-Skeleton auf fachliche Basisfunktionalitaet heben.
 
+### Commit-Folge
+
+1. S10C1/4
+- Thema: Modul-Schema + idempotente Migration umgesetzt (`--migrate [--db <path>]`, `module_meta`, `maintenance_events`) inkl. Smoke-Absicherung.
+- Status: done
+- Git-Commit: `278408a`
+- Artefakte: `.artifacts/sprint_10_commit_1_von_4.md`, `.artifacts/sprint_10_commit_1_von_4.diff`
+
 ### Geplante Bloecke
 
-- S10C1/4: done - Modul-Schema + idempotente Migration fuer Maintenance-Events (`--migrate`, `module_meta`, `maintenance_events`).
 - S10C2/4: Companion-CLI fuer `--add maintenance` / `--list maintenance`.
 - S10C3/4: `--stats maintenance` (Text + JSON) inkl. Contract-Baseline.
 - S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.
