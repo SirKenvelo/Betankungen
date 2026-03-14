@@ -294,7 +294,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 10 - Maintenance Companion v0.2
 
-- Status: in Umsetzung (`S10C1/4` + `S10C2/4` + `S10C3/4` done)
+- Status: done (`S10C1/4` + `S10C2/4` + `S10C3/4` + `S10C4/4` done)
 - Ziel: `betankungen-maintenance` von Handshake-Skeleton auf fachliche Basisfunktionalitaet heben.
 
 ### Commit-Folge
@@ -317,9 +317,15 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `25b6080`
 - Artefakte: `.artifacts/sprint_10_commit_3_von_4.md`, `.artifacts/sprint_10_commit_3_von_4.diff`
 
+4. S10C4/4
+- Thema: Modul-Qualitaetsgate finalisiert (negative Guardrail-Checks in `smoke_modules`, Contract-Doku `maintenance_stats_v1` in `docs/EXPORT_CONTRACT.md`, Abschluss-Sync fuer Modul-/Entry-/Statusdoku).
+- Status: done
+- Git-Commit: `f15fcf3`
+- Artefakte: `.artifacts/sprint_10_commit_4_von_4.md`, `.artifacts/sprint_10_commit_4_von_4.diff`
+
 ### Geplante Bloecke
 
-- S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.
+- (keine offenen Bloecke)
 
 ### Abschluss-Tag
 
