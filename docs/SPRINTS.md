@@ -334,12 +334,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: geplant
+- Status: in Arbeit
 - Ziel: Kostenintegration fuel + maintenance stabilisieren und 0.9.0-Readiness absichern.
 
 ### Geplante Bloecke
 
-- S11C1/4: Core-zu-Modul-Integrationscontract fuer Kostenpfad definieren/verdrahten.
+- S11C1/4: erledigt - expliziter Integrationsmodus im Cost-Pfad (`--maintenance-source none|module`) inkl. Validate-Policy, Text-/JSON-Contract-Feldern und Guardrail (`module` aktuell klarer Not-Active-Fehler bis S11C2/4).
 - S11C2/4: Cost-Aggregation fuel + maintenance mit robustem Fallback ohne Modul.
 - S11C3/4: Regression/CI-Haertung fuer Modi mit und ohne Maintenance-Modul.
 - S11C4/4: 0.9.0-Readiness-Paket (Scope-Freeze, Doku-Finalisierung, Preflight).

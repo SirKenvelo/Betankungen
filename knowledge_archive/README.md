@@ -105,3 +105,17 @@ Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 - Anlass: behavior change (Erweiterung um `--stats maintenance` inkl. JSON-/Pretty-Kontexten)
 - Datum: `2026-03-14`
 - Commit: `25b6080`
+
+11. `archive_cost_stats_pre_maintenance_source_2026-03-14.pas`
+- Quelle: `units/u_stats.pas`
+- Symbol/Topic: `CollectCostStats`, `RenderCostStatsJson`, `ShowCostStats`, `ShowCostStatsJson` (Vor-S11C1/4 Stand)
+- Anlass: behavior change (expliziter Integrationspfad `--maintenance-source` im Cost-Flow)
+- Datum: `2026-03-14`
+- Commit: `pending (S11C1/4)`
+
+12. `archive_cli_validate_pre_maintenance_source_policy_2026-03-14.pas`
+- Quelle: `units/u_cli_validate.pas`
+- Symbol/Topic: `ValidateCommand` (Vor-S11C1/4 Stand ohne `ValidateMaintenanceSourcePolicy`)
+- Anlass: behavior change (neue Kontext-Policy fuer `--maintenance-source`)
+- Datum: `2026-03-14`
+- Commit: `pending (S11C1/4)`

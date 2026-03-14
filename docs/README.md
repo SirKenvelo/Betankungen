@@ -69,6 +69,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Sprint 10 C2 umgesetzt: `betankungen-maintenance` bietet jetzt `--add maintenance` und `--list maintenance` als erste fachliche CRUD-Basis
 - Sprint 10 C3 umgesetzt: `betankungen-maintenance` liefert `--stats maintenance` (Text + JSON/Pretty) inkl. Scope-Contract (`--car-id`)
 - Sprint 10 C4 umgesetzt: Module-Smoke-/Contract-Haertung abgeschlossen (inkl. Guardrails fuer ungueltige Stats-/JSON-Kombinationen)
+- Sprint 11 C1 umgesetzt: Cost-CLI besitzt jetzt einen expliziten Integrationsmodus `--maintenance-source none|module`; `none` ist aktiv, `module` liefert bis S11C2/4 einen klaren Not-Active-Fehler.
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
@@ -242,6 +243,8 @@ Statistik-Modul für Betankungen (`fuelups` + Fleet-MVP).
 - Cost-MVP enthaelt Maintenance aktuell als Placeholder (`0`) fuer spaetere Modul-Integration
 - Cost-JSON (`--stats cost --json`, optional `--pretty`) inkl. Export-Meta und `kind: "cost_mvp"`
 - Cost-JSON enthaelt Scope-/Period-Felder im `cost`-Payload (`scope_mode`, `scope_car_id`, `period_*`) als maschinenlesbare Contract-Basis
+- Cost-Integrationscontract (S11C1): `--maintenance-source none|module` ist explizit; `none` aktiv, `module` bis S11C2/4 bewusst als klarer Not-Active-Pfad.
+- Cost-JSON enthaelt zusaetzlich Integrationsfelder (`maintenance_source_mode`, `maintenance_source_active`).
 - Cost-Guardrails bleiben strikt fuer `--csv`, `--monthly`, `--yearly`, `--dashboard`
 - Cost-CLI-Scope ist ab Sprint 9 freigeschaltet: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig und wirken auf die Aggregation.
 - Die Guardrails fuer Cost-Scope sind ueber Domain-Policy `P-061` regressionsgesichert (strikte Car-/Period-Isolation fuer `--stats cost`).

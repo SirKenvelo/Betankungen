@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-13
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -319,6 +319,21 @@ begin
     Cmd.PeriodFromIso := '';
 end;
 
+function ValidateMaintenanceSourcePolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  if not Cmd.MaintenanceSourceProvided then
+    Exit(True);
+
+  if not IsStatsCost(Cmd) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --maintenance-source ist nur zusammen mit "--stats cost" erlaubt.';
+    Cmd.ErrorFocus := efMaintenanceSource;
+    Exit(False);
+  end;
+end;
+
 function ValidateCommand(var Cmd: TCommand): boolean;
 begin
   Result := True;
@@ -358,6 +373,9 @@ begin
     Exit(False);
 
   if not ValidatePeriodPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateMaintenanceSourcePolicy(Cmd) then
     Exit(False);
 end;
 

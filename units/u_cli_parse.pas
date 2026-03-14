@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -156,6 +156,24 @@ begin
   end;
 end;
 
+function TryParseMaintenanceSource(const S: string; out Source: TMaintenanceSource): boolean;
+var
+  L: string;
+begin
+  L := LowerCase(Trim(S));
+  if L = 'none' then
+  begin
+    Source := msNone;
+    Exit(True);
+  end;
+  if L = 'module' then
+  begin
+    Source := msModule;
+    Exit(True);
+  end;
+  Result := False;
+end;
+
 // Zentrale CLI-Parsing- und Regelpruefung; liefert Fehlertext + Fokus-Flag.
 function BuildCommand(out Cmd: TCommand): boolean;
 var
@@ -174,6 +192,8 @@ begin
   Cmd.SeedForce := False;
   Cmd.UseDemoDb := False;
   Cmd.CarId := 0;
+  Cmd.MaintenanceSource := msNone;
+  Cmd.MaintenanceSourceProvided := False;
 
   i := 1;
   while i <= ParamCount do
@@ -194,6 +214,27 @@ begin
     if ParamStr(i) = '--csv' then begin Cmd.Csv := True; Inc(i); Continue; end;
     if ParamStr(i) = '--dashboard' then begin Cmd.Dashboard := True; Inc(i); Continue; end;
     if ParamStr(i) = '--pretty' then begin Cmd.Pretty := True; Inc(i); Continue; end;
+
+    if ParamStr(i) = '--maintenance-source' then
+    begin
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --maintenance-source benoetigt einen Wert (none|module).';
+        Cmd.ErrorFocus := efMaintenanceSource;
+        Exit(False);
+      end;
+
+      if not TryParseMaintenanceSource(ParamStr(i + 1), Cmd.MaintenanceSource) then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --maintenance-source erwartet "none" oder "module".';
+        Cmd.ErrorFocus := efMaintenanceSource;
+        Exit(False);
+      end;
+
+      Cmd.MaintenanceSourceProvided := True;
+      Inc(i, 2);
+      Continue;
+    end;
 
     // ------------------------------------------------------------
     // Zeitraum-Optionen: --from/--to (nur fuer --stats fuelups)

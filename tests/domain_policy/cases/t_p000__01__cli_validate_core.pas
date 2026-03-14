@@ -289,6 +289,33 @@ begin
   Ok('Policy: cost allows --car-id');
 end;
 
+procedure Test_MaintenanceSource_Cost_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkCost);
+  Cmd.MaintenanceSource := msNone;
+  Cmd.MaintenanceSourceProvided := True;
+
+  AssertTrue(ValidateCommand(Cmd), 'cost+maintenance-source must be ok');
+  Ok('Policy: --maintenance-source allowed for --stats cost');
+end;
+
+procedure Test_MaintenanceSource_NonCost_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckStats, tkFuelups);
+  Cmd.MaintenanceSource := msNone;
+  Cmd.MaintenanceSourceProvided := True;
+
+  AssertFalse(ValidateCommand(Cmd), 'maintenance-source outside cost must fail');
+  AssertEqInt(Ord(efMaintenanceSource), Ord(Cmd.ErrorFocus), 'maintenance-source focus');
+  Ok('Policy: --maintenance-source restricted to --stats cost');
+end;
+
 procedure Test_Format_FleetMonthly_Fails;
 var
   Cmd: TCommand;
@@ -424,6 +451,8 @@ begin
   Test_Format_CostYearly_Fails;
   Test_Format_CostDashboard_Fails;
   Test_CostCarId_Ok;
+  Test_MaintenanceSource_Cost_Ok;
+  Test_MaintenanceSource_NonCost_Fails;
   Test_Format_FleetMonthly_Fails;
   Test_Format_FleetYearly_Fails;
   Test_Format_FleetDashboard_Fails;

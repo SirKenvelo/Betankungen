@@ -2,7 +2,7 @@
 
 # smoke_cost_helpers.sh
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-13
+# UPDATED: 2026-03-14
 # Cost-spezifische Smoke-Checks fuer tests/smoke/smoke_cli.sh
 
 cost_read_metric() {
@@ -63,6 +63,8 @@ test_stats_cost_mvp_ok() {
   if [[ $rc -eq 0 ]] &&
      grep -q '^Cost-Stats (MVP)$' "$out" &&
      grep -q '^Scope: all cars$' "$out" &&
+     grep -q '^Maintenance source mode: none$' "$out" &&
+     grep -q '^Maintenance source active: no$' "$out" &&
      grep -q '^Period filter: none$' "$out" &&
      grep -q '^Cars total:' "$out" &&
      grep -q '^Distance (km):' "$out" &&
@@ -94,6 +96,8 @@ test_stats_cost_json_compact_ok() {
      grep -q '"cost":{' "$out" &&
      grep -q '"scope_mode":' "$out" &&
      grep -q '"scope_car_id":' "$out" &&
+     grep -q '"maintenance_source_mode":' "$out" &&
+     grep -q '"maintenance_source_active":' "$out" &&
      grep -q '"period_enabled":' "$out" &&
      grep -q '"period_from":' "$out" &&
      grep -q '"period_to_exclusive":' "$out" &&
@@ -134,6 +138,8 @@ test_stats_cost_json_pretty_ok() {
      grep -q '"cost": {' "$out" &&
      grep -q '"scope_mode":' "$out" &&
      grep -q '"scope_car_id":' "$out" &&
+     grep -q '"maintenance_source_mode":' "$out" &&
+     grep -q '"maintenance_source_active":' "$out" &&
      grep -q '"period_enabled":' "$out" &&
      grep -q '"period_from":' "$out" &&
      grep -q '"period_to_exclusive":' "$out" &&
@@ -180,6 +186,8 @@ test_stats_cost_json_scope_fields_ok() {
   if [[ $rc -eq 0 ]] &&
      grep -q '"scope_mode":"single_car"' "$out" &&
      grep -q "\"scope_car_id\":$scope_car_id" "$out" &&
+     grep -q '"maintenance_source_mode":"none"' "$out" &&
+     grep -q '"maintenance_source_active":false' "$out" &&
      grep -q '"period_enabled":true' "$out" &&
      grep -q '"period_from_provided":true' "$out" &&
      grep -q '"period_to_provided":false' "$out" &&
@@ -330,6 +338,70 @@ test_stats_cost_car_id_ok() {
     printf '[OK] --stats cost --car-id: Car-Scope wirkt auf Aggregation\n'
   else
     printf '[FAIL] --stats cost --car-id: Car-Scope wirkt auf Aggregation\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_maintenance_source_none_ok() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --maintenance-source none >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q '^Maintenance source mode: none$' "$out" &&
+     grep -q '^Maintenance source active: no$' "$out"; then
+    printf '[OK] --stats cost --maintenance-source none: expliziter Integrationsmodus aktiv\n'
+  else
+    printf '[FAIL] --stats cost --maintenance-source none: expliziter Integrationsmodus aktiv\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_maintenance_source_context_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats fuelups --maintenance-source none >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] &&
+     grep -q 'Fehler: --maintenance-source ist nur zusammen mit "--stats cost" erlaubt.' "$err"; then
+    printf '[OK] --maintenance-source ausserhalb cost: Validierungsfehler\n'
+  else
+    printf '[FAIL] --maintenance-source ausserhalb cost: Validierungsfehler\n'
+    add_fail
+  fi
+}
+
+test_stats_cost_maintenance_source_module_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --maintenance-source module >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] &&
+     grep -q 'S11C2/4' "$err"; then
+    printf '[OK] --stats cost --maintenance-source module: klarer Not-Active-Fehler\n'
+  else
+    printf '[FAIL] --stats cost --maintenance-source module: klarer Not-Active-Fehler\n'
     add_fail
   fi
 }

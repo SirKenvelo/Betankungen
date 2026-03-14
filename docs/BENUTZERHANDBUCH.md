@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-13
+**Stand:** 2026-03-14
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -127,10 +127,13 @@ Policy-Hinweis (Matrix v1):
 - Cost-MVP Textausgabe: `Betankungen --stats cost`
 - Cost-MVP JSON compact: `Betankungen --stats cost --json`
 - Cost-MVP JSON pretty: `Betankungen --stats cost --json --pretty`
+- Expliziter Integrationsmodus: `Betankungen --stats cost --maintenance-source none|module`
 - Ausgabe enthaelt aktuell: `Cars total`, `Cars with valid full-tank cycles`, `Distance (km)`, `Fuel cost (cents)`, `Maintenance cost (cents)` (MVP-Placeholder), `Total cost (cents)`, `Total cost per km (EUR)`.
 - Cost-MVP basiert derzeit auf Fuel-Kosten aus gueltigen Volltank-Zyklen; Maintenance ist im Core noch nicht integriert und steht daher auf `0`.
+- `--maintenance-source none` ist aktuell der aktive Modus.
+- `--maintenance-source module` ist bereits explizit verdrahtet, liefert aber bis S11C2/4 einen klaren Not-Active-Fehler.
 - JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "cost_mvp"`) und den Payload `cost` mit Aggregaten sowie skalierten per-km-Werten (`*_eur_x1000`).
-- Cost-JSON fuehrt zusaetzlich Scope-/Period-Felder als Contract (`scope_mode`, `scope_car_id`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`).
+- Cost-JSON fuehrt zusaetzlich Scope-/Period-Felder als Contract (`scope_mode`, `scope_car_id`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`) sowie Integrationsfelder (`maintenance_source_mode`, `maintenance_source_active`).
 - Weiterhin nicht verfuegbar fuer Cost-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`.
 - Cost-CLI-Scope ist aktiviert: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig.
 - Cost-Scope wirkt direkt auf die Aggregation (Collector): Zeitraum- und Fahrzeugfilter werden in Text- und JSON-Ausgabe angewendet.

@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-13
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,13 +59,15 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] | --edit cars --car-id <id> | --delete cars --car-id <id>')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--json [--pretty]]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats fleet [--json [--pretty]] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] [--json [--pretty]]')
+  else if FocusFlag = '--maintenance-source' then
+    Writeln('Usage: Betankungen --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] [--json [--pretty]]')
   else if (FocusFlag = '--from') then
-    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--json [--pretty]]')
+    Writeln('Usage: Betankungen --stats fuelups [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--monthly] [--yearly] [--dashboard] [--json [--pretty]] [--csv] | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] [--json [--pretty]]')
   else if FocusFlag = '--db' then
     Writeln('Usage: Betankungen [--db <pfad>|--demo] <command> [options]')
   else if FocusFlag = '--demo' then
@@ -133,6 +135,7 @@ begin
   Sec('Stats options');
   Item('--from <YYYY-MM|YYYY-MM-DD>','Startzeitraum (bei --stats fuelups und --stats cost).');
   Item('--to <YYYY-MM|YYYY-MM-DD>',  'Endzeitraum (fuelups/cost; exklusive Obergrenze).');
+  Item('--maintenance-source <none|module>','Kostenquelle fuer Maintenance im Cost-Pfad (aktuell aktiv: none).');
   Item('--monthly',                  'Monatliche Aggregation (nur fuelups; nicht mit --yearly).');
   Item('--yearly',                   'Jaehrliche Aggregation (nur fuelups; nicht mit --monthly/--csv/--dashboard).');
   Item('--json',                     'JSON-Ausgabe (fuelups/fleet/cost).');
@@ -160,6 +163,8 @@ begin
   Line('  Betankungen --stats fleet --json --pretty');
   Line('  Betankungen --stats cost');
   Line('  Betankungen --stats cost --from 2025-01 --to 2025-03');
+  Line('  Betankungen --stats cost --maintenance-source none');
+  Line('  Betankungen --stats cost --maintenance-source module');
   Line('  Betankungen --stats cost --car-id 1 --from 2025-01');
   Line('  Betankungen --stats cost --json --pretty');
   Line('  Betankungen --seed --fuelups 400 --force');

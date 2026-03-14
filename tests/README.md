@@ -81,6 +81,7 @@ Direktlauf:
 - Baseline deckt jetzt zusaetzlich `--stats cost` (MVP-Text + JSON compact/pretty) ab; Cost-Guardrails bleiben fuer `--csv`, `--monthly`, `--yearly`, `--dashboard` regressionsgesichert.
 - Cost-Scope ist in den Smokes funktionsbezogen abgesichert: `--stats cost --from ...` und `--stats cost --car-id ...` werden mit wirksamer Aggregationsfilterung geprueft.
 - Cost-JSON-Scope ist regressionsgesichert: `--stats cost --json --car-id ... --from ...` prueft Contract-Felder und Scope-/Period-Werte.
+- Cost-Integrationsmodus ist regressionsgesichert: `--stats cost --maintenance-source none` (OK), `--maintenance-source` ausserhalb `--stats cost` (Validierungsfehler) und `--stats cost --maintenance-source module` (klarer Not-Active-Fehler bis S11C2/4).
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.

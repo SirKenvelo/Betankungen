@@ -234,12 +234,15 @@ Bereits erledigt:
 
 ## Roadmap Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: geplant
+- Status: in Arbeit (`S11C1/4` umgesetzt)
 - Ziel: fuel + maintenance konsistent integrieren und Release-Reife vorbereiten.
 
 ### S11C1/4 - Integrationscontract
 
-- Geplant: expliziten Core-zu-Modul-Integrationsmodus fuer Kosten definieren.
+- Erreicht: expliziter Integrationsmodus fuer Cost-Stats eingefuehrt (`--maintenance-source none|module`).
+- Erreicht: Kontext-Policy verdrahtet (`--maintenance-source` nur fuer `--stats cost`).
+- Erreicht: Core-Cost gibt den Integrationsmodus transparent aus (Text + JSON-Contract-Felder `maintenance_source_mode`, `maintenance_source_active`).
+- Erreicht: `--maintenance-source module` liefert bis S11C2/4 einen klaren Not-Active-Fehler statt stillen Fallback.
 
 ### S11C2/4 - Kostenaggregation
 

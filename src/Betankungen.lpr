@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-13
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -561,6 +561,8 @@ begin
     ' Dashboard=' + BoolToStr(Cmd.Dashboard, True) +
     ' Pretty=' + BoolToStr(Cmd.Pretty, True) +
     ' CarId=' + IntToStr(Cmd.CarId) +
+    ' MaintenanceSource=' + MaintenanceSourceToString(Cmd.MaintenanceSource) +
+    ' MaintenanceSourceProvided=' + BoolToStr(Cmd.MaintenanceSourceProvided, True) +
     ' DbOverride=' + BoolToStr(Cmd.DbOverride <> '', True) +
     ' UseDemoDb=' + BoolToStr(Cmd.UseDemoDb, True)
   );
@@ -795,6 +797,9 @@ begin
         case Cmd.Kind of
           ckStats:
             begin
+              if Cmd.MaintenanceSource = msModule then
+                FailUsage('Fehler: --maintenance-source module ist vorbereitet, aber noch nicht aktiv (S11C2/4).', efMaintenanceSource);
+
               if Cmd.Json then
                 ShowCostStatsJson(DbPath,
                   Cmd.PeriodEnabled,
@@ -803,6 +808,7 @@ begin
                   Cmd.FromProvided,
                   Cmd.ToProvided,
                   Cmd.CarId,
+                  Cmd.MaintenanceSource,
                   Cmd.Pretty,
                   APP_VERSION)
               else
@@ -812,7 +818,8 @@ begin
                   Cmd.PeriodToExclIso,
                   Cmd.FromProvided,
                   Cmd.ToProvided,
-                  Cmd.CarId);
+                  Cmd.CarId,
+                  Cmd.MaintenanceSource);
             end;
         else
           FailUsage('Interner Fehler: Ungültiges cost-Kommando.');

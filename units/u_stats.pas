@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-13
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -29,6 +29,9 @@ unit u_stats;
 {$modeswitch advancedrecords}
 
 interface
+
+uses
+  u_cli_types;
 
 // Liefert die Standard-Zyklusstatistik (Text, ohne Period-Filter).
 procedure ShowFuelupStats(const DbPath: string); overload;
@@ -86,7 +89,8 @@ procedure ShowCostStats(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const CarId: integer = 0); overload;
+  const CarId: integer = 0;
+  const MaintenanceSource: TMaintenanceSource = msNone); overload;
 // Liefert die Cost-Statistik als MVP-JSON-Ausgabe.
 procedure ShowCostStatsJson(const DbPath: string;
   const Pretty: boolean = False;
@@ -97,6 +101,7 @@ procedure ShowCostStatsJson(const DbPath: string;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
   const CarId: integer;
+  const MaintenanceSource: TMaintenanceSource;
   const Pretty: boolean;
   const AppVersion: string); overload;
 
@@ -1405,6 +1410,7 @@ procedure CollectCostStats(const DbPath: string;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
   const ScopeCarId: integer;
+  const MaintenanceSource: TMaintenanceSource;
   out R: TCostStats);
 var
   Conn: TSQLite3Connection;
@@ -1481,8 +1487,15 @@ begin
     R.FuelCentsTotal += CarStats.SumTotalCents;
   end;
 
-  // MVP-Basis: maintenance liegt noch nicht im Core vor.
-  R.MaintenanceCentsTotal := 0;
+  case MaintenanceSource of
+    msNone:
+      // MVP-Basis: maintenance liegt noch nicht im Core vor.
+      R.MaintenanceCentsTotal := 0;
+    msModule:
+      raise Exception.Create('Fehler: --maintenance-source module ist vorbereitet, aber noch nicht aktiv (S11C2/4).');
+  else
+    R.MaintenanceCentsTotal := 0;
+  end;
   R.TotalCents := R.FuelCentsTotal + R.MaintenanceCentsTotal;
 end;
 
@@ -1522,6 +1535,7 @@ procedure RenderCostStatsJson(const R: TCostStats;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
   const CarId: integer;
+  const MaintenanceSource: TMaintenanceSource;
   const Pretty: boolean;
   const AppVersion: string);
 var
@@ -1531,12 +1545,14 @@ var
   MaintenancePerKmX1000: Int64;
   TotalPerKmX1000: Int64;
   ScopeMode: string;
+  MaintenanceSourceActive: boolean;
 begin
   CostPerKmAvailable := R.DistKmTotal > 0;
   if CarId > 0 then
     ScopeMode := 'single_car'
   else
     ScopeMode := 'all_cars';
+  MaintenanceSourceActive := False;
 
   if CostPerKmAvailable then
   begin
@@ -1563,6 +1579,10 @@ begin
   J.IndentInc;
   J.IndentWrite; J.W('"scope_mode":'); J.SP; J.W('"'); J.W(ScopeMode); J.W('"'); J.W(','); J.NL;
   J.IndentWrite; J.W('"scope_car_id":'); J.SP; J.W(IntToStr(CarId)); J.W(','); J.NL;
+  J.IndentWrite; J.W('"maintenance_source_mode":'); J.SP; J.W('"'); J.W(MaintenanceSourceToString(MaintenanceSource)); J.W('"'); J.W(','); J.NL;
+  J.IndentWrite; J.W('"maintenance_source_active":'); J.SP;
+  if MaintenanceSourceActive then J.W('true') else J.W('false');
+  J.W(','); J.NL;
   J.IndentWrite; J.W('"period_enabled":'); J.SP;
   if PeriodEnabled then J.W('true') else J.W('false');
   J.W(','); J.NL;
@@ -1595,21 +1615,24 @@ end;
 
 procedure ShowCostStats(const DbPath: string);
 begin
-  ShowCostStats(DbPath, False, '', '', False, False, 0);
+  ShowCostStats(DbPath, False, '', '', False, False, 0, msNone);
 end;
 
 procedure ShowCostStats(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
-  const CarId: integer);
+  const CarId: integer;
+  const MaintenanceSource: TMaintenanceSource);
 var
   R: TCostStats;
 begin
-  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, R);
+  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, MaintenanceSource, R);
 
   WriteLn('Cost-Stats (MVP)');
   WriteLn('Scope: ', CostScopeLabel(CarId));
+  WriteLn('Maintenance source mode: ', MaintenanceSourceToString(MaintenanceSource));
+  WriteLn('Maintenance source active: no');
   WriteLn('Period filter: ', CostPeriodLabel(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided));
   WriteLn('Cars total: ', R.CarsTotal);
   WriteLn('Cars with valid full-tank cycles: ', R.CarsWithCycles);
@@ -1624,7 +1647,7 @@ procedure ShowCostStatsJson(const DbPath: string;
   const Pretty: boolean;
   const AppVersion: string);
 begin
-  ShowCostStatsJson(DbPath, False, '', '', False, False, 0, Pretty, AppVersion);
+  ShowCostStatsJson(DbPath, False, '', '', False, False, 0, msNone, Pretty, AppVersion);
 end;
 
 procedure ShowCostStatsJson(const DbPath: string;
@@ -1632,12 +1655,13 @@ procedure ShowCostStatsJson(const DbPath: string;
   const PeriodFromIso, PeriodToExclIso: string;
   const FromProvided, ToProvided: boolean;
   const CarId: integer;
+  const MaintenanceSource: TMaintenanceSource;
   const Pretty: boolean;
   const AppVersion: string);
 var
   R: TCostStats;
 begin
-  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, R);
+  CollectCostStats(DbPath, PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided, CarId, MaintenanceSource, R);
   RenderCostStatsJson(
     R,
     PeriodEnabled,
@@ -1646,6 +1670,7 @@ begin
     FromProvided,
     ToProvided,
     CarId,
+    MaintenanceSource,
     Pretty,
     AppVersion);
 end;

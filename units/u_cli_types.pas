@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-11
+  UPDATED: 2026-03-14
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -40,6 +40,14 @@ uses
   SysUtils;
 
 type
+  // Quelle fuer Maintenance-Kosten im Cost-Stats-Pfad.
+  TMaintenanceSource = (
+    // Core-only Modus (keine Maintenance-Integration).
+    msNone,
+    // Expliziter Integrationspfad via Companion-Modul.
+    msModule
+  );
+
   // Gueltige Datenziele der Hauptkommandos.
   // Wichtig: Kein tkNone, da der Orchestrator nur gueltige Targets
   // nach erfolgreichem Parsing weiterverarbeitet.
@@ -80,6 +88,8 @@ type
     efDb,
     // Fehler bei --db-set.
     efDbSet,
+    // Fehler bei --maintenance-source.
+    efMaintenanceSource,
     // Fehler im Demo-Workflow.
     efDemo,
     // Fehler im Seed-Workflow.
@@ -145,6 +155,8 @@ type
     DbOverride: string;
     DbSet: string;
     CarId: integer;
+    MaintenanceSource: TMaintenanceSource;
+    MaintenanceSourceProvided: boolean;
 
     // Fehlertransport aus dem Parser.
     ErrorMsg: string;
@@ -160,6 +172,8 @@ function CommandKindToString(K: TCommandKind): String;
 // Fehlerfokus -> bevorzugtes Focus-Flag fuer Usage-Ausgabe.
 // Mehrere Enum-Werte duerfen auf dasselbe Flag mappen.
 function ErrorFocusToFlag(F: TErrorFocus): String;
+// Enum -> Token Mapping fuer Maintenance-Source.
+function MaintenanceSourceToString(const S: TMaintenanceSource): String;
 
 implementation
 
@@ -201,6 +215,7 @@ begin
     efCarId:       Result := '--car-id';
     efDb:          Result := '--db';
     efDbSet:       Result := '--db-set';
+    efMaintenanceSource: Result := '--maintenance-source';
     efDemo:        Result := '--demo';
     efSeed:        Result := '--seed';
     efStats:       Result := '--stats';
@@ -210,6 +225,16 @@ begin
     efCommand:     Result := '--add';
     efTarget:      Result := '--list';
     efMeta:        Result := '--about';
+  else
+    Result := '';
+  end;
+end;
+
+function MaintenanceSourceToString(const S: TMaintenanceSource): String;
+begin
+  case S of
+    msNone: Result := 'none';
+    msModule: Result := 'module';
   else
     Result := '';
   end;
