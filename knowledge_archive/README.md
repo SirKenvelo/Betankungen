@@ -104,4 +104,4 @@ Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 - Symbol/Topic: `RunListMaintenance`, `ParseArgs` (Vor-S10C3/4 Stand)
 - Anlass: behavior change (Erweiterung um `--stats maintenance` inkl. JSON-/Pretty-Kontexten)
 - Datum: `2026-03-14`
-- Commit: `n/a (S10C3/4, Hash folgt via Traceability-Commit)`
+- Commit: `25b6080`
