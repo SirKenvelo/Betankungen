@@ -294,7 +294,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 10 - Maintenance Companion v0.2
 
-- Status: in Umsetzung (`S10C1/4` done)
+- Status: in Umsetzung (`S10C1/4` + `S10C2/4` done)
 - Ziel: `betankungen-maintenance` von Handshake-Skeleton auf fachliche Basisfunktionalitaet heben.
 
 ### Commit-Folge
@@ -305,9 +305,14 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `278408a`
 - Artefakte: `.artifacts/sprint_10_commit_1_von_4.md`, `.artifacts/sprint_10_commit_1_von_4.diff`
 
+2. S10C2/4
+- Thema: Companion-CLI fuer Maintenance-CRUD-Basis umgesetzt (`--add maintenance`, `--list maintenance` inkl. `--car-id`-Scope) und Module-Smoke erweitert.
+- Status: done
+- Git-Commit: `aad05f8`
+- Artefakte: `.artifacts/sprint_10_commit_2_von_4.md`, `.artifacts/sprint_10_commit_2_von_4.diff`
+
 ### Geplante Bloecke
 
-- S10C2/4: Companion-CLI fuer Maintenance-CRUD-Basis (`--add maintenance`, `--list maintenance`, `--car-id`-Scope).
 - S10C3/4: `--stats maintenance` (Text + JSON) inkl. Contract-Baseline.
 - S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.
 
