@@ -49,3 +49,4 @@ Integration von:
 - S11C1/4 fuehrt den expliziten Integrationsmodus fuer Cost ein: `--maintenance-source none|module`.
 - S11C2/4 aktiviert den Modulpfad: bei `--maintenance-source module` werden Maintenance-Kosten aus dem Companion-Contract (`maintenance_stats_v1`) integriert; bei nicht verfuegbarer Quelle greift ein expliziter, robuster Fallback (`maintenance_source_active=false`, `maintenance_source_note`).
 - S11C3/4 haertet die Verify-/CI-Kette fuer beide Integrationsmodi: neuer Regression-Check `tests/regression/run_cost_integration_modes_check.sh` prueft `none`, aktives `module` sowie Fallback-Szenarien als Pflicht-Gate.
+- S11C4/4 finalisiert den 0.9.0-Readiness-Pfad: Scope-Freeze + standardisierter Release-Preflight (`scripts/release_preflight.sh`, `make release-preflight`, `docs/RELEASE_0_9_0_PREFLIGHT.md`).

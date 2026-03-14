@@ -71,6 +71,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Sprint 10 C4 umgesetzt: Module-Smoke-/Contract-Haertung abgeschlossen (inkl. Guardrails fuer ungueltige Stats-/JSON-Kombinationen)
 - Sprint 11 C1/C2 umgesetzt: Cost-CLI besitzt einen expliziten Integrationsmodus `--maintenance-source none|module`; `module` ist aktiv und integriert Maintenance-Kosten via Companion-Binary mit robustem, explizitem Fallback wenn die Quelle nicht verfuegbar ist.
 - Sprint 11 C3 umgesetzt: dedizierter Integrations-Regression-Check fuer Cost (`none`/`module` inkl. aktivem Modulpfad und Fallback-Szenarien) ist in `make verify` und CI als Pflicht-Gate verankert.
+- Sprint 11 C4 umgesetzt: 0.9.0-Readiness-Paket mit Scope-Freeze, standardisiertem Preflight (`scripts/release_preflight.sh`) und Release-Checkliste (`docs/RELEASE_0_9_0_PREFLIGHT.md`) ist aktiv.
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
@@ -87,6 +88,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
+- `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 
 ## Open-Source-Hinweis
 
@@ -399,6 +401,20 @@ Beispiel:
 - `scripts/repo_sync.sh --status-only`
 - `scripts/repo_sync.sh --remote origin --branch main`
 
+### `scripts/release_preflight.sh`
+Readiness-Preflight fuer den 0.9.0-Releasepfad.
+
+**Funktionen**
+- Fuehrt den lokalen Voll-Gate-Lauf via `make verify` aus (optional via `--skip-verify` ueberspringbar)
+- prueft, dass die aktive Versionierung noch auf einer `-dev`-Linie liegt
+- fuehrt `kpr.sh` und `scripts/backup_snapshot.sh` im Dry-Run aus
+- standardisiert die lokale Freigabepruefung vor dem finalen Release-Schritt
+
+Beispiel:
+- `scripts/release_preflight.sh`
+- `scripts/release_preflight.sh --skip-verify`
+- `scripts/release_preflight.sh --note "Preflight vor 0.9.0 Freigabe"`
+
 ### `scripts/sprint_artifact.sh`
 Hilfsskript fuer lokale Sprint-Artefakte aus einem bestehenden Commit.
 
@@ -473,6 +489,8 @@ Beispiel:
   - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
 - `make smoke`
   - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
+- `make release-preflight`
+  - Fuehrt den 0.9.0-Readiness-Preflight aus (`scripts/release_preflight.sh`)
 - `make release-dry`
   - Fuehrt `kpr.sh --dry-run` aus
 - optional:

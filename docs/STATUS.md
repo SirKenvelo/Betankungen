@@ -234,7 +234,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: in Arbeit (`S11C1/4` + `S11C2/4` + `S11C3/4` umgesetzt)
+- Status: abgeschlossen (`S11C1/4` + `S11C2/4` + `S11C3/4` + `S11C4/4` umgesetzt)
 - Ziel: fuel + maintenance konsistent integrieren und Release-Reife vorbereiten.
 
 ### S11C1/4 - Integrationscontract
@@ -259,7 +259,9 @@ Bereits erledigt:
 
 ### S11C4/4 - Release-Readiness
 
-- Geplant: Scope-Freeze, finale Doku-Synchronisierung und 0.9.0-Preflight.
+- Erreicht: Scope-Freeze fuer die 0.9.0-Linie dokumentiert (klarer In-/Out-of-Scope-Rahmen).
+- Erreicht: standardisierter lokaler Preflight eingefuehrt (`scripts/release_preflight.sh`, `make release-preflight`).
+- Erreicht: Release-Readiness-Checkliste fuer 0.9.0 verankert (`docs/RELEASE_0_9_0_PREFLIGHT.md`).
 
 ## Roadmap Sprint 6 - Modulstrategie operationalisieren
 
