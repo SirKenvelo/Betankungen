@@ -31,6 +31,15 @@ type
 
   TMaintenanceEventRows = array of TMaintenanceEventRow;
 
+  TMaintenanceStats = record
+    EventsTotal: Int64;
+    CarsTotal: Int64;
+    TotalCostCents: Int64;
+    AvgCostPerEventCents: Int64;
+    FirstEventDate: string;
+    LastEventDate: string;
+  end;
+
 function ResolveMaintenanceDbPath(const OverridePath: string): string;
 function CurrentModuleSchemaVersion: Integer;
 procedure EnsureMaintenanceSchema(const DbPath: string; out Changed: Boolean);
@@ -45,6 +54,10 @@ procedure ListMaintenanceEvents(
   const DbPath: string;
   const CarIdFilter: Integer;
   out Rows: TMaintenanceEventRows);
+procedure CollectMaintenanceStats(
+  const DbPath: string;
+  const CarIdFilter: Integer;
+  out Stats: TMaintenanceStats);
 
 implementation
 
@@ -326,6 +339,73 @@ begin
         Inc(N);
         Q.Next;
       end;
+    finally
+      Q.Close;
+    end;
+  finally
+    Q.Free;
+    Tran.Free;
+    Conn.Free;
+  end;
+end;
+
+procedure CollectMaintenanceStats(
+  const DbPath: string;
+  const CarIdFilter: Integer;
+  out Stats: TMaintenanceStats);
+var
+  Conn: TSQLite3Connection;
+  Tran: TSQLTransaction;
+  Q: TSQLQuery;
+  SchemaChanged: Boolean;
+begin
+  FillChar(Stats, SizeOf(Stats), 0);
+  EnsureMaintenanceSchema(DbPath, SchemaChanged);
+
+  Conn := TSQLite3Connection.Create(nil);
+  Tran := TSQLTransaction.Create(nil);
+  Q := TSQLQuery.Create(nil);
+  try
+    Conn.DatabaseName := DbPath;
+    Conn.Transaction := Tran;
+    Q.Database := Conn;
+    Q.Transaction := Tran;
+    Conn.Open;
+
+    if CarIdFilter > 0 then
+    begin
+      Q.SQL.Text :=
+        'SELECT ' +
+        '  COUNT(*) AS events_total, ' +
+        '  COUNT(DISTINCT car_id) AS cars_total, ' +
+        '  COALESCE(SUM(cost_cents), 0) AS total_cost_cents, ' +
+        '  COALESCE(MIN(event_date), '''') AS first_event_date, ' +
+        '  COALESCE(MAX(event_date), '''') AS last_event_date ' +
+        'FROM maintenance_events WHERE car_id = :car_id;';
+      Q.Params.ParamByName('car_id').AsInteger := CarIdFilter;
+    end
+    else
+      Q.SQL.Text :=
+        'SELECT ' +
+        '  COUNT(*) AS events_total, ' +
+        '  COUNT(DISTINCT car_id) AS cars_total, ' +
+        '  COALESCE(SUM(cost_cents), 0) AS total_cost_cents, ' +
+        '  COALESCE(MIN(event_date), '''') AS first_event_date, ' +
+        '  COALESCE(MAX(event_date), '''') AS last_event_date ' +
+        'FROM maintenance_events;';
+
+    Q.Open;
+    try
+      Stats.EventsTotal := Q.FieldByName('events_total').AsLargeInt;
+      Stats.CarsTotal := Q.FieldByName('cars_total').AsLargeInt;
+      Stats.TotalCostCents := Q.FieldByName('total_cost_cents').AsLargeInt;
+      Stats.FirstEventDate := Q.FieldByName('first_event_date').AsString;
+      Stats.LastEventDate := Q.FieldByName('last_event_date').AsString;
+      if Stats.EventsTotal > 0 then
+        Stats.AvgCostPerEventCents :=
+          (Stats.TotalCostCents + (Stats.EventsTotal div 2)) div Stats.EventsTotal
+      else
+        Stats.AvgCostPerEventCents := 0;
     finally
       Q.Close;
     end;

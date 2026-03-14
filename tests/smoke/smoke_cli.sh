@@ -242,6 +242,7 @@ print_plan() {
     printf '[LIST] (Modules) --migrate Re-Run bleibt idempotent (schema_version stabil)\n'
     printf '[LIST] (Modules) --add maintenance speichert Event-Datensaetze\n'
     printf '[LIST] (Modules) --list maintenance liefert all/scoped Ausgabe stabil\n'
+    printf '[LIST] (Modules) --stats maintenance liefert Text + JSON(+pretty) + Scope-Contract\n'
     printf '[LIST] (Modules) unknown flag -> sauberer CLI-Fehlerpfad\n'
   fi
 

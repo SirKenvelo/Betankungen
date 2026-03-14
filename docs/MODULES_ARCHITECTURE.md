@@ -10,11 +10,12 @@ Ziel:
 - reproduzierbarer Modul-Build
 - konsistente CLI-/DB-/Stats-Integration
 
-Aktueller Baseline-Stand (S6/S10C1):
+Aktueller Baseline-Stand (S6/S10C3):
 - Technischer Handshake ist implementiert (`--module-info` JSON-Contract).
 - Erstes Companion-Skeleton ist vorhanden (`src/betankungen-maintenance.lpr`).
 - Smoke-Absicherung fuer den Modul-Contract ist vorhanden (`tests/smoke/smoke_modules.sh`, integrierbar via `tests/smoke/smoke_cli.sh --modules`).
 - Modul-Schema-Basis ist vorhanden: `maintenance_events` + `module_meta(schema_version)` via idempotentem `--migrate`.
+- Maintenance-Companion liefert CRUD + Stats-Basis (`--add/--list/--stats maintenance`) inkl. JSON-Contract (`kind: "maintenance_stats_v1"`).
 
 ## Scope und Begriffe
 
@@ -113,6 +114,7 @@ Das Companion-Skeleton `betankungen-maintenance` liefert aktuell:
 - `--migrate [--db <path>]`
 - `--add maintenance --car-id <id> --date <YYYY-MM-DD> --type <name> --cost-cents <value> [--notes <text>] [--db <path>]`
 - `--list maintenance [--car-id <id>] [--db <path>]`
+- `--stats maintenance [--car-id <id>] [--json [--pretty]] [--db <path>]`
 
 Beispiel (`--module-info`, compact):
 
@@ -130,6 +132,10 @@ Schema-Baseline aus `S10C1/4` (Migration `--migrate`):
   - `cost_cents` (INTEGER, required, `>= 0`)
   - `notes` (TEXT, optional)
   - `created_at`, `updated_at` (TEXT, default `datetime('now')`)
+
+Stats-Baseline aus `S10C3/4` (`--stats maintenance`):
+- Text: `Maintenance-Stats (MVP)` mit Scope (`all cars` oder `car_id=<id>`), Zeitraum (`period`) und Kennzahlen (`events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`).
+- JSON: `contract_version=1`, `kind="maintenance_stats_v1"`, `generated_at`, `app_version`, Payload `maintenance` mit `scope_mode`, `scope_car_id`, `events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`, `period_from`, `period_to`.
 
 ## 8) Startpunkt fuer erste Module
 

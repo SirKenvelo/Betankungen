@@ -32,6 +32,14 @@ OUT_LIST_FILTER="$TMP_DIR/list_filter.out"
 ERR_LIST_FILTER="$TMP_DIR/list_filter.err"
 OUT_LIST_EMPTY="$TMP_DIR/list_empty.out"
 ERR_LIST_EMPTY="$TMP_DIR/list_empty.err"
+OUT_STATS_TEXT="$TMP_DIR/stats_text.out"
+ERR_STATS_TEXT="$TMP_DIR/stats_text.err"
+OUT_STATS_JSON="$TMP_DIR/stats_json.out"
+ERR_STATS_JSON="$TMP_DIR/stats_json.err"
+OUT_STATS_JSON_PRETTY="$TMP_DIR/stats_json_pretty.out"
+ERR_STATS_JSON_PRETTY="$TMP_DIR/stats_json_pretty.err"
+OUT_STATS_JSON_SCOPE="$TMP_DIR/stats_json_scope.out"
+ERR_STATS_JSON_SCOPE="$TMP_DIR/stats_json_scope.err"
 OUT_BAD="$TMP_DIR/bad.out"
 ERR_BAD="$TMP_DIR/bad.err"
 BUILD_LOG="$TMP_DIR/build.log"
@@ -114,6 +122,7 @@ if [[ $RC -ne 0 ]] ||
    ! grep -q '^       betankungen-maintenance --migrate \[--db <path>\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --add maintenance --car-id <id> --date <YYYY-MM-DD> --type <name> --cost-cents <value> \[--notes <text>\] \[--db <path>\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --list maintenance \[--car-id <id>\] \[--db <path>\]$' "$OUT_HELP" ||
+   ! grep -q '^       betankungen-maintenance --stats maintenance \[--car-id <id>\] \[--json \[--pretty\]\] \[--db <path>\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --help | --version$' "$OUT_HELP"; then
   fail '--help-Contract des Companion-Binary ist nicht stabil.'
 fi
@@ -235,6 +244,79 @@ if [[ $RC -ne 0 ]] ||
   fail '--list maintenance --car-id 999 muss leer, aber erfolgreich sein.'
 fi
 printf '[OK] Modules: --list maintenance leerer Scope ist stabil\n'
+
+set +e
+"$MODULE_BIN" --add maintenance --db "$MIGRATE_DB" --car-id 5 --date 2025-03-20 --type repair --cost-cents 5000 --notes "scope-case" >"$TMP_DIR/add_2.out" 2>"$TMP_DIR/add_2.err"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]]; then
+  fail '2. --add maintenance (Scope-Case) fehlgeschlagen.'
+fi
+
+set +e
+"$MODULE_BIN" --stats maintenance --db "$MIGRATE_DB" >"$OUT_STATS_TEXT" 2>"$ERR_STATS_TEXT"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^Maintenance-Stats (MVP)$' "$OUT_STATS_TEXT" ||
+   ! grep -q '^Scope: all cars$' "$OUT_STATS_TEXT" ||
+   ! grep -q '^Events total: 2$' "$OUT_STATS_TEXT" ||
+   ! grep -q '^Cars total: 2$' "$OUT_STATS_TEXT" ||
+   ! grep -q '^Total cost (cents): 17345$' "$OUT_STATS_TEXT" ||
+   ! grep -q '^Average cost per event (cents): 8673$' "$OUT_STATS_TEXT"; then
+  fail '--stats maintenance (text) verletzt den Contract.'
+fi
+printf '[OK] Modules: --stats maintenance text\n'
+
+set +e
+"$MODULE_BIN" --stats maintenance --db "$MIGRATE_DB" --json >"$OUT_STATS_JSON" 2>"$ERR_STATS_JSON"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '"contract_version":1' "$OUT_STATS_JSON" ||
+   ! grep -q '"kind":"maintenance_stats_v1"' "$OUT_STATS_JSON" ||
+   ! grep -q '"app_version":"' "$OUT_STATS_JSON" ||
+   ! grep -q '"maintenance":{' "$OUT_STATS_JSON" ||
+   ! grep -q '"scope_mode":"all_cars"' "$OUT_STATS_JSON" ||
+   ! grep -q '"events_total":2' "$OUT_STATS_JSON" ||
+   ! grep -q '"cars_total":2' "$OUT_STATS_JSON" ||
+   ! grep -q '"total_cost_cents":17345' "$OUT_STATS_JSON" ||
+   ! grep -q '"avg_cost_per_event_cents":8673' "$OUT_STATS_JSON"; then
+  fail '--stats maintenance --json verletzt den Contract.'
+fi
+printf '[OK] Modules: --stats maintenance --json compact\n'
+
+set +e
+"$MODULE_BIN" --stats maintenance --db "$MIGRATE_DB" --json --pretty >"$OUT_STATS_JSON_PRETTY" 2>"$ERR_STATS_JSON_PRETTY"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '^{$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^  "contract_version": 1,$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^  "kind": "maintenance_stats_v1",$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^  "maintenance": {$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^    "scope_mode": "all_cars",$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^    "events_total": 2,$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^    "cars_total": 2,$' "$OUT_STATS_JSON_PRETTY" ||
+   ! grep -q '^    "total_cost_cents": 17345,$' "$OUT_STATS_JSON_PRETTY"; then
+  fail '--stats maintenance --json --pretty verletzt den Contract.'
+fi
+printf '[OK] Modules: --stats maintenance --json --pretty\n'
+
+set +e
+"$MODULE_BIN" --stats maintenance --db "$MIGRATE_DB" --car-id 2 --json >"$OUT_STATS_JSON_SCOPE" 2>"$ERR_STATS_JSON_SCOPE"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '"scope_mode":"single_car"' "$OUT_STATS_JSON_SCOPE" ||
+   ! grep -q '"scope_car_id":2' "$OUT_STATS_JSON_SCOPE" ||
+   ! grep -q '"events_total":1' "$OUT_STATS_JSON_SCOPE" ||
+   ! grep -q '"cars_total":1' "$OUT_STATS_JSON_SCOPE" ||
+   ! grep -q '"total_cost_cents":12345' "$OUT_STATS_JSON_SCOPE" ||
+   ! grep -q '"avg_cost_per_event_cents":12345' "$OUT_STATS_JSON_SCOPE"; then
+  fail '--stats maintenance --car-id <id> verletzt den Scope-Contract.'
+fi
+printf '[OK] Modules: --stats maintenance --car-id scoped JSON\n'
 
 set +e
 "$MODULE_BIN" --does-not-exist >"$OUT_BAD" 2>"$ERR_BAD"

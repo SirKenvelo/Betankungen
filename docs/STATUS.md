@@ -178,6 +178,7 @@ Bereits erledigt:
 - Gestartet (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
 - Erreicht (S10C1/4): Modul-Schema + idempotente Migration fuer `betankungen-maintenance` umgesetzt (`--migrate [--db <path>]`, `module_meta`, `maintenance_events`).
 - Erreicht (S10C2/4): Companion-CRUD-Basis umgesetzt (`--add maintenance`, `--list maintenance` inkl. Scope via `--car-id`).
+- Erreicht (S10C3/4): Companion-Stats-Basis umgesetzt (`--stats maintenance` Text + JSON/Pretty inkl. Scope via `--car-id` und Contract `maintenance_stats_v1`).
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
@@ -207,7 +208,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 10 - Maintenance Companion v0.2
 
-- Status: in Umsetzung (`S10C1/4` + `S10C2/4` abgeschlossen)
+- Status: in Umsetzung (`S10C1/4` + `S10C2/4` + `S10C3/4` abgeschlossen)
 - Ziel: `betankungen-maintenance` von Contract-Skeleton auf fachliche Nutzbarkeit heben.
 
 ### S10C1/4 - Modul-Schema + Migration
@@ -222,7 +223,8 @@ Bereits erledigt:
 
 ### S10C3/4 - Modul-Stats + Export
 
-- Geplant: `--stats maintenance` (Text + JSON) mit klarem Contract.
+- Erreicht: `--stats maintenance` als Textausgabe mit Scope-/Period-Transparenz (`all cars` bzw. `car_id=<id>`) und Kennzahlen (`events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`).
+- Erreicht: JSON-Contract fuer Modul-Stats eingefuehrt (`contract_version=1`, `kind="maintenance_stats_v1"`, `generated_at`, `app_version`, Payload `maintenance` inkl. Scope-/Period-Feldern) sowie Pretty-Variante via `--json --pretty`.
 
 ### S10C4/4 - Modul-Qualitaetsgate
 

@@ -58,3 +58,7 @@ Optionales Modul:
 - S10C2/4 liefert die erste CRUD-Basis im Modul:
   - `--add maintenance` (Pflichtfelder: `--car-id`, `--date`, `--type`, `--cost-cents`)
   - `--list maintenance` (optionaler Scope `--car-id`)
+- S10C3/4 liefert die erste Stats-/Export-Basis im Modul:
+  - `--stats maintenance` (Text)
+  - `--stats maintenance --json [--pretty]` mit Contract `maintenance_stats_v1`
+  - optionaler Scope ueber `--car-id`

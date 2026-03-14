@@ -98,3 +98,10 @@ Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 - Anlass: loeschung (ersetzt durch zentrales `ParseArgs`-Modell fuer S10C2/4)
 - Datum: `2026-03-14`
 - Commit: `aad05f8`
+
+10. `archive_maintenance_pre_stats_cli_flow_2026-03-14.pas`
+- Quelle: `src/betankungen-maintenance.lpr`
+- Symbol/Topic: `RunListMaintenance`, `ParseArgs` (Vor-S10C3/4 Stand)
+- Anlass: behavior change (Erweiterung um `--stats maintenance` inkl. JSON-/Pretty-Kontexten)
+- Datum: `2026-03-14`
+- Commit: `n/a (S10C3/4, Hash folgt via Traceability-Commit)`

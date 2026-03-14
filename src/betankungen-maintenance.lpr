@@ -9,8 +9,8 @@
   Verantwortlichkeiten:
   - Stellt den minimalen Modul-Handshake bereit (`--module-info`).
   - Initialisiert/Migriert das Modul-Schema via `--migrate`.
+  - Liefert Basis-CRUD und Stats fuer Maintenance-Events.
   - Liefert Basis-Meta-Flags (`--help`, `--version`, optional `--pretty`).
-  - Enthaelt noch keine fachliche CRUD-/Stats-Logik fuer Maintenance-Events.
   ---------------------------------------------------------------------------
 }
 program betankungen_maintenance;
@@ -40,11 +40,13 @@ type
     akModuleInfo,
     akMigrate,
     akAddMaintenance,
-    akListMaintenance
+    akListMaintenance,
+    akStatsMaintenance
   );
 
   TParsedArgs = record
     Action: TActionKind;
+    Json: Boolean;
     Pretty: Boolean;
     DbArg: string;
     CarIdRaw: string;
@@ -60,9 +62,10 @@ begin
   WriteLn('       ', MODULE_BIN_NAME, ' --migrate [--db <path>]');
   WriteLn('       ', MODULE_BIN_NAME, ' --add maintenance --car-id <id> --date <YYYY-MM-DD> --type <name> --cost-cents <value> [--notes <text>] [--db <path>]');
   WriteLn('       ', MODULE_BIN_NAME, ' --list maintenance [--car-id <id>] [--db <path>]');
+  WriteLn('       ', MODULE_BIN_NAME, ' --stats maintenance [--car-id <id>] [--json [--pretty]] [--db <path>]');
   WriteLn('       ', MODULE_BIN_NAME, ' --help | --version');
   WriteLn('');
-  WriteLn('Maintenance companion module (schema + CRUD baseline).');
+  WriteLn('Maintenance companion module (schema + CRUD + stats baseline).');
 end;
 
 procedure PrintVersion;
@@ -136,6 +139,24 @@ begin
   Result := StringReplace(Result, #13, ' ', [rfReplaceAll]);
 end;
 
+function JsonEscape(const S: string): string;
+begin
+  Result := StringReplace(S, '\', '\\', [rfReplaceAll]);
+  Result := StringReplace(Result, '"', '\"', [rfReplaceAll]);
+  Result := StringReplace(Result, #13, '\r', [rfReplaceAll]);
+  Result := StringReplace(Result, #10, '\n', [rfReplaceAll]);
+end;
+
+function JsonString(const S: string): string;
+begin
+  Result := '"' + JsonEscape(S) + '"';
+end;
+
+function BuildGeneratedAt: string;
+begin
+  Result := FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss"Z"', Now);
+end;
+
 procedure RunAddMaintenance(const Args: TParsedArgs);
 var
   DbPath: string;
@@ -207,6 +228,87 @@ begin
     );
 end;
 
+function StatsScopeLabel(const CarIdFilter: Integer): string;
+begin
+  if CarIdFilter > 0 then
+    Result := 'car_id=' + IntToStr(CarIdFilter)
+  else
+    Result := 'all cars';
+end;
+
+procedure RunStatsMaintenance(const Args: TParsedArgs);
+var
+  DbPath: string;
+  Stats: TMaintenanceStats;
+  CarIdFilter: Integer;
+begin
+  if Trim(Args.CarIdRaw) <> '' then
+    CarIdFilter := ParsePositiveInt(Args.CarIdRaw, '--car-id')
+  else
+    CarIdFilter := 0;
+
+  DbPath := ResolveMaintenanceDbPath(Args.DbArg);
+  CollectMaintenanceStats(DbPath, CarIdFilter, Stats);
+
+  if Args.Json then
+  begin
+    if Args.Pretty then
+    begin
+      WriteLn('{');
+      WriteLn('  "contract_version": 1,');
+      WriteLn('  "kind": "maintenance_stats_v1",');
+      WriteLn('  "generated_at": ', JsonString(BuildGeneratedAt), ',');
+      WriteLn('  "app_version": ', JsonString(MODULE_VERSION), ',');
+      WriteLn('  "maintenance": {');
+      if CarIdFilter > 0 then
+        WriteLn('    "scope_mode": "single_car",')
+      else
+        WriteLn('    "scope_mode": "all_cars",');
+      WriteLn('    "scope_car_id": ', CarIdFilter, ',');
+      WriteLn('    "events_total": ', Stats.EventsTotal, ',');
+      WriteLn('    "cars_total": ', Stats.CarsTotal, ',');
+      WriteLn('    "total_cost_cents": ', Stats.TotalCostCents, ',');
+      WriteLn('    "avg_cost_per_event_cents": ', Stats.AvgCostPerEventCents, ',');
+      WriteLn('    "period_from": ', JsonString(Stats.FirstEventDate), ',');
+      WriteLn('    "period_to": ', JsonString(Stats.LastEventDate));
+      WriteLn('  }');
+      WriteLn('}');
+    end
+    else
+    begin
+      Write('{"contract_version":1');
+      Write(',"kind":"maintenance_stats_v1"');
+      Write(',"generated_at":', JsonString(BuildGeneratedAt));
+      Write(',"app_version":', JsonString(MODULE_VERSION));
+      Write(',"maintenance":{');
+      if CarIdFilter > 0 then
+        Write('"scope_mode":"single_car"')
+      else
+        Write('"scope_mode":"all_cars"');
+      Write(',"scope_car_id":', CarIdFilter);
+      Write(',"events_total":', Stats.EventsTotal);
+      Write(',"cars_total":', Stats.CarsTotal);
+      Write(',"total_cost_cents":', Stats.TotalCostCents);
+      Write(',"avg_cost_per_event_cents":', Stats.AvgCostPerEventCents);
+      Write(',"period_from":', JsonString(Stats.FirstEventDate));
+      Write(',"period_to":', JsonString(Stats.LastEventDate));
+      WriteLn('}}');
+    end;
+    Exit;
+  end;
+
+  WriteLn('Maintenance-Stats (MVP)');
+  WriteLn('Scope: ', StatsScopeLabel(CarIdFilter));
+  if (Stats.FirstEventDate <> '') and (Stats.LastEventDate <> '') then
+    WriteLn('Period: ', Stats.FirstEventDate, ' ... ', Stats.LastEventDate)
+  else
+    WriteLn('Period: none');
+  WriteLn('Events total: ', Stats.EventsTotal);
+  WriteLn('Cars total: ', Stats.CarsTotal);
+  WriteLn('Total cost (cents): ', Stats.TotalCostCents);
+  WriteLn('Average cost per event (cents): ', Stats.AvgCostPerEventCents);
+end;
+
 function ParseArgs(out Args: TParsedArgs; out ErrMsg: string): Boolean;
 var
   i: Integer;
@@ -238,6 +340,8 @@ begin
       SetAction(akModuleInfo)
     else if A = '--migrate' then
       SetAction(akMigrate)
+    else if A = '--json' then
+      Args.Json := True
     else if A = '--pretty' then
       Args.Pretty := True
     else if (A = '--db') or (A = '--car-id') or (A = '--date') or
@@ -263,7 +367,7 @@ begin
       else
         Args.NotesRaw := ParamStr(i);
     end
-    else if (A = '--add') or (A = '--list') then
+    else if (A = '--add') or (A = '--list') or (A = '--stats') then
     begin
       Inc(i);
       if i > ParamCount then
@@ -278,8 +382,10 @@ begin
       end;
       if A = '--add' then
         SetAction(akAddMaintenance)
+      else if A = '--list' then
+        SetAction(akListMaintenance)
       else
-        SetAction(akListMaintenance);
+        SetAction(akStatsMaintenance);
     end
     else
     begin
@@ -295,8 +401,9 @@ begin
       PendingAction := akHelp;
     Args.Action := PendingAction;
 
-    if (Args.Action in [akAddMaintenance, akListMaintenance, akMigrate]) and Args.Pretty then
-      raise Exception.Create('Fehler: --pretty ist nur zusammen mit --module-info erlaubt.');
+    if Args.Pretty and
+       (not ((Args.Action = akModuleInfo) or ((Args.Action = akStatsMaintenance) and Args.Json))) then
+      raise Exception.Create('Fehler: --pretty ist nur zusammen mit --module-info oder --stats maintenance --json erlaubt.');
 
     if Args.Action = akAddMaintenance then
     begin
@@ -308,7 +415,38 @@ begin
         raise Exception.Create('Fehler: --type ist fuer --add maintenance erforderlich.');
       if Trim(Args.CostCentsRaw) = '' then
         raise Exception.Create('Fehler: --cost-cents ist fuer --add maintenance erforderlich.');
+      if Args.Json then
+        raise Exception.Create('Fehler: --json ist fuer --add maintenance nicht erlaubt.');
     end;
+
+    if Args.Action = akListMaintenance then
+    begin
+      if Args.Json then
+        raise Exception.Create('Fehler: --json ist fuer --list maintenance nicht erlaubt.');
+      if Trim(Args.DateRaw) <> '' then
+        raise Exception.Create('Fehler: --date ist fuer --list maintenance nicht erlaubt.');
+      if Trim(Args.EventTypeRaw) <> '' then
+        raise Exception.Create('Fehler: --type ist fuer --list maintenance nicht erlaubt.');
+      if Trim(Args.CostCentsRaw) <> '' then
+        raise Exception.Create('Fehler: --cost-cents ist fuer --list maintenance nicht erlaubt.');
+      if Trim(Args.NotesRaw) <> '' then
+        raise Exception.Create('Fehler: --notes ist fuer --list maintenance nicht erlaubt.');
+    end;
+
+    if Args.Action = akStatsMaintenance then
+    begin
+      if Trim(Args.DateRaw) <> '' then
+        raise Exception.Create('Fehler: --date ist fuer --stats maintenance nicht erlaubt.');
+      if Trim(Args.EventTypeRaw) <> '' then
+        raise Exception.Create('Fehler: --type ist fuer --stats maintenance nicht erlaubt.');
+      if Trim(Args.CostCentsRaw) <> '' then
+        raise Exception.Create('Fehler: --cost-cents ist fuer --stats maintenance nicht erlaubt.');
+      if Trim(Args.NotesRaw) <> '' then
+        raise Exception.Create('Fehler: --notes ist fuer --stats maintenance nicht erlaubt.');
+    end;
+
+    if (Args.Action in [akHelp, akVersion, akModuleInfo, akMigrate]) and Args.Json then
+      raise Exception.Create('Fehler: --json ist nur zusammen mit --stats maintenance erlaubt.');
 
     Result := True;
   except
@@ -367,6 +505,20 @@ begin
   begin
     try
       RunListMaintenance(Args);
+      Halt(EXIT_OK);
+    except
+      on E: Exception do
+      begin
+        WriteLn(StdErr, E.Message);
+        Halt(EXIT_CLI);
+      end;
+    end;
+  end;
+
+  if Args.Action = akStatsMaintenance then
+  begin
+    try
+      RunStatsMaintenance(Args);
       Halt(EXIT_OK);
     except
       on E: Exception do
