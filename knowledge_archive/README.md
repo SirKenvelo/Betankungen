@@ -119,3 +119,17 @@ Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
 - Anlass: behavior change (neue Kontext-Policy fuer `--maintenance-source`)
 - Datum: `2026-03-14`
 - Commit: `47dcee8`
+
+13. `archive_cost_stats_pre_module_activation_2026-03-14.pas`
+- Quelle: `units/u_stats.pas`
+- Symbol/Topic: `CollectCostStats`, `ShowCostStats` (Vor-S11C2/4 Stand mit module Hard-Error)
+- Anlass: behavior change (Aktivierung der Cost-Integration fuer `--maintenance-source module` inkl. Fallback-Metadaten)
+- Datum: `2026-03-14`
+- Commit: `274111c`
+
+14. `archive_core_cost_dispatch_pre_module_activation_2026-03-14.pas`
+- Quelle: `src/Betankungen.lpr`
+- Symbol/Topic: Cost-Dispatch-Guard im Orchestrator (Vor-S11C2/4)
+- Anlass: behavior change (Entfernung des fruehen Hard-Error-Guards; Integrationsentscheidung in Stats-Schicht verlagert)
+- Datum: `2026-03-14`
+- Commit: `274111c`
