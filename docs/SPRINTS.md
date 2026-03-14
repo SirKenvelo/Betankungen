@@ -334,7 +334,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: in Arbeit (`S11C1/4` + `S11C2/4` + `S11C3/4` done)
+- Status: done (`S11C1/4` + `S11C2/4` + `S11C3/4` + `S11C4/4` done)
 - Ziel: Kostenintegration fuel + maintenance stabilisieren und 0.9.0-Readiness absichern.
 
 ### Commit-Folge
@@ -357,11 +357,17 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `015ba1b`
 - Artefakte: `.artifacts/sprint_11_commit_3_von_4.md`, `.artifacts/sprint_11_commit_3_von_4.diff`
 
+4. S11C4/4
+- Thema: 0.9.0-Readiness-Paket finalisiert. Scope-Freeze wurde dokumentiert, der standardisierte lokale Preflight (`scripts/release_preflight.sh`, `make release-preflight`) eingefuehrt und die Release-Checkliste unter `docs/RELEASE_0_9_0_PREFLIGHT.md` verankert.
+- Status: done
+- Git-Commit: `cbfa3e8`
+- Artefakte: `.artifacts/sprint_11_commit_4_von_4.md`, `.artifacts/sprint_11_commit_4_von_4.diff`
+
 ### Geplante Bloecke
 
-- S11C4/4: 0.9.0-Readiness-Paket (Scope-Freeze, Doku-Finalisierung, Preflight).
+- (keine offenen Bloecke)
 
 ### Abschluss-Tag
 
-- Sprint-Abschluss: S11C4/4 (pending)
-- Abschluss-Tag: `sprint-11-done` (pending)
+- Sprint-Abschluss: S11C4/4 (done)
+- Abschluss-Tag: `sprint-11-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
