@@ -14,6 +14,7 @@ Detailed documents are currently maintained primarily in German.
 - Sprint 10 C3 delivered maintenance stats baseline: `--stats maintenance` (text + JSON/pretty) with optional car scope (`--car-id`).
 - Sprint 10 C4 hardened the module contract and smoke coverage (invalid stats/json combinations now explicitly regression-tested).
 - Sprint 11 C1/C2 delivered an explicit cost integration mode: `--maintenance-source none|module`; `module` is now active and pulls maintenance cost from the companion binary with explicit fallback metadata when unavailable.
+- Sprint 11 C3 hardened verification/CI for both integration modes with a dedicated regression gate (`tests/regression/run_cost_integration_modes_check.sh`) covering `none`, active `module`, and explicit fallback scenarios.
 - S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export-meta baseline
 - S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
 - Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)

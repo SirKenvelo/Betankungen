@@ -1,17 +1,18 @@
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-13
+# UPDATED: 2026-03-14
 
 SHELL := bash
 .SHELLFLAGS := -e -o pipefail -c
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check policy smoke-fixtures smoke smoke-clean verify release-dry
+.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check policy smoke-fixtures smoke smoke-clean verify release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
 	@echo "  make build         - FPC-Standardbuild (bin/build/units)"
 	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Build + Contract + Policy + Smokes)"
+	@echo "  make cost-integration-check - Regression fuer Cost-Integrationsmodi (none/module/fallback)"
 	@echo "  make smoke         - Smoke-Suite (tests/smoke/smoke_cli.sh --modules)"
 	@echo "  make smoke-clean   - Clean-Home-Smoke (tests/smoke/smoke_clean_home.sh --modules)"
 	@echo "  make release-dry   - Dry-Run fuer Release-Archiv (kpr.sh --dry-run)"
@@ -29,6 +30,9 @@ tracker-lint:
 contract-check:
 	tests/regression/run_export_contract_json_check.sh
 
+cost-integration-check:
+	tests/regression/run_cost_integration_modes_check.sh
+
 policy:
 	tests/domain_policy/run_domain_policy_tests.sh
 
@@ -44,7 +48,7 @@ smoke:
 smoke-clean:
 	tests/smoke/smoke_clean_home.sh --modules
 
-verify: lint-docs tracker-lint build contract-check policy smoke-fixtures smoke smoke-clean
+verify: lint-docs tracker-lint build contract-check cost-integration-check policy smoke-fixtures smoke smoke-clean
 
 release-dry:
 	./kpr.sh --dry-run

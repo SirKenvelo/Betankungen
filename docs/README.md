@@ -70,6 +70,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Sprint 10 C3 umgesetzt: `betankungen-maintenance` liefert `--stats maintenance` (Text + JSON/Pretty) inkl. Scope-Contract (`--car-id`)
 - Sprint 10 C4 umgesetzt: Module-Smoke-/Contract-Haertung abgeschlossen (inkl. Guardrails fuer ungueltige Stats-/JSON-Kombinationen)
 - Sprint 11 C1/C2 umgesetzt: Cost-CLI besitzt einen expliziten Integrationsmodus `--maintenance-source none|module`; `module` ist aktiv und integriert Maintenance-Kosten via Companion-Binary mit robustem, explizitem Fallback wenn die Quelle nicht verfuegbar ist.
+- Sprint 11 C3 umgesetzt: dedizierter Integrations-Regression-Check fuer Cost (`none`/`module` inkl. aktivem Modulpfad und Fallback-Szenarien) ist in `make verify` und CI als Pflicht-Gate verankert.
 - Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
@@ -467,7 +468,9 @@ Beispiel:
 ## Task-Entrypoints (make)
 
 - `make verify`
-  - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Domain-Policy + Smoke + Clean-Home-Smoke
+  - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Cost-Integrations-Regression + Domain-Policy + Smoke + Clean-Home-Smoke
+- `make cost-integration-check`
+  - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
 - `make smoke`
   - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
 - `make release-dry`
@@ -488,6 +491,7 @@ Beispiel:
   - Tracker-Lint (`scripts/projtrack_lint.sh`)
   - FPC-Build (Projekt-Standard)
   - Export-Contract JSON-Check (`tests/regression/run_export_contract_json_check.sh`)
+  - Cost-Integrations-Regression (`tests/regression/run_cost_integration_modes_check.sh`)
   - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)
   - Smoke-Suite (`tests/smoke/smoke_cli.sh --modules`)
   - Clean-Home-Smoke (`tests/smoke/smoke_clean_home.sh --modules`)

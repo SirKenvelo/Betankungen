@@ -68,9 +68,12 @@ Direktlauf:
 ## Regression-Checks
 - Script: `tests/regression/run_export_contract_json_check.sh`
 - Zweck: Liest die JSON-Contract-Keys aus `docs/EXPORT_CONTRACT.md` und validiert sie gegen echte CLI-JSON-Ausgaben (`fuelups` full/monthly/yearly, `fleet`, `cost`).
+- Script: `tests/regression/run_cost_integration_modes_check.sh`
+- Zweck: validiert den Cost-Integrationscontract fuer `--maintenance-source none|module` inkl. aktivem Companion-Pfad und expliziten Fallbacks (fehlendes Binary, period-gefilterter Modulmodus).
 
 Direktlauf:
 - `tests/regression/run_export_contract_json_check.sh`
+- `tests/regression/run_cost_integration_modes_check.sh`
 
 ## Smoke-Test
 - Script: `tests/smoke/smoke_cli.sh`

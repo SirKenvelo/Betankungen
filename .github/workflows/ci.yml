@@ -1,5 +1,5 @@
 # CREATED: 2026-03-11
-# UPDATED: 2026-03-13
+# UPDATED: 2026-03-14
 name: CI
 
 on:
@@ -50,6 +50,10 @@ jobs:
       - name: Export-Contract JSON check
         run: |
           tests/regression/run_export_contract_json_check.sh
+
+      - name: Cost integration modes check
+        run: |
+          tests/regression/run_cost_integration_modes_check.sh
 
       - name: Domain-Policy suite
         run: |

@@ -234,7 +234,7 @@ Bereits erledigt:
 
 ## Roadmap Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: in Arbeit (`S11C1/4` + `S11C2/4` umgesetzt)
+- Status: in Arbeit (`S11C1/4` + `S11C2/4` + `S11C3/4` umgesetzt)
 - Ziel: fuel + maintenance konsistent integrieren und Release-Reife vorbereiten.
 
 ### S11C1/4 - Integrationscontract
@@ -252,7 +252,10 @@ Bereits erledigt:
 
 ### S11C3/4 - Regression + CI-Haertung
 
-- Geplant: Verify-/Smoke-/Policy-Kette fuer beide Modi (mit/ohne Modul) erweitern.
+- Erreicht: dedizierte Integrations-Regression `tests/regression/run_cost_integration_modes_check.sh` eingefuehrt.
+- Erreicht: Check deckt beide Modi robust ab (`--maintenance-source none|module`) inkl. aktivem Modulpfad und expliziten Fallback-Szenarien (fehlendes Binary, period-gefilterter Modulmodus).
+- Erreicht: lokales Verify-Gate erweitert (`make verify` enthaelt jetzt `cost-integration-check`).
+- Erreicht: CI-Gate erweitert (`.github/workflows/ci.yml` fuehrt den neuen Cost-Integrations-Check als Pflichtschritt im Job `verify` aus).
 
 ### S11C4/4 - Release-Readiness
 

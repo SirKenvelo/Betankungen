@@ -48,3 +48,4 @@ Integration von:
 - S9C4/4 haertet Guardrails regressionssicher fuer Cost-Scope (Domain-Policy `P-061`: Car-/Period-Isolation) und finalisiert den Sprint-9-Nachweis.
 - S11C1/4 fuehrt den expliziten Integrationsmodus fuer Cost ein: `--maintenance-source none|module`.
 - S11C2/4 aktiviert den Modulpfad: bei `--maintenance-source module` werden Maintenance-Kosten aus dem Companion-Contract (`maintenance_stats_v1`) integriert; bei nicht verfuegbarer Quelle greift ein expliziter, robuster Fallback (`maintenance_source_active=false`, `maintenance_source_note`).
+- S11C3/4 haertet die Verify-/CI-Kette fuer beide Integrationsmodi: neuer Regression-Check `tests/regression/run_cost_integration_modes_check.sh` prueft `none`, aktives `module` sowie Fallback-Szenarien als Pflicht-Gate.
