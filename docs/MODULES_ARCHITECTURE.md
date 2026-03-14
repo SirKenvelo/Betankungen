@@ -1,5 +1,5 @@
 # Betankungen Module Architecture
-**Stand:** 2026-03-10
+**Stand:** 2026-03-14
 **Status:** baseline v1 (operational)
 
 Dieses Dokument definiert den technischen Contract fuer optionale Module in
@@ -10,10 +10,11 @@ Ziel:
 - reproduzierbarer Modul-Build
 - konsistente CLI-/DB-/Stats-Integration
 
-Aktueller Baseline-Stand (S6):
+Aktueller Baseline-Stand (S6/S10C1):
 - Technischer Handshake ist implementiert (`--module-info` JSON-Contract).
 - Erstes Companion-Skeleton ist vorhanden (`src/betankungen-maintenance.lpr`).
 - Smoke-Absicherung fuer den Modul-Contract ist vorhanden (`tests/smoke/smoke_modules.sh`, integrierbar via `tests/smoke/smoke_cli.sh --modules`).
+- Modul-Schema-Basis ist vorhanden: `maintenance_events` + `module_meta(schema_version)` via idempotentem `--migrate`.
 
 ## Scope und Begriffe
 
@@ -109,12 +110,24 @@ Das Companion-Skeleton `betankungen-maintenance` liefert aktuell:
 - `--version`
 - `--module-info`
 - `--module-info --pretty`
+- `--migrate [--db <path>]`
 
 Beispiel (`--module-info`, compact):
 
 ```json
 {"module_name":"maintenance","module_version":"0.1.0-dev","min_core_version":"0.9.0-dev","db_schema_version":1}
 ```
+
+Schema-Baseline aus `S10C1/4` (Migration `--migrate`):
+- `module_meta(key PRIMARY KEY, value)` mit mindestens `schema_version=1`
+- `maintenance_events`:
+  - `id` (PK, autoincrement)
+  - `car_id` (INTEGER, required)
+  - `event_date` (TEXT, required)
+  - `event_type` (TEXT, required)
+  - `cost_cents` (INTEGER, required, `>= 0`)
+  - `notes` (TEXT, optional)
+  - `created_at`, `updated_at` (TEXT, default `datetime('now')`)
 
 ## 8) Startpunkt fuer erste Module
 

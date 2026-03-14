@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-13
+# UPDATED: 2026-03-14
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -238,6 +238,8 @@ print_plan() {
     printf '[LIST] (Modules) Companion-Binary Build: src/betankungen-maintenance.lpr\n'
     printf '[LIST] (Modules) --module-info compact liefert Pflichtfelder\n'
     printf '[LIST] (Modules) --module-info --pretty liefert Mehrzeilen-JSON\n'
+    printf '[LIST] (Modules) --migrate initialisiert Modul-Schema (module_meta + maintenance_events)\n'
+    printf '[LIST] (Modules) --migrate Re-Run bleibt idempotent (schema_version stabil)\n'
     printf '[LIST] (Modules) unknown flag -> sauberer CLI-Fehlerpfad\n'
   fi
 

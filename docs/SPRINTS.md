@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-13
+**Stand:** 2026-03-14
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -290,16 +290,16 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S9C4/4 (done)
-- Abschluss-Tag: `sprint-9-done` (pending)
+- Abschluss-Tag: `sprint-9-done` (gesetzt)
 
 ## Sprint 10 - Maintenance Companion v0.2
 
-- Status: geplant
+- Status: in Umsetzung (`S10C1/4` done)
 - Ziel: `betankungen-maintenance` von Handshake-Skeleton auf fachliche Basisfunktionalitaet heben.
 
 ### Geplante Bloecke
 
-- S10C1/4: Modul-Schema + idempotente Migration fuer Maintenance-Events.
+- S10C1/4: done - Modul-Schema + idempotente Migration fuer Maintenance-Events (`--migrate`, `module_meta`, `maintenance_events`).
 - S10C2/4: Companion-CLI fuer `--add maintenance` / `--list maintenance`.
 - S10C3/4: `--stats maintenance` (Text + JSON) inkl. Contract-Baseline.
 - S10C4/4: Modul-Smoke-/Contract-Haertung + Doku-Finalisierung.

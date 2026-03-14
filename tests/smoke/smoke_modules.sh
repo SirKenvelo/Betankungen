@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_modules.sh
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-14
 # Fokus-Smoke fuer Companion-Binary-Contract (`--module-info`) von Modulen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -20,9 +20,14 @@ OUT_INFO="$TMP_DIR/info.out"
 ERR_INFO="$TMP_DIR/info.err"
 OUT_INFO_PRETTY="$TMP_DIR/info_pretty.out"
 ERR_INFO_PRETTY="$TMP_DIR/info_pretty.err"
+OUT_MIGRATE_1="$TMP_DIR/migrate_1.out"
+ERR_MIGRATE_1="$TMP_DIR/migrate_1.err"
+OUT_MIGRATE_2="$TMP_DIR/migrate_2.out"
+ERR_MIGRATE_2="$TMP_DIR/migrate_2.err"
 OUT_BAD="$TMP_DIR/bad.out"
 ERR_BAD="$TMP_DIR/bad.err"
 BUILD_LOG="$TMP_DIR/build.log"
+MIGRATE_DB="$TMP_DIR/maintenance_module_test.db"
 
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
   C_RESET=$'\033[0m'
@@ -73,6 +78,9 @@ fi
 if ! command -v fpc >/dev/null 2>&1; then
   fail 'FPC Compiler nicht gefunden (erwartet: "fpc" im PATH).'
 fi
+if ! command -v sqlite3 >/dev/null 2>&1; then
+  fail 'sqlite3 nicht gefunden (erwartet fuer Migrationschecks).'
+fi
 
 mkdir -p "$ROOT_DIR/bin" "$BUILD_DIR"
 
@@ -95,6 +103,7 @@ RC=$?
 set -e
 if [[ $RC -ne 0 ]] ||
    ! grep -q '^Usage: betankungen-maintenance --module-info \[--pretty\]$' "$OUT_HELP" ||
+   ! grep -q '^       betankungen-maintenance --migrate \[--db <path>\]$' "$OUT_HELP" ||
    ! grep -q '^       betankungen-maintenance --help | --version$' "$OUT_HELP"; then
   fail '--help-Contract des Companion-Binary ist nicht stabil.'
 fi
@@ -134,6 +143,36 @@ if [[ $RC -ne 0 ]] ||
   fail '--module-info --pretty verletzt den JSON-Minimalcontract.'
 fi
 printf '[OK] Modules: --module-info --pretty JSON\n'
+
+set +e
+"$MODULE_BIN" --migrate --db "$MIGRATE_DB" >"$OUT_MIGRATE_1" 2>"$ERR_MIGRATE_1"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] || [[ ! -f "$MIGRATE_DB" ]]; then
+  fail '--migrate Erstlauf fehlgeschlagen.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT value FROM module_meta WHERE key='schema_version' LIMIT 1;")" != "1" ]]; then
+  fail '--migrate Erstlauf: schema_version ist nicht 1.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='maintenance_events';")" != "1" ]]; then
+  fail '--migrate Erstlauf: maintenance_events fehlt.'
+fi
+printf '[OK] Modules: --migrate initialisiert Modul-Schema\n'
+
+set +e
+"$MODULE_BIN" --migrate --db "$MIGRATE_DB" >"$OUT_MIGRATE_2" 2>"$ERR_MIGRATE_2"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]]; then
+  fail '--migrate Re-Run fehlgeschlagen.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT value FROM module_meta WHERE key='schema_version' LIMIT 1;")" != "1" ]]; then
+  fail '--migrate Re-Run: schema_version ist nicht stabil auf 1.'
+fi
+if [[ "$(sqlite3 "$MIGRATE_DB" "SELECT COUNT(*) FROM module_meta WHERE key='schema_version';")" != "1" ]]; then
+  fail '--migrate Re-Run: schema_version-Key ist nicht eindeutig.'
+fi
+printf '[OK] Modules: --migrate ist idempotent\n'
 
 set +e
 "$MODULE_BIN" --does-not-exist >"$OUT_BAD" 2>"$ERR_BAD"

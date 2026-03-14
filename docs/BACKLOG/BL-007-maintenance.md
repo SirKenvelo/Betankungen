@@ -1,5 +1,5 @@
 # BL-007 - Maintenance System
-**Stand:** 2026-03-09
+**Stand:** 2026-03-14
 **Status:** icebox
 **Prioritaet:** mittel
 **Typ:** Domain-Erweiterung (Companion-Modul)
@@ -48,3 +48,10 @@ Integration in Kostenanalyse:
 Optionales Modul:
 
 `betankungen-maintenance`
+
+## Hinweis zum aktuellen Stand
+
+- Sprint 10 ist gestartet.
+- S10C1/4 liefert die technische Modul-Basis fuer eigene Fachdaten:
+  - Modul-Schema `maintenance_events` + `module_meta(schema_version)`
+  - idempotente Migration via `betankungen-maintenance --migrate [--db <path>]`

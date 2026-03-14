@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-13
+**Stand:** 2026-03-14
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -41,6 +41,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S9C4/4 - Cost-Scope-Guardrails via Domain-Policy `P-061` erweitert (Car-/Period-Isolation fuer `--stats cost`) und Sprint-9-Doku finalisiert; Artefakte: `.artifacts/sprint_9_commit_4_von_4.md`, `.artifacts/sprint_9_commit_4_von_4.diff`; Basis-Commit: `297d588`. (2026-03-13)
 
 ### Changed
+- [S10C1/4] Module/Migration: `betankungen-maintenance` um idempotente Schema-Migration erweitert (`--migrate [--db <path>]`). Neue Unit `units/u_maintenance_db.pas` initialisiert das Modul-Schema mit `module_meta(schema_version)` und `maintenance_events` inkl. Indizes; das Companion-CLI verdrahtet den Migrationspfad in `src/betankungen-maintenance.lpr`. Module-Smoke auf Migrations-Contract erweitert (`tests/smoke/smoke_modules.sh`, `tests/smoke/smoke_cli.sh`) und Test-/Modul-Doku synchronisiert (`tests/README.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG/BL-007-maintenance.md`). (2026-03-14)
 - [General] Meta/Process: `AGENTS.md` auf den aktuellen Tracker-/Quality-Gate-Stand aktualisiert (`Stand` auf `2026-03-13`, explizite Verankerung von `POL-001`, kanonischen Pfaden `docs/backlog`/`docs/issues`/`docs/policies`, Legacy-Hinweis fuer `docs/BACKLOG`/`docs/ADR`, Verifikationshinweis zu `make verify` inkl. `projtrack_lint`). Hash-Disziplin fuer Sprint-Traceability praezisiert (verbindlich fuer `[SxCy/z]`, ohne harte Ueberdehnung auf alle `[General]`-Tasks). (2026-03-13)
 - [General] Tools/Quality-Gate: `projtrack_lint` in die Standard-Gates integriert. `Makefile` erweitert um Target `tracker-lint`; `make verify` fuehrt jetzt `sprint_docs_lint` + `projtrack_lint` vor Build/Tests aus. CI-Workflow `.github/workflows/ci.yml` um den Schritt `Tracker lint` ergaenzt. Doku-Sync in `docs/README.md`. (2026-03-13)
 - [General] Docs/Tracker: Bereichs-READMEs fuer das neue Tracker-Schema ergaenzt (`docs/issues/README.md`, `docs/backlog/README.md`) und die BL-Kette auf dem neuen Pfad finalisiert (`docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md` + `tasks/TSK-0001...`), inklusive Referenz-Sync in `ISS-0001`/`TSK-0001`. (2026-03-13)

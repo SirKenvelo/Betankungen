@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-13
+**Stand:** 2026-03-14
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -175,7 +175,8 @@ Bereits erledigt:
 - Erreicht (S9C2/4): Cost-Collector und Textausgabe auf aktiven Period-/Car-Scope erweitert.
 - Erreicht (S9C3/4): Cost-JSON-Contract um Scope-/Period-Felder erweitert und Contract-Check synchronisiert.
 - Erreicht (S9C4/4): Cost-Scope-Guardrails via Domain-Policy `P-061` regressionssicher erweitert (Car-/Period-Isolation) und Sprint 9 fachlich abgeschlossen.
-- Geplant (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
+- Gestartet (S10): Maintenance-Companion von Handshake auf fachliche v0.2-Basis heben.
+- Erreicht (S10C1/4): Modul-Schema + idempotente Migration fuer `betankungen-maintenance` umgesetzt (`--migrate [--db <path>]`, `module_meta`, `maintenance_events`).
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
@@ -205,12 +206,13 @@ Bereits erledigt:
 
 ## Roadmap Sprint 10 - Maintenance Companion v0.2
 
-- Status: geplant
+- Status: in Umsetzung (`S10C1/4` abgeschlossen)
 - Ziel: `betankungen-maintenance` von Contract-Skeleton auf fachliche Nutzbarkeit heben.
 
 ### S10C1/4 - Modul-Schema + Migration
 
-- Geplant: eigenes Maintenance-Schema und idempotente Modul-Migration.
+- Erreicht: eigenes Maintenance-Schema (`maintenance_events`) und getrennte Modul-Meta (`module_meta.schema_version`) eingefuehrt.
+- Erreicht: idempotente Modul-Migration via `betankungen-maintenance --migrate [--db <path>]` umgesetzt und per Module-Smoke regressionsgesichert.
 
 ### S10C2/4 - Modul-CLI Basis
 
