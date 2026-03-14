@@ -334,7 +334,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 11 - Integration + 0.9.0 Readiness
 
-- Status: in Arbeit (`S11C1/4` + `S11C2/4` done)
+- Status: in Arbeit (`S11C1/4` + `S11C2/4` + `S11C3/4` done)
 - Ziel: Kostenintegration fuel + maintenance stabilisieren und 0.9.0-Readiness absichern.
 
 ### Commit-Folge
@@ -351,9 +351,14 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Git-Commit: `274111c`
 - Artefakte: `.artifacts/sprint_11_commit_2_von_4.md`, `.artifacts/sprint_11_commit_2_von_4.diff`
 
+3. S11C3/4
+- Thema: Regression/CI fuer beide Integrationsmodi gehaertet. Neuer Gate-Check `tests/regression/run_cost_integration_modes_check.sh` deckt `--maintenance-source none|module` inkl. aktivem Companion-Pfad und expliziten Fallback-Szenarien ab und ist in `make verify` sowie CI verankert.
+- Status: done
+- Git-Commit: `015ba1b`
+- Artefakte: `.artifacts/sprint_11_commit_3_von_4.md`, `.artifacts/sprint_11_commit_3_von_4.diff`
+
 ### Geplante Bloecke
 
-- S11C3/4: Regression/CI-Haertung fuer Modi mit und ohne Maintenance-Modul.
 - S11C4/4: 0.9.0-Readiness-Paket (Scope-Freeze, Doku-Finalisierung, Preflight).
 
 ### Abschluss-Tag
