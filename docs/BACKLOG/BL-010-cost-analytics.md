@@ -46,4 +46,5 @@ Integration von:
 - S9C2/4 aktiviert die Scope-Auswertung im Collector/Textpfad: Zeitraum- und Fahrzeugfilter wirken jetzt auf die Cost-Aggregation.
 - S9C3/4 erweitert den Cost-JSON-Contract um Scope-/Period-Felder (`scope_*`, `period_*`) und synchronisiert den Export-Contract-Check.
 - S9C4/4 haertet Guardrails regressionssicher fuer Cost-Scope (Domain-Policy `P-061`: Car-/Period-Isolation) und finalisiert den Sprint-9-Nachweis.
-- S11C1/4 fuehrt den expliziten Integrationsmodus fuer Cost ein: `--maintenance-source none|module` (aktuell aktiv: `none`; `module` liefert bis S11C2/4 einen klaren Not-Active-Fehler).
+- S11C1/4 fuehrt den expliziten Integrationsmodus fuer Cost ein: `--maintenance-source none|module`.
+- S11C2/4 aktiviert den Modulpfad: bei `--maintenance-source module` werden Maintenance-Kosten aus dem Companion-Contract (`maintenance_stats_v1`) integriert; bei nicht verfuegbarer Quelle greift ein expliziter, robuster Fallback (`maintenance_source_active=false`, `maintenance_source_note`).

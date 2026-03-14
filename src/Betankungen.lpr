@@ -797,9 +797,6 @@ begin
         case Cmd.Kind of
           ckStats:
             begin
-              if Cmd.MaintenanceSource = msModule then
-                FailUsage('Fehler: --maintenance-source module ist vorbereitet, aber noch nicht aktiv (S11C2/4).', efMaintenanceSource);
-
               if Cmd.Json then
                 ShowCostStatsJson(DbPath,
                   Cmd.PeriodEnabled,

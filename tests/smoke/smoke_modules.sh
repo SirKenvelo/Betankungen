@@ -8,6 +8,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MODULE_SRC="$ROOT_DIR/src/betankungen-maintenance.lpr"
 MODULE_BIN="$ROOT_DIR/bin/betankungen-maintenance"
+CORE_BIN="$ROOT_DIR/bin/Betankungen"
 BUILD_DIR="$ROOT_DIR/build"
 UNITS_DIR="$ROOT_DIR/units"
 
@@ -50,8 +51,11 @@ OUT_FAIL_3="$TMP_DIR/fail_3.out"
 ERR_FAIL_3="$TMP_DIR/fail_3.err"
 OUT_FAIL_4="$TMP_DIR/fail_4.out"
 ERR_FAIL_4="$TMP_DIR/fail_4.err"
+OUT_CORE_COST_JSON="$TMP_DIR/core_cost_json.out"
+ERR_CORE_COST_JSON="$TMP_DIR/core_cost_json.err"
 BUILD_LOG="$TMP_DIR/build.log"
 MIGRATE_DB="$TMP_DIR/maintenance_module_test.db"
+CORE_DB="$TMP_DIR/core_cost_integration.db"
 
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
   C_RESET=$'\033[0m'
@@ -132,6 +136,16 @@ if [[ $RC -ne 0 ]]; then
   fail 'Companion-Binary konnte nicht gebaut werden.'
 fi
 printf '[OK] Modules: Build erfolgreich (%s)\n' "src/betankungen-maintenance.lpr"
+
+if [[ ! -x "$CORE_BIN" ]]; then
+  set +e
+  fpc -Mobjfpc -Sh -gl -gw -FE"$ROOT_DIR/bin" -FU"$BUILD_DIR" -Fu"$UNITS_DIR" "$ROOT_DIR/src/Betankungen.lpr" >>"$BUILD_LOG" 2>&1
+  RC=$?
+  set -e
+  if [[ $RC -ne 0 ]] || [[ ! -x "$CORE_BIN" ]]; then
+    fail 'Core-Binary konnte fuer Integrationscheck nicht gebaut werden.'
+  fi
+fi
 
 if [[ ! -x "$MODULE_BIN" ]]; then
   fail "Companion-Binary fehlt nach Build: $MODULE_BIN"
@@ -341,6 +355,25 @@ if [[ $RC -ne 0 ]] ||
   fail '--stats maintenance --car-id <id> verletzt den Scope-Contract.'
 fi
 printf '[OK] Modules: --stats maintenance --car-id scoped JSON\n'
+
+mkdir -p "$TMP_DIR/home_core"
+set +e
+BETANKUNGEN_MAINTENANCE_BIN="$MODULE_BIN" \
+BETANKUNGEN_MAINTENANCE_DB="$MIGRATE_DB" \
+HOME="$TMP_DIR/home_core" \
+  "$CORE_BIN" --db "$CORE_DB" --stats cost --json --maintenance-source module >"$OUT_CORE_COST_JSON" 2>"$ERR_CORE_COST_JSON"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q '"kind":"cost_mvp"' "$OUT_CORE_COST_JSON" ||
+   ! grep -q '"maintenance_source_mode":"module"' "$OUT_CORE_COST_JSON" ||
+   ! grep -q '"maintenance_source_active":true' "$OUT_CORE_COST_JSON" ||
+   ! grep -q '"maintenance_source_note":"module stats loaded' "$OUT_CORE_COST_JSON" ||
+   ! grep -q '"maintenance_cents_total":17345' "$OUT_CORE_COST_JSON" ||
+   ! grep -q '"total_cents":17345' "$OUT_CORE_COST_JSON"; then
+  fail 'Core-Integration mit --maintenance-source module verletzt den Cost-Contract.'
+fi
+printf '[OK] Modules: Core-Integration --stats cost --maintenance-source module (JSON)\n'
 
 expect_cli_fail "$OUT_FAIL_1" "$ERR_FAIL_1" --stats maintenance --pretty --db "$MIGRATE_DB"
 if ! grep -q -- '--pretty ist nur zusammen mit --module-info oder --stats maintenance --json erlaubt' "$ERR_FAIL_1"; then

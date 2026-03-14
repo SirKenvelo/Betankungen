@@ -129,11 +129,15 @@ Policy-Hinweis (Matrix v1):
 - Cost-MVP JSON pretty: `Betankungen --stats cost --json --pretty`
 - Expliziter Integrationsmodus: `Betankungen --stats cost --maintenance-source none|module`
 - Ausgabe enthaelt aktuell: `Cars total`, `Cars with valid full-tank cycles`, `Distance (km)`, `Fuel cost (cents)`, `Maintenance cost (cents)` (MVP-Placeholder), `Total cost (cents)`, `Total cost per km (EUR)`.
-- Cost-MVP basiert derzeit auf Fuel-Kosten aus gueltigen Volltank-Zyklen; Maintenance ist im Core noch nicht integriert und steht daher auf `0`.
+- Cost-MVP basiert auf Fuel-Kosten aus gueltigen Volltank-Zyklen; ohne aktivierte Modulquelle (`--maintenance-source none`) bleibt Maintenance auf `0` (Core-Placeholder).
 - `--maintenance-source none` ist aktuell der aktive Modus.
-- `--maintenance-source module` ist bereits explizit verdrahtet, liefert aber bis S11C2/4 einen klaren Not-Active-Fehler.
+- `--maintenance-source module` ist ab S11C2/4 aktiv: der Core liest Maintenance-Kosten ueber das Companion-Binary `betankungen-maintenance` ein.
+- Falls das Companion-Binary oder dessen Datenquelle nicht nutzbar ist, bleibt der Cost-Lauf robust (kein Abbruch); stattdessen wird ein expliziter Fallback mit `maintenance_source_active=false` und Hinweistext ausgegeben.
 - JSON enthaelt Export-Meta (`contract_version`, `generated_at`, `app_version`, `kind: "cost_mvp"`) und den Payload `cost` mit Aggregaten sowie skalierten per-km-Werten (`*_eur_x1000`).
-- Cost-JSON fuehrt zusaetzlich Scope-/Period-Felder als Contract (`scope_mode`, `scope_car_id`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`) sowie Integrationsfelder (`maintenance_source_mode`, `maintenance_source_active`).
+- Cost-JSON fuehrt zusaetzlich Scope-/Period-Felder als Contract (`scope_mode`, `scope_car_id`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`) sowie Integrationsfelder (`maintenance_source_mode`, `maintenance_source_active`, `maintenance_source_note`).
+- Optionale Environment-Overrides fuer die Modulquelle:
+  - `BETANKUNGEN_MAINTENANCE_BIN` (Pfad/Name des Companion-Binaries)
+  - `BETANKUNGEN_MAINTENANCE_DB` (expliziter Modul-DB-Pfad fuer den Companion-Aufruf)
 - Weiterhin nicht verfuegbar fuer Cost-MVP: `--csv`, `--monthly`, `--yearly`, `--dashboard`.
 - Cost-CLI-Scope ist aktiviert: `--from/--to` und `--car-id` sind fuer `--stats cost` zulaessig.
 - Cost-Scope wirkt direkt auf die Aggregation (Collector): Zeitraum- und Fahrzeugfilter werden in Text- und JSON-Ausgabe angewendet.

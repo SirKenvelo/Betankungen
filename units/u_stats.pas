@@ -109,6 +109,11 @@ implementation
 
 uses
   SysUtils,
+  Classes,
+  Process,
+  Pipes,
+  fpjson,
+  jsonparser,
   SQLite3Conn, SQLDB, u_log, u_table, u_fmt, u_car_context;
 
 // ------------------------------------------------------------
@@ -349,6 +354,8 @@ type
     DistKmTotal: Int64;
     FuelCentsTotal: Int64;
     MaintenanceCentsTotal: Int64;
+    MaintenanceSourceActive: Boolean;
+    MaintenanceSourceNote: string;
     TotalCents: Int64;
   end;
 
@@ -1405,6 +1412,297 @@ begin
   Result := (TotalCents * 10 + (DistKm div 2)) div DistKm;
 end;
 
+function BoolToYesNo(const B: Boolean): string;
+begin
+  if B then
+    Exit('yes');
+  Result := 'no';
+end;
+
+function TrimFirstLine(const S: string): string;
+var
+  i: Integer;
+begin
+  Result := Trim(S);
+  for i := 1 to Length(Result) do
+    if (Result[i] = #10) or (Result[i] = #13) then
+    begin
+      Result := Trim(Copy(Result, 1, i - 1));
+      Exit;
+    end;
+end;
+
+function TruncateForNote(const S: string; const MaxLen: Integer): string;
+begin
+  Result := Trim(S);
+  if Length(Result) > MaxLen then
+    Result := Copy(Result, 1, MaxLen) + '...';
+end;
+
+procedure AppendPipeToText(Pipe: TInputPipeStream; var Text: string);
+var
+  Buf: array[0..2047] of Byte;
+  N: LongInt;
+  Chunk: RawByteString;
+begin
+  while Pipe.NumBytesAvailable > 0 do
+  begin
+    N := Pipe.Read(Buf, SizeOf(Buf));
+    if N <= 0 then
+      Exit;
+    SetString(Chunk, PAnsiChar(@Buf[0]), N);
+    Text := Text + string(Chunk);
+  end;
+end;
+
+function RunProcessCapture(const ExePath: string; const Params: array of string;
+  out StdOutText, StdErrText: string; out ExitCode: Integer): Boolean;
+var
+  P: TProcess;
+  i: Integer;
+begin
+  StdOutText := '';
+  StdErrText := '';
+  ExitCode := -1;
+  Result := False;
+
+  P := TProcess.Create(nil);
+  try
+    P.Executable := ExePath;
+    for i := Low(Params) to High(Params) do
+      P.Parameters.Add(Params[i]);
+    P.Options := [poUsePipes];
+    P.ShowWindow := swoHide;
+
+    P.Execute;
+    while P.Running do
+    begin
+      AppendPipeToText(P.Output, StdOutText);
+      AppendPipeToText(P.Stderr, StdErrText);
+      Sleep(10);
+    end;
+    AppendPipeToText(P.Output, StdOutText);
+    AppendPipeToText(P.Stderr, StdErrText);
+
+    ExitCode := P.ExitStatus;
+    Result := True;
+  finally
+    P.Free;
+  end;
+end;
+
+function ResolveMaintenanceCompanionBinary(out BinPath: string): Boolean;
+var
+  EnvBin: string;
+  LocalBin: string;
+begin
+  EnvBin := Trim(GetEnvironmentVariable('BETANKUNGEN_MAINTENANCE_BIN'));
+  if EnvBin <> '' then
+  begin
+    BinPath := EnvBin;
+    if (Pos('/', EnvBin) > 0) or (Pos(PathDelim, EnvBin) > 0) then
+      Exit(FileExists(EnvBin));
+    Exit(True);
+  end;
+
+  LocalBin := ExpandFileName(
+    IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) +
+    'betankungen-maintenance'
+  );
+  if FileExists(LocalBin) then
+  begin
+    BinPath := LocalBin;
+    Exit(True);
+  end;
+
+  BinPath := 'betankungen-maintenance';
+  Result := True;
+end;
+
+function TryParseMaintenanceStatsJson(const RawJson: string;
+  out TotalCostCents: Int64; out Reason: string): Boolean;
+var
+  Root: TJSONData;
+  Obj: TJSONObject;
+  Kind: string;
+  Node: TJSONData;
+begin
+  Result := False;
+  TotalCostCents := 0;
+  Reason := '';
+  Root := nil;
+
+  try
+    try
+      Root := GetJSON(Trim(RawJson));
+    except
+      on E: Exception do
+      begin
+        Reason := 'JSON parse failed: ' + TrimFirstLine(E.Message);
+        Exit(False);
+      end;
+    end;
+
+    if (Root = nil) or (Root.JSONType <> jtObject) then
+    begin
+      Reason := 'JSON root is not an object.';
+      Exit(False);
+    end;
+
+    Obj := TJSONObject(Root);
+    Kind := Obj.Get('kind', '');
+    if Kind <> 'maintenance_stats_v1' then
+    begin
+      Reason := 'unexpected kind: ' + Kind;
+      Exit(False);
+    end;
+
+    Node := Obj.FindPath('maintenance.total_cost_cents');
+    if Node = nil then
+    begin
+      Reason := 'missing field: maintenance.total_cost_cents';
+      Exit(False);
+    end;
+
+    try
+      TotalCostCents := Node.AsInt64;
+    except
+      on E: Exception do
+      begin
+        Reason := 'invalid maintenance.total_cost_cents: ' + TrimFirstLine(E.Message);
+        Exit(False);
+      end;
+    end;
+
+    Result := True;
+  finally
+    if Root <> nil then
+      Root.Free;
+  end;
+end;
+
+procedure ResolveMaintenanceFromModule(
+  const ScopeCarId: Integer;
+  const PeriodEnabled: Boolean;
+  out MaintenanceCents: Int64;
+  out Active: Boolean;
+  out Note: string);
+var
+  BinPath: string;
+  MaintenanceDb: string;
+  OutText: string;
+  ErrText: string;
+  ExitCode: Integer;
+  ParseReason: string;
+begin
+  MaintenanceCents := 0;
+  Active := False;
+  Note := '';
+
+  if PeriodEnabled then
+  begin
+    Note := 'module source currently supports no --from/--to; fallback to 0';
+    Exit;
+  end;
+
+  if not ResolveMaintenanceCompanionBinary(BinPath) then
+  begin
+    Note := 'maintenance companion binary not found: ' + BinPath;
+    Exit;
+  end;
+
+  MaintenanceDb := Trim(GetEnvironmentVariable('BETANKUNGEN_MAINTENANCE_DB'));
+
+  try
+    if MaintenanceDb <> '' then
+    begin
+      if ScopeCarId > 0 then
+      begin
+        if not RunProcessCapture(
+          BinPath,
+          ['--stats', 'maintenance', '--json', '--db', MaintenanceDb, '--car-id', IntToStr(ScopeCarId)],
+          OutText,
+          ErrText,
+          ExitCode) then
+        begin
+          Note := 'maintenance module execute failed.';
+          Exit;
+        end;
+      end
+      else
+      begin
+        if not RunProcessCapture(
+          BinPath,
+          ['--stats', 'maintenance', '--json', '--db', MaintenanceDb],
+          OutText,
+          ErrText,
+          ExitCode) then
+        begin
+          Note := 'maintenance module execute failed.';
+          Exit;
+        end;
+      end;
+    end
+    else
+    begin
+      if ScopeCarId > 0 then
+      begin
+        if not RunProcessCapture(
+          BinPath,
+          ['--stats', 'maintenance', '--json', '--car-id', IntToStr(ScopeCarId)],
+          OutText,
+          ErrText,
+          ExitCode) then
+        begin
+          Note := 'maintenance module execute failed.';
+          Exit;
+        end;
+      end
+      else
+      begin
+        if not RunProcessCapture(
+          BinPath,
+          ['--stats', 'maintenance', '--json'],
+          OutText,
+          ErrText,
+          ExitCode) then
+        begin
+          Note := 'maintenance module execute failed.';
+          Exit;
+        end;
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      Note := 'maintenance module error: ' + TruncateForNote(TrimFirstLine(E.Message), 160);
+      Exit;
+    end;
+  end;
+
+  if ExitCode <> 0 then
+  begin
+    if Trim(ErrText) <> '' then
+      Note := 'maintenance module failed (exit ' + IntToStr(ExitCode) + '): ' +
+        TruncateForNote(TrimFirstLine(ErrText), 160)
+    else
+      Note := 'maintenance module failed (exit ' + IntToStr(ExitCode) + ').';
+    Exit;
+  end;
+
+  if not TryParseMaintenanceStatsJson(OutText, MaintenanceCents, ParseReason) then
+  begin
+    Note := 'maintenance module output invalid: ' + TruncateForNote(ParseReason, 160);
+    Exit;
+  end;
+
+  Active := True;
+  if MaintenanceDb <> '' then
+    Note := 'module stats loaded via BETANKUNGEN_MAINTENANCE_DB'
+  else
+    Note := 'module stats loaded via companion default db';
+end;
+
 procedure CollectCostStats(const DbPath: string;
   const PeriodEnabled: boolean;
   const PeriodFromIso, PeriodToExclIso: string;
@@ -1422,7 +1720,14 @@ var
   CarId: integer;
   CarStats: TStatsCollected;
 begin
-  FillChar(R, SizeOf(R), 0);
+  R.CarsTotal := 0;
+  R.CarsWithCycles := 0;
+  R.DistKmTotal := 0;
+  R.FuelCentsTotal := 0;
+  R.MaintenanceCentsTotal := 0;
+  R.MaintenanceSourceActive := False;
+  R.MaintenanceSourceNote := '';
+  R.TotalCents := 0;
   SetLength(CarIds, 0);
   CarN := 0;
 
@@ -1489,12 +1794,26 @@ begin
 
   case MaintenanceSource of
     msNone:
-      // MVP-Basis: maintenance liegt noch nicht im Core vor.
-      R.MaintenanceCentsTotal := 0;
+      begin
+        // Core-only Fallback bleibt explizit sichtbar.
+        R.MaintenanceCentsTotal := 0;
+        R.MaintenanceSourceActive := False;
+        R.MaintenanceSourceNote := 'core-only mode (none)';
+      end;
     msModule:
-      raise Exception.Create('Fehler: --maintenance-source module ist vorbereitet, aber noch nicht aktiv (S11C2/4).');
+      ResolveMaintenanceFromModule(
+        ScopeCarId,
+        PeriodEnabled,
+        R.MaintenanceCentsTotal,
+        R.MaintenanceSourceActive,
+        R.MaintenanceSourceNote
+      );
   else
-    R.MaintenanceCentsTotal := 0;
+    begin
+      R.MaintenanceCentsTotal := 0;
+      R.MaintenanceSourceActive := False;
+      R.MaintenanceSourceNote := 'unknown maintenance source; fallback to 0';
+    end;
   end;
   R.TotalCents := R.FuelCentsTotal + R.MaintenanceCentsTotal;
 end;
@@ -1545,14 +1864,12 @@ var
   MaintenancePerKmX1000: Int64;
   TotalPerKmX1000: Int64;
   ScopeMode: string;
-  MaintenanceSourceActive: boolean;
 begin
   CostPerKmAvailable := R.DistKmTotal > 0;
   if CarId > 0 then
     ScopeMode := 'single_car'
   else
     ScopeMode := 'all_cars';
-  MaintenanceSourceActive := False;
 
   if CostPerKmAvailable then
   begin
@@ -1581,7 +1898,9 @@ begin
   J.IndentWrite; J.W('"scope_car_id":'); J.SP; J.W(IntToStr(CarId)); J.W(','); J.NL;
   J.IndentWrite; J.W('"maintenance_source_mode":'); J.SP; J.W('"'); J.W(MaintenanceSourceToString(MaintenanceSource)); J.W('"'); J.W(','); J.NL;
   J.IndentWrite; J.W('"maintenance_source_active":'); J.SP;
-  if MaintenanceSourceActive then J.W('true') else J.W('false');
+  if R.MaintenanceSourceActive then J.W('true') else J.W('false');
+  J.W(','); J.NL;
+  J.IndentWrite; J.W('"maintenance_source_note":'); J.SP; J.W('"'); J.W(JsonEscape(R.MaintenanceSourceNote)); J.W('"');
   J.W(','); J.NL;
   J.IndentWrite; J.W('"period_enabled":'); J.SP;
   if PeriodEnabled then J.W('true') else J.W('false');
@@ -1632,13 +1951,20 @@ begin
   WriteLn('Cost-Stats (MVP)');
   WriteLn('Scope: ', CostScopeLabel(CarId));
   WriteLn('Maintenance source mode: ', MaintenanceSourceToString(MaintenanceSource));
-  WriteLn('Maintenance source active: no');
+  WriteLn('Maintenance source active: ', BoolToYesNo(R.MaintenanceSourceActive));
+  if Trim(R.MaintenanceSourceNote) <> '' then
+    WriteLn('Maintenance source note: ', R.MaintenanceSourceNote);
   WriteLn('Period filter: ', CostPeriodLabel(PeriodEnabled, PeriodFromIso, PeriodToExclIso, FromProvided, ToProvided));
   WriteLn('Cars total: ', R.CarsTotal);
   WriteLn('Cars with valid full-tank cycles: ', R.CarsWithCycles);
   WriteLn('Distance (km): ', R.DistKmTotal);
   WriteLn('Fuel cost (cents): ', R.FuelCentsTotal);
-  WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (MVP placeholder)');
+  if MaintenanceSource = msNone then
+    WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (core-only placeholder)')
+  else if R.MaintenanceSourceActive then
+    WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (module)')
+  else
+    WriteLn('Maintenance cost (cents): ', R.MaintenanceCentsTotal, ' (module fallback)');
   WriteLn('Total cost (cents): ', R.TotalCents);
   WriteLn('Total cost per km (EUR): ', FormatEuroPerKm(R.TotalCents, R.DistKmTotal));
 end;

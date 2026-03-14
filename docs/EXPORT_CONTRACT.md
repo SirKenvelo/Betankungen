@@ -21,7 +21,7 @@ Payload (v1, aktueller Stand):
   - fuelups monthly/yearly: `rows`
   - fuelups full_tank_cycles: `cycles` + `sum`
   - fleet_mvp: `fleet` (`cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`)
-- cost_mvp: `cost` (`scope_mode`, `scope_car_id`, `maintenance_source_mode`, `maintenance_source_active`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`, `cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
+- cost_mvp: `cost` (`scope_mode`, `scope_car_id`, `maintenance_source_mode`, `maintenance_source_active`, `maintenance_source_note`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`, `cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
 
 ### Module JSON Contract (Maintenance Companion v1)
 
@@ -42,6 +42,15 @@ Guardrails (Companion-CLI):
 - `--pretty` nur zusammen mit `--module-info` oder `--stats maintenance --json`
 - `--json` nur fuer `--stats maintenance`
 - `--stats maintenance` akzeptiert keine Add-Parameter (`--date`, `--type`, `--cost-cents`, `--notes`)
+
+Core-zu-Modul-Integration (Cost):
+- Aktivierung ueber `--stats cost --maintenance-source module`
+- Optionales Environment-Override fuer den Companion-Binary-Pfad:
+  - `BETANKUNGEN_MAINTENANCE_BIN`
+- Optionales Environment-Override fuer die Modul-DB:
+  - `BETANKUNGEN_MAINTENANCE_DB`
+- Bei nicht verfuegbarem oder fehlerhaftem Companion bleibt der Cost-Run erfolgreich
+  mit explizitem Fallback (`maintenance_source_active=false`, `maintenance_source_note` gesetzt).
 
 ## CSV Contract
 

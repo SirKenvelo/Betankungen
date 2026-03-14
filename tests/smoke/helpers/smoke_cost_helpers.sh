@@ -65,6 +65,7 @@ test_stats_cost_mvp_ok() {
      grep -q '^Scope: all cars$' "$out" &&
      grep -q '^Maintenance source mode: none$' "$out" &&
      grep -q '^Maintenance source active: no$' "$out" &&
+     grep -q '^Maintenance source note: core-only mode (none)$' "$out" &&
      grep -q '^Period filter: none$' "$out" &&
      grep -q '^Cars total:' "$out" &&
      grep -q '^Distance (km):' "$out" &&
@@ -98,6 +99,7 @@ test_stats_cost_json_compact_ok() {
      grep -q '"scope_car_id":' "$out" &&
      grep -q '"maintenance_source_mode":' "$out" &&
      grep -q '"maintenance_source_active":' "$out" &&
+     grep -q '"maintenance_source_note":' "$out" &&
      grep -q '"period_enabled":' "$out" &&
      grep -q '"period_from":' "$out" &&
      grep -q '"period_to_exclusive":' "$out" &&
@@ -140,6 +142,7 @@ test_stats_cost_json_pretty_ok() {
      grep -q '"scope_car_id":' "$out" &&
      grep -q '"maintenance_source_mode":' "$out" &&
      grep -q '"maintenance_source_active":' "$out" &&
+     grep -q '"maintenance_source_note":' "$out" &&
      grep -q '"period_enabled":' "$out" &&
      grep -q '"period_from":' "$out" &&
      grep -q '"period_to_exclusive":' "$out" &&
@@ -188,6 +191,7 @@ test_stats_cost_json_scope_fields_ok() {
      grep -q "\"scope_car_id\":$scope_car_id" "$out" &&
      grep -q '"maintenance_source_mode":"none"' "$out" &&
      grep -q '"maintenance_source_active":false' "$out" &&
+     grep -q '"maintenance_source_note":"core-only mode (none)"' "$out" &&
      grep -q '"period_enabled":true' "$out" &&
      grep -q '"period_from_provided":true' "$out" &&
      grep -q '"period_to_provided":false' "$out" &&
@@ -385,7 +389,7 @@ test_stats_cost_maintenance_source_context_fails() {
   fi
 }
 
-test_stats_cost_maintenance_source_module_fails() {
+test_stats_cost_maintenance_source_module_fallback_ok() {
   local home out err rc
 
   home="$(register_tmp_dir)"
@@ -393,15 +397,19 @@ test_stats_cost_maintenance_source_module_fails() {
   err="$home/err.txt"
 
   set +e
-  HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --maintenance-source module >"$out" 2>"$err"
+  BETANKUNGEN_MAINTENANCE_BIN="$home/does-not-exist/betankungen-maintenance" \
+    HOME="$home" "$ROOT_DIR/bin/Betankungen" --stats cost --maintenance-source module >"$out" 2>"$err"
   rc=$?
   set -e
 
-  if [[ $rc -ne 0 ]] &&
-     grep -q 'S11C2/4' "$err"; then
-    printf '[OK] --stats cost --maintenance-source module: klarer Not-Active-Fehler\n'
+  if [[ $rc -eq 0 ]] &&
+     grep -q '^Maintenance source mode: module$' "$out" &&
+     grep -q '^Maintenance source active: no$' "$out" &&
+     grep -q '^Maintenance source note: maintenance companion binary not found:' "$out" &&
+     grep -q '^Maintenance cost (cents): 0 (module fallback)$' "$out"; then
+    printf '[OK] --stats cost --maintenance-source module: robuster Fallback ohne Companion-Binary\n'
   else
-    printf '[FAIL] --stats cost --maintenance-source module: klarer Not-Active-Fehler\n'
+    printf '[FAIL] --stats cost --maintenance-source module: robuster Fallback ohne Companion-Binary\n'
     add_fail
   fi
 }

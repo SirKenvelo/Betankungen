@@ -162,7 +162,7 @@ print_plan() {
   printf '[LIST] --stats cost --json scope -> Contract-Felder + Werte\n'
   printf '[LIST] --stats cost --maintenance-source none -> expliziter Integrationsmodus\n'
   printf '[LIST] --maintenance-source ausserhalb cost -> Validierungsfehler\n'
-  printf '[LIST] --stats cost --maintenance-source module -> klarer Not-Active-Fehler\n'
+  printf '[LIST] --stats cost --maintenance-source module -> robuster Fallback ohne Companion-Binary\n'
   printf '[LIST] --stats cost --csv -> Validierungsfehler\n'
   printf '[LIST] --stats cost --monthly/--yearly/--dashboard -> Validierungsfehler\n'
   printf '[LIST] --stats cost --from ... -> Period-Scope wirkt auf Aggregation\n'
@@ -1046,7 +1046,7 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_stats_cost_json_scope_fields_ok
   test_stats_cost_maintenance_source_none_ok
   test_stats_cost_maintenance_source_context_fails
-  test_stats_cost_maintenance_source_module_fails
+  test_stats_cost_maintenance_source_module_fallback_ok
   test_stats_cost_csv_fails
   test_stats_cost_monthly_yearly_dashboard_fails
   test_stats_cost_period_ok
