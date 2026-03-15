@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -55,24 +55,16 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 ## Roadmap – Kurzstand
 
-- `0.5.3`: Reifegrad & Vervollstaendigung (Struktur-Release, kein massiver Feature-Zuwachs)
-- `0.5.4`: First-Run UX & Initialisierung (Default-DB ohne Konfig-Wissen, Prompt nur als Fallback)
-- `0.5.5`: Jahres-Summary fuer Stats (`--yearly`) auf Basis der Monatsaggregation
-- `0.5.6`: Help/Usage Rework (abgeschlossen)
-- `0.5.6-0`: Zwischenversion fuer die Einfuehrung einer zusaetzlichen Unit (abgeschlossen)
-- `0.6.0`: Fahrzeug-Domain konsolidieren (abgeschlossen)
-- `0.7.0`: Multi-Car-CLI (Cars-CRUD + Resolver + strict car scoping) freigegeben
-- `0.8.0`: Export-/Output-Contracts (CSV/JSON) und Konsistenz-Haertung abgeschlossen
-- `0.9.x`: naechster Fokus (priorisiert nach Scope-Freeze)
-- `0.9.x` Baseline erreicht: Modulstrategie `accepted`, Companion-Handshake `--module-info` inkl. Modules-Smoke (`--modules`) verfuegbar
-- Sprint 10 C1 gestartet: `betankungen-maintenance` besitzt jetzt den Migrationspfad `--migrate [--db <path>]` fuer ein idempotentes Modul-Schema (`module_meta`, `maintenance_events`)
-- Sprint 10 C2 umgesetzt: `betankungen-maintenance` bietet jetzt `--add maintenance` und `--list maintenance` als erste fachliche CRUD-Basis
-- Sprint 10 C3 umgesetzt: `betankungen-maintenance` liefert `--stats maintenance` (Text + JSON/Pretty) inkl. Scope-Contract (`--car-id`)
-- Sprint 10 C4 umgesetzt: Module-Smoke-/Contract-Haertung abgeschlossen (inkl. Guardrails fuer ungueltige Stats-/JSON-Kombinationen)
-- Sprint 11 C1/C2 umgesetzt: Cost-CLI besitzt einen expliziten Integrationsmodus `--maintenance-source none|module`; `module` ist aktiv und integriert Maintenance-Kosten via Companion-Binary mit robustem, explizitem Fallback wenn die Quelle nicht verfuegbar ist.
-- Sprint 11 C3 umgesetzt: dedizierter Integrations-Regression-Check fuer Cost (`none`/`module` inkl. aktivem Modulpfad und Fallback-Szenarien) ist in `make verify` und CI als Pflicht-Gate verankert.
-- Sprint 11 C4 umgesetzt: 0.9.0-Readiness-Paket mit Scope-Freeze, standardisiertem Preflight (`scripts/release_preflight.sh`) und Release-Checkliste (`docs/RELEASE_0_9_0_PREFLIGHT.md`) ist aktiv.
-- Wichtig: Jahres-Summary ist bewusst nicht Teil von `0.5.3`, sondern auf `0.5.5` verschoben.
+- `0.9.0` wurde am `2026-03-15` final freigegeben.
+- Verbindlicher Fahrplan bis `1.0.0` ist aktiv: `docs/ROADMAP_1_0_0.md`.
+- Prioritaet bis 1.0.0:
+  - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`).
+  - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
+  - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
+- Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
+- Nicht Teil von 1.0.0:
+  - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
+  - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
@@ -88,6 +80,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
+- `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 
 ## Open-Source-Hinweis

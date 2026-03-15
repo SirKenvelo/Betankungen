@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -371,3 +371,25 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint-Abschluss: S11C4/4 (done)
 - Abschluss-Tag: `sprint-11-done` (pending, wird erst nach expliziter Freigabe gesetzt und gepusht)
+
+## Sprint 12 - Road to 1.0.0 Kickoff
+
+- Status: geplant
+- Ziel: verbindlichen 1.0.0-Gate-Plan operativ starten und den Zyklus
+  releasefaehig strukturieren.
+
+### Geplante Bloecke
+
+- S12C1/4: Zyklusstart technisch fixieren (`APP_VERSION 1.0.0-dev`) und
+  Entry-Doku (`README`/`STATUS`/`CHANGELOG`) konsistent auf 1.0.0-Kurs setzen.
+- S12C2/4: Backlog-Downstream fuer 1.0.0 aufsetzen (konkrete Tasks aus
+  `BL-0012`, `BL-012`, optional `BL-0013`).
+- S12C3/4: DoD-/Gate-Kriterien fuer 1.0.0 in Verify-/Preflight-Flow
+  operationalisieren.
+- S12C4/4: Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S12C4/4 (pending)
+- Abschluss-Tag: `sprint-12-done` (pending, wird erst nach expliziter
+  Freigabe gesetzt und gepusht)

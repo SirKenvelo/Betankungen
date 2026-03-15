@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-15
-**Zielversion:** 0.9.0
+**Zielversion:** 1.0.0
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -182,6 +182,18 @@ Bereits erledigt:
 - Erreicht (S10C3/4): Companion-Stats-Basis umgesetzt (`--stats maintenance` Text + JSON/Pretty inkl. Scope via `--car-id` und Contract `maintenance_stats_v1`).
 - Erreicht (S10C4/4): Modul-Smoke-/Contract-Haertung finalisiert (Guardrails fuer ungueltige Stats-/JSON-Kombinationen regressionsgesichert, Contract-Doku synchronisiert).
 - Erreicht (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
+
+## Roadmap 1.0.0 - verbindlicher Fahrplan (aktiv)
+
+- Der verbindliche Gate-Plan liegt in `docs/ROADMAP_1_0_0.md`.
+- Fokus fuer den 1.0.0-Zyklus:
+  - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
+  - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).
+  - Public-Readiness-Mindestpaket gemaess `BL-012`.
+  - Release-Haertung ueber standardisierte Verify-/Preflight-Gates.
+- Explizit out of scope:
+  - Runtime-Config-Profile im Core (`ADR-0009` = `rejected`).
+  - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
