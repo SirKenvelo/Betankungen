@@ -417,10 +417,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Geplante Bloecke
 
-- S13C1/4: in progress - Restscope Gate 2 konkretisieren
+- S13C1/4: done - Restscope Gate 2 konkretisiert
   (Contract-Haertungs-Checklist aus `POL-002` fuer JSON/CSV/CLI ableiten und
   gegen bestehende Contracts mappen).
-- S13C2/4: pending - Fehlende Contract-Checks als Regressionen ergaenzen
+- S13C2/4: in progress - Fehlende Contract-Checks als Regressionen ergaenzen
   (fokussiert auf klare Deprecation-/Breaking-Sichtbarkeit statt stiller
   Semantikwechsel).
 - S13C3/4: pending - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
@@ -432,6 +432,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint 13 wurde nach Abschluss von Sprint 12 initialisiert; Arbeitsfokus ist
   jetzt der verbleibende Gate-2-Restscope.
+- `S13C1/4` abgeschlossen: Policy-abgeleitete Contract-Hardening-Checklist
+  erstellt (`docs/CONTRACT_HARDENING_1_0_0.md`) und gegen aktuelle JSON/CSV/CLI-
+  Nachweise gemappt; verbleibender Restscope fuer `S13C2/4` ist konkretisiert.
 
 ### Abschluss-Tag
 

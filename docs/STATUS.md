@@ -194,7 +194,7 @@ Bereits erledigt:
   - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement und Review-Block im Solo-Modus (`required_approving_review_count=0`).
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
-  - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).
+  - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel), operationalisiert ueber `docs/CONTRACT_HARDENING_1_0_0.md`.
   - Public-Readiness-Mindestpaket gemaess `BL-012`.
   - Release-Haertung ueber standardisierte Verify-/Preflight-Gates.
 - Optional erreicht:

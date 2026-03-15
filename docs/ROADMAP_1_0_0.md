@@ -89,7 +89,8 @@ Status:
 - in Arbeit seit 2026-03-15.
 - Fortschritt am 2026-03-15:
   - `BL-0012` abgeschlossen (`capabilities`-Contract v1 dokumentiert + Runtime + Smoke).
-  - Restscope fuer Gate 2 bleibt aktiv (weitere Contract-Haertung / Integrationsnutzung).
+  - Policy-abgeleitete Gate-2-Checklist ist dokumentiert (`docs/CONTRACT_HARDENING_1_0_0.md`).
+  - Restscope fuer Gate 2 bleibt aktiv (CSV-Contract-Regression zentralisieren + sichtbarer Deprecation-Status gemaess `POL-002`).
 
 ### Gate 3: Public-Readiness (S14)
 
