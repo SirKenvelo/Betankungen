@@ -25,7 +25,7 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-009 - Agriculture Module](BACKLOG/BL-009-agriculture-module.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
 - [BL-010 - Cost Analytics](BACKLOG/BL-010-cost-analytics.md) - Status: `next`, Typ: Stats-/Domain-Erweiterung (cross-module)
 - [BL-011 - Projekt-Scaffolder (Repo Bootstrap)](BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md) - Status: `geplant`, Typ: Tooling-/Meta-Projekt (separates Repository)
-- [BL-012 - GitHub Wiki Enablement](BACKLOG/BL-012-github-wiki-enablement.md) - Status: `next`, Typ: Dokumentations-/Community-Enablement (Public-Readiness)
+- [BL-012 - GitHub Wiki Enablement](BACKLOG/BL-012-github-wiki-enablement.md) - Status: `done`, Typ: Dokumentations-/Community-Enablement (Public-Readiness)
 
 ## Verknuepfte Entscheidungen
 

@@ -374,7 +374,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 12 - Road to 1.0.0 Kickoff
 
-- Status: in progress
+- Status: done
 - Ziel: verbindlichen 1.0.0-Gate-Plan operativ starten und den Zyklus
   releasefaehig strukturieren.
 
@@ -386,7 +386,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   `BL-0012`, `BL-012`, optional `BL-0013`).
 - S12C3/4: done - DoD-/Gate-Kriterien fuer 1.0.0 in Verify-/Preflight-Flow
   operationalisieren (inkl. abgeschlossenem Capability-Contract-Block aus `BL-0012` und optionalem Benchmark-Harness aus `BL-0013`).
-- S12C4/4: in progress - Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
+- S12C4/4: done - Sprint-12-Finalisierung mit Doku-Sync, Wiki-Linkhaertung und Abschluss-Verifikation.
 
 ### Fortschritt (2026-03-15)
 
@@ -395,12 +395,46 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - 1.0.0-Readiness-Preflight operationalisiert:
   `scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`.
-- Branch-Protection fuer `main` aktiviert und verifiziert:
+- Public-Readiness-Gate (S14) fachlich abgeschlossen:
+  `BL-012` ist auf `done`, Source-of-Truth-Links sind auf stabile Repo-URLs
+  gehaertet und interne Wiki-Navigation rendert Seitenpfade ohne `.md`.
+- Branch-Protection fuer `main` ist aktiv:
   PR-only-Flow mit Required-Check `verify`, strict up-to-date, Conversation-
-  Resolution und Admin-Enforcement ist aktiv.
+  Resolution, Admin-Enforcement und Review-Block im Solo-Modus
+  (`required_approving_review_count=0`).
 
 ### Abschluss-Tag
 
-- Sprint-Abschluss: S12C4/4 (pending)
+- Sprint-Abschluss: S12C4/4 (done)
 - Abschluss-Tag: `sprint-12-done` (pending, wird erst nach expliziter
+  Freigabe gesetzt und gepusht)
+
+## Sprint 13 - Contract Hardening for 1.0.0
+
+- Status: in progress
+- Ziel: Gate 2 (Contract + Modulfaehigkeiten) operativ abschliessen und die
+  1.0.0-Contract-Haertung sichtbar in Verify-/Doku-Flow verankern.
+
+### Geplante Bloecke
+
+- S13C1/4: in progress - Restscope Gate 2 konkretisieren
+  (Contract-Haertungs-Checklist aus `POL-002` fuer JSON/CSV/CLI ableiten und
+  gegen bestehende Contracts mappen).
+- S13C2/4: pending - Fehlende Contract-Checks als Regressionen ergaenzen
+  (fokussiert auf klare Deprecation-/Breaking-Sichtbarkeit statt stiller
+  Semantikwechsel).
+- S13C3/4: pending - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
+  finalisieren (`EXPORT_CONTRACT`, Module-/Entry-Doku, Status-Roadmap-Sync).
+- S13C4/4: pending - Gate-2-Abschlusslauf dokumentieren
+  (`make verify` + Abschlussnarrativ + Sprint-/Changelog-Referenzen).
+
+### Fortschritt (2026-03-15)
+
+- Sprint 13 wurde nach Abschluss von Sprint 12 initialisiert; Arbeitsfokus ist
+  jetzt der verbleibende Gate-2-Restscope.
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S13C4/4 (pending)
+- Abschluss-Tag: `sprint-13-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)

@@ -7,10 +7,11 @@
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
-- Gate 3 (S14): in Arbeit (Wiki-v1 ist live; Publish-/Pflegefluss aktiv).
+- Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
 - Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
-  Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement).
+  Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
+  Review-Block aktiv mit `required_approving_review_count=0` (Solo-Maintainer-Modus).
 - Gate 5: offen.
 
 ## Ausgangslage
@@ -99,11 +100,11 @@ Exit-Kriterium:
 - Ein externer Leser kommt in <= 3 Klicks von Repo-Start zu Build/Verify/CLI-Einstieg.
 
 Status:
-- in Arbeit seit 2026-03-15.
-- Wiki-v1-Quellseiten und Link-Governance wurden im Repo angelegt
-  (`docs/wiki/`, `make wiki-link-check`, `TSK-0005 done`).
-- GitHub-Wiki wurde initialisiert und aus `docs/wiki/` erstbefuellt
-  (Home + v1-Basisseiten live).
+- abgeschlossen am 2026-03-15.
+- `BL-012` ist auf `done` gesetzt (Wiki-v1-Struktur + Pflegeflow).
+- Linkhaertung abgeschlossen:
+  - Source-of-Truth-Links in Wiki-Seiten zeigen auf absolute Repo-Ziele.
+  - Interne Wiki-Links rendern Seitenpfade ohne `.md` (kein Raw-View).
 
 ### Gate 4: Release-Candidate-Haertung (S15)
 
@@ -120,7 +121,8 @@ Status:
   (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`).
 - Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
-  strict up-to-date, PR-Pflicht mit Review/Conversation-Resolution,
+  strict up-to-date, PR-Pflicht mit Conversation-Resolution,
+  `required_pull_request_reviews` aktiv mit `required_approving_review_count=0`,
   `enforce_admins=true`, keine Force-Pushes/Deletes).
 
 ### Gate 5: Finalisierung 1.0.0
