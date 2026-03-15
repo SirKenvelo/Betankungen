@@ -91,7 +91,8 @@ Status:
   - `BL-0012` abgeschlossen (`capabilities`-Contract v1 dokumentiert + Runtime + Smoke).
   - Policy-abgeleitete Gate-2-Checklist ist dokumentiert (`docs/CONTRACT_HARDENING_1_0_0.md`).
   - CSV-Contract-Regression ist jetzt zentral in Verify/CI verankert (`tests/regression/run_export_contract_csv_check.sh`).
-  - Restscope fuer Gate 2 bleibt aktiv (sichtbarer Deprecation-Status gemaess `POL-002`).
+  - Deprecation-Status gemaess `POL-002` ist explizit dokumentiert (`docs/EXPORT_CONTRACT.md`: "Aktive Deprecations: none").
+  - Restscope fuer Gate 2 liegt jetzt im Abschlusslauf (`S13C4/4`: Verify + Abschlussnarrativ).
 
 ### Gate 3: Public-Readiness (S14)
 

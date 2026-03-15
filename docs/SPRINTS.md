@@ -423,9 +423,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S13C2/4: done - Fehlende Contract-Checks als Regressionen ergaenzen
   (fokussiert auf klare Deprecation-/Breaking-Sichtbarkeit statt stiller
   Semantikwechsel).
-- S13C3/4: in progress - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
+- S13C3/4: done - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
   finalisieren (`EXPORT_CONTRACT`, Module-/Entry-Doku, Status-Roadmap-Sync).
-- S13C4/4: pending - Gate-2-Abschlusslauf dokumentieren
+- S13C4/4: in progress - Gate-2-Abschlusslauf dokumentieren
   (`make verify` + Abschlussnarrativ + Sprint-/Changelog-Referenzen).
 
 ### Fortschritt (2026-03-15)
@@ -439,6 +439,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   (`tests/regression/run_export_contract_csv_check.sh`) und in lokale/CI-Gates
   verdrahtet (`Makefile`, `.github/workflows/ci.yml`); Testdoku sowie
   Gate-2-Fortschritt in Contract-/Roadmap-/Status-Doku synchronisiert.
+- `S13C3/4` abgeschlossen: Contract-Evolution-/Deprecation-Sichtbarkeit gemaess
+  `POL-002` in der Contract-Doku finalisiert (`docs/EXPORT_CONTRACT.md`:
+  Abschnitt "Deprecation Status"), Modul-/Entry-Doku darauf ausgerichtet
+  (`docs/MODULES_ARCHITECTURE.md`, `docs/README.md`, `docs/README_EN.md`) und
+  Gate-2-Restscope in Hardening-/Roadmap-/Status-Doku auf den Abschlusslauf
+  (`S13C4/4`) reduziert.
 - S13C1/4 Traceability:
   - Git-Commit: `cf802fb`
   - Artefakte: `.artifacts/sprint_13_commit_1_von_4.md`,
