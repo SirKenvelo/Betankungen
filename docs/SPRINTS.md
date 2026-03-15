@@ -461,6 +461,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `2f48bf6`
   - Artefakte: `.artifacts/sprint_13_commit_3_von_4.md`,
     `.artifacts/sprint_13_commit_3_von_4.diff`
+- S13C4/4 Traceability:
+  - Git-Commit: `43d5e32`
+  - Artefakte: `.artifacts/sprint_13_commit_4_von_4.md`,
+    `.artifacts/sprint_13_commit_4_von_4.diff`
 
 ### Abschluss-Tag
 
