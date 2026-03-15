@@ -28,7 +28,7 @@ betankungen-maintenance --stats maintenance --car-id 1 --json --pretty
 
 ## Contract / Behavior Docs
 
-- [User manual (German)](../BENUTZERHANDBUCH.md)
-- [Export contract](../EXPORT_CONTRACT.md)
-- [Modules architecture](../MODULES_ARCHITECTURE.md)
-- [Domain policy tests](../../tests/domain_policy/README.md)
+- [User manual (German)](https://github.com/SirKenvelo/Betankungen/blob/main/docs/BENUTZERHANDBUCH.md)
+- [Export contract](https://github.com/SirKenvelo/Betankungen/blob/main/docs/EXPORT_CONTRACT.md)
+- [Modules architecture](https://github.com/SirKenvelo/Betankungen/blob/main/docs/MODULES_ARCHITECTURE.md)
+- [Domain policy tests](https://github.com/SirKenvelo/Betankungen/blob/main/tests/domain_policy/README.md)
