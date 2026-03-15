@@ -5,11 +5,11 @@ Welcome to the public-readiness wiki entry for Betankungen.
 
 ## Start Here
 
-- [Getting Started](Getting-Started.md)
-- [CLI Quick Reference](CLI-Quick-Reference.md)
-- [Architecture Short Guide](Architecture-Short-Guide.md)
-- [FAQ & Troubleshooting](FAQ-Troubleshooting.md)
-- [Troubleshooting Playbooks](Troubleshooting-Playbooks.md)
+- [Getting Started](Getting-Started)
+- [CLI Quick Reference](CLI-Quick-Reference)
+- [Architecture Short Guide](Architecture-Short-Guide)
+- [FAQ & Troubleshooting](FAQ-Troubleshooting)
+- [Troubleshooting Playbooks](Troubleshooting-Playbooks)
 
 ## Source Of Truth (Repository Docs)
 

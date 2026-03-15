@@ -96,7 +96,7 @@ require_pattern "$WIKI_DIR/Home.md" 'https://github\.com/SirKenvelo/Betankungen/
 require_pattern "$WIKI_DIR/Getting-Started.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/README\.md' "Getting Started verlinkt docs README"
 require_pattern "$WIKI_DIR/CLI-Quick-Reference.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/EXPORT_CONTRACT\.md' "CLI Quick Reference verlinkt Export Contract"
 require_pattern "$WIKI_DIR/Architecture-Short-Guide.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/ARCHITECTURE_EN\.md' "Architecture guide verlinkt EN architecture"
-require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" 'Troubleshooting-Playbooks\.md' "FAQ verlinkt Playbooks"
+require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" 'Troubleshooting-Playbooks\)' "FAQ verlinkt Playbooks"
 require_pattern "$WIKI_DIR/Troubleshooting-Playbooks.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/MODULES_ARCHITECTURE\.md' "Playbooks verlinken Module-Architektur"
 
 info "Pruefe bidirektionale Entry-Verlinkung"
@@ -115,6 +115,18 @@ for page in \
   "$WIKI_DIR/Troubleshooting-Playbooks.md"; do
   reject_pattern "$page" ']\((\./|\.\./)' "Keine repo-relativen Links"
 done
+
+info "Pruefe interne Wiki-Navigation ohne .md-Targets"
+
+require_pattern "$WIKI_DIR/Home.md" ']\(Getting-Started\)' "Home nutzt Wiki-Link Getting-Started ohne .md"
+require_pattern "$WIKI_DIR/Home.md" ']\(CLI-Quick-Reference\)' "Home nutzt Wiki-Link CLI-Quick-Reference ohne .md"
+require_pattern "$WIKI_DIR/Home.md" ']\(Architecture-Short-Guide\)' "Home nutzt Wiki-Link Architecture-Short-Guide ohne .md"
+require_pattern "$WIKI_DIR/Home.md" ']\(FAQ-Troubleshooting\)' "Home nutzt Wiki-Link FAQ-Troubleshooting ohne .md"
+require_pattern "$WIKI_DIR/Home.md" ']\(Troubleshooting-Playbooks\)' "Home nutzt Wiki-Link Troubleshooting-Playbooks ohne .md"
+require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" ']\(Troubleshooting-Playbooks\)' "FAQ nutzt Wiki-Link Troubleshooting-Playbooks ohne .md"
+
+reject_pattern "$WIKI_DIR/Home.md" ']\((Getting-Started|CLI-Quick-Reference|Architecture-Short-Guide|FAQ-Troubleshooting|Troubleshooting-Playbooks)\.md\)' "Home verwendet keine internen Wiki-Links mit .md"
+reject_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" ']\(Troubleshooting-Playbooks\.md\)' "FAQ verwendet keinen internen Wiki-Link mit .md"
 
 info "Pruefe relative Links in Wiki-Seiten"
 
