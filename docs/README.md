@@ -57,6 +57,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - Verbindlicher Fahrplan bis `1.0.0` ist aktiv: `docs/ROADMAP_1_0_0.md`.
+- Gate-Stand: Gate 1 abgeschlossen, Gate 2 aktiv.
 - Prioritaet bis 1.0.0:
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`).
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
@@ -78,6 +79,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).
 - `docs/policies/`: formale Regeln/Standards/Vertraege (`POL-xxx`), inkl. Tracker-Standard.
 - `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.
+- `docs/tasks/`: globale `TSK-xxxx`-Eintraege (z. B. fuer Legacy-Backlog-Parents).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.

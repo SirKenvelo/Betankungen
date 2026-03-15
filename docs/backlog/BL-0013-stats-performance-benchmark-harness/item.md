@@ -41,4 +41,4 @@ Ein optional ausfuehrbarer Benchmark-Workflow inkl. Doku, der bei
 Performance-Triggern reproduzierbar genutzt werden kann.
 
 # Derived Tasks
-- none yet
+- `TSK-0004` - Reproduzierbare Benchmark-Fixtures + optionaler Runner.

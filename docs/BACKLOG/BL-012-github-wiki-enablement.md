@@ -64,3 +64,8 @@ technische Source of Truth bleibt.
 Der Vorschlag "Public-Readiness-Doku-Paket (Wiki + FAQ + Troubleshooting +
 Link-Checks)" wird in diesem Backlog-Eintrag konsolidiert und nicht als
 separates neues Legacy-BL dupliziert.
+
+## Derived Task (Tracker)
+
+- `TSK-0005` (`docs/tasks/TSK-0005-public-readiness-wiki-v1-bootstrap.md`)
+  operationalisiert die v1-Umsetzung fuer Gate-Plan 1.0.0.

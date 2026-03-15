@@ -2,6 +2,12 @@
 **Stand:** 2026-03-15
 **Status:** verbindlich
 
+## Umsetzungsstand (2026-03-15)
+
+- Gate 1 (S12): abgeschlossen.
+- Gate 2 (S13): gestartet (BL-0012 ist auf konkrete Tasks heruntergebrochen).
+- Gate 3-5: offen.
+
 ## Ausgangslage
 
 - Version `0.9.0` ist seit `2026-03-15` final freigegeben.
@@ -59,6 +65,11 @@
 Exit-Kriterium:
 - Keine offenen Scope-Unklarheiten mehr fuer den 1.0.0-Zyklus.
 
+Status:
+- abgeschlossen am 2026-03-15 (Version `1.0.0-dev`, Entry-Doku-Sync,
+  Task-Downstream fuer `BL-0012`, `BL-0013`, `BL-012` via
+  `TSK-0002..TSK-0005`).
+
 ### Gate 2: Contract + Modulfaehigkeiten (S13)
 
 - `BL-0012` umgesetzt (Capabilities im Modul-Contract).
@@ -67,6 +78,9 @@ Exit-Kriterium:
 
 Exit-Kriterium:
 - Core kann modulare Features explizit ueber Contract erkennen (keine impliziten Annahmen).
+
+Status:
+- in Arbeit (seit 2026-03-15).
 
 ### Gate 3: Public-Readiness (S14)
 
