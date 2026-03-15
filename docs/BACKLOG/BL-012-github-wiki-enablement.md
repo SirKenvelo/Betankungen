@@ -1,6 +1,6 @@
 # BL-012 - GitHub Wiki Enablement
 **Stand:** 2026-03-15
-**Status:** in Arbeit
+**Status:** done
 **Typ:** Dokumentations-/Community-Enablement (Public-Readiness)
 
 ## Motivation
@@ -82,3 +82,9 @@ separates neues Legacy-BL dupliziert.
   (`Home`, `Getting-Started`, `CLI-Quick-Reference`,
   `Architecture-Short-Guide`, `FAQ-Troubleshooting`,
   `Troubleshooting-Playbooks`).
+- Wiki-Linkhaertung abgeschlossen:
+  - Source-of-Truth-Links zeigen stabil auf absolute Repo-URLs (`blob/main`).
+  - Interne Wiki-Navigation nutzt gerenderte Seitentargets ohne `.md`
+    (kein Raw-Markdown-Redirect mehr).
+- Der initiale Public-Issue-Befund zu kaputten Wiki-Links (`#3`) ist behoben
+  und geschlossen.
