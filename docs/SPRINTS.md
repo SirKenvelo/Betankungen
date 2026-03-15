@@ -471,3 +471,29 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Sprint-Abschluss: S13C4/4 (done)
 - Abschluss-Tag: `sprint-13-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)
+
+## Sprint 15 - Release Candidate Hardening for 1.0.0
+
+- Status: in progress
+- Ziel: Gate 4 (RC-Haertung) operativ abschliessen und den 1.0.0-Releasepfad mit klaren Preflight-Guardrails absichern.
+
+### Geplante Bloecke
+
+- S15C1/4: done - 1.0.0-Preflight um Gate-Status-/Doku-Guardrails erweitern.
+- S15C2/4: pending - RC-Checkliste/Scope-Freeze auf aktuellen Gate-Stand nachziehen.
+- S15C3/4: pending - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
+- S15C4/4: pending - Gate-4-Abschlussnarrativ und Release-Vorbereitung finalisieren.
+
+### Fortschritt (2026-03-15)
+
+- `S15C1/4` abgeschlossen: `scripts/release_preflight_1_0_0.sh` prueft jetzt
+  zusaetzlich den dokumentierten Gate-Status (`CONTRACT_HARDENING=done`, Gate 2
+  in `ROADMAP_1_0_0.md` und `STATUS.md` als abgeschlossen). Doku-Sync in
+  `docs/RELEASE_1_0_0_PREFLIGHT.md`, `docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`,
+  `docs/README.md`.
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S15C4/4 (pending)
+- Abschluss-Tag: `sprint-15-done` (pending, wird erst nach expliziter
+  Freigabe gesetzt und gepusht)

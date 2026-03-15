@@ -11,6 +11,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 NOTE="1.0.0 readiness preflight"
 SKIP_VERIFY=false
+SKIP_DOC_GATES=false
 
 usage() {
   cat <<EOF_USAGE
@@ -21,12 +22,14 @@ Usage:
 
 Options:
   --skip-verify        ueberspringt 'make verify' (nur schnelle Dry-Run-Pruefungen)
+  --skip-doc-gates     ueberspringt Gate-Status-/Doku-Guardrails aus den 1.0.0-Dokumenten
   --note TEXT          Notiz fuer kpr/backup dry-run (Default: "$NOTE")
   -h, --help           Hilfe anzeigen
 
 Beispiele:
   $SCRIPT_NAME
   $SCRIPT_NAME --skip-verify
+  $SCRIPT_NAME --skip-doc-gates
   $SCRIPT_NAME --note "Preflight vor 1.0.0 Freigabe"
 EOF_USAGE
 }
@@ -44,10 +47,26 @@ ok() {
   printf '[OK] %s\n' "$*"
 }
 
+check_doc_gate() {
+  local file="$1"
+  local pattern="$2"
+  local label="$3"
+  [[ -f "$file" ]] || die "Dokument fehlt fuer Gate-Check: $file"
+  if grep -Eq "$pattern" "$file"; then
+    ok "$label"
+  else
+    die "$label (Pattern nicht gefunden in $file)"
+  fi
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --skip-verify)
       SKIP_VERIFY=true
+      shift
+      ;;
+    --skip-doc-gates)
+      SKIP_DOC_GATES=true
       shift
       ;;
     --note)
@@ -83,6 +102,24 @@ if [[ "$APP_VERSION" != "1.0.0-dev" ]]; then
   die "Preflight 1.0.0 erwartet APP_VERSION=1.0.0-dev (gefunden: $APP_VERSION)."
 fi
 ok "Versionierungs-Guardrail passt (1.0.0-dev aktiv)."
+
+if ! $SKIP_DOC_GATES; then
+  info "Pruefe Gate-Status-/Doku-Guardrails fuer 1.0.0."
+  check_doc_gate \
+    "$ROOT_DIR/docs/CONTRACT_HARDENING_1_0_0.md" \
+    '\*\*Status:\*\* done' \
+    "Contract-Hardening ist auf done gesetzt"
+  check_doc_gate \
+    "$ROOT_DIR/docs/ROADMAP_1_0_0.md" \
+    'Gate 2 \(S13\): abgeschlossen' \
+    "Roadmap dokumentiert Gate 2 als abgeschlossen"
+  check_doc_gate \
+    "$ROOT_DIR/docs/STATUS.md" \
+    'Gate 2 \(S13\) abgeschlossen' \
+    "Status-Doku dokumentiert Gate 2 als abgeschlossen"
+else
+  info "Gate-Status-/Doku-Guardrails wurden via --skip-doc-gates uebersprungen."
+fi
 
 if ! $SKIP_VERIFY; then
   info "Starte Vollpruefung: make verify"
