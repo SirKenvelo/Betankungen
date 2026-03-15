@@ -1,6 +1,6 @@
 # Contract Hardening Checklist for 1.0.0
 **Stand:** 2026-03-15
-**Status:** active
+**Status:** done
 
 ## Ziel
 
@@ -34,6 +34,12 @@ Gate 2 gilt als abgeschlossen, wenn:
 2. CSV-Contract-Regression zentral und reproduzierbar verankert ist,
 3. Deprecation-Status sichtbar dokumentiert ist (auch wenn "none"),
 4. `make verify` inklusive neuer Contract-Gates gruen ist.
+
+## Gate-2-Abschlussnachweis (S13C4/4)
+
+- Datum: 2026-03-15
+- Verifikation: `make verify` erfolgreich (inkl. Contract-Gates JSON/CSV, Domain-Policy, Smoke).
+- Ergebnis: keine offenen Gate-2-Blocker fuer 1.0.0.
 
 ## Referenzen
 

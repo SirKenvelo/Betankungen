@@ -5,7 +5,7 @@
 ## Umsetzungsstand (2026-03-15)
 
 - Gate 1 (S12): abgeschlossen.
-- Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung im Restscope `POL-002` laeuft weiter).
+- Gate 2 (S13): abgeschlossen am 2026-03-15 (Contract-Haertung gemaess `POL-002` inkl. zentraler JSON/CSV-Gates und sichtbarem Deprecation-Status).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
 - Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
@@ -86,13 +86,13 @@ Exit-Kriterium:
 - Core kann modulare Features explizit ueber Contract erkennen (keine impliziten Annahmen).
 
 Status:
-- in Arbeit seit 2026-03-15.
+- abgeschlossen am 2026-03-15.
 - Fortschritt am 2026-03-15:
   - `BL-0012` abgeschlossen (`capabilities`-Contract v1 dokumentiert + Runtime + Smoke).
   - Policy-abgeleitete Gate-2-Checklist ist dokumentiert (`docs/CONTRACT_HARDENING_1_0_0.md`).
   - CSV-Contract-Regression ist jetzt zentral in Verify/CI verankert (`tests/regression/run_export_contract_csv_check.sh`).
   - Deprecation-Status gemaess `POL-002` ist explizit dokumentiert (`docs/EXPORT_CONTRACT.md`: "Aktive Deprecations: none").
-  - Restscope fuer Gate 2 liegt jetzt im Abschlusslauf (`S13C4/4`: Verify + Abschlussnarrativ).
+  - Abschlusslauf `S13C4/4` ist dokumentiert (`make verify` gruen, keine offenen Gate-2-Blocker).
 
 ### Gate 3: Public-Readiness (S14)
 
