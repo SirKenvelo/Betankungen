@@ -1,5 +1,5 @@
 # Contributing
-**Stand:** 2026-03-12
+**Stand:** 2026-03-15
 
 Thank you for your interest in Betankungen.
 
@@ -26,6 +26,12 @@ Thank you for your interest in Betankungen.
 - Keep changes focused and reversible.
 - Avoid unrelated refactors in the same PR.
 - Update docs when behavior, flags, output format, or architecture decisions change.
+
+## Wiki Maintenance
+
+- Public-readiness wiki pages are versioned under `docs/wiki/`.
+- Wiki is an entry layer; repository docs under `docs/` remain source of truth.
+- Run `make wiki-link-check` when wiki/source links are touched.
 
 ## License
 

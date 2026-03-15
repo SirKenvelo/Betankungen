@@ -388,6 +388,11 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   operationalisieren (inkl. abgeschlossenem Capability-Contract-Block aus `BL-0012` und optionalem Benchmark-Harness aus `BL-0013`).
 - S12C4/4: Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
 
+### Fortschritt (2026-03-15)
+
+- `TSK-0005` (BL-012) abgeschlossen: Wiki-v1-Quellseiten unter `docs/wiki/`
+  angelegt und Link-Governance via `make wiki-link-check` verankert.
+
 ### Abschluss-Tag
 
 - Sprint-Abschluss: S12C4/4 (pending)

@@ -6,13 +6,14 @@ SHELL := bash
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-dry
+.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
 	@echo "  make build         - FPC-Standardbuild (bin/build/units)"
 	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Build + Contract + Policy + Smokes)"
 	@echo "  make cost-integration-check - Regression fuer Cost-Integrationsmodi (none/module/fallback)"
+	@echo "  make wiki-link-check - Guardrail-Check fuer Wiki-v1-Quellseiten"
 	@echo "  make stats-benchmark - Optionaler Benchmark-Runner fuer Stats-Pfade"
 	@echo "  make smoke         - Smoke-Suite (tests/smoke/smoke_cli.sh --modules)"
 	@echo "  make smoke-clean   - Clean-Home-Smoke (tests/smoke/smoke_clean_home.sh --modules)"
@@ -35,6 +36,9 @@ contract-check:
 cost-integration-check:
 	tests/regression/run_cost_integration_modes_check.sh
 
+wiki-link-check:
+	scripts/wiki_link_check.sh
+
 policy:
 	tests/domain_policy/run_domain_policy_tests.sh
 
@@ -50,7 +54,7 @@ smoke:
 smoke-clean:
 	tests/smoke/smoke_clean_home.sh --modules
 
-verify: lint-docs tracker-lint build contract-check cost-integration-check policy smoke-fixtures smoke smoke-clean
+verify: lint-docs tracker-lint wiki-link-check build contract-check cost-integration-check policy smoke-fixtures smoke smoke-clean
 
 stats-benchmark:
 	tests/benchmark/run_stats_benchmark.sh

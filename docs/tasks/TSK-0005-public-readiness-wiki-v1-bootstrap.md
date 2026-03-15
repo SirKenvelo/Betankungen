@@ -1,7 +1,7 @@
 ---
 id: TSK-0005
 title: Bootstrap public-readiness wiki v1 and link governance
-status: todo
+status: done
 priority: P2
 type: task
 tags: [docs, public-readiness, wiki, links]
@@ -24,7 +24,7 @@ Setze das Public-Readiness-Mindestpaket fuer das Wiki v1 operativ auf
 - Keine Redundanz fuer tiefe technische Contracts erzeugen.
 
 # Done When
-- [ ] Basisseiten (Home, Getting Started, CLI Quick Reference,
+- [x] Basisseiten (Home, Getting Started, CLI Quick Reference,
       Architecture, FAQ/Troubleshooting) stehen.
-- [ ] README/CONTRIBUTING enthalten klare Wiki-/Pflege-Verweise.
-- [ ] Link-Check-Flow fuer zentrale Wiki-Einstiegslinks ist definiert.
+- [x] README/CONTRIBUTING enthalten klare Wiki-/Pflege-Verweise.
+- [x] Link-Check-Flow fuer zentrale Wiki-Einstiegslinks ist definiert.

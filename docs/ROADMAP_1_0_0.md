@@ -7,7 +7,8 @@
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
-- Gate 3-5: offen.
+- Gate 3 (S14): vorbereitet (`BL-012`/`TSK-0005` als Wiki-v1-Basis umgesetzt).
+- Gate 4-5: offen.
 
 ## Ausgangslage
 
@@ -93,6 +94,11 @@ Status:
 
 Exit-Kriterium:
 - Ein externer Leser kommt in <= 3 Klicks von Repo-Start zu Build/Verify/CLI-Einstieg.
+
+Status:
+- vorbereitet seit 2026-03-15.
+- Wiki-v1-Quellseiten und Link-Governance wurden im Repo angelegt
+  (`docs/wiki/`, `make wiki-link-check`, `TSK-0005 done`).
 
 ### Gate 4: Release-Candidate-Haertung (S15)
 

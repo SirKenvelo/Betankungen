@@ -1,6 +1,6 @@
 # BL-012 - GitHub Wiki Enablement
 **Stand:** 2026-03-15
-**Status:** geplant
+**Status:** in Arbeit
 **Typ:** Dokumentations-/Community-Enablement (Public-Readiness)
 
 ## Motivation
@@ -68,4 +68,13 @@ separates neues Legacy-BL dupliziert.
 ## Derived Task (Tracker)
 
 - `TSK-0005` (`docs/tasks/TSK-0005-public-readiness-wiki-v1-bootstrap.md`)
-  operationalisiert die v1-Umsetzung fuer Gate-Plan 1.0.0.
+  operationalisiert die v1-Umsetzung fuer Gate-Plan 1.0.0. (done, 2026-03-15)
+
+## Umsetzungsstand (2026-03-15)
+
+- Versionierte Wiki-v1-Quellseiten wurden unter `docs/wiki/` angelegt
+  (Home, Getting Started, CLI Quick Reference, Architecture, FAQ, Playbooks).
+- Bidirektionale Entry-Verlinkung ist dokumentiert (`README.md`,
+  `CONTRIBUTING.md` <-> `docs/wiki/README.md`).
+- Link-Check-Flow ist als Skript `scripts/wiki_link_check.sh` und Make-Target
+  `make wiki-link-check` verfuegbar.

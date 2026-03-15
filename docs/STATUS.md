@@ -189,6 +189,7 @@ Bereits erledigt:
 - Gate-Stand:
   - Gate 1 (S12) abgeschlossen am 2026-03-15.
   - Gate 2 (S13) in Arbeit (Contract + Modulfaehigkeiten; `BL-0012` ist done).
+  - Gate 3 (S14) vorbereitet: Wiki-v1-Quellpaket + Link-Check-Flow stehen (`TSK-0005` done).
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).

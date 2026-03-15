@@ -25,7 +25,7 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-009 - Agriculture Module](BACKLOG/BL-009-agriculture-module.md) - Status: `icebox`, Typ: Domain-Erweiterung (Companion-Modul)
 - [BL-010 - Cost Analytics](BACKLOG/BL-010-cost-analytics.md) - Status: `next`, Typ: Stats-/Domain-Erweiterung (cross-module)
 - [BL-011 - Projekt-Scaffolder (Repo Bootstrap)](BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md) - Status: `geplant`, Typ: Tooling-/Meta-Projekt (separates Repository)
-- [BL-012 - GitHub Wiki Enablement](BACKLOG/BL-012-github-wiki-enablement.md) - Status: `geplant`, Typ: Dokumentations-/Community-Enablement (Public-Readiness)
+- [BL-012 - GitHub Wiki Enablement](BACKLOG/BL-012-github-wiki-enablement.md) - Status: `next`, Typ: Dokumentations-/Community-Enablement (Public-Readiness)
 
 ## Verknuepfte Entscheidungen
 
@@ -34,6 +34,6 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 ## Kanonische BL-xxxx (neues Tracker-Schema)
 
 - [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `proposed`, Typ: Feature (Meta-/Tooling)
-- [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `proposed`, Typ: Feature (Module-Contract)
-- [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `proposed`, Typ: Research (trigger-basiert)
+- [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract)
+- [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert)
 - [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `idea`, Typ: Research (spaetere Linie)

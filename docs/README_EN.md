@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -42,5 +42,6 @@ Detailed documents are currently maintained primarily in German.
 ## Notes For Contributors
 
 - See `CONTRIBUTING.md` in the project root.
+- Public-readiness wiki source pages: `docs/wiki/README.md`.
 - Build baseline:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
