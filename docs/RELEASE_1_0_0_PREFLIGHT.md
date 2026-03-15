@@ -45,10 +45,11 @@ scripts/release_preflight_1_0_0.sh --skip-verify
 3. `make release-preflight-1-0-0` ist lokal gruen.
 4. Letzter GitHub-Run `CI / verify` auf `main` ist gruen.
 5. `docs/CHANGELOG.md`, `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md` sind auf finalen Stand synchronisiert.
-6. Finaler Release-Commit setzt `APP_VERSION` von `1.0.0-dev` auf `1.0.0`.
-7. Release-Artefakt erst nach finaler Freigabe erzeugen:
+6. Contract-Hardening-Checklist ist vor Freeze explizit geprueft (`docs/CONTRACT_HARDENING_1_0_0.md`) und enthaelt keine offenen 1.0.0-Blocker.
+7. Finaler Release-Commit setzt `APP_VERSION` von `1.0.0-dev` auf `1.0.0`.
+8. Release-Artefakt erst nach finaler Freigabe erzeugen:
    - `./kpr.sh --note "Release 1.0.0 final"`
-8. Optionales Backup direkt nach Release:
+9. Optionales Backup direkt nach Release:
    - `scripts/backup_snapshot.sh --note "Backup after release 1.0.0"`
 
 ## Hinweis zur Branch-Protection

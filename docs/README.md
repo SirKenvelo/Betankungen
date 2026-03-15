@@ -85,6 +85,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 - `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.
+- `docs/CONTRACT_HARDENING_1_0_0.md`: Policy-abgeleitete Contract-Hardening-Checklist (Gate 2 / Sprint 13).
 - `docs/wiki/README.md`: versionierte Wiki-v1-Quellseiten (Public-Readiness-Einstieg).
 
 ## Open-Source-Hinweis
