@@ -188,7 +188,7 @@ Bereits erledigt:
 - Der verbindliche Gate-Plan liegt in `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand:
   - Gate 1 (S12) abgeschlossen am 2026-03-15.
-  - Gate 2 (S13) in Arbeit (Contract + Modulfaehigkeiten; `BL-0012` ist done).
+  - Gate 2 (S13) in Arbeit (Contract + Modulfaehigkeiten; `BL-0012` ist done, zentrale CSV-Contract-Regression ist in Verify/CI verankert, verbleibender Restscope: sichtbarer Deprecation-Status gemaess `POL-002`).
   - Gate 3 (S14) abgeschlossen am 2026-03-15: Wiki-v1 ist live, `BL-012` ist `done`, Source-of-Truth-Links sind auf absolute Repo-Ziele gehaertet und interne Wiki-Links rendern ohne `.md`-Raw-Redirect.
   - Gate 4 (S15) vorbereitet: 1.0.0-Preflight verankert (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`, `docs/RELEASE_1_0_0_PREFLIGHT.md`).
   - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement und Review-Block im Solo-Modus (`required_approving_review_count=0`).

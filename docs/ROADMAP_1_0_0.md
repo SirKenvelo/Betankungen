@@ -5,7 +5,7 @@
 ## Umsetzungsstand (2026-03-15)
 
 - Gate 1 (S12): abgeschlossen.
-- Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
+- Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung im Restscope `POL-002` laeuft weiter).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
 - Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
@@ -90,7 +90,8 @@ Status:
 - Fortschritt am 2026-03-15:
   - `BL-0012` abgeschlossen (`capabilities`-Contract v1 dokumentiert + Runtime + Smoke).
   - Policy-abgeleitete Gate-2-Checklist ist dokumentiert (`docs/CONTRACT_HARDENING_1_0_0.md`).
-  - Restscope fuer Gate 2 bleibt aktiv (CSV-Contract-Regression zentralisieren + sichtbarer Deprecation-Status gemaess `POL-002`).
+  - CSV-Contract-Regression ist jetzt zentral in Verify/CI verankert (`tests/regression/run_export_contract_csv_check.sh`).
+  - Restscope fuer Gate 2 bleibt aktiv (sichtbarer Deprecation-Status gemaess `POL-002`).
 
 ### Gate 3: Public-Readiness (S14)
 
