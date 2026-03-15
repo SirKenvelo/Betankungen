@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 **Zielversion:** 0.9.x
 
 ## Fundament & Architektur (erledigt)
@@ -181,6 +181,19 @@ Bereits erledigt:
 - Erreicht (S10C3/4): Companion-Stats-Basis umgesetzt (`--stats maintenance` Text + JSON/Pretty inkl. Scope via `--car-id` und Contract `maintenance_stats_v1`).
 - Erreicht (S10C4/4): Modul-Smoke-/Contract-Haertung finalisiert (Guardrails fuer ungueltige Stats-/JSON-Kombinationen regressionsgesichert, Contract-Doku synchronisiert).
 - Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
+
+### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
+
+- Abgeschlossen: Integrationscontract Core<->Modul und Cost-Scope-UX sind bereits umgesetzt und als Duplikate markiert (`docs/BACKLOG/BL-010-cost-analytics.md`).
+- Public-Readiness-Doku-Paket wurde in `BL-012` konsolidiert (inkl. FAQ/Troubleshooting/Link-Check-Richtung).
+- Neue Folgeeintraege im kanonischen Tracker:
+  - `BL-0012` (Module Capability Discovery, post-0.9.0)
+  - `BL-0013` (Stats Performance Benchmark Harness, trigger-basiert)
+  - `BL-0014` (Import/Export Paketformat mit Manifest/Checksum, spaeter)
+- Neue Policies:
+  - `POL-002` (Contract Evolution + Deprecation)
+  - `POL-003` (Backup Retention/Restore/Privacy)
+- Runtime-Config-Profile wurden als out-of-scope fuer den Core formal abgelehnt (`ADR-0009`, `rejected`).
 
 ## Roadmap Sprint 9 - Cost Scoped Analytics v1.1
 

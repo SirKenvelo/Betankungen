@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-03-10
+**Stand:** 2026-03-15
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer produkt- und architekturrelevante Entscheidungen.
 Backlog-Themen ohne finale Entscheidung stehen im Index `docs/BACKLOG.md`;
@@ -15,6 +15,7 @@ die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
 - `ADR-0006` - Household Drivers (optionales `driver`-Objekt + `fuelups.driver_id`) (`proposed`)
 - `ADR-0007` - Core Boundary: Core vs Module (`accepted`)
 - `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)
+- `ADR-0009` - Runtime-Config-Profile im Core abgelehnt (`rejected`)
 
 ## Ergaenzende Policy-/UX-Notizen
 

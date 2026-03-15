@@ -1,5 +1,5 @@
 # BL-010 - Cost Analytics
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 **Status:** next
 **Typ:** Stats-/Domain-Erweiterung (cross-module)
 
@@ -50,3 +50,12 @@ Integration von:
 - S11C2/4 aktiviert den Modulpfad: bei `--maintenance-source module` werden Maintenance-Kosten aus dem Companion-Contract (`maintenance_stats_v1`) integriert; bei nicht verfuegbarer Quelle greift ein expliziter, robuster Fallback (`maintenance_source_active=false`, `maintenance_source_note`).
 - S11C3/4 haertet die Verify-/CI-Kette fuer beide Integrationsmodi: neuer Regression-Check `tests/regression/run_cost_integration_modes_check.sh` prueft `none`, aktives `module` sowie Fallback-Szenarien als Pflicht-Gate.
 - S11C4/4 finalisiert den 0.9.0-Readiness-Pfad: Scope-Freeze + standardisierter Release-Preflight (`scripts/release_preflight.sh`, `make release-preflight`, `docs/RELEASE_0_9_0_PREFLIGHT.md`).
+
+## Vorschlagsabgleich (2026-03-15)
+
+- Vorschlag "ADR Core-zu-Modul-Integrationscontract" ist bereits umgesetzt
+  (S11C1/4 + S11C2/4) und benoetigt kein weiteres separates Backlog-Item.
+- Vorschlag "BL Cost-Scope-UX" ist bereits umgesetzt
+  (S9C2/4 Text-Scope + S9C3/4 JSON-Scope/Period + P-061-Guardrails).
+- Offene Folgearbeiten fuer Cost bleiben separat und werden nicht als Duplikat
+  dieser bereits abgeschlossenen Punkte gefuehrt.

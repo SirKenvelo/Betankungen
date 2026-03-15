@@ -1,5 +1,5 @@
 # BL-012 - GitHub Wiki Enablement
-**Stand:** 2026-03-12
+**Stand:** 2026-03-15
 **Status:** geplant
 **Typ:** Dokumentations-/Community-Enablement (Public-Readiness)
 
@@ -27,12 +27,15 @@ technische Source of Truth bleibt.
   - CLI Quick Reference
   - Architecture Short Guide
   - FAQ / Troubleshooting
+  - Troubleshooting-Playbooks fuer wiederkehrende Fehlerbilder
 - Klare Abgrenzung dokumentieren:
   - Wiki = Einstieg / Navigation
   - Repo-Doku (`docs/`) = verbindliche Details
 - Verlinkung in beide Richtungen:
   - Root-`README.md` -> Wiki
   - Wiki-Seiten -> relevante `docs/*.md`
+- Link-Qualitaet absichern:
+  - regelmaessiger Link-Check fuer Wiki-Einstiegsseiten und zentrale Repo-Links
 - Pflegeprozess definieren:
   - wann Wiki-Updates Pflicht sind
   - welche Inhalte nur im Repo gepflegt werden
@@ -55,3 +58,9 @@ technische Source of Truth bleibt.
 - Sinnvoll vor oder waehrend der Public-Schaltung des Repositories.
 - Sprachstrategie bleibt inkrementell: Wiki kann mit EN-Entry starten und
   auf DE-Details verweisen, bis weitere Inhalte schrittweise uebersetzt sind.
+
+## Vorschlagsabgleich (2026-03-15)
+
+Der Vorschlag "Public-Readiness-Doku-Paket (Wiki + FAQ + Troubleshooting +
+Link-Checks)" wird in diesem Backlog-Eintrag konsolidiert und nicht als
+separates neues Legacy-BL dupliziert.

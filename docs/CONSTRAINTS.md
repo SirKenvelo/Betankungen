@@ -1,5 +1,5 @@
 # WAS WIR NICHT TUN – Projekt „Betankungen“
-**Stand:** 2026-02-07
+**Stand:** 2026-03-15
 
 Diese Liste definiert bewusst gesetzte Grenzen.
 Alles hier ist **kein Bug**, sondern **Design-Entscheidung**.
@@ -32,6 +32,10 @@ Alles hier ist **kein Bug**, sondern **Design-Entscheidung**.
 - Kein Mischmasch aus Flags & impliziten Zuständen
   - alles geht über `TCommand`
   - keine globalen „Sonderfälle“
+
+- Keine Runtime-Config-Profile im Core
+  - keine impliziten Modi wie `default` / `work` / `demo`
+  - Kontextwechsel erfolgt explizit (z. B. `--db`, `--db-set`, `--demo`, `--seed`)
 
 - Kein „magisches Verhalten“
   - `--seed` überschreibt **nie** ohne `--force`
