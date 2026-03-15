@@ -5,7 +5,7 @@ Thank you for your interest in Betankungen.
 
 ## Current Contribution Policy
 
-- The repository may be private during pre-1.0 preparation, but maintainership stays with the project owner.
+- The repository is public during pre-1.0 preparation; maintainership stays with the project owner.
 - External issues are welcome.
 - Pull requests are welcome after prior alignment in an issue/discussion.
 - Maintainers may decline changes that do not match scope, roadmap, or quality bar.
