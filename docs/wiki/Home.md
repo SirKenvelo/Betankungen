@@ -13,8 +13,8 @@ Welcome to the public-readiness wiki entry for Betankungen.
 
 ## Source Of Truth (Repository Docs)
 
-- [English docs entry](../README_EN.md)
-- [Project status and roadmap](../STATUS.md)
-- [Main documentation (German)](../README.md)
-- [Changelog](../CHANGELOG.md)
-- [Contributing policy](../../CONTRIBUTING.md)
+- [English docs entry](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README_EN.md)
+- [Project status and roadmap](https://github.com/SirKenvelo/Betankungen/blob/main/docs/STATUS.md)
+- [Main documentation (German)](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README.md)
+- [Changelog](https://github.com/SirKenvelo/Betankungen/blob/main/docs/CHANGELOG.md)
+- [Contributing policy](https://github.com/SirKenvelo/Betankungen/blob/main/CONTRIBUTING.md)

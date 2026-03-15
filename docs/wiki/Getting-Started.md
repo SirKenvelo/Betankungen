@@ -28,7 +28,7 @@ make stats-benchmark
 
 ## Related Source Docs
 
-- [Project docs entry](../README.md)
-- [English docs entry](../README_EN.md)
-- [Test guide](../../tests/README.md)
-- [Status](../STATUS.md)
+- [Project docs entry](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README.md)
+- [English docs entry](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README_EN.md)
+- [Test guide](https://github.com/SirKenvelo/Betankungen/blob/main/tests/README.md)
+- [Status](https://github.com/SirKenvelo/Betankungen/blob/main/docs/STATUS.md)

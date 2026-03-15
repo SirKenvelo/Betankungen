@@ -46,6 +46,17 @@ require_pattern() {
   fi
 }
 
+reject_pattern() {
+  local path="$1"
+  local pattern="$2"
+  local label="$3"
+  if grep -Eq "$pattern" "$path"; then
+    fail "$label gefunden in ${path#$ROOT_DIR/}"
+  else
+    ok "$label"
+  fi
+}
+
 check_relative_links() {
   local page="$1"
   local page_dir
@@ -81,17 +92,29 @@ require_file "$WIKI_DIR/Troubleshooting-Playbooks.md" "Wiki page Troubleshooting
 
 info "Pruefe Pflichtreferenzen auf Source-of-Truth-Doku"
 
-require_pattern "$WIKI_DIR/Home.md" '\.\./README_EN\.md' "Home verlinkt English docs entry"
-require_pattern "$WIKI_DIR/Getting-Started.md" '\.\./README\.md' "Getting Started verlinkt docs README"
-require_pattern "$WIKI_DIR/CLI-Quick-Reference.md" '\.\./EXPORT_CONTRACT\.md' "CLI Quick Reference verlinkt Export Contract"
-require_pattern "$WIKI_DIR/Architecture-Short-Guide.md" '\.\./ARCHITECTURE_EN\.md' "Architecture guide verlinkt EN architecture"
+require_pattern "$WIKI_DIR/Home.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/README_EN\.md' "Home verlinkt English docs entry"
+require_pattern "$WIKI_DIR/Getting-Started.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/README\.md' "Getting Started verlinkt docs README"
+require_pattern "$WIKI_DIR/CLI-Quick-Reference.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/EXPORT_CONTRACT\.md' "CLI Quick Reference verlinkt Export Contract"
+require_pattern "$WIKI_DIR/Architecture-Short-Guide.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/ARCHITECTURE_EN\.md' "Architecture guide verlinkt EN architecture"
 require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" 'Troubleshooting-Playbooks\.md' "FAQ verlinkt Playbooks"
-require_pattern "$WIKI_DIR/Troubleshooting-Playbooks.md" '\.\./MODULES_ARCHITECTURE\.md' "Playbooks verlinken Module-Architektur"
+require_pattern "$WIKI_DIR/Troubleshooting-Playbooks.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/MODULES_ARCHITECTURE\.md' "Playbooks verlinken Module-Architektur"
 
 info "Pruefe bidirektionale Entry-Verlinkung"
 
 require_pattern "$ROOT_DIR/README.md" 'docs/wiki/README\.md' "Root README verweist auf Wiki-Source"
 require_pattern "$ROOT_DIR/CONTRIBUTING.md" 'docs/wiki/README\.md|docs/wiki/' "CONTRIBUTING verweist auf Wiki-Source"
+
+info "Pruefe, dass Wiki-Seiten keine ../-Repo-Links verwenden"
+
+for page in \
+  "$WIKI_DIR/Home.md" \
+  "$WIKI_DIR/Getting-Started.md" \
+  "$WIKI_DIR/CLI-Quick-Reference.md" \
+  "$WIKI_DIR/Architecture-Short-Guide.md" \
+  "$WIKI_DIR/FAQ-Troubleshooting.md" \
+  "$WIKI_DIR/Troubleshooting-Playbooks.md"; do
+  reject_pattern "$page" ']\((\./|\.\./)' "Keine repo-relativen Links"
+done
 
 info "Pruefe relative Links in Wiki-Seiten"
 
