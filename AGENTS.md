@@ -36,6 +36,19 @@
 - Bei Auth-/Transportproblemen (SSH/Passphrase) darf Codex fuer nicht-interaktive Laeufe den HTTPS-Weg mit vorhandener `gh`-Authentifizierung nutzen, sofern kein Sicherheitsrisiko entsteht.
 - Potenziell destruktive Git-Aktionen (z. B. `reset --hard`, History-Rewrite auf geteilten Branches, erzwungene Pushes) erfolgen nur nach expliziter User-Freigabe.
 
+### Public-Repo-Governance (verbindlich)
+- `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
+- Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
+- PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
+- Nach Merge wird der Arbeitsbranch aufgeraeumt (remote + lokal), sofern kein expliziter Weiterverwendungsgrund dokumentiert ist.
+- Ausnahmefaelle (z. B. dringender Hotfix ausserhalb des Standardpfads) nur mit expliziter User-Freigabe und sichtbarer Dokumentation in `docs/CHANGELOG.md`.
+- Bei aktiver Review-Pflicht und Solo-Maintenance gilt: temporaere Regelanpassungen sind erlaubt, muessen aber nach dem Merge wieder auf den Zielzustand zurueckgestellt werden.
+
+### Public-Security-Hygiene
+- Keine Secrets/API-Keys/Token in Repository-Dateien, Commit-Messages, PR-Texten oder Wiki-Inhalten.
+- Keine produktiven personenbezogenen oder sensiblen Nutzdaten als Testfixtures committen; nur Demo-/synthetische Daten.
+- Bei Fehlermeldungen/Logs in oeffentlichen Doku-/PR-Texten keine unnoetigen lokalen Systemdetails offenlegen (nur technisch relevante Ausschnitte).
+
 ### Repo-Pflege-Rhythmus
 - Session-Start: einmaliger Sync mit `fetch` und `pull --rebase`, damit lokal auf aktuellem Remote-Stand gearbeitet wird.
 - Waehrend der Session: Commits und Pushes erfolgen pro fachlich-logischer Einheit (z. B. Feature-Block, Bugfix-Block, Doku-Block).
