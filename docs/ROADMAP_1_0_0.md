@@ -6,6 +6,7 @@
 
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
+- Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3-5: offen.
 
 ## Ausgangslage

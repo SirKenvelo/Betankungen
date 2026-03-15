@@ -385,7 +385,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S12C2/4: done - Backlog-Downstream fuer 1.0.0 aufsetzen (konkrete Tasks aus
   `BL-0012`, `BL-012`, optional `BL-0013`).
 - S12C3/4: in progress - DoD-/Gate-Kriterien fuer 1.0.0 in Verify-/Preflight-Flow
-  operationalisieren (inkl. abgeschlossenem Capability-Contract-Block aus `BL-0012`).
+  operationalisieren (inkl. abgeschlossenem Capability-Contract-Block aus `BL-0012` und optionalem Benchmark-Harness aus `BL-0013`).
 - S12C4/4: Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
 
 ### Abschluss-Tag

@@ -1,7 +1,7 @@
 ---
 id: TSK-0004
 title: Build benchmark fixtures and optional runner for stats paths
-status: todo
+status: done
 priority: P3
 type: task
 tags: [performance, benchmark, stats, qa]
@@ -26,6 +26,6 @@ Pflicht-Gates.
 - Messpunkte und Laufparameter dokumentieren.
 
 # Done When
-- [ ] Benchmark-Fixtures sind versioniert und reproduzierbar.
-- [ ] Runner liefert stabile Messausgaben fuer definierte Stats-Modi.
-- [ ] Baseline und Ausfuehrungshinweise sind dokumentiert.
+- [x] Benchmark-Fixtures sind versioniert und reproduzierbar.
+- [x] Runner liefert stabile Messausgaben fuer definierte Stats-Modi.
+- [x] Baseline und Ausfuehrungshinweise sind dokumentiert.

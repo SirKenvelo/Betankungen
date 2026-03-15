@@ -2,6 +2,7 @@
 **Stand:** 2026-03-15
 
 ## Ordnerstruktur
+- `tests/benchmark/`: optionaler Benchmark-Runner fuer trigger-basierte Performance-Messungen.
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
 - `tests/domain_policy/cases/`: kleine, fokussierte Policy-Cases.
 - `tests/domain_policy/fixtures/`: SQL-Seeds und generierte Test-DBs.
@@ -74,6 +75,18 @@ Direktlauf:
 Direktlauf:
 - `tests/regression/run_export_contract_json_check.sh`
 - `tests/regression/run_cost_integration_modes_check.sh`
+
+## Benchmark (optional)
+
+- Script: `tests/benchmark/run_stats_benchmark.sh`
+- Zweck: reproduzierbare Laufzeitmessung fuer definierte Stats-Pfade
+  (fuelups/fleet/cost), ausserhalb der Pflicht-Gates.
+- Standard-Fixture: `tests/domain_policy/fixtures/Betankungen_Big.db`
+
+Direktlauf:
+- `tests/benchmark/run_stats_benchmark.sh --iterations 5 --warmup 1`
+- optional JSON-Protokoll:
+  `tests/benchmark/run_stats_benchmark.sh --json-out .artifacts/benchmarks/stats_bench.json`
 
 ## Smoke-Test
 - Script: `tests/smoke/smoke_cli.sh`

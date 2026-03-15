@@ -194,6 +194,8 @@ Bereits erledigt:
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).
   - Public-Readiness-Mindestpaket gemaess `BL-012`.
   - Release-Haertung ueber standardisierte Verify-/Preflight-Gates.
+- Optional erreicht:
+  - Trigger-basierter Stats-Benchmark-Harness (`BL-0013`) ist als optionaler Runner verfuegbar.
 - Explizit out of scope:
   - Runtime-Config-Profile im Core (`ADR-0009` = `rejected`).
   - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.

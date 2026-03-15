@@ -1,7 +1,7 @@
 ---
 id: BL-0013
 title: Performance-Benchmark-Harness fuer Stats-Collector
-status: proposed
+status: done
 priority: P3
 type: research
 tags: [performance, stats, qa]
@@ -41,4 +41,17 @@ Ein optional ausfuehrbarer Benchmark-Workflow inkl. Doku, der bei
 Performance-Triggern reproduzierbar genutzt werden kann.
 
 # Derived Tasks
-- `TSK-0004` - Reproduzierbare Benchmark-Fixtures + optionaler Runner.
+- `TSK-0004` - Reproduzierbare Benchmark-Fixtures + optionaler Runner. (done)
+
+# Initial Benchmark Baseline (2026-03-15)
+
+Konfiguration:
+- DB: `tests/domain_policy/fixtures/Betankungen_Big.db`
+- Command: `tests/benchmark/run_stats_benchmark.sh --iterations 5 --warmup 1`
+
+Messwerte (ms):
+- `fuelups_text`: avg 18, min 17, max 19
+- `fuelups_json`: avg 16, min 15, max 16
+- `fleet_json`: avg 13, min 12, max 14
+- `cost_json_none`: avg 29, min 19, max 35
+- `cost_json_scoped`: avg 22, min 17, max 30

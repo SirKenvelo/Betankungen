@@ -484,6 +484,8 @@ Beispiel:
   - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
 - `make smoke`
   - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
+- `make stats-benchmark`
+  - Optionaler Benchmark-Runner fuer Stats-Pfade (`tests/benchmark/run_stats_benchmark.sh`)
 - `make release-preflight`
   - Fuehrt den 0.9.0-Readiness-Preflight aus (`scripts/release_preflight.sh`)
 - `make release-dry`
