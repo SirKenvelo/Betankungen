@@ -21,9 +21,9 @@ Nachweise.
 | --- | --- | --- | --- | --- |
 | Additiv ist Standard | JSON (Core) | `docs/EXPORT_CONTRACT.md`, `tests/regression/run_export_contract_json_check.sh` | abgedeckt | weiter bei neuen Feldern nur additive Keys |
 | Additiv ist Standard | JSON (Companion `--module-info` + maintenance stats) | `docs/MODULES_ARCHITECTURE.md`, `docs/EXPORT_CONTRACT.md`, `tests/smoke/smoke_modules.sh` | abgedeckt | bei neuen `capabilities` nur additive Keys |
-| Breaking Change => expliziter Bump + Doku + Testupdate | JSON/CSV | Regel in `POL-002`, Contract-Basis in `docs/EXPORT_CONTRACT.md` | teilweise | S13C2: expliziten Regression-Check fuer CSV-Header/Spaltenvertrag zentralisieren |
+| Breaking Change => expliziter Bump + Doku + Testupdate | JSON/CSV | Regel in `POL-002`, Contract-Basis in `docs/EXPORT_CONTRACT.md`, zentrale Regressionen `run_export_contract_json_check.sh` + `run_export_contract_csv_check.sh` | abgedeckt | bei echten Breaking Changes weiterhin verpflichtend: Bump + Doku + Testupdate im selben Change |
 | Keine stillen Semantikwechsel | CLI | `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/smoke/smoke_cli.sh` | abgedeckt | neue CLI-Optionen nur mit Validate/Help/Smoke im selben Change |
-| Maschinenfreundliche Ausgabe stabil | JSON/CSV | JSON-Check (`run_export_contract_json_check.sh`), CSV feldbasiert in Smoke/Domain-Policy (`tests/helpers/csv.sh`, `t_p060__01`, `t_p060__02`) | teilweise | S13C2: zentralen CSV-Contract-Regression-Runner ergaenzen |
+| Maschinenfreundliche Ausgabe stabil | JSON/CSV | JSON-Check (`run_export_contract_json_check.sh`), zentraler CSV-Check (`run_export_contract_csv_check.sh`), feldbasierte CSV-Regressionen in Smoke/Domain-Policy (`tests/helpers/csv.sh`, `t_p060__01`, `t_p060__02`) | abgedeckt | bei Contract-Erweiterungen nur additive Felder und stabile Header-Reihenfolge |
 | CLI-Deprecation Lifecycle (A/B/C) | CLI | Policy-Definition vorhanden (`POL-002`) | offen | S13C3: "Aktive Deprecations"-Abschnitt in Doku etablieren (aktuell: keine aktiven Deprecations) |
 
 ## Gate-2 Exit-Kriterien (Operationalisierung)

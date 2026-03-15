@@ -6,7 +6,7 @@ SHELL := bash
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-dry
+.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
@@ -31,8 +31,13 @@ lint-docs:
 tracker-lint:
 	scripts/projtrack_lint.sh
 
-contract-check:
+contract-check: contract-check-json contract-check-csv
+
+contract-check-json:
 	tests/regression/run_export_contract_json_check.sh
+
+contract-check-csv:
+	tests/regression/run_export_contract_csv_check.sh
 
 cost-integration-check:
 	tests/regression/run_cost_integration_modes_check.sh
