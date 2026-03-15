@@ -24,7 +24,7 @@ Nachweise.
 | Breaking Change => expliziter Bump + Doku + Testupdate | JSON/CSV | Regel in `POL-002`, Contract-Basis in `docs/EXPORT_CONTRACT.md`, zentrale Regressionen `run_export_contract_json_check.sh` + `run_export_contract_csv_check.sh` | abgedeckt | bei echten Breaking Changes weiterhin verpflichtend: Bump + Doku + Testupdate im selben Change |
 | Keine stillen Semantikwechsel | CLI | `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/smoke/smoke_cli.sh` | abgedeckt | neue CLI-Optionen nur mit Validate/Help/Smoke im selben Change |
 | Maschinenfreundliche Ausgabe stabil | JSON/CSV | JSON-Check (`run_export_contract_json_check.sh`), zentraler CSV-Check (`run_export_contract_csv_check.sh`), feldbasierte CSV-Regressionen in Smoke/Domain-Policy (`tests/helpers/csv.sh`, `t_p060__01`, `t_p060__02`) | abgedeckt | bei Contract-Erweiterungen nur additive Felder und stabile Header-Reihenfolge |
-| CLI-Deprecation Lifecycle (A/B/C) | CLI | Policy-Definition vorhanden (`POL-002`) | offen | S13C3: "Aktive Deprecations"-Abschnitt in Doku etablieren (aktuell: keine aktiven Deprecations) |
+| CLI-Deprecation Lifecycle (A/B/C) | CLI | Policy-Definition in `POL-002` + sichtbarer Status in `docs/EXPORT_CONTRACT.md` ("Aktive Deprecations: none") | abgedeckt | bei neuer Deprecation: Lifecycle-Phase + Nachfolger + Changelog im selben Change |
 
 ## Gate-2 Exit-Kriterien (Operationalisierung)
 

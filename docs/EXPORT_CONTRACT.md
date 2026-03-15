@@ -73,6 +73,10 @@ Core-zu-Modul-Integration (Cost):
   - `BETANKUNGEN_MAINTENANCE_DB`
 - Bei nicht verfuegbarem oder fehlerhaftem Companion bleibt der Cost-Run erfolgreich
   mit explizitem Fallback (`maintenance_source_active=false`, `maintenance_source_note` gesetzt).
+- Integrationszustand wird im Cost-JSON explizit markiert:
+  - Core-only: `maintenance_source_mode="none"`, `maintenance_source_active=false`
+  - Modul aktiv: `maintenance_source_mode="module"`, `maintenance_source_active=true`
+  - Modul-Fallback: `maintenance_source_mode="module"`, `maintenance_source_active=false`, Grund in `maintenance_source_note`
 
 ## CSV Contract
 
@@ -96,3 +100,13 @@ Core-zu-Modul-Integration (Cost):
 - Keine Feldentfernung
 - Nur additive Erweiterungen
 - CSV-Spaltenreihenfolge bleibt stabil
+
+## Deprecation Status (POL-002)
+
+Aktive Deprecations (Stand 2026-03-15):
+- none
+
+Regel fuer neue Deprecations:
+- Lifecycle nach `POL-002` (Phase A `announced`, Phase B `deprecated`, Phase C `removed`).
+- Jede neue Deprecation wird in diesem Abschnitt und im Changelog dokumentiert,
+  inkl. Nachfolger und geplanter Entfernungsphase.

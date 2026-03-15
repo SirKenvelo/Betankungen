@@ -61,6 +61,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Prioritaet bis 1.0.0:
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
+  - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
 - Nicht Teil von 1.0.0:

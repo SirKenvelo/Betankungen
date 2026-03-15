@@ -111,6 +111,14 @@ Contract-Regel fuer `capabilities`:
    - Changelog-Eintrag
    - Migrationshinweis
 
+### Deprecation-Status (POL-002)
+
+- Aktive Modul-Deprecations (Stand 2026-03-15): `none`
+- Wenn ein Modulpfad deprecate't wird, sind verpflichtend:
+  - Lifecycle-Phase gemaess `POL-002` (A/B/C),
+  - Doku-Update in `docs/EXPORT_CONTRACT.md` und diesem Dokument,
+  - Changelog-Eintrag im gleichen Change-Set.
+
 ## 6) Mindest-Qualitaetsstandard pro Modul
 
 Ein Modul gilt erst als integrierbar, wenn mindestens vorhanden:
