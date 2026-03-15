@@ -16,7 +16,7 @@ first, deep historical/technical detail can stay German-first for now.
 
 ## Troubleshooting Entry
 
-- [Troubleshooting playbooks](Troubleshooting-Playbooks.md)
+- [Troubleshooting playbooks](Troubleshooting-Playbooks)
 - [Contributing policy](https://github.com/SirKenvelo/Betankungen/blob/main/CONTRIBUTING.md)
 - [Main docs entry](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README.md)
 - [Status and roadmap](https://github.com/SirKenvelo/Betankungen/blob/main/docs/STATUS.md)
