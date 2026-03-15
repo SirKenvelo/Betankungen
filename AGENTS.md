@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-13
+**Stand:** 2026-03-15
 
 <INSTRUCTIONS>
 
@@ -98,6 +98,16 @@
 - Falls ein Task nicht sprintgebunden ist, den Prefix `[General]` verwenden.
 - Beispiel (Format, `[Unreleased] -> Changed`): `- u_fmt: CSV-Helper ergaenzt. (YYYY-MM-DD)`
 - Beispiel (Format, `[Unreleased] -> Tooling / Assistance`): `- Implementation und Review erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner. (YYYY-MM-DD)`
+
+## Wiki-Pflege (Public-Readiness)
+- Wiki-Inhalte werden im Repository unter `docs/wiki/` versioniert; diese Dateien sind die redaktionelle Source fuer den Wiki-Einstieg.
+- Bei Wiki-relevanten Aenderungen ist `make wiki-link-check` verpflichtend auszufuehren.
+- Veroeffentlichungsfluss:
+  1. `docs/wiki/*.md` aktualisieren
+  2. `make wiki-link-check` ausfuehren
+  3. Inhalte in das GitHub-Wiki-Repo `<owner>/<repo>.wiki.git` synchronisieren
+  4. bei technischem Wiki-Blocker (Remote nicht verfuegbar) bleibt `docs/wiki/` der verbindliche Zwischenstand; Blocker im `docs/CHANGELOG.md` transparent dokumentieren
+- Leitplanke: Wiki bleibt kuratierter Einstieg, tiefe/finale Details verbleiben in `docs/` (Source of Truth).
 
 ## Knowledge-Archive-Regeln
 - Bei Loeschung von Prozeduren/Funktionen muss die urspruengliche Version vor dem Entfernen in `knowledge_archive/` gesichert werden.
