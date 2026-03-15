@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-15
-**Zielversion:** 0.9.x
+**Zielversion:** 0.9.0
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -157,7 +157,8 @@ Bereits erledigt:
 - Export-/Output-Contracts fuer CSV/JSON sind dokumentiert (`docs/EXPORT_CONTRACT.md`) und testseitig abgesichert.
 - DoD 0.8.x ist erreicht (CSV-Contract-Haertung, VIN-/i18n-Vorbereitung, Multi-Car-Smokes stabil gruen).
 
-## Roadmap 0.9.x – naechster Fokus
+## Roadmap 0.9.x – abgeschlossen / 0.9.0 freigegeben
+- 0.9.0 wurde am 2026-03-15 final freigegeben.
 - Priorisierung und Scope-Freeze fuer 0.9.x festziehen (keine Scope-Drift).
 - Performance Sweep nur trigger-basiert (kein Selbstzweck; nur bei messbarem Schmerz).
 - Weiterfuehrung entlang klarer Guardrails: erst korrekt, dann schnell, dann schoen.
@@ -180,7 +181,7 @@ Bereits erledigt:
 - Erreicht (S10C2/4): Companion-CRUD-Basis umgesetzt (`--add maintenance`, `--list maintenance` inkl. Scope via `--car-id`).
 - Erreicht (S10C3/4): Companion-Stats-Basis umgesetzt (`--stats maintenance` Text + JSON/Pretty inkl. Scope via `--car-id` und Contract `maintenance_stats_v1`).
 - Erreicht (S10C4/4): Modul-Smoke-/Contract-Haertung finalisiert (Guardrails fuer ungueltige Stats-/JSON-Kombinationen regressionsgesichert, Contract-Doku synchronisiert).
-- Geplant (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
+- Erreicht (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 

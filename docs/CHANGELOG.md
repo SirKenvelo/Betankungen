@@ -5,8 +5,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-0.9.x
-Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze + klarer Folgefokus).
+1.0.x
+Ziel: naechste priorisierte Entwicklungsphase nach abgeschlossenem 0.9.0-Release.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -49,6 +49,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach Abschluss 0.8.0 (Scope-Freeze
 - S11C4/4 - 0.9.0-Readiness-Paket finalisiert: Scope-Freeze dokumentiert, lokaler Preflight `scripts/release_preflight.sh` + `make release-preflight` eingefuehrt und Release-Checkliste unter `docs/RELEASE_0_9_0_PREFLIGHT.md` verankert; Artefakte: `.artifacts/sprint_11_commit_4_von_4.md`, `.artifacts/sprint_11_commit_4_von_4.diff`; Basis-Commit: `cbfa3e8`. (2026-03-14)
 
 ### Changed
+- [General] Release: 0.9.0 final freigegeben. `src/Betankungen.lpr` auf `APP_VERSION 0.9.0` gesetzt und Release-Doku auf den finalen Stand synchronisiert (`docs/STATUS.md`, `docs/RELEASE_0_9_0_PREFLIGHT.md`). `[Unreleased]` wurde auf Zielversion `1.0.x` fuer den naechsten Entwicklungszyklus vorbereitet. (2026-03-15)
 - [General] Tracker/Policy: Vorschlagsabgleich fuer 9 ADR/BL-Themen formalisiert. Duplikate in `BL-010` (Integrationscontract + Cost-Scope-UX bereits umgesetzt) markiert, Public-Readiness-Paket in `BL-012` konsolidiert (inkl. FAQ/Troubleshooting/Link-Check-Richtung), neue kanonische Folgeeintraege `BL-0012` (Module Capability Discovery), `BL-0013` (trigger-basierter Performance-Benchmark-Harness) und `BL-0014` (Import/Export-Paketformat als spaetere Forschungsarbeit) angelegt, neue Policies `POL-002` (Contract Evolution/Deprecation) und `POL-003` (Backup Retention/Restore/Privacy) eingefuehrt, sowie `ADR-0009` fuer Runtime-Config-Profile im Core auf `rejected` gesetzt. Doku-Sync in `docs/STATUS.md`, `docs/BACKLOG.md`, `docs/CONSTRAINTS.md`, `docs/ADR/README.md`. (2026-03-15)
 - [S11C4/4] Release/Readiness: 0.9.0-Readiness-Paket finalisiert. Neuer lokaler Preflight `scripts/release_preflight.sh` fuehrt den standardisierten Freigabe-Vorcheck aus (Versionierungs-Guardrail auf `-dev`, optionaler Voll-Gate-Lauf via `make verify`, Dry-Runs fuer `kpr.sh` und `backup_snapshot.sh`); `Makefile` um Target `make release-preflight` erweitert. Scope-Freeze und Release-Checkliste in `docs/RELEASE_0_9_0_PREFLIGHT.md` verankert, Sprint-/Status-/Entry-Doku synchronisiert (`docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `docs/BACKLOG/BL-010-cost-analytics.md`). (2026-03-14)
 - [S11C3/4] QA/CI: Verify-Kette fuer Cost-Integration gehaertet. Neuer Regression-Check `tests/regression/run_cost_integration_modes_check.sh` validiert den Integrationscontract fuer beide Modi (`--maintenance-source none|module`) inklusive aktivem Companion-Pfad (`BETANKUNGEN_MAINTENANCE_BIN` + `BETANKUNGEN_MAINTENANCE_DB`) und expliziten Fallback-Szenarien (fehlendes Binary, period-gefilterter Modulmodus). Lokales Gate erweitert (`Makefile`: neues Target `cost-integration-check`, Aufnahme in `make verify`) und CI-Workflow um Pflichtschritt `Cost integration modes check` ergaenzt (`.github/workflows/ci.yml`). Doku-Sync in `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`, `docs/BACKLOG/BL-010-cost-analytics.md`, `tests/README.md`, `tests/regression/README.md`. (2026-03-14)
