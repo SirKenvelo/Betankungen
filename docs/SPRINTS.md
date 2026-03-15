@@ -491,6 +491,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   in `ROADMAP_1_0_0.md` und `STATUS.md` als abgeschlossen). Doku-Sync in
   `docs/RELEASE_1_0_0_PREFLIGHT.md`, `docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`,
   `docs/README.md`.
+- S15C1/4 Traceability:
+  - Git-Commit: `d8b618e`
+  - Artefakte: `.artifacts/sprint_15_commit_1_von_4.md`,
+    `.artifacts/sprint_15_commit_1_von_4.diff`
 
 ### Abschluss-Tag
 
