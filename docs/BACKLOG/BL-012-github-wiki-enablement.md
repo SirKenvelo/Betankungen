@@ -78,3 +78,7 @@ separates neues Legacy-BL dupliziert.
   `CONTRIBUTING.md` <-> `docs/wiki/README.md`).
 - Link-Check-Flow ist als Skript `scripts/wiki_link_check.sh` und Make-Target
   `make wiki-link-check` verfuegbar.
+- GitHub-Wiki ist initialisiert und mit dem v1-Basispaket befuellt
+  (`Home`, `Getting-Started`, `CLI-Quick-Reference`,
+  `Architecture-Short-Guide`, `FAQ-Troubleshooting`,
+  `Troubleshooting-Playbooks`).
