@@ -435,6 +435,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `S13C1/4` abgeschlossen: Policy-abgeleitete Contract-Hardening-Checklist
   erstellt (`docs/CONTRACT_HARDENING_1_0_0.md`) und gegen aktuelle JSON/CSV/CLI-
   Nachweise gemappt; verbleibender Restscope fuer `S13C2/4` ist konkretisiert.
+- S13C1/4 Traceability:
+  - Git-Commit: `cf802fb`
+  - Artefakte: `.artifacts/sprint_13_commit_1_von_4.md`,
+    `.artifacts/sprint_13_commit_1_von_4.diff`
 
 ### Abschluss-Tag
 
