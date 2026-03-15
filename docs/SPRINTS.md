@@ -411,7 +411,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 13 - Contract Hardening for 1.0.0
 
-- Status: in progress
+- Status: done
 - Ziel: Gate 2 (Contract + Modulfaehigkeiten) operativ abschliessen und die
   1.0.0-Contract-Haertung sichtbar in Verify-/Doku-Flow verankern.
 
@@ -425,7 +425,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Semantikwechsel).
 - S13C3/4: done - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
   finalisieren (`EXPORT_CONTRACT`, Module-/Entry-Doku, Status-Roadmap-Sync).
-- S13C4/4: in progress - Gate-2-Abschlusslauf dokumentieren
+- S13C4/4: done - Gate-2-Abschlusslauf dokumentieren
   (`make verify` + Abschlussnarrativ + Sprint-/Changelog-Referenzen).
 
 ### Fortschritt (2026-03-15)
@@ -445,6 +445,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   (`docs/MODULES_ARCHITECTURE.md`, `docs/README.md`, `docs/README_EN.md`) und
   Gate-2-Restscope in Hardening-/Roadmap-/Status-Doku auf den Abschlusslauf
   (`S13C4/4`) reduziert.
+- `S13C4/4` abgeschlossen: Gate-2-Abschlusslauf ausgefuehrt und dokumentiert
+  (`make verify` gruen, keine offenen Gate-2-Blocker), Gate-2-Status auf
+  `abgeschlossen` synchronisiert (`docs/CONTRACT_HARDENING_1_0_0.md`,
+  `docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`).
 - S13C1/4 Traceability:
   - Git-Commit: `cf802fb`
   - Artefakte: `.artifacts/sprint_13_commit_1_von_4.md`,
@@ -460,6 +464,6 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Abschluss-Tag
 
-- Sprint-Abschluss: S13C4/4 (pending)
+- Sprint-Abschluss: S13C4/4 (done)
 - Abschluss-Tag: `sprint-13-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)
