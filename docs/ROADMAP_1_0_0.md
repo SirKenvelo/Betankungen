@@ -5,7 +5,7 @@
 ## Umsetzungsstand (2026-03-15)
 
 - Gate 1 (S12): abgeschlossen.
-- Gate 2 (S13): gestartet (BL-0012 ist auf konkrete Tasks heruntergebrochen).
+- Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
 - Gate 3-5: offen.
 
 ## Ausgangslage
@@ -80,7 +80,10 @@ Exit-Kriterium:
 - Core kann modulare Features explizit ueber Contract erkennen (keine impliziten Annahmen).
 
 Status:
-- in Arbeit (seit 2026-03-15).
+- in Arbeit seit 2026-03-15.
+- Fortschritt am 2026-03-15:
+  - `BL-0012` abgeschlossen (`capabilities`-Contract v1 dokumentiert + Runtime + Smoke).
+  - Restscope fuer Gate 2 bleibt aktiv (weitere Contract-Haertung / Integrationsnutzung).
 
 ### Gate 3: Public-Readiness (S14)
 

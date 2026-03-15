@@ -1,5 +1,5 @@
 # Betankungen Module Architecture
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 **Status:** baseline v1 (operational)
 
 Dieses Dokument definiert den technischen Contract fuer optionale Module in
@@ -11,7 +11,7 @@ Ziel:
 - konsistente CLI-/DB-/Stats-Integration
 
 Aktueller Baseline-Stand (S6/S10C4):
-- Technischer Handshake ist implementiert (`--module-info` JSON-Contract).
+- Technischer Handshake ist implementiert (`--module-info` JSON-Contract inkl. `capabilities`).
 - Erstes Companion-Skeleton ist vorhanden (`src/betankungen-maintenance.lpr`).
 - Smoke-Absicherung fuer den Modul-Contract ist vorhanden (`tests/smoke/smoke_modules.sh`, integrierbar via `tests/smoke/smoke_cli.sh --modules`).
 - Modul-Schema-Basis ist vorhanden: `maintenance_events` + `module_meta(schema_version)` via idempotentem `--migrate`.
@@ -43,12 +43,29 @@ Dieses Dokument basiert auf:
      - `module_version`
      - `min_core_version`
      - `db_schema_version`
+     - `capabilities` (Objekt mit stabilen booleschen Keys)
 
 Bedeutung der Felder (verbindlich):
 - `module_name`: stabiler Modul-Identifier (z. B. `maintenance`)
 - `module_version`: Version des Modul-Binaries
 - `min_core_version`: minimale Core-App-Version, mit der das Modul kompatibel ist
 - `db_schema_version`: Version des Modul-Schemas (nicht identisch zur Core-`schema_version`)
+- `capabilities`: maschinenlesbare Modulfaehigkeiten, additiv erweiterbar
+
+Capabilities v1 (verbindliche Keys, boolesch):
+- `supports_migrate`
+- `supports_add_maintenance`
+- `supports_list_maintenance`
+- `supports_stats_maintenance`
+- `supports_stats_json`
+- `supports_stats_pretty`
+- `supports_car_scope`
+- `supports_period_scope`
+
+Contract-Regel fuer `capabilities`:
+- bestehende Keys bleiben semantisch stabil,
+- neue Keys duerfen nur additiv ergaenzt werden,
+- kein stiller Bedeutungswechsel bestehender Keys (`POL-002`).
 
 ## 2) CLI-Integrations-Contract
 
@@ -120,7 +137,7 @@ Das Companion-Skeleton `betankungen-maintenance` liefert aktuell:
 Beispiel (`--module-info`, compact):
 
 ```json
-{"module_name":"maintenance","module_version":"0.1.0-dev","min_core_version":"0.9.0-dev","db_schema_version":1}
+{"module_name":"maintenance","module_version":"0.1.0-dev","min_core_version":"0.9.0-dev","db_schema_version":1,"capabilities":{"supports_migrate":true,"supports_add_maintenance":true,"supports_list_maintenance":true,"supports_stats_maintenance":true,"supports_stats_json":true,"supports_stats_pretty":true,"supports_car_scope":true,"supports_period_scope":false}}
 ```
 
 Schema-Baseline aus `S10C1/4` (Migration `--migrate`):

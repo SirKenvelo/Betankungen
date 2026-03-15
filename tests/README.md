@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 
 ## Ordnerstruktur
 - `tests/domain_policy/`: Policy-Matrix und zugehoerige Hilfsmittel.
@@ -90,7 +90,7 @@ Direktlauf:
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.
 - Dedizierter Migrations-Smoke: `tests/smoke/smoke_migrations.sh` (aktuell: `--v4-to-v5`).
-- Dedizierter Module-Contract-Smoke: `tests/smoke/smoke_modules.sh` (`--module-info` compact/pretty, `--migrate` inkl. idempotentem Re-Run, `--add maintenance`, `--list maintenance`, `--stats maintenance` Text/JSON/Pretty/Scope, Guardrails fuer ungueltige Stats-/JSON-Kombinationen, unknown-flag-Fehlerpfad).
+- Dedizierter Module-Contract-Smoke: `tests/smoke/smoke_modules.sh` (`--module-info` compact/pretty inkl. `capabilities`, `--migrate` inkl. idempotentem Re-Run, `--add maintenance`, `--list maintenance`, `--stats maintenance` Text/JSON/Pretty/Scope, Guardrails fuer ungueltige Stats-/JSON-Kombinationen, unknown-flag-Fehlerpfad).
 - Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
 - Die `-c`-Cars-Suite prueft zusaetzlich den Wrapper `tests/smoke_multi_car_context.sh` (inkl. Transit auf `tests/smoke/smoke_multi_car_context.sh`).
 - Cars-CRUD-Smoke deckt zusaetzlich Car-Resolver-Scope fuer Fuelups ab:

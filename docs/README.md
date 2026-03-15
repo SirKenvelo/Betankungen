@@ -59,7 +59,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.0.0` ist aktiv: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand: Gate 1 abgeschlossen, Gate 2 aktiv.
 - Prioritaet bis 1.0.0:
-  - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`).
+  - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.

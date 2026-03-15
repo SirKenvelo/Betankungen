@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_modules.sh
-# UPDATED: 2026-03-14
+# UPDATED: 2026-03-15
 # Fokus-Smoke fuer Companion-Binary-Contract (`--module-info`) von Modulen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -181,7 +181,19 @@ set +e
 RC=$?
 set -e
 if [[ $RC -ne 0 ]] ||
-   ! grep -Eq '^\{"module_name":"maintenance","module_version":"[^"]+","min_core_version":"[^"]+","db_schema_version":[0-9]+\}$' "$OUT_INFO"; then
+   ! grep -q '"module_name":"maintenance"' "$OUT_INFO" ||
+   ! grep -q '"module_version":"' "$OUT_INFO" ||
+   ! grep -q '"min_core_version":"' "$OUT_INFO" ||
+   ! grep -q '"db_schema_version":' "$OUT_INFO" ||
+   ! grep -q '"capabilities":{' "$OUT_INFO" ||
+   ! grep -q '"supports_migrate":true' "$OUT_INFO" ||
+   ! grep -q '"supports_add_maintenance":true' "$OUT_INFO" ||
+   ! grep -q '"supports_list_maintenance":true' "$OUT_INFO" ||
+   ! grep -q '"supports_stats_maintenance":true' "$OUT_INFO" ||
+   ! grep -q '"supports_stats_json":true' "$OUT_INFO" ||
+   ! grep -q '"supports_stats_pretty":true' "$OUT_INFO" ||
+   ! grep -q '"supports_car_scope":true' "$OUT_INFO" ||
+   ! grep -q '"supports_period_scope":false' "$OUT_INFO"; then
   fail '--module-info (compact) verletzt den JSON-Minimalcontract.'
 fi
 printf '[OK] Modules: --module-info compact JSON\n'
@@ -195,7 +207,17 @@ if [[ $RC -ne 0 ]] ||
    ! grep -q '^  "module_name": "maintenance",$' "$OUT_INFO_PRETTY" ||
    ! grep -q '^  "module_version": ' "$OUT_INFO_PRETTY" ||
    ! grep -q '^  "min_core_version": ' "$OUT_INFO_PRETTY" ||
-   ! grep -Eq '^  "db_schema_version": [0-9]+$' "$OUT_INFO_PRETTY" ||
+   ! grep -Eq '^  "db_schema_version": [0-9]+,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^  "capabilities": {$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_migrate": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_add_maintenance": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_list_maintenance": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_stats_maintenance": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_stats_json": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_stats_pretty": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_car_scope": true,$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^    "supports_period_scope": false$' "$OUT_INFO_PRETTY" ||
+   ! grep -q '^  }$' "$OUT_INFO_PRETTY" ||
    ! grep -q '^}$' "$OUT_INFO_PRETTY"; then
   fail '--module-info --pretty verletzt den JSON-Minimalcontract.'
 fi

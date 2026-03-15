@@ -1,7 +1,7 @@
 ---
 id: TSK-0003
 title: Implement capabilities in module-info plus regression coverage
-status: todo
+status: done
 priority: P1
 type: task
 tags: [module, runtime, tests, smoke]
@@ -25,6 +25,6 @@ haerte die Guardrails ueber Smoke-/Regressionstests.
 - Ergebnisse in `make verify` reproduzierbar pruefbar machen.
 
 # Done When
-- [ ] Runtime gibt `capabilities` stabil und maschinenlesbar aus.
-- [ ] Smoke-/Regressionstests fuer den neuen Contract sind gruen.
-- [ ] Changelog + Modul-/Export-Doku sind synchronisiert.
+- [x] Runtime gibt `capabilities` stabil und maschinenlesbar aus.
+- [x] Smoke-/Regressionstests fuer den neuen Contract sind gruen.
+- [x] Changelog + Modul-/Export-Doku sind synchronisiert.

@@ -1,5 +1,5 @@
 # EXPORT CONTRACT
-**Stand:** 2026-03-14
+**Stand:** 2026-03-15
 
 Zweck: Stabiler Export-Vertrag fuer maschinenlesbare Ausgabeformate (JSON/CSV).
 
@@ -24,6 +24,28 @@ Payload (v1, aktueller Stand):
 - cost_mvp: `cost` (`scope_mode`, `scope_car_id`, `maintenance_source_mode`, `maintenance_source_active`, `maintenance_source_note`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`, `cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
 
 ### Module JSON Contract (Maintenance Companion v1)
+
+#### Module Handshake Contract (`--module-info` v1)
+
+Companion-Modul `betankungen-maintenance`:
+- Top-Level-Keys:
+  - `module_name`
+  - `module_version`
+  - `min_core_version`
+  - `db_schema_version`
+  - `capabilities`
+- `capabilities` ist ein Objekt mit stabilen booleschen Keys:
+  - `supports_migrate`
+  - `supports_add_maintenance`
+  - `supports_list_maintenance`
+  - `supports_stats_maintenance`
+  - `supports_stats_json`
+  - `supports_stats_pretty`
+  - `supports_car_scope`
+  - `supports_period_scope`
+
+Contract-Regel:
+- `capabilities` wird nur additiv erweitert (keine stillen Semantikwechsel).
 
 Companion-Modul `betankungen-maintenance`:
 - `kind`: `maintenance_stats_v1`

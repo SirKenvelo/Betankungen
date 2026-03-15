@@ -2,7 +2,7 @@
   betankungen-maintenance.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-03-10
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-15
   AUTHOR : Christof Kempinski
   Companion-Binary-Skeleton fuer das optionale Maintenance-Modul.
 
@@ -81,6 +81,14 @@ begin
   Info.ModuleVersion := MODULE_VERSION;
   Info.MinCoreVersion := MIN_CORE_VERSION;
   Info.DbSchemaVersion := DB_SCHEMA_VERSION;
+  Info.Capabilities.SupportsMigrate := True;
+  Info.Capabilities.SupportsAddMaintenance := True;
+  Info.Capabilities.SupportsListMaintenance := True;
+  Info.Capabilities.SupportsStatsMaintenance := True;
+  Info.Capabilities.SupportsStatsJson := True;
+  Info.Capabilities.SupportsStatsPretty := True;
+  Info.Capabilities.SupportsCarScope := True;
+  Info.Capabilities.SupportsPeriodScope := False;
   PrintModuleInfoJson(Info, Pretty);
 end;
 

@@ -188,7 +188,7 @@ Bereits erledigt:
 - Der verbindliche Gate-Plan liegt in `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand:
   - Gate 1 (S12) abgeschlossen am 2026-03-15.
-  - Gate 2 (S13) gestartet (Contract + Modulfaehigkeiten).
+  - Gate 2 (S13) in Arbeit (Contract + Modulfaehigkeiten; `BL-0012` ist done).
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).

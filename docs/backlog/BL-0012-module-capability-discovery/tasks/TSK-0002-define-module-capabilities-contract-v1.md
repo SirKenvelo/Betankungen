@@ -1,7 +1,7 @@
 ---
 id: TSK-0002
 title: Define module capabilities contract v1 for --module-info
-status: todo
+status: done
 priority: P1
 type: task
 tags: [module, contract, cli, docs]
@@ -28,6 +28,6 @@ keine Breaking-Changes).
 - Keine impliziten Feature-Annahmen im Core.
 
 # Done When
-- [ ] Capabilities-Schema v1 schriftlich definiert.
-- [ ] Additionsregeln gemaess `POL-002` dokumentiert.
-- [ ] Doku-Referenzen auf einen konsistenten Contract-Stand gebracht.
+- [x] Capabilities-Schema v1 schriftlich definiert.
+- [x] Additionsregeln gemaess `POL-002` dokumentiert.
+- [x] Doku-Referenzen auf einen konsistenten Contract-Stand gebracht.

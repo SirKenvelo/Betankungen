@@ -1,7 +1,7 @@
 ---
 id: BL-0012
 title: Module Capability Discovery erweitern
-status: approved
+status: done
 priority: P2
 type: feature
 tags: [module, contract, cli]
@@ -43,5 +43,5 @@ Versionierter, additiver Capability-Contract fuer Companion-Module mit
 robuster Testabdeckung und Doku-Sync.
 
 # Derived Tasks
-- `TSK-0002` - Contract v1 fuer `capabilities` in `--module-info` definieren.
-- `TSK-0003` - Runtime-Umsetzung + Regression/Smoke fuer `capabilities`.
+- `TSK-0002` - Contract v1 fuer `capabilities` in `--module-info` definieren. (done)
+- `TSK-0003` - Runtime-Umsetzung + Regression/Smoke fuer `capabilities`. (done)
