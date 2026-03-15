@@ -395,6 +395,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - 1.0.0-Readiness-Preflight operationalisiert:
   `scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`.
+- Branch-Protection fuer `main` aktiviert und verifiziert:
+  PR-only-Flow mit Required-Check `verify`, strict up-to-date, Conversation-
+  Resolution und Admin-Enforcement ist aktiv.
 
 ### Abschluss-Tag
 

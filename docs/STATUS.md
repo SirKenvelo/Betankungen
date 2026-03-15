@@ -191,6 +191,7 @@ Bereits erledigt:
   - Gate 2 (S13) in Arbeit (Contract + Modulfaehigkeiten; `BL-0012` ist done).
   - Gate 3 (S14) in Arbeit: Wiki-v1-Quellpaket + Link-Check-Flow stehen (`TSK-0005` done) und die initialen Seiten sind im GitHub-Wiki veroeffentlicht.
   - Gate 4 (S15) vorbereitet: 1.0.0-Preflight verankert (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`, `docs/RELEASE_1_0_0_PREFLIGHT.md`).
+  - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement.
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel).

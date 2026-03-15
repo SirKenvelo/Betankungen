@@ -9,6 +9,8 @@
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): in Arbeit (Wiki-v1 ist live; Publish-/Pflegefluss aktiv).
 - Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
+- Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
+  Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement).
 - Gate 5: offen.
 
 ## Ausgangslage
@@ -117,6 +119,9 @@ Status:
 - Standardisierter 1.0.0-Preflight ist verankert
   (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`).
+- Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
+  strict up-to-date, PR-Pflicht mit Review/Conversation-Resolution,
+  `enforce_admins=true`, keine Force-Pushes/Deletes).
 
 ### Gate 5: Finalisierung 1.0.0
 
