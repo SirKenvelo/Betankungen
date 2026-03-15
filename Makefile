@@ -6,7 +6,7 @@ SHELL := bash
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-dry
+.PHONY: help build lint-docs tracker-lint contract-check cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
@@ -18,6 +18,7 @@ help:
 	@echo "  make smoke         - Smoke-Suite (tests/smoke/smoke_cli.sh --modules)"
 	@echo "  make smoke-clean   - Clean-Home-Smoke (tests/smoke/smoke_clean_home.sh --modules)"
 	@echo "  make release-preflight - Readiness-Preflight (verify + release dry-runs)"
+	@echo "  make release-preflight-1-0-0 - 1.0.0 Readiness-Preflight (verify + release dry-runs)"
 	@echo "  make release-dry   - Dry-Run fuer Release-Archiv (kpr.sh --dry-run)"
 
 build:
@@ -61,6 +62,9 @@ stats-benchmark:
 
 release-preflight:
 	scripts/release_preflight.sh
+
+release-preflight-1-0-0:
+	scripts/release_preflight_1_0_0.sh
 
 release-dry:
 	./kpr.sh --dry-run

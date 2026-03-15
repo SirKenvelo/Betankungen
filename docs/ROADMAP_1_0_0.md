@@ -8,7 +8,8 @@
 - Gate 2 (S13): in Arbeit (`BL-0012` fachlich abgeschlossen; Contract-Haertung laeuft weiter).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): in Arbeit (Wiki-v1 ist live; Publish-/Pflegefluss aktiv).
-- Gate 4-5: offen.
+- Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
+- Gate 5: offen.
 
 ## Ausgangslage
 
@@ -110,6 +111,12 @@ Status:
 
 Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
+
+Status:
+- vorbereitet seit 2026-03-15.
+- Standardisierter 1.0.0-Preflight ist verankert
+  (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
+  `docs/RELEASE_1_0_0_PREFLIGHT.md`).
 
 ### Gate 5: Finalisierung 1.0.0
 

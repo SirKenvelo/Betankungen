@@ -84,6 +84,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
+- `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.
 - `docs/wiki/README.md`: versionierte Wiki-v1-Quellseiten (Public-Readiness-Einstieg).
 
 ## Open-Source-Hinweis
@@ -411,6 +412,20 @@ Beispiel:
 - `scripts/release_preflight.sh --skip-verify`
 - `scripts/release_preflight.sh --note "Preflight vor 0.9.0 Freigabe"`
 
+### `scripts/release_preflight_1_0_0.sh`
+Readiness-Preflight fuer den 1.0.0-Releasepfad.
+
+**Funktionen**
+- Fuehrt den lokalen Voll-Gate-Lauf via `make verify` aus (optional via `--skip-verify` ueberspringbar)
+- prueft strikt auf `APP_VERSION=1.0.0-dev`
+- fuehrt `kpr.sh` und `scripts/backup_snapshot.sh` im Dry-Run aus
+- standardisiert die lokale Freigabepruefung fuer die 1.0.0-Finalisierung
+
+Beispiel:
+- `scripts/release_preflight_1_0_0.sh`
+- `scripts/release_preflight_1_0_0.sh --skip-verify`
+- `scripts/release_preflight_1_0_0.sh --note "Preflight vor 1.0.0 Freigabe"`
+
 ### `scripts/sprint_artifact.sh`
 Hilfsskript fuer lokale Sprint-Artefakte aus einem bestehenden Commit.
 
@@ -489,6 +504,8 @@ Beispiel:
   - Optionaler Benchmark-Runner fuer Stats-Pfade (`tests/benchmark/run_stats_benchmark.sh`)
 - `make release-preflight`
   - Fuehrt den 0.9.0-Readiness-Preflight aus (`scripts/release_preflight.sh`)
+- `make release-preflight-1-0-0`
+  - Fuehrt den 1.0.0-Readiness-Preflight aus (`scripts/release_preflight_1_0_0.sh`)
 - `make release-dry`
   - Fuehrt `kpr.sh --dry-run` aus
 - optional:

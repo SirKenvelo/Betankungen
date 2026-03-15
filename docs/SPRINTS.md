@@ -384,14 +384,17 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Entry-Doku (`README`/`STATUS`/`CHANGELOG`) konsistent auf 1.0.0-Kurs setzen.
 - S12C2/4: done - Backlog-Downstream fuer 1.0.0 aufsetzen (konkrete Tasks aus
   `BL-0012`, `BL-012`, optional `BL-0013`).
-- S12C3/4: in progress - DoD-/Gate-Kriterien fuer 1.0.0 in Verify-/Preflight-Flow
+- S12C3/4: done - DoD-/Gate-Kriterien fuer 1.0.0 in Verify-/Preflight-Flow
   operationalisieren (inkl. abgeschlossenem Capability-Contract-Block aus `BL-0012` und optionalem Benchmark-Harness aus `BL-0013`).
-- S12C4/4: Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
+- S12C4/4: in progress - Sprint-12-Finalisierung mit Doku-Sync und Abschluss-Verifikation.
 
 ### Fortschritt (2026-03-15)
 
 - `TSK-0005` (BL-012) abgeschlossen: Wiki-v1-Quellseiten unter `docs/wiki/`
   angelegt und Link-Governance via `make wiki-link-check` verankert.
+- 1.0.0-Readiness-Preflight operationalisiert:
+  `scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
+  `docs/RELEASE_1_0_0_PREFLIGHT.md`.
 
 ### Abschluss-Tag
 
