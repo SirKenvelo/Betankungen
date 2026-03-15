@@ -420,10 +420,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S13C1/4: done - Restscope Gate 2 konkretisiert
   (Contract-Haertungs-Checklist aus `POL-002` fuer JSON/CSV/CLI ableiten und
   gegen bestehende Contracts mappen).
-- S13C2/4: in progress - Fehlende Contract-Checks als Regressionen ergaenzen
+- S13C2/4: done - Fehlende Contract-Checks als Regressionen ergaenzen
   (fokussiert auf klare Deprecation-/Breaking-Sichtbarkeit statt stiller
   Semantikwechsel).
-- S13C3/4: pending - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
+- S13C3/4: in progress - Doku-Sync fuer Contract-Evolution und Integrationsnutzung
   finalisieren (`EXPORT_CONTRACT`, Module-/Entry-Doku, Status-Roadmap-Sync).
 - S13C4/4: pending - Gate-2-Abschlusslauf dokumentieren
   (`make verify` + Abschlussnarrativ + Sprint-/Changelog-Referenzen).
@@ -435,10 +435,18 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `S13C1/4` abgeschlossen: Policy-abgeleitete Contract-Hardening-Checklist
   erstellt (`docs/CONTRACT_HARDENING_1_0_0.md`) und gegen aktuelle JSON/CSV/CLI-
   Nachweise gemappt; verbleibender Restscope fuer `S13C2/4` ist konkretisiert.
+- `S13C2/4` abgeschlossen: zentraler CSV-Contract-Regression-Runner eingefuehrt
+  (`tests/regression/run_export_contract_csv_check.sh`) und in lokale/CI-Gates
+  verdrahtet (`Makefile`, `.github/workflows/ci.yml`); Testdoku sowie
+  Gate-2-Fortschritt in Contract-/Roadmap-/Status-Doku synchronisiert.
 - S13C1/4 Traceability:
   - Git-Commit: `cf802fb`
   - Artefakte: `.artifacts/sprint_13_commit_1_von_4.md`,
     `.artifacts/sprint_13_commit_1_von_4.diff`
+- S13C2/4 Traceability:
+  - Git-Commit: `1608656`
+  - Artefakte: `.artifacts/sprint_13_commit_2_von_4.md`,
+    `.artifacts/sprint_13_commit_2_von_4.diff`
 
 ### Abschluss-Tag
 
