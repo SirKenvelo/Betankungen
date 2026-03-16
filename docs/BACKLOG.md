@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-15
+**Stand:** 2026-03-16
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -36,4 +36,5 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `proposed`, Typ: Feature (Meta-/Tooling)
 - [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract)
 - [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert)
-- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `idea`, Typ: Research (spaetere Linie)
+- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `approved`, Typ: Research (priorisierter Feature-Block fuer 1.1.0)
+- [BL-0015 - Release- und Verify-Hardening fuer die 1.1.0-Linie](backlog/BL-0015-release-verify-hardening-1-1-0/item.md) - Status: `approved`, Typ: Improvement (priorisierter Hardening-Block fuer 1.1.0)

@@ -212,15 +212,16 @@ Bereits erledigt:
 - Der aktive Gate-Plan liegt in `docs/ROADMAP_1_1_0.md`.
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
-  - Gate 2 aktiv (Scope-Freeze mit priorisiertem Feature-/Hardening-Block und explizitem Out-of-Scope).
-  - Gate 3/4/5 pending.
+  - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
+  - Gate 3 aktiv (Umsetzung + Contract-Haertung fuer die scope-frozen Bloecke).
+  - Gate 4/5 pending.
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - Gate 2 sauber abschliessen (Scope-Commit + Tracker-Downstream),
-  - danach Umsetzung und Contract-Haertung entlang des 1.1.0-Gate-Plans.
+  - Gate-3-Umsetzung fuer den scope-frozen Zyklus starten (`BL-0014`, `BL-0015`),
+  - Contract-/Preflight-Haertung entlang des 1.1.0-Gate-Plans nachziehen.
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
