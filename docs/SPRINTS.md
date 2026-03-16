@@ -508,7 +508,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S15C1/4 Traceability:
   - Git-Commit: `d8b618e`
   - Artefakte: `.artifacts/sprint_15_commit_1_von_4.md`,
-  `.artifacts/sprint_15_commit_1_von_4.diff`
+    `.artifacts/sprint_15_commit_1_von_4.diff`
 - S15C2/4 Traceability:
   - Git-Commit: `e52ba86`
   - Artefakte: `.artifacts/sprint_15_commit_2_von_4.md`,
@@ -517,6 +517,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `8c993b5`
   - Artefakte: `.artifacts/sprint_15_commit_3_von_4.md`,
     `.artifacts/sprint_15_commit_3_von_4.diff`
+- S15C4/4 Traceability:
+  - Git-Commit: `52b5823`
+  - Artefakte: `.artifacts/sprint_15_commit_4_von_4.md`,
+    `.artifacts/sprint_15_commit_4_von_4.diff`
 
 ### Abschluss-Tag
 
