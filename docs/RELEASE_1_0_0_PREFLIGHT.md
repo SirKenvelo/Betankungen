@@ -24,6 +24,7 @@ fuer den Weg zu `1.0.0`.
 - Gate 2 (S13): abgeschlossen.
 - Gate 3 (S14): abgeschlossen.
 - Gate 4 (S15): abgeschlossen am 2026-03-16 (S15C1/4 bis S15C4/4 dokumentiert).
+- Gate 5: abgeschlossen am 2026-03-16 (finaler Release-Umschalt-Commit und Release-Ausfuehrung erfolgt).
 - Scope-Freeze ist aktiv: nur release-relevante Fixes und Doku-Syncs mit direktem 1.0.0-Bezug.
 - Governance-Mindeststand fuer `main`: PR-only, Required-Check `verify`, up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement.
 
@@ -50,6 +51,19 @@ fuer den Weg zu `1.0.0`.
 - Der naechste Schritt ist Gate 5: finaler Release-Umschalt-Commit, finaler
   Doku-Sync und anschliessende Ausfuehrung von Release-/Backup-Schritten
   nach expliziter Freigabe.
+
+## Gate-5-Ausfuehrungsnachweis (Finalisierung)
+
+- Finaler Release-Umschalt-Commit ausgefuehrt (`APP_VERSION=1.0.0`).
+- Finaler Doku-Sync fuer den Gate-5-Abschluss durchgefuehrt.
+- Release-Artefakt ausgefuehrt:
+  - `./kpr.sh --note "Release 1.0.0 final"`
+  - Ergebnis: `.releases/Betankungen_1_0_0.tar`
+  - SHA-256: `9ebde5b6ffec7197688dd5ae71f035b66f8f874fe18b38d01aff4939f295f5c1`
+- Direktes Backup nach Release ausgefuehrt:
+  - `scripts/backup_snapshot.sh --note "Backup after release 1.0.0"`
+  - Ergebnis: `.backup/2026-03-16_1736`
+- Ergebnis: Version `1.0.0` ist final freigegeben.
 
 ## Automatischer Preflight
 

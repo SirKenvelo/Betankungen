@@ -5,8 +5,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-1.0.x
-Ziel: naechste priorisierte Entwicklungsphase nach abgeschlossenem 0.9.0-Release.
+1.1.x
+Ziel: naechste priorisierte Entwicklungsphase nach abgeschlossenem 1.0.0-Release.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -57,6 +57,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach abgeschlossenem 0.9.0-Release
 - S15C4/4 - Gate-4-Abschlussnarrativ finalisiert: Gate 4 auf `abgeschlossen` gesetzt und Handover auf Gate 5 (finaler Release-Umschalt-Commit + finaler Doku-Sync + Release-/Backup-Ausfuehrung nach Freigabe) dokumentiert; Artefakte: `.artifacts/sprint_15_commit_4_von_4.md`, `.artifacts/sprint_15_commit_4_von_4.diff`; Basis-Commit: `52b5823`. (2026-03-16)
 
 ### Changed
+- [General] Release: Version `1.0.0` final freigegeben. `src/Betankungen.lpr` wurde von `APP_VERSION 1.0.0-dev` auf `1.0.0` umgestellt. Gate 5 ist als abgeschlossen dokumentiert (`docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`, `docs/RELEASE_1_0_0_PREFLIGHT.md`, `docs/SPRINTS.md`, `docs/README.md`). Release-Artefakt und Direkt-Backup wurden ausgefuehrt (`./kpr.sh --note "Release 1.0.0 final"`, `scripts/backup_snapshot.sh --note "Backup after release 1.0.0"`); Artefakt `.releases/Betankungen_1_0_0.tar` (SHA-256 `9ebde5b6ffec7197688dd5ae71f035b66f8f874fe18b38d01aff4939f295f5c1`) und Snapshot `.backup/2026-03-16_1736`. (2026-03-16)
 - [S15C4/4] Release/Docs: Gate 4 (RC-Haertung) als abgeschlossen dokumentiert und der Handover auf Gate 5 finalisiert. `docs/ROADMAP_1_0_0.md` fuehrt Gate 4 jetzt als `abgeschlossen am 2026-03-16`; `docs/RELEASE_1_0_0_PREFLIGHT.md` enthaelt das Gate-4-Abschlussnarrativ mit den verbleibenden finalen Schritten (`APP_VERSION -> 1.0.0`, finaler Doku-Sync, Release-/Backup-Ausfuehrung nach Freigabe). Status-/Sprint-/Entry-Doku entsprechend synchronisiert (`docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`). (2026-03-16)
 - [S15C3/4] Release/Verification: RC-Abschlusslauf fuer Gate 4 dokumentiert. Lokaler Voll-Preflight lief gruen (`make release-preflight-1-0-0`, inklusive `make verify`, Doku-Gates sowie Release-/Backup-Dry-Runs) und ist in `docs/RELEASE_1_0_0_PREFLIGHT.md` als Nachweis verankert. Roadmap-/Status-/Sprint-/Entry-Doku auf den Abschlussstand `S15C3/4 done` synchronisiert (`docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`) und CI-Referenz auf `main` dokumentiert (`https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`). (2026-03-16)
 - [S15C2/4] Release/Docs: RC-Checkliste und Scope-Freeze auf den aktuellen Gate-Stand nachgezogen. `docs/RELEASE_1_0_0_PREFLIGHT.md` enthaelt jetzt einen expliziten RC-Status-Snapshot (Gate 1/2/3 abgeschlossen, Gate 4 aktiv), die 1.0.0-Checkliste fordert dokumentierte Gate-Konsistenz, und Roadmap-/Status-/Entry-/Sprint-Doku wurden auf S15C2 synchronisiert (`docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`). Governance-Text auf Solo-Maintainer-Betrieb ohne verpflichtende Approvals vereinheitlicht. (2026-03-16)

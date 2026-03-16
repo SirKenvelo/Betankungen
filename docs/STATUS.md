@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-16
-**Zielversion:** 1.0.0
+**Zielversion:** 1.1.0 (naechste Entwicklungsphase)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -191,8 +191,11 @@ Bereits erledigt:
   - Gate 2 (S13) abgeschlossen am 2026-03-15 (Contract + Modulfaehigkeiten; `BL-0012` done, zentrale CSV-Contract-Regression in Verify/CI verankert, Deprecation-Status gemaess `POL-002` explizit dokumentiert, Abschlusslauf `S13C4/4` mit `make verify` gruen).
   - Gate 3 (S14) abgeschlossen am 2026-03-15: Wiki-v1 ist live, `BL-012` ist `done`, Source-of-Truth-Links sind auf absolute Repo-Ziele gehaertet und interne Wiki-Links rendern ohne `.md`-Raw-Redirect.
   - Gate 4 (S15) abgeschlossen am 2026-03-16: RC-Haertung ist dokumentiert abgeschlossen (S15C1/4 bis S15C4/4), inkl. lokalem Voll-Preflight und CI-Referenz (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`, `docs/RELEASE_1_0_0_PREFLIGHT.md`, CI-Run `23153384396`).
-  - Gate 5 offen: finale Release-Freigabe (`APP_VERSION -> 1.0.0`, finaler Doku-Sync, Release-/Backup-Ausfuehrung) steht als naechster Schritt an.
+  - Gate 5 abgeschlossen am 2026-03-16: finale Release-Freigabe ist erfolgt (`APP_VERSION=1.0.0`, finaler Doku-Sync, Release-Artefakt `.releases/Betankungen_1_0_0.tar`, Backup `.backup/2026-03-16_1736`).
   - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement; im Solo-Maintainer-Betrieb ohne verpflichtende Approvals.
+- Ergebnis fuer die 1.0.0-Linie:
+  - `1.0.0` ist final freigegeben.
+  - Der naechste Entwicklungsfokus liegt auf der 1.1.x-Planungs-/Dev-Linie.
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel), operationalisiert ueber `docs/CONTRACT_HARDENING_1_0_0.md`.

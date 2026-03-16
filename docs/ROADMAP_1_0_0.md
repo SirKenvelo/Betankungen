@@ -1,6 +1,6 @@
 # Verbindlicher Fahrplan bis Version 1.0.0
 **Stand:** 2026-03-16
-**Status:** verbindlich
+**Status:** abgeschlossen (1.0.0 final)
 
 ## Umsetzungsstand (2026-03-16)
 
@@ -12,7 +12,7 @@
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
   Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
   keine verpflichtenden Approvals im Solo-Maintainer-Betrieb).
-- Gate 5: offen (Finalisierungsvorbereitung ist dokumentiert, finaler Release-Schritt ausstehend).
+- Gate 5: abgeschlossen am 2026-03-16 (finaler Release-Umschalt-Commit, Doku-Finalsync und Release-/Backup-Ausfuehrung dokumentiert).
 
 ## Ausgangslage
 
@@ -149,6 +149,13 @@ Status:
 
 Exit-Kriterium:
 - 1.0.0 ist final freigegeben und vollstaendig nachvollziehbar dokumentiert.
+
+Status:
+- abgeschlossen am 2026-03-16.
+- Finaler Release-Umschalt-Commit ist erfolgt (`APP_VERSION=1.0.0`).
+- Finaler Doku-Sync fuer Gate-5-Abschluss wurde durchgefuehrt.
+- Release-Artefakt und Direkt-Backup wurden nach Freigabe ausgefuehrt
+  (`.releases/Betankungen_1_0_0.tar`, Snapshot `.backup/2026-03-16_1736`).
 
 ## Verbindliche Abweichungsregel
 

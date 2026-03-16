@@ -527,3 +527,26 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Sprint-Abschluss: S15C4/4 (done)
 - Abschluss-Tag: `sprint-15-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)
+
+## Gate 5 - Finalisierung 1.0.0
+
+- Status: done
+- Ziel: finalen Release-Schritt fuer `1.0.0` ausfuehren und den Abschluss
+  nachvollziehbar dokumentieren.
+
+### Abschluss (2026-03-16)
+
+- Finaler Release-Umschalt-Commit ausgefuehrt (`APP_VERSION=1.0.0`).
+- Finaler Doku-Sync fuer Gate 5 abgeschlossen (`ROADMAP_1_0_0`, `STATUS`,
+  `README`, `RELEASE_1_0_0_PREFLIGHT`, `CHANGELOG`).
+- Release-Artefakt ausgefuehrt: `./kpr.sh --note "Release 1.0.0 final"`.
+- Release-Artefakt: `.releases/Betankungen_1_0_0.tar`
+  (SHA-256: `9ebde5b6ffec7197688dd5ae71f035b66f8f874fe18b38d01aff4939f295f5c1`).
+- Direktes Backup nach Release ausgefuehrt:
+  `scripts/backup_snapshot.sh --note "Backup after release 1.0.0"`.
+- Backup-Snapshot: `.backup/2026-03-16_1736`.
+
+### Abschluss-Tag
+
+- Kein zusaetzlicher Sprint-Tag (Gate-basierter Release-Block ausserhalb der
+  Sprint-Nummerierung).
