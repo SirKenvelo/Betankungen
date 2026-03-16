@@ -65,7 +65,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
-- Naechster Fokus: 1.1.x-Planung und naechste `-dev`-Linie nach dem finalen 1.0.0-Release.
+- Naechster Fokus: aktive 1.1.x-Entwicklungslinie (`APP_VERSION=1.1.0-dev`) nach dem finalen 1.0.0-Release.
 - Nicht Teil von 1.0.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.

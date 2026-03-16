@@ -101,7 +101,7 @@ const
   
   // Anwendungsmetadaten fuer --version/--about
   APP_NAME    = 'Betankungen';
-  APP_VERSION = '1.0.0';
+  APP_VERSION = '1.1.0-dev';
   APP_AUTHOR  = 'Christof Kempinski';
 
 var

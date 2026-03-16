@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-16
-**Zielversion:** 1.1.0 (naechste Entwicklungsphase)
+**Zielversion:** 1.1.0-dev (aktive Entwicklungsphase)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -183,7 +183,7 @@ Bereits erledigt:
 - Erreicht (S10C4/4): Modul-Smoke-/Contract-Haertung finalisiert (Guardrails fuer ungueltige Stats-/JSON-Kombinationen regressionsgesichert, Contract-Doku synchronisiert).
 - Erreicht (S11): Core-zu-Modul-Kostenintegration plus 0.9.0-Readiness-Paket.
 
-## Roadmap 1.0.0 - verbindlicher Fahrplan (aktiv)
+## Roadmap 1.0.0 - verbindlicher Fahrplan (abgeschlossen)
 
 - Der verbindliche Gate-Plan liegt in `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand:
@@ -195,7 +195,7 @@ Bereits erledigt:
   - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement; im Solo-Maintainer-Betrieb ohne verpflichtende Approvals.
 - Ergebnis fuer die 1.0.0-Linie:
   - `1.0.0` ist final freigegeben.
-  - Der naechste Entwicklungsfokus liegt auf der 1.1.x-Planungs-/Dev-Linie.
+  - Die naechste Entwicklungsbasis ist aktiv auf `APP_VERSION=1.1.0-dev` gesetzt.
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel), operationalisiert ueber `docs/CONTRACT_HARDENING_1_0_0.md`.
