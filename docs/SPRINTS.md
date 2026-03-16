@@ -474,7 +474,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 15 - Release Candidate Hardening for 1.0.0
 
-- Status: in progress
+- Status: done
 - Ziel: Gate 4 (RC-Haertung) operativ abschliessen und den 1.0.0-Releasepfad mit klaren Preflight-Guardrails absichern.
 
 ### Geplante Bloecke
@@ -482,7 +482,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S15C1/4: done - 1.0.0-Preflight um Gate-Status-/Doku-Guardrails erweitern.
 - S15C2/4: done - RC-Checkliste/Scope-Freeze auf aktuellen Gate-Stand nachziehen.
 - S15C3/4: done - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
-- S15C4/4: pending - Gate-4-Abschlussnarrativ und Release-Vorbereitung finalisieren.
+- S15C4/4: done - Gate-4-Abschlussnarrativ und Release-Vorbereitung finalisieren.
 
 ### Fortschritt (2026-03-16)
 
@@ -501,6 +501,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   `make release-preflight-1-0-0` (inkl. `make verify`, Doku-Gates und Dry-Runs);
   referenzierter CI-Run: `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`
   (`CI`, `success`, Commit `a59cb6e`).
+- `S15C4/4` abgeschlossen: Gate-4-Abschlussnarrativ finalisiert und Handover
+  auf Gate 5 dokumentiert. Gate 4 ist damit als abgeschlossen markiert;
+  verbleibend ist nur der finale Release-Block (`APP_VERSION -> 1.0.0`,
+  finaler Doku-Sync, `kpr.sh`/`backup_snapshot.sh` nach Freigabe).
 - S15C1/4 Traceability:
   - Git-Commit: `d8b618e`
   - Artefakte: `.artifacts/sprint_15_commit_1_von_4.md`,
@@ -513,9 +517,13 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `8c993b5`
   - Artefakte: `.artifacts/sprint_15_commit_3_von_4.md`,
     `.artifacts/sprint_15_commit_3_von_4.diff`
+- S15C4/4 Traceability:
+  - Git-Commit: `52b5823`
+  - Artefakte: `.artifacts/sprint_15_commit_4_von_4.md`,
+    `.artifacts/sprint_15_commit_4_von_4.diff`
 
 ### Abschluss-Tag
 
-- Sprint-Abschluss: S15C4/4 (pending)
+- Sprint-Abschluss: S15C4/4 (done)
 - Abschluss-Tag: `sprint-15-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)
