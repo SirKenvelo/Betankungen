@@ -23,7 +23,7 @@ fuer den Weg zu `1.0.0`.
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): abgeschlossen.
 - Gate 3 (S14): abgeschlossen.
-- Gate 4 (S15): in Arbeit (S15C1/4 bis S15C3/4 abgeschlossen; Gate-4-Abschlussnarrativ folgt in S15C4/4).
+- Gate 4 (S15): abgeschlossen am 2026-03-16 (S15C1/4 bis S15C4/4 dokumentiert).
 - Scope-Freeze ist aktiv: nur release-relevante Fixes und Doku-Syncs mit direktem 1.0.0-Bezug.
 - Governance-Mindeststand fuer `main`: PR-only, Required-Check `verify`, up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement.
 
@@ -39,6 +39,17 @@ fuer den Weg zu `1.0.0`.
 - Commit: `a59cb6e` (`[S15C2/4] ... (#12)`)
 - Ergebnis: `success`
 - URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`
+
+## Gate-4-Abschlussnarrativ (S15C4)
+
+- Das Gate-4-Exit-Kriterium ("RC-Kandidat ist releasefaehig und reproduzierbar")
+  ist auf Dokumentenebene als erreicht bewertet.
+- Die Preflight-/Verify-Kette ist operationalisiert und nachweislich gruen
+  (lokal + CI-Referenz auf `main`).
+- Scope-Freeze und Governance-Leitplanken fuer den finalen Abschnitt bleiben aktiv.
+- Der naechste Schritt ist Gate 5: finaler Release-Umschalt-Commit, finaler
+  Doku-Sync und anschliessende Ausfuehrung von Release-/Backup-Schritten
+  nach expliziter Freigabe.
 
 ## Automatischer Preflight
 
@@ -70,7 +81,7 @@ scripts/release_preflight_1_0_0.sh --skip-doc-gates
 ## Release-Checkliste (1.0.0)
 
 1. Scope-Freeze ist aktiv (nur release-relevante Fixes).
-2. Gate-Status ist konsistent dokumentiert (`ROADMAP_1_0_0.md`, `STATUS.md`, `SPRINTS.md`): Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
+2. Gate-Status ist konsistent dokumentiert (`ROADMAP_1_0_0.md`, `STATUS.md`, `SPRINTS.md`): Gate 1/2/3/4 abgeschlossen.
 3. `APP_VERSION` steht vor dem finalen Umschalt-Commit auf `1.0.0-dev`.
 4. `make release-preflight-1-0-0` ist lokal gruen.
 5. Letzter GitHub-Run `CI / verify` auf `main` ist gruen.

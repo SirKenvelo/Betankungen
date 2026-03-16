@@ -8,11 +8,11 @@
 - Gate 2 (S13): abgeschlossen am 2026-03-15 (Contract-Haertung gemaess `POL-002` inkl. zentraler JSON/CSV-Gates und sichtbarem Deprecation-Status).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
-- Gate 4 (S15): in Arbeit (S15C1/4 bis S15C3/4 abgeschlossen; Gate-4-Abschlussnarrativ ausstehend).
+- Gate 4 (S15): abgeschlossen am 2026-03-16 (RC-Haertung inkl. lokalem Voll-Preflight und CI-Referenz dokumentiert).
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
   Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
   keine verpflichtenden Approvals im Solo-Maintainer-Betrieb).
-- Gate 5: offen.
+- Gate 5: offen (Finalisierungsvorbereitung ist dokumentiert, finaler Release-Schritt ausstehend).
 
 ## Ausgangslage
 
@@ -119,7 +119,7 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- in Arbeit seit 2026-03-15.
+- abgeschlossen am 2026-03-16.
 - Standardisierter 1.0.0-Preflight ist verankert
   (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`).
@@ -132,6 +132,10 @@ Status:
   `make release-preflight-1-0-0`; CI-Referenz auf `main`:
   `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`,
   Status `success`).
+- S15C4/4: Gate-4-Abschlussnarrativ und Release-Vorbereitung finalisiert
+  (Gate-4-Exit-Kriterium als erreicht dokumentiert; Handover auf Gate 5
+  mit den finalen Release-Schritten `APP_VERSION -> 1.0.0`,
+  finaler Doku-Sync und Release-/Backup-Ausfuehrung nach Freigabe).
 - Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
   strict up-to-date, PR-Pflicht mit Conversation-Resolution,
   `enforce_admins=true`, keine Force-Pushes/Deletes).
