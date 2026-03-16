@@ -8,7 +8,7 @@
 - Gate 2 (S13): abgeschlossen am 2026-03-15 (Contract-Haertung gemaess `POL-002` inkl. zentraler JSON/CSV-Gates und sichtbarem Deprecation-Status).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
-- Gate 4 (S15): vorbereitet (1.0.0-Preflight operationalisiert).
+- Gate 4 (S15): in Arbeit (RC-Haertung mit operationalisiertem 1.0.0-Preflight laeuft).
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
   Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
   Review-Block aktiv mit `required_approving_review_count=0` (Solo-Maintainer-Modus).
@@ -119,10 +119,12 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- vorbereitet seit 2026-03-15.
+- in Arbeit seit 2026-03-15.
 - Standardisierter 1.0.0-Preflight ist verankert
   (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`,
   `docs/RELEASE_1_0_0_PREFLIGHT.md`).
+- S15C1/4: Preflight um explizite Gate-Status-/Doku-Guardrails erweitert
+  (`CONTRACT_HARDENING=done`, Gate-2-Abschluss in `ROADMAP_1_0_0.md` und `docs/STATUS.md`).
 - Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
   strict up-to-date, PR-Pflicht mit Conversation-Resolution,
   `required_pull_request_reviews` aktiv mit `required_approving_review_count=0`,

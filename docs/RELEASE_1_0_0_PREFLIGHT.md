@@ -27,6 +27,7 @@ make release-preflight-1-0-0
 ```
 
 Entspricht:
+- Gate-Status-/Doku-Guardrails (`CONTRACT_HARDENING=done`, Gate-2-Abschluss in `ROADMAP_1_0_0.md` und `STATUS.md`)
 - `make verify`
 - `make smoke-fixtures`
 - `./kpr.sh --dry-run --note "<...>"`
@@ -36,6 +37,12 @@ Schneller Lauf ohne Vollsuite:
 
 ```bash
 scripts/release_preflight_1_0_0.sh --skip-verify
+```
+
+Optional ohne Doku-Guardrails:
+
+```bash
+scripts/release_preflight_1_0_0.sh --skip-doc-gates
 ```
 
 ## Release-Checkliste (1.0.0)
