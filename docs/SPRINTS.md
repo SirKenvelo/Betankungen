@@ -567,3 +567,11 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Sprint 16 wurde initialisiert: verbindlichen 1.1.0-Gate-Plan als neues Arbeitsdokument angelegt (`docs/ROADMAP_1_1_0.md`) und den aktiven Zyklus in Entry-Doku/Status verankert (`docs/README.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`).
 - `S16C2/4` abgeschlossen: Gate-2-Scope-Freeze im Tracker festgezogen. `BL-0014` wurde auf `approved` angehoben und mit `TSK-0006` konkretisiert; zusaetzlich wurde der dedizierte Hardening-Block `BL-0015` mit `TSK-0007` angelegt. Roadmap-/Status-/Entry-Doku wurden auf den Gate-2-Abschluss synchronisiert (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BACKLOG.md`).
+- S16C1/4 Traceability:
+  - Git-Commit: `6256d87`
+  - Artefakte: `.artifacts/sprint_16_commit_1_von_4.md`,
+    `.artifacts/sprint_16_commit_1_von_4.diff`
+- S16C2/4 Traceability:
+  - Git-Commit: `feab063`
+  - Artefakte: `.artifacts/sprint_16_commit_2_von_4.md`,
+    `.artifacts/sprint_16_commit_2_von_4.diff`
