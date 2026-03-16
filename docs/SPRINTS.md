@@ -550,3 +550,19 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - Kein zusaetzlicher Sprint-Tag (Gate-basierter Release-Block ausserhalb der
   Sprint-Nummerierung).
+
+## Sprint 16 - Road to 1.1.0 Kickoff
+
+- Status: aktiv
+- Ziel: den 1.1.0-Zyklus mit verbindlichem Gate-Plan und klarer Scope-Freeze-Vorbereitung starten.
+
+### Geplante Bloecke
+
+- S16C1/4: in progress - 1.1.0-Fahrplan initialisieren (`docs/ROADMAP_1_1_0.md`) und Entry-Doku (`README`/`STATUS`/`SPRINTS`) auf den aktiven Zyklus synchronisieren.
+- S16C2/4: next - Scope-Freeze fuer Gate 2 im Tracker festziehen (priorisierter Feature-Block + Hardening-Block + explizites Out-of-Scope).
+- S16C3/4: next - Verify-/Contract-DoD fuer den gewaehlten 1.1.0-Scope konkretisieren.
+- S16C4/4: next - Gate-2-Abschlusslauf dokumentieren und Sprint-16-Status auf den Umsetzungsblock uebergeben.
+
+### Fortschritt (2026-03-16)
+
+- Sprint 16 wurde initialisiert: verbindlichen 1.1.0-Gate-Plan als neues Arbeitsdokument angelegt (`docs/ROADMAP_1_1_0.md`) und den aktiven Zyklus in Entry-Doku/Status verankert (`docs/README.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`).

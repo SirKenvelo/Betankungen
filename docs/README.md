@@ -57,18 +57,19 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
+- Verbindlicher Fahrplan bis `1.1.0` ist aktiv: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand: Gate 1/2/3/4/5 abgeschlossen.
-- Prioritaet bis 1.0.0:
+- 1.0.0-Abschlusspaket (historisch):
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
   - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
-- Naechster Fokus: aktive 1.1.x-Entwicklungslinie (`APP_VERSION=1.1.0-dev`) nach dem finalen 1.0.0-Release.
-- Nicht Teil von 1.0.0:
+- Naechster Fokus: Scope-Freeze und Gate-2-Abschluss fuer den aktiven 1.1.0-Zyklus.
+- Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
-  - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.
+  - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
@@ -85,6 +86,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/tasks/`: globale `TSK-xxxx`-Eintraege (z. B. fuer Legacy-Backlog-Parents).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
+- `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan fuer die aktive 1.1.0-Linie.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 - `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.

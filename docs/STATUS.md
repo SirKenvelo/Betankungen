@@ -207,6 +207,21 @@ Bereits erledigt:
   - Runtime-Config-Profile im Core (`ADR-0009` = `rejected`).
   - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.
 
+## Roadmap 1.1.0 - verbindlicher Fahrplan (aktiv)
+
+- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_1_0.md`.
+- Gate-Stand:
+  - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
+  - Gate 2 aktiv (Scope-Freeze mit priorisiertem Feature-/Hardening-Block und explizitem Out-of-Scope).
+  - Gate 3/4/5 pending.
+- Leitplanken fuer die 1.1.0-Linie:
+  - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
+  - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
+  - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
+- Operativer Fokus:
+  - Gate 2 sauber abschliessen (Scope-Commit + Tracker-Downstream),
+  - danach Umsetzung und Contract-Haertung entlang des 1.1.0-Gate-Plans.
+
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
 - Abgeschlossen: Integrationscontract Core<->Modul und Cost-Scope-UX sind bereits umgesetzt und als Duplikate markiert (`docs/BACKLOG/BL-010-cost-analytics.md`).
