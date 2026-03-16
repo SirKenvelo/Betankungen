@@ -481,7 +481,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - S15C1/4: done - 1.0.0-Preflight um Gate-Status-/Doku-Guardrails erweitern.
 - S15C2/4: done - RC-Checkliste/Scope-Freeze auf aktuellen Gate-Stand nachziehen.
-- S15C3/4: pending - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
+- S15C3/4: done - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
 - S15C4/4: pending - Gate-4-Abschlussnarrativ und Release-Vorbereitung finalisieren.
 
 ### Fortschritt (2026-03-16)
@@ -496,6 +496,11 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Governance-Text auf den laufenden Solo-Maintainer-Modus ohne verpflichtende
   Approvals nachgezogen (`docs/RELEASE_1_0_0_PREFLIGHT.md`,
   `docs/ROADMAP_1_0_0.md`, `docs/STATUS.md`, `docs/README.md`).
+- `S15C3/4` abgeschlossen: RC-Abschlusslauf mit lokalem Voll-Preflight und
+  CI-Referenz auf `main` dokumentiert. Lokaler Nachweis erfolgte ueber
+  `make release-preflight-1-0-0` (inkl. `make verify`, Doku-Gates und Dry-Runs);
+  referenzierter CI-Run: `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`
+  (`CI`, `success`, Commit `a59cb6e`).
 - S15C1/4 Traceability:
   - Git-Commit: `d8b618e`
   - Artefakte: `.artifacts/sprint_15_commit_1_von_4.md`,
@@ -504,6 +509,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `e52ba86`
   - Artefakte: `.artifacts/sprint_15_commit_2_von_4.md`,
     `.artifacts/sprint_15_commit_2_von_4.diff`
+- S15C3/4 Traceability:
+  - Git-Commit: `8c993b5`
+  - Artefakte: `.artifacts/sprint_15_commit_3_von_4.md`,
+    `.artifacts/sprint_15_commit_3_von_4.diff`
 
 ### Abschluss-Tag
 

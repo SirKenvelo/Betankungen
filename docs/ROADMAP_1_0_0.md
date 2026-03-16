@@ -8,7 +8,7 @@
 - Gate 2 (S13): abgeschlossen am 2026-03-15 (Contract-Haertung gemaess `POL-002` inkl. zentraler JSON/CSV-Gates und sichtbarem Deprecation-Status).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
-- Gate 4 (S15): in Arbeit (S15C1/4 und S15C2/4 abgeschlossen; RC-Abschlusslauf vorbereitet).
+- Gate 4 (S15): in Arbeit (S15C1/4 bis S15C3/4 abgeschlossen; Gate-4-Abschlussnarrativ ausstehend).
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
   Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
   keine verpflichtenden Approvals im Solo-Maintainer-Betrieb).
@@ -128,6 +128,10 @@ Status:
 - S15C2/4: RC-Checkliste und Scope-Freeze auf aktuellen Gate-Stand synchronisiert
   (`docs/RELEASE_1_0_0_PREFLIGHT.md`, `docs/ROADMAP_1_0_0.md`,
   `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`).
+- S15C3/4: RC-Abschlusslauf dokumentiert (lokaler Voll-Preflight gruen via
+  `make release-preflight-1-0-0`; CI-Referenz auf `main`:
+  `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`,
+  Status `success`).
 - Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
   strict up-to-date, PR-Pflicht mit Conversation-Resolution,
   `enforce_admins=true`, keine Force-Pushes/Deletes).

@@ -23,9 +23,22 @@ fuer den Weg zu `1.0.0`.
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): abgeschlossen.
 - Gate 3 (S14): abgeschlossen.
-- Gate 4 (S15): in Arbeit (S15C1/4 und S15C2/4 abgeschlossen; RC-Abschlusslauf folgt in S15C3/4).
+- Gate 4 (S15): in Arbeit (S15C1/4 bis S15C3/4 abgeschlossen; Gate-4-Abschlussnarrativ folgt in S15C4/4).
 - Scope-Freeze ist aktiv: nur release-relevante Fixes und Doku-Syncs mit direktem 1.0.0-Bezug.
 - Governance-Mindeststand fuer `main`: PR-only, Required-Check `verify`, up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement.
+
+## RC-Abschlusslauf-Nachweis (S15C3)
+
+### Lokal (2026-03-16)
+- Befehl: `make release-preflight-1-0-0`
+- Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gate-Checks und Dry-Runs fuer Release-/Backup-Werkzeuge).
+
+### CI-Referenz auf `main`
+- Workflow: `CI` (`verify`)
+- Run-ID: `23153384396`
+- Commit: `a59cb6e` (`[S15C2/4] ... (#12)`)
+- Ergebnis: `success`
+- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23153384396`
 
 ## Automatischer Preflight
 
