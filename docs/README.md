@@ -56,14 +56,16 @@ Das Hauptprogramm steuert – die Units arbeiten.
 ## Roadmap – Kurzstand
 
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
-- Verbindlicher Fahrplan bis `1.0.0` ist aktiv: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand: Gate 1/2/3/4 abgeschlossen; Gate 5 (finale 1.0.0-Freigabe) ist der verbleibende Schlussblock.
+- `1.0.0` wurde am `2026-03-16` final freigegeben.
+- Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
+- Gate-Stand: Gate 1/2/3/4/5 abgeschlossen.
 - Prioritaet bis 1.0.0:
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
   - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
+- Naechster Fokus: 1.1.x-Planung und naechste `-dev`-Linie nach dem finalen 1.0.0-Release.
 - Nicht Teil von 1.0.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Import-/Export-Paketformat (`BL-0014`) als spaeterer Forschungsblock.
