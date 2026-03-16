@@ -1,17 +1,17 @@
 # Verbindlicher Fahrplan bis Version 1.0.0
-**Stand:** 2026-03-15
+**Stand:** 2026-03-16
 **Status:** verbindlich
 
-## Umsetzungsstand (2026-03-15)
+## Umsetzungsstand (2026-03-16)
 
 - Gate 1 (S12): abgeschlossen.
 - Gate 2 (S13): abgeschlossen am 2026-03-15 (Contract-Haertung gemaess `POL-002` inkl. zentraler JSON/CSV-Gates und sichtbarem Deprecation-Status).
 - Optional-Block (`BL-0013`): Benchmark-Harness umgesetzt.
 - Gate 3 (S14): abgeschlossen (Wiki-v1 live, Links gehaertet, Einstieg stabil).
-- Gate 4 (S15): in Arbeit (RC-Haertung mit operationalisiertem 1.0.0-Preflight laeuft).
+- Gate 4 (S15): in Arbeit (S15C1/4 und S15C2/4 abgeschlossen; RC-Abschlusslauf vorbereitet).
 - Repo-Governance: aktiv (main ist PR-only mit Required-Check `verify`,
   Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement;
-  Review-Block aktiv mit `required_approving_review_count=0` (Solo-Maintainer-Modus).
+  keine verpflichtenden Approvals im Solo-Maintainer-Betrieb).
 - Gate 5: offen.
 
 ## Ausgangslage
@@ -125,9 +125,11 @@ Status:
   `docs/RELEASE_1_0_0_PREFLIGHT.md`).
 - S15C1/4: Preflight um explizite Gate-Status-/Doku-Guardrails erweitert
   (`CONTRACT_HARDENING=done`, Gate-2-Abschluss in `ROADMAP_1_0_0.md` und `docs/STATUS.md`).
+- S15C2/4: RC-Checkliste und Scope-Freeze auf aktuellen Gate-Stand synchronisiert
+  (`docs/RELEASE_1_0_0_PREFLIGHT.md`, `docs/ROADMAP_1_0_0.md`,
+  `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`).
 - Branch-Protection fuer `main` ist scharf geschaltet (`verify` required,
   strict up-to-date, PR-Pflicht mit Conversation-Resolution,
-  `required_pull_request_reviews` aktiv mit `required_approving_review_count=0`,
   `enforce_admins=true`, keine Force-Pushes/Deletes).
 
 ### Gate 5: Finalisierung 1.0.0

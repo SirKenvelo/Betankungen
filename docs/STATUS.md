@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-15
+**Stand:** 2026-03-16
 **Zielversion:** 1.0.0
 
 ## Fundament & Architektur (erledigt)
@@ -190,8 +190,8 @@ Bereits erledigt:
   - Gate 1 (S12) abgeschlossen am 2026-03-15.
   - Gate 2 (S13) abgeschlossen am 2026-03-15 (Contract + Modulfaehigkeiten; `BL-0012` done, zentrale CSV-Contract-Regression in Verify/CI verankert, Deprecation-Status gemaess `POL-002` explizit dokumentiert, Abschlusslauf `S13C4/4` mit `make verify` gruen).
   - Gate 3 (S14) abgeschlossen am 2026-03-15: Wiki-v1 ist live, `BL-012` ist `done`, Source-of-Truth-Links sind auf absolute Repo-Ziele gehaertet und interne Wiki-Links rendern ohne `.md`-Raw-Redirect.
-  - Gate 4 (S15) in Arbeit: 1.0.0-Preflight verankert und um Gate-Status-/Doku-Guardrails erweitert (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`, `docs/RELEASE_1_0_0_PREFLIGHT.md`).
-  - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution, Admin-Enforcement und Review-Block im Solo-Modus (`required_approving_review_count=0`).
+  - Gate 4 (S15) in Arbeit: 1.0.0-Preflight verankert; S15C1/4 (Doc-Gate-Guardrails) und S15C2/4 (RC-Checkliste/Scope-Freeze-Sync) sind abgeschlossen (`scripts/release_preflight_1_0_0.sh`, `make release-preflight-1-0-0`, `docs/RELEASE_1_0_0_PREFLIGHT.md`).
+  - Repo-Governance aktiv: `main` ist PR-only mit Required-Check `verify`, Up-to-date-Pflicht, Conversation-Resolution und Admin-Enforcement; im Solo-Maintainer-Betrieb ohne verpflichtende Approvals.
 - Fokus fuer den 1.0.0-Zyklus:
   - Module Capability Discovery (`BL-0012`) produktiv und regressionssicher.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, keine stillen Semantikwechsel), operationalisiert ueber `docs/CONTRACT_HARDENING_1_0_0.md`.
