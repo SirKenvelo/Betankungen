@@ -1,18 +1,19 @@
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-15
+# UPDATED: 2026-03-17
 
 SHELL := bash
 .SHELLFLAGS := -e -o pipefail -c
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-dry
+.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
 	@echo "  make build         - FPC-Standardbuild (bin/build/units)"
 	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Build + Contract + Policy + Smokes)"
 	@echo "  make cost-integration-check - Regression fuer Cost-Integrationsmodi (none/module/fallback)"
+	@echo "  make package-manifest-check - Optionaler Fixture-Check fuer Export-Package-Manifest v1"
 	@echo "  make wiki-link-check - Guardrail-Check fuer Wiki-v1-Quellseiten"
 	@echo "  make stats-benchmark - Optionaler Benchmark-Runner fuer Stats-Pfade"
 	@echo "  make smoke         - Smoke-Suite (tests/smoke/smoke_cli.sh --modules)"
@@ -41,6 +42,9 @@ contract-check-csv:
 
 cost-integration-check:
 	tests/regression/run_cost_integration_modes_check.sh
+
+package-manifest-check:
+	tests/regression/run_package_manifest_fixture_check.sh
 
 wiki-link-check:
 	scripts/wiki_link_check.sh

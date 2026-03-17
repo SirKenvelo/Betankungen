@@ -1,18 +1,18 @@
 ---
 id: BL-0014
 title: Import-Export-Paketformat mit Manifest und Checksum
-status: approved
+status: done
 priority: P2
 type: research
 tags: [export, portability, integrity]
 created: 2026-03-15
-updated: 2026-03-16
+updated: 2026-03-17
 related:
   - BL-010
   - POL-002
   - POL-003
 ---
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 
 # Goal
 Bewertung und Entwurf eines portablen Import-/Export-Paketformats mit Manifest
@@ -38,9 +38,10 @@ Out of Scope:
 - Zusatzerwartungen an Rueckwaertskompatibilitaet ohne stabilen Use-Case.
 
 # Output
-Ein scope-frozen Research-/Contract-Block fuer die 1.1.0-Linie mit klaren
-Deliverables (Manifest-v1-Entwurf, Integritaetsregeln, Fixture-/Dry-Run-Plan)
-und expliziten Nicht-Zielen.
+Der scope-frozen Research-/Contract-Block fuer die 1.1.0-Linie ist geliefert:
+- Manifest-v1-Felder und Integritaetsregeln dokumentiert (`docs/EXPORT_PACKAGE_CONTRACT.md`).
+- Reproduzierbare Dry-Run-Fixtures fuer valid/invalid vorhanden (`tests/regression/fixtures/package_manifest_v1/`).
+- Optionaler lokaler Runner verfuegbar (`tests/regression/run_package_manifest_fixture_check.sh`, `make package-manifest-check`).
 
 # Derived Tasks
-- `TSK-0006` - Manifest-v1-Contract und Dry-Run-Fixtures fuer Paketpruefungen.
+- `TSK-0006` - Manifest-v1-Contract und Dry-Run-Fixtures fuer Paketpruefungen. (done)

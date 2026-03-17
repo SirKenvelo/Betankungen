@@ -36,6 +36,6 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `proposed`, Typ: Feature (Meta-/Tooling)
 - [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract)
 - [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert)
-- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `approved`, Typ: Research (priorisierter Feature-Block fuer 1.1.0)
+- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `done`, Typ: Research (priorisierter Feature-Block fuer 1.1.0)
 - [BL-0015 - Release- und Verify-Hardening fuer die 1.1.0-Linie](backlog/BL-0015-release-verify-hardening-1-1-0/item.md) - Status: `approved`, Typ: Improvement (priorisierter Hardening-Block fuer 1.1.0)
 - [BL-0016 - Community-Standards-Baseline fuer das Public Repository](backlog/BL-0016-community-standards-baseline/item.md) - Status: `proposed`, Typ: Improvement (nicht-blockierender Public-Readiness-Follow-up)

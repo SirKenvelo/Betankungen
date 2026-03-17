@@ -68,8 +68,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
 - Scope-Freeze 1.1.0 ist gesetzt:
-  - Feature-Block: `BL-0014` + `TSK-0006` (Paketformat-Contract/Manifest/Dry-Run-Fixtures).
-  - Hardening-Block: `BL-0015` + `TSK-0007` (Release-/Verify-Haertung fuer 1.1.0).
+  - Feature-Block: `BL-0014` + `TSK-0006` ist abgeschlossen (Paketformat-Contract/Manifest/Dry-Run-Fixtures + optionaler Fixture-Runner).
+  - Hardening-Block: `BL-0015` + `TSK-0007` bleibt aktiv (Release-/Verify-Haertung fuer 1.1.0).
 - Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
@@ -96,6 +96,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 - `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan fuer die aktive 1.1.0-Linie.
 - `docs/CONTRACT_HARDENING_1_1_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.1.0-Linie.
+- `docs/EXPORT_PACKAGE_CONTRACT.md`: Manifest-v1-Contract fuer Export-Pakete (BL-0014 / TSK-0006).
 - `docs/RELEASE_1_1_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer die 1.1.0-Linie.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
@@ -514,6 +515,8 @@ Beispiel:
   - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Cost-Integrations-Regression + Domain-Policy + Smoke + Clean-Home-Smoke
 - `make cost-integration-check`
   - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
+- `make package-manifest-check`
+  - Fuehrt den optionalen Manifest-v1-Fixture-Check aus (`tests/regression/run_package_manifest_fixture_check.sh`)
 - `make smoke`
   - Fuehrt `tests/smoke/smoke_cli.sh --modules` aus
 - `make stats-benchmark`
