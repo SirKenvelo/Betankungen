@@ -21,8 +21,9 @@
 
 ### Muss (release-blockierend)
 
-1. Scope-Commit fuer 1.1.0 im Tracker festziehen:
-- genau ein priorisierter Feature-Block plus ein Hardening-Block fuer den Zyklus;
+1. Scope-Commit fuer 1.1.0 ist im Tracker festgezogen:
+- priorisierter Feature-Block: `BL-0014` (status `approved`) mit Task `TSK-0006`;
+- priorisierter Hardening-Block: `BL-0015` (status `approved`) mit Task `TSK-0007`;
 - explizite Out-of-Scope-Liste gegen Scope-Drift.
 
 2. Contract-sichere Umsetzung:
@@ -38,12 +39,13 @@
 
 ### Soll (nicht release-blockierend)
 
-- `BL-0014` (Import/Export-Paketformat) als Research-Block vorstrukturieren
-  (Contract-/Manifest-Entwurf + Risikoabschaetzung), ohne finalen Rollout-Zwang.
+- Zusaeztliche Trackerthemen bleiben ausserhalb des 1.1.0-Scope-Freeze,
+  solange sie nicht als Blocker fuer `BL-0014`/`BL-0015` nachgewiesen sind.
 
 ### Nicht Teil von 1.1.0
 
 - Runtime-Config-Profile im Programm (`ADR-0009`, abgelehnt).
+- Vollstaendige Import-Pipeline mit Migrationsautomatik in 1.1.0.
 - Big-Bang-Uebersetzung der gesamten Detaildoku vor Release.
 - Architekturwechsel weg vom CLI-Kern.
 
@@ -63,14 +65,18 @@ Status:
 
 ### Gate 2: Scope-Freeze 1.1.0
 
-- Priorisierter Feature-Block und Hardening-Block final festgelegt.
-- Tracker-Downstream (`BL`/`TSK`) und DoD/Grenzen explizit dokumentiert.
+- Priorisierte Bloecke sind final festgelegt:
+  - Feature-Block `BL-0014` + `TSK-0006`
+  - Hardening-Block `BL-0015` + `TSK-0007`
+- Out-of-Scope-Liste ist explizit dokumentiert (kein Profilmodus, keine volle
+  Import-Pipeline in 1.1.0, kein Architekturwechsel).
+- Tracker-Downstream und DoD/Grenzen sind dokumentiert.
 
 Exit-Kriterium:
 - Kein fachlicher Scope-Drift fuer den laufenden 1.1.0-Zyklus.
 
 Status:
-- aktiv.
+- abgeschlossen am 2026-03-16.
 
 ### Gate 3: Umsetzung + Contract-Haertung
 
@@ -81,7 +87,7 @@ Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- pending.
+- aktiv.
 
 ### Gate 4: Release-Candidate-Haertung
 

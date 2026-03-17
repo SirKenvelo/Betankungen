@@ -59,14 +59,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
 - Verbindlicher Fahrplan bis `1.1.0` ist aktiv: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand: Gate 1/2/3/4/5 abgeschlossen.
+- Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
+- Gate-Stand 1.1.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
 - 1.0.0-Abschlusspaket (historisch):
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
   - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
   - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
-- Naechster Fokus: Scope-Freeze und Gate-2-Abschluss fuer den aktiven 1.1.0-Zyklus.
+- Scope-Freeze 1.1.0 ist gesetzt:
+  - Feature-Block: `BL-0014` + `TSK-0006` (Paketformat-Contract/Manifest/Dry-Run-Fixtures).
+  - Hardening-Block: `BL-0015` + `TSK-0007` (Release-/Verify-Haertung fuer 1.1.0).
+- Naechster Fokus: Gate-3-Umsetzung und Contract-Haertung fuer die scope-frozen 1.1.0-Bloecke.
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).
