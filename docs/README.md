@@ -69,7 +69,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
 - Scope-Freeze 1.1.0 ist gesetzt:
   - Feature-Block: `BL-0014` + `TSK-0006` ist abgeschlossen (Paketformat-Contract/Manifest/Dry-Run-Fixtures + optionaler Fixture-Runner).
-  - Hardening-Block: `BL-0015` + `TSK-0007` bleibt aktiv (Release-/Verify-Haertung fuer 1.1.0).
+  - Hardening-Block: `BL-0015` + `TSK-0007` ist abgeschlossen (operatives 1.1.0-Preflight-Skript + Doku-Gates).
 - Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
@@ -98,6 +98,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/CONTRACT_HARDENING_1_1_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.1.0-Linie.
 - `docs/EXPORT_PACKAGE_CONTRACT.md`: Manifest-v1-Contract fuer Export-Pakete (BL-0014 / TSK-0006).
 - `docs/RELEASE_1_1_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer die 1.1.0-Linie.
+- `scripts/release_preflight_1_1_0.sh`: operativer 1.1.0-Readiness-Preflight.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 - `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.
@@ -525,6 +526,8 @@ Beispiel:
   - Fuehrt den 0.9.0-Readiness-Preflight aus (`scripts/release_preflight.sh`)
 - `make release-preflight-1-0-0`
   - Fuehrt den 1.0.0-Readiness-Preflight aus (`scripts/release_preflight_1_0_0.sh`)
+- `make release-preflight-1-1-0`
+  - Fuehrt den 1.1.0-Readiness-Preflight aus (`scripts/release_preflight_1_1_0.sh`)
 - `make release-dry`
   - Fuehrt `kpr.sh --dry-run` aus
 - optional:

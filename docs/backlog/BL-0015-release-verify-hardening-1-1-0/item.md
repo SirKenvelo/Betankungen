@@ -1,18 +1,18 @@
 ---
 id: BL-0015
 title: Release- und Verify-Hardening fuer die 1.1.0-Linie
-status: approved
+status: done
 priority: P1
 type: improvement
 tags: [release, verify, governance, qa]
 created: 2026-03-16
-updated: 2026-03-16
+updated: 2026-03-17
 related:
   - POL-002
   - POL-003
   - BL-0014
 ---
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 
 # Goal
 Den 1.1.0-Releasepfad fruehzeitig haerten, damit Scope-Freeze, Verify-Gates
@@ -42,4 +42,4 @@ Ein stabiler Hardening-Block fuer die 1.1.0-Linie, der Release-Reife
 fruehzeitig absichert, ohne den Feature-Umfang auszuweiten.
 
 # Derived Tasks
-- `TSK-0007` - 1.1.0-Preflight-Blueprint und Doku-Gates definieren.
+- `TSK-0007` - 1.1.0-Preflight-Blueprint und Doku-Gates definieren. (done)
