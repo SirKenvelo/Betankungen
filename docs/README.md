@@ -60,7 +60,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.1.0` ist aktiv: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.1.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
+- Gate-Stand 1.1.0: Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
 - 1.0.0-Abschlusspaket (historisch):
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
@@ -73,7 +73,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
-- Naechster Fokus: finalen Gate-3-Abschlusslauf in `S17C4/4` dokumentieren und anschliessend Gate 4 (RC-Haertung) formal starten.
+- Naechster Fokus: Gate 4 (RC-Haertung) mit vollstaendigem RC-Abschlusslauf und konsistentem Gate-Sync dokumentieren.
 - Non-blocking Follow-up im Tracker erfasst: `BL-0016` (Community-Standards-Baseline fuer Public Repo).
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).

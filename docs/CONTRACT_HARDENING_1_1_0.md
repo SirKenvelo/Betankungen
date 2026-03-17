@@ -1,6 +1,6 @@
 # Contract Hardening 1.1.0
 **Stand:** 2026-03-17
-**Status:** aktiv (Gate 3 Closeout / S17C3)
+**Status:** abgeschlossen (Gate 3, finalisiert in S17C4)
 
 ## Ziel
 
@@ -42,6 +42,16 @@ transparent und pruefbar.
   `https://github.com/SirKenvelo/Betankungen/actions/runs/23207955306`.
 - Scope-Freeze ist unverletzt: keine zusaetzlichen release-blockierenden
   1.1.0-Bloecke neben `BL-0014` und `BL-0015`.
+
+## Abschlusslauf-Nachweis (S17C4)
+
+- Lokal: `make release-preflight-1-1-0` erneut erfolgreich
+  (inkl. Vollsuite `make verify`, Doku-Gates und Dry-Runs).
+- CI-Referenz auf `main` aktualisiert: Run `23208794011` (`CI`, `success`),
+  Commit `e67860f`, URL:
+  `https://github.com/SirKenvelo/Betankungen/actions/runs/23208794011`.
+- Ergebnis: Gate-3-Exit-Kriterien sind ohne offene Blocker erfuellt; Uebergang
+  auf Gate 4 ist formal freigegeben.
 
 ## Nicht-Ziele in Gate 3
 

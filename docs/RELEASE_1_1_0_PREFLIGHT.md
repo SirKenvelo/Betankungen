@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-17
-**Status:** aktiv (Gate-3-Closeout dokumentiert, Gate-4-Handover vorbereitet)
+**Status:** aktiv (Gate 4 gestartet, nach abgeschlossenem Gate 3)
 
 ## Ziel
 
@@ -56,17 +56,17 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   Fixture-Runner `tests/regression/run_package_manifest_fixture_check.sh`).
 - Operative Skriptbasis ist nachweisbar ausgefuehrt (`make release-preflight-1-1-0`).
 
-## Gate-3-Closeout-Snapshot (S17C3, Stand 2026-03-17)
+## Gate-Status-Snapshot (S17C4, Stand 2026-03-17)
 
 - Gate 1: abgeschlossen am 2026-03-16.
 - Gate 2: abgeschlossen am 2026-03-16.
-- Gate 3: aktiv (Closeout-Nachweise verdichtet; finaler Abschlusslauf in
-  `S17C4/4` verbleibt).
-- Gate 4/5: pending.
+- Gate 3: abgeschlossen am 2026-03-17 (Exit-Kriterien voll erfuellt).
+- Gate 4: aktiv (Start dokumentiert in `S17C4/4`).
+- Gate 5: pending.
 - Scope-Freeze bleibt unverletzt (`BL-0014` + `BL-0015` als einziger
   release-blockierender 1.1.0-Fokus).
 
-## RC-Handover-Stand fuer Gate 4 (S17C3)
+## RC-Handover-Stand fuer Gate 4 (S17C4)
 
 ### Lokal
 - Befehl: `make release-preflight-1-1-0`
@@ -75,14 +75,14 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 
 ### CI-Referenz auf `main`
 - Workflow: `CI` (`verify`)
-- Run-ID: `23207955306`
-- Commit: `f072f06` (`S17c2 preflight script 1-1-0 (#22)`)
+- Run-ID: `23208794011`
+- Commit: `e67860f` (`S17c3 gate3 closeout handover (#23)`)
 - Ergebnis: `success`
-- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23207955306`
+- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23208794011`
 
-## Verbleibender Gate-3-Schritt (S17C4)
+## Naechster Schritt (Gate 4)
 
-- Finalen Gate-3-Abschlusslauf dokumentieren
-  (`make verify` + Matrix-/Roadmap-/Status-Sync).
-- Nach erfolgreichem Abschluss Gate-3-Exit-Kriterium in Roadmap/Status
-  auf `abgeschlossen` setzen und Gate-4-Start markieren.
+- RC-Abschlusslauf fuer Gate 4 mit lokalem Voll-Preflight und aktualisierter
+  CI-Referenz auf `main` dokumentieren.
+- Danach Gate-4-Exit-Kriterium in Roadmap/Status explizit auf `abgeschlossen`
+  setzen.
