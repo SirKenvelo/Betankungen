@@ -581,3 +581,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `f796179`
   - Artefakte: `.artifacts/sprint_16_commit_3_von_4.md`,
     `.artifacts/sprint_16_commit_3_von_4.diff`
+- S16C4/4 Traceability:
+  - Git-Commit: `f3aa61b`
+  - Artefakte: `.artifacts/sprint_16_commit_4_von_4.md`,
+    `.artifacts/sprint_16_commit_4_von_4.diff`
