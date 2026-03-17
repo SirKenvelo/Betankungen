@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -58,6 +58,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach abgeschlossenem 1.0.0-Release
 - S16C2/4 - Gate-2-Scope-Freeze fuer die 1.1.0-Linie im Tracker festgezogen (`BL-0014` + `TSK-0006`, `BL-0015` + `TSK-0007`) und Roadmap-/Status-/Sprint-/Entry-Doku synchronisiert; Artefakte: `.artifacts/sprint_16_commit_2_von_4.md`, `.artifacts/sprint_16_commit_2_von_4.diff`; Basis-Commit: `feab063`. (2026-03-16)
 
 ### Changed
+- [S16C3/4] Planning/Quality: Verify-/Contract-DoD fuer Gate 3 der 1.1.0-Linie konkretisiert. Neue Leitdokumente `docs/CONTRACT_HARDENING_1_1_0.md` (Hardening-Matrix/Exit-Kriterien) und `docs/RELEASE_1_1_0_PREFLIGHT.md` (Preflight-Blueprint + Doku-Gates) eingefuehrt; Roadmap-/Status-/Sprint-/Entry-Doku auf den DoD-Stand synchronisiert (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`). (2026-03-17)
 - [S16C2/4] Planning/Tracker: Gate-2-Scope-Freeze fuer die 1.1.0-Linie festgezogen. `BL-0014` wurde auf `approved` angehoben und mit `TSK-0006` konkretisiert (Manifest-v1 + Dry-Run-Fixtures); zusaetzlich wurde `BL-0015` als dedizierter Hardening-Block mit `TSK-0007` neu angelegt (Release-/Verify-Haertung 1.1.0). Roadmap-/Status-/Sprint-/Entry-Doku auf Gate-2-Abschluss synchronisiert (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`, `docs/BACKLOG.md`). (2026-03-16)
 - [General] Roadmap/Planning: Aktiven 1.1.0-Gate-Plan eingefuehrt (`docs/ROADMAP_1_1_0.md`) und als verbindlichen Zyklusrahmen in Entry-/Status-/Sprint-Doku verankert (`docs/README.md`, `docs/STATUS.md`, `docs/SPRINTS.md`). Gate 1 ist damit als abgeschlossen dokumentiert, Gate 2 (Scope-Freeze) als naechster operativer Fokus gesetzt. (2026-03-16)
 - [General] Versioning: Nach finaler Freigabe von `1.0.0` wurde die aktive Entwicklungsbasis auf die naechste Linie angehoben (`src/Betankungen.lpr`: `APP_VERSION=1.1.0-dev`). Entry-/Status-Doku auf den neuen Dev-Start synchronisiert (`docs/README.md`, `docs/STATUS.md`). (2026-03-16)
