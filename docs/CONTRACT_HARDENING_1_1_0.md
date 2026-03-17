@@ -19,9 +19,9 @@ transparent und pruefbar.
 
 | Bereich | DoD-Anforderung | Nachweisstand |
 |---|---|---|
-| Paket-Contract | Manifest-v1-Felder inkl. Integritaetsregeln dokumentiert (additiv, versioniert). | open |
-| Paket-Fixtures | Reproduzierbare Dry-Run-Fixtures fuer gueltig/ungueltig definiert. | open |
-| Verify-Integration | Contract-/Fixture-Checks als optionaler Runner dokumentiert und lokal ausfuehrbar. | open |
+| Paket-Contract | Manifest-v1-Felder inkl. Integritaetsregeln dokumentiert (additiv, versioniert). | done |
+| Paket-Fixtures | Reproduzierbare Dry-Run-Fixtures fuer gueltig/ungueltig definiert. | done |
+| Verify-Integration | Contract-/Fixture-Checks als optionaler Runner dokumentiert und lokal ausfuehrbar. | done |
 | Preflight-Blueprint | 1.1.0-Preflight-Checkpunkte (Version, Doku-Gates, Dry-Runs) konsistent definiert. | open |
 | Doku-Governance | Entry-/Status-/Sprint-/Changelog-Verweise auf Scope und Gate-Stand synchron. | done |
 | Policy-Fit | Keine stillen Breaks (`POL-002`), keine Privacy-/Retention-Verletzung (`POL-003`). | in_progress |

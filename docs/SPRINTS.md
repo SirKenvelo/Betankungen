@@ -585,3 +585,23 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `f3aa61b`
   - Artefakte: `.artifacts/sprint_16_commit_4_von_4.md`,
     `.artifacts/sprint_16_commit_4_von_4.diff`
+
+## Sprint 17 - Gate 3 Umsetzung (Manifest v1)
+
+- Status: aktiv
+- Ziel: den Feature-Block `BL-0014` im Gate-3-Rahmen fachlich abschliessen und den verbleibenden Hardening-Block `BL-0015` vorbereiten.
+
+### Geplante Bloecke
+
+- S17C1/4: done - Manifest-v1-Contract, Dry-Run-Fixtures und optionalen lokalen Runner fuer Paketvalidierung liefern (`TSK-0006`).
+- S17C2/4: next - 1.1.0-Preflight-Skriptbasis aus dem Blueprint operationalisieren (`TSK-0007`).
+- S17C3/4: pending - Doku-Gates fuer den 1.1.0-Preflight auf Skript-/Policy-Ebene verdrahten.
+- S17C4/4: pending - Gate-3-Abschlusslauf (Verify + Matrix-Sync) vorbereiten.
+
+### Fortschritt (2026-03-17)
+
+- `S17C1/4` abgeschlossen: Manifest-v1-Contract als neues Arbeitsdokument eingefuehrt (`docs/EXPORT_PACKAGE_CONTRACT.md`), reproduzierbare valid/invalid-Fixtures angelegt (`tests/regression/fixtures/package_manifest_v1/`) und optionalen lokalen Fixture-Runner umgesetzt (`tests/regression/run_package_manifest_fixture_check.sh`, `make package-manifest-check`). Tracker-/Gate-Sync auf done/in-progress aktualisiert (`docs/backlog/BL-0014-import-export-package-format/item.md`, `docs/backlog/BL-0014-import-export-package-format/tasks/TSK-0006-define-package-manifest-v1-and-dry-run-fixtures.md`, `docs/CONTRACT_HARDENING_1_1_0.md`, `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/CHANGELOG.md`).
+- S17C1/4 Traceability:
+  - Git-Commit: `2d3ba79`
+  - Artefakte: `.artifacts/sprint_17_commit_1_von_4.md`,
+    `.artifacts/sprint_17_commit_1_von_4.diff`

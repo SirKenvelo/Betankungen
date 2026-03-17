@@ -22,7 +22,7 @@
 ### Muss (release-blockierend)
 
 1. Scope-Commit fuer 1.1.0 ist im Tracker festgezogen:
-- priorisierter Feature-Block: `BL-0014` (status `approved`) mit Task `TSK-0006`;
+- priorisierter Feature-Block: `BL-0014` (status `done`) mit Task `TSK-0006`;
 - priorisierter Hardening-Block: `BL-0015` (status `approved`) mit Task `TSK-0007`;
 - explizite Out-of-Scope-Liste gegen Scope-Drift.
 
@@ -85,12 +85,14 @@ Status:
 - 1.1.0-Preflight-Blueprint und Doku-Gates sind definiert
   (`docs/RELEASE_1_1_0_PREFLIGHT.md`).
 - Umsetzungsblock fuer `BL-0014`/`BL-0015` laeuft auf dieser Basis.
+  - `BL-0014` + `TSK-0006` abgeschlossen (Manifest-v1-Contract, Dry-Run-Fixtures, optionaler Fixture-Runner).
+  - `BL-0015` + `TSK-0007` verbleibt als aktiver Hardening-Block.
 
 Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv (S16C4/4 abgeschlossen; Umsetzungsblock `BL-0014`/`BL-0015` laeuft).
+- aktiv (`BL-0014` done, `BL-0015` in Arbeit).
 
 ### Gate 4: Release-Candidate-Haertung
 

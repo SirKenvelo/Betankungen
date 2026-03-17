@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-15
+**Stand:** 2026-03-17
 
 ## Ordnerstruktur
 - `tests/benchmark/`: optionaler Benchmark-Runner fuer trigger-basierte Performance-Messungen.
@@ -73,11 +73,14 @@ Direktlauf:
 - Zweck: Validiert den CSV-Contract aus `docs/EXPORT_CONTRACT.md` gegen echte CLI-CSV-Ausgaben (`--stats fuelups --csv`) inkl. Guardrail fuer die ungueltige Kombination `--yearly --csv`.
 - Script: `tests/regression/run_cost_integration_modes_check.sh`
 - Zweck: validiert den Cost-Integrationscontract fuer `--maintenance-source none|module` inkl. aktivem Companion-Pfad und expliziten Fallbacks (fehlendes Binary, period-gefilterter Modulmodus).
+- Script: `tests/regression/run_package_manifest_fixture_check.sh`
+- Zweck: validiert den Export-Package-Manifest-Contract v1 gegen reproduzierbare Dry-Run-Fixtures (1x valid, mehrere invalid).
 
 Direktlauf:
 - `tests/regression/run_export_contract_json_check.sh`
 - `tests/regression/run_export_contract_csv_check.sh`
 - `tests/regression/run_cost_integration_modes_check.sh`
+- `tests/regression/run_package_manifest_fixture_check.sh`
 
 ## Benchmark (optional)
 

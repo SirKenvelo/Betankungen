@@ -45,4 +45,6 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 ## Aktueller Preflight-Stand
 
 - Blueprint ist definiert.
-- Operative Ausfuehrung als RC-Nachweis folgt in Gate 4 (`S16C4/4` oder Folgesprint).
+- Paket-Contract-Block aus Gate 3 ist konkretisiert (`docs/EXPORT_PACKAGE_CONTRACT.md`,
+  Fixture-Runner `tests/regression/run_package_manifest_fixture_check.sh`).
+- Operative Ausfuehrung als RC-Nachweis folgt in Gate 4.
