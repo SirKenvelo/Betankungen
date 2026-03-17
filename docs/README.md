@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -70,7 +70,10 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Scope-Freeze 1.1.0 ist gesetzt:
   - Feature-Block: `BL-0014` + `TSK-0006` (Paketformat-Contract/Manifest/Dry-Run-Fixtures).
   - Hardening-Block: `BL-0015` + `TSK-0007` (Release-/Verify-Haertung fuer 1.1.0).
-- Naechster Fokus: Gate-3-Umsetzung und Contract-Haertung fuer die scope-frozen 1.1.0-Bloecke.
+- Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
+  - `docs/CONTRACT_HARDENING_1_1_0.md`
+  - `docs/RELEASE_1_1_0_PREFLIGHT.md`
+- Naechster Fokus: Gate-3-Umsetzung auf dieser DoD-Basis und Vorbereitung des RC-Preflight-Nachweises fuer Gate 4.
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).
@@ -91,6 +94,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
 - `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan fuer die aktive 1.1.0-Linie.
+- `docs/CONTRACT_HARDENING_1_1_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.1.0-Linie.
+- `docs/RELEASE_1_1_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer die 1.1.0-Linie.
 - `docs/ROADMAP_1_0_0.md`: verbindlicher Gate-Plan bis zur Finalisierung 1.0.0.
 - `docs/RELEASE_0_9_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 0.9.0-Linie.
 - `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.

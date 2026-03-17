@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.1.0
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 **Status:** aktiv (`APP_VERSION=1.1.0-dev`)
 
 ## Ausgangslage
@@ -80,14 +80,17 @@ Status:
 
 ### Gate 3: Umsetzung + Contract-Haertung
 
-- Umsetzungsblock abgeschlossen.
-- Contract-Doku und Regressionen fuer neue/erweiterte Pfade gruen.
+- Verify-/Contract-DoD ist konkretisiert
+  (`docs/CONTRACT_HARDENING_1_1_0.md`).
+- 1.1.0-Preflight-Blueprint und Doku-Gates sind definiert
+  (`docs/RELEASE_1_1_0_PREFLIGHT.md`).
+- Umsetzungsblock fuer `BL-0014`/`BL-0015` laeuft auf dieser Basis.
 
 Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv.
+- aktiv (S16C3/4 abgeschlossen, S16C4/4 offen).
 
 ### Gate 4: Release-Candidate-Haertung
 

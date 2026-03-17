@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-16
+**Stand:** 2026-03-17
 **Zielversion:** 1.1.0-dev (aktive Entwicklungsphase)
 
 ## Fundament & Architektur (erledigt)
@@ -213,15 +213,15 @@ Bereits erledigt:
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
-  - Gate 3 aktiv (Umsetzung + Contract-Haertung fuer die scope-frozen Bloecke).
+  - Gate 3 aktiv (Umsetzung + Contract-Haertung fuer die scope-frozen Bloecke; Verify-/Contract-DoD und Preflight-Blueprint in `docs/CONTRACT_HARDENING_1_1_0.md` und `docs/RELEASE_1_1_0_PREFLIGHT.md` konkretisiert).
   - Gate 4/5 pending.
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - Gate-3-Umsetzung fuer den scope-frozen Zyklus starten (`BL-0014`, `BL-0015`),
-  - Contract-/Preflight-Haertung entlang des 1.1.0-Gate-Plans nachziehen.
+  - Gate-3-Umsetzung fuer den scope-frozen Zyklus entlang des konkretisierten DoD weiterfuehren (`BL-0014`, `BL-0015`),
+  - RC-Preflight-Nachweis fuer Gate 4 vorbereiten.
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
