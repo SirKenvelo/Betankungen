@@ -1,6 +1,6 @@
 # Contract Hardening 1.1.0
 **Stand:** 2026-03-17
-**Status:** aktiv (Gate 3)
+**Status:** aktiv (Gate 3 Closeout / S17C3)
 
 ## Ziel
 
@@ -24,7 +24,7 @@ transparent und pruefbar.
 | Verify-Integration | Contract-/Fixture-Checks als optionaler Runner dokumentiert und lokal ausfuehrbar. | done |
 | Preflight-Blueprint | 1.1.0-Preflight-Checkpunkte (Version, Doku-Gates, Dry-Runs) konsistent definiert. | done |
 | Doku-Governance | Entry-/Status-/Sprint-/Changelog-Verweise auf Scope und Gate-Stand synchron. | done |
-| Policy-Fit | Keine stillen Breaks (`POL-002`), keine Privacy-/Retention-Verletzung (`POL-003`). | in_progress |
+| Policy-Fit | Keine stillen Breaks (`POL-002`), keine Privacy-/Retention-Verletzung (`POL-003`). | done |
 
 ## Exit-Kriterien Gate 3
 
@@ -32,6 +32,16 @@ transparent und pruefbar.
 - `make verify` ist gruen.
 - Scope-Freeze bleibt unverletzt (`BL-0014`, `BL-0015` als alleiniger 1.1.0-Fokus).
 - Offene Punkte fuer Gate 4 sind explizit als RC-Themen dokumentiert.
+
+## Closeout-Nachweise (S17C3)
+
+- Lokal: `make release-preflight-1-1-0` erfolgreich
+  (inkl. `make verify`, Doku-Gates, Release-/Backup-Dry-Runs).
+- CI-Referenz auf `main`: Run `23207955306` (`CI`, `success`),
+  Commit `f072f06`, URL:
+  `https://github.com/SirKenvelo/Betankungen/actions/runs/23207955306`.
+- Scope-Freeze ist unverletzt: keine zusaetzlichen release-blockierenden
+  1.1.0-Bloecke neben `BL-0014` und `BL-0015`.
 
 ## Nicht-Ziele in Gate 3
 

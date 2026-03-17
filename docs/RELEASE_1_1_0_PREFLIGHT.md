@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-17
-**Status:** aktiv (Skriptbasis vorhanden, Gate 3)
+**Status:** aktiv (Gate-3-Closeout dokumentiert, Gate-4-Handover vorbereitet)
 
 ## Ziel
 
@@ -54,4 +54,35 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - Blueprint ist definiert.
 - Paket-Contract-Block aus Gate 3 ist konkretisiert (`docs/EXPORT_PACKAGE_CONTRACT.md`,
   Fixture-Runner `tests/regression/run_package_manifest_fixture_check.sh`).
-- Operative Ausfuehrung als RC-Nachweis folgt in Gate 4.
+- Operative Skriptbasis ist nachweisbar ausgefuehrt (`make release-preflight-1-1-0`).
+
+## Gate-3-Closeout-Snapshot (S17C3, Stand 2026-03-17)
+
+- Gate 1: abgeschlossen am 2026-03-16.
+- Gate 2: abgeschlossen am 2026-03-16.
+- Gate 3: aktiv (Closeout-Nachweise verdichtet; finaler Abschlusslauf in
+  `S17C4/4` verbleibt).
+- Gate 4/5: pending.
+- Scope-Freeze bleibt unverletzt (`BL-0014` + `BL-0015` als einziger
+  release-blockierender 1.1.0-Fokus).
+
+## RC-Handover-Stand fuer Gate 4 (S17C3)
+
+### Lokal
+- Befehl: `make release-preflight-1-1-0`
+- Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gates sowie
+  Release-/Backup-Dry-Runs).
+
+### CI-Referenz auf `main`
+- Workflow: `CI` (`verify`)
+- Run-ID: `23207955306`
+- Commit: `f072f06` (`S17c2 preflight script 1-1-0 (#22)`)
+- Ergebnis: `success`
+- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23207955306`
+
+## Verbleibender Gate-3-Schritt (S17C4)
+
+- Finalen Gate-3-Abschlusslauf dokumentieren
+  (`make verify` + Matrix-/Roadmap-/Status-Sync).
+- Nach erfolgreichem Abschluss Gate-3-Exit-Kriterium in Roadmap/Status
+  auf `abgeschlossen` setzen und Gate-4-Start markieren.
