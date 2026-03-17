@@ -553,7 +553,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 16 - Road to 1.1.0 Kickoff
 
-- Status: aktiv
+- Status: done
 - Ziel: den 1.1.0-Zyklus mit verbindlichem Gate-Plan und klarer Scope-Freeze-Vorbereitung starten.
 
 ### Geplante Bloecke
@@ -561,13 +561,14 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S16C1/4: done - 1.1.0-Fahrplan initialisieren (`docs/ROADMAP_1_1_0.md`) und Entry-Doku (`README`/`STATUS`/`SPRINTS`) auf den aktiven Zyklus synchronisieren.
 - S16C2/4: done - Scope-Freeze fuer Gate 2 im Tracker festziehen (priorisierter Feature-Block + Hardening-Block + explizites Out-of-Scope).
 - S16C3/4: done - Verify-/Contract-DoD fuer den gewaehlten 1.1.0-Scope konkretisieren.
-- S16C4/4: next - Gate-2-Abschlusslauf dokumentieren und Sprint-16-Status auf den Umsetzungsblock uebergeben.
+- S16C4/4: done - Gate-3-Kickoff-Handover dokumentieren und Sprint-16-Abschluss auf den Umsetzungsblock uebergeben.
 
 ### Fortschritt (2026-03-17)
 
 - Sprint 16 wurde initialisiert: verbindlichen 1.1.0-Gate-Plan als neues Arbeitsdokument angelegt (`docs/ROADMAP_1_1_0.md`) und den aktiven Zyklus in Entry-Doku/Status verankert (`docs/README.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`).
 - `S16C2/4` abgeschlossen: Gate-2-Scope-Freeze im Tracker festgezogen. `BL-0014` wurde auf `approved` angehoben und mit `TSK-0006` konkretisiert; zusaetzlich wurde der dedizierte Hardening-Block `BL-0015` mit `TSK-0007` angelegt. Roadmap-/Status-/Entry-Doku wurden auf den Gate-2-Abschluss synchronisiert (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BACKLOG.md`).
 - `S16C3/4` abgeschlossen: Verify-/Contract-DoD fuer Gate 3 konkretisiert. Neue Arbeitsdokumente `docs/CONTRACT_HARDENING_1_1_0.md` und `docs/RELEASE_1_1_0_PREFLIGHT.md` eingefuehrt und Roadmap-/Status-/Entry-Doku auf den DoD-Stand synchronisiert (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/CHANGELOG.md`).
+- `S16C4/4` abgeschlossen: Sprint-16-Kickoff als Gate-3-Handover finalisiert. Gate-Status in Roadmap-/Status-/Entry-Doku auf den aktiven Umsetzungsblock synchronisiert und ein expliziter non-blocking Follow-up fuer Public-Readiness als `BL-0016` im kanonischen Tracker aufgenommen (`docs/backlog/BL-0016-community-standards-baseline/item.md`, `docs/BACKLOG.md`, `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/CHANGELOG.md`).
 - S16C1/4 Traceability:
   - Git-Commit: `6256d87`
   - Artefakte: `.artifacts/sprint_16_commit_1_von_4.md`,
@@ -580,3 +581,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `f796179`
   - Artefakte: `.artifacts/sprint_16_commit_3_von_4.md`,
     `.artifacts/sprint_16_commit_3_von_4.diff`
+- S16C4/4 Traceability:
+  - Git-Commit: `f3aa61b`
+  - Artefakte: `.artifacts/sprint_16_commit_4_von_4.md`,
+    `.artifacts/sprint_16_commit_4_von_4.diff`

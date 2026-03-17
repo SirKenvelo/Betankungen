@@ -74,6 +74,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
 - Naechster Fokus: Gate-3-Umsetzung auf dieser DoD-Basis und Vorbereitung des RC-Preflight-Nachweises fuer Gate 4.
+- Non-blocking Follow-up im Tracker erfasst: `BL-0016` (Community-Standards-Baseline fuer Public Repo).
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).
