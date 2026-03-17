@@ -23,7 +23,7 @@
 
 1. Scope-Commit fuer 1.1.0 ist im Tracker festgezogen:
 - priorisierter Feature-Block: `BL-0014` (status `done`) mit Task `TSK-0006`;
-- priorisierter Hardening-Block: `BL-0015` (status `approved`) mit Task `TSK-0007`;
+- priorisierter Hardening-Block: `BL-0015` (status `done`) mit Task `TSK-0007`;
 - explizite Out-of-Scope-Liste gegen Scope-Drift.
 
 2. Contract-sichere Umsetzung:
@@ -86,13 +86,13 @@ Status:
   (`docs/RELEASE_1_1_0_PREFLIGHT.md`).
 - Umsetzungsblock fuer `BL-0014`/`BL-0015` laeuft auf dieser Basis.
   - `BL-0014` + `TSK-0006` abgeschlossen (Manifest-v1-Contract, Dry-Run-Fixtures, optionaler Fixture-Runner).
-  - `BL-0015` + `TSK-0007` verbleibt als aktiver Hardening-Block.
+  - `BL-0015` + `TSK-0007` abgeschlossen (operatives 1.1.0-Preflight-Skript + Doku-Gates).
 
 Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv (`BL-0014` done, `BL-0015` in Arbeit).
+- aktiv (`BL-0014` done, `BL-0015` done; Gate-3-Policy-Fit/Closeout verbleibt).
 
 ### Gate 4: Release-Candidate-Haertung
 

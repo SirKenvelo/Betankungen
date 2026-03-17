@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-17
-**Status:** vorbereitet (Gate 3)
+**Status:** aktiv (Skriptbasis vorhanden, Gate 3)
 
 ## Ziel
 
@@ -31,6 +31,13 @@ definiert den Soll-Preflight fuer Gate 4/5 und die zugehoerigen Doku-Gates.
 5. Release-/Backup-Dry-Runs
 - Release-Skript und Backup-Skript lassen sich im Dry-Run-Pfad pruefen, ohne
   finale Artefakte vor Gate 5 zu erzeugen.
+
+## Skriptbasis
+
+- Operativer Preflight-Entrypoint:
+  - `scripts/release_preflight_1_1_0.sh`
+- Make-Entrypoint:
+  - `make release-preflight-1-1-0`
 
 ## Doku-Sync-Gates (Pflicht)
 
