@@ -90,7 +90,7 @@ Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv (S16C3/4 abgeschlossen, S16C4/4 offen).
+- aktiv (S16C4/4 abgeschlossen; Umsetzungsblock `BL-0014`/`BL-0015` laeuft).
 
 ### Gate 4: Release-Candidate-Haertung
 
