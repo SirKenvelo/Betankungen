@@ -601,3 +601,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Fortschritt (2026-03-17)
 
 - `S17C1/4` abgeschlossen: Manifest-v1-Contract als neues Arbeitsdokument eingefuehrt (`docs/EXPORT_PACKAGE_CONTRACT.md`), reproduzierbare valid/invalid-Fixtures angelegt (`tests/regression/fixtures/package_manifest_v1/`) und optionalen lokalen Fixture-Runner umgesetzt (`tests/regression/run_package_manifest_fixture_check.sh`, `make package-manifest-check`). Tracker-/Gate-Sync auf done/in-progress aktualisiert (`docs/backlog/BL-0014-import-export-package-format/item.md`, `docs/backlog/BL-0014-import-export-package-format/tasks/TSK-0006-define-package-manifest-v1-and-dry-run-fixtures.md`, `docs/CONTRACT_HARDENING_1_1_0.md`, `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/CHANGELOG.md`).
+- S17C1/4 Traceability:
+  - Git-Commit: `2d3ba79`
+  - Artefakte: `.artifacts/sprint_17_commit_1_von_4.md`,
+    `.artifacts/sprint_17_commit_1_von_4.diff`
