@@ -93,18 +93,19 @@ Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv (`BL-0014` done, `BL-0015` done; nur finaler Gate-3-Abschlusslauf in `S17C4/4` verbleibt).
+- abgeschlossen am 2026-03-17 (Gate-4-Start aktiviert).
 
 ### Gate 4: Release-Candidate-Haertung
 
 - Feature-Freeze aktiv.
 - Vollstaendiger Verify-/Preflight-Lauf ohne offene Blocker.
+- RC-Nachweis wird lokal + per CI-Referenz auf `main` dokumentiert.
 
 Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- pending.
+- aktiv (Start mit `S17C4/4` dokumentiert).
 
 ### Gate 5: Finalisierung 1.1.0
 

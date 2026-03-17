@@ -128,8 +128,13 @@ if ! $SKIP_DOC_GATES; then
 
   check_doc_gate \
     "$ROOT_DIR/docs/ROADMAP_1_1_0.md" \
-    'aktiv \(`BL-0014` done, `BL-0015` (in Arbeit|done[^)]*)\)' \
-    "Roadmap zeigt den aktuellen Gate-3-Umsetzungsstand"
+    '(aktiv \(`BL-0014` done, `BL-0015` (in Arbeit|done[^)]*)\)|abgeschlossen am [0-9]{4}-[0-9]{2}-[0-9]{2} \(Gate-4-Start aktiviert\)\.)' \
+    "Roadmap zeigt den dokumentierten Gate-3-Status"
+
+  check_doc_gate \
+    "$ROOT_DIR/docs/ROADMAP_1_1_0.md" \
+    'Gate 4: Release-Candidate-Haertung' \
+    "Roadmap enthaelt Gate-4-Block"
 
   check_doc_gate \
     "$ROOT_DIR/docs/CONTRACT_HARDENING_1_1_0.md" \
