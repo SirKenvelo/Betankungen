@@ -213,15 +213,15 @@ Bereits erledigt:
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
-  - Gate 3 aktiv (Kickoff-Block S16 abgeschlossen; Feature-Block `BL-0014` und Hardening-Block `BL-0015` sind mit `TSK-0006`/`TSK-0007` abgeschlossen. Verify-/Contract-DoD und operatives Preflight-Skript fuer 1.1.0 sind in `docs/CONTRACT_HARDENING_1_1_0.md`, `docs/RELEASE_1_1_0_PREFLIGHT.md` und `scripts/release_preflight_1_1_0.sh` verankert).
+  - Gate 3 aktiv (Kickoff-Block S16 abgeschlossen; Feature-Block `BL-0014` und Hardening-Block `BL-0015` sind mit `TSK-0006`/`TSK-0007` abgeschlossen. Policy-Fit wurde auf `done` synchronisiert und RC-Handover-Nachweise sind verdichtet: lokaler Lauf `make release-preflight-1-1-0` plus CI-Referenz `23207955306` auf `main`).
   - Gate 4/5 pending.
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - Gate-3-Policy-Fit/Closeout entlang des konkretisierten DoD abschliessen,
-  - RC-Preflight-Nachweis fuer Gate 4 vorbereiten.
+  - finalen Gate-3-Abschlusslauf (`S17C4/4`) mit Verify-/Matrix-Sync dokumentieren,
+  - danach Gate-4-Start (RC-Haertung) formal auf Roadmap-/Status-Ebene aktivieren.
   - Nicht-blockierenden Public-Readiness-Follow-up im Tracker halten (`BL-0016`: Code of Conduct, Security Policy, Issue-/PR-Templates).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
