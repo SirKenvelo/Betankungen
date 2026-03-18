@@ -674,3 +674,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `ff9dcf6`
   - Artefakte: `.artifacts/sprint_18_commit_2_von_4.md`,
     `.artifacts/sprint_18_commit_2_von_4.diff`
+- S18C3/4 Traceability:
+  - Git-Commit: `e14ee87`
+  - Artefakte: `.artifacts/sprint_18_commit_3_von_4.md`,
+    `.artifacts/sprint_18_commit_3_von_4.diff`
