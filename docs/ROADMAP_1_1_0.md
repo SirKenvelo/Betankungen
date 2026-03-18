@@ -102,6 +102,8 @@ Status:
 - RC-Nachweis wird lokal + per CI-Referenz auf `main` dokumentiert.
 - Gate-4-Kickoff ist dokumentiert (`S18C1/4`), inkl. RC-Status-Snapshot in
   `docs/RELEASE_1_1_0_PREFLIGHT.md`.
+- RC-Checkliste/Feature-Freeze-Snapshot ist dokumentiert (`S18C2/4`),
+  ohne Scope-Drift gegen Gate 2/3.
 - Nicht-blockierender Follow-up fuer externe Belegfoto-Links wurde als
   `BL-0021` im kanonischen Tracker erfasst (kein Scope-Drift fuer 1.1.0).
 
@@ -109,7 +111,7 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- aktiv (Kickoff-Block `S18C1/4` dokumentiert).
+- aktiv (Kickoff + Checklisten-Snapshot bis `S18C2/4` dokumentiert).
 
 ### Gate 5: Finalisierung 1.1.0
 

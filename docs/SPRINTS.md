@@ -637,9 +637,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - S18C1/4: done - Gate-4-Kickoff dokumentieren und nicht-blockierenden
   Follow-up `BL-0021` erfassen.
-- S18C2/4: next - RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen
+- S18C2/4: done - RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen
   Gate-Stand synchronisieren.
-- S18C3/4: pending - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
+- S18C3/4: next - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
 - S18C4/4: pending - Gate-4-Abschlussnarrativ und Handover auf Gate 5
   finalisieren.
 
@@ -651,6 +651,13 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Backlog-Vorschlag fuer externe Belegfoto-Links als `BL-0021` im kanonischen
   Tracker aufgenommen (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`,
   `docs/BACKLOG.md`, `docs/CHANGELOG.md`).
+- `S18C2/4` abgeschlossen: RC-Checkliste und Feature-Freeze-Snapshot auf den
+  aktuellen Gate-4-Stand synchronisiert. `docs/RELEASE_1_1_0_PREFLIGHT.md`
+  fuehrt jetzt einen expliziten RC-/Freeze-Snapshot (in-scope vs.
+  non-blocking/out-of-scope), waehrend Roadmap-/Status-/Entry-Doku den Fokus
+  auf den RC-Abschlusslauf `S18C3/4` umstellen
+  (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
 - S18C1/4 Traceability:
   - Git-Commit: `2d202a4`
   - Artefakte: `.artifacts/sprint_18_commit_1_von_4.md`,
