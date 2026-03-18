@@ -1,7 +1,7 @@
 # POL-001: Tracker Standard (Maintainer Schema)
-**Stand:** 2026-03-13
+**Stand:** 2026-03-18
 **Status:** active
-**Datum:** 2026-03-13
+**Datum:** 2026-03-18
 
 ## Ziel
 
@@ -174,6 +174,10 @@ Erlaubte Werte je Artefaktart:
 - Tags sind optional, aber empfohlen.
 - `untagged` ist kein echter Tag, sondern ein Tool-Befund.
 - Kategorien (Empfehlung): Bereich, Charakter/Risiko, Arbeitszustand.
+- Empfohlene Priorisierungs-Lanes fuer Backlog-Items:
+  - `lane:release-blocking`
+  - `lane:planned`
+  - `lane:exploratory`
 
 ## Task-Struktur
 

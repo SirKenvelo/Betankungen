@@ -686,3 +686,39 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `6d08aa3`
   - Artefakte: `.artifacts/sprint_18_commit_4_von_4.md`,
     `.artifacts/sprint_18_commit_4_von_4.diff`
+
+### Abschluss-Tag
+
+- Sprint-Abschluss: S18C4/4 (done)
+- Abschluss-Tag: `sprint-18-done` (pending, wird erst nach expliziter
+  Freigabe gesetzt und gepusht)
+
+## Sprint 19 - Gate 5 Finalisierung (1.1.0)
+
+- Status: aktiv
+- Ziel: Finale 1.1.0-Freigabe vorbereiten und dabei Priorisierung im Backlog
+  klar trennen (release-blocking vs. planned vs. exploratory).
+
+### Geplante Bloecke
+
+- S19C1/4: done - Gate-5-Kickoff dokumentieren und BL-Triage-Lanes im
+  kanonischen Tracker verankern.
+- S19C2/4: pending - finalen Release-Checklisten-/Scope-Snapshot fuer Gate 5
+  synchronisieren.
+- S19C3/4: pending - finalen Release-Umschalt-Commit (`APP_VERSION=1.1.0`) +
+  Doku-Finalsync nach Freigabe vorbereiten.
+- S19C4/4: pending - Release-/Backup-Ausfuehrung und Gate-5-Closeout
+  dokumentieren (nach Freigabe).
+
+### Fortschritt (2026-03-18)
+
+- `S19C1/4` abgeschlossen: Gate-5-Kickoff dokumentiert und die empfohlene
+  BL-Lane-Sortierung (`release-blocking`/`planned`/`exploratory`) in Policy,
+  Backlog-Index und den offenen BL-Items verankert
+  (`docs/policies/POL-001-tracker-standard.md`, `docs/backlog/README.md`,
+  `docs/BACKLOG.md`, `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0020`,
+  `BL-0021`).
+- S19C1/4 Traceability:
+  - Git-Commit: `12d1cd7`
+  - Artefakte: `.artifacts/sprint_19_commit_1_von_4.md`,
+    `.artifacts/sprint_19_commit_1_von_4.diff`

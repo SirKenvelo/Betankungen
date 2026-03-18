@@ -12,6 +12,14 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - `next`: fuer einen der naechsten Sprints priorisiert.
 - `blocked`: fachlich klar, aber durch Abhaengigkeiten blockiert.
 
+## Priorisierungs-Lanes (empfohlen)
+
+- `release-blocking`: gehoert in den aktiven Release-Scope.
+- `planned`: wichtig, aber nicht release-blockierend.
+- `exploratory`: Forschungs-/Ideenblock mit unsicherem ROI.
+
+Hinweis: Die Lane kann in BL-Frontmatter als Tag (`lane:*`) gefuehrt werden.
+
 ## Backlog-Index
 
 - [BL-001 - Policy Structure Coverage Check](BACKLOG/BL-001-policy-structure-coverage-check.md) - Status: `icebox`, Typ: Meta-Guardrail
@@ -34,13 +42,13 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 ## Kanonische BL-xxxx (neues Tracker-Schema)
 
 - [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `proposed`, Typ: Feature (Meta-/Tooling)
-- [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract)
-- [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert)
-- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `done`, Typ: Research (priorisierter Feature-Block fuer 1.1.0)
-- [BL-0015 - Release- und Verify-Hardening fuer die 1.1.0-Linie](backlog/BL-0015-release-verify-hardening-1-1-0/item.md) - Status: `done`, Typ: Improvement (priorisierter Hardening-Block fuer 1.1.0)
-- [BL-0016 - Community-Standards-Baseline fuer das Public Repository](backlog/BL-0016-community-standards-baseline/item.md) - Status: `proposed`, Typ: Improvement (nicht-blockierender Public-Readiness-Follow-up)
-- [BL-0017 - Evaluation kostenloser Tankstellenpreis-APIs](backlog/BL-0017-fuel-price-api-evaluation/item.md) - Status: `proposed`, Typ: Research (API-Quellenentscheid fuer Preis-Polling)
-- [BL-0018 - Historische Tankstellenpreis-Erfassung via API-Polling](backlog/BL-0018-fuel-price-history-polling/item.md) - Status: `proposed`, Typ: Feature (15-Minuten-Polling + Historienbasis)
-- [BL-0019 - Tankstellen-Geodaten und Plus-Codes erweitern](backlog/BL-0019-station-geodata-plus-codes/item.md) - Status: `proposed`, Typ: Feature (Koordinaten/Plus-Codes fuer Stationen)
-- [BL-0020 - Backup-Operationen fuer einzelne oder alle Tankdatenbanken](backlog/BL-0020-multi-database-backup-operations/item.md) - Status: `proposed`, Typ: Improvement (Mehr-DB-Backup im Betrieb)
-- [BL-0021 - Tankbeleg-Foto-Links als Referenz speichern](backlog/BL-0021-receipt-photo-link-references/item.md) - Status: `proposed`, Typ: Feature (externe Belegbilder nur per Link referenzieren)
+- [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract), Lane: `release-blocking` (historisch)
+- [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert), Lane: `planned` (historisch)
+- [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `done`, Typ: Research (priorisierter Feature-Block fuer 1.1.0), Lane: `release-blocking` (historisch)
+- [BL-0015 - Release- und Verify-Hardening fuer die 1.1.0-Linie](backlog/BL-0015-release-verify-hardening-1-1-0/item.md) - Status: `done`, Typ: Improvement (priorisierter Hardening-Block fuer 1.1.0), Lane: `release-blocking` (historisch)
+- [BL-0016 - Community-Standards-Baseline fuer das Public Repository](backlog/BL-0016-community-standards-baseline/item.md) - Status: `proposed`, Typ: Improvement (nicht-blockierender Public-Readiness-Follow-up), Lane: `planned`
+- [BL-0017 - Evaluation kostenloser Tankstellenpreis-APIs](backlog/BL-0017-fuel-price-api-evaluation/item.md) - Status: `proposed`, Typ: Research (API-Quellenentscheid fuer Preis-Polling), Lane: `exploratory`
+- [BL-0018 - Historische Tankstellenpreis-Erfassung via API-Polling](backlog/BL-0018-fuel-price-history-polling/item.md) - Status: `proposed`, Typ: Feature (15-Minuten-Polling + Historienbasis), Lane: `planned`
+- [BL-0019 - Tankstellen-Geodaten und Plus-Codes erweitern](backlog/BL-0019-station-geodata-plus-codes/item.md) - Status: `proposed`, Typ: Feature (Koordinaten/Plus-Codes fuer Stationen), Lane: `planned`
+- [BL-0020 - Backup-Operationen fuer einzelne oder alle Tankdatenbanken](backlog/BL-0020-multi-database-backup-operations/item.md) - Status: `proposed`, Typ: Improvement (Mehr-DB-Backup im Betrieb), Lane: `planned`
+- [BL-0021 - Tankbeleg-Foto-Links als Referenz speichern](backlog/BL-0021-receipt-photo-link-references/item.md) - Status: `proposed`, Typ: Feature (externe Belegbilder nur per Link referenzieren), Lane: `planned`

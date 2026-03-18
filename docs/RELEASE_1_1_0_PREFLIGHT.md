@@ -107,6 +107,14 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   (`ROADMAP_1_1_0`, `STATUS`, `SPRINTS`, `CHANGELOG`, `README`).
 - Nach expliziter Freigabe: Release-/Backup-Ausfuehrung final statt Dry-Run.
 
+## Gate-5-Kickoff-Update (S19C1)
+
+- Gate 5 ist als aktiver Arbeitsblock dokumentiert (`docs/ROADMAP_1_1_0.md`,
+  `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md`).
+- BL-Triage-Lanes sind als leichte Priorisierung geschuetzt
+  (`release-blocking`/`planned`/`exploratory`), ohne den Scope-Freeze fuer
+  1.1.0 aufzuweichen.
+
 ## Gate-4-Kickoff-Update (S18C1)
 
 - Kickoff in Sprint-Narrative verankert (`docs/SPRINTS.md`).
