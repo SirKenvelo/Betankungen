@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (Gate 4 gestartet, RC-Kickoff dokumentiert)
+**Status:** aktiv (Gate 4 gestartet, RC-Checkliste/Freeze-Snapshot dokumentiert)
 
 ## Ziel
 
@@ -96,3 +96,30 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   aktiv (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`).
 - Nicht-blockierender Folgeeintrag fuer externe Belegfoto-Links als `BL-0021`
   im kanonischen Tracker erfasst (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`).
+
+## RC-Checklisten-Snapshot (S18C2, Stand 2026-03-18)
+
+- Gate-Konsistenz ist dokumentiert: Gate 1/2/3 abgeschlossen, Gate 4 aktiv,
+  Gate 5 pending (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`).
+- Versionierungs-Guardrail unveraendert: `APP_VERSION=1.1.0-dev`
+  bis Gate 5.
+- Doku-Sync-Gates konsistent:
+  `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`,
+  `docs/CHANGELOG.md`, `docs/README.md`.
+- Governance-Mindeststand fuer `main` bleibt:
+  PR-only, gruener Required-Check `verify`, up-to-date-Branch-Pflicht.
+
+## Feature-Freeze-Snapshot (S18C2)
+
+### In-Scope (release-blockierend)
+- `BL-0014` + `TSK-0006` (done)
+- `BL-0015` + `TSK-0007` (done)
+
+### Nicht als 1.1.0-Release-Blocker eingeplant
+- `BL-0016` (Community-Standards-Follow-up, non-blocking)
+- `BL-0021` (externe Tankbeleg-Foto-Links, non-blocking)
+
+### Out-of-Scope bleibt unveraendert
+- Runtime-Config-Profile im Core (`ADR-0009` = rejected)
+- Vollstaendige Import-Pipeline in 1.1.0
+- Architekturwechsel weg vom CLI-Kern
