@@ -4,13 +4,13 @@ title: Backup-Operationen fuer einzelne oder alle Tankdatenbanken
 status: proposed
 priority: P2
 type: improvement
-tags: [backup, restore, operations, safety]
+tags: [backup, restore, operations, safety, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-17
+updated: 2026-03-18
 related:
   - POL-003
 ---
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 # Goal
 Gezielte Backup-Funktionen fuer eigene Tankdatenbanken bereitstellen (einzeln

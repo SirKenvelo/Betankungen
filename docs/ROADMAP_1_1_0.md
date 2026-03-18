@@ -120,12 +120,15 @@ Status:
 
 - `APP_VERSION` von `1.1.0-dev` auf `1.1.0`.
 - Finaler Doku-Sync und Release-/Backup-Ausfuehrung nach Freigabe.
+- Gate-5-Kickoff ist dokumentiert (`S19C1/4`), inkl. BL-Triage-Lanes
+  (`release-blocking`/`planned`/`exploratory`) fuer bessere
+  Priorisierung bei hoher Backlog-Dichte.
 
 Exit-Kriterium:
 - 1.1.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv (Finalisierungsphase gestartet; Release-Freigabe ausstehend).
+- aktiv (Kickoff dokumentiert, Release-Freigabe ausstehend).
 
 ## Verbindliche Abweichungsregel
 

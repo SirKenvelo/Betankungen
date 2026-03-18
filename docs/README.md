@@ -75,6 +75,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
 - Naechster Fokus: Gate-5-Finalisierung vorbereiten (Release-Umschalt-Commit + finaler Doku-Sync + Release-/Backup-Ausfuehrung nach Freigabe).
 - Non-blocking Follow-ups im Tracker erfasst: `BL-0016` (Community-Standards-Baseline) und `BL-0021` (Tankbeleg-Foto-Links als externe Referenz).
+- BL-Priorisierung fuer hohe Backlog-Dichte ist auf Lanes geschaerft:
+  `release-blocking` / `planned` / `exploratory`.
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).

@@ -4,14 +4,14 @@ title: Community-Standards-Baseline fuer das Public Repository
 status: proposed
 priority: P3
 type: improvement
-tags: [community, governance, docs, templates]
+tags: [community, governance, docs, templates, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-17
+updated: 2026-03-18
 related:
   - BL-012
   - POL-001
 ---
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 # Goal
 Die oeffentlichen Community-Standards im Repository auf eine saubere

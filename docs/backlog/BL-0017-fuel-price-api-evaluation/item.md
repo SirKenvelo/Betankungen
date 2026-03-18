@@ -4,14 +4,14 @@ title: Evaluation kostenloser Tankstellenpreis-APIs fuer Raspberry-Pi-Betrieb
 status: proposed
 priority: P2
 type: research
-tags: [api, fuel-price, research, raspberry-pi]
+tags: [api, fuel-price, research, raspberry-pi, 'lane:exploratory']
 created: 2026-03-17
-updated: 2026-03-17
+updated: 2026-03-18
 related:
   - BL-0018
   - POL-003
 ---
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 # Goal
 Eine tragfaehige, kostenlose API-Quelle fuer regelmaessige Tankstellenpreis-

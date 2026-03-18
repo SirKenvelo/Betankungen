@@ -4,7 +4,7 @@ title: Tankbeleg-Foto-Links als Referenz speichern
 status: proposed
 priority: P3
 type: feature
-tags: [receipts, photos, links, storage]
+tags: [receipts, photos, links, storage, 'lane:planned']
 created: 2026-03-18
 updated: 2026-03-18
 related:

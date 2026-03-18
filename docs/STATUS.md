@@ -215,13 +215,14 @@ Bereits erledigt:
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
   - Gate 3 abgeschlossen am 2026-03-17 (Feature-/Hardening-Block `BL-0014`/`BL-0015` final auf `done`, Matrix komplett auf `done`, lokaler Abschlusslauf `make release-preflight-1-1-0` gruen; letzte CI-Referenz auf `main`: Run `23208794011`, Commit `e67860f`).
   - Gate 4 abgeschlossen am 2026-03-18 (Kickoff + RC-Checklisten-/Freeze-Snapshot + RC-Abschlusslauf + Exit-/Handover-Narrativ bis `S18C4/4` dokumentiert; CI-Referenz auf `main`: Run `23241536267`, Commit `6b1a0c1`).
-  - Gate 5 aktiv (Finalisierung 1.1.0 gestartet, Release-Freigabe ausstehend).
+  - Gate 5 aktiv (Kickoff `S19C1/4` dokumentiert, Release-Freigabe ausstehend).
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
   - Gate-5-Finalisierung fuer 1.1.0 vorbereiten (finaler Release-Umschalt-Commit, finaler Doku-Sync, Release-/Backup-Ausfuehrung nach Freigabe),
+  - BL-Triage-Lanes im kanonischen Tracker als leichte Priorisierung konsequent nutzen (`release-blocking`/`planned`/`exploratory`),
   - Feature-Freeze auf den scope-frozen 1.1.0-Umfang halten.
   - Nicht-blockierende Follow-ups im Tracker halten (`BL-0016` Community-Standards, `BL-0021` externe Belegfoto-Links).
 

@@ -4,13 +4,13 @@ title: Tankstellen-Geodaten und Plus-Codes erweitern
 status: proposed
 priority: P3
 type: feature
-tags: [stations, geodata, plus-codes, enrichment]
+tags: [stations, geodata, plus-codes, enrichment, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-17
+updated: 2026-03-18
 related:
   - BL-0018
 ---
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 # Goal
 Tankstellenstammdaten um Koordinaten und optional Plus Codes erweitern.
