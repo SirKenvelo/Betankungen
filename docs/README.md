@@ -73,12 +73,14 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
-- Naechster Fokus: finalen Release-Umschalt-Commit fuer 1.1.0 und Doku-Finalsync vorbereiten (`S19C3/4`), danach Release-/Backup-Ausfuehrung nach Freigabe.
+- Naechster Fokus: nach expliziter Freigabe den finalen Release-Umschalt-Commit fuer 1.1.0 ausfuehren und Gate 5 inklusive Release-/Backup schliessen (`S19C4/4`).
 - Non-blocking Follow-ups im Tracker erfasst: `BL-0016` (Community-Standards-Baseline) und `BL-0021` (Tankbeleg-Foto-Links als externe Referenz).
 - BL-Priorisierung fuer hohe Backlog-Dichte ist auf Lanes geschaerft:
   `release-blocking` / `planned` / `exploratory`.
 - Gate-5-Checklisten-/Scope-Snapshot ist dokumentiert (inkl. aktueller
   `main`-CI-Referenz).
+- Gate-5-Release-Umschaltpaket ist dokumentiert; der eigentliche
+  Versionswechsel erfolgt erst nach Freigabe.
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).

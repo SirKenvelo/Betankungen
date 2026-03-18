@@ -125,13 +125,15 @@ Status:
   Priorisierung bei hoher Backlog-Dichte.
 - Gate-5-Checklisten-/Scope-Snapshot ist dokumentiert (`S19C2/4`), inkl.
   aktueller CI-Referenz auf `main`.
+- Gate-5-Release-Umschaltpaket ist dokumentiert (`S19C3/4`), der eigentliche
+  Versionswechsel bleibt bis zur expliziten Freigabe ausstehend.
 
 Exit-Kriterium:
 - 1.1.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv (Kickoff + Checklisten-/Scope-Snapshot dokumentiert, Release-Freigabe
-  ausstehend).
+- aktiv (Kickoff + Checklisten-/Scope-Snapshot + Release-Umschaltpaket
+  dokumentiert, Release-Freigabe ausstehend).
 
 ## Verbindliche Abweichungsregel
 

@@ -705,7 +705,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   kanonischen Tracker verankern.
 - S19C2/4: done - finalen Release-Checklisten-/Scope-Snapshot fuer Gate 5
   synchronisieren.
-- S19C3/4: pending - finalen Release-Umschalt-Commit (`APP_VERSION=1.1.0`) +
+- S19C3/4: done - finalen Release-Umschalt-Commit (`APP_VERSION=1.1.0`) +
   Doku-Finalsync nach Freigabe vorbereiten.
 - S19C4/4: pending - Release-/Backup-Ausfuehrung und Gate-5-Closeout
   dokumentieren (nach Freigabe).
@@ -726,6 +726,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Roadmap-/Status-/Entry-/Changelog-Doku auf den naechsten Fokus `S19C3/4`
   nachgezogen (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
   `docs/CHANGELOG.md`).
+- `S19C3/4` abgeschlossen: Release-Umschaltpaket fuer Gate 5 ist dokumentiert,
+  ohne vorgezogenen Versionswechsel. `docs/RELEASE_1_1_0_PREFLIGHT.md` fuehrt
+  jetzt die finalen Umschaltdateien und den operativen Ablauf nach Freigabe.
+  Roadmap-/Status-/Entry-/Changelog-Doku auf den Abschlussblock `S19C4/4`
+  ausgerichtet (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
 - S19C1/4 Traceability:
   - Git-Commit: `12d1cd7`
   - Artefakte: `.artifacts/sprint_19_commit_1_von_4.md`,
@@ -734,3 +740,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `87b18fb`
   - Artefakte: `.artifacts/sprint_19_commit_2_von_4.md`,
     `.artifacts/sprint_19_commit_2_von_4.diff`
+- S19C3/4 Traceability:
+  - Git-Commit: `99fc714`
+  - Artefakte: `.artifacts/sprint_19_commit_3_von_4.md`,
+    `.artifacts/sprint_19_commit_3_von_4.diff`
