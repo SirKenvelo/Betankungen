@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.1.0
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 **Status:** aktiv (`APP_VERSION=1.1.0-dev`)
 
 ## Ausgangslage
@@ -100,12 +100,16 @@ Status:
 - Feature-Freeze aktiv.
 - Vollstaendiger Verify-/Preflight-Lauf ohne offene Blocker.
 - RC-Nachweis wird lokal + per CI-Referenz auf `main` dokumentiert.
+- Gate-4-Kickoff ist dokumentiert (`S18C1/4`), inkl. RC-Status-Snapshot in
+  `docs/RELEASE_1_1_0_PREFLIGHT.md`.
+- Nicht-blockierender Follow-up fuer externe Belegfoto-Links wurde als
+  `BL-0021` im kanonischen Tracker erfasst (kein Scope-Drift fuer 1.1.0).
 
 Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- aktiv (Start mit `S17C4/4` dokumentiert).
+- aktiv (Kickoff-Block `S18C1/4` dokumentiert).
 
 ### Gate 5: Finalisierung 1.1.0
 

@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -626,3 +626,32 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Sprint-Abschluss: S17C4/4 (done)
 - Abschluss-Tag: `sprint-17-done` (pending, wird erst nach expliziter
   Freigabe gesetzt und gepusht)
+
+## Sprint 18 - Gate 4 RC Hardening (1.1.0)
+
+- Status: aktiv
+- Ziel: Gate 4 fuer die 1.1.0-Linie operativ absichern und den Handover auf
+  Gate 5 vorbereiten.
+
+### Geplante Bloecke
+
+- S18C1/4: done - Gate-4-Kickoff dokumentieren und nicht-blockierenden
+  Follow-up `BL-0021` erfassen.
+- S18C2/4: next - RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen
+  Gate-Stand synchronisieren.
+- S18C3/4: pending - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
+- S18C4/4: pending - Gate-4-Abschlussnarrativ und Handover auf Gate 5
+  finalisieren.
+
+### Fortschritt (2026-03-18)
+
+- `S18C1/4` abgeschlossen: Gate-4-Kickoff auf Doku-Ebene verankert
+  (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/RELEASE_1_1_0_PREFLIGHT.md`) und den neuen nicht-blockierenden
+  Backlog-Vorschlag fuer externe Belegfoto-Links als `BL-0021` im kanonischen
+  Tracker aufgenommen (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`,
+  `docs/BACKLOG.md`, `docs/CHANGELOG.md`).
+- S18C1/4 Traceability:
+  - Git-Commit: `2d202a4`
+  - Artefakte: `.artifacts/sprint_18_commit_1_von_4.md`,
+    `.artifacts/sprint_18_commit_1_von_4.diff`

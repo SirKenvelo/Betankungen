@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -43,3 +43,4 @@ Die zentrale Uebersicht bleibt in `docs/BACKLOG.md`; die Details je Thema liegen
 - [BL-0018 - Historische Tankstellenpreis-Erfassung via API-Polling](backlog/BL-0018-fuel-price-history-polling/item.md) - Status: `proposed`, Typ: Feature (15-Minuten-Polling + Historienbasis)
 - [BL-0019 - Tankstellen-Geodaten und Plus-Codes erweitern](backlog/BL-0019-station-geodata-plus-codes/item.md) - Status: `proposed`, Typ: Feature (Koordinaten/Plus-Codes fuer Stationen)
 - [BL-0020 - Backup-Operationen fuer einzelne oder alle Tankdatenbanken](backlog/BL-0020-multi-database-backup-operations/item.md) - Status: `proposed`, Typ: Improvement (Mehr-DB-Backup im Betrieb)
+- [BL-0021 - Tankbeleg-Foto-Links als Referenz speichern](backlog/BL-0021-receipt-photo-link-references/item.md) - Status: `proposed`, Typ: Feature (externe Belegbilder nur per Link referenzieren)
