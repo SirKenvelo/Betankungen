@@ -629,7 +629,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 18 - Gate 4 RC Hardening (1.1.0)
 
-- Status: aktiv
+- Status: done
 - Ziel: Gate 4 fuer die 1.1.0-Linie operativ absichern und den Handover auf
   Gate 5 vorbereiten.
 
@@ -640,7 +640,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - S18C2/4: done - RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen
   Gate-Stand synchronisieren.
 - S18C3/4: done - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
-- S18C4/4: pending - Gate-4-Abschlussnarrativ und Handover auf Gate 5
+- S18C4/4: done - Gate-4-Abschlussnarrativ und Handover auf Gate 5
   finalisieren.
 
 ### Fortschritt (2026-03-18)
@@ -665,6 +665,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Preflight-/Roadmap-/Status-/Entry-Doku auf den verbleibenden Gate-4-Closeout
   (`S18C4/4`) synchronisiert (`docs/RELEASE_1_1_0_PREFLIGHT.md`,
   `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
+- `S18C4/4` abgeschlossen: Gate 4 formal auf `abgeschlossen` gesetzt und der
+  Handover auf Gate 5 finalisiert (`docs/ROADMAP_1_1_0.md`,
+  `docs/STATUS.md`, `docs/RELEASE_1_1_0_PREFLIGHT.md`, `docs/README.md`,
   `docs/CHANGELOG.md`).
 - S18C1/4 Traceability:
   - Git-Commit: `2d202a4`
