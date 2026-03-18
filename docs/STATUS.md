@@ -214,13 +214,14 @@ Bereits erledigt:
   - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
   - Gate 3 abgeschlossen am 2026-03-17 (Feature-/Hardening-Block `BL-0014`/`BL-0015` final auf `done`, Matrix komplett auf `done`, lokaler Abschlusslauf `make release-preflight-1-1-0` gruen; letzte CI-Referenz auf `main`: Run `23208794011`, Commit `e67860f`).
-  - Gate 4 aktiv (Kickoff + RC-Checklisten-/Freeze-Snapshot + RC-Abschlusslauf bis `S18C3/4` dokumentiert; CI-Referenz auf `main`: Run `23241536267`, Commit `6b1a0c1`); Gate 5 pending.
+  - Gate 4 abgeschlossen am 2026-03-18 (Kickoff + RC-Checklisten-/Freeze-Snapshot + RC-Abschlusslauf + Exit-/Handover-Narrativ bis `S18C4/4` dokumentiert; CI-Referenz auf `main`: Run `23241536267`, Commit `6b1a0c1`).
+  - Gate 5 aktiv (Finalisierung 1.1.0 gestartet, Release-Freigabe ausstehend).
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - Gate-4-Abschlussnarrativ und Handover auf Gate 5 finalisieren (`S18C4/4`),
+  - Gate-5-Finalisierung fuer 1.1.0 vorbereiten (finaler Release-Umschalt-Commit, finaler Doku-Sync, Release-/Backup-Ausfuehrung nach Freigabe),
   - Feature-Freeze auf den scope-frozen 1.1.0-Umfang halten.
   - Nicht-blockierende Follow-ups im Tracker halten (`BL-0016` Community-Standards, `BL-0021` externe Belegfoto-Links).
 

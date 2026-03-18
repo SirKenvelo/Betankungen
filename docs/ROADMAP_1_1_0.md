@@ -113,8 +113,8 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- aktiv (Kickoff + Checklisten-Snapshot + RC-Abschlusslauf bis `S18C3/4`
-  dokumentiert).
+- abgeschlossen am 2026-03-18 (Kickoff + Checklisten-Snapshot +
+  RC-Abschlusslauf + Exit-/Handover-Narrativ bis `S18C4/4` dokumentiert).
 
 ### Gate 5: Finalisierung 1.1.0
 
@@ -125,7 +125,7 @@ Exit-Kriterium:
 - 1.1.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- pending.
+- aktiv (Finalisierungsphase gestartet; Release-Freigabe ausstehend).
 
 ## Verbindliche Abweichungsregel
 

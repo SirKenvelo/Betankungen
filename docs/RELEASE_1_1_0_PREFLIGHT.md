@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (RC-Abschlusslauf dokumentiert, Gate-4-Closeout ausstehend)
+**Status:** aktiv (Gate 4 abgeschlossen, Gate-5-Finalisierung vorbereitet)
 
 ## Ziel
 
@@ -56,7 +56,7 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   Fixture-Runner `tests/regression/run_package_manifest_fixture_check.sh`).
 - Operative Skriptbasis ist nachweisbar ausgefuehrt (`make release-preflight-1-1-0`).
 
-## Gate-Status-Snapshot (S17C4, Stand 2026-03-17)
+## Gate-Status-Snapshot (S17C4, historisch, Stand 2026-03-17)
 
 - Gate 1: abgeschlossen am 2026-03-16.
 - Gate 2: abgeschlossen am 2026-03-16.
@@ -80,7 +80,7 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - Ergebnis: `success`
 - URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23208794011`
 
-## Naechster Schritt (Gate 4)
+## Gate-4-Arbeitspaket (historisch)
 
 - `S18C2/4`: RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen Gate-Stand
   synchronisieren.
@@ -88,6 +88,24 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   aktualisierter CI-Referenz auf `main` dokumentieren.
 - `S18C4/4`: Gate-4-Exit-Kriterium in Roadmap/Status auf `abgeschlossen`
   setzen und Handover auf Gate 5 finalisieren.
+
+## Gate-4-Closeout-Nachweis (S18C4, Stand 2026-03-18)
+
+- Gate-4-Exit-Kriterium ist dokumentiert:
+  `docs/ROADMAP_1_1_0.md` fuehrt Gate 4 als abgeschlossen.
+- Gate-4-Handover auf Gate 5 ist dokumentiert:
+  `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/README.md` und
+  `docs/CHANGELOG.md` zeigen konsistent den Fokus auf Gate 5.
+- RC-Nachweise aus `S18C3/4` bleiben unveraendert gueltig
+  (lokaler Voll-Preflight + CI-Referenz auf `main`).
+
+## Naechster Schritt (Gate 5)
+
+- Finalen Release-Umschalt-Commit vorbereiten (`APP_VERSION` von
+  `1.1.0-dev` auf `1.1.0`).
+- Finalen Doku-Sync fuer die 1.1.0-Freigabe durchziehen
+  (`ROADMAP_1_1_0`, `STATUS`, `SPRINTS`, `CHANGELOG`, `README`).
+- Nach expliziter Freigabe: Release-/Backup-Ausfuehrung final statt Dry-Run.
 
 ## Gate-4-Kickoff-Update (S18C1)
 
@@ -97,7 +115,7 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - Nicht-blockierender Folgeeintrag fuer externe Belegfoto-Links als `BL-0021`
   im kanonischen Tracker erfasst (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`).
 
-## RC-Checklisten-Snapshot (S18C2, Stand 2026-03-18)
+## RC-Checklisten-Snapshot (S18C2, historisch, Stand 2026-03-18)
 
 - Gate-Konsistenz ist dokumentiert: Gate 1/2/3 abgeschlossen, Gate 4 aktiv,
   Gate 5 pending (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`).
