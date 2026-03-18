@@ -153,6 +153,10 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 
 - Release-Befehl: `./kpr.sh --note "Release 1.1.0 final"`
 - Backup-Befehl: `scripts/backup_snapshot.sh --note "Backup after release 1.1.0"`
+- Release-Artefakt: `.releases/Betankungen_1_1_0.tar`
+  (SHA-256 `f3c1f5ef4a8daa3a5a1cf9d4cb74c871c2799c1338e1eafe2422a6bfbeb026f3`).
+- Backup-Snapshot: `.backup/2026-03-18_1331`
+  (Retention-Info: 6 Snapshots, Keep=10, keine Loeschung).
 
 ## Gate-4-Kickoff-Update (S18C1)
 

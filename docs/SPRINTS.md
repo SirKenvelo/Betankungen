@@ -737,6 +737,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   abgeschlossen gesetzt und finale Release-/Backup-Ausfuehrung dokumentiert
   (`./kpr.sh --note "Release 1.1.0 final"`,
   `scripts/backup_snapshot.sh --note "Backup after release 1.1.0"`).
+  Ergebnis: Artefakt `.releases/Betankungen_1_1_0.tar`
+  (SHA-256 `f3c1f5ef4a8daa3a5a1cf9d4cb74c871c2799c1338e1eafe2422a6bfbeb026f3`)
+  und Snapshot `.backup/2026-03-18_1331`.
 - S19C1/4 Traceability:
   - Git-Commit: `12d1cd7`
   - Artefakte: `.artifacts/sprint_19_commit_1_von_4.md`,
@@ -749,3 +752,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `99fc714`
   - Artefakte: `.artifacts/sprint_19_commit_3_von_4.md`,
     `.artifacts/sprint_19_commit_3_von_4.diff`
+- S19C4/4 Traceability:
+  - Git-Commit: `cf74b1c`
+  - Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`,
+    `.artifacts/sprint_19_commit_4_von_4.diff`

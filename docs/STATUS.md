@@ -215,7 +215,7 @@ Bereits erledigt:
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
   - Gate 3 abgeschlossen am 2026-03-17 (Feature-/Hardening-Block `BL-0014`/`BL-0015` final auf `done`, Matrix komplett auf `done`, lokaler Abschlusslauf `make release-preflight-1-1-0` gruen; letzte CI-Referenz auf `main`: Run `23208794011`, Commit `e67860f`).
   - Gate 4 abgeschlossen am 2026-03-18 (Kickoff + RC-Checklisten-/Freeze-Snapshot + RC-Abschlusslauf + Exit-/Handover-Narrativ bis `S18C4/4` dokumentiert; CI-Referenz auf `main`: Run `23241536267`, Commit `6b1a0c1`).
-  - Gate 5 abgeschlossen am 2026-03-18 (Kickoff `S19C1/4` + Checklisten-/Scope-Snapshot `S19C2/4` + Release-Umschaltpaket `S19C3/4` + finaler Release-/Backup-Run in `S19C4/4`).
+  - Gate 5 abgeschlossen am 2026-03-18 (Kickoff `S19C1/4` + Checklisten-/Scope-Snapshot `S19C2/4` + Release-Umschaltpaket `S19C3/4` + finaler Release-/Backup-Run in `S19C4/4`; Artefakt `.releases/Betankungen_1_1_0.tar`, SHA-256 `f3c1f5ef4a8daa3a5a1cf9d4cb74c871c2799c1338e1eafe2422a6bfbeb026f3`, Snapshot `.backup/2026-03-18_1331`).
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
