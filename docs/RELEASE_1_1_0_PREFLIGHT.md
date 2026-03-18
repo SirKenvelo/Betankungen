@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (Gate-5-Checkliste/Scope-Snapshot dokumentiert, Finalisierung ausstehend)
+**Status:** aktiv (Release-Umschalt-Commit vorbereitet, explizite Freigabe ausstehend)
 
 ## Ziel
 
@@ -133,6 +133,21 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - Commit: `6088568` (`S19c1 gate5 kickoff backlog lanes (#29)`)
 - Ergebnis: `success`
 - URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23243226276`
+
+## Gate-5-Release-Umschaltpaket (S19C3, Stand 2026-03-18)
+
+- Der finale Versionswechsel ist vorbereitet, aber noch **nicht** ausgefuehrt
+  (Guardrail bleibt bis zur Freigabe: `APP_VERSION=1.1.0-dev`).
+- Finale Umschaltdateien fuer den Release-Commit sind klar benannt:
+  - `src/Betankungen.lpr` (`APP_VERSION -> 1.1.0`)
+  - `docs/STATUS.md` (Zielversion/Fokus auf final)
+  - `docs/ROADMAP_1_1_0.md` (Gate 5 auf `abgeschlossen`)
+  - `docs/SPRINTS.md` und `docs/CHANGELOG.md` (Release-/Traceability-Sync)
+- Operativer Ablauf nach Freigabe ist festgezogen:
+  1. finalen Release-Umschalt-Commit erstellen (`1.1.0-dev -> 1.1.0`)
+  2. finalen Doku-Sync committen
+  3. Release-/Backup-Ausfuehrung (`kpr.sh`, `backup_snapshot.sh`)
+  4. Gate-5-Closeout dokumentieren (`S19C4/4`)
 
 ## Gate-4-Kickoff-Update (S18C1)
 
