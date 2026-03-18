@@ -1,11 +1,11 @@
 # Verbindlicher Fahrplan bis Version 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (`APP_VERSION=1.1.0-dev`)
+**Status:** abgeschlossen (`APP_VERSION=1.1.0`, final freigegeben)
 
 ## Ausgangslage
 
 - `1.0.0` wurde am 2026-03-16 final freigegeben.
-- Die aktive Entwicklungsbasis ist auf `1.1.0-dev` umgestellt.
+- Die Entwicklungsbasis wurde bis zur Freigabe auf `1.1.0-dev` gefuehrt.
 - Dieser Fahrplan ist gate-basiert (Qualitaetskriterien vor Kalenderdatum).
 
 ## Verbindliche Leitplanken
@@ -119,21 +119,21 @@ Status:
 ### Gate 5: Finalisierung 1.1.0
 
 - `APP_VERSION` von `1.1.0-dev` auf `1.1.0`.
-- Finaler Doku-Sync und Release-/Backup-Ausfuehrung nach Freigabe.
+- Finaler Doku-Sync und Release-/Backup-Ausfuehrung.
 - Gate-5-Kickoff ist dokumentiert (`S19C1/4`), inkl. BL-Triage-Lanes
   (`release-blocking`/`planned`/`exploratory`) fuer bessere
   Priorisierung bei hoher Backlog-Dichte.
 - Gate-5-Checklisten-/Scope-Snapshot ist dokumentiert (`S19C2/4`), inkl.
   aktueller CI-Referenz auf `main`.
 - Gate-5-Release-Umschaltpaket ist dokumentiert (`S19C3/4`), der eigentliche
-  Versionswechsel bleibt bis zur expliziten Freigabe ausstehend.
+  Versionswechsel wurde in `S19C4/4` final ausgefuehrt.
 
 Exit-Kriterium:
 - 1.1.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv (Kickoff + Checklisten-/Scope-Snapshot + Release-Umschaltpaket
-  dokumentiert, Release-Freigabe ausstehend).
+- abgeschlossen am 2026-03-18 (Kickoff + Checklisten-/Scope-Snapshot +
+  Release-Umschaltpaket + finaler Release-/Backup-Run in `S19C4/4`).
 
 ## Verbindliche Abweichungsregel
 

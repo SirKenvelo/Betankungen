@@ -695,7 +695,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 19 - Gate 5 Finalisierung (1.1.0)
 
-- Status: aktiv
+- Status: abgeschlossen
 - Ziel: Finale 1.1.0-Freigabe vorbereiten und dabei Priorisierung im Backlog
   klar trennen (release-blocking vs. planned vs. exploratory).
 
@@ -707,8 +707,8 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   synchronisieren.
 - S19C3/4: done - finalen Release-Umschalt-Commit (`APP_VERSION=1.1.0`) +
   Doku-Finalsync nach Freigabe vorbereiten.
-- S19C4/4: pending - Release-/Backup-Ausfuehrung und Gate-5-Closeout
-  dokumentieren (nach Freigabe).
+- S19C4/4: done - finalen Release-Umschalt-Commit ausfuehren, Release-/Backup
+  final laufen lassen und Gate-5-Closeout dokumentieren.
 
 ### Fortschritt (2026-03-18)
 
@@ -732,6 +732,11 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Roadmap-/Status-/Entry-/Changelog-Doku auf den Abschlussblock `S19C4/4`
   ausgerichtet (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
   `docs/CHANGELOG.md`).
+- `S19C4/4` abgeschlossen: finaler 1.1.0-Release ausgefuehrt
+  (`APP_VERSION=1.1.0`), Gate 5 in Roadmap-/Status-/Entry-Doku auf
+  abgeschlossen gesetzt und finale Release-/Backup-Ausfuehrung dokumentiert
+  (`./kpr.sh --note "Release 1.1.0 final"`,
+  `scripts/backup_snapshot.sh --note "Backup after release 1.1.0"`).
 - S19C1/4 Traceability:
   - Git-Commit: `12d1cd7`
   - Artefakte: `.artifacts/sprint_19_commit_1_von_4.md`,

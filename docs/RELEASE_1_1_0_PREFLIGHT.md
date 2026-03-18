@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (Release-Umschalt-Commit vorbereitet, explizite Freigabe ausstehend)
+**Status:** abgeschlossen (1.1.0 final freigegeben)
 
 ## Ziel
 
@@ -11,7 +11,8 @@ definiert den Soll-Preflight fuer Gate 4/5 und die zugehoerigen Doku-Gates.
 
 1. Branch-/Version-Guardrails
 - Arbeitsstand liegt auf PR-Branch (nicht direkt auf `main`).
-- `APP_VERSION` entspricht dem erwarteten Zyklusstand (`1.1.0-dev` bis Gate 5).
+- `APP_VERSION` entspricht dem erwarteten Zyklusstand
+  (`1.1.0-dev` bis zum Umschalt-Commit, danach `1.1.0`).
 
 2. Verify-Block
 - `make verify` laeuft gruen.
@@ -99,13 +100,12 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - RC-Nachweise aus `S18C3/4` bleiben unveraendert gueltig
   (lokaler Voll-Preflight + CI-Referenz auf `main`).
 
-## Naechster Schritt (Gate 5)
+## Gate-5-Closeout (S19C4)
 
-- Finalen Release-Umschalt-Commit vorbereiten (`APP_VERSION` von
-  `1.1.0-dev` auf `1.1.0`).
-- Finalen Doku-Sync fuer die 1.1.0-Freigabe durchziehen
+- Finaler Release-Umschalt-Commit ist ausgefuehrt (`APP_VERSION 1.1.0`).
+- Finaler Doku-Sync fuer die 1.1.0-Freigabe ist abgeschlossen
   (`ROADMAP_1_1_0`, `STATUS`, `SPRINTS`, `CHANGELOG`, `README`).
-- Nach expliziter Freigabe: Release-/Backup-Ausfuehrung final statt Dry-Run.
+- Release-/Backup-Ausfuehrung wurde final statt Dry-Run durchgefuehrt.
 
 ## Gate-5-Kickoff-Update (S19C1)
 
@@ -136,8 +136,8 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 
 ## Gate-5-Release-Umschaltpaket (S19C3, Stand 2026-03-18)
 
-- Der finale Versionswechsel ist vorbereitet, aber noch **nicht** ausgefuehrt
-  (Guardrail bleibt bis zur Freigabe: `APP_VERSION=1.1.0-dev`).
+- Der finale Versionswechsel wurde in `S19C4/4` ausgefuehrt
+  (`APP_VERSION=1.1.0`).
 - Finale Umschaltdateien fuer den Release-Commit sind klar benannt:
   - `src/Betankungen.lpr` (`APP_VERSION -> 1.1.0`)
   - `docs/STATUS.md` (Zielversion/Fokus auf final)
@@ -148,6 +148,11 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
   2. finalen Doku-Sync committen
   3. Release-/Backup-Ausfuehrung (`kpr.sh`, `backup_snapshot.sh`)
   4. Gate-5-Closeout dokumentieren (`S19C4/4`)
+
+## Finale Release-/Backup-Ausfuehrung (S19C4, Stand 2026-03-18)
+
+- Release-Befehl: `./kpr.sh --note "Release 1.1.0 final"`
+- Backup-Befehl: `scripts/backup_snapshot.sh --note "Backup after release 1.1.0"`
 
 ## Gate-4-Kickoff-Update (S18C1)
 
