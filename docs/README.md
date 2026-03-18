@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -73,8 +73,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
-- Naechster Fokus: Gate 4 (RC-Haertung) mit vollstaendigem RC-Abschlusslauf und konsistentem Gate-Sync dokumentieren.
-- Non-blocking Follow-up im Tracker erfasst: `BL-0016` (Community-Standards-Baseline fuer Public Repo).
+- Naechster Fokus: Gate 4 (RC-Haertung) mit Checklisten-/Freeze-Snapshot und danach vollstaendigem RC-Abschlusslauf dokumentieren.
+- Non-blocking Follow-ups im Tracker erfasst: `BL-0016` (Community-Standards-Baseline) und `BL-0021` (Tankbeleg-Foto-Links als externe Referenz).
 - Leitplanke fuer 1.1.0:
   - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
   - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).

@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
-**Stand:** 2026-03-17
-**Status:** aktiv (Gate 4 gestartet, nach abgeschlossenem Gate 3)
+**Stand:** 2026-03-18
+**Status:** aktiv (Gate 4 gestartet, RC-Kickoff dokumentiert)
 
 ## Ziel
 
@@ -82,7 +82,17 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 
 ## Naechster Schritt (Gate 4)
 
-- RC-Abschlusslauf fuer Gate 4 mit lokalem Voll-Preflight und aktualisierter
-  CI-Referenz auf `main` dokumentieren.
-- Danach Gate-4-Exit-Kriterium in Roadmap/Status explizit auf `abgeschlossen`
-  setzen.
+- `S18C2/4`: RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen Gate-Stand
+  synchronisieren.
+- `S18C3/4`: RC-Abschlusslauf fuer Gate 4 mit lokalem Voll-Preflight und
+  aktualisierter CI-Referenz auf `main` dokumentieren.
+- `S18C4/4`: Gate-4-Exit-Kriterium in Roadmap/Status auf `abgeschlossen`
+  setzen und Handover auf Gate 5 finalisieren.
+
+## Gate-4-Kickoff-Update (S18C1)
+
+- Kickoff in Sprint-Narrative verankert (`docs/SPRINTS.md`).
+- Roadmap-/Status-/Entry-Doku zeigen konsistent: Gate 3 abgeschlossen, Gate 4
+  aktiv (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`).
+- Nicht-blockierender Folgeeintrag fuer externe Belegfoto-Links als `BL-0021`
+  im kanonischen Tracker erfasst (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`).

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 **Zielversion:** 1.1.0-dev (aktive Entwicklungsphase)
 
 ## Fundament & Architektur (erledigt)
@@ -214,15 +214,16 @@ Bereits erledigt:
   - Gate 1 abgeschlossen am 2026-03-16 (Zyklusstart auf `APP_VERSION=1.1.0-dev` und Doku-Sync).
   - Gate 2 abgeschlossen am 2026-03-16 (Scope-Freeze im Tracker: `BL-0014` + `TSK-0006` als priorisierter Feature-Block, `BL-0015` + `TSK-0007` als priorisierter Hardening-Block, inkl. explizitem Out-of-Scope).
   - Gate 3 abgeschlossen am 2026-03-17 (Feature-/Hardening-Block `BL-0014`/`BL-0015` final auf `done`, Matrix komplett auf `done`, lokaler Abschlusslauf `make release-preflight-1-1-0` gruen; letzte CI-Referenz auf `main`: Run `23208794011`, Commit `e67860f`).
-  - Gate 4 aktiv (Start mit `S17C4/4` dokumentiert); Gate 5 pending.
+  - Gate 4 aktiv (Kickoff-Block `S18C1/4` dokumentiert); Gate 5 pending.
 - Leitplanken fuer die 1.1.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - RC-Haertung in Gate 4 mit vollstaendigem Abschlusslauf (lokal + CI-Referenz) dokumentieren,
+  - RC-Haertung in Gate 4 mit Checklisten-/Freeze-Snapshot fortschreiben (`S18C2/4`),
+  - danach vollstaendigen RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren,
   - Feature-Freeze auf den scope-frozen 1.1.0-Umfang halten.
-  - Nicht-blockierenden Public-Readiness-Follow-up im Tracker halten (`BL-0016`: Code of Conduct, Security Policy, Issue-/PR-Templates).
+  - Nicht-blockierende Follow-ups im Tracker halten (`BL-0016` Community-Standards, `BL-0021` externe Belegfoto-Links).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
@@ -232,6 +233,7 @@ Bereits erledigt:
   - `BL-0012` (Module Capability Discovery, post-0.9.0)
   - `BL-0013` (Stats Performance Benchmark Harness, trigger-basiert)
   - `BL-0014` (Import/Export Paketformat mit Manifest/Checksum; in Gate 3 der 1.1.0-Linie abgeschlossen)
+  - `BL-0021` (Tankbeleg-Foto-Links als externe Referenz, nicht blockierend fuer 1.1.0)
 - Neue Policies:
   - `POL-002` (Contract Evolution + Deprecation)
   - `POL-003` (Backup Retention/Restore/Privacy)
