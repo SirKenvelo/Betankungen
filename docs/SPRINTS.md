@@ -651,3 +651,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Backlog-Vorschlag fuer externe Belegfoto-Links als `BL-0021` im kanonischen
   Tracker aufgenommen (`docs/backlog/BL-0021-receipt-photo-link-references/item.md`,
   `docs/BACKLOG.md`, `docs/CHANGELOG.md`).
+- S18C1/4 Traceability:
+  - Git-Commit: `2d202a4`
+  - Artefakte: `.artifacts/sprint_18_commit_1_von_4.md`,
+    `.artifacts/sprint_18_commit_1_von_4.diff`
