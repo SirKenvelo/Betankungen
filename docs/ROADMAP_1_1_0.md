@@ -123,12 +123,15 @@ Status:
 - Gate-5-Kickoff ist dokumentiert (`S19C1/4`), inkl. BL-Triage-Lanes
   (`release-blocking`/`planned`/`exploratory`) fuer bessere
   Priorisierung bei hoher Backlog-Dichte.
+- Gate-5-Checklisten-/Scope-Snapshot ist dokumentiert (`S19C2/4`), inkl.
+  aktueller CI-Referenz auf `main`.
 
 Exit-Kriterium:
 - 1.1.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv (Kickoff dokumentiert, Release-Freigabe ausstehend).
+- aktiv (Kickoff + Checklisten-/Scope-Snapshot dokumentiert, Release-Freigabe
+  ausstehend).
 
 ## Verbindliche Abweichungsregel
 

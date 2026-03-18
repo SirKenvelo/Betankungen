@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (Gate 4 abgeschlossen, Gate-5-Finalisierung vorbereitet)
+**Status:** aktiv (Gate-5-Checkliste/Scope-Snapshot dokumentiert, Finalisierung ausstehend)
 
 ## Ziel
 
@@ -114,6 +114,25 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - BL-Triage-Lanes sind als leichte Priorisierung geschuetzt
   (`release-blocking`/`planned`/`exploratory`), ohne den Scope-Freeze fuer
   1.1.0 aufzuweichen.
+
+## Gate-5-Checklisten-/Scope-Snapshot (S19C2, Stand 2026-03-18)
+
+- Gate-Konsistenz ist dokumentiert: Gate 1/2/3/4 abgeschlossen, Gate 5 aktiv
+  (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/SPRINTS.md`).
+- Versionierungs-Guardrail bleibt bis zum finalen Umschalt-Commit stabil:
+  `APP_VERSION=1.1.0-dev`.
+- Release-blockierender Scope bleibt unveraendert abgeschlossen:
+  `BL-0014` + `TSK-0006`, `BL-0015` + `TSK-0007` (kein Scope-Drift).
+- BL-Lanes bleiben explizit als Priorisierungshilfe aktiv
+  (`release-blocking`/`planned`/`exploratory`), ohne neue Release-Blocker zu
+  erzeugen.
+
+### CI-Referenz auf `main` (aktuell)
+- Workflow: `CI` (`verify`)
+- Run-ID: `23243226276`
+- Commit: `6088568` (`S19c1 gate5 kickoff backlog lanes (#29)`)
+- Ergebnis: `success`
+- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23243226276`
 
 ## Gate-4-Kickoff-Update (S18C1)
 
