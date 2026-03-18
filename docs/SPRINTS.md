@@ -639,7 +639,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Follow-up `BL-0021` erfassen.
 - S18C2/4: done - RC-Checkliste/Feature-Freeze-Snapshot auf aktuellen
   Gate-Stand synchronisieren.
-- S18C3/4: next - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
+- S18C3/4: done - RC-Abschlusslauf (lokal + CI-Referenz) dokumentieren.
 - S18C4/4: pending - Gate-4-Abschlussnarrativ und Handover auf Gate 5
   finalisieren.
 
@@ -657,6 +657,14 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   non-blocking/out-of-scope), waehrend Roadmap-/Status-/Entry-Doku den Fokus
   auf den RC-Abschlusslauf `S18C3/4` umstellen
   (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
+- `S18C3/4` abgeschlossen: RC-Abschlusslauf fuer Gate 4 dokumentiert.
+  Lokaler Voll-Preflight lief gruen (`make release-preflight-1-1-0`) und die
+  CI-Referenz auf `main` wurde auf den aktuellen Stand aktualisiert
+  (Run `23241536267`, Commit `6b1a0c1`).
+  Preflight-/Roadmap-/Status-/Entry-Doku auf den verbleibenden Gate-4-Closeout
+  (`S18C4/4`) synchronisiert (`docs/RELEASE_1_1_0_PREFLIGHT.md`,
+  `docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
   `docs/CHANGELOG.md`).
 - S18C1/4 Traceability:
   - Git-Commit: `2d202a4`

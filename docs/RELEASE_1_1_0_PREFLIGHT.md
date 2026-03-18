@@ -1,6 +1,6 @@
 # Release Preflight 1.1.0
 **Stand:** 2026-03-18
-**Status:** aktiv (Gate 4 gestartet, RC-Checkliste/Freeze-Snapshot dokumentiert)
+**Status:** aktiv (RC-Abschlusslauf dokumentiert, Gate-4-Closeout ausstehend)
 
 ## Ziel
 
@@ -123,3 +123,17 @@ Alle muessen denselben Gate-Stand fuer 1.1.0 widerspruchsfrei zeigen.
 - Runtime-Config-Profile im Core (`ADR-0009` = rejected)
 - Vollstaendige Import-Pipeline in 1.1.0
 - Architekturwechsel weg vom CLI-Kern
+
+## RC-Abschlusslauf-Nachweis (S18C3)
+
+### Lokal (2026-03-18)
+- Befehl: `make release-preflight-1-1-0`
+- Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gates,
+  Release-/Backup-Dry-Runs).
+
+### CI-Referenz auf `main`
+- Workflow: `CI` (`verify`)
+- Run-ID: `23241536267`
+- Commit: `6b1a0c1` (`S18c2 gate4 checklist freeze sync (#26)`)
+- Ergebnis: `success`
+- URL: `https://github.com/SirKenvelo/Betankungen/actions/runs/23241536267`
