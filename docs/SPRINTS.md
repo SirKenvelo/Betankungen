@@ -703,7 +703,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - S19C1/4: done - Gate-5-Kickoff dokumentieren und BL-Triage-Lanes im
   kanonischen Tracker verankern.
-- S19C2/4: pending - finalen Release-Checklisten-/Scope-Snapshot fuer Gate 5
+- S19C2/4: done - finalen Release-Checklisten-/Scope-Snapshot fuer Gate 5
   synchronisieren.
 - S19C3/4: pending - finalen Release-Umschalt-Commit (`APP_VERSION=1.1.0`) +
   Doku-Finalsync nach Freigabe vorbereiten.
@@ -718,7 +718,19 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   (`docs/policies/POL-001-tracker-standard.md`, `docs/backlog/README.md`,
   `docs/BACKLOG.md`, `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0020`,
   `BL-0021`).
+- `S19C2/4` abgeschlossen: Gate-5-Checklisten-/Scope-Snapshot auf den
+  aktuellen Stand synchronisiert. `docs/RELEASE_1_1_0_PREFLIGHT.md` fuehrt
+  jetzt einen expliziten Snapshot fuer Gate 5 (Gate-Konsistenz,
+  Versionierungs-Guardrail, release-blockierender Scope, Lane-Stand) inkl.
+  aktueller CI-Referenz auf `main` (Run `23243226276`, Commit `6088568`).
+  Roadmap-/Status-/Entry-/Changelog-Doku auf den naechsten Fokus `S19C3/4`
+  nachgezogen (`docs/ROADMAP_1_1_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
 - S19C1/4 Traceability:
   - Git-Commit: `12d1cd7`
   - Artefakte: `.artifacts/sprint_19_commit_1_von_4.md`,
     `.artifacts/sprint_19_commit_1_von_4.diff`
+- S19C2/4 Traceability:
+  - Git-Commit: `87b18fb`
+  - Artefakte: `.artifacts/sprint_19_commit_2_von_4.md`,
+    `.artifacts/sprint_19_commit_2_von_4.diff`
