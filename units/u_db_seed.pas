@@ -2,7 +2,7 @@
   u_db_seed.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-06
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Demo-Datenbank-Seeding fuer Betankungen.
 
@@ -212,6 +212,7 @@ begin
     '  payment_type              TEXT,' +
     '  pump_no                   TEXT,' +
     '  note                      TEXT,' +
+    '  receipt_link              TEXT,' +
     '  created_at                TEXT NOT NULL DEFAULT (datetime(''now'')),' +
     '  updated_at                TEXT,' +
     '  FOREIGN KEY(station_id) REFERENCES stations(id) ON DELETE RESTRICT,' +
@@ -230,6 +231,8 @@ begin
     ExecSQL(Conn, Tran, 'ALTER TABLE fuelups ADD COLUMN car_id INTEGER NOT NULL DEFAULT 1;');
   if not ColumnExists(Conn, Tran, 'fuelups', 'missed_previous') then
     ExecSQL(Conn, Tran, 'ALTER TABLE fuelups ADD COLUMN missed_previous INTEGER NOT NULL DEFAULT 0;');
+  if not ColumnExists(Conn, Tran, 'fuelups', 'receipt_link') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE fuelups ADD COLUMN receipt_link TEXT;');
 
   ExecSQL(Conn, Tran, 'DROP INDEX IF EXISTS idx_fuelups_fueled_at;');
   ExecSQL(Conn, Tran, 'DROP INDEX IF EXISTS idx_fuelups_odometer_km;');
@@ -322,7 +325,7 @@ var
   fueledAt: TDateTime;
   dtStart: TDateTime;
   spanDays: integer;
-  fuelType, payType, pumpNo, note: string;
+  fuelType, payType, pumpNo, note, receiptLink: string;
   kmStep: integer;
 begin
   Dbg(
@@ -337,10 +340,10 @@ begin
     Q.SQL.Text :=
       'INSERT INTO fuelups (' +
       ' station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents, price_per_liter_milli_eur,' +
-      ' is_full_tank, missed_previous, fuel_type, payment_type, pump_no, note' +
+      ' is_full_tank, missed_previous, fuel_type, payment_type, pump_no, note, receipt_link' +
       ') VALUES (' +
       ' :station_id, :car_id, :fueled_at, :odometer_km, :liters_ml, :total_cents, :ppl_milli,' +
-      ' :is_full, :missed_previous, :fuel_type, :payment_type, :pump_no, :note' +
+      ' :is_full, :missed_previous, :fuel_type, :payment_type, :pump_no, :note, :receipt_link' +
       ');';
 
     // “Realistisch”: 3-5 Jahre zurück
@@ -384,6 +387,10 @@ begin
 
       if Random(100) < 60 then pumpNo := IntToStr(1 + Random(12)) else pumpNo := '';
       if Random(100) < 25 then note := 'Demo ' + IntToStr(i) else note := '';
+      if Random(100) < 20 then
+        receiptLink := 'file:///demo/receipts/' + FormatDateTime('yyyymmdd_hhnnss', fueledAt) + '_' + IntToStr(i) + '.jpg'
+      else
+        receiptLink := '';
 
       Q.ParamByName('station_id').AsInteger := stationId;
       Q.ParamByName('car_id').AsInteger := carId;
@@ -399,6 +406,7 @@ begin
       if payType = '' then Q.ParamByName('payment_type').Clear else Q.ParamByName('payment_type').AsString := payType;
       if pumpNo = '' then Q.ParamByName('pump_no').Clear else Q.ParamByName('pump_no').AsString := pumpNo;
       if note = '' then Q.ParamByName('note').Clear else Q.ParamByName('note').AsString := note;
+      if receiptLink = '' then Q.ParamByName('receipt_link').Clear else Q.ParamByName('receipt_link').AsString := receiptLink;
 
       Q.ExecSQL;
     end;

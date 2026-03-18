@@ -1,10 +1,10 @@
 ---
 id: BL-0021
 title: Tankbeleg-Foto-Links als Referenz speichern
-status: proposed
-priority: P3
+status: done
+priority: P2
 type: feature
-tags: [receipts, photos, links, storage, 'lane:planned']
+tags: [receipts, photos, links, storage, 'lane:release-blocking']
 created: 2026-03-18
 updated: 2026-03-18
 related:
@@ -25,8 +25,10 @@ pflegen, damit Nachweise auffindbar bleiben und die Core-DB schlank bleibt.
 # Scope
 In Scope:
 - Datenfeld-Strategie fuer externe Belegreferenzen (Pfad/URI-Link).
+- Append-only-kompatibler Write-Path fuer neue Fuelups mit optionalem Link.
 - Validierungs- und Ausgabeleitplanken fuer Linkfelder.
 - Klare Backup-/Privacy-Abgrenzung fuer externe Dateipfade gemaess `POL-003`.
+- Contract-sichtbare JSON-Ausgabe fuer gesetzte/fehlende Linkfelder.
 
 Out of Scope:
 - Binaere Bildspeicherung in SQLite.
@@ -39,9 +41,10 @@ Out of Scope:
 - Plattformunterschiede bei absoluten/relativen Pfaden.
 
 # Output
-Ein klarer, optionaler Referenzrahmen fuer Belegfotos, der den Core nicht mit
-Datei-Binaries belastet und mit bestehenden Privacy-/Backup-Leitplanken
-kompatibel bleibt.
+Release-blocking Referenzrahmen fuer `1.2.0`, der externe Beleglinks im Core
+abbildet, ohne Datei-Binaries in SQLite abzulegen, und dabei mit
+Privacy-/Backup-Leitplanken kompatibel bleibt.
 
 # Derived Tasks
-- Werden bei Aktivierung als `TSK-xxxx` angelegt.
+- `TSK-0010` - Receipt-Link-Contract und Privacy-Guardrails definieren. (done)
+- `TSK-0011` - Receipt-Link-Write-Path und Output-/Contract-Nachweise liefern. (done)

@@ -2,7 +2,7 @@
   u_cli_types.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Zentrale CLI-Typdefinitionen fuer Betankungen.
 
@@ -90,6 +90,8 @@ type
     efDbSet,
     // Fehler bei --maintenance-source.
     efMaintenanceSource,
+    // Fehler bei --receipt-link.
+    efReceiptLink,
     // Fehler im Demo-Workflow.
     efDemo,
     // Fehler im Seed-Workflow.
@@ -155,6 +157,8 @@ type
     DbOverride: string;
     DbSet: string;
     CarId: integer;
+    ReceiptLink: string;
+    ReceiptLinkProvided: boolean;
     MaintenanceSource: TMaintenanceSource;
     MaintenanceSourceProvided: boolean;
 
@@ -216,6 +220,7 @@ begin
     efDb:          Result := '--db';
     efDbSet:       Result := '--db-set';
     efMaintenanceSource: Result := '--maintenance-source';
+    efReceiptLink: Result := '--receipt-link';
     efDemo:        Result := '--demo';
     efSeed:        Result := '--seed';
     efStats:       Result := '--stats';

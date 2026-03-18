@@ -57,10 +57,16 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
+- `1.1.0` wurde am `2026-03-18` final freigegeben.
+- Verbindlicher Fahrplan bis `1.2.0` ist aktiv: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
+- Gate-Stand 1.2.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
+- Verbindliche Folge-Reihenfolge nach 1.2.0:
+  - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
+  - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
 - 1.0.0-Abschlusspaket (historisch):
   - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
   - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
@@ -74,7 +80,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `docs/CONTRACT_HARDENING_1_1_0.md`
   - `docs/RELEASE_1_1_0_PREFLIGHT.md`
 - Finalisierung 1.1.0: finaler Release-Umschalt-Commit + Gate-5-Closeout (`S19C4/4`) abgeschlossen.
-- Non-blocking Follow-ups im Tracker erfasst: `BL-0016` (Community-Standards-Baseline) und `BL-0021` (Tankbeleg-Foto-Links als externe Referenz).
+- Scope-Freeze 1.2.0 ist gesetzt:
+  - Ops-/Feature-Block: `BL-0020` + `TSK-0008`/`TSK-0009` (release-blocking).
+  - Feature-Block: `BL-0021` + `TSK-0010`/`TSK-0011` (release-blocking).
+- Gate-3-Fortschritt 1.2.0:
+  - `BL-0020` ist als erster regressionssicherer Lieferstand umgesetzt (`scripts/db_backup_ops.sh` + `tests/regression/run_db_backup_ops_check.sh`).
+  - `BL-0021` ist umgesetzt (Receipt-Link-Write-Path + Guardrails + Contract-Checks).
+- Verify-/Contract-DoD fuer Gate 3 der 1.2.0-Linie ist konkretisiert:
+  - `docs/CONTRACT_HARDENING_1_2_0.md`
+  - `docs/RELEASE_1_2_0_PREFLIGHT.md`
+- Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
+  in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
+- Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.
 - BL-Priorisierung fuer hohe Backlog-Dichte ist auf Lanes geschaerft:
   `release-blocking` / `planned` / `exploratory`.
 - Gate-5-Checklisten-/Scope-Snapshot und Release-Umschaltpaket sind dokumentiert
@@ -98,7 +115,10 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/tasks/`: globale `TSK-xxxx`-Eintraege (z. B. fuer Legacy-Backlog-Parents).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
-- `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan fuer die aktive 1.1.0-Linie.
+- `docs/ROADMAP_1_2_0.md`: verbindlicher Gate-Plan fuer die aktive 1.2.0-Linie.
+- `docs/CONTRACT_HARDENING_1_2_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.2.0-Linie.
+- `docs/RELEASE_1_2_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer Gate 4/5 der 1.2.0-Linie.
+- `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan der abgeschlossenen 1.1.0-Linie.
 - `docs/CONTRACT_HARDENING_1_1_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.1.0-Linie.
 - `docs/EXPORT_PACKAGE_CONTRACT.md`: Manifest-v1-Contract fuer Export-Pakete (BL-0014 / TSK-0006).
 - `docs/RELEASE_1_1_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer die 1.1.0-Linie.
@@ -381,6 +401,21 @@ Beispiel:
 - `scripts/backup_snapshot.sh --keep 10`
 - `scripts/backup_snapshot.sh --archive .releases/Betankungen_0_8_0.tar --note "Vor Hotfix" --keep 15`
 
+### `scripts/db_backup_ops.sh`
+Operations-Skript fuer Multi-DB-Backups in `.backup/db_ops/`.
+
+**Funktionen**
+- Sichert einzelne Datenbanken via `--db FILE` (mehrfach moeglich)
+- Sichert alle erkannten `*.db` unter einer Suchwurzel via `--all --source-dir DIR`
+- Schreibt pro Lauf Integritaetsmetadaten (`metadata.json`) mit `sha256`/`size_bytes`
+- Pflegt einen Laufindex in `.backup/db_ops/index.json`
+- Unterstuetzt sichere Vorschau via `--dry-run` und Retention via `--keep N`
+
+Beispiel:
+- `scripts/db_backup_ops.sh --db ~/.local/share/Betankungen/betankungen.db`
+- `scripts/db_backup_ops.sh --all --source-dir ~/.local/share/Betankungen --keep 20`
+- `scripts/db_backup_ops.sh --all --source-dir /srv/betankungen --dry-run`
+
 ### `scripts/net_recover.sh`
 Netzwerkdiagnose mit optionalem Interface-Neustart bei "verbunden, aber kein Internet".
 
@@ -517,9 +552,11 @@ Beispiel:
 ## Task-Entrypoints (make)
 
 - `make verify`
-  - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Cost-Integrations-Regression + Domain-Policy + Smoke + Clean-Home-Smoke
+  - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Cost-Integrations-Regression + DB-Backup-Ops-Regression + Domain-Policy + Smoke + Clean-Home-Smoke
 - `make cost-integration-check`
   - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
+- `make db-backup-ops-check`
+  - Fuehrt die dedizierte Multi-DB-Backup-Regression aus (`tests/regression/run_db_backup_ops_check.sh`)
 - `make package-manifest-check`
   - Fuehrt den optionalen Manifest-v1-Fixture-Check aus (`tests/regression/run_package_manifest_fixture_check.sh`)
 - `make smoke`
@@ -551,6 +588,7 @@ Beispiel:
   - FPC-Build (Projekt-Standard)
   - Export-Contract JSON-Check (`tests/regression/run_export_contract_json_check.sh`)
   - Cost-Integrations-Regression (`tests/regression/run_cost_integration_modes_check.sh`)
+  - DB-Backup-Ops-Regression (`tests/regression/run_db_backup_ops_check.sh`)
   - Domain-Policy-Suite (`tests/domain_policy/run_domain_policy_tests.sh`)
   - Smoke-Suite (`tests/smoke/smoke_cli.sh --modules`)
   - Clean-Home-Smoke (`tests/smoke/smoke_clean_home.sh --modules`)

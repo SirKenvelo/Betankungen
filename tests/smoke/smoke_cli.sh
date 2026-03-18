@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-15
+# UPDATED: 2026-03-18
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -151,6 +151,8 @@ print_plan() {
   printf '[LIST] Betankungen --version\n'
   printf '[LIST] Betankungen --help\n'
   printf '[LIST] --help enthaelt Struktur-Keywords (Commands/Stats options/Examples/--yearly/--dashboard)\n'
+  printf '[LIST] --help enthaelt Receipt-Link-Option (--receipt-link)\n'
+  printf '[LIST] --receipt-link ausserhalb --add fuelups -> Validierungsfehler\n'
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
   printf '[LIST] --stats fuelups --json --csv -> Fehler im 3-Zeilen-Format ohne Voll-Help\n'
   printf '[LIST] --stats fleet -> MVP-Textausgabe\n'
@@ -290,6 +292,46 @@ test_help_keywords_stable() {
     printf '[OK] --help enthaelt Struktur-Keywords\n'
   else
     printf '[FAIL] --help enthaelt Struktur-Keywords\n'
+    add_fail
+  fi
+}
+
+test_help_mentions_receipt_link() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --help >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] && grep -q -- '--receipt-link <path|uri>' "$out"; then
+    printf '[OK] --help enthaelt --receipt-link\n'
+  else
+    printf '[FAIL] --help enthaelt --receipt-link\n'
+    add_fail
+  fi
+}
+
+test_receipt_link_scope_guardrail_fails() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --list fuelups --receipt-link file:///tmp/r.jpg >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q -- '--receipt-link ist nur zusammen mit "--add fuelups" erlaubt' "$err"; then
+    printf '[OK] --receipt-link ausserhalb --add fuelups: Validierungsfehler\n'
+  else
+    printf '[FAIL] --receipt-link ausserhalb --add fuelups: Validierungsfehler\n'
     add_fail
   fi
 }
@@ -1035,6 +1077,8 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   run_check "Betankungen --version" "$ROOT_DIR/bin/Betankungen" --version
   run_check "Betankungen --help" "$ROOT_DIR/bin/Betankungen" --help
   test_help_keywords_stable
+  test_help_mentions_receipt_link
+  test_receipt_link_scope_guardrail_fails
   test_stats_stations_fails_short_usage
   test_stats_json_csv_fails_short_3line_no_full_help
   test_stats_fleet_mvp_ok

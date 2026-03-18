@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-18
-**Zielversion:** 1.1.0 (final freigegeben)
+**Zielversion:** 1.2.0 (aktive Entwicklungsbasis)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -221,9 +221,27 @@ Bereits erledigt:
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - 1.1.0 ist final freigegeben (`APP_VERSION=1.1.0`).
+  - 1.1.0 ist final freigegeben (`APP_VERSION=1.1.0`, historischer Abschlussstand).
   - BL-Triage-Lanes im kanonischen Tracker bleiben als leichte Priorisierung aktiv (`release-blocking`/`planned`/`exploratory`).
-  - Nicht-blockierende Follow-ups im Tracker bleiben aktiv (`BL-0016` Community-Standards, `BL-0021` externe Belegfoto-Links).
+
+## Roadmap 1.2.0 - verbindlicher Fahrplan (aktiv)
+
+- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_2_0.md`.
+- Gate-Stand:
+  - Gate 1 abgeschlossen am 2026-03-18 (Zyklusstart auf `APP_VERSION=1.2.0-dev`, neue Roadmap verankert).
+  - Gate 2 abgeschlossen am 2026-03-18 (Scope-Freeze: `BL-0020` + `TSK-0008`/`TSK-0009` sowie `BL-0021` + `TSK-0010`/`TSK-0011` als release-blocking).
+  - Gate 3 aktiv (Umsetzung + Contract-Haertung; DoD konkretisiert in `docs/CONTRACT_HARDENING_1_2_0.md` und `docs/RELEASE_1_2_0_PREFLIGHT.md`).
+  - Gate 4 ausstehend (RC-Haertung).
+  - Gate 5 ausstehend (Finalisierung `1.2.0`).
+- Leitplanken fuer die 1.2.0-Linie:
+  - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
+  - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
+  - Backup-/Restore-/Privacy strikt nach `POL-003`;
+  - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
+- Operativer Fokus:
+  - Entwicklungsbasis ist auf `APP_VERSION=1.2.0-dev` gesetzt.
+  - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
+  - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 

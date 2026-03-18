@@ -756,3 +756,71 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `cf74b1c`
   - Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`,
     `.artifacts/sprint_19_commit_4_von_4.diff`
+
+## Sprint 20 - Road to 1.2.0 Kickoff
+
+- Status: done
+- Ziel: Scope-Freeze fuer die 1.2.0-Linie operativ verankern und die
+  release-blocking Arbeitsbloecke fuer Umsetzung/Haertung vorbereiten.
+
+### Geplante Bloecke
+
+- S20C1/4: done - 1.2.0-Fahrplan aufsetzen (`docs/ROADMAP_1_2_0.md`),
+  Entwicklungsbasis auf `1.2.0-dev` anheben und Entry-/Status-Doku
+  synchronisieren.
+- S20C2/4: done - Scope-Freeze fuer `BL-0020` und `BL-0021` im Tracker
+  festziehen (Status `approved`, Lane `release-blocking`, Tasks `TSK-0008`
+  bis `TSK-0011`).
+- S20C3/4: done - Verify-/Contract-DoD fuer Gate 3 der 1.2.0-Linie
+  konkretisieren.
+- S20C4/4: done - Gate-3-Umsetzungsblock starten und den ersten
+  regressionssicheren Lieferstand dokumentieren.
+
+### Fortschritt (2026-03-18)
+
+- `S20C1/4` abgeschlossen: neue 1.2.0-Roadmap angelegt und als aktiver
+  Fahrplan verankert (`docs/ROADMAP_1_2_0.md`), Versionierungsbasis auf
+  `APP_VERSION=1.2.0-dev` gesetzt (`src/Betankungen.lpr`) und Entry-/Status-
+  Doku synchronisiert (`docs/README.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`).
+- `S20C2/4` abgeschlossen: release-blocking Scope im kanonischen Tracker
+  festgezogen. `BL-0020` und `BL-0021` stehen auf `approved` mit Lane
+  `release-blocking`; Downstream-Tasks `TSK-0008` bis `TSK-0011` sind angelegt
+  (`docs/backlog/BL-0020-multi-database-backup-operations/`,
+  `docs/backlog/BL-0021-receipt-photo-link-references/`, `docs/BACKLOG.md`).
+- `S20C3/4` abgeschlossen: Verify-/Contract-DoD fuer Gate 3 konkretisiert.
+  Neue Leitdokumente `docs/CONTRACT_HARDENING_1_2_0.md` (Hardening-Matrix) und
+  `docs/RELEASE_1_2_0_PREFLIGHT.md` (Preflight-Blueprint + Doku-Gates)
+  eingefuehrt; Roadmap-/Status-/Entry-/Changelog-Doku auf den Gate-3-DoD-Stand
+  synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md`).
+- `S20C4/4` abgeschlossen: erster regressionssicherer Gate-3-Lieferstand fuer
+  den 1.2.0-Release-Kern umgesetzt. `BL-0020` ist auf `done` gesetzt
+  (Runner `scripts/db_backup_ops.sh`, Regression
+  `tests/regression/run_db_backup_ops_check.sh`, Verify-Verdrahtung via
+  `make db-backup-ops-check` + `make verify`); Tracker-/Roadmap-/Status-/Entry-
+  Doku synchronisiert.
+
+## Sprint 21 - Receipt-Link Delivery (1.2.0)
+
+- Status: done
+- Ziel: `BL-0021` als zweiten release-blocking Gate-3-Lieferstand umsetzen
+  (Contract + Write-Path + Guardrails + Nachweise).
+
+### Geplante Bloecke
+
+- S21C1/1: done - Receipt-Link-Contract und optionalen Write-Path fuer Fuelups
+  liefern, inklusive Output-/JSON-Sichtbarkeit und Verify-Verdrahtung.
+
+### Fortschritt (2026-03-18)
+
+- `S21C1/1` abgeschlossen:
+  - CLI/Policy: neues Flag `--receipt-link` eingefuehrt (nur mit
+    `--add fuelups`, Guardrails fuer leer/Steuerzeichen/Laenge).
+  - DB/Write-Path: neues additives Feld `fuelups.receipt_link` in Core- und
+    Seed-Schema inkl. idempotenter Migration.
+  - Output/Contract: Detailausgabe zeigt gesetzte Receipt-Links; Fuelups-JSON
+    fuehrt `receipt_links_set` und `receipt_links_missing` fuer full/monthly/
+    yearly.
+  - Regression/Verify: neuer Check
+    `tests/regression/run_receipt_link_contract_check.sh`, verdrahtet via
+    `make receipt-link-check` und `make verify`.

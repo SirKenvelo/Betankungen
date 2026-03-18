@@ -1,5 +1,5 @@
 # EXPORT CONTRACT
-**Stand:** 2026-03-15
+**Stand:** 2026-03-18
 
 Zweck: Stabiler Export-Vertrag fuer maschinenlesbare Ausgabeformate (JSON/CSV).
 
@@ -18,8 +18,8 @@ Pflichtfelder:
 Payload (v1, aktueller Stand):
 - Report-Kennung: Feld `kind` (z. B. `fuelups_monthly`, `fuelups_yearly`, `fuelups_full_tank_cycles`, `fleet_mvp`, `cost_mvp`)
 - Nutzdaten:
-  - fuelups monthly/yearly: `rows`
-  - fuelups full_tank_cycles: `cycles` + `sum`
+  - fuelups monthly/yearly: `rows`, `receipt_links_set`, `receipt_links_missing`
+  - fuelups full_tank_cycles: `cycles` + `sum` + `receipt_links_set` + `receipt_links_missing`
   - fleet_mvp: `fleet` (`cars_total`, `fuelups_total`, `liters_ml_total`, `total_cents_all`)
 - cost_mvp: `cost` (`scope_mode`, `scope_car_id`, `maintenance_source_mode`, `maintenance_source_active`, `maintenance_source_note`, `period_enabled`, `period_from`, `period_to_exclusive`, `period_from_provided`, `period_to_provided`, `cars_total`, `cars_with_cycles`, `distance_km_total`, `fuel_cents_total`, `maintenance_cents_total`, `total_cents`, `cost_per_km_available`, `fuel_cost_per_km_eur_x1000`, `maintenance_cost_per_km_eur_x1000`, `total_cost_per_km_eur_x1000`)
 

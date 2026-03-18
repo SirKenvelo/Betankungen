@@ -2,7 +2,7 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Statistik-Funktionen fuer Betankungen.
 
@@ -316,6 +316,8 @@ type
     MinDt: string;
     MaxDt: string;
     TotalCentsAll: Int64;
+    ReceiptLinksSet: Int64;
+    ReceiptLinksMissing: Int64;
     EffFromIso: string;
     EffToExclIso: string;
   end;
@@ -439,6 +441,7 @@ begin
       'SELECT ' +
       '  COUNT(*) AS cnt, ' +
       '  SUM(CASE WHEN is_full_tank = 1 THEN 1 ELSE 0 END) AS full_cnt, ' +
+      '  SUM(CASE WHEN receipt_link IS NOT NULL AND TRIM(receipt_link) <> '''' THEN 1 ELSE 0 END) AS receipt_set_cnt, ' +
       '  MIN(fueled_at) AS min_dt, ' +
       '  MAX(fueled_at) AS max_dt, ' +
       '  SUM(total_cents) AS total_cents ' +
@@ -460,6 +463,10 @@ begin
     R.H.TotalFuelups := FieldInt64OrZero(Q, 'cnt');
     DbgEffectivePeriod(PeriodEnabled, FromProvided, ToProvided, R.H.EffFromIso, R.H.EffToExclIso, R.H.TotalFuelups);
     R.H.FullFuelups := FieldInt64OrZero(Q, 'full_cnt');
+    R.H.ReceiptLinksSet := FieldInt64OrZero(Q, 'receipt_set_cnt');
+    R.H.ReceiptLinksMissing := R.H.TotalFuelups - R.H.ReceiptLinksSet;
+    if R.H.ReceiptLinksMissing < 0 then
+      R.H.ReceiptLinksMissing := 0;
     R.H.MinDt := Q.FieldByName('min_dt').AsString;
     R.H.MaxDt := Q.FieldByName('max_dt').AsString;
     R.H.TotalCentsAll := FieldInt64OrZero(Q, 'total_cents');
@@ -642,6 +649,7 @@ begin
     WriteLn('Statistik (fuelups) - Jahresuebersicht');
     WriteLn('Zeitraum: ', SafeStr(C.H.MinDt), ' ... ', SafeStr(C.H.MaxDt));
     WriteLn('Tankvorgaenge: ', C.H.TotalFuelups, '  |  Volltank: ', C.H.FullFuelups);
+    WriteLn('Receipt links: gesetzt=', C.H.ReceiptLinksSet, '  |  fehlend=', C.H.ReceiptLinksMissing);
 
     if C.H.TotalFuelups = 0 then
     begin
@@ -715,6 +723,7 @@ begin
   WriteLn('Statistik (fuelups) - Volltank-Zyklen');
   WriteLn('Zeitraum: ', SafeStr(C.H.MinDt), ' ... ', SafeStr(C.H.MaxDt));
   WriteLn('Tankvorgänge: ', C.H.TotalFuelups, '  |  Volltank: ', C.H.FullFuelups);
+  WriteLn('Receipt links: gesetzt=', C.H.ReceiptLinksSet, '  |  fehlend=', C.H.ReceiptLinksMissing);
 
   if C.H.TotalFuelups = 0 then
   begin
@@ -1003,6 +1012,8 @@ begin
 
     J.IndentWrite; J.W('"fuelups_total":'); J.SP; J.W(IntToStr(R.H.TotalFuelups)); J.W(','); J.NL;
     J.IndentWrite; J.W('"fuelups_full":'); J.SP; J.W(IntToStr(R.H.FullFuelups)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_set":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksSet)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_missing":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksMissing)); J.W(','); J.NL;
 
     J.IndentWrite; J.W('"rows":'); J.SP; J.W('['); J.NL;
     J.IndentInc;
@@ -1045,6 +1056,8 @@ begin
 
     J.IndentWrite; J.W('"fuelups_total":'); J.SP; J.W(IntToStr(R.H.TotalFuelups)); J.W(','); J.NL;
     J.IndentWrite; J.W('"fuelups_full":'); J.SP; J.W(IntToStr(R.H.FullFuelups)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_set":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksSet)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_missing":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksMissing)); J.W(','); J.NL;
 
     J.IndentWrite; J.W('"rows":'); J.SP; J.W('['); J.NL;
     J.IndentInc;
@@ -1082,6 +1095,8 @@ begin
 
     J.IndentWrite; J.W('"fuelups_total":'); J.SP; J.W(IntToStr(R.H.TotalFuelups)); J.W(','); J.NL;
     J.IndentWrite; J.W('"fuelups_full":'); J.SP; J.W(IntToStr(R.H.FullFuelups)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_set":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksSet)); J.W(','); J.NL;
+    J.IndentWrite; J.W('"receipt_links_missing":'); J.SP; J.W(IntToStr(R.H.ReceiptLinksMissing)); J.W(','); J.NL;
 
     J.IndentWrite; J.W('"cycles":'); J.SP; J.W('['); J.NL;
     J.IndentInc;

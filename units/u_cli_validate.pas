@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -30,7 +30,8 @@ function ValidateCommandDb(var Cmd: TCommand; const DbPath: string): boolean;
 implementation
 
 uses
-  u_cars;
+  u_cars,
+  SysUtils;
 
 function IsStandaloneMeta(const Cmd: TCommand): boolean;
 begin
@@ -137,6 +138,57 @@ begin
   begin
     Cmd.ErrorMsg := 'fuelups unterstuetzt nur add/list (append-only).';
     Cmd.ErrorFocus := efTarget;
+    Exit(False);
+  end;
+end;
+
+function HasControlChars(const S: string): boolean;
+var
+  i: Integer;
+begin
+  Result := False;
+  for i := 1 to Length(S) do
+  begin
+    if (Ord(S[i]) < 32) or (Ord(S[i]) = 127) then
+      Exit(True);
+  end;
+end;
+
+function ValidateReceiptLinkPolicy(var Cmd: TCommand): boolean;
+const
+  RECEIPT_LINK_MAX_LEN = 1024;
+begin
+  Result := True;
+
+  if not Cmd.ReceiptLinkProvided then
+    Exit(True);
+
+  if not IsAddFuelups(Cmd) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --receipt-link ist nur zusammen mit "--add fuelups" erlaubt.';
+    Cmd.ErrorFocus := efReceiptLink;
+    Exit(False);
+  end;
+
+  Cmd.ReceiptLink := Trim(Cmd.ReceiptLink);
+  if Cmd.ReceiptLink = '' then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --receipt-link darf nicht leer sein.';
+    Cmd.ErrorFocus := efReceiptLink;
+    Exit(False);
+  end;
+
+  if Length(Cmd.ReceiptLink) > RECEIPT_LINK_MAX_LEN then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --receipt-link ist zu lang (max. 1024 Zeichen).';
+    Cmd.ErrorFocus := efReceiptLink;
+    Exit(False);
+  end;
+
+  if HasControlChars(Cmd.ReceiptLink) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --receipt-link enthaelt unzulaessige Steuerzeichen.';
+    Cmd.ErrorFocus := efReceiptLink;
     Exit(False);
   end;
 end;
@@ -358,6 +410,9 @@ begin
     Exit(False);
 
   if not ValidateCarIdPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateReceiptLinkPolicy(Cmd) then
     Exit(False);
 
   if not ValidateStatsTargetPolicy(Cmd) then
