@@ -41,6 +41,10 @@
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
+- Merge-Strategie (Decision-Matrix):
+  1. `Create a merge commit` ist Standard fuer sprintgebundene PRs mit mehreren fachlichen Commits, wenn Commit-Hash-Traceability aus `docs/CHANGELOG.md`/`docs/SPRINTS.md` erhalten bleiben soll.
+  2. `Squash and merge` ist Standard fuer PRs mit WIP-/Fixup-/Review-Nachzieh-Commits, wenn auf `main` ein kuratierter Einzelcommit gewuenscht ist.
+  3. Bei PRs mit genau einem sauberen Commit sind beide Varianten zulaessig; bei Hash-pflichtigen Sprint-Commits wird `Create a merge commit` bevorzugt.
 - Nach Merge wird der Arbeitsbranch aufgeraeumt (remote + lokal), sofern kein expliziter Weiterverwendungsgrund dokumentiert ist.
 - Ausnahmefaelle (z. B. dringender Hotfix ausserhalb des Standardpfads) nur mit expliziter User-Freigabe und sichtbarer Dokumentation in `docs/CHANGELOG.md`.
 - Bei aktiver Review-Pflicht und Solo-Maintenance gilt: temporaere Regelanpassungen sind erlaubt, muessen aber nach dem Merge wieder auf den Zielzustand zurueckgestellt werden.
