@@ -1,6 +1,6 @@
 # Release Preflight 1.2.0
-**Stand:** 2026-03-18
-**Status:** in Vorbereitung (Blueprint aus S20C3)
+**Stand:** 2026-03-19
+**Status:** aktiv (Gate 4 RC-Haertung)
 
 ## Ziel
 
@@ -53,12 +53,12 @@ Hinweis: Die operative Verdrahtung ist Teil des Gate-3-Umsetzungsblocks
 
 Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
 
-## Gate-Status-Snapshot (S20C3, Stand 2026-03-18)
+## Gate-Status-Snapshot (Stand 2026-03-19)
 
 - Gate 1: abgeschlossen am 2026-03-18.
 - Gate 2: abgeschlossen am 2026-03-18.
-- Gate 3: aktiv (DoD konkretisiert, Umsetzung in Arbeit).
-- Gate 4: ausstehend.
+- Gate 3: abgeschlossen am 2026-03-19 (release-blocking Scope geliefert).
+- Gate 4: aktiv (RC-Haertung gestartet).
 - Gate 5: ausstehend.
 - Scope-Freeze bleibt unverletzt (`BL-0020` + `BL-0021` als einziger
   release-blockierender 1.2.0-Fokus).
