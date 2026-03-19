@@ -110,7 +110,12 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- aktiv (Kickoff am 2026-03-19).
+- abgeschlossen am 2026-03-19.
+- Fortschritt:
+  - RC-Checklisten-/Feature-Freeze-Snapshot ist auf aktuellen Scope-Stand
+    synchronisiert (`S22C2/3`, `docs/RELEASE_1_2_0_PREFLIGHT.md`).
+  - RC-Abschlusslauf ist dokumentiert (`S22C3/3`): lokales `make verify`
+    gruen + CI-Referenz auf `main` (Run `23307738745`, Commit `3e9be17`).
 
 ### Gate 5: Finalisierung 1.2.0
 
@@ -122,7 +127,7 @@ Exit-Kriterium:
 - 1.2.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- ausstehend.
+- aktiv (Kickoff am 2026-03-19).
 
 ## Verbindliche Abweichungsregel
 

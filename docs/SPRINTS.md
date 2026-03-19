@@ -827,7 +827,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## Sprint 22 - Gate 4 RC Hardening (1.2.0)
 
-- Status: aktiv
+- Status: done
 - Ziel: Gate 3 fuer die 1.2.0-Linie formal schliessen und Gate 4
   (RC-Haertung) mit konsistentem Doku-/Preflight-Stand aktiv fuehren.
 
@@ -835,6 +835,36 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - S22C1/3: done - Gate-3-Closeout und Gate-4-Kickoff in Roadmap-/Status-/
   Entry-/Hardening-/Preflight-Doku synchronisiert.
-- S22C2/3: pending - RC-Checklisten-/Feature-Freeze-Snapshot fuer Gate 4
-  auf den laufenden Stand haerten.
-- S22C3/3: pending - RC-Abschlusslauf und Gate-4-Exit-Nachweis dokumentieren.
+- S22C2/3: done - RC-Checklisten-/Feature-Freeze-Snapshot fuer Gate 4 auf
+  den laufenden Stand gehaertet.
+- S22C3/3: done - RC-Abschlusslauf und Gate-4-Exit-Nachweis dokumentieren.
+
+### Sprint-Notiz zu S22C1/3 (Uebergang)
+
+- Der originale Sprint-Auftakt von Sprint 22 ist Commit `e08b716`
+  (`[General] docs: close 1.2.0 gate-3 and activate gate-4`) auf Branch
+  `chore/1-2-0-gate3-closeout-gate4-kickoff`.
+- Dieser Commit entspricht fachlich `S22C1/3`.
+- Die explizite C1/C2/C3-Kennzeichnung war im laufenden Uebergang zur
+  kanonischen Sprint-Governance noch nicht vollstaendig im Branch-/PR-Flow
+  umgesetzt.
+- Traceability:
+  - `S22C1/3` = `e08b716`
+  - `S22C2/3` = `74c2b63`
+  - `S22C3/3` = aktueller Sprint-Abschlussschritt
+
+### Fortschritt (2026-03-19)
+
+- `S22C2/3` abgeschlossen:
+  - `docs/RELEASE_1_2_0_PREFLIGHT.md` um einen expliziten
+    RC-Checklisten-Snapshot erweitert (Scope-Freeze intakt, Doku-Gates
+    konsistent, offene RC-Exit-Schritte transparent).
+  - Roadmap-/Status-/Entry-/Changelog-Doku auf den Gate-4-Fortschritt
+    synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`,
+    `docs/README.md`, `docs/CHANGELOG.md`).
+- `S22C3/3` abgeschlossen:
+  - lokaler Vollnachweis `make verify` ist gruen.
+  - CI-Referenz auf `main` aktualisiert (`CI` Run `23307738745`,
+    Commit `3e9be17`, `success`).
+  - Gate-4-Exit dokumentiert und Handover auf Gate 5 in Roadmap-/Status-/
+    Entry-/Preflight-/Changelog-Doku synchronisiert.

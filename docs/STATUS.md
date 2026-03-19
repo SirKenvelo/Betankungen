@@ -231,8 +231,8 @@ Bereits erledigt:
   - Gate 1 abgeschlossen am 2026-03-18 (Zyklusstart auf `APP_VERSION=1.2.0-dev`, neue Roadmap verankert).
   - Gate 2 abgeschlossen am 2026-03-18 (Scope-Freeze: `BL-0020` + `TSK-0008`/`TSK-0009` sowie `BL-0021` + `TSK-0010`/`TSK-0011` als release-blocking).
   - Gate 3 abgeschlossen am 2026-03-19 (release-blocking Scope geliefert: `BL-0020` + `BL-0021` auf `done`, Contract-Hardening auf Abschlussstand).
-  - Gate 4 aktiv (RC-Haertung gestartet, Preflight-/Freeze-Snapshot aktiv gepflegt).
-  - Gate 5 ausstehend (Finalisierung `1.2.0`).
+  - Gate 4 abgeschlossen am 2026-03-19 (RC-Checklisten-/Freeze-Snapshot + lokaler Vollnachweis `make verify` + CI-Referenz auf `main`: Run `23307738745`, Commit `3e9be17`).
+  - Gate 5 aktiv (Finalisierung `1.2.0`).
 - Leitplanken fuer die 1.2.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
@@ -241,7 +241,8 @@ Bereits erledigt:
 - Operativer Fokus:
   - Entwicklungsbasis ist auf `APP_VERSION=1.2.0-dev` gesetzt.
   - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
-  - Gate 4 RC-Haertung ist aktiv (`docs/RELEASE_1_2_0_PREFLIGHT.md`).
+  - Gate 4 RC-Haertung ist abgeschlossen; Gate 5 (Finalisierung 1.2.0) ist
+    aktiv.
   - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
