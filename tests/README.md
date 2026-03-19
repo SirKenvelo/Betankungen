@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-17
+**Stand:** 2026-03-18
 
 ## Ordnerstruktur
 - `tests/benchmark/`: optionaler Benchmark-Runner fuer trigger-basierte Performance-Messungen.
@@ -75,12 +75,18 @@ Direktlauf:
 - Zweck: validiert den Cost-Integrationscontract fuer `--maintenance-source none|module` inkl. aktivem Companion-Pfad und expliziten Fallbacks (fehlendes Binary, period-gefilterter Modulmodus).
 - Script: `tests/regression/run_package_manifest_fixture_check.sh`
 - Zweck: validiert den Export-Package-Manifest-Contract v1 gegen reproduzierbare Dry-Run-Fixtures (1x valid, mehrere invalid).
+- Script: `tests/regression/run_db_backup_ops_check.sh`
+- Zweck: validiert den Multi-DB-Backup-Operationspfad (`scripts/db_backup_ops.sh`) inkl. Scope-Guardrails, Dry-Run, Single/All-Run, Integritaetsmetadaten, Index-Konsistenz und Retention.
+- Script: `tests/regression/run_receipt_link_contract_check.sh`
+- Zweck: validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe und JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
 
 Direktlauf:
 - `tests/regression/run_export_contract_json_check.sh`
 - `tests/regression/run_export_contract_csv_check.sh`
 - `tests/regression/run_cost_integration_modes_check.sh`
 - `tests/regression/run_package_manifest_fixture_check.sh`
+- `tests/regression/run_db_backup_ops_check.sh`
+- `tests/regression/run_receipt_link_contract_check.sh`
 
 ## Benchmark (optional)
 

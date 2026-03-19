@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,7 +59,9 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] | --edit cars --car-id <id> | --delete cars --car-id <id>')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] | --edit cars --car-id <id> | --delete cars --car-id <id>')
+  else if FocusFlag = '--receipt-link' then
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>]')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
@@ -122,6 +124,7 @@ begin
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
   Item('--car-id <id>',              'Bei --add/--list/--stats fuelups, --stats cost sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
+  Item('--receipt-link <path|uri>',  'Optionaler externer Beleg-Link (nur bei --add fuelups).');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Advanced options');
@@ -148,6 +151,7 @@ begin
   Line('  Betankungen --add cars');
   Line('  Betankungen --add fuelups');
   Line('  Betankungen --add fuelups --car-id 1');
+  Line('  Betankungen --add fuelups --car-id 1 --receipt-link file:///data/receipts/2026-03-18.jpg');
   Line('  Betankungen --list fuelups --car-id 1');
   Line('  Betankungen --list cars --detail');
   Line('  Betankungen --edit cars --car-id 2');

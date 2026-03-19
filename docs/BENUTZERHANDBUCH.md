@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-14
+**Stand:** 2026-03-18
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -62,6 +62,7 @@ Eingabe bei `--add stations`:
 **Betankungen erfassen**
 Kommandos:
 - `Betankungen --add fuelups`
+- `Betankungen --add fuelups --receipt-link <path|uri>`
 - `Betankungen --list fuelups`
 - `Betankungen --list fuelups --car-id <id>`
 - `Betankungen --list fuelups --detail`
@@ -85,6 +86,8 @@ Eingabe bei `--add fuelups`:
 - Vollgetankt? (y/n)
 - Bei sehr grosser Tankmenge (> 150 L) kommt eine Warnung mit Bestaetigungsabfrage
 - Optional: Spritart, Bezahlart, Zapfsaeule, Notiz
+- Optional: externer Beleg-Link via `--receipt-link <path|uri>` (nur Referenz, keine Bilddaten in SQLite).
+- Guardrails fuer `--receipt-link`: nur bei `--add fuelups`, nicht leer, keine Steuerzeichen.
 
 Policy-Hinweis (Matrix v1):
 - Hard Error ohne Write: `P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`.
@@ -93,6 +96,7 @@ Policy-Hinweis (Matrix v1):
   - bei 0 Fahrzeugen: Hard Error
   - bei genau 1 Fahrzeug: automatische Aufloesung
   - bei mehreren Fahrzeugen: `--car-id` erforderlich
+- In `--list fuelups --detail` wird ein gesetzter Beleg-Link als `Receipt link: ...` angezeigt.
 
 **Statistiken: Volltank-Zyklen, Monate und Jahre**
 - Textausgabe: `Betankungen --stats fuelups`

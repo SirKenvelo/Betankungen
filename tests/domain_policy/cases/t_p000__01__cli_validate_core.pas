@@ -431,6 +431,61 @@ begin
   Ok('Period: context restricted');
 end;
 
+procedure Test_ReceiptLink_AddFuelups_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckAdd, tkFuelups);
+  Cmd.ReceiptLinkProvided := True;
+  Cmd.ReceiptLink := 'file:///data/receipts/2026-03-18-1234.jpg';
+
+  AssertTrue(ValidateCommand(Cmd), 'receipt-link for add fuelups must be ok');
+  Ok('Policy: --receipt-link allowed with --add fuelups');
+end;
+
+procedure Test_ReceiptLink_NonAddFuelups_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckList, tkFuelups);
+  Cmd.ReceiptLinkProvided := True;
+  Cmd.ReceiptLink := 'file:///data/receipts/2026-03-18-1234.jpg';
+
+  AssertFalse(ValidateCommand(Cmd), 'receipt-link outside add fuelups must fail');
+  AssertEqInt(Ord(efReceiptLink), Ord(Cmd.ErrorFocus), 'receipt-link scope focus');
+  Ok('Policy: --receipt-link restricted to --add fuelups');
+end;
+
+procedure Test_ReceiptLink_Empty_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckAdd, tkFuelups);
+  Cmd.ReceiptLinkProvided := True;
+  Cmd.ReceiptLink := '   ';
+
+  AssertFalse(ValidateCommand(Cmd), 'empty receipt-link must fail');
+  AssertEqInt(Ord(efReceiptLink), Ord(Cmd.ErrorFocus), 'receipt-link empty focus');
+  Ok('Policy: --receipt-link empty value rejected');
+end;
+
+procedure Test_ReceiptLink_ControlChar_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckAdd, tkFuelups);
+  Cmd.ReceiptLinkProvided := True;
+  Cmd.ReceiptLink := 'file:///data/receipts/a' + #10 + 'b.jpg';
+
+  AssertFalse(ValidateCommand(Cmd), 'receipt-link with control char must fail');
+  AssertEqInt(Ord(efReceiptLink), Ord(Cmd.ErrorFocus), 'receipt-link control-char focus');
+  Ok('Policy: --receipt-link control chars rejected');
+end;
+
 begin
   Test_MetaHelp_Standalone;
   Test_ActionDbSet_Standalone;
@@ -461,6 +516,10 @@ begin
   Test_Format_JsonPretty_Ok;
   Test_Period_Range_Fails;
   Test_Period_Context_Fails;
+  Test_ReceiptLink_AddFuelups_Ok;
+  Test_ReceiptLink_NonAddFuelups_Fails;
+  Test_ReceiptLink_Empty_Fails;
+  Test_ReceiptLink_ControlChar_Fails;
 
   WriteLn('[OK]   all validate tests passed');
   Halt(0);

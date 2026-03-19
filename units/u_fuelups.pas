@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-28
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -34,7 +34,7 @@ uses
 // Oeffentliche Schnittstelle
 
 // Startet den interaktiven Dialog zum Hinzufuegen einer Betankung.
-procedure AddFuelupInteractive(const DbPath: string; const CarId: integer = 0);
+procedure AddFuelupInteractive(const DbPath: string; const CarId: integer = 0; const ReceiptLink: string = '');
 
 // Zeigt die Betankungen des aufgeloesten Fahrzeugs an (Detailed steuert Zusatzinfos).
 procedure ListFuelups(const DbPath: string; Detailed: boolean; const CarId: integer = 0);
@@ -66,6 +66,7 @@ type
     PaymentType: string;
     PumpNo: string;
     Note: string;
+    ReceiptLink: string;
   end;
 
 const
@@ -321,7 +322,7 @@ begin
 end;
 
 // Hauptprozedur zum Erfassen neuer Daten
-procedure AddFuelupInteractive(const DbPath: string; const CarId: integer);
+procedure AddFuelupInteractive(const DbPath: string; const CarId: integer; const ReceiptLink: string);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
@@ -374,6 +375,7 @@ begin
     
     try
       Inp.CarId := ResolveCarIdOrFail(DbPath, CarId);
+      Inp.ReceiptLink := Trim(ReceiptLink);
 
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');
@@ -496,10 +498,10 @@ begin
       Q.SQL.Text :=
         'INSERT INTO fuelups(' +
         '  station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents, price_per_liter_milli_eur,' +
-        '  is_full_tank, missed_previous, fuel_type, payment_type, pump_no, note' +
+        '  is_full_tank, missed_previous, fuel_type, payment_type, pump_no, note, receipt_link' +
         ') VALUES(' +
         '  :station_id, :car_id, :fueled_at, :odometer_km, :liters_ml, :total_cents, :ppl_milli,' +
-        '  :is_full_tank, :missed_previous, :fuel_type, :payment_type, :pump_no, :note' +
+        '  :is_full_tank, :missed_previous, :fuel_type, :payment_type, :pump_no, :note, :receipt_link' +
         ');';
 
       Q.ParamByName('station_id').AsInteger := Inp.StationId;
@@ -516,6 +518,7 @@ begin
       SetOptStr('payment_type', Inp.PaymentType);
       SetOptStr('pump_no', Inp.PumpNo);
       SetOptStr('note', Inp.Note);
+      SetOptStr('receipt_link', Inp.ReceiptLink);
 
       Dbg('AddFuelup: station_id=' + IntToStr(Inp.StationId) +
         ' car_id=' + IntToStr(Inp.CarId) +
@@ -577,6 +580,7 @@ begin
         '       COALESCE(f.payment_type, '''') AS payment_type, ' +
         '       COALESCE(f.pump_no, '''') AS pump_no, ' +
         '       COALESCE(f.note, '''') AS note, ' +
+        '       COALESCE(f.receipt_link, '''') AS receipt_link, ' +
         '       COALESCE(c.name, ''(unbekannt)'') AS car_name, ' +
         '       s.brand, s.city, s.street, s.house_no ' +
         'FROM fuelups f ' +
@@ -630,6 +634,7 @@ begin
             Q.FieldByName('payment_type').AsString,
             Q.FieldByName('pump_no').AsString,
             Q.FieldByName('note').AsString,
+            Q.FieldByName('receipt_link').AsString,
             Q.FieldByName('street').AsString + ' ' + Q.FieldByName('house_no').AsString + ', ' + Q.FieldByName('city').AsString
           );
         end;

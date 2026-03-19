@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-14
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -192,6 +192,8 @@ begin
   Cmd.SeedForce := False;
   Cmd.UseDemoDb := False;
   Cmd.CarId := 0;
+  Cmd.ReceiptLink := '';
+  Cmd.ReceiptLinkProvided := False;
   Cmd.MaintenanceSource := msNone;
   Cmd.MaintenanceSourceProvided := False;
 
@@ -232,6 +234,28 @@ begin
       end;
 
       Cmd.MaintenanceSourceProvided := True;
+      Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--receipt-link' then
+    begin
+      if i + 1 > ParamCount then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --receipt-link benoetigt einen Wert (Pfad oder URI).';
+        Cmd.ErrorFocus := efReceiptLink;
+        Exit(False);
+      end;
+
+      if Copy(ParamStr(i + 1), 1, 2) = '--' then
+      begin
+        Cmd.ErrorMsg := 'Fehler: --receipt-link benoetigt einen Wert (Pfad oder URI).';
+        Cmd.ErrorFocus := efReceiptLink;
+        Exit(False);
+      end;
+
+      Cmd.ReceiptLink := ParamStr(i + 1);
+      Cmd.ReceiptLinkProvided := True;
       Inc(i, 2);
       Continue;
     end;

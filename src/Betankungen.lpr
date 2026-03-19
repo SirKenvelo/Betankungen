@@ -101,7 +101,7 @@ const
   
   // Anwendungsmetadaten fuer --version/--about
   APP_NAME    = 'Betankungen';
-  APP_VERSION = '1.1.0';
+  APP_VERSION = '1.2.0-dev';
   APP_AUTHOR  = 'Christof Kempinski';
 
 var
@@ -718,7 +718,7 @@ begin
 
       tkFuelups:
         case Cmd.Kind of
-          ckAdd: AddFuelupInteractive(DbPath, Cmd.CarId);
+          ckAdd: AddFuelupInteractive(DbPath, Cmd.CarId, Cmd.ReceiptLink);
           ckList: ListFuelups(DbPath, Cmd.Detail, Cmd.CarId);
           ckStats:
             begin

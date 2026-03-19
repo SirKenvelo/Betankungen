@@ -2,7 +2,7 @@
   u_db_init.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-06
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Datenbank-Bootstrapper und Schema-Verwaltung fuer SQLite.
 
@@ -31,6 +31,7 @@
   v3: Transaktionsdaten für Betankungen (fuelups) inkl. Start-KM Logik
   v4: Fuelups erweitert um car_id + missed_previous, neue cars-Tabelle
   v5: cars erweitert um vin, reg_doc_path, reg_doc_sha256
+  v5a: fuelups erweitert um receipt_link (additiv via ALTER, schema_version bleibt 5)
 
   Hinweis: Bei Schema-Änderungen bitte die 'schema_version' in der 
   EnsureDatabase-Prozedur UND hier im Header inkrementieren.
@@ -72,12 +73,14 @@ var
   HasCarOdometerStartDate: boolean;
   HasCarId: boolean;
   HasMissedPrevious: boolean;
+  HasReceiptLink: boolean;
   DefaultCarId: integer;
   MetaOdoStartKm: integer;
   MetaOdoStartDate: string;
   MetaTmp: string;
   CarIdExpr: string;
   MissedPreviousExpr: string;
+  ReceiptLinkExpr: string;
 
   function TableExists(const TableName: string): boolean;
   begin
@@ -373,6 +376,7 @@ begin
       HasFuelupsTable := TableExists('fuelups');
       HasCarId := HasFuelupsTable and ColumnExists('fuelups', 'car_id');
       HasMissedPrevious := HasFuelupsTable and ColumnExists('fuelups', 'missed_previous');
+      HasReceiptLink := HasFuelupsTable and ColumnExists('fuelups', 'receipt_link');
 
       if not HasFuelupsTable then
       begin
@@ -393,6 +397,7 @@ begin
           '  payment_type                TEXT,' +
           '  pump_no                     TEXT,' +
           '  note                        TEXT,' +
+          '  receipt_link                TEXT,' +
           '  created_at                  TEXT NOT NULL DEFAULT (datetime(''now'')),' +
           '  updated_at                  TEXT,' +
           '  FOREIGN KEY(station_id) REFERENCES stations(id) ON DELETE RESTRICT,' +
@@ -445,6 +450,7 @@ begin
           '  payment_type                TEXT,' +
           '  pump_no                     TEXT,' +
           '  note                        TEXT,' +
+          '  receipt_link                TEXT,' +
           '  created_at                  TEXT NOT NULL DEFAULT (datetime(''now'')),' +
           '  updated_at                  TEXT,' +
           '  FOREIGN KEY(station_id) REFERENCES stations(id) ON DELETE RESTRICT,' +
@@ -468,16 +474,21 @@ begin
         else
           MissedPreviousExpr := '0';
 
+        if HasReceiptLink then
+          ReceiptLinkExpr := 'receipt_link'
+        else
+          ReceiptLinkExpr := 'NULL';
+
         Q.SQL.Text :=
           'INSERT INTO fuelups_new (' +
           '  id, station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents,' +
           '  price_per_liter_milli_eur, is_full_tank, missed_previous, fuel_type, payment_type,' +
-          '  pump_no, note, created_at, updated_at' +
+          '  pump_no, note, receipt_link, created_at, updated_at' +
           ') ' +
           'SELECT ' +
           '  id, station_id, ' + CarIdExpr + ', fueled_at, odometer_km, liters_ml, total_cents,' +
           '  price_per_liter_milli_eur, is_full_tank, ' + MissedPreviousExpr + ', fuel_type, payment_type,' +
-          '  pump_no, note, created_at, updated_at ' +
+          '  pump_no, note, ' + ReceiptLinkExpr + ', created_at, updated_at ' +
           'FROM fuelups;';
         if not HasCarId then
           Q.Params.ParamByName('car_id').AsInteger := DefaultCarId;
@@ -487,6 +498,12 @@ begin
         Q.ExecSQL;
 
         Q.SQL.Text := 'ALTER TABLE fuelups_new RENAME TO fuelups;';
+        Q.ExecSQL;
+      end;
+
+      if not ColumnExists('fuelups', 'receipt_link') then
+      begin
+        Q.SQL.Text := 'ALTER TABLE fuelups ADD COLUMN receipt_link TEXT;';
         Q.ExecSQL;
       end;
 

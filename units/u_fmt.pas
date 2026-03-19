@@ -2,7 +2,7 @@
   u_fmt.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-24
+  UPDATED: 2026-03-18
   AUTHOR : Christof Kempinski
   Zentrales Modul fuer CLI-Formatierung, Tabellenlayout und Dashboard-Rendering.
 
@@ -87,7 +87,7 @@ procedure PrintFuelupRow(
 // Gibt Detail-Informationen (Notizen, Adresse) unter einer Zeile aus
 procedure PrintFuelupDetail(
   const AIsFull, AMissedPrevious: Boolean;
-  const ACarName, AFuelType, APayment, APump, ANote, AAddress: string
+  const ACarName, AFuelType, APayment, APump, ANote, AReceiptLink, AAddress: string
 );
 
 // Gibt Cars in einem einheitlichen Tabellenlayout aus.
@@ -579,7 +579,7 @@ begin
           U_VERT, ' ', PadR(AStation, COL_STATION), ' ', U_VERT);
 end;
 
-procedure PrintFuelupDetail(const AIsFull, AMissedPrevious: Boolean; const ACarName, AFuelType, APayment, APump, ANote, AAddress: string);
+procedure PrintFuelupDetail(const AIsFull, AMissedPrevious: Boolean; const ACarName, AFuelType, APayment, APump, ANote, AReceiptLink, AAddress: string);
   // Lokale Hilfsfunktion zum Zeichnen einer Detail-Zeile
   function DetailLine(const S: string): string;
   begin 
@@ -599,6 +599,9 @@ begin
   // Optional: Notiz nur anzeigen, wenn Text vorhanden
   if Trim(ANote) <> '' then 
     WriteLn(DetailLine('Note: ' + ANote));
+
+  if Trim(AReceiptLink) <> '' then
+    WriteLn(DetailLine('Receipt link: ' + AReceiptLink));
 
   // Adresse
   WriteLn(DetailLine('Addr: ' + AAddress));
