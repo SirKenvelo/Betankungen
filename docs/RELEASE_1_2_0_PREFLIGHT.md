@@ -1,6 +1,6 @@
 # Release Preflight 1.2.0
 **Stand:** 2026-03-19
-**Status:** aktiv (Gate 4 RC-Haertung, Snapshot S22C2)
+**Status:** abgeschlossen (Gate 4 Exit in S22C3)
 
 ## Ziel
 
@@ -58,8 +58,8 @@ Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
 - Gate 1: abgeschlossen am 2026-03-18.
 - Gate 2: abgeschlossen am 2026-03-18.
 - Gate 3: abgeschlossen am 2026-03-19 (release-blocking Scope geliefert).
-- Gate 4: aktiv (RC-Haertung gestartet).
-- Gate 5: ausstehend.
+- Gate 4: abgeschlossen am 2026-03-19 (RC-Nachweise dokumentiert).
+- Gate 5: aktiv (Finalisierung 1.2.0).
 - Scope-Freeze bleibt unverletzt (`BL-0020` + `BL-0021` als einziger
   release-blockierender 1.2.0-Fokus).
 
@@ -80,7 +80,7 @@ Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
 - Produktive API-Polling-Integration in 1.2.0
 - Architekturwechsel weg vom CLI-Kern
 
-## RC-Checklisten-Snapshot (S22C2, Stand 2026-03-19)
+## RC-Abschlussnachweis (S22C3, Stand 2026-03-19)
 
 - Scope-Freeze unverletzt:
   - `BL-0020` + `TSK-0008`/`TSK-0009`: done
@@ -93,7 +93,12 @@ Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
   - `docs/SPRINTS.md`
   - `docs/CHANGELOG.md`
   - `docs/README.md`
-- Offene RC-Schritte bis Gate-4-Exit (`S22C3/3`):
-  - finalen RC-Abschlusslauf dokumentieren (`make verify`, geplanter
-    `release_preflight_1_2_0`-Lauf nach Verfuegbarkeit)
-  - letzte CI-Referenz auf `main` in den Gate-4-Exit aufnehmen
+- Lokaler Vollnachweis:
+  - `make verify` erfolgreich (inkl. Lint/Build/Contract-/Regression-/Domain-
+    Policy-/Smoke-Gates).
+- CI-Referenz auf `main`:
+  - Workflow: `CI`
+  - Run: `23307738745`
+  - Status: `success`
+  - Commit: `3e9be17`
+- Offene RC-Schritte: keine; Uebergang auf Gate 5 ist freigegeben.

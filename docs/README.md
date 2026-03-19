@@ -63,7 +63,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.2.0: Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
+- Gate-Stand 1.2.0: Gate 1/2/3/4 abgeschlossen, Gate 5 aktiv.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
@@ -89,10 +89,13 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verify-/Contract-Hardening fuer Gate 3 der 1.2.0-Linie ist abgeschlossen:
   - `docs/CONTRACT_HARDENING_1_2_0.md`
   - `docs/RELEASE_1_2_0_PREFLIGHT.md`
-- Gate-4-Start 1.2.0:
-  - RC-Haertung ist aktiv (Feature-Freeze-/Preflight-Snapshot in `docs/RELEASE_1_2_0_PREFLIGHT.md`).
-  - RC-Checklisten-/Freeze-Snapshot wurde in `S22C2/3` auf den aktuellen
-    Scope-Stand fortgeschrieben.
+- Gate-4-Abschluss 1.2.0:
+  - RC-Haertung ist abgeschlossen (`S22C2/3` + `S22C3/3`).
+  - Abschlussnachweis: lokales `make verify` gruen und CI-Referenz auf `main`
+    (`CI` Run `23307738745`, Commit `3e9be17`).
+- Gate-5-Start 1.2.0:
+  - Finalisierung ist aktiv (Version-Umschalt-/Release-/Backup-Closeout als
+    letzter Block).
 - Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
   in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
 - Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.
