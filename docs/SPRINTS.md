@@ -835,6 +835,16 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - S22C1/3: done - Gate-3-Closeout und Gate-4-Kickoff in Roadmap-/Status-/
   Entry-/Hardening-/Preflight-Doku synchronisiert.
-- S22C2/3: pending - RC-Checklisten-/Feature-Freeze-Snapshot fuer Gate 4
-  auf den laufenden Stand haerten.
+- S22C2/3: done - RC-Checklisten-/Feature-Freeze-Snapshot fuer Gate 4 auf
+  den laufenden Stand gehaertet.
 - S22C3/3: pending - RC-Abschlusslauf und Gate-4-Exit-Nachweis dokumentieren.
+
+### Fortschritt (2026-03-19)
+
+- `S22C2/3` abgeschlossen:
+  - `docs/RELEASE_1_2_0_PREFLIGHT.md` um einen expliziten
+    RC-Checklisten-Snapshot erweitert (Scope-Freeze intakt, Doku-Gates
+    konsistent, offene RC-Exit-Schritte transparent).
+  - Roadmap-/Status-/Entry-/Changelog-Doku auf den Gate-4-Fortschritt
+    synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`,
+    `docs/README.md`, `docs/CHANGELOG.md`).

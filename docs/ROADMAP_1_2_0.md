@@ -111,6 +111,9 @@ Exit-Kriterium:
 
 Status:
 - aktiv (Kickoff am 2026-03-19).
+- Fortschritt:
+  - RC-Checklisten-/Feature-Freeze-Snapshot ist auf aktuellen Scope-Stand
+    synchronisiert (`S22C2/3`, `docs/RELEASE_1_2_0_PREFLIGHT.md`).
 
 ### Gate 5: Finalisierung 1.2.0
 

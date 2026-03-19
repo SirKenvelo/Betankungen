@@ -1,6 +1,6 @@
 # Release Preflight 1.2.0
 **Stand:** 2026-03-19
-**Status:** aktiv (Gate 4 RC-Haertung)
+**Status:** aktiv (Gate 4 RC-Haertung, Snapshot S22C2)
 
 ## Ziel
 
@@ -79,3 +79,21 @@ Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
 - Runtime-Config-Profile im Core (`ADR-0009` = rejected)
 - Produktive API-Polling-Integration in 1.2.0
 - Architekturwechsel weg vom CLI-Kern
+
+## RC-Checklisten-Snapshot (S22C2, Stand 2026-03-19)
+
+- Scope-Freeze unverletzt:
+  - `BL-0020` + `TSK-0008`/`TSK-0009`: done
+  - `BL-0021` + `TSK-0010`/`TSK-0011`: done
+- Contract-Hardening 1.2.0 steht auf Gate-3-Abschlussstand:
+  - `docs/CONTRACT_HARDENING_1_2_0.md` = abgeschlossen
+- Doku-Gates fuer Gate 4 sind konsistent:
+  - `docs/ROADMAP_1_2_0.md`
+  - `docs/STATUS.md`
+  - `docs/SPRINTS.md`
+  - `docs/CHANGELOG.md`
+  - `docs/README.md`
+- Offene RC-Schritte bis Gate-4-Exit (`S22C3/3`):
+  - finalen RC-Abschlusslauf dokumentieren (`make verify`, geplanter
+    `release_preflight_1_2_0`-Lauf nach Verfuegbarkeit)
+  - letzte CI-Referenz auf `main` in den Gate-4-Exit aufnehmen

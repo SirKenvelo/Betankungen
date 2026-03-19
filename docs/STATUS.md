@@ -241,7 +241,9 @@ Bereits erledigt:
 - Operativer Fokus:
   - Entwicklungsbasis ist auf `APP_VERSION=1.2.0-dev` gesetzt.
   - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
-  - Gate 4 RC-Haertung ist aktiv (`docs/RELEASE_1_2_0_PREFLIGHT.md`).
+  - Gate 4 RC-Haertung ist aktiv; RC-Checklisten-/Freeze-Snapshot wurde in
+    `S22C2/3` auf den aktuellen Scope-Stand synchronisiert
+    (`docs/RELEASE_1_2_0_PREFLIGHT.md`).
   - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15

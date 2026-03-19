@@ -91,6 +91,8 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `docs/RELEASE_1_2_0_PREFLIGHT.md`
 - Gate-4-Start 1.2.0:
   - RC-Haertung ist aktiv (Feature-Freeze-/Preflight-Snapshot in `docs/RELEASE_1_2_0_PREFLIGHT.md`).
+  - RC-Checklisten-/Freeze-Snapshot wurde in `S22C2/3` auf den aktuellen
+    Scope-Stand fortgeschrieben.
 - Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
   in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
 - Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.
