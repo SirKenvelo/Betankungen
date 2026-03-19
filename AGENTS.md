@@ -32,7 +32,7 @@
 - Neue Tracker-Eintraege werden ueber die Vorlagen in `docs/policies/templates/` gestartet.
 
 ## Repo-Pflege
-- Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch/pull --rebase`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
+- Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch`, `pull --ff-only`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
 - Commit + Push werden von Codex auf Wunsch vollstaendig uebernommen (inkl. Branch-Flow), sodass nach fachlicher Freigabe kein separater manueller Push durch den User noetig ist.
 - Bei Auth-/Transportproblemen (SSH/Passphrase) darf Codex fuer nicht-interaktive Laeufe den HTTPS-Weg mit vorhandener `gh`-Authentifizierung nutzen, sofern kein Sicherheitsrisiko entsteht.
 - Potenziell destruktive Git-Aktionen (z. B. `reset --hard`, History-Rewrite auf geteilten Branches, erzwungene Pushes) erfolgen nur nach expliziter User-Freigabe.
@@ -41,10 +41,9 @@
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
-- Merge-Strategie (Decision-Matrix):
-  1. `Create a merge commit` ist Standard fuer sprintgebundene PRs mit mehreren fachlichen Commits, wenn Commit-Hash-Traceability aus `docs/CHANGELOG.md`/`docs/SPRINTS.md` erhalten bleiben soll.
-  2. `Squash and merge` ist Standard fuer PRs mit WIP-/Fixup-/Review-Nachzieh-Commits, wenn auf `main` ein kuratierter Einzelcommit gewuenscht ist.
-  3. Bei PRs mit genau einem sauberen Commit sind beide Varianten zulaessig; bei Hash-pflichtigen Sprint-Commits wird `Create a merge commit` bevorzugt.
+- Verbindliche Detailleitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen liegt in `docs/GIT_WORKFLOW.md`.
+- Merge-Default fuer Sprint- und Traceability-relevante PRs ist `Create a merge commit`; `Squash and merge` ist nur Ausnahmefall fuer kleine Einzelcommit-Aenderungen.
+- Rebase-Merge wird nicht verwendet.
 - Nach Merge wird der Arbeitsbranch aufgeraeumt (remote + lokal), sofern kein expliziter Weiterverwendungsgrund dokumentiert ist.
 - Ausnahmefaelle (z. B. dringender Hotfix ausserhalb des Standardpfads) nur mit expliziter User-Freigabe und sichtbarer Dokumentation in `docs/CHANGELOG.md`.
 - Bei aktiver Review-Pflicht und Solo-Maintenance gilt: temporaere Regelanpassungen sind erlaubt, muessen aber nach dem Merge wieder auf den Zielzustand zurueckgestellt werden.
@@ -55,9 +54,9 @@
 - Bei Fehlermeldungen/Logs in oeffentlichen Doku-/PR-Texten keine unnoetigen lokalen Systemdetails offenlegen (nur technisch relevante Ausschnitte).
 
 ### Repo-Pflege-Rhythmus
-- Session-Start: einmaliger Sync mit `fetch` und `pull --rebase`, damit lokal auf aktuellem Remote-Stand gearbeitet wird.
+- Session-Start: einmaliger Sync mit `fetch` und `pull --ff-only`, damit lokal auf aktuellem Remote-Stand gearbeitet wird.
 - Waehrend der Session: Commits und Pushes erfolgen pro fachlich-logischer Einheit (z. B. Feature-Block, Bugfix-Block, Doku-Block).
-- Session-Ende: finaler Sync-Check (`fetch`/ggf. `pull --rebase`), danach Abschluss-Commit(s) und Push.
+- Session-Ende: finaler Sync-Check (`fetch`/ggf. `pull --ff-only`), danach Abschluss-Commit(s) und Push.
 - Bei laengeren Tasks: mehrere Zwischen-Commits sind gewuenscht; bei kurzen Tasks reicht in der Regel ein Abschluss-Commit.
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
 - Commit-Message-Konvention fuer Sprint-Arbeit: Betreff beginnt mit Prefix `[SxCy/z]` (Beispiel: `[S1C2/4] tests: cars_crud csv scope field-based`).
