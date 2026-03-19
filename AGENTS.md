@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-15
+**Stand:** 2026-03-19
 
 <INSTRUCTIONS>
 
@@ -33,6 +33,7 @@
 
 ## Repo-Pflege
 - Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch/pull --rebase`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
+- Commit + Push werden von Codex auf Wunsch vollstaendig uebernommen (inkl. Branch-Flow), sodass nach fachlicher Freigabe kein separater manueller Push durch den User noetig ist.
 - Bei Auth-/Transportproblemen (SSH/Passphrase) darf Codex fuer nicht-interaktive Laeufe den HTTPS-Weg mit vorhandener `gh`-Authentifizierung nutzen, sofern kein Sicherheitsrisiko entsteht.
 - Potenziell destruktive Git-Aktionen (z. B. `reset --hard`, History-Rewrite auf geteilten Branches, erzwungene Pushes) erfolgen nur nach expliziter User-Freigabe.
 
@@ -40,6 +41,10 @@
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
+- Merge-Strategie (Decision-Matrix):
+  1. `Create a merge commit` ist Standard fuer sprintgebundene PRs mit mehreren fachlichen Commits, wenn Commit-Hash-Traceability aus `docs/CHANGELOG.md`/`docs/SPRINTS.md` erhalten bleiben soll.
+  2. `Squash and merge` ist Standard fuer PRs mit WIP-/Fixup-/Review-Nachzieh-Commits, wenn auf `main` ein kuratierter Einzelcommit gewuenscht ist.
+  3. Bei PRs mit genau einem sauberen Commit sind beide Varianten zulaessig; bei Hash-pflichtigen Sprint-Commits wird `Create a merge commit` bevorzugt.
 - Nach Merge wird der Arbeitsbranch aufgeraeumt (remote + lokal), sofern kein expliziter Weiterverwendungsgrund dokumentiert ist.
 - Ausnahmefaelle (z. B. dringender Hotfix ausserhalb des Standardpfads) nur mit expliziter User-Freigabe und sichtbarer Dokumentation in `docs/CHANGELOG.md`.
 - Bei aktiver Review-Pflicht und Solo-Maintenance gilt: temporaere Regelanpassungen sind erlaubt, muessen aber nach dem Merge wieder auf den Zielzustand zurueckgestellt werden.
@@ -57,6 +62,7 @@
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
 - Commit-Message-Konvention fuer Sprint-Arbeit: Betreff beginnt mit Prefix `[SxCy/z]` (Beispiel: `[S1C2/4] tests: cars_crud csv scope field-based`).
 - Sprint-Tagging: Nach komplett abgeschlossenem und freigegebenem Sprint wird genau ein annotierter Tag im Format `sprint-<nr>-done` erstellt und gepusht; keine Sprint-Tags auf Zwischenstaenden.
+- Version-Tagging: Release-/Version-Tags (z. B. `1.2.0`) werden nur nach expliziter User-Freigabe erstellt und gepusht (keine automatische Tag-Erstellung).
 - Sprint-Artefakte nach Push: Nach jedem erfolgreichen Push eines Sprint-Commits erstellt Codex selbststaendig lokale Artefakte in `.artifacts/` (`.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.diff` und `.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.md`).
 - Reihenfolge fuer Sprint-Artefakte: 1) Commit und Push abschliessen. 2) `.diff` aus dem gepushten Commit erzeugen (z. B. `git show --stat --patch <hash> > .artifacts/sprint_<...>.diff`). 3) Begleit-`.md` mit Ziel, Hash, Message und Artefaktverweisen in `.artifacts/` erstellen.
 - Sprint-Artefakte bleiben lokal: `.artifacts/*.md` und `.artifacts/*.diff` werden grundsaetzlich nicht committed oder gepusht (nur bei expliziter User-Freigabe).

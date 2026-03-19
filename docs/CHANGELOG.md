@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-18
+**Stand:** 2026-03-19
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -72,6 +72,8 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.1.0-Rel
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Meta/Process: Merge-Strategie in `AGENTS.md` als Decision-Matrix praezisiert. `Create a merge commit` ist fuer sprintgebundene Multi-Commit-PRs mit Hash-Traceability der Standard; `Squash and merge` ist fuer WIP-/Fixup-lastige PRs mit kuratiertem Einzelcommit vorgesehen; bei Ein-Commit-PRs sind beide Varianten zulaessig mit Praeferenz fuer `merge commit` bei hash-pflichtigen Sprint-Commits. (2026-03-19)
+- [General] Meta/Process: `AGENTS.md` auf den Git-Workflowwunsch synchronisiert (`Stand` aktualisiert). Commit+Push-Uebernahme durch Codex ist explizit als Standard auf Wunsch festgehalten; Sprint-Tagging bleibt auf abgeschlossene/freigegebene Sprints begrenzt, und Release-/Version-Tags (z. B. `1.2.0`) duerfen nur nach expliziter User-Freigabe erstellt/gepusht werden. (2026-03-19)
 - [General] Docs/Root-README: Project-State-Block auf den aktuellen Release-/Dev-Stand korrigiert (`Latest release: 1.1.0` vom 2026-03-18, `Current development line: 1.2.0-dev`) und Datumsstand der Seite synchronisiert. (2026-03-18)
 - [General] Fuelups/Receipt-Link: Optionalen Beleg-Link fuer neue Fuelups eingefuehrt (`--receipt-link` nur mit `--add fuelups`) inklusive Guardrails fuer Scope, leere Werte, Steuerzeichen und Laengenlimit. Additives Datenfeld `fuelups.receipt_link` in Core-/Seed-Schema inkl. idempotenter Migration nachgezogen; Detailausgabe zeigt gesetzte Links (`Receipt link: ...`). Fuelups-JSON (full/monthly/yearly) erweitert um `receipt_links_set` und `receipt_links_missing`, Export-Contract und Nutzerdoku synchronisiert. Neue Regression `tests/regression/run_receipt_link_contract_check.sh` sowie Verify-Verdrahtung via `make receipt-link-check` und `make verify`. Tracker-/Roadmap-/Status-/Hardening-/Sprint-Doku fuer `BL-0021` und `TSK-0010`/`TSK-0011` auf `done` gesetzt. (2026-03-18)
 - [S20C4/4] Ops/Backup: Ersten regressionssicheren Gate-3-Lieferstand fuer die 1.2.0-Linie geliefert. Neuer Runner `scripts/db_backup_ops.sh` implementiert Multi-DB-Backups fuer `--db` (single) und `--all --source-dir` inkl. Dry-Run, Integritaetsmetadaten (`metadata.json`), Laufindex (`.backup/db_ops/index.json`) und Retention (`--keep`). Dedizierte Regression `tests/regression/run_db_backup_ops_check.sh` eingefuehrt und in `make verify` verdrahtet (`Makefile`: neues Target `db-backup-ops-check`). Tracker-/Doku-Sync: `BL-0020` sowie `TSK-0008`/`TSK-0009` auf `done`; Roadmap-/Status-/Entry-/Sprint-/Testdoku aktualisiert. (2026-03-18)
