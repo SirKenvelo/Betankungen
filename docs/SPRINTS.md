@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-18
+**Stand:** 2026-03-19
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -824,3 +824,17 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Regression/Verify: neuer Check
     `tests/regression/run_receipt_link_contract_check.sh`, verdrahtet via
     `make receipt-link-check` und `make verify`.
+
+## Sprint 22 - Gate 4 RC Hardening (1.2.0)
+
+- Status: aktiv
+- Ziel: Gate 3 fuer die 1.2.0-Linie formal schliessen und Gate 4
+  (RC-Haertung) mit konsistentem Doku-/Preflight-Stand aktiv fuehren.
+
+### Geplante Bloecke
+
+- S22C1/3: done - Gate-3-Closeout und Gate-4-Kickoff in Roadmap-/Status-/
+  Entry-/Hardening-/Preflight-Doku synchronisiert.
+- S22C2/3: pending - RC-Checklisten-/Feature-Freeze-Snapshot fuer Gate 4
+  auf den laufenden Stand haerten.
+- S22C3/3: pending - RC-Abschlusslauf und Gate-4-Exit-Nachweis dokumentieren.

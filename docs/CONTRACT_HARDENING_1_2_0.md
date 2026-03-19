@@ -1,6 +1,6 @@
 # Contract Hardening 1.2.0
-**Stand:** 2026-03-18
-**Status:** aktiv (Gate 3, DoD konkretisiert in S20C3)
+**Stand:** 2026-03-19
+**Status:** abgeschlossen (Gate 3 Closeout)
 
 ## Ziel
 
@@ -42,7 +42,7 @@ transparent und pruefbar.
 - Kein Community-/Scaffolder-Block als 1.2.0-Release-Blocker
   (`BL-0016`, `BL-0011`).
 
-## Fortschritt (S20C4, Stand 2026-03-18)
+## Abschlussstand (Gate 3, Stand 2026-03-19)
 
 - `BL-0020` ist auf `done` umgesetzt:
   - Runner: `scripts/db_backup_ops.sh`
@@ -55,3 +55,5 @@ transparent und pruefbar.
     `receipt_links_set`/`receipt_links_missing` fuer fuelups full/monthly/yearly.
   - Regression: `tests/regression/run_receipt_link_contract_check.sh`
   - Verify-Verdrahtung: `make receipt-link-check` und Aufnahme in `make verify`
+- Gate-3-Exit ist damit formal erreicht; RC-Haertung laeuft in Gate 4 ueber
+  `docs/RELEASE_1_2_0_PREFLIGHT.md`.

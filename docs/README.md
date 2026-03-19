@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-18
+**Stand:** 2026-03-19
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -63,7 +63,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.2.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
+- Gate-Stand 1.2.0: Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
@@ -83,12 +83,14 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Scope-Freeze 1.2.0 ist gesetzt:
   - Ops-/Feature-Block: `BL-0020` + `TSK-0008`/`TSK-0009` (release-blocking).
   - Feature-Block: `BL-0021` + `TSK-0010`/`TSK-0011` (release-blocking).
-- Gate-3-Fortschritt 1.2.0:
-  - `BL-0020` ist als erster regressionssicherer Lieferstand umgesetzt (`scripts/db_backup_ops.sh` + `tests/regression/run_db_backup_ops_check.sh`).
-  - `BL-0021` ist umgesetzt (Receipt-Link-Write-Path + Guardrails + Contract-Checks).
-- Verify-/Contract-DoD fuer Gate 3 der 1.2.0-Linie ist konkretisiert:
+- Gate-3-Abschluss 1.2.0:
+  - `BL-0020` ist auf `done` (Multi-DB-Backup-Operations inkl. Regression/Verify-Verdrahtung).
+  - `BL-0021` ist auf `done` (Receipt-Link-Write-Path + Guardrails + Contract-Checks).
+- Verify-/Contract-Hardening fuer Gate 3 der 1.2.0-Linie ist abgeschlossen:
   - `docs/CONTRACT_HARDENING_1_2_0.md`
   - `docs/RELEASE_1_2_0_PREFLIGHT.md`
+- Gate-4-Start 1.2.0:
+  - RC-Haertung ist aktiv (Feature-Freeze-/Preflight-Snapshot in `docs/RELEASE_1_2_0_PREFLIGHT.md`).
 - Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
   in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
 - Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.

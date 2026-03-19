@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.2.0
-**Stand:** 2026-03-18
+**Stand:** 2026-03-19
 **Status:** aktiv (`APP_VERSION=1.2.0-dev`)
 
 ## Ausgangslage
@@ -93,12 +93,12 @@ Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv (DoD konkretisiert am 2026-03-18).
-- Fortschritt:
-  - erster regressionssicherer Lieferstand ist umgesetzt (`S20C4/4`):
-    `BL-0020` (Multi-DB-Backup-Operations) steht auf `done`.
-  - zweiter release-blocking Lieferstand ist umgesetzt:
-    `BL-0021` (Receipt-Photo-Link-References) steht auf `done`.
+- abgeschlossen am 2026-03-19.
+- Abschlussnachweis:
+  - `BL-0020` (Multi-DB-Backup-Operations) steht auf `done`.
+  - `BL-0021` (Receipt-Photo-Link-References) steht auf `done`.
+  - Verify-/Contract-Hardening-Matrix fuer 1.2.0 ist auf Gate-3-Abschlussstand
+    synchronisiert (`docs/CONTRACT_HARDENING_1_2_0.md`).
 
 ### Gate 4: Release-Candidate-Haertung
 
@@ -110,7 +110,7 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- ausstehend.
+- aktiv (Kickoff am 2026-03-19).
 
 ### Gate 5: Finalisierung 1.2.0
 
