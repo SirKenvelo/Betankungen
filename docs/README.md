@@ -107,6 +107,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 ## Doku-Navigation
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
+- `docs/GIT_WORKFLOW.md`: verbindlicher Git-/Branch-/PR-/Merge-Workflow fuer Sprint- und Traceability-Arbeit.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
