@@ -12,6 +12,7 @@ related:
   - ISS-0003
   - ISS-0004
   - ISS-0005
+  - ISS-0006
 ---
 **Stand:** 2026-03-20
 
@@ -29,12 +30,14 @@ die vor allem in realen Erstnutzer-, Break- und Dialogpfaden sichtbar werden:
 - EOF-/Leerzustandsprobleme in interaktiven Dialogen
 - fehlende Cross-Field-Validierung bei Fuelups
 - zu schwache Plausibilitaetspruefung bei Stations-Stammdaten
+- schwache Erststart- und Mehrfahrzeug-Fuehrung fuer neue CLI-Nutzer
 
 # Scope
 In Scope:
 - kanonische Teststrategie und Coverage-Matrix fuer Betankungen
 - Ueberfuehrung reproduzierbarer Nutzertest-Funde in `ISS`-Artefakte
 - gezielte Hardening-Arbeit fuer User-Flow-, Robustheits- und Validierungsluecken
+- klare Onboarding- und Mehrfahrzeug-Hinweise fuer Erstnutzer und Folge-CLI-Pfade
 - Ausbau von User-Flow-/Break-Test-Abdeckung mit deterministischen Fixtures
 
 Out of Scope:
@@ -51,9 +54,11 @@ Out of Scope:
 # Output
 Ein priorisierter Hardening-Block, der die aktuellen Nutzer- und
 Robustheitsbefunde sichtbar macht, in konkrete Arbeitsschritte zerlegt und als
-Grundlage fuer die naechste Qualitaetsphase dient.
+Grundlage fuer die naechste Qualitaetsphase dient, inklusive sichtbarer
+Onboarding- und Mehrfahrzeug-Fuehrung.
 
 # Derived Tasks
 - `TSK-0012` - User-Flow- und Break-Test-Abdeckung aus der Matrix ableiten. (todo)
 - `TSK-0013` - Seed-/Demo-Flow sowie EOF-/Abbruchverhalten haerten. (todo)
 - `TSK-0014` - Fuelup- und Stations-Validierung auf Cross-Field-/Plausibilitaetsniveau anheben. (todo)
+- `TSK-0015` - Erststart- und Mehrfahrzeug-Fuehrung in Help, Hints und Leerzustaenden schaerfen. (todo)

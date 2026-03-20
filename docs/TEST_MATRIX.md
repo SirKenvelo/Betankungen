@@ -343,7 +343,7 @@ Erfolgskriterium:
 
 ## Aktuelle Nutzerfundlage (2026-03-20)
 
-Die manuell dokumentierten Nutzertests zeigen aktuell vier reproduzierbare
+Die manuell dokumentierten Nutzertests zeigen aktuell fuenf reproduzierbare
 Problemcluster, die nicht nur UX-, sondern teils echte Korrektheits- und
 Robustheitsluecken sind:
 
@@ -354,6 +354,8 @@ Robustheitsluecken sind:
   Cross-Field-Validierung gespeichert.
 - `ISS-0005`: Stations-Stammdaten akzeptieren offensichtlich falsch
   einsortierte oder unplausible Werte.
+- `ISS-0006`: Erststart- und Mehrfahrzeug-Fuehrung sind fuer neue Nutzer nicht
+  sichtbar genug und erklaeren wichtige Zustandswechsel erst nach Fehlern.
 
 Der uebergeordnete Hardening-Block dafuer ist `BL-0022`.
 
