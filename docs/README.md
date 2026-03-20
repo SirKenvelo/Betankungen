@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-19
+**Stand:** 2026-03-20
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -113,6 +113,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
 - `docs/GIT_WORKFLOW.md`: verbindlicher Git-/Branch-/PR-/Merge-Workflow fuer Sprint- und Traceability-Arbeit.
+- `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
@@ -561,6 +562,7 @@ Beispiel:
 
 - `make verify`
   - Lokales CI-Gate: `sprint_docs_lint` + `projtrack_lint` + FPC-Build + Export-Contract-Check + Cost-Integrations-Regression + DB-Backup-Ops-Regression + Domain-Policy + Smoke + Clean-Home-Smoke
+  - Strategische Einordnung der Pflicht-Gates und der noch offenen User-Flow-/Break-Test-Luecken: `docs/TEST_MATRIX.md`
 - `make cost-integration-check`
   - Fuehrt die dedizierte Cost-Integrations-Regression aus (`tests/regression/run_cost_integration_modes_check.sh`)
 - `make db-backup-ops-check`
