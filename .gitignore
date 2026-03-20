@@ -1,5 +1,5 @@
 # Betankungen - .gitignore
-# Stand: 2026-03-11
+# Stand: 2026-03-20
 
 # Build-Artefakte (FPC)
 bin/
@@ -33,6 +33,7 @@ tests/domain_policy/fixtures/.build_test_dbs.lock.d/
 # IDE / Editor
 .idea/
 .vscode/
+.codex/
 
 # Lokaler Session-/Export-Kontext
 projekt_kontext.md
