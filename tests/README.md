@@ -1,5 +1,14 @@
 # Tests
-**Stand:** 2026-03-18
+**Stand:** 2026-03-20
+
+## Abgrenzung / Source of Truth
+
+- `docs/TEST_MATRIX.md` definiert die kanonische Teststrategie, Testebenen,
+  Coverage-Bereiche und Release-Gates.
+- `tests/README.md` beschreibt bewusst nur die heute im Repository vorhandenen
+  und ausfuehrbaren Suiten, Runner und Fixtures.
+- Konkrete reproduzierbare Produktprobleme und Hardening-Follow-ups werden im
+  Tracker unter `docs/issues/` und `docs/backlog/` gefuehrt.
 
 ## Ordnerstruktur
 - `tests/benchmark/`: optionaler Benchmark-Runner fuer trigger-basierte Performance-Messungen.

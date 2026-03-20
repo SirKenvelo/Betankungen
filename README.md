@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-18
+**Stand:** 2026-03-20
 
 CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
@@ -13,6 +13,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 - English docs entry: `docs/README_EN.md`
 - English architecture summary: `docs/ARCHITECTURE_EN.md`
 - Main project documentation (currently German): `docs/README.md`
+- Test strategy and matrix: `docs/TEST_MATRIX.md`
 - Wiki source pages (v1 bootstrap): `docs/wiki/README.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Backlog index: `docs/BACKLOG.md`

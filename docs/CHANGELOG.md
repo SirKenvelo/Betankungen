@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-19
+**Stand:** 2026-03-20
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -72,6 +72,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.1.0-Rel
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] QA/Docs/Tracker: Neue kanonische Teststrategie `docs/TEST_MATRIX.md` eingefuehrt. Das Dokument trennt jetzt bewusst zwischen Teststrategie/Coverage (`docs/TEST_MATRIX.md`), ausfuehrbaren Reposuiten (`tests/README.md`) und konkreten reproduzierbaren Nutzertest-Funden (`docs/issues/ISS-0002` bis `ISS-0005`, `docs/backlog/BL-0022`). Entry-Doku (`README.md`, `docs/README.md`), Testdoku (`tests/README.md`) und Backlog-Index (`docs/BACKLOG.md`) wurden auf diese Leitplanke synchronisiert. (2026-03-20)
 - [S22C3/3] Release/Docs: Gate 4 der 1.2.0-Linie formal abgeschlossen. RC-Abschlussnachweis dokumentiert mit lokalem Volllauf `make verify` (gruen) sowie CI-Referenz auf `main` (`CI` Run `23307738745`, Commit `3e9be17`, `success`). Gate-Status auf Gate 4 `abgeschlossen` / Gate 5 `aktiv` synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/RELEASE_1_2_0_PREFLIGHT.md`, `docs/SPRINTS.md`). (2026-03-19)
 - [S22C2/3] Release/Docs: Gate-4-RC-Checklisten-/Feature-Freeze-Snapshot fuer die 1.2.0-Linie auf den aktuellen Scope-Stand fortgeschrieben. `docs/RELEASE_1_2_0_PREFLIGHT.md` enthaelt jetzt einen expliziten RC-Snapshot (Scope-Freeze intakt, Doku-Gates konsistent, offene Exit-Schritte fuer `S22C3/3`), und Roadmap-/Status-/Entry-/Sprint-Doku wurden auf den aktiven Gate-4-Fortschritt synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md`). (2026-03-19)
 - [General] Meta/Process: Neues Referenzdokument `docs/GIT_WORKFLOW.md` eingefuehrt und als kanonische Leitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen verankert (1 Sprint = 1 Branch/1 PR, Merge-Commit als Standard, Squash als Ausnahme, Rebase-Merge aus). `AGENTS.md` auf denselben Standard harmonisiert (Sync-Flow auf `fetch` + `pull --ff-only`, Verweis auf `docs/GIT_WORKFLOW.md`) und Entry-Doku-Navigation in `docs/README.md` erweitert. (2026-03-19)

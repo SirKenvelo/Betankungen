@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-18
+**Stand:** 2026-03-20
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -52,3 +52,4 @@ Hinweis: Die Lane kann in BL-Frontmatter als Tag (`lane:*`) gefuehrt werden.
 - [BL-0019 - Tankstellen-Geodaten und Plus-Codes erweitern](backlog/BL-0019-station-geodata-plus-codes/item.md) - Status: `proposed`, Typ: Feature (Koordinaten/Plus-Codes fuer Stationen), Lane: `planned`
 - [BL-0020 - Backup-Operationen fuer einzelne oder alle Tankdatenbanken](backlog/BL-0020-multi-database-backup-operations/item.md) - Status: `done`, Typ: Improvement (Mehr-DB-Backup im Betrieb), Lane: `release-blocking` (1.2.0)
 - [BL-0021 - Tankbeleg-Foto-Links als Referenz speichern](backlog/BL-0021-receipt-photo-link-references/item.md) - Status: `done`, Typ: Feature (externe Belegbilder nur per Link referenzieren), Lane: `release-blocking` (1.2.0)
+- [BL-0022 - User-Flow- und QA-Hardening aus Nutzertests](backlog/BL-0022-user-flow-and-qa-hardening/item.md) - Status: `proposed`, Typ: Improvement (reproduzierbare Nutzertest-Funde in Matrix, Tracker und Folgetasks ueberfuehren), Lane: `planned`
