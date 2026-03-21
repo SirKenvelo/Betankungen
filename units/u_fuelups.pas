@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-18
+  UPDATED: 2026-03-21
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -183,6 +183,15 @@ begin
   Result := not Q.EOF;
 end;
 
+function StationsAvailable(Q: TSQLQuery): boolean;
+begin
+  Q.Close;
+  Q.SQL.Text := 'SELECT 1 FROM stations LIMIT 1;';
+  Q.Open;
+  Result := not Q.EOF;
+  Q.Close;
+end;
+
 function GetCarOdometerStartKm(Q: TSQLQuery; const ACarId: integer): integer;
 begin
   Q.Close;
@@ -241,8 +250,7 @@ begin
   PrintCars(Q);
   while True do
   begin
-    Write('Car-ID (oder "l"=Liste, "q"=Abbruch): ');
-    ReadLn(S);
+    S := ReadInteractiveLine('Car-ID (oder "l"=Liste, "q"=Abbruch): ');
     S := Trim(LowerCase(S));
 
     if (S = 'q') or (S = 'quit') then
@@ -287,12 +295,14 @@ var
   S: string;
   Id: Integer;
 begin
+  if not StationsAvailable(Q) then
+    raise Exception.Create('Keine Tankstellen vorhanden. Bitte zuerst --add stations ausfuehren.');
+
   PrintStations(Q);
 
   while True do
   begin
-    Write('Stations-ID (oder "l"=Liste, "q"=Abbruch): ');
-    ReadLn(S);
+    S := ReadInteractiveLine('Stations-ID (oder "l"=Liste, "q"=Abbruch): ');
     S := Trim(LowerCase(S));
 
     if (S = 'q') or (S = 'quit') then
