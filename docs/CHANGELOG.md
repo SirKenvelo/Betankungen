@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -72,6 +72,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.1.0-Rel
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Docs/Backlog: Zwei neue kanonische Vorschlags-Backlogs aufgenommen: `BL-0023` fuer ein kuratiertes Dev-Diary als Projektchronik und `BL-0024` fuer eine kleine persoenliche Wiki-Notiz zu Cookie inklusive optionaler Bild-Einbindung. Backlog-Index in `docs/BACKLOG.md` synchronisiert. (2026-03-21)
 - [General] Repo/Cleanup: Lokale Codex-Konfigurationen werden jetzt ueber `.gitignore` aus dem Repo herausgehalten (`.codex/`). Projektweite Editor-Konventionen bleiben weiterhin ueber `.editorconfig` versioniert. (2026-03-20)
 - [General] QA/Docs/Tracker: Neue kanonische Teststrategie `docs/TEST_MATRIX.md` eingefuehrt. Das Dokument trennt jetzt bewusst zwischen Teststrategie/Coverage (`docs/TEST_MATRIX.md`), ausfuehrbaren Reposuiten (`tests/README.md`) und konkreten reproduzierbaren Nutzertest-Funden (`docs/issues/ISS-0002` bis `ISS-0006`, `docs/backlog/BL-0022`). Entry-Doku (`README.md`, `docs/README.md`), Testdoku (`tests/README.md`) und Backlog-Index (`docs/BACKLOG.md`) wurden auf diese Leitplanke synchronisiert; zusaetzlich ist die UX-Spur fuer Erststart- und Mehrfahrzeug-Fuehrung jetzt explizit als Tracker-Artefakt verankert. (2026-03-20)
 - [S22C3/3] Release/Docs: Gate 4 der 1.2.0-Linie formal abgeschlossen. RC-Abschlussnachweis dokumentiert mit lokalem Volllauf `make verify` (gruen) sowie CI-Referenz auf `main` (`CI` Run `23307738745`, Commit `3e9be17`, `success`). Gate-Status auf Gate 4 `abgeschlossen` / Gate 5 `aktiv` synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/RELEASE_1_2_0_PREFLIGHT.md`, `docs/SPRINTS.md`). (2026-03-19)
@@ -271,6 +272,7 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.1.0-Rel
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Pflege der neuen Backlog-Vorschlaege `BL-0023` und `BL-0024` inkl. Index-/Changelog-Sync erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-21)
 - Tracker-/Policy-Pflege (Vorschlagsabgleich, neue BL/POL/ADR-Eintraege und Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-15)
 - Konsistenz-Update von `AGENTS.md` auf den aktuellen Tracker-/Gate-Stand erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)
 - Integration von `projtrack_lint` in lokale/CI-Quality-Gates (`make verify`, GitHub Actions) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)
