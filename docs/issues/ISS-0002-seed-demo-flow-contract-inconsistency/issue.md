@@ -1,17 +1,17 @@
 ---
 id: ISS-0002
 title: Seed and demo flow are contractually inconsistent
-status: open
+status: resolved
 priority: P1
 type: bug
 tags: [cli, demo, seed, regression, needs-tests]
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-21
 related:
   - BL-0022
   - TSK-0013
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 # Summary
 `--seed` reports success and recommends `--demo` as a follow-up path, but the
@@ -44,6 +44,12 @@ This breaks a prominent onboarding and demo path and directly weakens trust in
 the CLI guidance.
 
 # Acceptance Criteria
-- [ ] `--seed` and `--demo` are behaviorally aligned.
-- [ ] Success messaging only advertises guaranteed follow-up paths.
-- [ ] Regression coverage exists for the fresh-environment path.
+- [x] `--seed` and `--demo` are behaviorally aligned.
+- [x] Success messaging only advertises guaranteed follow-up paths.
+- [x] Regression coverage exists for the fresh-environment path.
+
+# Resolution
+- Smoke deckt den frischen Anschlussfluss jetzt explizit ab:
+  `--seed -> --demo --list stations` muss funktionieren.
+- Der Demo-Fehlerpfad ohne Seed bleibt separat regressionsgesichert:
+  `--demo --list stations` ohne Seed endet sauber mit Contract-Fehler.

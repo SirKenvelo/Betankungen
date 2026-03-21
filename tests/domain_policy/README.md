@@ -1,5 +1,5 @@
 # Domain-Policy-Tests
-**Stand:** 2026-03-13
+**Stand:** 2026-03-21
 
 ## Inhalt
 - `cases/`: fokussierte Case-Dateien nach Policy-ID (`t_<policy>__<nn>__<kurzname>.*`, `.pas` oder `.sh`)
@@ -41,7 +41,7 @@
     - `cases/t_p022__01__consumption_warn_yes.sh`
     - `cases/t_p022__02__consumption_warn_no.sh`
     - `fixtures/p022_base.sql`
-- Cost-/Price-Block P-030..P-032:
+- Cost-/Price-Block P-030..P-033:
   - `P-030` Hard Error (`cost_cents < 0`):
     - `cases/t_p030__01__cost_negative.sh`
     - `fixtures/p030_base.sql`
@@ -53,6 +53,10 @@
     - `cases/t_p032__01__price_zero_warn_yes.sh`
     - `cases/t_p032__02__price_zero_warn_no.sh`
     - `fixtures/p032_base.sql`
+  - `P-033` Warning+Confirm (Cross-Field total vs. liters x price/liter):
+    - `cases/t_p033__01__price_total_mismatch_warn_yes.sh`
+    - `cases/t_p033__02__price_total_mismatch_warn_no.sh`
+    - `fixtures/p033_base.sql`
 - Date-Block P-040..P-041:
   - `P-040` Hard Error (Datum/Zeit fehlt oder ungueltig):
     - `cases/t_p040__01__datetime_invalid.sh`

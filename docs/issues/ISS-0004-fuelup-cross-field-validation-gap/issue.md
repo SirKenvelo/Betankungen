@@ -1,17 +1,17 @@
 ---
 id: ISS-0004
 title: Fuelups can be stored with contradictory price-liter-total combinations
-status: open
+status: resolved
 priority: P1
 type: bug
 tags: [validation, fuelups, data-quality, needs-tests]
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-21
 related:
   - BL-0022
   - TSK-0014
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 # Summary
 Fuelup records can currently be stored even when `total`, `liters` and
@@ -40,6 +40,16 @@ The application can persist data that is obviously wrong and then build
 statistics on top of it.
 
 # Acceptance Criteria
-- [ ] Cross-field validation exists with a documented tolerance rule.
-- [ ] Grossly inconsistent values are blocked or require a defined override path.
-- [ ] Positive and negative regression coverage exists.
+- [x] Cross-field validation exists with a documented tolerance rule.
+- [x] Grossly inconsistent values are blocked or require a defined override path.
+- [x] Positive and negative regression coverage exists.
+
+# Resolution
+- `P-033` eingefuehrt: Cross-Field-Guardrail fuer `total_cents` vs.
+  `liters_ml * price_per_liter_milli_eur` mit dokumentierter
+  Rundungs-/Toleranzregel (`<= 10` Cent).
+- Bei starker Abweichung wird `Warning+Confirm` genutzt; bei `Confirm=NO` wird
+  der Write-Pfad sauber abgebrochen.
+- Domain-Policy-Abdeckung erweitert um:
+  - `t_p033__01__price_total_mismatch_warn_yes.sh`
+  - `t_p033__02__price_total_mismatch_warn_no.sh`

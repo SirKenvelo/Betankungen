@@ -1,18 +1,18 @@
 ---
 id: ISS-0003
 title: Fuelup dialog can loop on EOF in empty-state paths
-status: open
+status: resolved
 priority: P0
 type: bug
 tags: [cli, fuelups, eof, robustness, needs-tests]
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-21
 related:
   - BL-0022
   - TSK-0012
   - TSK-0013
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 # Summary
 Interactive fuelup flows can enter a repeating error loop when stdin is EOF and
@@ -40,6 +40,13 @@ The current behavior is a real robustness defect for scripting, CI-style use
 and operator confidence.
 
 # Acceptance Criteria
-- [ ] EOF is detected and terminates the dialog immediately.
-- [ ] Empty-state station handling does not fall through into a prompt loop.
-- [ ] Regression or smoke coverage exists for the non-interactive path.
+- [x] EOF is detected and terminates the dialog immediately.
+- [x] Empty-state station handling does not fall through into a prompt loop.
+- [x] Regression or smoke coverage exists for the non-interactive path.
+
+# Resolution
+- Interaktive Eingabepfade nutzen jetzt einen EOF-sicheren Dialog-Reader.
+- `--add fuelups` bricht bei leerer Stationsbasis vor der ID-Prompt-Schleife
+  kontrolliert ab.
+- Smoke deckt den Non-Interactive-Fall explizit ab:
+  `--add fuelups </dev/null` darf nicht mehr loopen.
