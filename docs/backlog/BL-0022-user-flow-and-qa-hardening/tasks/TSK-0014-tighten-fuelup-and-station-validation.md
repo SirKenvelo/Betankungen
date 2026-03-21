@@ -1,7 +1,7 @@
 ---
 id: TSK-0014
 title: Tighten fuelup and station validation
-status: doing
+status: done
 priority: P1
 type: task
 tags: [validation, fuelups, stations, data-quality]
@@ -28,5 +28,5 @@ Plausibilitaetspruefung fuer Stations-Stammdaten.
 
 # Done When
 - [x] Widerspruechliche Fuelup-Werte werden klar abgefangen.
-- [ ] Offensichtlich unplausible Stationswerte werden nicht mehr still gespeichert.
+- [x] Offensichtlich unplausible Stationswerte werden nicht mehr still gespeichert.
 - [x] Tests decken positive und negative Faelle reproduzierbar ab.

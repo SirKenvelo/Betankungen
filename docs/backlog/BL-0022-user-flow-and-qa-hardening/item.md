@@ -1,7 +1,7 @@
 ---
 id: BL-0022
 title: User-Flow- und QA-Hardening aus Nutzertests
-status: proposed
+status: in_progress
 priority: P1
 type: improvement
 tags: [qa, tests, ux, validation, 'lane:planned']
@@ -60,5 +60,5 @@ Onboarding- und Mehrfahrzeug-Fuehrung.
 # Derived Tasks
 - `TSK-0012` - User-Flow- und Break-Test-Abdeckung aus der Matrix ableiten. (todo)
 - `TSK-0013` - Seed-/Demo-Flow sowie EOF-/Abbruchverhalten haerten. (done)
-- `TSK-0014` - Fuelup- und Stations-Validierung auf Cross-Field-/Plausibilitaetsniveau anheben. (doing)
+- `TSK-0014` - Fuelup- und Stations-Validierung auf Cross-Field-/Plausibilitaetsniveau anheben. (done)
 - `TSK-0015` - Erststart- und Mehrfahrzeug-Fuehrung in Help, Hints und Leerzustaenden schaerfen. (todo)

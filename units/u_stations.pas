@@ -2,7 +2,7 @@
   u_stations.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-03-21
   AUTHOR : Christof Kempinski
   Fachmodul fuer Stammdatenverwaltung von Tankstellen (stations).
 
@@ -58,6 +58,87 @@ const
   COL_CITY = 16;
   COL_PHONE = 14;
   COL_OWNER = 16;
+
+function HasDigit(const S: string): boolean;
+var
+  I: Integer;
+begin
+  Result := False;
+  for I := 1 to Length(S) do
+    if S[I] in ['0'..'9'] then
+      Exit(True);
+end;
+
+function HasAsciiLetter(const S: string): boolean;
+var
+  I: Integer;
+  C: Char;
+begin
+  Result := False;
+  for I := 1 to Length(S) do
+  begin
+    C := UpCase(S[I]);
+    if C in ['A'..'Z'] then
+      Exit(True);
+  end;
+end;
+
+function IsDigitsOnly(const S: string): boolean;
+var
+  I: Integer;
+begin
+  if S = '' then
+    Exit(False);
+  for I := 1 to Length(S) do
+    if not (S[I] in ['0'..'9']) then
+      Exit(False);
+  Result := True;
+end;
+
+procedure ValidateStationMasterDataOrFail(
+  const Brand, Street, HouseNo, Zip, City, Phone: string);
+begin
+  EnsureNotEmpty('brand', Brand);
+  EnsureNotEmpty('street', Street);
+  EnsureNotEmpty('house_no', HouseNo);
+  EnsureNotEmpty('zip', Zip);
+  EnsureNotEmpty('city', City);
+
+  if IsDigitsOnly(City) and HasAsciiLetter(Zip) then
+    raise Exception.Create(
+      'P-080: Feldverschiebung vermutet (zip/city). Bitte Eingaben pruefen.'
+    );
+
+  if (not IsDigitsOnly(Zip)) then
+    raise Exception.Create(
+      'P-081: zip ungueltig (nur Ziffern erlaubt).'
+    );
+
+  if (Length(Zip) < 4) or (Length(Zip) > 10) then
+    raise Exception.Create(
+      'P-081: zip ungueltig (erwartet 4..10 Ziffern).'
+    );
+
+  if IsDigitsOnly(City) then
+    raise Exception.Create(
+      'P-082: city ungueltig (enthaelt nur Ziffern).'
+    );
+
+  if not HasAsciiLetter(City) then
+    raise Exception.Create(
+      'P-082: city ungueltig (keine Buchstaben gefunden).'
+    );
+
+  if not HasDigit(HouseNo) then
+    raise Exception.Create(
+      'P-083: house_no ungueltig (mindestens eine Ziffer erwartet).'
+    );
+
+  if (Trim(Phone) <> '') and (not HasDigit(Phone)) then
+    raise Exception.Create(
+      'P-084: phone ungueltig (mindestens eine Ziffer erwartet).'
+    );
+end;
 
 procedure PrintSep;
 begin
@@ -187,6 +268,8 @@ begin
   City := AskRequired('City: ');
   Phone := AskOptional('Phone (Optional): ');
   Owner := AskOptional('Owner (Optional): ');
+
+  ValidateStationMasterDataOrFail(Brand, Street, HouseNo, Zip, City, Phone);
 
   Conn := TSQLite3Connection.Create(nil);
   Tran := TSQLTransaction.Create(nil);
@@ -510,12 +593,9 @@ begin
       NewPhone := AskKeep('Phone: (ENTER=behalten)', Q.FieldByName('phone').AsString);
       NewOwner := AskKeep('Owner: (ENTER=behalten)', Q.FieldByName('owner').AsString);
 
-      // Sicherheitspruefung: Pflichtfeld leer?
-      EnsureNotEmpty('brand', NewBrand);
-      EnsureNotEmpty('street', NewStreet);
-      EnsureNotEmpty('house_no', NewHouseNo);
-      EnsureNotEmpty('zip', NewZip);
-      EnsureNotEmpty('city', NewCity);
+      ValidateStationMasterDataOrFail(
+        NewBrand, NewStreet, NewHouseNo, NewZip, NewCity, NewPhone
+      );
       Q.Close;
 
       WriteLn('Ausgewählt: ', ReplaceLine(OldBrand, OldStreet, OldHouseNo,
