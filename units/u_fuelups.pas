@@ -74,6 +74,8 @@ const
   GAP_THRESHOLD_KM = 1500;
   // Warnschwelle fuer aussergewoehnlich grosse Tankmengen.
   MAX_TANK_ML_WARNING = 150000; // 150 L
+  // Rundungs-/Toleranzregel fuer P-033 (Cross-Field total vs. liters*ppl).
+  PRICE_CONSISTENCY_TOLERANCE_CENTS = 10;
 
 // Prueft strikt das erwartete ISO-Format "YYYY-MM-DD HH:MM:SS".
 function TryParseFueledAtIso(const S: string; out DT: TDateTime): boolean;
@@ -289,6 +291,15 @@ begin
   Result := not Q.EOF;
 end;
 
+function CalcExpectedTotalCents(const ALitersMl, APricePerLiterMilliEur: Int64): Int64;
+var
+  Numerator: Int64;
+begin
+  Numerator := ALitersMl * APricePerLiterMilliEur;
+  // liters_ml * milli_eur/liter -> cents (rounded to nearest cent).
+  Result := (Numerator + 5000) div 10000;
+end;
+
 // Interaktive Auswahl der Tankstelle mit Validierungsschleife
 function SelectStationIdInteractive(Q: TSQLQuery): Integer;
 var
@@ -344,6 +355,8 @@ var
   LastKm: integer;
   DiffKm: integer;
   MissedPreviousConfirmed: boolean;
+  ExpectedTotalCents: Int64;
+  DeltaCents: Int64;
 
   // Setzt optionale String-Parameter (leerer String wird zu NULL)
   procedure SetOptStr(const P, V: string);
@@ -468,6 +481,28 @@ begin
           False
         ) then
           raise Exception.Create('P-032: Abbruch durch Benutzer (Preis/Liter<=0).');
+      end;
+
+      // P-033 (Warning+Confirm): Cross-Field-Plausi total vs. liters*price.
+      if (Inp.TotalCents > 0) and (Inp.PricePerLiterMilliEur > 0) then
+      begin
+        ExpectedTotalCents := CalcExpectedTotalCents(Inp.LitersMl, Inp.PricePerLiterMilliEur);
+        DeltaCents := Abs(Inp.TotalCents - ExpectedTotalCents);
+        if DeltaCents > PRICE_CONSISTENCY_TOLERANCE_CENTS then
+        begin
+          if not AskYesNo(
+            Format(
+              'P-033: Warnung: Gesamtpreis (%s) weicht von Liter x Preis/L (%s) um %s ab. Trotzdem speichern?',
+              [
+                FmtEuroFromCents(Inp.TotalCents),
+                FmtEuroFromCents(ExpectedTotalCents),
+                FmtEuroFromCents(DeltaCents)
+              ]
+            ),
+            False
+          ) then
+            raise Exception.Create('P-033: Abbruch durch Benutzer (Gesamtpreis/Liter/Preis-Liter inkonsistent).');
+        end;
       end;
 
       Inp.IsFullTank := AskYesNo('Vollgetankt?', True);

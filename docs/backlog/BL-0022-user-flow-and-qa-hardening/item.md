@@ -6,7 +6,7 @@ priority: P1
 type: improvement
 tags: [qa, tests, ux, validation, 'lane:planned']
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-21
 related:
   - ISS-0002
   - ISS-0003
@@ -14,7 +14,7 @@ related:
   - ISS-0005
   - ISS-0006
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 # Goal
 Reproduzierbare Nutzertest-Funde in eine belastbare QA- und Hardening-Spur
@@ -59,6 +59,6 @@ Onboarding- und Mehrfahrzeug-Fuehrung.
 
 # Derived Tasks
 - `TSK-0012` - User-Flow- und Break-Test-Abdeckung aus der Matrix ableiten. (todo)
-- `TSK-0013` - Seed-/Demo-Flow sowie EOF-/Abbruchverhalten haerten. (todo)
-- `TSK-0014` - Fuelup- und Stations-Validierung auf Cross-Field-/Plausibilitaetsniveau anheben. (todo)
+- `TSK-0013` - Seed-/Demo-Flow sowie EOF-/Abbruchverhalten haerten. (done)
+- `TSK-0014` - Fuelup- und Stations-Validierung auf Cross-Field-/Plausibilitaetsniveau anheben. (doing)
 - `TSK-0015` - Erststart- und Mehrfahrzeug-Fuehrung in Help, Hints und Leerzustaenden schaerfen. (todo)
