@@ -2,7 +2,7 @@
 
 # smoke_bootstrap_helpers.sh
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-21
 # Bootstrap-/First-Run-Checks fuer tests/smoke/smoke_cli.sh
 
 test_first_run_bootstrap() {
@@ -182,6 +182,66 @@ test_demo_without_seed_fails_non_interactive() {
     printf '[OK] --demo ohne Seed: sauberer Fehler ohne Prompt\n'
   else
     printf '[FAIL] --demo ohne Seed: sauberer Fehler ohne Prompt\n'
+    add_fail
+  fi
+}
+
+test_seed_then_demo_list_stations_ok() {
+  local home out err rc
+
+  home="$(prepare_seeded_demo_home)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --demo --list stations >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 && -s "$out" ]] &&
+     ! grep -q 'Demo-DB nicht gefunden' "$err"; then
+    printf '[OK] --seed -> --demo --list stations: Demo-DB konsistent nutzbar\n'
+  else
+    printf '[FAIL] --seed -> --demo --list stations: Demo-DB konsistent nutzbar\n'
+    add_fail
+  fi
+}
+
+test_add_fuelups_empty_state_eof_fails_cleanly() {
+  local home out err rc pid loops=0 finished=false
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --add fuelups >"$out" 2>"$err" </dev/null &
+  pid=$!
+  while [[ $loops -lt 5 ]]; do
+    if ! kill -0 "$pid" 2>/dev/null; then
+      finished=true
+      break
+    fi
+    sleep 1
+    loops=$((loops + 1))
+  done
+
+  if $finished; then
+    wait "$pid"
+    rc=$?
+  else
+    kill "$pid" 2>/dev/null || true
+    wait "$pid" 2>/dev/null || true
+    rc=124
+  fi
+  set -e
+
+  if [[ $rc -ne 0 && $rc -ne 124 ]] &&
+     grep -q 'Keine Tankstellen vorhanden' "$err" &&
+     ! grep -q 'Stations-ID (oder "l"=Liste, "q"=Abbruch):' "$out"; then
+    printf '[OK] --add fuelups bei leerer DB + EOF: sauberer Fehler ohne Prompt-Schleife\n'
+  else
+    printf '[FAIL] --add fuelups bei leerer DB + EOF: sauberer Fehler ohne Prompt-Schleife\n'
     add_fail
   fi
 }

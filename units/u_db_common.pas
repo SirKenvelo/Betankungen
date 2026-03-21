@@ -2,7 +2,7 @@
   u_db_common.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-22
+  UPDATED: 2026-03-21
   AUTHOR : Christof Kempinski
   Zentrale Eingabe- und Parse-Utilities fuer den CLI-Dialogfluss.
 
@@ -44,6 +44,8 @@ const
 function AskRequired(const Prompt: string): string;
 // Liest ein optionales Feld (trimmed, darf leer sein).
 function AskOptional(const Prompt: string): string;
+// Liest eine Dialogzeile EOF-sicher von stdin.
+function ReadInteractiveLine(const Prompt: string): string;
 
 // Eingabetaste = aktuellen Wert behalten (Edit-Flow).
 function AskKeep(const Prompt, Current: string): string;
@@ -81,13 +83,20 @@ implementation
 uses
   SysUtils, Math;
 
+function ReadInteractiveLine(const Prompt: string): string;
+begin
+  Write(Prompt);
+  if EOF(Input) then
+    raise Exception.Create('Eingabe abgebrochen (EOF).');
+  ReadLn(Result);
+end;
+
 function AskRequired(const Prompt: string): string;
 var
   Input: string;
 begin
   repeat
-    Write(Prompt);
-    ReadLn(Input);
+    Input := ReadInteractiveLine(Prompt);
     Input := Trim(Input);
     if Input = '' then
       WriteLn('Fehler: Diese Eingabe darf nicht leer sein!');
@@ -99,8 +108,7 @@ function AskOptional(const Prompt: string): string;
 var
   Input: string;
 begin
-  Write(Prompt);
-  ReadLn(Input);
+  Input := ReadInteractiveLine(Prompt);
   Result := Trim(Input);
 end;
 
@@ -108,8 +116,7 @@ function AskKeep(const Prompt, Current: string): string;
 var
   Input: string;
 begin
-  Write(Prompt, ' [', Current, ']: ');
-  ReadLn(Input);
+  Input := ReadInteractiveLine(Prompt + ' [' + Current + ']: ');
   Input := Trim(Input);
   if Input = '' then
     Result := Current
@@ -128,11 +135,9 @@ var
   S: string;
 begin
   if DefaultNo then
-    Write(Prompt, ' (y/N): ')
+    S := ReadInteractiveLine(Prompt + ' (y/N): ')
   else
-    Write(Prompt, ' (Y/n): ');
-
-  ReadLn(S);
+    S := ReadInteractiveLine(Prompt + ' (Y/n): ');
   S := LowerCase(Trim(S));
 
   if S = '' then
@@ -153,8 +158,7 @@ var
 begin
   while True do
   begin
-    Write(Prompt);
-    ReadLn(S);
+    S := ReadInteractiveLine(Prompt);
     S := Trim(S);
 
     // Abbruch
