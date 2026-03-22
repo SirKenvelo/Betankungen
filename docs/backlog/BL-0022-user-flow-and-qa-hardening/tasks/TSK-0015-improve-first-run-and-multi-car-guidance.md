@@ -1,18 +1,18 @@
 ---
 id: TSK-0015
 title: Improve first-run and multi-car guidance
-status: todo
+status: done
 priority: P2
 type: task
 tags: [cli, onboarding, cars, ux]
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-22
 parent: BL-0022
 related:
   - BL-0022
   - ISS-0006
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-22
 
 # Task
 Schaerfe die sichtbare CLI-Fuehrung fuer Erststart, Default-Fahrzeug und den
@@ -28,6 +28,6 @@ erst aus Fehlern ableiten muessen.
   frueh genug nennen.
 
 # Done When
-- [ ] Erststart kommuniziert den angelegten Zustand sichtbar und knapp.
-- [ ] Default-Car- und Multi-Car-Regeln sind in CLI-Hints/Help konsistent.
-- [ ] Tests oder reproduzierbare User-Flow-Faelle decken die Guidance-Pfade ab.
+- [x] Erststart kommuniziert den angelegten Zustand sichtbar und knapp.
+- [x] Default-Car- und Multi-Car-Regeln sind in CLI-Hints/Help konsistent.
+- [x] Tests oder reproduzierbare User-Flow-Faelle decken die Guidance-Pfade ab.

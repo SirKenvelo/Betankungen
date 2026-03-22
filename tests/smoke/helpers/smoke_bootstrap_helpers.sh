@@ -2,7 +2,7 @@
 
 # smoke_bootstrap_helpers.sh
 # CREATED: 2026-03-12
-# UPDATED: 2026-03-21
+# UPDATED: 2026-03-22
 # Bootstrap-/First-Run-Checks fuer tests/smoke/smoke_cli.sh
 
 test_first_run_bootstrap() {
@@ -19,10 +19,14 @@ test_first_run_bootstrap() {
   rc=$?
   set -e
 
-  if [[ $rc -eq 0 && ! -s "$out" && ! -s "$err" && -f "$cfg" && -f "$db" ]]; then
-    printf '[OK] First-Run: stiller Bootstrap (config+db)\n'
+  if [[ $rc -eq 0 && ! -s "$err" && -f "$cfg" && -f "$db" ]] &&
+     grep -q 'Erststart: Config angelegt:' "$out" &&
+     grep -q 'Hinweis: Standardfahrzeug "Hauptauto" ist aktiv' "$out" &&
+     grep -q 'Naechster Schritt: Betankungen --list cars' "$out" &&
+     grep -q -- '--car-id erforderlich' "$out"; then
+    printf '[OK] First-Run: sichtbare Guidance (config+db+next-step)\n'
   else
-    printf '[FAIL] First-Run: stiller Bootstrap (config+db)\n'
+    printf '[FAIL] First-Run: sichtbare Guidance (config+db+next-step)\n'
     add_fail
   fi
 }
@@ -44,10 +48,13 @@ test_cfg_present_db_missing() {
   rc=$?
   set -e
 
-  if [[ $rc -eq 0 && ! -s "$out" && ! -s "$err" && -f "$db" ]]; then
-    printf '[OK] Config vorhanden, DB fehlt: automatische DB-Anlage ohne Prompt\n'
+  if [[ $rc -eq 0 && ! -s "$err" && -f "$db" ]] &&
+     grep -q 'Hinweis: Datenbank angelegt:' "$out" &&
+     grep -q 'Naechster Schritt: Betankungen --list cars' "$out" &&
+     ! grep -q 'DB-Pfad>' "$out"; then
+    printf '[OK] Config vorhanden, DB fehlt: DB-Anlage + Guidance ohne Prompt\n'
   else
-    printf '[FAIL] Config vorhanden, DB fehlt: automatische DB-Anlage ohne Prompt\n'
+    printf '[FAIL] Config vorhanden, DB fehlt: DB-Anlage + Guidance ohne Prompt\n'
     add_fail
   fi
 }

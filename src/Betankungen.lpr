@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-18
+  UPDATED: 2026-03-22
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -28,7 +28,8 @@
     (Text/JSON) via `--stats cost`.
 
   Betriebsmodi:
-  - Bootstrap-Modus: Aufruf ohne Argumente initialisiert fehlende Config/DB still.
+  - Bootstrap-Modus: Aufruf ohne Argumente initialisiert fehlende Config/DB
+    mit sichtbarer Erststart-Fuehrung.
   - Interaktiver Fallback-Modus: Pfadabfrage nur bei nicht nutzbarem DB-Pfad.
   - Automatisierter Modus: Direkte Ausfuehrung ueber Schalter fuer Skripte/Fortgeschrittene.
   - Diagnose-Modus: Integrierte Hilfe- und Konfigurationsanzeige (--show-config).
@@ -505,7 +506,11 @@ begin
 
   if NoCommandInitNeeded then
   begin
-    SetQuiet(True);
+    // TSK-0015: Erststart/Bootstrap fuer neue Nutzer sichtbar machen.
+    SetQuiet(False);
+    CfgExisted := FileExists(GetConfigPath);
+    FirstRun := False;
+    WasCreated := False;
     try
       // identischer Flow wie im regulären Pfad, aber ohne Kommandopflicht
       try
@@ -521,7 +526,7 @@ begin
       while True do
       begin
         try
-          EnsureDatabase(DbPath);
+          WasCreated := EnsureDatabase(DbPath);
           Break;
         except
           on E: Exception do
@@ -529,6 +534,24 @@ begin
             PromptAndPersistDbPath(DbPath);
           end;
         end;
+      end;
+
+      if not CfgExisted then
+      begin
+        Msg(Format(Tr(midMetaFirstRunConfigCreatedFmt), [GetConfigPath]));
+        FirstRun := True;
+      end;
+
+      if WasCreated then
+      begin
+        Msg('Hinweis: Datenbank angelegt: ' + ExpandFileName(DbPath));
+        Msg('Hinweis: Standardfahrzeug "Hauptauto" ist aktiv (car_id=1).');
+      end;
+
+      if FirstRun or WasCreated then
+      begin
+        Msg('Hinweis: Bei mehreren Fahrzeugen ist --car-id erforderlich (IDs: Betankungen --list cars).');
+        Msg('Naechster Schritt: Betankungen --list cars');
       end;
 
       Halt(EXIT_OK);

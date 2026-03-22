@@ -261,7 +261,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR"; then
   fail 'Matrix >1 Cars: --add fuelups ohne --car-id wurde nicht korrekt geblockt.'
 fi
 
@@ -271,7 +272,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR"; then
   fail 'Matrix >1 Cars: --list fuelups ohne --car-id wurde nicht korrekt geblockt.'
 fi
 
@@ -281,7 +283,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR"; then
   fail 'Matrix >1 Cars: --stats fuelups ohne --car-id wurde nicht korrekt geblockt.'
 fi
 printf '[OK] Matrix >1 Cars: no-id -> Hard Error\n'

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cars_crud.sh
-# UPDATED: 2026-03-12
+# UPDATED: 2026-03-22
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
 # und Car-Resolver-Scope fuer fuelups add/list/stats.
 
@@ -252,7 +252,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR_SCOPE_ADD_TWO_NOID" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_ADD_TWO_NOID"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_ADD_TWO_NOID" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR_SCOPE_ADD_TWO_NOID"; then
   fail 'Scope-Smoke: --add fuelups ohne --car-id bei 2 Cars wurde nicht sauber geblockt.'
 fi
 printf '[OK] Fuelups Scope: add ohne --car-id bei 2 Cars -> Hard Error\n'
@@ -273,7 +274,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR_SCOPE_LIST_TWO_NOID" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_LIST_TWO_NOID"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_LIST_TWO_NOID" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR_SCOPE_LIST_TWO_NOID"; then
   fail 'Scope-Smoke: --list fuelups ohne --car-id bei 2 Cars wurde nicht sauber geblockt.'
 fi
 printf '[OK] Fuelups Scope: list ohne --car-id bei 2 Cars -> Hard Error\n'
@@ -284,7 +286,8 @@ RC=$?
 set -e
 if [[ $RC -eq 0 ]] ||
    ! grep -q 'ERROR: multiple cars found.' "$ERR_SCOPE_STATS_TWO_NOID" ||
-   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_STATS_TWO_NOID"; then
+   ! grep -q 'Hint: specify --car-id <id>' "$ERR_SCOPE_STATS_TWO_NOID" ||
+   ! grep -q 'Hint: use --list cars to inspect available IDs' "$ERR_SCOPE_STATS_TWO_NOID"; then
   fail 'Scope-Smoke: --stats fuelups ohne --car-id bei 2 Cars wurde nicht sauber geblockt.'
 fi
 printf '[OK] Fuelups Scope: stats ohne --car-id bei 2 Cars -> Hard Error\n'
