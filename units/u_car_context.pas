@@ -2,7 +2,7 @@
   u_car_context.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-27
-  UPDATED: 2026-02-27
+  UPDATED: 2026-03-22
   AUTHOR : Christof Kempinski
   Car-Context-Resolver fuer eine kanonische Car-ID im Laufkontext.
 
@@ -62,7 +62,8 @@ begin
   if CarCount > 1 then
     raise Exception.Create(
       'ERROR: multiple cars found.' + LineEnding +
-      'Hint: specify --car-id <id>'
+      'Hint: specify --car-id <id>' + LineEnding +
+      'Hint: use --list cars to inspect available IDs'
     );
 
   Result := CarsGetSingleId(DB);

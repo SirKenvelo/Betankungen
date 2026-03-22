@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-20
+**Stand:** 2026-03-22
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -35,7 +35,7 @@ Das Projekt ist **lernorientiert**, aber nicht als Spielzeug gedacht.
 - Modularer Aufbau mit klar getrennten Units
 - Keine Fach- oder SQL-Logik im Hauptprogramm
 - Demo-Datenbank fuer Tests und Vorfuehrungen (`--seed`, `--demo`)
-- Frischer Start ohne Argumente initialisiert Config + DB automatisch (ohne "Kein Kommando")
+- Frischer Start ohne Argumente initialisiert Config + DB automatisch mit kurzer Guidance (u. a. naechster Schritt `--list cars`)
 - Fehlt nur die DB bei vorhandener Config, wird sie automatisch am konfigurierten Pfad erstellt
 
 **Zentrale Idee:**

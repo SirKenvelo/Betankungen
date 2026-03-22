@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-18
+  UPDATED: 2026-03-22
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -123,9 +123,14 @@ begin
   Sec('Common options');
   Item('--db <pfad>',                'DB nur fuer diesen Lauf (nicht mit --db-set).');
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
-  Item('--car-id <id>',              'Bei --add/--list/--stats fuelups, --stats cost sowie --edit/--delete cars; fuer fuelups Pflicht bei mehreren Fahrzeugen.');
+  Item('--car-id <id>',              'Bei --add/--list/--stats fuelups, --stats cost sowie --edit/--delete cars; bei >1 Cars Pflicht (IDs via --list cars).');
   Item('--receipt-link <path|uri>',  'Optionaler externer Beleg-Link (nur bei --add fuelups).');
   Item('--detail',                   'Detailausgabe fuer Listen.');
+
+  Sec('Car resolver (fuelups)');
+  Line('  0 Cars ohne --car-id: Hard Error (zuerst --add cars).');
+  Line('  1 Car ohne --car-id: automatische Auswahl.');
+  Line('  >1 Cars ohne --car-id: Hard Error mit Hinweis auf --car-id und --list cars.');
 
   Sec('Advanced options');
   Item('--db-set <pfad>',            'DB-Pfad speichern und beenden (nicht mit --db).');
@@ -151,6 +156,7 @@ begin
   Line('  Betankungen --add cars');
   Line('  Betankungen --add fuelups');
   Line('  Betankungen --add fuelups --car-id 1');
+  Line('  Betankungen --list cars');
   Line('  Betankungen --add fuelups --car-id 1 --receipt-link file:///data/receipts/2026-03-18.jpg');
   Line('  Betankungen --list fuelups --car-id 1');
   Line('  Betankungen --list cars --detail');

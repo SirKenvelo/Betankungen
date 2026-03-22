@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-18
+**Stand:** 2026-03-22
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -31,8 +31,9 @@ Alle car-sensitiven Kommandos (`--add fuelups`, `--list fuelups`, `--stats fuelu
 - Config-Sprache: `language=de|en|pl` unter Sektion `[ui]` (Default `de`).
 - Fehlende/ungueltige Config-Sprache wird auf `de` normalisiert; i18n ist aktuell als Skeleton vorbereitet (noch keine breite Lauftext-Migration).
 - Erststart ohne vorhandene Config: Standard-DB wird automatisch genutzt und in der Config gespeichert.
-- Frischer Start ohne Argumente: Config + DB werden still angelegt, kein Fehler "Kein Kommando".
-- Config vorhanden, DB fehlt: Die DB wird automatisch am konfigurierten Pfad neu angelegt (ohne Prompt).
+- Frischer Start ohne Argumente: Config + DB werden automatisch angelegt und der naechste sinnvolle Schritt sichtbar ausgegeben (`Betankungen --list cars`).
+- Config vorhanden, DB fehlt: Die DB wird automatisch am konfigurierten Pfad neu angelegt (ohne Prompt) und mit kurzer Guidance bestaetigt.
+- Wenn die DB neu angelegt wird, ist das Standardfahrzeug `Hauptauto` aktiv (`car_id=1`).
 - Prompt nur als Fallback: Eine interaktive DB-Pfadabfrage erscheint nur, wenn die DB-Provisionierung fehlschlaegt.
 - Pfad dauerhaft setzen: `Betankungen --db-set /pfad/zur/db.sqlite`
 - Pfad nur fuer diesen Lauf: `Betankungen --db /pfad/zur/db.sqlite <command>`

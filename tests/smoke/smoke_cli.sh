@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-21
+# UPDATED: 2026-03-22
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -172,8 +172,8 @@ print_plan() {
   printf '[LIST] --stats fleet --csv -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --monthly/--yearly/--dashboard -> Validierungsfehler\n'
   printf '[LIST] --stats fleet --from ... -> Validierungsfehler\n'
-  printf '[LIST] First-Run: stiller Bootstrap (config+db)\n'
-  printf '[LIST] Config vorhanden, DB fehlt: automatische DB-Anlage ohne Prompt\n'
+  printf '[LIST] First-Run: sichtbare Guidance (config+db+next-step)\n'
+  printf '[LIST] Config vorhanden, DB fehlt: DB-Anlage + Guidance ohne Prompt\n'
   printf '[LIST] Default nicht schreibbar: Prompt-Fallback + Retry erfolgreich\n'
   printf '[LIST] --show-config in frischer HOME-Umgebung\n'
   printf '[LIST] --reset-config loescht nur Config, nicht die DB\n'
