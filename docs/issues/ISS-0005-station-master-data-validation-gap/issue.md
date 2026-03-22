@@ -1,17 +1,17 @@
 ---
 id: ISS-0005
 title: Station dialog accepts implausible mis-slotted master data
-status: open
+status: resolved
 priority: P1
 type: bug
 tags: [stations, validation, ux, data-quality, needs-tests]
 created: 2026-03-20
-updated: 2026-03-20
+updated: 2026-03-21
 related:
   - BL-0022
   - TSK-0014
 ---
-**Stand:** 2026-03-20
+**Stand:** 2026-03-21
 
 # Summary
 The station dialog currently accepts obviously implausible or shifted values and
@@ -40,6 +40,19 @@ This is a data-quality and UX defect: it creates avoidable data garbage and can
 make later CLI output look untrustworthy.
 
 # Acceptance Criteria
-- [ ] Obvious field-shift and plausibility problems are detected.
-- [ ] The dialog provides clear correction guidance instead of silent acceptance.
-- [ ] Regression or user-flow coverage exists for representative bad inputs.
+- [x] Obvious field-shift and plausibility problems are detected.
+- [x] The dialog provides clear correction guidance instead of silent acceptance.
+- [x] Regression or user-flow coverage exists for representative bad inputs.
+
+# Resolution
+- Stations-Dialoge (`--add stations`, `--edit stations`) validieren jetzt
+  offensichtliche Stammdaten-Plausibilitaet mit klaren Policy-Hinweisen:
+  `P-080` bis `P-084`.
+- Abgedeckte Problemklassen:
+  - `zip`/`city`-Shift-Erkennung
+  - nicht-numerische `zip`
+  - rein numerische `city`
+  - `house_no` ohne Ziffer
+  - gesetzte `phone` ohne Ziffer
+- Regressionsabdeckung wurde um negative und positive Referenzfaelle erweitert:
+  `t_p080__01`, `t_p080__02`, `t_p081__01`, `t_p084__01` (Fixture `p080_base.sql`).

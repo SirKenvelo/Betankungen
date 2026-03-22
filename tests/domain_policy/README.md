@@ -86,6 +86,17 @@
   - `P-070` Hard Error (cars delete bei vorhandenen fuelup-Referenzen verboten):
     - `cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`
     - `fixtures/p070_base.sql`
+- Stations-Masterdata-Block P-080..P-084:
+  - `P-080` Shift-Guard + Positive Referenz:
+    - `cases/t_p080__01__station_zip_city_shift_rejected.sh`
+    - `cases/t_p080__02__station_valid_master_data_accepts.sh`
+    - `fixtures/p080_base.sql`
+  - `P-081` zip numerisch:
+    - `cases/t_p081__01__station_zip_non_numeric_rejected.sh`
+    - `fixtures/p080_base.sql`
+  - `P-084` phone mit Ziffern:
+    - `cases/t_p084__01__station_phone_without_digits_rejected.sh`
+    - `fixtures/p080_base.sql`
 
 ## Einstieg
 - Cases starten: `tests/domain_policy/run_domain_policy_tests.sh`
