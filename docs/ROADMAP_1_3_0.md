@@ -103,8 +103,11 @@ Status:
   - `BL-0017` ist abgeschlossen; die Evaluationsmatrix, Betriebsgrenzen,
     Primaerquelle, Fallback-Strategie und Audit-Leitplanken liegen in
     `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` vor.
-  - `BL-0018` bleibt der offene technische Kern fuer Polling, Persistenzpfad
-    und Historien-Contract.
+  - Fuer `BL-0018` ist der Polling-/Historien-Contract samt Datenpfad-Trennung
+    jetzt in `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`
+    dokumentiert.
+  - Offener technischer Rest fuer Gate 3 bleibt `TSK-0021`
+    (Polling-Basis, Persistenzpfad, Regression und Evidenz).
 
 ### Gate 4: Release-Candidate-Haertung
 

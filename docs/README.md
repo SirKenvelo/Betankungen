@@ -71,7 +71,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
     abgeschlossen; Entscheidungsbasis liegt in
     `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`.
-  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten.
+  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten ist aktiv; der
+    Contract fuer Datenpfad-Trennung, Rohdaten und Minimalpersistenz liegt in
+    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`.
 - Scope-Freeze 1.3.0 ist gesetzt:
   - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
   - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
@@ -141,6 +143,9 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der aktiven 1.3.0-Linie.
 - `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,
   Fallback-Strategie und Betriebsgrenzen fuer den 1.3.0-Provider-Fit.
+- `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`: verbindlicher
+  Minimal-Contract fuer Polling-Pfad, Rohdatenablage, Historienpersistenz und
+  Trennung zur Core-Datenbank in `1.3.0`.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).

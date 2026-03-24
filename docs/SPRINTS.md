@@ -927,3 +927,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   Repo-Doku `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` ueberfuehrt,
   Primaerquelle `Tankerkoenig` festgelegt, Fallback `Benzinpreis-Aktuell.de`
   dokumentiert und Audit-/Betriebsgrenzen fuer `BL-0018` benannt.
+- `TSK-0020` fuer `BL-0018` abgeschlossen: Kanon-Doku
+  `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` definiert jetzt
+  Datenpfad-Trennung, Raw-Snapshot-Format, minimale Historienpersistenz und
+  Integrationsgrenzen zur Core-Datenbank; offener Rest bleibt `TSK-0021`.
