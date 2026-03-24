@@ -17,6 +17,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 - Fuel-price provider decision baseline: `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`
 - Fuel-price polling/history contract baseline: `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`
 - Fuel-price polling runtime baseline: `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`
+- Fuel-price release preflight baseline: `docs/RELEASE_1_3_0_PREFLIGHT.md`
 - Curated project chronicle (Dev Diary): `docs/DEV_DIARY.md`
 - Test strategy and matrix: `docs/TEST_MATRIX.md`
 - Wiki source pages (v1 bootstrap): `docs/wiki/README.md`

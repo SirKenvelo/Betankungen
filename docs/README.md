@@ -150,6 +150,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`: gelieferte Runtime-Basis fuer
   den getrennten Preis-Historienpfad (`scripts/fuel_price_polling_run.sh`,
   Regression, Verify-Einbindung).
+- `docs/RELEASE_1_3_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer
+  Gate 4/5 der aktiven 1.3.0-Linie.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
@@ -614,6 +616,8 @@ Beispiel:
   - Fuehrt den 1.0.0-Readiness-Preflight aus (`scripts/release_preflight_1_0_0.sh`)
 - `make release-preflight-1-1-0`
   - Fuehrt den 1.1.0-Readiness-Preflight aus (`scripts/release_preflight_1_1_0.sh`)
+- `make release-preflight-1-3-0`
+  - Fuehrt den 1.3.0-Readiness-Preflight aus (`scripts/release_preflight_1_3_0.sh`)
 - `make release-dry`
   - Fuehrt `kpr.sh --dry-run` aus
 - optional:
