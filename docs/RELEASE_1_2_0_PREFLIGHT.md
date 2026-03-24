@@ -1,6 +1,6 @@
 # Release Preflight 1.2.0
-**Stand:** 2026-03-19
-**Status:** abgeschlossen (Gate 4 Exit in S22C3)
+**Stand:** 2026-03-24
+**Status:** abgeschlossen (1.2.0 final freigegeben)
 
 ## Ziel
 
@@ -53,13 +53,13 @@ Hinweis: Die operative Verdrahtung ist Teil des Gate-3-Umsetzungsblocks
 
 Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
 
-## Gate-Status-Snapshot (Stand 2026-03-19)
+## Gate-Status-Snapshot (Stand 2026-03-24)
 
 - Gate 1: abgeschlossen am 2026-03-18.
 - Gate 2: abgeschlossen am 2026-03-18.
 - Gate 3: abgeschlossen am 2026-03-19 (release-blocking Scope geliefert).
 - Gate 4: abgeschlossen am 2026-03-19 (RC-Nachweise dokumentiert).
-- Gate 5: aktiv (Finalisierung 1.2.0).
+- Gate 5: abgeschlossen am 2026-03-24 (1.2.0 final freigegeben).
 - Scope-Freeze bleibt unverletzt (`BL-0020` + `BL-0021` als einziger
   release-blockierender 1.2.0-Fokus).
 
@@ -101,4 +101,24 @@ Alle muessen denselben Gate-Stand fuer 1.2.0 widerspruchsfrei zeigen.
   - Run: `23307738745`
   - Status: `success`
   - Commit: `3e9be17`
-- Offene RC-Schritte: keine; Uebergang auf Gate 5 ist freigegeben.
+- Offene RC-Schritte: keine; Gate-5-Closeout ist abgeschlossen.
+
+## Gate-5-Closeout (Stand 2026-03-24)
+
+- Finaler Release-Umschalt-Commit ausgefuehrt (`APP_VERSION=1.2.0`).
+- Finaler Doku-Sync fuer die 1.2.0-Freigabe abgeschlossen:
+  - `docs/ROADMAP_1_2_0.md`
+  - `docs/STATUS.md`
+  - `docs/SPRINTS.md`
+  - `docs/CHANGELOG.md`
+  - `docs/README.md`
+  - `docs/README_EN.md`
+  - `README.md`
+- Finale Release-/Backup-Ausfuehrung:
+  - `./kpr.sh --note "Release 1.2.0 final"` ->
+    `.releases/Betankungen_1_2_0.tar` (SHA-256
+    `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`)
+  - `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"` ->
+    `.backup/2026-03-24_1809`
+- Lokaler Vollnachweis:
+  - `make verify` erfolgreich.

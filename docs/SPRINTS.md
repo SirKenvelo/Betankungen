@@ -871,12 +871,13 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## General-Stream nach Sprint 22 (Gate 5, non-blocking)
 
-- Status: aktiv
+- Status: abgeschlossen
 - Ziel: Gate-5-Finalisierung der 1.2.0-Linie begleiten, ohne den
-  release-blocking Scope zu aendern; parallel gezielte QA-/User-Flow-
-  Nachschaerfungen aus `BL-0022` auf `main` liefern.
+  release-blocking Scope zu aendern; gezielte QA-/User-Flow-/Doku-
+  Nachschaerfungen aus `BL-0022`/`BL-0023` auf `main` integrieren und den
+  finalen 1.2.0-Release-Closeout durchfuehren.
 
-### Bisheriger Fortschritt (2026-03-20 bis 2026-03-22)
+### Bisheriger Fortschritt (2026-03-20 bis 2026-03-24)
 
 - `189e159`: Teststrategie und Nutzerfund-Tracker als kanonischer Rahmen
   eingefuehrt (`docs/TEST_MATRIX.md`, `BL-0022`, `ISS-0002..ISS-0006`).
@@ -890,3 +891,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   stabilisiert.
 - `f590bcb`: First-Run- und Multi-Car-Guidance in CLI/Help sichtbar
   geschaerft (`TSK-0015`).
+- Gate-5-Closeout 1.2.0 finalisiert:
+  - `APP_VERSION=1.2.0` gesetzt.
+  - finaler Doku-Sync fuer Roadmap/Status/Entry/Preflight/Changelog
+    abgeschlossen.
+  - lokaler Vollnachweis `make verify` ist gruen.
+  - finale Release-/Backup-Ausfuehrung dokumentiert
+    (`.releases/Betankungen_1_2_0.tar`, Snapshot `.backup/2026-03-24_1809`).

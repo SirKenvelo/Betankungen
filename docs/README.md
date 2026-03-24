@@ -58,12 +58,12 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
 - `1.1.0` wurde am `2026-03-18` final freigegeben.
-- Verbindlicher Fahrplan bis `1.2.0` ist aktiv: `docs/ROADMAP_1_2_0.md`.
+- Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.2.0: Gate 1/2/3/4 abgeschlossen, Gate 5 aktiv.
+- Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
@@ -93,14 +93,20 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - RC-Haertung ist abgeschlossen (`S22C2/3` + `S22C3/3`).
   - Abschlussnachweis: lokales `make verify` gruen und CI-Referenz auf `main`
     (`CI` Run `23307738745`, Commit `3e9be17`).
-- Gate-5-Start 1.2.0:
-  - Finalisierung ist aktiv (Version-Umschalt-/Release-/Backup-Closeout als
-    letzter Block).
-- Gate-5-Fortschritt 1.2.0 (non-blocking Hardening, BL-0022):
-  - EOF-/Seed-Demo-Haertung, Fuelup-Cross-Field-Guardrail `P-033`,
-    Stations-Plausibilitaetschecks `P-080` bis `P-084`, Resolver-Matrix-Sync
-    fuer den zusaetzlichen `P-050`-Prompt und geschaerfte First-Run-/Multi-Car-
-    Guidance sind auf `main` integriert.
+- Gate-5-Closeout 1.2.0:
+  - Finaler Release-Umschalt-Commit (`APP_VERSION=1.2.0`) und finaler
+    Doku-Sync sind abgeschlossen.
+  - Finale Release-/Backup-Ausfuehrung ist dokumentiert
+    (`./kpr.sh --note "Release 1.2.0 final"`,
+    `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"`;
+    Artefakt `.releases/Betankungen_1_2_0.tar`,
+    SHA-256 `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`,
+    Snapshot `.backup/2026-03-24_1809`).
+- Gate-5-Hardening 1.2.0 (non-blocking):
+  - `BL-0022` ist abgeschlossen (EOF-/Seed-Demo-Haertung, Fuelup-Cross-Field-
+    Guardrail `P-033`, Stations-Plausibilitaetschecks `P-080` bis `P-084`,
+    Resolver-Matrix-Sync fuer den zusaetzlichen `P-050`-Prompt und
+    geschaerfte First-Run-/Multi-Car-Guidance).
 - Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
   in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
 - Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.
@@ -130,7 +136,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/tasks/`: globale `TSK-xxxx`-Eintraege (z. B. fuer Legacy-Backlog-Parents).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
 - `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
-- `docs/ROADMAP_1_2_0.md`: verbindlicher Gate-Plan fuer die aktive 1.2.0-Linie.
+- `docs/ROADMAP_1_2_0.md`: verbindlicher Gate-Plan der abgeschlossenen 1.2.0-Linie.
 - `docs/CONTRACT_HARDENING_1_2_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.2.0-Linie.
 - `docs/RELEASE_1_2_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer Gate 4/5 der 1.2.0-Linie.
 - `docs/ROADMAP_1_1_0.md`: verbindlicher Gate-Plan der abgeschlossenen 1.1.0-Linie.
