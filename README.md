@@ -7,7 +7,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
 - Latest release: `1.2.0` (released on 2026-03-24)
 - Current development line: `1.3.0-dev`
-- Active release roadmap: `1.3.0` (Gate 1 and Gate 2 completed, Gate 3 active).
+- Active release roadmap: `1.3.0` (Gate 1, Gate 2, and Gate 3 completed; Gate 4 active).
 
 ## Documentation
 
@@ -16,6 +16,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 - Main project documentation (currently German): `docs/README.md`
 - Fuel-price provider decision baseline: `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`
 - Fuel-price polling/history contract baseline: `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`
+- Fuel-price polling runtime baseline: `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`
 - Curated project chronicle (Dev Diary): `docs/DEV_DIARY.md`
 - Test strategy and matrix: `docs/TEST_MATRIX.md`
 - Wiki source pages (v1 bootstrap): `docs/wiki/README.md`

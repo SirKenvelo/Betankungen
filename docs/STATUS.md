@@ -234,10 +234,10 @@ Bereits erledigt:
     `TSK-0018`/`TSK-0019` sowie `BL-0018` + `TSK-0020`/`TSK-0021` als
     release-blocking; Folgeversion `1.4.0` bleibt auf `BL-0016` + `BL-0011`
     festgelegt).
-  - Gate 3 aktiv (`BL-0017` abgeschlossen; fuer `BL-0018` ist der
-    Polling-/Historien-Contract dokumentiert, `TSK-0021` bleibt der offene
-    technische Lieferblock).
-  - Gate 4 offen.
+  - Gate 3 abgeschlossen am 2026-03-24 (`BL-0017` + `BL-0018` auf `done`,
+    Polling-Runner/Regression geliefert, lokaler Abschlusslauf `make verify`
+    gruen).
+  - Gate 4 aktiv.
   - Gate 5 offen.
 - Leitplanken fuer die 1.3.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
@@ -256,16 +256,19 @@ Bereits erledigt:
   - `BL-0017` ist abgeschlossen: Entscheidungsvorlage und Betriebsgrenzen fuer
     den Provider-Fit liegen in `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` vor
     (Primaerquelle `Tankerkoenig`, Fallback `Benzinpreis-Aktuell.de`).
-  - `TSK-0020` ist abgeschlossen: Polling-/Historien-Contract, Datenpfad-
-    Trennung und Minimalpersistenz fuer `BL-0018` sind in
-    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` dokumentiert.
+  - `BL-0018` ist abgeschlossen: Polling-/Historien-Contract, separater
+    Runtime-Pfad und Regressionsevidenz liegen in
+    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`,
+    `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`,
+    `scripts/fuel_price_polling_run.sh` und
+    `tests/regression/run_fuel_price_history_check.sh` vor.
   - Scope-Freeze fuer `1.3.0` ist gesetzt:
     `BL-0017` + `TSK-0018`/`TSK-0019` sowie `BL-0018` +
     `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
-  - Offener Gate-3-Rest fuer `1.3.0` ist jetzt `TSK-0021`
-    (Polling-Basis, Persistenzpfad, Regression-/Audit-Evidenz).
-  - Offener Gate-3-Kern ist jetzt `BL-0018`: Polling-/Historien-Contract,
-    Datenpfad-Trennung, Persistenz und Nachweisfuehrung.
+  - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
+    Fuel-Price-History-Regression-Check und lief lokal gruen.
+  - Aktiver naechster Fokus ist Gate 4 der 1.3.0-Linie
+    (RC-Haertung/Preflight/Audit-Entscheid).
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

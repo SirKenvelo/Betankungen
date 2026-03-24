@@ -86,6 +86,8 @@ Direktlauf:
 - Zweck: validiert den Export-Package-Manifest-Contract v1 gegen reproduzierbare Dry-Run-Fixtures (1x valid, mehrere invalid).
 - Script: `tests/regression/run_db_backup_ops_check.sh`
 - Zweck: validiert den Multi-DB-Backup-Operationspfad (`scripts/db_backup_ops.sh`) inkl. Scope-Guardrails, Dry-Run, Single/All-Run, Integritaetsmetadaten, Index-Konsistenz und Retention.
+- Script: `tests/regression/run_fuel_price_history_check.sh`
+- Zweck: validiert den getrennten Preis-Historienpfad (`scripts/fuel_price_polling_run.sh`) inkl. Dry-Run, Pflichtargumenten, Raw-Snapshot-Ablage, SQLite-Persistenz, State-Datei, Duplikat-Guardrail und Fehlerpfad ohne Partial-Write.
 - Script: `tests/regression/run_receipt_link_contract_check.sh`
 - Zweck: validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe und JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
 - Script: `tests/regression/run_user_flow_break_matrix_check.sh`
@@ -97,6 +99,7 @@ Direktlauf:
 - `tests/regression/run_cost_integration_modes_check.sh`
 - `tests/regression/run_package_manifest_fixture_check.sh`
 - `tests/regression/run_db_backup_ops_check.sh`
+- `tests/regression/run_fuel_price_history_check.sh`
 - `tests/regression/run_receipt_link_contract_check.sh`
 - `tests/regression/run_user_flow_break_matrix_check.sh`
 

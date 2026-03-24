@@ -10,7 +10,8 @@ Detailed documents are currently maintained primarily in German.
 - Current development line: `1.3.0-dev`.
 - The active binding roadmap is `1.3.0` (`docs/ROADMAP_1_3_0.md`):
   - Gate 1 and Gate 2 are completed.
-  - Gate 3 is active.
+  - Gate 3 is completed.
+  - Gate 4 is active.
 - Release-blocking scope for the completed `1.2.0` line is delivered:
   - `BL-0020` multi-database backup operations: done.
   - `BL-0021` receipt-photo link references: done.
@@ -26,6 +27,9 @@ Detailed documents are currently maintained primarily in German.
 - `TSK-0020` for `BL-0018` is completed; the polling/history contract,
   storage-path separation, and minimal persistence baseline are documented in
   `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`.
+- `TSK-0021` for `BL-0018` is completed; the runtime baseline now includes the
+  separate polling runner, raw/database/state persistence, and regression
+  evidence in `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

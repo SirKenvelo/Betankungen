@@ -48,7 +48,8 @@ konkreten Suiten in `tests/README.md` die operative Source of Truth.
 - Domain-Policy-Suite:
   - starke Abdeckung fuer CLI-/Domain-Guards und deterministische Kernregeln
 - Regression-Skripte:
-  - gezielte Contract-/Feature-Regressionen fuer JSON/CSV/Cost/Backup/Receipt
+  - gezielte Contract-/Feature-Regressionen fuer JSON/CSV/Cost/Backup/
+    Fuel-Price-History/Receipt
   - priorisierte User-Flow-/Break-Pfade aus der Matrix jetzt als eigener
     Regression-Runner codifiziert (`tests/regression/run_user_flow_break_matrix_check.sh`)
 - Smoke-Suiten:

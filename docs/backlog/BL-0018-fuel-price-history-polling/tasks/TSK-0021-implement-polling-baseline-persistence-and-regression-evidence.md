@@ -1,7 +1,7 @@
 ---
 id: TSK-0021
 title: Implement polling baseline persistence and regression evidence for 1.3.0
-status: todo
+status: done
 priority: P1
 type: task
 tags: [polling, history, implementation, qa]
@@ -26,6 +26,6 @@ Persistenzpfad, minimalem Runner und Regression-/Audit-Nachweisen.
 - Delta-/Risiko-Audit ist fuer Integrations- und Datenpfade mitzudenken.
 
 # Done When
-- [ ] Polling-Basis ist in einem klar getrennten Pfad umgesetzt.
-- [ ] Regressionen decken Kern- und Fehlerpfade ab.
-- [ ] Doku und Audit-/Nachweisbezug sind auf dem Runtime-Stand.
+- [x] Polling-Basis ist in einem klar getrennten Pfad umgesetzt.
+- [x] Regressionen decken Kern- und Fehlerpfade ab.
+- [x] Doku und Audit-/Nachweisbezug sind auf dem Runtime-Stand.
