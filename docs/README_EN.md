@@ -6,15 +6,14 @@ Detailed documents are currently maintained primarily in German.
 
 ## Current State
 
-- Latest release: `1.1.0` (released on 2026-03-18).
-- Current development line: `1.2.0-dev`.
-- The binding roadmap for `1.2.0` is active (`docs/ROADMAP_1_2_0.md`):
-  - Gate 1 to Gate 4 are completed.
-  - Gate 5 is active (finalization track).
+- Latest release: `1.2.0` (released on 2026-03-24).
+- Current development line: `1.2.0` (release closeout state).
+- The binding roadmap for `1.2.0` is completed (`docs/ROADMAP_1_2_0.md`):
+  - Gate 1 to Gate 5 are completed.
 - Release-blocking scope for `1.2.0` is delivered:
   - `BL-0020` multi-database backup operations: done.
   - `BL-0021` receipt-photo link references: done.
-- Non-blocking hardening stream `BL-0022` is active and already delivered key fixes:
+- Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).
   - Station master-data plausibility validation (`P-080` to `P-084`).

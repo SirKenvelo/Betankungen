@@ -1,11 +1,11 @@
 # Verbindlicher Fahrplan bis Version 1.2.0
 **Stand:** 2026-03-24
-**Status:** aktiv (`APP_VERSION=1.2.0-dev`)
+**Status:** abgeschlossen (`APP_VERSION=1.2.0`, final freigegeben)
 
 ## Ausgangslage
 
 - `1.1.0` wurde am 2026-03-18 final freigegeben.
-- Die naechste Entwicklungsbasis laeuft auf `1.2.0-dev`.
+- Die Entwicklungsbasis wurde bis zur Freigabe auf `1.2.0-dev` gefuehrt.
 - Dieser Fahrplan bleibt gate-basiert (Qualitaetskriterien vor Kalenderdatum).
 
 ## Verbindliche Leitplanken
@@ -127,12 +127,21 @@ Exit-Kriterium:
 - 1.2.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv (Kickoff am 2026-03-19).
-- Fortschritt seit Gate-4-Abschluss:
-  - non-blocking Hardening-Stream `BL-0022` laeuft auf `main` parallel zur
-    Finalisierung (u. a. `eebac9a`, `10d6361`, `26e1499`, `50b7600`,
-    `f590bcb`), ohne den release-blocking Scope (`BL-0020`, `BL-0021`) zu
-    aendern.
+- abgeschlossen am 2026-03-24.
+- Abschlussnachweis:
+  - finaler Versionswechsel ist ausgefuehrt (`APP_VERSION=1.2.0`).
+  - finaler Doku-Sync ist abgeschlossen (`ROADMAP`/`STATUS`/`README`/
+    `README_EN`/`SPRINTS`/`CHANGELOG`/`RELEASE_1_2_0_PREFLIGHT`).
+  - finale Release-/Backup-Ausfuehrung ist dokumentiert:
+    - `./kpr.sh --note "Release 1.2.0 final"` ->
+      `.releases/Betankungen_1_2_0.tar` (SHA-256
+      `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`)
+    - `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"` ->
+      `.backup/2026-03-24_1809`
+  - lokaler Vollnachweis ist erfolgreich (`make verify`).
+  - non-blocking Hardening-/Doku-Streams `BL-0022` und `BL-0023` sind auf
+    `main` abgeschlossen, ohne Scope-Drift gegen den release-blocking Kern
+    (`BL-0020`, `BL-0021`).
 
 ## Verbindliche Abweichungsregel
 

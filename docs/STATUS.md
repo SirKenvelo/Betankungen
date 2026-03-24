@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-24
-**Zielversion:** 1.2.0 (aktive Entwicklungsbasis)
+**Zielversion:** 1.2.0 (final freigegeben)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -224,25 +224,29 @@ Bereits erledigt:
   - 1.1.0 ist final freigegeben (`APP_VERSION=1.1.0`, historischer Abschlussstand).
   - BL-Triage-Lanes im kanonischen Tracker bleiben als leichte Priorisierung aktiv (`release-blocking`/`planned`/`exploratory`).
 
-## Roadmap 1.2.0 - verbindlicher Fahrplan (aktiv)
+## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 
-- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_2_0.md`.
+- Der verbindliche Gate-Plan liegt in `docs/ROADMAP_1_2_0.md`.
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-18 (Zyklusstart auf `APP_VERSION=1.2.0-dev`, neue Roadmap verankert).
   - Gate 2 abgeschlossen am 2026-03-18 (Scope-Freeze: `BL-0020` + `TSK-0008`/`TSK-0009` sowie `BL-0021` + `TSK-0010`/`TSK-0011` als release-blocking).
   - Gate 3 abgeschlossen am 2026-03-19 (release-blocking Scope geliefert: `BL-0020` + `BL-0021` auf `done`, Contract-Hardening auf Abschlussstand).
   - Gate 4 abgeschlossen am 2026-03-19 (RC-Checklisten-/Freeze-Snapshot + lokaler Vollnachweis `make verify` + CI-Referenz auf `main`: Run `23307738745`, Commit `3e9be17`).
-  - Gate 5 aktiv (Finalisierung `1.2.0`).
+  - Gate 5 abgeschlossen am 2026-03-24 (finaler Versionswechsel
+    `APP_VERSION=1.2.0`, finaler Doku-Sync sowie finale Release-/
+    Backup-Ausfuehrung; Artefakt `.releases/Betankungen_1_2_0.tar`, SHA-256
+    `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`,
+    Snapshot `.backup/2026-03-24_1809`).
 - Leitplanken fuer die 1.2.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
   - Backup-/Restore-/Privacy strikt nach `POL-003`;
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - Entwicklungsbasis ist auf `APP_VERSION=1.2.0-dev` gesetzt.
+  - 1.2.0 ist final freigegeben (`APP_VERSION=1.2.0`).
   - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
-  - Gate 4 RC-Haertung ist abgeschlossen; Gate 5 (Finalisierung 1.2.0) ist
-    aktiv.
+  - Gate-5-Closeout ist abgeschlossen (Version-Umschalt-/Release-/Backup-
+    Paket und Doku-Sync final dokumentiert).
   - Non-blocking Hardening-Stream `BL-0022` ist abgeschlossen: dokumentierte
     Nutzertest-Funde (`ISS-0002` bis `ISS-0006`) sind behoben und ueber
     `TSK-0012` jetzt mit priorisiertem User-Flow-/Break-Regression-Check
