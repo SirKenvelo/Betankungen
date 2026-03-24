@@ -23,6 +23,9 @@ Detailed documents are currently maintained primarily in German.
 - `BL-0017` is now completed; the provider decision baseline is documented in
   `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` (primary source:
   `Tankerkoenig`, fallback: `Benzinpreis-Aktuell.de`).
+- `TSK-0020` for `BL-0018` is completed; the polling/history contract,
+  storage-path separation, and minimal persistence baseline are documented in
+  `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`.
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

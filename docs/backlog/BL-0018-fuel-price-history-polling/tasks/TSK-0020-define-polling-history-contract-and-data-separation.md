@@ -1,7 +1,7 @@
 ---
 id: TSK-0020
 title: Define polling history contract and data separation for 1.3.0
-status: todo
+status: done
 priority: P1
 type: task
 tags: [polling, history, contract, storage]
@@ -27,6 +27,6 @@ Trennung von Core-Datenbanken, Rohdatenformat und minimaler Persistenzstruktur.
 - Contract-/Privacy-Regeln muessen vor der technischen Umsetzung stabil sein.
 
 # Done When
-- [ ] Datenpfad- und Trennregeln sind dokumentiert.
-- [ ] Rohdaten-/Historienformat ist ausreichend konkret beschrieben.
-- [ ] Integrationsgrenzen zum Core sind explizit festgehalten.
+- [x] Datenpfad- und Trennregeln sind dokumentiert.
+- [x] Rohdaten-/Historienformat ist ausreichend konkret beschrieben.
+- [x] Integrationsgrenzen zum Core sind explizit festgehalten.
