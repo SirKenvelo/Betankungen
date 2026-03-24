@@ -1,5 +1,5 @@
 # Test Matrix
-**Stand:** 2026-03-20
+**Stand:** 2026-03-24
 
 ## Ziel
 
@@ -49,6 +49,8 @@ konkreten Suiten in `tests/README.md` die operative Source of Truth.
   - starke Abdeckung fuer CLI-/Domain-Guards und deterministische Kernregeln
 - Regression-Skripte:
   - gezielte Contract-/Feature-Regressionen fuer JSON/CSV/Cost/Backup/Receipt
+  - priorisierte User-Flow-/Break-Pfade aus der Matrix jetzt als eigener
+    Regression-Runner codifiziert (`tests/regression/run_user_flow_break_matrix_check.sh`)
 - Smoke-Suiten:
   - schneller End-to-End-Sanity-Check fuer CLI, Multi-Car, Migrationen,
     Module und Clean-Home
@@ -56,8 +58,9 @@ konkreten Suiten in `tests/README.md` die operative Source of Truth.
   - bewusst optional, kein Pflicht-Gate
 
 Noch unterreprasentiert sind aktuell:
-- explizite User-Flow-Tests aus Erstnutzer-Sicht
-- Break-/Robustheitspfade fuer EOF, leere Ausgangslagen und Fehlbedienung
+- breitere User-Flow-Abdeckung jenseits der priorisierten Phase-1-Pfade
+- tiefe Fehlerumgebungsfaelle (read-only/corrupt DB) als reproduzierbare
+  Standardsuite
 - systematische Restore-Roundtrips als Release-Standard
 
 ## Testebenen
@@ -172,12 +175,12 @@ Erfolgskriterium:
 
 | ID | Testfall | Erwartung | Prioritaet | Status |
 | --- | --- | --- | --- | --- |
-| INIT-001 | Start in leerem Verzeichnis | `config.ini` und DB werden automatisch erzeugt | Hoch | Offen |
-| INIT-002 | Erststart legt Standardauto an | Hauptauto oder definierter Default ist vorhanden | Hoch | Offen |
-| INIT-003 | `--show-config` nach Erststart | Pfade und Werte werden plausibel angezeigt | Hoch | Offen |
-| INIT-004 | `--list cars` direkt nach Erststart | Standardauto sichtbar, kein Fehler | Mittel | Offen |
-| INIT-005 | `--list stations` leer | Verstaendliche Rueckmeldung, kein Crash | Hoch | Offen |
-| INIT-006 | `--list fuelups` leer | Verstaendliche Rueckmeldung, kein Crash | Hoch | Offen |
+| INIT-001 | Start in leerem Verzeichnis | `config.ini` und DB werden automatisch erzeugt | Hoch | Automatisiert |
+| INIT-002 | Erststart legt Standardauto an | Hauptauto oder definierter Default ist vorhanden | Hoch | Automatisiert |
+| INIT-003 | `--show-config` nach Erststart | Pfade und Werte werden plausibel angezeigt | Hoch | Automatisiert |
+| INIT-004 | `--list cars` direkt nach Erststart | Standardauto sichtbar, kein Fehler | Mittel | Automatisiert |
+| INIT-005 | `--list stations` leer | Verstaendliche Rueckmeldung, kein Crash | Hoch | Automatisiert |
+| INIT-006 | `--list fuelups` leer | Verstaendliche Rueckmeldung, kein Crash | Hoch | Automatisiert |
 
 ### 2. Config
 
@@ -247,11 +250,11 @@ Erfolgskriterium:
 
 | ID | Testfall | Erwartung | Prioritaet | Status |
 | --- | --- | --- | --- | --- |
-| DEMO-001 | `--seed` auf leerer Umgebung | Seed laeuft erfolgreich | Hoch | Offen |
-| DEMO-002 | Seed erzeugt Demo-DB | Demo-DB wird getrennt von Haupt-DB angelegt | Hoch | Offen |
-| DEMO-003 | `--demo --list stations` | Seed-Daten sichtbar | Hoch | Offen |
-| DEMO-004 | `--demo --stats fuelups --monthly` | Plausible Statistik auf Demo-Daten | Mittel | Offen |
-| DEMO-005 | Missverstaendnis Haupt-DB vs. Demo-DB | Ausgabe/Hinweis macht Trennung verstaendlich | Hoch | Offen |
+| DEMO-001 | `--seed` auf leerer Umgebung | Seed laeuft erfolgreich | Hoch | Automatisiert |
+| DEMO-002 | Seed erzeugt Demo-DB | Demo-DB wird getrennt von Haupt-DB angelegt | Hoch | Automatisiert |
+| DEMO-003 | `--demo --list stations` | Seed-Daten sichtbar | Hoch | Automatisiert |
+| DEMO-004 | `--demo --stats fuelups --monthly` | Plausible Statistik auf Demo-Daten | Mittel | Automatisiert |
+| DEMO-005 | Missverstaendnis Haupt-DB vs. Demo-DB | Ausgabe/Hinweis macht Trennung verstaendlich | Hoch | Automatisiert |
 | DEMO-006 | `--force`-Verhalten | Vorhandene Demo-Daten werden definiert ueberschrieben | Mittel | Offen |
 
 ### 8. JSON / Export / Schnittstellen
@@ -267,7 +270,7 @@ Erfolgskriterium:
 
 | ID | Testfall | Erwartung | Prioritaet | Status |
 | --- | --- | --- | --- | --- |
-| CLI-001 | unbekanntes Flag | sauberer Fehlertext, sinnvoller Exit-Code | Hoch | Offen |
+| CLI-001 | unbekanntes Flag | sauberer Fehlertext, sinnvoller Exit-Code | Hoch | Automatisiert |
 | CLI-002 | unvollstaendiger Befehl | Hilfe oder klare Fehlermeldung | Hoch | Offen |
 | CLI-003 | widerspruechliche Flags | Klare Ablehnung oder definierte Prioritaet | Mittel | Offen |
 | CLI-004 | `--help` | Hilfetext vollstaendig und verstaendlich | Hoch | Offen |
@@ -343,19 +346,15 @@ Erfolgskriterium:
 
 ## Aktuelle Nutzerfundlage (2026-03-20)
 
-Die manuell dokumentierten Nutzertests zeigen aktuell fuenf reproduzierbare
-Problemcluster, die nicht nur UX-, sondern teils echte Korrektheits- und
-Robustheitsluecken sind:
+Die manuell dokumentierten Nutzertests haben fuenf reproduzierbare
+Problemcluster sichtbar gemacht. Diese Cluster sind inzwischen als Tracker-
+Artefakte erfasst und technisch nachgezogen:
 
-- `ISS-0002`: `--seed` und `--demo` sind im Anschlussfluss inkonsistent.
-- `ISS-0003`: interaktive Fuelup-Pfade koennen bei EOF/leerer Ausgangslage in
-  eine Fehlerschleife geraten.
-- `ISS-0004`: fachlich widerspruechliche Fuelup-Werte werden ohne
-  Cross-Field-Validierung gespeichert.
-- `ISS-0005`: Stations-Stammdaten akzeptieren offensichtlich falsch
-  einsortierte oder unplausible Werte.
-- `ISS-0006`: Erststart- und Mehrfahrzeug-Fuehrung sind fuer neue Nutzer nicht
-  sichtbar genug und erklaeren wichtige Zustandswechsel erst nach Fehlern.
+- `ISS-0002`: resolved (`--seed`/`--demo` Anschlussfluss gehaertet).
+- `ISS-0003`: resolved (EOF-/Leerzustandsabbruch fuer Fuelup-Dialoge gehaertet).
+- `ISS-0004`: resolved (`P-033` Cross-Field-Validierung aktiv).
+- `ISS-0005`: resolved (`P-080..P-084` Stations-Plausibilitaet aktiv).
+- `ISS-0006`: resolved (First-Run-/Multi-Car-Guidance geschaerft).
 
 Der uebergeordnete Hardening-Block dafuer ist `BL-0022`.
 
@@ -373,11 +372,12 @@ Der uebergeordnete Hardening-Block dafuer ist `BL-0022`.
 
 ## Praktischer naechster Schritt
 
-Phase 1:
-- Smoke-Test-Set um fehlende User-Flow-/Leerzustands-Pfade vervollstaendigen
-- definierte Integrationsdaten fuer Stats aufbauen
-- Backup-Roundtrip-Test implementieren
-- reproduzierbare Nutzer-/Break-Test-Funde in Regression/Tracker ueberfuehren
+Phase 2:
+- verbleibende offene Matrix-Faelle priorisieren (Config-Defekte,
+  Read-only-/Corrupt-DB, Restore-Roundtrip)
+- User-Flow-/Break-Checks schrittweise aus dem dedizierten Runner in weitere
+  Release-Gates ueberfuehren
+- definierte Integrationsdaten fuer Stats weiter ausbauen
 
 ## Statuslegende
 

@@ -1,5 +1,5 @@
 # Regression-Tests
-**Stand:** 2026-03-18
+**Stand:** 2026-03-24
 
 Hier liegen reproduzierbare Regression-Cases fuer bereits behobene Bugs.
 
@@ -19,3 +19,5 @@ Aktueller automatischer Check:
   - validiert den Multi-DB-Backup-Operationspfad (`scripts/db_backup_ops.sh`) fuer Scope-Guardrails, Dry-Run, Single/All-Run, Integritaetsmetadaten, Index-Konsistenz und Retention.
 - `tests/regression/run_receipt_link_contract_check.sh`
   - validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe sowie JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
+- `tests/regression/run_user_flow_break_matrix_check.sh`
+  - validiert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (u. a. INIT-/DEMO-Basispfade, unknown-flag-Fehler, EOF-Abbruch bei `--add fuelups`, Multi-Car-Guidance-Hints).
