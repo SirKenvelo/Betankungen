@@ -138,6 +138,20 @@ Ziel: aktive Entwicklungsphase nach final freigegebenem 1.2.0-Release.
   `docs/ROADMAP_1_3_0.md`, `docs/STATUS.md` und `docs/SPRINTS.md`
   aktualisiert. Lokaler RC-Kickoff-Lauf `make release-preflight-1-3-0` ist
   erfolgreich dokumentiert. (2026-03-24)
+- [General] ADR/Workflow: Die Idee eines kleinen repo-lokalen Workflow-
+  Wrapper-CLI fuer Git-/PR-/Preflight-Schritte ist als `ADR-0010` auf
+  Vorschlagsstand verankert (`docs/ADR/ADR-0010-repo-local-workflow-wrapper-cli.md`).
+  Leitplanke: kein neuer Scope in `1.3.0`; ein einfacher Script-MVP wird erst
+  nach der Finalisierung der `1.3.0`-Linie als Folgearbeit betrachtet.
+  ADR-Index synchronisiert (`docs/ADR/README.md`). (2026-03-24)
+- [General] Release/Docs: Gate-4-RC-Snapshot fuer `1.3.0` nachgezogen.
+  `docs/RELEASE_1_3_0_PREFLIGHT.md` enthaelt jetzt den RC-Checklisten-/
+  Freeze-Snapshot, die aktuelle CI-Referenz auf `main`
+  (`CI` Run `23514165068`, Commit `ce5a574`, `success`) sowie den
+  verbleibenden Gate-4-Rest. Roadmap-/Status-/Entry-/Sprint-Doku auf den
+  aktualisierten Gate-4-Stand synchronisiert
+  (`docs/ROADMAP_1_3_0.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/README_EN.md`, `docs/SPRINTS.md`). (2026-03-24)
 - [General] Release/Docs: Version `1.2.0` final freigegeben. `src/Betankungen.lpr` wurde auf `APP_VERSION=1.2.0` umgestellt; Gate 5 der 1.2.0-Linie ist in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku als abgeschlossen synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`, `docs/RELEASE_1_2_0_PREFLIGHT.md`, `docs/SPRINTS.md`). Finale Release-/Backup-Ausfuehrung wurde erfolgreich durchgefuehrt (`./kpr.sh --note "Release 1.2.0 final"`, `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"`), inkl. Artefakt `.releases/Betankungen_1_2_0.tar` (SHA-256 `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`) und Snapshot `.backup/2026-03-24_1809`; lokaler Vollnachweis `make verify` ist gruen. (2026-03-24)
 - [General] Docs/Tracker: `BL-0023` abgeschlossen und als kuratierte Entwicklungschronik verankert. Neues Basisdokument `docs/DEV_DIARY.md` definiert Ort, Leitplanken und Abgrenzung zu Changelog/Sprints; erster Referenzeintrag unter `docs/dev_diary/2026-03-24-bl0023-kickoff-and-framing.md` angelegt. Tracker-Sync: `BL-0023` auf `done`, neue Tasks `TSK-0016`/`TSK-0017` auf `done` (`docs/backlog/BL-0023...`), Backlog-/Status-/Entry-Navigation nachgezogen (`docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`). (2026-03-24)
 - [General] QA/Tests/Tracker: `TSK-0012` umgesetzt und `BL-0022` auf Abschlussstand gebracht. Neuer Regression-Runner `tests/regression/run_user_flow_break_matrix_check.sh` codifiziert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (INIT-001..006, DEMO-001..005, CLI-001, EOF-Abbruch `--add fuelups`, Multi-Car-Guidance-Hints). Verify-Verdrahtung erweitert (`Makefile`: Target `user-flow-break-check`, Aufnahme in `make verify`), Testdoku synchronisiert (`tests/README.md`, `tests/regression/README.md`), Matrix-Status fuer die erstabgedeckten IDs auf `Automatisiert` gesetzt und Tracker-Status nachgezogen (`docs/backlog/BL-0022...`, `docs/BACKLOG.md`, `docs/STATUS.md`). (2026-03-24)

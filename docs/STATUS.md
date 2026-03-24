@@ -274,6 +274,8 @@ Bereits erledigt:
     Entrypoint ist `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff fuer Gate 4 ist erfolgreich gelaufen
     (`make release-preflight-1-3-0` inklusive `make verify` und Dry-Runs).
+  - RC-Checklisten-/Freeze-Snapshot ist dokumentiert; aktuelle CI-Referenz auf
+    `main`: Run `23514165068`, Commit `ce5a574`, Status `success`.
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

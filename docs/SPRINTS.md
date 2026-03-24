@@ -946,3 +946,6 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Der erste lokale Gate-4-Kickoff-Lauf ist gruen:
   `make release-preflight-1-3-0` lief erfolgreich inklusive `make verify`,
   `kpr.sh --dry-run` und `scripts/backup_snapshot.sh --dry-run`.
+- Der RC-Checklisten-/Freeze-Snapshot fuer Gate 4 ist jetzt dokumentiert,
+  inklusive aktueller CI-Referenz auf `main`
+  (`CI` Run `23514165068`, Commit `ce5a574`).
