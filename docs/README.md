@@ -118,6 +118,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
 - `docs/GIT_WORKFLOW.md`: verbindlicher Git-/Branch-/PR-/Merge-Workflow fuer Sprint- und Traceability-Arbeit.
+- `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
