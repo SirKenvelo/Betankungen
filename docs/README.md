@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-22
+**Stand:** 2026-03-24
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -96,6 +96,11 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Gate-5-Start 1.2.0:
   - Finalisierung ist aktiv (Version-Umschalt-/Release-/Backup-Closeout als
     letzter Block).
+- Gate-5-Fortschritt 1.2.0 (non-blocking Hardening, BL-0022):
+  - EOF-/Seed-Demo-Haertung, Fuelup-Cross-Field-Guardrail `P-033`,
+    Stations-Plausibilitaetschecks `P-080` bis `P-084`, Resolver-Matrix-Sync
+    fuer den zusaetzlichen `P-050`-Prompt und geschaerfte First-Run-/Multi-Car-
+    Guidance sind auf `main` integriert.
 - Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
   in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
 - Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.

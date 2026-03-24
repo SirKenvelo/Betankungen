@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-19
+**Stand:** 2026-03-24
 **Zielversion:** 1.2.0 (aktive Entwicklungsbasis)
 
 ## Fundament & Architektur (erledigt)
@@ -23,7 +23,7 @@
 - Smoke-Checks unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`)
 
 ## Datenmodell & Domain-Logik (erledigt)
-- SQLite-Schema v4 stabil (`cars`, `fuelups.car_id`, `fuelups.missed_previous`)
+- SQLite-Schema v5 stabil (`cars`, `fuelups.car_id`, `fuelups.missed_previous`, additives Feld `fuelups.receipt_link`)
 - `stations` voll editierbar
 - `fuelups` append-only, historisch korrekt
 - Fuelups referenzieren `stations` und `cars` (FK)
@@ -243,6 +243,11 @@ Bereits erledigt:
   - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
   - Gate 4 RC-Haertung ist abgeschlossen; Gate 5 (Finalisierung 1.2.0) ist
     aktiv.
+  - Non-blocking Hardening-Stream `BL-0022` ist aktiv und liefert bereits
+    produktive Nachschaerfungen auf `main` (EOF-/Seed-Demo-Haertung,
+    Fuelup-Cross-Field `P-033`, Stations-Plausibilitaet `P-080..P-084`,
+    Resolver-Matrix-Sync fuer zusaetzlichen `P-050`-Prompt, First-Run-/Multi-
+    Car-Guidance).
   - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
