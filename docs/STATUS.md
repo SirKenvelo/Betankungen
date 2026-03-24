@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-24
-**Zielversion:** 1.2.0 (final freigegeben)
+**Zielversion:** 1.3.0 (aktive Dev-Linie; `APP_VERSION=1.3.0-dev`)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -223,6 +223,45 @@ Bereits erledigt:
 - Operativer Fokus:
   - 1.1.0 ist final freigegeben (`APP_VERSION=1.1.0`, historischer Abschlussstand).
   - BL-Triage-Lanes im kanonischen Tracker bleiben als leichte Priorisierung aktiv (`release-blocking`/`planned`/`exploratory`).
+
+## Roadmap 1.3.0 - verbindlicher Fahrplan (aktiv)
+
+- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_3_0.md`.
+- Gate-Stand:
+  - Gate 1 abgeschlossen am 2026-03-24 (Zyklusstart auf
+    `APP_VERSION=1.3.0-dev`, neue Roadmap verankert).
+  - Gate 2 abgeschlossen am 2026-03-24 (Scope-Freeze: `BL-0017` +
+    `TSK-0018`/`TSK-0019` sowie `BL-0018` + `TSK-0020`/`TSK-0021` als
+    release-blocking; Folgeversion `1.4.0` bleibt auf `BL-0016` + `BL-0011`
+    festgelegt).
+  - Gate 3 aktiv (`BL-0017` abgeschlossen; `BL-0018` verbleibt als technischer
+    Lieferblock).
+  - Gate 4 offen.
+  - Gate 5 offen.
+- Leitplanken fuer die 1.3.0-Linie:
+  - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
+  - externe Preisquellen nur auf Basis einer expliziten API-/Lizenzentscheidung
+    aus `BL-0017`;
+  - Polling-/Historien-Daten bleiben konzeptionell getrennt von produktiven
+    Core-Datenbanken, bis das Trennkonzept fuer `BL-0018` dokumentiert ist;
+  - Contract-Evolution strikt nach `POL-002` (keine stillen Breaks);
+  - Backup-/Restore-/Privacy strikt nach `POL-003`;
+  - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
+- Operativer Fokus:
+  - `1.2.0` ist seit 2026-03-24 final freigegeben.
+  - Die aktive Entwicklungsbasis steht auf `APP_VERSION=1.3.0-dev`.
+  - Der verbindliche Release-Kern fuer `1.3.0` folgt Option B:
+    `BL-0017` (API-Evaluation) + `BL-0018` (Polling/Historisierung).
+  - `BL-0017` ist abgeschlossen: Entscheidungsvorlage und Betriebsgrenzen fuer
+    den Provider-Fit liegen in `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` vor
+    (Primaerquelle `Tankerkoenig`, Fallback `Benzinpreis-Aktuell.de`).
+  - Scope-Freeze fuer `1.3.0` ist gesetzt:
+    `BL-0017` + `TSK-0018`/`TSK-0019` sowie `BL-0018` +
+    `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
+  - Offener Gate-3-Kern ist jetzt `BL-0018`: Polling-/Historien-Contract,
+    Datenpfad-Trennung, Persistenz und Nachweisfuehrung.
+  - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
+    (`BL-0016` + `BL-0011`) gesetzt.
 
 ## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 

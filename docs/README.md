@@ -58,12 +58,23 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
 - `1.1.0` wurde am `2026-03-18` final freigegeben.
+- Verbindlicher Fahrplan bis `1.3.0` ist aktiv: `docs/ROADMAP_1_3_0.md`.
 - Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
+- Gate-Stand 1.3.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
+- Aktive Entwicklungsbasis: `APP_VERSION=1.3.0-dev`.
+- Release-Kern fuer 1.3.0 gemaess Entscheidungsentwurf:
+  - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
+    abgeschlossen; Entscheidungsbasis liegt in
+    `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`.
+  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten.
+- Scope-Freeze 1.3.0 ist gesetzt:
+  - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
+  - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
@@ -127,6 +138,9 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
+- `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der aktiven 1.3.0-Linie.
+- `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,
+  Fallback-Strategie und Betriebsgrenzen fuer den 1.3.0-Provider-Fit.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).

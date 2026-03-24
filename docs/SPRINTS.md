@@ -898,3 +898,32 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - lokaler Vollnachweis `make verify` ist gruen.
   - finale Release-/Backup-Ausfuehrung dokumentiert
     (`.releases/Betankungen_1_2_0.tar`, Snapshot `.backup/2026-03-24_1809`).
+
+## General-Stream nach 1.2.0 - Kickoff 1.3.0
+
+- Status: aktiv
+- Ziel: die neue Entwicklungsbasis `1.3.0-dev` technisch und dokumentarisch
+  sauber verankern, basierend auf der verbindlichen Reihenfolge aus dem
+  Entscheidungsentwurf vom 2026-03-18.
+
+### Fortschritt (2026-03-24)
+
+- `APP_VERSION=1.3.0-dev` gesetzt und damit die neue Entwicklungsbasis aktiv
+  gemacht.
+- Neue Roadmap `docs/ROADMAP_1_3_0.md` als aktiven Gate-Rahmen angelegt.
+- Entry-/Status-Doku fuer den aktiven 1.3.0-Zyklus synchronisiert
+  (`README.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`,
+  `docs/CHANGELOG.md`).
+- Verbindliche Reihenfolge fuer die naechsten Versionen explizit verankert:
+  `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C
+  (`BL-0016` + `BL-0011`).
+- Triggerbasierte Audit-Leitplanke fuer die 1.3.0-Linie in der Roadmap
+  verankert (kein pauschales Vollaudit; Release-Audit erst an Gate 4/5
+  verbindlich entscheiden).
+- Gate 2 fuer die 1.3.0-Linie als Scope-Freeze nachgezogen:
+  `BL-0017`/`BL-0018` auf `approved` + `lane:release-blocking`,
+  Downstream-Tasks `TSK-0018` bis `TSK-0021` angelegt.
+- `BL-0017` fachlich abgeschlossen: Research-Ausarbeitung in die kanonische
+  Repo-Doku `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` ueberfuehrt,
+  Primaerquelle `Tankerkoenig` festgelegt, Fallback `Benzinpreis-Aktuell.de`
+  dokumentiert und Audit-/Betriebsgrenzen fuer `BL-0018` benannt.
