@@ -30,6 +30,9 @@ Detailed documents are currently maintained primarily in German.
 - `TSK-0021` for `BL-0018` is completed; the runtime baseline now includes the
   separate polling runner, raw/database/state persistence, and regression
   evidence in `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
+- Gate 4 is now backed by a dedicated `1.3.0` release-preflight blueprint and
+  local entrypoint (`docs/RELEASE_1_3_0_PREFLIGHT.md`,
+  `make release-preflight-1-3-0`).
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

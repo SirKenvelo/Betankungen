@@ -237,7 +237,8 @@ Bereits erledigt:
   - Gate 3 abgeschlossen am 2026-03-24 (`BL-0017` + `BL-0018` auf `done`,
     Polling-Runner/Regression geliefert, lokaler Abschlusslauf `make verify`
     gruen).
-  - Gate 4 aktiv.
+  - Gate 4 aktiv (Preflight-Blueprint + operativer Readiness-Preflight fuer
+    `1.3.0` eingefuehrt).
   - Gate 5 offen.
 - Leitplanken fuer die 1.3.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
@@ -269,6 +270,10 @@ Bereits erledigt:
     Fuel-Price-History-Regression-Check und lief lokal gruen.
   - Aktiver naechster Fokus ist Gate 4 der 1.3.0-Linie
     (RC-Haertung/Preflight/Audit-Entscheid).
+  - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
+    Entrypoint ist `make release-preflight-1-3-0`.
+  - Lokaler RC-Kickoff fuer Gate 4 ist erfolgreich gelaufen
+    (`make release-preflight-1-3-0` inklusive `make verify` und Dry-Runs).
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

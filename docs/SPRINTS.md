@@ -939,3 +939,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   `make fuel-price-history-check`.
 - Gate 3 der 1.3.0-Linie ist damit formal abgeschlossen; lokaler
   Abschlusslauf `make verify` ist auf diesem Stand gruen, Gate 4 ist aktiv.
+- Gate 4 fuer die 1.3.0-Linie ist operationalisiert: neuer Preflight-Blueprint
+  `docs/RELEASE_1_3_0_PREFLIGHT.md` und operativer Entrypoint
+  `scripts/release_preflight_1_3_0.sh` / `make release-preflight-1-3-0`
+  verdichten RC-Haertung, Doku-Gates und Dry-Run-Nachweise.
+- Der erste lokale Gate-4-Kickoff-Lauf ist gruen:
+  `make release-preflight-1-3-0` lief erfolgreich inklusive `make verify`,
+  `kpr.sh --dry-run` und `scripts/backup_snapshot.sh --dry-run`.

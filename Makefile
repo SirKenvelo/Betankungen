@@ -6,7 +6,7 @@ SHELL := bash
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-dry
+.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-preflight-1-3-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
@@ -25,6 +25,7 @@ help:
 	@echo "  make release-preflight - Readiness-Preflight (verify + release dry-runs)"
 	@echo "  make release-preflight-1-0-0 - 1.0.0 Readiness-Preflight (verify + release dry-runs)"
 	@echo "  make release-preflight-1-1-0 - 1.1.0 Readiness-Preflight (verify + release dry-runs)"
+	@echo "  make release-preflight-1-3-0 - 1.3.0 Readiness-Preflight (verify + release dry-runs)"
 	@echo "  make release-dry   - Dry-Run fuer Release-Archiv (kpr.sh --dry-run)"
 
 build:
@@ -94,6 +95,9 @@ release-preflight-1-0-0:
 
 release-preflight-1-1-0:
 	scripts/release_preflight_1_1_0.sh
+
+release-preflight-1-3-0:
+	scripts/release_preflight_1_3_0.sh
 
 release-dry:
 	./kpr.sh --dry-run

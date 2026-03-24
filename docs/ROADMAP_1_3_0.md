@@ -117,12 +117,22 @@ Status:
 - RC-Nachweis lokal und per CI-Referenz dokumentiert.
 - Release-Audit gemaess triggerbasierter Audit-Strategie ist entschieden und
   dokumentiert (mindestens Release-Audit; Vollaudit nur bei Risikotriggern).
+- Preflight-Blueprint fuer Gate 4/5 ist als Soll-Rahmen definiert:
+  `docs/RELEASE_1_3_0_PREFLIGHT.md`.
 
 Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
 - aktiv.
+- Fortschritt:
+  - Gate-4-Preflight-Blueprint und Doku-Gates sind in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md` verankert.
+  - Operativer Readiness-Preflight ist eingefuehrt:
+    `scripts/release_preflight_1_3_0.sh` und
+    `make release-preflight-1-3-0`.
+  - Lokaler RC-Kickoff-Lauf `make release-preflight-1-3-0` ist gruen
+    dokumentiert.
 
 ### Gate 5: Finalisierung 1.3.0
 
