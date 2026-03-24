@@ -120,7 +120,8 @@ main() {
   ok "[DEMO-002] Demo-DB ist getrennt von Haupt-DB"
 
   run_expect_ok "[DEMO-003] --demo --list stations" "$BIN_FILE" --demo --list stations
-  assert_contains "$LAST_OUT" "Aral (" "[DEMO-003] Demo-Stationen fehlen in Ausgabe."
+  assert_not_contains "$LAST_OUT" "Keine Tankstellen vorhanden." "[DEMO-003] Ausgabe meldet unerwartet leere Stationen."
+  grep -Eq '.+\(.+, [0-9]{5} .+\)' "$LAST_OUT" || fail "[DEMO-003] Demo-Stationen fehlen in Ausgabe."
 
   run_expect_ok "[DEMO-004] --demo --stats fuelups --monthly" "$BIN_FILE" --demo --stats fuelups --monthly
   assert_contains "$LAST_OUT" "Monatsstatistik" "[DEMO-004] Monatsauswertung nicht sichtbar."

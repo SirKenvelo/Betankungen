@@ -248,6 +248,9 @@ Bereits erledigt:
     `TSK-0012` jetzt mit priorisiertem User-Flow-/Break-Regression-Check
     (`tests/regression/run_user_flow_break_matrix_check.sh`) in `make verify`
     verankert.
+  - Non-blocking Doku-Stream `BL-0023` ist abgeschlossen: Dev-Diary-Baustein
+    (`docs/DEV_DIARY.md`) mit initialem Eintrag und Tracker-/Navigations-Sync
+    ist verankert.
   - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15

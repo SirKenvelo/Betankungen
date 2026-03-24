@@ -1,16 +1,16 @@
 ---
 id: BL-0023
 title: Dev-Diary als kuratierte Projektchronik
-status: proposed
+status: done
 priority: P3
 type: improvement
 tags: [docs, process, storytelling, community, 'lane:planned']
 created: 2026-03-21
-updated: 2026-03-21
+updated: 2026-03-24
 related:
   - BL-0016
 ---
-**Stand:** 2026-03-21
+**Stand:** 2026-03-24
 
 # Goal
 Ein leichtgewichtiges Dev-Diary einfuehren, das wichtige Projektstationen,
@@ -47,4 +47,5 @@ kuratierte menschliche Chronik erweitert, ohne bestehende technische
 Source-of-Truth-Dokumente zu ersetzen.
 
 # Derived Tasks
-- Werden bei Aktivierung des Backlog-Items als `TSK-xxxx` angelegt.
+- `TSK-0016` - Dev-Diary-Ort, Format und redaktionelle Leitplanken definieren. (done)
+- `TSK-0017` - Initialen Dev-Diary-Eintrag und Doku-Navigation verankern. (done)

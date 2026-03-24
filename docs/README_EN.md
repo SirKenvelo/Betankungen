@@ -31,6 +31,7 @@ Detailed documents are currently maintained primarily in German.
 5. `docs/ADR/README.md` (architecture decisions index)
 6. `docs/BACKLOG.md` (deferred/planned topics index)
 7. `docs/CHANGELOG.md` (dated change history)
+8. `docs/DEV_DIARY.md` (curated project chronicle, German)
 
 ## Language Policy
 
