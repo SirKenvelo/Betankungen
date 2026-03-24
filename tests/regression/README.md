@@ -17,6 +17,8 @@ Aktueller automatischer Check:
   - validiert den Manifest-v1-Contract fuer Export-Pakete gegen Dry-Run-Fixtures (valid/invalid).
 - `tests/regression/run_db_backup_ops_check.sh`
   - validiert den Multi-DB-Backup-Operationspfad (`scripts/db_backup_ops.sh`) fuer Scope-Guardrails, Dry-Run, Single/All-Run, Integritaetsmetadaten, Index-Konsistenz und Retention.
+- `tests/regression/run_fuel_price_history_check.sh`
+  - validiert die getrennte Preis-Historienbasis (`scripts/fuel_price_polling_run.sh`) fuer Pflichtargumente, Dry-Run, Raw-Snapshot-Ablage, SQLite-Persistenz, State-Datei, Duplikat-Schutz und sauberen Fehlerpfad ohne Partial-Write.
 - `tests/regression/run_receipt_link_contract_check.sh`
   - validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe sowie JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
 - `tests/regression/run_user_flow_break_matrix_check.sh`

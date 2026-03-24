@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "license": "CC BY 4.0 - Tankerkoenig test fixture",
+  "data": "MTS-K",
+  "status": "ok",
+  "stations": [
+    {
+      "name": "Fehlerhafte Station",
+      "brand": "Aral",
+      "street": "Testweg",
+      "houseNumber": "5",
+      "postCode": 12345,
+      "place": "Fehlerstadt",
+      "lat": 52.5001,
+      "lng": 13.4001,
+      "isOpen": true,
+      "diesel": 1.589,
+      "e5": 1.759,
+      "e10": 1.699
+    }
+  ]
+}

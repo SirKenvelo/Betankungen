@@ -1,7 +1,7 @@
 ---
 id: BL-0018
 title: Historische Tankstellenpreis-Erfassung via API-Polling
-status: in_progress
+status: done
 priority: P2
 type: feature
 tags: [api, polling, history, analytics, docker, 'lane:release-blocking']
@@ -40,9 +40,9 @@ Out of Scope:
 - Polling-Ausfaelle verfaelschen Historien-Auswertungen.
 
 # Output
-Ein definierter Implementierungsrahmen fuer Preis-Historie inklusive
-Speicherformat- und Datenmodell-Leitplanken.
+Ein gelieferter Basispfad fuer Preis-Historie mit getrenntem Runner,
+Raw-Snapshot-Ablage, Historienpersistenz und Regressionsevidenz.
 
 # Derived Tasks
 - `TSK-0020` - Polling-/Historien-Contract und Datenpfad-Trennung fuer 1.3.0 definieren. (done)
-- `TSK-0021` - Polling-Basis, Persistenzpfad und Regression-/Audit-Nachweise fuer 1.3.0 liefern. (todo)
+- `TSK-0021` - Polling-Basis, Persistenzpfad und Regression-/Audit-Nachweise fuer 1.3.0 liefern. (done)

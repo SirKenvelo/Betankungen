@@ -6,7 +6,7 @@ SHELL := bash
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check receipt-link-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-dry
+.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
@@ -14,6 +14,7 @@ help:
 	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Build + Contract + Policy + Smokes)"
 	@echo "  make cost-integration-check - Regression fuer Cost-Integrationsmodi (none/module/fallback)"
 	@echo "  make db-backup-ops-check - Regression fuer Multi-DB-Backup-Operations (single/all/dry-run/retention)"
+	@echo "  make fuel-price-history-check - Regression fuer getrennten Preis-Historienpfad (runner/raw/db/state)"
 	@echo "  make receipt-link-check - Regression fuer Receipt-Link-Contract (Scope/Write-Path/Text+JSON)"
 	@echo "  make user-flow-break-check - Priorisierte User-Flow-/Break-Matrix-Checks aus TSK-0012"
 	@echo "  make package-manifest-check - Optionaler Fixture-Check fuer Export-Package-Manifest v1"
@@ -50,6 +51,9 @@ cost-integration-check:
 db-backup-ops-check:
 	tests/regression/run_db_backup_ops_check.sh
 
+fuel-price-history-check:
+	tests/regression/run_fuel_price_history_check.sh
+
 receipt-link-check:
 	tests/regression/run_receipt_link_contract_check.sh
 
@@ -77,7 +81,7 @@ smoke:
 smoke-clean:
 	tests/smoke/smoke_clean_home.sh --modules
 
-verify: lint-docs tracker-lint wiki-link-check build contract-check cost-integration-check db-backup-ops-check receipt-link-check user-flow-break-check policy smoke-fixtures smoke smoke-clean
+verify: lint-docs tracker-lint wiki-link-check build contract-check cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check user-flow-break-check policy smoke-fixtures smoke smoke-clean
 
 stats-benchmark:
 	tests/benchmark/run_stats_benchmark.sh

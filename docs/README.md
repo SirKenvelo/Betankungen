@@ -62,7 +62,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand 1.3.0: Gate 1/2 abgeschlossen, Gate 3 aktiv.
+- Gate-Stand 1.3.0: Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
@@ -71,9 +71,10 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
     abgeschlossen; Entscheidungsbasis liegt in
     `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`.
-  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten ist aktiv; der
-    Contract fuer Datenpfad-Trennung, Rohdaten und Minimalpersistenz liegt in
-    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`.
+  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten ist
+    abgeschlossen; Contract und Runtime-Basis liegen in
+    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` und
+    `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
 - Scope-Freeze 1.3.0 ist gesetzt:
   - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
   - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
@@ -146,6 +147,9 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`: verbindlicher
   Minimal-Contract fuer Polling-Pfad, Rohdatenablage, Historienpersistenz und
   Trennung zur Core-Datenbank in `1.3.0`.
+- `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`: gelieferte Runtime-Basis fuer
+  den getrennten Preis-Historienpfad (`scripts/fuel_price_polling_run.sh`,
+  Regression, Verify-Einbindung).
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).

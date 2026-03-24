@@ -98,16 +98,17 @@ Exit-Kriterium:
 - Zyklusumfang fachlich fertig und regressionssicher.
 
 Status:
-- aktiv.
-- Fortschritt:
+- abgeschlossen am 2026-03-24.
+- Abschlussstand:
   - `BL-0017` ist abgeschlossen; die Evaluationsmatrix, Betriebsgrenzen,
     Primaerquelle, Fallback-Strategie und Audit-Leitplanken liegen in
     `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` vor.
-  - Fuer `BL-0018` ist der Polling-/Historien-Contract samt Datenpfad-Trennung
-    jetzt in `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`
-    dokumentiert.
-  - Offener technischer Rest fuer Gate 3 bleibt `TSK-0021`
-    (Polling-Basis, Persistenzpfad, Regression und Evidenz).
+  - `BL-0018` ist abgeschlossen: separater Polling-Runner,
+    Raw-/DB-/State-Persistenz und Regressionsevidenz liegen in
+    `scripts/fuel_price_polling_run.sh`,
+    `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md` und
+    `tests/regression/run_fuel_price_history_check.sh` vor.
+  - Vollstaendiger Abschlusslauf `make verify` ist auf diesem Stand gruen.
 
 ### Gate 4: Release-Candidate-Haertung
 
@@ -121,7 +122,7 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- offen.
+- aktiv.
 
 ### Gate 5: Finalisierung 1.3.0
 

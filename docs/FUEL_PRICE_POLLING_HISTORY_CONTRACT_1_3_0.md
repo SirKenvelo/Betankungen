@@ -170,11 +170,12 @@ Minimalfelder:
 - Fuer `1.3.0` ist kein pauschales Vollaudit dieses Datenstroms vorgesehen.
 - Das Dokument bildet aber die Mindestbasis fuer Delta-/Risiko-Audits zu
   Datenpfad, Trennung, Rohdatenhaltung und Betriebsgrenzen.
-- Implementierungs- und Regressionsevidenz fuer diesen Contract wird in
-  `TSK-0021` nachgezogen.
+- Implementierungs- und Regressionsevidenz fuer diesen Contract liegt auf
+  Runtime-Stand in `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md` sowie in
+  `tests/regression/run_fuel_price_history_check.sh` vor.
 
 ## Ergebnis fuer Gate 3
 
 - `TSK-0020` ist mit diesem Dokument fachlich erfuellt.
-- Offener Rest in `BL-0018` ist die technische Umsetzung des Polling-,
-  Persistenz- und Evidenzpfads ueber `TSK-0021`.
+- Der technische Folgepfad aus `TSK-0021` ist auf Runtime-Basis geliefert:
+  separater Runner, Persistenzpfad und Regressionsevidenz sind vorhanden.

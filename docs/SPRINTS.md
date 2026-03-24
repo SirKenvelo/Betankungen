@@ -930,4 +930,12 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `TSK-0020` fuer `BL-0018` abgeschlossen: Kanon-Doku
   `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` definiert jetzt
   Datenpfad-Trennung, Raw-Snapshot-Format, minimale Historienpersistenz und
-  Integrationsgrenzen zur Core-Datenbank; offener Rest bleibt `TSK-0021`.
+  Integrationsgrenzen zur Core-Datenbank.
+- `TSK-0021` fuer `BL-0018` abgeschlossen: neuer separater Runner
+  `scripts/fuel_price_polling_run.sh` persistiert `tankerkoenig`-Snapshots in
+  den getrennten Historienpfad (`raw/`, `db/`, `state/`); Runtime-Doku in
+  `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`, Regression in
+  `tests/regression/run_fuel_price_history_check.sh`, Verify-Einbindung ueber
+  `make fuel-price-history-check`.
+- Gate 3 der 1.3.0-Linie ist damit formal abgeschlossen; lokaler
+  Abschlusslauf `make verify` ist auf diesem Stand gruen, Gate 4 ist aktiv.
