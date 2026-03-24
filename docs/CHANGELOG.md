@@ -5,8 +5,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-1.2.x
-Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.2.0-Release.
+1.3.x
+Ziel: aktive Entwicklungsphase nach final freigegebenem 1.2.0-Release.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -72,6 +72,38 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.2.0-Rel
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Versioning: Nach der Finalisierung von `1.2.0` wurde die aktive
+  Entwicklungsbasis auf `APP_VERSION=1.3.0-dev` angehoben
+  (`src/Betankungen.lpr`). (2026-03-24)
+- [General] Planning/Roadmap: Verbindlichen Fahrplan fuer die `1.3.0`-Linie
+  eingefuehrt (`docs/ROADMAP_1_3_0.md`) und den aktiven Gate-Stand
+  synchronisiert: Gate 1 abgeschlossen (Zyklusstart), Gate 2 abgeschlossen,
+  Gate 3 aktiv.
+  Leitplanken aus dem Entscheidungsentwurf vom 2026-03-18 sind verankert:
+  `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C
+  (`BL-0016` + `BL-0011`). Zusaetzlich ist die triggerbasierte Audit-
+  Leitplanke fuer Gate 4/5 verankert (kein pauschales Vollaudit pro Change).
+  (2026-03-24)
+- [General] Docs/Entry: Root-README, deutsche/englische Einstiegsdoku,
+  Projektstatus und Sprint-Narrativ auf die aktive `1.3.0-dev`-Linie
+  synchronisiert (`README.md`, `docs/README.md`, `docs/README_EN.md`,
+  `docs/STATUS.md`, `docs/SPRINTS.md`). (2026-03-24)
+- [General] Tracker/Planning: Scope-Freeze fuer `1.3.0` im kanonischen Tracker
+  festgezogen. `BL-0017` und `BL-0018` stehen jetzt auf `approved` mit Lane
+  `release-blocking`; Downstream-Tasks `TSK-0018` bis `TSK-0021` sind angelegt
+  und der Gate-2-Stand ist in Backlog-/Roadmap-/Status-/Entry-Doku
+  synchronisiert (`docs/backlog/BL-0017-fuel-price-api-evaluation/item.md`,
+  `docs/backlog/BL-0018-fuel-price-history-polling/item.md`,
+  `docs/BACKLOG.md`, `docs/ROADMAP_1_3_0.md`, `docs/STATUS.md`,
+  `docs/README.md`, `docs/README_EN.md`, `docs/SPRINTS.md`). (2026-03-24)
+- [General] Research/Decision: API-Evaluation fuer `BL-0017` in kanonische
+  Repo-Doku ueberfuehrt (`docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`).
+  Bewertungsmatrix, Ausschlussgruende, Betriebsgrenzen und Auditbedarf sind
+  jetzt nachvollziehbar verankert; fuer `1.3.0` ist `Tankerkoenig` als
+  Primaerquelle und `Benzinpreis-Aktuell.de` als degradierter Fallback
+  festgelegt. Tracker-Sync: `TSK-0018` und `TSK-0019` auf `done`, `BL-0017`
+  auf `done`; Gate-3-Stand in Roadmap-/Status-/Entry-/Sprint-Doku
+  aktualisiert. (2026-03-24)
 - [General] Release/Docs: Version `1.2.0` final freigegeben. `src/Betankungen.lpr` wurde auf `APP_VERSION=1.2.0` umgestellt; Gate 5 der 1.2.0-Linie ist in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku als abgeschlossen synchronisiert (`docs/ROADMAP_1_2_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`, `docs/RELEASE_1_2_0_PREFLIGHT.md`, `docs/SPRINTS.md`). Finale Release-/Backup-Ausfuehrung wurde erfolgreich durchgefuehrt (`./kpr.sh --note "Release 1.2.0 final"`, `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"`), inkl. Artefakt `.releases/Betankungen_1_2_0.tar` (SHA-256 `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`) und Snapshot `.backup/2026-03-24_1809`; lokaler Vollnachweis `make verify` ist gruen. (2026-03-24)
 - [General] Docs/Tracker: `BL-0023` abgeschlossen und als kuratierte Entwicklungschronik verankert. Neues Basisdokument `docs/DEV_DIARY.md` definiert Ort, Leitplanken und Abgrenzung zu Changelog/Sprints; erster Referenzeintrag unter `docs/dev_diary/2026-03-24-bl0023-kickoff-and-framing.md` angelegt. Tracker-Sync: `BL-0023` auf `done`, neue Tasks `TSK-0016`/`TSK-0017` auf `done` (`docs/backlog/BL-0023...`), Backlog-/Status-/Entry-Navigation nachgezogen (`docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`). (2026-03-24)
 - [General] QA/Tests/Tracker: `TSK-0012` umgesetzt und `BL-0022` auf Abschlussstand gebracht. Neuer Regression-Runner `tests/regression/run_user_flow_break_matrix_check.sh` codifiziert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (INIT-001..006, DEMO-001..005, CLI-001, EOF-Abbruch `--add fuelups`, Multi-Car-Guidance-Hints). Verify-Verdrahtung erweitert (`Makefile`: Target `user-flow-break-check`, Aufnahme in `make verify`), Testdoku synchronisiert (`tests/README.md`, `tests/regression/README.md`), Matrix-Status fuer die erstabgedeckten IDs auf `Automatisiert` gesetzt und Tracker-Status nachgezogen (`docs/backlog/BL-0022...`, `docs/BACKLOG.md`, `docs/STATUS.md`). (2026-03-24)
@@ -281,6 +313,8 @@ Ziel: naechste priorisierte Entwicklungsphase nach final freigegebenem 1.2.0-Rel
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Versionierungs-/Roadmap-Sync fuer den Start der `1.3.0-dev`-Linie erfolgte
+  mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-24)
 - Pflege der neuen Backlog-Vorschlaege `BL-0023` und `BL-0024` inkl. Index-/Changelog-Sync erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-21)
 - Tracker-/Policy-Pflege (Vorschlagsabgleich, neue BL/POL/ADR-Eintraege und Doku-Sync) erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-15)
 - Konsistenz-Update von `AGENTS.md` auf den aktuellen Tracker-/Gate-Stand erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-13)

@@ -1,18 +1,20 @@
 ---
 id: BL-0018
 title: Historische Tankstellenpreis-Erfassung via API-Polling
-status: proposed
+status: approved
 priority: P2
 type: feature
-tags: [api, polling, history, analytics, docker, 'lane:planned']
+tags: [api, polling, history, analytics, docker, 'lane:release-blocking']
 created: 2026-03-17
-updated: 2026-03-18
+updated: 2026-03-24
 related:
   - BL-0017
   - BL-010
   - POL-003
+  - TSK-0020
+  - TSK-0021
 ---
-**Stand:** 2026-03-18
+**Stand:** 2026-03-24
 
 # Goal
 Tankstellenpreise zyklisch (z. B. alle 15 Minuten) erfassen und als auswertbare
@@ -42,4 +44,5 @@ Ein definierter Implementierungsrahmen fuer Preis-Historie inklusive
 Speicherformat- und Datenmodell-Leitplanken.
 
 # Derived Tasks
-- Werden bei Aktivierung als `TSK-xxxx` angelegt.
+- `TSK-0020` - Polling-/Historien-Contract und Datenpfad-Trennung fuer 1.3.0 definieren. (todo)
+- `TSK-0021` - Polling-Basis, Persistenzpfad und Regression-/Audit-Nachweise fuer 1.3.0 liefern. (todo)

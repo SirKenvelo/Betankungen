@@ -1,17 +1,20 @@
 ---
 id: BL-0017
 title: Evaluation kostenloser Tankstellenpreis-APIs fuer Raspberry-Pi-Betrieb
-status: proposed
+status: done
 priority: P2
 type: research
-tags: [api, fuel-price, research, raspberry-pi, 'lane:exploratory']
+tags: [api, fuel-price, research, raspberry-pi, 'lane:release-blocking']
 created: 2026-03-17
-updated: 2026-03-18
+updated: 2026-03-24
 related:
   - BL-0018
   - POL-003
+  - TSK-0018
+  - TSK-0019
+  - POL-002
 ---
-**Stand:** 2026-03-18
+**Stand:** 2026-03-24
 
 # Goal
 Eine tragfaehige, kostenlose API-Quelle fuer regelmaessige Tankstellenpreis-
@@ -38,6 +41,8 @@ Out of Scope:
 # Output
 Ein klar dokumentierter API-Entscheidungsvorschlag als Grundlage fuer die
 spaetere Implementierung von Preis-Historie und Vergleichen.
+Source of truth: `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`
 
 # Derived Tasks
-- Werden bei Aktivierung als `TSK-xxxx` angelegt.
+- `TSK-0018` - API-Evaluationsmatrix und Betriebsgrenzen fuer 1.3.0 definieren. (done)
+- `TSK-0019` - Quellenempfehlung inkl. Fallback und Audit-/Doku-Nachweis fuer 1.3.0 ausarbeiten. (done)
