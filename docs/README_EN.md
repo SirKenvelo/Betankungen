@@ -1,29 +1,26 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-15
+**Stand:** 2026-03-24
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
 
 ## Current State
 
-- Latest release: `0.8.0`
-- Current development line: road to `0.9.x`
-- S6 baseline is in place: module strategy accepted, companion handshake (`--module-info`) implemented, module smoke path available (`tests/smoke_modules.sh` / `--modules`)
-- Sprint 10 C1 started: maintenance companion now has schema migration baseline via `--migrate [--db <path>]` (idempotent module schema init).
-- Sprint 10 C2 delivered CRUD baseline in the maintenance companion: `--add maintenance` and `--list maintenance`.
-- Sprint 10 C3 delivered maintenance stats baseline: `--stats maintenance` (text + JSON/pretty) with optional car scope (`--car-id`).
-- Sprint 10 C4 hardened the module contract and smoke coverage (invalid stats/json combinations now explicitly regression-tested).
-- Sprint 11 C1/C2 delivered an explicit cost integration mode: `--maintenance-source none|module`; `module` is now active and pulls maintenance cost from the companion binary with explicit fallback metadata when unavailable.
-- Sprint 11 C3 hardened verification/CI for both integration modes with a dedicated regression gate (`tests/regression/run_cost_integration_modes_check.sh`) covering `none`, active `module`, and explicit fallback scenarios.
-- Contract evolution/deprecation visibility is explicit per `POL-002`: active deprecations are tracked in `docs/EXPORT_CONTRACT.md` (current status: `none`).
-- Sprint 11 C4 finalized 0.9.0 readiness with an explicit scope-freeze and a standardized local preflight (`scripts/release_preflight.sh`, checklist in `docs/RELEASE_0_9_0_PREFLIGHT.md`).
-- S7 progressed to Fleet JSON MVP: `--stats fleet --json [--pretty]` plus export-meta baseline
-- S7 guardrails hardened: fleet keeps strict rejects for `--csv`, `--monthly`, `--yearly`, `--dashboard`, `--from/--to`
-- Sprint 7 is functionally complete (Fleet MVP text + JSON + guardrail coverage)
-- Sprint 8 progressed to Cost JSON MVP: `--stats cost --json [--pretty]` with export-meta baseline (`kind: "cost_mvp"`)
-- Sprint 8 guardrails hardened for cost: invalid combos (`--csv`, `--monthly`, `--yearly`, `--dashboard`) are regression-covered
-- Sprint 9 C1/C2/C3/C4: cost scope is active end-to-end and guardrailed. `--stats cost` accepts `--from/--to` and `--car-id`, collector/output apply the filters, cost JSON includes scope/period contract fields, and domain-policy `P-061` protects car/period isolation.
-- Sprint 8 is functionally complete (Cost MVP text + JSON + guardrails, verified in domain-policy and smoke suites)
+- Latest release: `1.1.0` (released on 2026-03-18).
+- Current development line: `1.2.0-dev`.
+- The binding roadmap for `1.2.0` is active (`docs/ROADMAP_1_2_0.md`):
+  - Gate 1 to Gate 4 are completed.
+  - Gate 5 is active (finalization track).
+- Release-blocking scope for `1.2.0` is delivered:
+  - `BL-0020` multi-database backup operations: done.
+  - `BL-0021` receipt-photo link references: done.
+- Non-blocking hardening stream `BL-0022` is active and already delivered key fixes:
+  - EOF-safe fuelup dialog and seed/demo smoke hardening.
+  - Fuelup cross-field validation guardrail (`P-033`).
+  - Station master-data plausibility validation (`P-080` to `P-084`).
+  - Multi-car resolver smoke sync for the extra `P-050` prompt.
+  - Improved first-run and multi-car guidance in CLI/help paths.
+- CI/verify governance remains active for `main` (PR-based flow with green verification gate).
 
 ## Recommended Reading Order
 

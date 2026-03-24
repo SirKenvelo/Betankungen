@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-19
+**Stand:** 2026-03-24
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -868,3 +868,25 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
     Commit `3e9be17`, `success`).
   - Gate-4-Exit dokumentiert und Handover auf Gate 5 in Roadmap-/Status-/
     Entry-/Preflight-/Changelog-Doku synchronisiert.
+
+## General-Stream nach Sprint 22 (Gate 5, non-blocking)
+
+- Status: aktiv
+- Ziel: Gate-5-Finalisierung der 1.2.0-Linie begleiten, ohne den
+  release-blocking Scope zu aendern; parallel gezielte QA-/User-Flow-
+  Nachschaerfungen aus `BL-0022` auf `main` liefern.
+
+### Bisheriger Fortschritt (2026-03-20 bis 2026-03-22)
+
+- `189e159`: Teststrategie und Nutzerfund-Tracker als kanonischer Rahmen
+  eingefuehrt (`docs/TEST_MATRIX.md`, `BL-0022`, `ISS-0002..ISS-0006`).
+- `7d43034`: Repo-Hygiene fuer lokale Codex-Konfigurationen nachgezogen
+  (`.codex/` in `.gitignore`).
+- `eebac9a`: EOF-sicheren Fuelup-Dialog und Seed-/Demo-Smoke-Hardening
+  umgesetzt.
+- `10d6361`: Cross-Field-Guardrail `P-033` fuer Fuelups geliefert.
+- `26e1499`: Stations-Masterdata-Plausibilitaet (`P-080..P-084`) gehaertet.
+- `50b7600`: Resolver-Matrix-Smoke fuer den zusaetzlichen `P-050`-Prompt
+  stabilisiert.
+- `f590bcb`: First-Run- und Multi-Car-Guidance in CLI/Help sichtbar
+  geschaerft (`TSK-0015`).

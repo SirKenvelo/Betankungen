@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.2.0
-**Stand:** 2026-03-19
+**Stand:** 2026-03-24
 **Status:** aktiv (`APP_VERSION=1.2.0-dev`)
 
 ## Ausgangslage
@@ -128,6 +128,11 @@ Exit-Kriterium:
 
 Status:
 - aktiv (Kickoff am 2026-03-19).
+- Fortschritt seit Gate-4-Abschluss:
+  - non-blocking Hardening-Stream `BL-0022` laeuft auf `main` parallel zur
+    Finalisierung (u. a. `eebac9a`, `10d6361`, `26e1499`, `50b7600`,
+    `f590bcb`), ohne den release-blocking Scope (`BL-0020`, `BL-0021`) zu
+    aendern.
 
 ## Verbindliche Abweichungsregel
 
