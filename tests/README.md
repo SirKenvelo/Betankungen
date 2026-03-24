@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-20
+**Stand:** 2026-03-24
 
 ## Abgrenzung / Source of Truth
 
@@ -88,6 +88,8 @@ Direktlauf:
 - Zweck: validiert den Multi-DB-Backup-Operationspfad (`scripts/db_backup_ops.sh`) inkl. Scope-Guardrails, Dry-Run, Single/All-Run, Integritaetsmetadaten, Index-Konsistenz und Retention.
 - Script: `tests/regression/run_receipt_link_contract_check.sh`
 - Zweck: validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe und JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
+- Script: `tests/regression/run_user_flow_break_matrix_check.sh`
+- Zweck: validiert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (Initialisierung/Leerzustaende, Seed/Demo-Basisfluss, unknown-flag, EOF-Abbruch bei `--add fuelups`, Multi-Car-Guidance-Hints).
 
 Direktlauf:
 - `tests/regression/run_export_contract_json_check.sh`
@@ -96,6 +98,7 @@ Direktlauf:
 - `tests/regression/run_package_manifest_fixture_check.sh`
 - `tests/regression/run_db_backup_ops_check.sh`
 - `tests/regression/run_receipt_link_contract_check.sh`
+- `tests/regression/run_user_flow_break_matrix_check.sh`
 
 ## Benchmark (optional)
 

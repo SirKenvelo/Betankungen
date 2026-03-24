@@ -243,11 +243,11 @@ Bereits erledigt:
   - release-blocking Scope fuer 1.2.0: `BL-0020` (Multi-DB-Backup-Operations, done) und `BL-0021` (Receipt-Photo-Link-References, done).
   - Gate 4 RC-Haertung ist abgeschlossen; Gate 5 (Finalisierung 1.2.0) ist
     aktiv.
-  - Non-blocking Hardening-Stream `BL-0022` ist aktiv und liefert bereits
-    produktive Nachschaerfungen auf `main` (EOF-/Seed-Demo-Haertung,
-    Fuelup-Cross-Field `P-033`, Stations-Plausibilitaet `P-080..P-084`,
-    Resolver-Matrix-Sync fuer zusaetzlichen `P-050`-Prompt, First-Run-/Multi-
-    Car-Guidance).
+  - Non-blocking Hardening-Stream `BL-0022` ist abgeschlossen: dokumentierte
+    Nutzertest-Funde (`ISS-0002` bis `ISS-0006`) sind behoben und ueber
+    `TSK-0012` jetzt mit priorisiertem User-Flow-/Break-Regression-Check
+    (`tests/regression/run_user_flow_break_matrix_check.sh`) in `make verify`
+    verankert.
   - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
