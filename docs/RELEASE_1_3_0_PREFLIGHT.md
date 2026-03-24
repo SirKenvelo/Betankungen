@@ -97,6 +97,29 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gates sowie
   Release-/Backup-Dry-Runs).
 
+### CI-Referenz auf `main`
+- Workflow: `CI`
+- Run-ID: `23514165068`
+- Commit: `ce5a574`
+- Ergebnis: `success`
+
+## RC-Checklisten-/Freeze-Snapshot (Stand 2026-03-24)
+
+- Gate-Konsistenz ist dokumentiert: Gate 1/2/3 abgeschlossen, Gate 4 aktiv,
+  Gate 5 offen.
+- Versionierungs-Guardrail unveraendert: `APP_VERSION=1.3.0-dev` bis Gate 5.
+- Doku-Sync-Gates konsistent:
+  - `docs/ROADMAP_1_3_0.md`
+  - `docs/STATUS.md`
+  - `docs/SPRINTS.md`
+  - `docs/CHANGELOG.md`
+  - `docs/README.md`
+- Governance-Mindeststand fuer `main` bleibt:
+  PR-only, gruener Required-Check `verify`, up-to-date-Branch-Pflicht.
+- Release-blockierender Scope bleibt unveraendert abgeschlossen:
+  - `BL-0017` + `TSK-0018`/`TSK-0019`
+  - `BL-0018` + `TSK-0020`/`TSK-0021`
+
 ## Audit-Entscheid fuer Gate 4
 
 - Aktueller Zielpfad: Release-Audit fuer die `1.3.0`-Linie.
@@ -108,7 +131,6 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 
 ## Offene Gate-4-Schritte
 
-- CI-Referenz auf `main` fuer den aktuellen RC-Stand dokumentieren.
 - RC-Abschlusslauf auf den finalen Gate-4-Stand verdichten.
 - Roadmap-/Status-/Entry-Doku auf Gate-4-Closeout und Gate-5-Handover
   umstellen.

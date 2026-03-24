@@ -78,6 +78,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Scope-Freeze 1.3.0 ist gesetzt:
   - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
   - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
+- Gate-4-RC-Snapshot fuer 1.3.0 ist dokumentiert:
+  - lokaler Readiness-Preflight `make release-preflight-1-3-0` gruen.
+  - CI-Referenz auf `main`: `CI` Run `23514165068`, Commit `ce5a574`.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)

@@ -133,6 +133,9 @@ Status:
     `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff-Lauf `make release-preflight-1-3-0` ist gruen
     dokumentiert.
+  - RC-Checklisten-/Freeze-Snapshot fuer Gate 4 ist in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert, inkl. CI-Referenz auf
+    `main` (Run `23514165068`, Commit `ce5a574`).
 
 ### Gate 5: Finalisierung 1.3.0
 

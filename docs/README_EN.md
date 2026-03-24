@@ -33,6 +33,9 @@ Detailed documents are currently maintained primarily in German.
 - Gate 4 is now backed by a dedicated `1.3.0` release-preflight blueprint and
   local entrypoint (`docs/RELEASE_1_3_0_PREFLIGHT.md`,
   `make release-preflight-1-3-0`).
+- The current Gate-4 RC snapshot is documented, including the local preflight
+  result and the latest CI reference on `main` (run `23514165068`,
+  commit `ce5a574`).
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).
