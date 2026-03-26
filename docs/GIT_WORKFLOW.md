@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-03-19
+**Stand:** 2026-03-26
 
 ## Ziel
 
@@ -47,6 +47,19 @@ Beispiele:
 ### Regel
 
 Ein Branch enthaelt genau ein zusammenhaengendes Thema (z. B. ein Sprint).
+
+### Branch-Naming-Disziplin (verbindlich)
+
+- Branch-Namen duerfen nicht frei erfunden, generisch oder platzhalterhaft
+  sein.
+- Unzulaessige Beispiele:
+  `future-branch`, `future-sprint`, `test-branch`, `tmp`, `misc`, `update`,
+  `changes`.
+- Branch-Namen muessen dem hier beschriebenen Muster und dem fachlichen
+  Sprint-/Themenzuschnitt entsprechen (z. B. `feat/...`, `fix/...`,
+  `chore/...` mit klarer Scope-Aussage).
+- Wenn kein regelkonformer Branch-Name sicher ableitbar ist, wird vor
+  Commit/Push ein konkreter Namensvorschlag zur Freigabe eingeholt.
 
 ## Commit-Regeln
 
