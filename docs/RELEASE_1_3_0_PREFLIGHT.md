@@ -1,6 +1,6 @@
 # Release Preflight 1.3.0
-**Stand:** 2026-03-24
-**Status:** aktiv (Gate 4 / RC-Haertung laeuft)
+**Stand:** 2026-03-26
+**Status:** aktiv (Gate 5 / Finalisierung vorbereitet)
 
 ## Ziel
 
@@ -62,14 +62,16 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - RC-Kickoff-Nachweis ist lokal reproduzierbar ueber
   `make release-preflight-1-3-0`.
 - Lokaler RC-Kickoff-Lauf ist erfolgreich dokumentiert.
+- Finaler RC-Abschlusslauf ist erfolgreich dokumentiert
+  (`make release-preflight-1-3-0` inklusive `make verify`).
 
-## Gate-Status-Snapshot (Stand 2026-03-24)
+## Gate-Status-Snapshot (Stand 2026-03-26)
 
 - Gate 1: abgeschlossen am 2026-03-24.
 - Gate 2: abgeschlossen am 2026-03-24.
 - Gate 3: abgeschlossen am 2026-03-24.
-- Gate 4: aktiv.
-- Gate 5: offen.
+- Gate 4: abgeschlossen am 2026-03-26.
+- Gate 5: aktiv.
 - Scope-Freeze bleibt unverletzt (`BL-0017` + `BL-0018` als einziger
   release-blockierender `1.3.0`-Fokus).
 
@@ -90,17 +92,22 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - Vermischung externer Preis-Historie mit produktiven Tankdatenbanken
 - Architekturwechsel weg vom CLI-Kern
 
-## Lokaler RC-Kickoff-Nachweis
+## Lokaler RC-Nachweis
 
 ### Lokal (2026-03-24)
 - Befehl: `make release-preflight-1-3-0`
 - Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gates sowie
   Release-/Backup-Dry-Runs).
 
+### Lokal (2026-03-26, Gate-4-Abschlusslauf)
+- Befehl: `make release-preflight-1-3-0`
+- Ergebnis: erfolgreich (inkl. `make verify`, Doku-Gates sowie
+  Release-/Backup-Dry-Runs).
+
 ### CI-Referenz auf `main`
 - Workflow: `CI`
-- Run-ID: `23514165068`
-- Commit: `ce5a574`
+- Run-ID: `23515516312`
+- Commit: `027e963`
 - Ergebnis: `success`
 
 ## RC-Checklisten-/Freeze-Snapshot (Stand 2026-03-24)
@@ -120,6 +127,18 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   - `BL-0017` + `TSK-0018`/`TSK-0019`
   - `BL-0018` + `TSK-0020`/`TSK-0021`
 
+## Gate-4-Closeout-/Handover-Snapshot (Stand 2026-03-26)
+
+- Gate 4 ist formal abgeschlossen.
+- Der finale RC-Abschlusslauf ist lokal vollstaendig gruen dokumentiert
+  (`make release-preflight-1-3-0` inklusive `make verify` und Dry-Runs).
+- CI-Referenz auf `main` ist auf dem aktuellen dokumentierten Stand
+  (`CI` Run `23515516312`, Commit `027e963`, `success`).
+- Roadmap-/Status-/Entry-Doku ist auf Gate-4-Closeout und Gate-5-Handover
+  synchronisiert.
+- Gate 5 ist aktiv; `APP_VERSION` bleibt bis zur finalen Freigabe auf
+  `1.3.0-dev`.
+
 ## Audit-Entscheid fuer Gate 4
 
 - Aktueller Zielpfad: Release-Audit fuer die `1.3.0`-Linie.
@@ -129,8 +148,9 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   Abweichung), muss die Entscheidung vor dem finalen Release aktualisiert
   werden.
 
-## Offene Gate-4-Schritte
+## Gate-5-Handover (naechste Schritte)
 
-- RC-Abschlusslauf auf den finalen Gate-4-Stand verdichten.
-- Roadmap-/Status-/Entry-Doku auf Gate-4-Closeout und Gate-5-Handover
-  umstellen.
+- Finalen Gate-5-Snapshot (Scope/Version/Audit-Entscheid) aufsetzen.
+- Finalen Release-Umschalt-Block vorbereiten (`APP_VERSION` -> `1.3.0`).
+- Finalen Doku-Sync sowie Release-/Backup-Ausfuehrung nach Freigabe
+  durchziehen.

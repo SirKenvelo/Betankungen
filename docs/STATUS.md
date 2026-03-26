@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 **Zielversion:** 1.3.0 (aktive Dev-Linie; `APP_VERSION=1.3.0-dev`)
 
 ## Fundament & Architektur (erledigt)
@@ -237,9 +237,10 @@ Bereits erledigt:
   - Gate 3 abgeschlossen am 2026-03-24 (`BL-0017` + `BL-0018` auf `done`,
     Polling-Runner/Regression geliefert, lokaler Abschlusslauf `make verify`
     gruen).
-  - Gate 4 aktiv (Preflight-Blueprint + operativer Readiness-Preflight fuer
-    `1.3.0` eingefuehrt).
-  - Gate 5 offen.
+  - Gate 4 abgeschlossen am 2026-03-26 (RC-Kickoff, RC-Checklisten-/Freeze-
+    Snapshot und finaler RC-Abschlusslauf mit lokalem Vollnachweis
+    `make release-preflight-1-3-0`).
+  - Gate 5 aktiv.
 - Leitplanken fuer die 1.3.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - externe Preisquellen nur auf Basis einer expliziten API-/Lizenzentscheidung
@@ -268,14 +269,16 @@ Bereits erledigt:
     `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
   - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
     Fuel-Price-History-Regression-Check und lief lokal gruen.
-  - Aktiver naechster Fokus ist Gate 4 der 1.3.0-Linie
-    (RC-Haertung/Preflight/Audit-Entscheid).
+  - Aktiver naechster Fokus ist Gate 5 der 1.3.0-Linie
+    (Finalisierung/Release-Umschaltblock/Audit-Referenz).
   - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
     Entrypoint ist `make release-preflight-1-3-0`.
-  - Lokaler RC-Kickoff fuer Gate 4 ist erfolgreich gelaufen
-    (`make release-preflight-1-3-0` inklusive `make verify` und Dry-Runs).
-  - RC-Checklisten-/Freeze-Snapshot ist dokumentiert; aktuelle CI-Referenz auf
-    `main`: Run `23514165068`, Commit `ce5a574`, Status `success`.
+  - Lokaler RC-Kickoff und finaler RC-Abschlusslauf fuer Gate 4 sind
+    erfolgreich gelaufen (`make release-preflight-1-3-0` inklusive
+    `make verify` und Dry-Runs).
+  - RC-Checklisten-/Freeze-Snapshot und Gate-4-Closeout sind dokumentiert;
+    aktuelle CI-Referenz auf `main`: Run `23515516312`, Commit `027e963`,
+    Status `success`.
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

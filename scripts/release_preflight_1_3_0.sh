@@ -3,7 +3,7 @@ set -euo pipefail
 
 # release_preflight_1_3_0.sh
 # CREATED: 2026-03-24
-# UPDATED: 2026-03-24
+# UPDATED: 2026-03-26
 # Release-Readiness-Preflight fuer 1.3.0 (lokaler Gate-Run + Dry-Run der Release-Werkzeuge).
 
 SCRIPT_NAME="$(basename "$0")"
@@ -153,8 +153,8 @@ if ! $SKIP_DOC_GATES; then
 
   check_doc_gate \
     "$ROOT_DIR/docs/STATUS.md" \
-    'Gate 4 aktiv \(Preflight-Blueprint \+ operativer Readiness-Preflight fuer' \
-    "Status-Doku fuehrt Gate 4 als aktiv"
+    'Gate 4 (aktiv|abgeschlossen)' \
+    "Status-Doku fuehrt Gate 4 als aktiv/abgeschlossen"
 
   check_doc_gate \
     "$ROOT_DIR/docs/RELEASE_1_3_0_PREFLIGHT.md" \

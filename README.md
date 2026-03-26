@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 
 CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
@@ -7,7 +7,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
 - Latest release: `1.2.0` (released on 2026-03-24)
 - Current development line: `1.3.0-dev`
-- Active release roadmap: `1.3.0` (Gate 1, Gate 2, and Gate 3 completed; Gate 4 active).
+- Active release roadmap: `1.3.0` (Gate 1 to Gate 4 completed; Gate 5 active).
 
 ## Documentation
 

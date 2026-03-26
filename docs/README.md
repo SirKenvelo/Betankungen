@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -62,7 +62,7 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand 1.3.0: Gate 1/2/3 abgeschlossen, Gate 4 aktiv.
+- Gate-Stand 1.3.0: Gate 1/2/3/4 abgeschlossen, Gate 5 aktiv.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
@@ -78,9 +78,10 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Scope-Freeze 1.3.0 ist gesetzt:
   - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
   - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
-- Gate-4-RC-Snapshot fuer 1.3.0 ist dokumentiert:
-  - lokaler Readiness-Preflight `make release-preflight-1-3-0` gruen.
-  - CI-Referenz auf `main`: `CI` Run `23514165068`, Commit `ce5a574`.
+- Gate-4-Closeout fuer 1.3.0 ist dokumentiert:
+  - lokaler finaler RC-Abschlusslauf `make release-preflight-1-3-0` gruen
+    (inkl. `make verify` und Dry-Runs).
+  - CI-Referenz auf `main`: `CI` Run `23515516312`, Commit `027e963`.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
