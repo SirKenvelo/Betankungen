@@ -955,3 +955,5 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Gate 4 der 1.3.0-Linie ist formal abgeschlossen; Gate 5 ist aktiv.
 - Aktuelle CI-Referenz auf `main` fuer den Gate-4-Closeout ist dokumentiert
   (`CI` Run `23515516312`, Commit `027e963`, Status `success`).
+- Gate-5-Kickoff-Snapshot ist dokumentiert (Scope/Version/Audit/Exit-Checks)
+  in `docs/RELEASE_1_3_0_PREFLIGHT.md`.
