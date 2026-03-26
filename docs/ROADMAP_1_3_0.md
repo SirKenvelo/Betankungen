@@ -155,6 +155,9 @@ Exit-Kriterium:
 
 Status:
 - aktiv.
+- Fortschritt:
+  - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
 
 ## Verbindliche Abweichungsregel
 

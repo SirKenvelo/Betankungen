@@ -82,6 +82,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - lokaler finaler RC-Abschlusslauf `make release-preflight-1-3-0` gruen
     (inkl. `make verify` und Dry-Runs).
   - CI-Referenz auf `main`: `CI` Run `23515516312`, Commit `027e963`.
+- Gate-5-Kickoff-Snapshot fuer 1.3.0 ist dokumentiert:
+  - Scope/Version/Audit/Exit-Checks in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md`.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)

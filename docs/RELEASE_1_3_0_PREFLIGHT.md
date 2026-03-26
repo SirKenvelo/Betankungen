@@ -139,6 +139,36 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - Gate 5 ist aktiv; `APP_VERSION` bleibt bis zur finalen Freigabe auf
   `1.3.0-dev`.
 
+## Gate-5-Kickoff-Snapshot (Stand 2026-03-26)
+
+### Scope-Snapshot
+- Release-blockierender Scope bleibt unveraendert:
+  - `BL-0017` + `TSK-0018`/`TSK-0019` (`done`)
+  - `BL-0018` + `TSK-0020`/`TSK-0021` (`done`)
+- Kein neuer `1.3.0`-Scope ist zusaetzlich freigegeben.
+
+### Versions-Snapshot
+- Aktueller technischer Stand: `APP_VERSION=1.3.0-dev`.
+- Der finale Umschalt-Commit auf `APP_VERSION=1.3.0` bleibt ein eigener
+  Gate-5-Release-Schritt nach expliziter Freigabe.
+
+### Audit-Snapshot
+- Release-Audit bleibt der Zielpfad fuer die `1.3.0`-Finalisierung.
+- Aktuell kein dokumentierter Zwang zu einem Vollaudit.
+- Bei neuem Risikotrigger vor Gate-5-Abschluss muss die Audit-Entscheidung
+  vor dem finalen Release aktualisiert werden.
+
+### Finale Exit-Checks (Gate 5)
+- Check 1: finalen Release-Umschalt-Block vorbereiten
+  (`APP_VERSION`-Umschaltpunkt + Doku-Update-Liste).
+- Check 2: finalen lokalen Abschlusslauf auf dem Release-Stand dokumentieren
+  (`make verify`, `make release-preflight-1-3-0`).
+- Check 3: finalen Doku-Sync auf `1.3.0` durchziehen
+  (Roadmap/Status/Entry/Preflight/Sprints/Changelog).
+- Check 4: finale Release-/Backup-Ausfuehrung nach Freigabe dokumentieren
+  (`kpr.sh`, `backup_snapshot.sh`).
+- Check 5: Gate-5-Closeout nachvollziehbar abschliessen.
+
 ## Audit-Entscheid fuer Gate 4
 
 - Aktueller Zielpfad: Release-Audit fuer die `1.3.0`-Linie.
@@ -150,7 +180,7 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 
 ## Gate-5-Handover (naechste Schritte)
 
-- Finalen Gate-5-Snapshot (Scope/Version/Audit-Entscheid) aufsetzen.
+- Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist gesetzt.
 - Finalen Release-Umschalt-Block vorbereiten (`APP_VERSION` -> `1.3.0`).
 - Finalen Doku-Sync sowie Release-/Backup-Ausfuehrung nach Freigabe
   durchziehen.

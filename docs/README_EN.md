@@ -37,6 +37,9 @@ Detailed documents are currently maintained primarily in German.
 - The Gate-4 closeout snapshot is documented, including the final local RC run
   and the latest CI reference on `main` (run `23515516312`,
   commit `027e963`).
+- The Gate-5 kickoff snapshot for `1.3.0` is documented
+  (`docs/RELEASE_1_3_0_PREFLIGHT.md`), including scope/version/audit/exit
+  checkpoints for the finalization phase.
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

@@ -279,6 +279,8 @@ Bereits erledigt:
   - RC-Checklisten-/Freeze-Snapshot und Gate-4-Closeout sind dokumentiert;
     aktuelle CI-Referenz auf `main`: Run `23515516312`, Commit `027e963`,
     Status `success`.
+  - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 
