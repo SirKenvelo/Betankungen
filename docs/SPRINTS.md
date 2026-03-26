@@ -967,3 +967,21 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - lokaler Vollnachweis `make verify` ist gruen.
   - finale Release-/Backup-Ausfuehrung dokumentiert
     (`.releases/Betankungen_1_3_0.tar`, Snapshot `.backup/2026-03-26_1918`).
+
+## General-Stream nach 1.3.0 - ADR/Backlog-Refinement
+
+- Status: done
+- Ziel: Entscheidungs- und Tracker-Basis fuer den naechsten Arbeitsabschnitt
+  nach der abgeschlossenen `1.3.0`-Linie konsistent finalisieren.
+
+### Fortschritt (2026-03-26)
+
+- `ADR-0010` auf `accepted` finalisiert und den verbindlichen MVP-Rahmen fuer
+  das repo-lokale Workflow-Wrapper-CLI `btkgit` festgezogen.
+- `BL-0024` von `proposed` auf `approved` gehoben und von einem reinen
+  Vorschlag auf einen umsetzbaren Arbeitsblock ausgebaut.
+- Downstream-Tasks fuer `BL-0024` angelegt:
+  - `TSK-0022` (Platzierung/Ton/Guardrails der Cookie-Wiki-Notiz)
+  - `TSK-0023` (Veroeffentlichung, Navigation und Wiki-Link-Check)
+- ADR-/Backlog-Index sowie Changelog auf den neuen Entscheidungs- und
+  Tracker-Stand synchronisiert.

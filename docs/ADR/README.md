@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer produkt- und architekturrelevante Entscheidungen.
 Backlog-Themen ohne finale Entscheidung stehen im Index `docs/BACKLOG.md`;
@@ -16,7 +16,7 @@ die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
 - `ADR-0007` - Core Boundary: Core vs Module (`accepted`)
 - `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)
 - `ADR-0009` - Runtime-Config-Profile im Core abgelehnt (`rejected`)
-- `ADR-0010` - Repo-lokales Workflow-Wrapper-CLI nach 1.3.0 (`proposed`)
+- `ADR-0010` - Repo-lokales Workflow-Wrapper-CLI (`btkgit`) (`accepted`)
 
 ## Ergaenzende Policy-/UX-Notizen
 

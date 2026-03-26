@@ -72,6 +72,17 @@ Ziel: naechste Entwicklungsphase nach final freigegebenem 1.3.0-Release.
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] ADR/Tracker: `ADR-0010` ist von `proposed` auf `accepted`
+  finalisiert und der Startumfang fuer das repo-lokale Workflow-Wrapper-CLI
+  (`btkgit`) verbindlich festgezogen (`docs/ADR/ADR-0010-repo-local-workflow-wrapper-cli.md`,
+  `docs/ADR/README.md`). Parallel wurde `BL-0024` von `proposed` auf
+  `approved` gehoben und um konkrete Folgeaufgaben erweitert:
+  `TSK-0022` (Platzierung/Ton/Guardrails) und `TSK-0023`
+  (Veroeffentlichung/Navigation/Link-Check). Backlog-Index und Tracker-Dateien
+  sind synchronisiert (`docs/backlog/BL-0024-cookie-personal-wiki-note/item.md`,
+  `docs/backlog/BL-0024-cookie-personal-wiki-note/tasks/TSK-0022-define-cookie-note-placement-tone-and-guardrails.md`,
+  `docs/backlog/BL-0024-cookie-personal-wiki-note/tasks/TSK-0023-publish-cookie-wiki-note-and-sync-links.md`,
+  `docs/BACKLOG.md`). (2026-03-26)
 - [General] Release/Docs: Version `1.3.0` final freigegeben.
   `src/Betankungen.lpr` wurde auf `APP_VERSION=1.3.0` umgestellt; Gate 5 der
   1.3.0-Linie ist in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku als
@@ -399,6 +410,9 @@ Ziel: naechste Entwicklungsphase nach final freigegebenem 1.3.0-Release.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Ausarbeitung und Finalisierung von `ADR-0010` sowie Tracker-Operationalisierung
+  von `BL-0024` (`TSK-0022`/`TSK-0023`) erfolgte mit Unterstuetzung durch
+  AI-Tools als Sparringspartner. (2026-03-26)
 - Versionierungs-/Roadmap-Sync fuer den Start der `1.3.0-dev`-Linie erfolgte
   mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-24)
 - Pflege der neuen Backlog-Vorschlaege `BL-0023` und `BL-0024` inkl. Index-/Changelog-Sync erfolgte mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-03-21)
