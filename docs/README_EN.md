@@ -40,6 +40,9 @@ Detailed documents are currently maintained primarily in German.
 - The Gate-5 kickoff snapshot for `1.3.0` is documented
   (`docs/RELEASE_1_3_0_PREFLIGHT.md`), including scope/version/audit/exit
   checkpoints for the finalization phase.
+- The final Gate-5 release-switch package is prepared (target files and
+  execution order are documented in `docs/RELEASE_1_3_0_PREFLIGHT.md`,
+  without an early `APP_VERSION` switch).
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

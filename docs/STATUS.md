@@ -281,6 +281,9 @@ Bereits erledigt:
     Status `success`.
   - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
     `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
+  - Finales Release-Umschaltpaket (`APP_VERSION`-Switch auf `1.3.0`,
+    Ziel-Dateien, Ausfuehrungsreihenfolge) ist vorbereitet, aber noch nicht
+    ausgefuehrt.
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

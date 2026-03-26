@@ -957,3 +957,6 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   (`CI` Run `23515516312`, Commit `027e963`, Status `success`).
 - Gate-5-Kickoff-Snapshot ist dokumentiert (Scope/Version/Audit/Exit-Checks)
   in `docs/RELEASE_1_3_0_PREFLIGHT.md`.
+- Finales Gate-5-Release-Umschaltpaket ist vorbereitet
+  (Ziel-Dateien + Ausfuehrungsreihenfolge, ohne vorgezogenen
+  `APP_VERSION`-Wechsel).

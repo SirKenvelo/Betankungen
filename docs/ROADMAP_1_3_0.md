@@ -158,6 +158,9 @@ Status:
 - Fortschritt:
   - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
     `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
+  - Finales Release-Umschaltpaket (Ziel-Dateien + Reihenfolge) ist in
+    `docs/RELEASE_1_3_0_PREFLIGHT.md` vorbereitet, ohne vorgezogenen
+    Versionswechsel.
 
 ## Verbindliche Abweichungsregel
 
