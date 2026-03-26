@@ -6,13 +6,14 @@ Detailed documents are currently maintained primarily in German.
 
 ## Current State
 
-- Latest release: `1.2.0` (released on 2026-03-24).
-- Current development line: `1.3.0-dev`.
+- Latest release: `1.3.0` (released on 2026-03-26).
+- Current development line: not started yet (post-release closeout on
+  `APP_VERSION=1.3.0`).
 - The active binding roadmap is `1.3.0` (`docs/ROADMAP_1_3_0.md`):
   - Gate 1 and Gate 2 are completed.
   - Gate 3 is completed.
   - Gate 4 is completed.
-  - Gate 5 is active.
+  - Gate 5 is completed.
 - Release-blocking scope for the completed `1.2.0` line is delivered:
   - `BL-0020` multi-database backup operations: done.
   - `BL-0021` receipt-photo link references: done.
@@ -37,12 +38,9 @@ Detailed documents are currently maintained primarily in German.
 - The Gate-4 closeout snapshot is documented, including the final local RC run
   and the latest CI reference on `main` (run `23515516312`,
   commit `027e963`).
-- The Gate-5 kickoff snapshot for `1.3.0` is documented
-  (`docs/RELEASE_1_3_0_PREFLIGHT.md`), including scope/version/audit/exit
-  checkpoints for the finalization phase.
-- The final Gate-5 release-switch package is prepared (target files and
-  execution order are documented in `docs/RELEASE_1_3_0_PREFLIGHT.md`,
-  without an early `APP_VERSION` switch).
+- The Gate-5 finalization closeout for `1.3.0` is documented
+  (`docs/RELEASE_1_3_0_PREFLIGHT.md`), including the final version switch,
+  release/backup execution, and artifact references.
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

@@ -1,6 +1,6 @@
 # Verbindlicher Fahrplan bis Version 1.3.0
 **Stand:** 2026-03-26
-**Status:** aktiv (`APP_VERSION=1.3.0-dev`)
+**Status:** abgeschlossen (`APP_VERSION=1.3.0`)
 
 ## Ausgangslage
 
@@ -154,13 +154,18 @@ Exit-Kriterium:
 - 1.3.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- aktiv.
-- Fortschritt:
-  - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
-    `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
-  - Finales Release-Umschaltpaket (Ziel-Dateien + Reihenfolge) ist in
-    `docs/RELEASE_1_3_0_PREFLIGHT.md` vorbereitet, ohne vorgezogenen
-    Versionswechsel.
+- abgeschlossen am 2026-03-26.
+- Abschlussstand:
+  - Finaler Versionswechsel ist ausgefuehrt (`APP_VERSION=1.3.0`).
+  - Finaler Doku-Sync fuer Roadmap/Status/Entry/Preflight/Sprints/Changelog
+    ist abgeschlossen.
+  - Finale Release-/Backup-Ausfuehrung ist dokumentiert
+    (`./kpr.sh --note "Release 1.3.0 final"`,
+    `scripts/backup_snapshot.sh --note "Backup after release 1.3.0"`).
+  - Release-Artefakt ist erstellt:
+    `.releases/Betankungen_1_3_0.tar` (SHA-256
+    `d9e61f0c6516c67c5191882c163bb28f664db2a1d1f41397766830a1280653de`),
+    Snapshot `.backup/2026-03-26_1918`.
 
 ## Verbindliche Abweichungsregel
 

@@ -5,8 +5,8 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-1.3.x
-Ziel: aktive Entwicklungsphase nach final freigegebenem 1.2.0-Release.
+1.4.x
+Ziel: naechste Entwicklungsphase nach final freigegebenem 1.3.0-Release.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -72,6 +72,19 @@ Ziel: aktive Entwicklungsphase nach final freigegebenem 1.2.0-Release.
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Release/Docs: Version `1.3.0` final freigegeben.
+  `src/Betankungen.lpr` wurde auf `APP_VERSION=1.3.0` umgestellt; Gate 5 der
+  1.3.0-Linie ist in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku als
+  abgeschlossen synchronisiert (`docs/ROADMAP_1_3_0.md`, `docs/STATUS.md`,
+  `docs/README.md`, `docs/README_EN.md`, `README.md`,
+  `docs/RELEASE_1_3_0_PREFLIGHT.md`, `docs/SPRINTS.md`). Finale
+  Release-/Backup-Ausfuehrung wurde erfolgreich durchgefuehrt
+  (`./kpr.sh --note "Release 1.3.0 final"`,
+  `scripts/backup_snapshot.sh --note "Backup after release 1.3.0"`), inkl.
+  Artefakt `.releases/Betankungen_1_3_0.tar` (SHA-256
+  `d9e61f0c6516c67c5191882c163bb28f664db2a1d1f41397766830a1280653de`) und
+  Snapshot `.backup/2026-03-26_1918`; lokaler
+  Vollnachweis `make verify` ist gruen. (2026-03-26)
 - [General] Versioning: Nach der Finalisierung von `1.2.0` wurde die aktive
   Entwicklungsbasis auf `APP_VERSION=1.3.0-dev` angehoben
   (`src/Betankungen.lpr`). (2026-03-24)

@@ -1,6 +1,6 @@
 # Release Preflight 1.3.0
 **Stand:** 2026-03-26
-**Status:** aktiv (Gate 5 / Finalisierung vorbereitet)
+**Status:** abgeschlossen (Gate 5 / Finalisierung abgeschlossen)
 
 ## Ziel
 
@@ -64,6 +64,8 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - Lokaler RC-Kickoff-Lauf ist erfolgreich dokumentiert.
 - Finaler RC-Abschlusslauf ist erfolgreich dokumentiert
   (`make release-preflight-1-3-0` inklusive `make verify`).
+- Finaler Gate-5-Abschlusslauf ist lokal erfolgreich dokumentiert
+  (`make verify`).
 
 ## Gate-Status-Snapshot (Stand 2026-03-26)
 
@@ -71,7 +73,7 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - Gate 2: abgeschlossen am 2026-03-24.
 - Gate 3: abgeschlossen am 2026-03-24.
 - Gate 4: abgeschlossen am 2026-03-26.
-- Gate 5: aktiv.
+- Gate 5: abgeschlossen am 2026-03-26.
 - Scope-Freeze bleibt unverletzt (`BL-0017` + `BL-0018` als einziger
   release-blockierender `1.3.0`-Fokus).
 
@@ -136,8 +138,7 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   (`CI` Run `23515516312`, Commit `027e963`, `success`).
 - Roadmap-/Status-/Entry-Doku ist auf Gate-4-Closeout und Gate-5-Handover
   synchronisiert.
-- Gate 5 ist aktiv; `APP_VERSION` bleibt bis zur finalen Freigabe auf
-  `1.3.0-dev`.
+- Gate 5 wurde anschliessend als finaler Release-Block ausgefuehrt.
 
 ## Gate-5-Kickoff-Snapshot (Stand 2026-03-26)
 
@@ -169,10 +170,9 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   (`kpr.sh`, `backup_snapshot.sh`).
 - Check 5: Gate-5-Closeout nachvollziehbar abschliessen.
 
-## Release-Umschaltpaket (vorbereitet, Stand 2026-03-26)
+## Release-Umschaltpaket (ausgefuehrt, Stand 2026-03-26)
 
-- Das Umschaltpaket ist geplant und dokumentiert, aber in diesem Schritt noch
-  nicht ausgefuehrt.
+- Das Umschaltpaket ist vollstaendig ausgefuehrt und dokumentiert.
 
 ### Ziel-Dateien fuer den finalen Umschalt-Commit
 - `src/Betankungen.lpr` (`APP_VERSION` von `1.3.0-dev` auf `1.3.0`)
@@ -185,14 +185,14 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 - `docs/CHANGELOG.md`
 - `docs/RELEASE_1_3_0_PREFLIGHT.md`
 
-### Geplante Reihenfolge (ohne Ausfuehrung in diesem Schritt)
-1. Finalen Gate-5-Vorcheck auf dem `1.3.0-dev`-Stand dokumentieren
+### Ausgefuehrte Reihenfolge (Gate-5-Closeout)
+1. Finalen Gate-5-Vorcheck auf dem `1.3.0-dev`-Stand dokumentiert
    (`make verify`, `make release-preflight-1-3-0`).
-2. Umschalt-Commit vorbereiten (Version + Doku in den Ziel-Dateien
-   konsistent auf `1.3.0` ziehen).
-3. Finalen Freigabeblock nach expliziter Freigabe ausfuehren:
-   `kpr.sh` + `backup_snapshot.sh`.
-4. Gate-5-Closeout mit finaler Artefakt-/Hash-Referenz dokumentieren.
+2. Umschalt-Commit ausgefuehrt (Version + Doku konsistent auf `1.3.0`).
+3. Finalen Freigabeblock nach Freigabe ausgefuehrt:
+   `./kpr.sh --note "Release 1.3.0 final"` +
+   `scripts/backup_snapshot.sh --note "Backup after release 1.3.0"`.
+4. Gate-5-Closeout mit finaler Artefakt-/Hash-Referenz dokumentiert.
 
 ## Audit-Entscheid fuer Gate 4
 
@@ -203,10 +203,13 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   Abweichung), muss die Entscheidung vor dem finalen Release aktualisiert
   werden.
 
-## Gate-5-Handover (naechste Schritte)
+## Gate-5-Closeout (Finalstand)
 
-- Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist gesetzt.
-- Finales Release-Umschaltpaket (`APP_VERSION`-Switch + Zieldateien +
-  Reihenfolge) ist vorbereitet.
-- Finalen Doku-Sync sowie Release-/Backup-Ausfuehrung nach Freigabe
-  durchziehen.
+- Gate-5-Kickoff-Snapshot ist umgesetzt.
+- Finales Release-Umschaltpaket ist ausgefuehrt (`APP_VERSION=1.3.0`).
+- Finaler Doku-Sync ist abgeschlossen.
+- Finale Release-/Backup-Ausfuehrung ist abgeschlossen.
+- Release-Artefakt:
+  `.releases/Betankungen_1_3_0.tar`
+  (SHA-256 `d9e61f0c6516c67c5191882c163bb28f664db2a1d1f41397766830a1280653de`).
+- Snapshot: `.backup/2026-03-26_1918`.
