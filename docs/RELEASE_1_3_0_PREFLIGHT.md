@@ -169,6 +169,31 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
   (`kpr.sh`, `backup_snapshot.sh`).
 - Check 5: Gate-5-Closeout nachvollziehbar abschliessen.
 
+## Release-Umschaltpaket (vorbereitet, Stand 2026-03-26)
+
+- Das Umschaltpaket ist geplant und dokumentiert, aber in diesem Schritt noch
+  nicht ausgefuehrt.
+
+### Ziel-Dateien fuer den finalen Umschalt-Commit
+- `src/Betankungen.lpr` (`APP_VERSION` von `1.3.0-dev` auf `1.3.0`)
+- `docs/ROADMAP_1_3_0.md`
+- `docs/STATUS.md`
+- `docs/README.md`
+- `docs/README_EN.md`
+- `README.md`
+- `docs/SPRINTS.md`
+- `docs/CHANGELOG.md`
+- `docs/RELEASE_1_3_0_PREFLIGHT.md`
+
+### Geplante Reihenfolge (ohne Ausfuehrung in diesem Schritt)
+1. Finalen Gate-5-Vorcheck auf dem `1.3.0-dev`-Stand dokumentieren
+   (`make verify`, `make release-preflight-1-3-0`).
+2. Umschalt-Commit vorbereiten (Version + Doku in den Ziel-Dateien
+   konsistent auf `1.3.0` ziehen).
+3. Finalen Freigabeblock nach expliziter Freigabe ausfuehren:
+   `kpr.sh` + `backup_snapshot.sh`.
+4. Gate-5-Closeout mit finaler Artefakt-/Hash-Referenz dokumentieren.
+
 ## Audit-Entscheid fuer Gate 4
 
 - Aktueller Zielpfad: Release-Audit fuer die `1.3.0`-Linie.
@@ -181,6 +206,7 @@ Alle muessen denselben Gate-Stand fuer `1.3.0` widerspruchsfrei zeigen.
 ## Gate-5-Handover (naechste Schritte)
 
 - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist gesetzt.
-- Finalen Release-Umschalt-Block vorbereiten (`APP_VERSION` -> `1.3.0`).
+- Finales Release-Umschaltpaket (`APP_VERSION`-Switch + Zieldateien +
+  Reihenfolge) ist vorbereitet.
 - Finalen Doku-Sync sowie Release-/Backup-Ausfuehrung nach Freigabe
   durchziehen.
