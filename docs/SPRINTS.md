@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -906,7 +906,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   sauber verankern, basierend auf der verbindlichen Reihenfolge aus dem
   Entscheidungsentwurf vom 2026-03-18.
 
-### Fortschritt (2026-03-24)
+### Fortschritt (2026-03-26)
 
 - `APP_VERSION=1.3.0-dev` gesetzt und damit die neue Entwicklungsbasis aktiv
   gemacht.
@@ -949,3 +949,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Der RC-Checklisten-/Freeze-Snapshot fuer Gate 4 ist jetzt dokumentiert,
   inklusive aktueller CI-Referenz auf `main`
   (`CI` Run `23514165068`, Commit `ce5a574`).
+- Der finale RC-Abschlusslauf fuer Gate 4 ist dokumentiert:
+  `make release-preflight-1-3-0` lief gruen (inkl. `make verify`,
+  Doku-Gates sowie Release-/Backup-Dry-Runs).
+- Gate 4 der 1.3.0-Linie ist formal abgeschlossen; Gate 5 ist aktiv.
+- Aktuelle CI-Referenz auf `main` fuer den Gate-4-Closeout ist dokumentiert
+  (`CI` Run `23515516312`, Commit `027e963`, Status `success`).

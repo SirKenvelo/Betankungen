@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -11,7 +11,8 @@ Detailed documents are currently maintained primarily in German.
 - The active binding roadmap is `1.3.0` (`docs/ROADMAP_1_3_0.md`):
   - Gate 1 and Gate 2 are completed.
   - Gate 3 is completed.
-  - Gate 4 is active.
+  - Gate 4 is completed.
+  - Gate 5 is active.
 - Release-blocking scope for the completed `1.2.0` line is delivered:
   - `BL-0020` multi-database backup operations: done.
   - `BL-0021` receipt-photo link references: done.
@@ -33,9 +34,9 @@ Detailed documents are currently maintained primarily in German.
 - Gate 4 is now backed by a dedicated `1.3.0` release-preflight blueprint and
   local entrypoint (`docs/RELEASE_1_3_0_PREFLIGHT.md`,
   `make release-preflight-1-3-0`).
-- The current Gate-4 RC snapshot is documented, including the local preflight
-  result and the latest CI reference on `main` (run `23514165068`,
-  commit `ce5a574`).
+- The Gate-4 closeout snapshot is documented, including the final local RC run
+  and the latest CI reference on `main` (run `23515516312`,
+  commit `027e963`).
 - Non-blocking hardening stream `BL-0022` is completed and delivered key fixes:
   - EOF-safe fuelup dialog and seed/demo smoke hardening.
   - Fuelup cross-field validation guardrail (`P-033`).

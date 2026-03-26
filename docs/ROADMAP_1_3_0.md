@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.3.0
-**Stand:** 2026-03-24
+**Stand:** 2026-03-26
 **Status:** aktiv (`APP_VERSION=1.3.0-dev`)
 
 ## Ausgangslage
@@ -124,8 +124,8 @@ Exit-Kriterium:
 - RC-Kandidat ist releasefaehig und reproduzierbar.
 
 Status:
-- aktiv.
-- Fortschritt:
+- abgeschlossen am 2026-03-26.
+- Abschlussstand:
   - Gate-4-Preflight-Blueprint und Doku-Gates sind in
     `docs/RELEASE_1_3_0_PREFLIGHT.md` verankert.
   - Operativer Readiness-Preflight ist eingefuehrt:
@@ -136,6 +136,11 @@ Status:
   - RC-Checklisten-/Freeze-Snapshot fuer Gate 4 ist in
     `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert, inkl. CI-Referenz auf
     `main` (Run `23514165068`, Commit `ce5a574`).
+  - Finaler RC-Abschlusslauf `make release-preflight-1-3-0` ist gruen
+    dokumentiert (inkl. `make verify`, Doku-Gates, Release-/Backup-Dry-Runs).
+  - Aktuelle CI-Referenz auf `main` ist dokumentiert:
+    Run `23515516312`, Commit `027e963`, Status `success`.
+  - Handover auf Gate 5 ist synchronisiert.
 
 ### Gate 5: Finalisierung 1.3.0
 
@@ -149,7 +154,7 @@ Exit-Kriterium:
 - 1.3.0 ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- offen.
+- aktiv.
 
 ## Verbindliche Abweichungsregel
 
