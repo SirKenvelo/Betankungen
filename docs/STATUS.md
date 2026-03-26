@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-26
-**Zielversion:** 1.3.0 (aktive Dev-Linie; `APP_VERSION=1.3.0-dev`)
+**Zielversion:** 1.3.0 (final freigegeben; `APP_VERSION=1.3.0`)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -224,7 +224,7 @@ Bereits erledigt:
   - 1.1.0 ist final freigegeben (`APP_VERSION=1.1.0`, historischer Abschlussstand).
   - BL-Triage-Lanes im kanonischen Tracker bleiben als leichte Priorisierung aktiv (`release-blocking`/`planned`/`exploratory`).
 
-## Roadmap 1.3.0 - verbindlicher Fahrplan (aktiv)
+## Roadmap 1.3.0 - verbindlicher Fahrplan (abgeschlossen)
 
 - Der aktive Gate-Plan liegt in `docs/ROADMAP_1_3_0.md`.
 - Gate-Stand:
@@ -240,7 +240,11 @@ Bereits erledigt:
   - Gate 4 abgeschlossen am 2026-03-26 (RC-Kickoff, RC-Checklisten-/Freeze-
     Snapshot und finaler RC-Abschlusslauf mit lokalem Vollnachweis
     `make release-preflight-1-3-0`).
-  - Gate 5 aktiv.
+  - Gate 5 abgeschlossen am 2026-03-26 (finaler Versionswechsel
+    `APP_VERSION=1.3.0`, finaler Doku-Sync sowie finale Release-/
+    Backup-Ausfuehrung; Artefakt `.releases/Betankungen_1_3_0.tar`, SHA-256
+    `d9e61f0c6516c67c5191882c163bb28f664db2a1d1f41397766830a1280653de`,
+    Snapshot `.backup/2026-03-26_1918`).
 - Leitplanken fuer die 1.3.0-Linie:
   - keine Runtime-Config-Profile im Core (`ADR-0009` bleibt `rejected`);
   - externe Preisquellen nur auf Basis einer expliziten API-/Lizenzentscheidung
@@ -251,8 +255,8 @@ Bereits erledigt:
   - Backup-/Restore-/Privacy strikt nach `POL-003`;
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
-  - `1.2.0` ist seit 2026-03-24 final freigegeben.
-  - Die aktive Entwicklungsbasis steht auf `APP_VERSION=1.3.0-dev`.
+  - `1.3.0` ist seit 2026-03-26 final freigegeben.
+  - Finaler technischer Stand fuer die 1.3.0-Linie: `APP_VERSION=1.3.0`.
   - Der verbindliche Release-Kern fuer `1.3.0` folgt Option B:
     `BL-0017` (API-Evaluation) + `BL-0018` (Polling/Historisierung).
   - `BL-0017` ist abgeschlossen: Entscheidungsvorlage und Betriebsgrenzen fuer
@@ -269,8 +273,8 @@ Bereits erledigt:
     `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
   - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
     Fuel-Price-History-Regression-Check und lief lokal gruen.
-  - Aktiver naechster Fokus ist Gate 5 der 1.3.0-Linie
-    (Finalisierung/Release-Umschaltblock/Audit-Referenz).
+  - Der naechste Fokus ist die 1.4.0-Linie gemaess Option C
+    (`BL-0016` + `BL-0011`).
   - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
     Entrypoint ist `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff und finaler RC-Abschlusslauf fuer Gate 4 sind
@@ -279,11 +283,8 @@ Bereits erledigt:
   - RC-Checklisten-/Freeze-Snapshot und Gate-4-Closeout sind dokumentiert;
     aktuelle CI-Referenz auf `main`: Run `23515516312`, Commit `027e963`,
     Status `success`.
-  - Gate-5-Kickoff-Snapshot (Scope/Version/Audit/Exit-Checks) ist in
-    `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert.
-  - Finales Release-Umschaltpaket (`APP_VERSION`-Switch auf `1.3.0`,
-    Ziel-Dateien, Ausfuehrungsreihenfolge) ist vorbereitet, aber noch nicht
-    ausgefuehrt.
+  - Gate-5-Closeout ist in `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert
+    (Scope/Version/Audit/Exit-Checks, finaler Umschalt- und Release-Block).
   - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
     (`BL-0016` + `BL-0011`) gesetzt.
 

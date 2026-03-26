@@ -58,15 +58,15 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - `0.9.0` wurde am `2026-03-15` final freigegeben.
 - `1.0.0` wurde am `2026-03-16` final freigegeben.
 - `1.1.0` wurde am `2026-03-18` final freigegeben.
-- Verbindlicher Fahrplan bis `1.3.0` ist aktiv: `docs/ROADMAP_1_3_0.md`.
+- Verbindlicher Fahrplan bis `1.3.0` ist abgeschlossen: `docs/ROADMAP_1_3_0.md`.
 - Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
 - Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
 - Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand 1.3.0: Gate 1/2/3/4 abgeschlossen, Gate 5 aktiv.
+- Gate-Stand 1.3.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
 - Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
-- Aktive Entwicklungsbasis: `APP_VERSION=1.3.0-dev`.
+- Aktueller Finalstand: `APP_VERSION=1.3.0`.
 - Release-Kern fuer 1.3.0 gemaess Entscheidungsentwurf:
   - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
     abgeschlossen; Entscheidungsbasis liegt in
@@ -82,12 +82,11 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - lokaler finaler RC-Abschlusslauf `make release-preflight-1-3-0` gruen
     (inkl. `make verify` und Dry-Runs).
   - CI-Referenz auf `main`: `CI` Run `23515516312`, Commit `027e963`.
-- Gate-5-Kickoff-Snapshot fuer 1.3.0 ist dokumentiert:
-  - Scope/Version/Audit/Exit-Checks in
+- Gate-5-Closeout fuer 1.3.0 ist dokumentiert:
+  - Scope-/Version-/Audit-Entscheid und Exit-Checks sind nachvollziehbar in
     `docs/RELEASE_1_3_0_PREFLIGHT.md`.
-- Finales Gate-5-Release-Umschaltpaket ist vorbereitet:
-  - Ziel-Dateien + Ausfuehrungsreihenfolge sind dokumentiert
-    (ohne vorgezogenen `APP_VERSION`-Wechsel).
+  - Finaler Versionswechsel, Doku-Sync und Release-/Backup-Ausfuehrung sind
+    abgeschlossen.
 - Verbindliche Folge-Reihenfolge nach 1.2.0:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
   - `1.4.0`: Option C (`BL-0016` + `BL-0011`)

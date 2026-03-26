@@ -901,7 +901,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ## General-Stream nach 1.2.0 - Kickoff 1.3.0
 
-- Status: aktiv
+- Status: done
 - Ziel: die neue Entwicklungsbasis `1.3.0-dev` technisch und dokumentarisch
   sauber verankern, basierend auf der verbindlichen Reihenfolge aus dem
   Entscheidungsentwurf vom 2026-03-18.
@@ -960,3 +960,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Finales Gate-5-Release-Umschaltpaket ist vorbereitet
   (Ziel-Dateien + Ausfuehrungsreihenfolge, ohne vorgezogenen
   `APP_VERSION`-Wechsel).
+- Gate-5-Closeout fuer 1.3.0 ist abgeschlossen:
+  - `APP_VERSION=1.3.0` gesetzt.
+  - finaler Doku-Sync fuer Roadmap/Status/Entry/Preflight/Sprints/Changelog
+    abgeschlossen.
+  - lokaler Vollnachweis `make verify` ist gruen.
+  - finale Release-/Backup-Ausfuehrung dokumentiert
+    (`.releases/Betankungen_1_3_0.tar`, Snapshot `.backup/2026-03-26_1918`).
