@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-22
+# UPDATED: 2026-03-27
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -147,6 +147,7 @@ print_plan() {
   printf '[LIST] Pfad vorhanden: .backup\n'
   printf '[LIST] kpr dry-run\n'
   printf '[LIST] backup_snapshot dry-run\n'
+  printf '[LIST] btkgit --help\n'
   printf '[LIST] Test-DB Build: Betankungen_Big.db + Betankungen_Policy.db\n'
   printf '[LIST] Betankungen --version\n'
   printf '[LIST] Betankungen --help\n'
@@ -1073,6 +1074,7 @@ require_path "$ROOT_DIR/.backup"
 
 run_check "kpr dry-run" "$ROOT_DIR/kpr.sh" --dry-run
 run_check "backup_snapshot dry-run" "$ROOT_DIR/scripts/backup_snapshot.sh" --dry-run
+run_check "btkgit --help" "$ROOT_DIR/btkgit" --help
 run_check "Test-DB Build: Betankungen_Big.db + Betankungen_Policy.db" "$ROOT_DIR/tests/domain_policy/helpers/build_test_dbs.sh"
 
 if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then

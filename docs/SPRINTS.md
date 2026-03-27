@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -985,3 +985,25 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - `TSK-0023` (Veroeffentlichung, Navigation und Wiki-Link-Check)
 - ADR-/Backlog-Index sowie Changelog auf den neuen Entscheidungs- und
   Tracker-Stand synchronisiert.
+
+## General-Stream nach 1.3.0 - ADR-0010 + BL-0024 Umsetzung
+
+- Status: done
+- Ziel: den akzeptierten `ADR-0010` als operatives MVP liefern und den
+  freigegebenen Backlog-Block `BL-0024` inklusive Wiki-Navigation und
+  Tracker-Status vollstaendig abschliessen.
+
+### Fortschritt (2026-03-27)
+
+- `ADR-0010` ist jetzt technisch umgesetzt:
+  - neues Wrapper-CLI `scripts/btkgit.sh` plus Root-Entrypoint `./btkgit`.
+  - MVP-Kommandos aktiv: `sync`, `preflight <version>`, `ready`, `cleanup`.
+  - bestehende Projektbefehle bleiben sichtbar und kanonisch (`git`, `make`,
+    `scripts/release_preflight_*`).
+- `BL-0024` ist umgesetzt und auf `done` gesetzt:
+  - `TSK-0022` (Platzierung/Ton/Guardrails) auf `done`.
+  - `TSK-0023` (Veroeffentlichung/Navigation/Link-Check) auf `done`.
+  - finale Wiki-Seite `docs/wiki/Cookie-Note.md` angelegt und in
+    `docs/wiki/Home.md` / `docs/wiki/README.md` verlinkt.
+- Wiki-Guardrails fuer die neue Seite erweitert
+  (`scripts/wiki_link_check.sh`) und per `make wiki-link-check` abgesichert.

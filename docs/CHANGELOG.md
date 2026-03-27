@@ -72,6 +72,21 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Tooling/Workflow: `ADR-0010` als MVP umgesetzt. Neues
+  repo-lokales Wrapper-CLI `btkgit` eingefuehrt (`./btkgit`,
+  `scripts/btkgit.sh`) mit den Kommandos `sync`, `preflight <version>`,
+  `ready` und `cleanup`; Smoke-Abdeckung wurde um einen Basischeck fuer
+  `btkgit --help` erweitert (`tests/smoke/smoke_cli.sh`).
+  Doku-Sync in `docs/ADR/ADR-0010-repo-local-workflow-wrapper-cli.md`,
+  `docs/README.md`, `docs/STATUS.md` und `docs/SPRINTS.md`. (2026-03-27)
+- [General] Wiki/Tracker: `BL-0024` abgeschlossen und auf `done` gesetzt.
+  Cookie-Notiz als kuratierte Wiki-Seite veroeffentlicht
+  (`docs/wiki/Cookie-Note.md`), Navigation in `docs/wiki/Home.md` und
+  `docs/wiki/README.md` nachgezogen, zugehoerige Tasks `TSK-0022` und
+  `TSK-0023` auf `done` gesetzt sowie Backlog-Index synchronisiert
+  (`docs/backlog/BL-0024-cookie-personal-wiki-note/**`, `docs/BACKLOG.md`).
+  Wiki-Link-Guardrails wurden fuer die neue Seite erweitert
+  (`scripts/wiki_link_check.sh`). (2026-03-27)
 - [General] Process/Git-Policy: Merge- und Commit-Regeln verbindlich
   nachgeschaerft. `Create a merge commit` ist jetzt als fester
   Standard-Merge mit Prioritaetsregel dokumentiert; heuristische

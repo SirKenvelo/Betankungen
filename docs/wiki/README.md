@@ -1,5 +1,5 @@
 # Wiki Source (v1)
-**Stand:** 2026-03-15
+**Stand:** 2026-03-27
 
 This folder contains the versioned source pages for the public-readiness wiki
 bootstrap (`BL-012` / `TSK-0005`).
@@ -17,6 +17,7 @@ bootstrap (`BL-012` / `TSK-0005`).
 - `Architecture-Short-Guide.md`
 - `FAQ-Troubleshooting.md`
 - `Troubleshooting-Playbooks.md`
+- `Cookie-Note.md`
 
 ## Maintenance Flow
 

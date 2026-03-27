@@ -1,12 +1,12 @@
 ---
 id: BL-0024
 title: Cookie als persoenliche Wiki-Notiz mit optionalem Bild
-status: approved
+status: done
 priority: P4
 type: improvement
 tags: [wiki, community, docs, personal, 'lane:planned']
 created: 2026-03-21
-updated: 2026-03-26
+updated: 2026-03-27
 related:
   - BL-002
   - BL-012
@@ -14,7 +14,7 @@ related:
   - TSK-0022
   - TSK-0023
 ---
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 
 # Goal
 Eine kleine, bewusst ruhige Wiki-Notiz zu Cookie als persoenlichem
@@ -50,5 +50,5 @@ persoenlichen Hintergrund sichtbar macht und dabei bewusst klein, respektvoll
 und technisch unaufdringlich bleibt.
 
 # Derived Tasks
-- `TSK-0022` - Platzierung, Ton und Guardrails fuer die Cookie-Wiki-Notiz festziehen. (todo)
-- `TSK-0023` - Cookie-Wiki-Notiz veroeffentlichen und Navigation/Link-Checks synchronisieren. (todo)
+- `TSK-0022` - Platzierung, Ton und Guardrails fuer die Cookie-Wiki-Notiz festziehen. (done)
+- `TSK-0023` - Cookie-Wiki-Notiz veroeffentlichen und Navigation/Link-Checks synchronisieren. (done)

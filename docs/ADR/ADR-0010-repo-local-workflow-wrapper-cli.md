@@ -1,5 +1,5 @@
 # ADR-0010: Repo-lokales Workflow-Wrapper-CLI (`btkgit`)
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 **Status:** accepted
 **Datum:** 2026-03-26
 
@@ -60,6 +60,20 @@ ersetzt deren fachliche Source of Truth nicht.
   aufgerufen werden.
 - Der anschliessende 1.4.0-Zyklus kann mit einem klar abgegrenzten
   Tooling-Startblock beginnen.
+
+## Umsetzungsstand (MVP)
+
+Stand 2026-03-27:
+
+- Root-Wrapper `./btkgit` delegiert auf `scripts/btkgit.sh`.
+- `btkgit sync` fuehrt `git fetch --prune origin` und `git pull --ff-only` aus.
+- `btkgit preflight <version>` delegiert auf versionsspezifische
+  `scripts/release_preflight_<version>.sh` (inkl. `default` fuer
+  `scripts/release_preflight.sh`).
+- `btkgit ready` liefert menschenlesbaren Status und optionalen lokalen
+  Vollcheck via `make verify`.
+- `btkgit cleanup` fuehrt den Post-Merge-Pfad transparent aus (`checkout main`,
+  Sync auf `main`, lokales Branch-Cleanup).
 
 ## Referenzen
 
