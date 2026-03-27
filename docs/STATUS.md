@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-26
-**Zielversion:** 1.3.0 (final freigegeben; `APP_VERSION=1.3.0`)
+**Stand:** 2026-03-27
+**Zielversion:** Transition-Hold nach 1.3.0 (technischer Stand `APP_VERSION=1.3.0`; `1.4.0-dev` noch nicht gestartet)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -257,6 +257,8 @@ Bereits erledigt:
 - Operativer Fokus:
   - `1.3.0` ist seit 2026-03-26 final freigegeben.
   - Finaler technischer Stand fuer die 1.3.0-Linie: `APP_VERSION=1.3.0`.
+  - Verbindlicher Uebergangszustand `post-1-3-0-transition` ist aktiv:
+    `APP_VERSION` bleibt bis zum dedizierten Dev-Start-Commit auf `1.3.0`.
   - Der verbindliche Release-Kern fuer `1.3.0` folgt Option B:
     `BL-0017` (API-Evaluation) + `BL-0018` (Polling/Historisierung).
   - `BL-0017` ist abgeschlossen: Entscheidungsvorlage und Betriebsgrenzen fuer
@@ -273,8 +275,9 @@ Bereits erledigt:
     `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
   - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
     Fuel-Price-History-Regression-Check und lief lokal gruen.
-  - Der naechste Fokus ist die 1.4.0-Linie gemaess Option C
-    (`BL-0016` + `BL-0011`).
+  - Die 1.4.0-Linie bleibt als naechster Planungsfokus gemaess Option C
+    vorgemerkt (`BL-0016` + `BL-0011`), startet aber erst mit separatem
+    `APP_VERSION`-Wechsel auf `1.4.0-dev`.
   - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
     Entrypoint ist `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff und finaler RC-Abschlusslauf fuer Gate 4 sind

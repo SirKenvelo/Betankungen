@@ -1,12 +1,12 @@
 # CHANGELOG
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-1.4.x
-Ziel: naechste Entwicklungsphase nach final freigegebenem 1.3.0-Release.
+Transition-Hold (`APP_VERSION=1.3.0`)
+Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.0-dev`.
 
 ### Sprint / Commit References
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -72,6 +72,12 @@ Ziel: naechste Entwicklungsphase nach final freigegebenem 1.3.0-Release.
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 
 ### Changed
+- [General] Versioning/Transition: Verbindlichen Uebergangszustand
+  `post-1-3-0-transition` definiert. `APP_VERSION` bleibt explizit auf
+  `1.3.0`; die 1.4.0-Linie bleibt nur planerisch vorgemerkt und startet erst
+  mit einem separaten Dev-Start-Commit (`1.4.0-dev`). Status-/Changelog-
+  Metadaten wurden entsprechend synchronisiert (`docs/STATUS.md`,
+  `docs/CHANGELOG.md`). (2026-03-27)
 - [General] Process/Git-Workflow: Verbindliche Branch-Naming-Disziplin in den
   kanonischen Git-/PR-Regeln verankert (`docs/GIT_WORKFLOW.md`): generische
   Platzhalter-Branch-Namen sind explizit unzulaessig; Branches muessen den
