@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-19
+**Stand:** 2026-03-27
 
 <INSTRUCTIONS>
 
@@ -42,7 +42,11 @@
 - Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
 - Verbindliche Detailleitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen liegt in `docs/GIT_WORKFLOW.md`.
-- Merge-Default fuer Sprint- und Traceability-relevante PRs ist `Create a merge commit`; `Squash and merge` ist nur Ausnahmefall fuer kleine Einzelcommit-Aenderungen.
+- Standard-Merge-Strategie ist verbindlich `Create a merge commit`.
+- Prioritaetsregel: Wenn ein fester Merge-Standard definiert ist, muss dieser immer verwendet werden; heuristische Entscheidungsregeln (z. B. "Squash bei kleinen Aenderungen") gelten nur ohne expliziten Standard.
+- `Squash and merge` ist nur erlaubt, wenn der Merge-Standard explizit ueberschrieben wird oder der Task dies eindeutig fordert.
+- Ohne explizite Freigabe darf kein `Squash and merge` verwendet werden.
+- Begruendung: Merge-Commits erhalten die Branch-Struktur und verbessern die Traceability; konsistente Merge-Strategie hat Vorrang vor kurzfristiger Historienvereinfachung.
 - Rebase-Merge wird nicht verwendet.
 - Nach Merge wird der Arbeitsbranch aufgeraeumt (remote + lokal), sofern kein expliziter Weiterverwendungsgrund dokumentiert ist.
 - Ausnahmefaelle (z. B. dringender Hotfix ausserhalb des Standardpfads) nur mit expliziter User-Freigabe und sichtbarer Dokumentation in `docs/CHANGELOG.md`.
@@ -59,7 +63,12 @@
 - Session-Ende: finaler Sync-Check (`fetch`/ggf. `pull --ff-only`), danach Abschluss-Commit(s) und Push.
 - Bei laengeren Tasks: mehrere Zwischen-Commits sind gewuenscht; bei kurzen Tasks reicht in der Regel ein Abschluss-Commit.
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
-- Commit-Message-Konvention fuer Sprint-Arbeit: Betreff beginnt mit Prefix `[SxCy/z]` (Beispiel: `[S1C2/4] tests: cars_crud csv scope field-based`).
+- Commit-Message-Konvention (verbindlich): `[Scope] type: kurze beschreibung`.
+- `Scope` steht in eckigen Klammern (z. B. `[General]`; bei Sprint-Arbeit `[SxCy/z]`).
+- `type` ist klein geschrieben (z. B. `docs`, `feat`, `cli`, `release`, `chore`).
+- Beschreibung ist kurz, praezise und ohne Fuelltext.
+- Keine gemischten Formate (z. B. nicht abwechselnd `chore(...)` und `[General] ...`).
+- Neue Commits muessen sich an diese Repo-Konvention anpassen; Abweichungen sind nur bei explizit eingefuehrter neuer Konvention erlaubt.
 - Sprint-Tagging: Nach komplett abgeschlossenem und freigegebenem Sprint wird genau ein annotierter Tag im Format `sprint-<nr>-done` erstellt und gepusht; keine Sprint-Tags auf Zwischenstaenden.
 - Version-Tagging: Release-/Version-Tags (z. B. `1.2.0`) werden nur nach expliziter User-Freigabe erstellt und gepusht (keine automatische Tag-Erstellung).
 - Sprint-Artefakte nach Push: Nach jedem erfolgreichen Push eines Sprint-Commits erstellt Codex selbststaendig lokale Artefakte in `.artifacts/` (`.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.diff` und `.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.md`).
