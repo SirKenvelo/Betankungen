@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 
 ## Ziel
 
@@ -71,18 +71,25 @@ Jeder Commit soll:
 - einzeln verstaendlich sein
 - sinnvoll abgegrenzt sein
 
-### Beispielstruktur
+### Commit-Message-Konvention (verbindlich)
 
-- `S22C1/4 ...`
-- `S22C2/4 ...`
-- `S22C3/4 ...`
-- `S22C4/4 ...`
+- Schema: `[Scope] type: kurze beschreibung`
+- Beispiele:
+  - `[General] docs: add transition hold before 1.4.0-dev`
+  - `[General] release: finalize 1.3.0 gate5 closeout`
+  - `[General] cli: improve first-run guidance`
+- `Scope` steht immer in eckigen Klammern (z. B. `[General]`; fuer Sprint-Arbeit `[SxCy/z]`).
+- `type` ist klein geschrieben (z. B. `docs`, `feat`, `cli`, `release`, `chore`).
+- Beschreibung ist kurz, praezise und ohne Fuelltext.
+- Keine gemischten Formate (z. B. nicht abwechselnd `chore(...)` und `[General] ...`).
+- Neue Commits muessen diese Repo-Konvention verwenden; Abweichungen sind nur bei explizit eingefuehrter neuer Konvention zulaessig.
 
 ### Nicht erlaubt
 
 - unsaubere WIP-Commits
 - grosse Sammelcommits ohne Struktur
 - nachtraegliches Zusammenquetschen sauberer Sprint-Commits
+- Commit-Betreff im Format `chore(...)` oder anderen Mischformaten ausserhalb der Konvention `[Scope] type: ...`
 
 ## Artefakte pro Commit
 
@@ -144,7 +151,12 @@ Die Beschreibung wird **beim Erstellen des PR** gepflegt, nicht erst beim Merge.
 
 ### Standard
 
-- **Create a merge commit**
+- **Create a merge commit** ist die verbindliche Standard-Merge-Strategie.
+
+### Prioritaetsregel
+
+- Wenn ein fester Merge-Standard definiert ist, muss dieser immer verwendet werden.
+- Entscheidungsregeln wie "Squash bei kleinen Aenderungen" gelten nur dann, wenn kein expliziter Standard festgelegt ist.
 
 ### Warum?
 
@@ -155,11 +167,12 @@ Die Beschreibung wird **beim Erstellen des PR** gepflegt, nicht erst beim Merge.
 
 ### Ausnahme: Squash
 
-Erlaubt bei:
+`Squash and merge` ist nur erlaubt, wenn:
 
-- kleinen Doku-Aenderungen
-- einem einzelnen Commit
-- irrelevanten Mini-Aenderungen
+- der Merge-Standard explizit ueberschrieben wird, oder
+- dies im Task eindeutig gefordert ist.
+
+Ohne diese explizite Freigabe darf kein `Squash and merge` verwendet werden.
 
 ### Nicht verwenden: Rebase-Merge
 
@@ -230,7 +243,7 @@ Wenn unklar ist:
 - Mehrere sinnvolle Commits?
   - Ja -> Merge Commit
 - Nur ein kleiner Commit ohne Relevanz?
-  - Ja -> Squash moeglich
+  - Der feste Merge-Standard bleibt dennoch `Create a merge commit`.
 
 ## Kurzfassung
 
