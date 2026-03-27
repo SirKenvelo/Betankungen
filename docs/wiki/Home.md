@@ -1,5 +1,5 @@
 # Betankungen Wiki (v1)
-**Stand:** 2026-03-15
+**Stand:** 2026-03-27
 
 Welcome to the public-readiness wiki entry for Betankungen.
 
@@ -10,6 +10,7 @@ Welcome to the public-readiness wiki entry for Betankungen.
 - [Architecture Short Guide](Architecture-Short-Guide)
 - [FAQ & Troubleshooting](FAQ-Troubleshooting)
 - [Troubleshooting Playbooks](Troubleshooting-Playbooks)
+- [Cookie Note](Cookie-Note)
 
 ## Source Of Truth (Repository Docs)
 

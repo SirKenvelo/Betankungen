@@ -3,7 +3,7 @@ set -euo pipefail
 
 # wiki_link_check.sh
 # CREATED: 2026-03-15
-# UPDATED: 2026-03-15
+# UPDATED: 2026-03-27
 # Guardrail-Check fuer das Public-Readiness-Wiki-v1-Quellpaket.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -89,6 +89,7 @@ require_file "$WIKI_DIR/CLI-Quick-Reference.md" "Wiki page CLI Quick Reference"
 require_file "$WIKI_DIR/Architecture-Short-Guide.md" "Wiki page Architecture Short Guide"
 require_file "$WIKI_DIR/FAQ-Troubleshooting.md" "Wiki page FAQ/Troubleshooting"
 require_file "$WIKI_DIR/Troubleshooting-Playbooks.md" "Wiki page Troubleshooting Playbooks"
+require_file "$WIKI_DIR/Cookie-Note.md" "Wiki page Cookie Note"
 
 info "Pruefe Pflichtreferenzen auf Source-of-Truth-Doku"
 
@@ -98,6 +99,7 @@ require_pattern "$WIKI_DIR/CLI-Quick-Reference.md" 'https://github\.com/SirKenve
 require_pattern "$WIKI_DIR/Architecture-Short-Guide.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/ARCHITECTURE_EN\.md' "Architecture guide verlinkt EN architecture"
 require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" 'Troubleshooting-Playbooks\)' "FAQ verlinkt Playbooks"
 require_pattern "$WIKI_DIR/Troubleshooting-Playbooks.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/MODULES_ARCHITECTURE\.md' "Playbooks verlinken Module-Architektur"
+require_pattern "$WIKI_DIR/Cookie-Note.md" 'https://github\.com/SirKenvelo/Betankungen/blob/main/docs/backlog/BL-0024-cookie-personal-wiki-note/item\.md' "Cookie Note verlinkt BL-0024 als Source of Truth"
 
 info "Pruefe bidirektionale Entry-Verlinkung"
 
@@ -112,7 +114,8 @@ for page in \
   "$WIKI_DIR/CLI-Quick-Reference.md" \
   "$WIKI_DIR/Architecture-Short-Guide.md" \
   "$WIKI_DIR/FAQ-Troubleshooting.md" \
-  "$WIKI_DIR/Troubleshooting-Playbooks.md"; do
+  "$WIKI_DIR/Troubleshooting-Playbooks.md" \
+  "$WIKI_DIR/Cookie-Note.md"; do
   reject_pattern "$page" ']\((\./|\.\./)' "Keine repo-relativen Links"
 done
 
@@ -123,9 +126,10 @@ require_pattern "$WIKI_DIR/Home.md" ']\(CLI-Quick-Reference\)' "Home nutzt Wiki-
 require_pattern "$WIKI_DIR/Home.md" ']\(Architecture-Short-Guide\)' "Home nutzt Wiki-Link Architecture-Short-Guide ohne .md"
 require_pattern "$WIKI_DIR/Home.md" ']\(FAQ-Troubleshooting\)' "Home nutzt Wiki-Link FAQ-Troubleshooting ohne .md"
 require_pattern "$WIKI_DIR/Home.md" ']\(Troubleshooting-Playbooks\)' "Home nutzt Wiki-Link Troubleshooting-Playbooks ohne .md"
+require_pattern "$WIKI_DIR/Home.md" ']\(Cookie-Note\)' "Home nutzt Wiki-Link Cookie-Note ohne .md"
 require_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" ']\(Troubleshooting-Playbooks\)' "FAQ nutzt Wiki-Link Troubleshooting-Playbooks ohne .md"
 
-reject_pattern "$WIKI_DIR/Home.md" ']\((Getting-Started|CLI-Quick-Reference|Architecture-Short-Guide|FAQ-Troubleshooting|Troubleshooting-Playbooks)\.md\)' "Home verwendet keine internen Wiki-Links mit .md"
+reject_pattern "$WIKI_DIR/Home.md" ']\((Getting-Started|CLI-Quick-Reference|Architecture-Short-Guide|FAQ-Troubleshooting|Troubleshooting-Playbooks|Cookie-Note)\.md\)' "Home verwendet keine internen Wiki-Links mit .md"
 reject_pattern "$WIKI_DIR/FAQ-Troubleshooting.md" ']\(Troubleshooting-Playbooks\.md\)' "FAQ verwendet keinen internen Wiki-Link mit .md"
 
 info "Pruefe relative Links in Wiki-Seiten"
@@ -137,7 +141,8 @@ for page in \
   "$WIKI_DIR/CLI-Quick-Reference.md" \
   "$WIKI_DIR/Architecture-Short-Guide.md" \
   "$WIKI_DIR/FAQ-Troubleshooting.md" \
-  "$WIKI_DIR/Troubleshooting-Playbooks.md"; do
+  "$WIKI_DIR/Troubleshooting-Playbooks.md" \
+  "$WIKI_DIR/Cookie-Note.md"; do
   check_relative_links "$page"
 done
 

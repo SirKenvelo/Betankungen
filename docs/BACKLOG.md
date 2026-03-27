@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -54,4 +54,4 @@ Hinweis: Die Lane kann in BL-Frontmatter als Tag (`lane:*`) gefuehrt werden.
 - [BL-0021 - Tankbeleg-Foto-Links als Referenz speichern](backlog/BL-0021-receipt-photo-link-references/item.md) - Status: `done`, Typ: Feature (externe Belegbilder nur per Link referenzieren), Lane: `release-blocking` (1.2.0)
 - [BL-0022 - User-Flow- und QA-Hardening aus Nutzertests](backlog/BL-0022-user-flow-and-qa-hardening/item.md) - Status: `done`, Typ: Improvement (reproduzierbare Nutzertest-Funde in Matrix, Tracker und Folgetasks ueberfuehren), Lane: `planned`
 - [BL-0023 - Dev-Diary als kuratierte Projektchronik](backlog/BL-0023-dev-diary-project-chronicle/item.md) - Status: `done`, Typ: Improvement (kuratierte Entwicklungschronik in `docs/DEV_DIARY.md` + Initialeintrag), Lane: `planned`
-- [BL-0024 - Cookie als persoenliche Wiki-Notiz mit optionalem Bild](backlog/BL-0024-cookie-personal-wiki-note/item.md) - Status: `approved`, Typ: Improvement (kleine persoenliche Wiki-Notiz mit behutsamem Public-Readiness-Rahmen), Lane: `planned`, Tasks: `TSK-0022`, `TSK-0023`
+- [BL-0024 - Cookie als persoenliche Wiki-Notiz mit optionalem Bild](backlog/BL-0024-cookie-personal-wiki-note/item.md) - Status: `done`, Typ: Improvement (kleine persoenliche Wiki-Notiz mit behutsamem Public-Readiness-Rahmen), Lane: `planned`, Tasks: `TSK-0022` (`done`), `TSK-0023` (`done`)

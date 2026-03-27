@@ -259,6 +259,12 @@ Bereits erledigt:
   - Finaler technischer Stand fuer die 1.3.0-Linie: `APP_VERSION=1.3.0`.
   - Verbindlicher Uebergangszustand `post-1-3-0-transition` ist aktiv:
     `APP_VERSION` bleibt bis zum dedizierten Dev-Start-Commit auf `1.3.0`.
+  - `ADR-0010` ist als MVP jetzt umgesetzt: repo-lokales Wrapper-CLI
+    `btkgit` ist verfuegbar (`./btkgit`, `scripts/btkgit.sh`) fuer
+    `sync`, `preflight`, `ready` und `cleanup`.
+  - `BL-0024` ist abgeschlossen: Cookie-Notiz ist als kuratierte,
+    unaufdringliche Wiki-Seite veroeffentlicht
+    (`docs/wiki/Cookie-Note.md`) und Navigation/Link-Checks sind synchron.
   - Der verbindliche Release-Kern fuer `1.3.0` folgt Option B:
     `BL-0017` (API-Evaluation) + `BL-0018` (Polling/Historisierung).
   - `BL-0017` ist abgeschlossen: Entscheidungsvorlage und Betriebsgrenzen fuer

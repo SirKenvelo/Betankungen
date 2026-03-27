@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-26
+**Stand:** 2026-03-27
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -226,6 +226,7 @@ Details zur Regelbasis:
 
 ### Root-Ordner (Workflow ohne Git)
 - `scripts/`: Wartungsskripte (Release/Backup/Netzwerkdiagnose)
+- `btkgit`: repo-lokaler Workflow-Wrapper fuer Sync/Preflight/Readiness/Cleanup (Wrapper auf `scripts/btkgit.sh`)
 - `data/`: entkoppelte Daten-Assets (u. a. `dev_messages.b64` fuer optionale Easter-Egg-Messages)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
@@ -509,6 +510,24 @@ Beispiel:
 - `scripts/repo_sync.sh`
 - `scripts/repo_sync.sh --status-only`
 - `scripts/repo_sync.sh --remote origin --branch main`
+
+### `scripts/btkgit.sh` / `./btkgit`
+Repo-lokales Workflow-Wrapper-CLI gemaess `ADR-0010`.
+
+**Funktionen (MVP)**
+- `btkgit sync`: Session-Sync (`git fetch --prune origin` + `git pull --ff-only`)
+- `btkgit preflight <version>`: delegiert auf den passenden versionsspezifischen
+  Preflight (z. B. `1.3.0` -> `scripts/release_preflight_1_3_0.sh`)
+- `btkgit ready`: menschenlesbarer lokaler Readiness-Wrapper (`git status`,
+  optional `make verify`)
+- `btkgit cleanup`: Post-Merge-Flow (`checkout main`, Sync, lokales
+  Branch-Cleanup)
+
+Beispiele:
+- `./btkgit sync`
+- `./btkgit preflight 1.3.0 -- --skip-verify`
+- `./btkgit ready`
+- `./btkgit cleanup`
 
 ### `scripts/release_preflight.sh`
 Readiness-Preflight fuer den 0.9.0-Releasepfad.
