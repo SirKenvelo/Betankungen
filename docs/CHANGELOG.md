@@ -74,6 +74,11 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S24C1/1 - `1.4.0`-Repo-Scope formal festgezogen: `BL-0011` aus dem Betankungen-Implementierungsscope herausgeloest, als externes Research-/Handover-Thema dokumentiert und die betroffenen Planungsquellen auf `BL-0016` als verbleibenden In-Repo-Scope synchronisiert; Artefakte: `.artifacts/sprint_24_commit_1_von_1.md`, `.artifacts/sprint_24_commit_1_von_1.diff`; Basis-Commit: `a8af75d`. (2026-03-28)
 
 ### Changed
+- [General] Process/PR-Workflow: Sprint-PR-Titel als eigene Konvention
+  verankert. Fuer Sprint-Arbeit gilt auf GitHub jetzt `[Sxx] type: short
+  description`; Commit-Labels wie `[S24C1/1]` und generische Titel wie
+  `[Sprint 24]` sind als PR-Titel nicht zulaessig. Kurzregel in `AGENTS.md`,
+  Detailregel in `docs/GIT_WORKFLOW.md`. (2026-03-28)
 - [S24C1/1] Planning/Tracker: `BL-0011` fuer die geplante `1.4.0`-Linie
   formal aus dem Betankungen-Implementierungsscope externalisiert.
   `BL-0011` steht jetzt im kanonischen Tracker als blocked/research mit
