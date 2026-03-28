@@ -41,7 +41,7 @@ Hinweis: Die Lane kann in BL-Frontmatter als Tag (`lane:*`) gefuehrt werden.
 
 ## Kanonische BL-xxxx (neues Tracker-Schema)
 
-- [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `proposed`, Typ: Feature (Meta-/Tooling)
+- [BL-0011 - Projekt-Scaffolder (Repo Bootstrap)](backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md) - Status: `blocked`, Typ: Research (externalisiertes Scaffolder-Thema, nicht im Betankungen-Repo-Scope fuer `1.4.0`), Lane: `exploratory`
 - [BL-0012 - Module Capability Discovery erweitern](backlog/BL-0012-module-capability-discovery/item.md) - Status: `done`, Typ: Feature (Module-Contract), Lane: `release-blocking` (historisch)
 - [BL-0013 - Performance-Benchmark-Harness fuer Stats-Collector](backlog/BL-0013-stats-performance-benchmark-harness/item.md) - Status: `done`, Typ: Research (trigger-basiert), Lane: `planned` (historisch)
 - [BL-0014 - Import-Export-Paketformat mit Manifest und Checksum](backlog/BL-0014-import-export-package-format/item.md) - Status: `done`, Typ: Research (priorisierter Feature-Block fuer 1.1.0), Lane: `release-blocking` (historisch)
