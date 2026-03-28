@@ -1,51 +1,72 @@
 ---
 id: BL-0011
 title: Projekt-Scaffolder (Repo Bootstrap)
-status: proposed
-priority: P2
-type: feature
-tags: [tooling, docs, bootstrap]
+status: blocked
+priority: P3
+type: research
+tags: [tooling, docs, bootstrap, externalization, 'lane:exploratory']
 created: 2026-03-13
 updated: 2026-03-28
 related:
   - BL-011
+  - BL-0016
   - POL-001
 ---
 **Stand:** 2026-03-28
 
 # Goal
-Ein reproduzierbarer Projekt-Scaffold soll neue Repositories mit minimalen
-Eingaben auf einen sofort nutzbaren Startzustand bringen.
+Den Bedarf fuer einen generischen Projekt-Scaffolder als externes, vom
+`Betankungen`-Repository getrenntes Thema sauber dokumentieren und fuer einen
+spaeteren Handover belastbar festhalten.
 
 # Motivation
 Neues Projekt-Setup kostet wiederholt Zeit und fuehrt ohne Standard leicht zu
-abweichenden Strukturen und unvollstaendigen Basiskonfigurationen.
+abweichenden Strukturen und unvollstaendigen Basiskonfigurationen. Gleichzeitig
+ist ein generischer Repo-Bootstrap kein fachlicher Ausbau von `Betankungen`
+selbst und wuerde den Produkt-Scope mit Meta-Tooling vermischen.
 
 # Scope
 In Scope:
-- Basisgeruest fuer neue Repositories (`src`, `docs`, `tests`, `scripts`).
-- Standarddateien (z. B. `README.md`, `docs/CHANGELOG.md`, `docs/STATUS.md`,
-  `AGENTS.md`, `.gitignore`).
-- Optionale Initialisierung mit `--git-init`.
+- Repo-seitige Scope-Entscheidung und Externalisierungsdoku fuer `Betankungen`.
+- MVP-/Nicht-Ziel-Snapshot fuer ein separates Scaffolder-Repository.
+- Referenzpflege zu `BL-011`, `BL-0016` und `POL-001`.
 
 Out of Scope:
+- Umsetzung des Scaffolder-CLI innerhalb von `Betankungen`.
+- Aufnahme des Themas in den `1.4.0`-Implementierungsscope dieses Repositories.
 - Vollstaendiger CI/CD-Stack-Generator.
 - Framework-spezifisches Dependency-Bootstrapping.
 - Tiefgreifende Projekt-Spezialisierungen jenseits des Basisprofils.
 
+# External MVP Snapshot
+- Basisgeruest fuer neue Repositories (`src`, `docs`, `tests`, `scripts`,
+  `.artifacts`).
+- Standarddateien (z. B. `README.md`, `docs/CHANGELOG.md`, `docs/STATUS.md`,
+  `AGENTS.md`, `.gitignore`).
+- Optionale Initialisierung mit `--git-init`.
+
 # Risks
-- Scope-Drift durch zu viele optionale Profile.
-- Inkonsistente Templates ohne klaren Contract.
-- Zu enge Kopplung an ein einzelnes Ausgangsprojekt.
+- Scope-Drift zwischen `Betankungen` und einem generischen Tooling-Projekt.
+- Inkonsistente Handover-Erwartungen ohne klaren MVP-/Nicht-Ziel-Snapshot.
+- Spaetere Rueckkopplung in den Repo-Scope ohne explizite Maintainer-Entscheidung.
 
 # Output
-Ein kleines CLI-Tool mit klaren Templates, das reproduzierbar ein
-commit-bereites Grundgeruest erzeugt.
+Ein dokumentierter Externalisierungs- und Handover-Stand fuer `BL-0011`,
+inklusive MVP-Snapshot, Nicht-Zielen und klarer Repo-Scope-Grenze fuer
+`Betankungen`.
+
+# Repo Scope Decision
+- `BL-0011` gehoert nicht zum Implementierungsscope des `Betankungen`-
+  Repositories fuer die geplante `1.4.0`-Linie.
+- `Betankungen` fuehrt hierzu nur den Research-/Handover-Stand und die
+  Referenzpflege.
+- Details der Entscheidung liegen in `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
 
 # Derived Tasks
-- Keine aktiven Tasks.
-- Neue Task-Ableitungen werden erst bei einer expliziten Scope-Aktivierung von
-  `BL-0011` angelegt.
+- Keine Betankungen-internen Tasks.
+- Neue Task-Ableitungen werden erst bei einer expliziten Aktivierung im
+  Zielprojekt oder nach einer ausdruecklichen Rueckholung in den Repo-Scope
+  angelegt.
 
 # Legacy Reference
 - Inhaltliche Legacy-Beschreibung: `docs/BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md`

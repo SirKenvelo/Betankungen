@@ -1,5 +1,5 @@
 # Verbindlicher Fahrplan bis Version 1.3.0
-**Stand:** 2026-03-26
+**Stand:** 2026-03-28
 **Status:** abgeschlossen (`APP_VERSION=1.3.0`)
 
 ## Ausgangslage
@@ -8,9 +8,13 @@
 - Der Entscheidungsentwurf v0.1 vom 2026-03-18 legt die verbindliche
   Reihenfolge der Folgeversionen fest:
   - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
-  - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
+  - `1.4.0`: historischer Planungsmarker Option C (`BL-0016` + `BL-0011`)
 - Die Entwicklungsbasis wurde nach dem 1.2.0-Release auf `1.3.0-dev`
   angehoben.
+- Sprint 24 vom 2026-03-28 hat den Folge-Scope fuer das `Betankungen`-Repo
+  nachgeschaerft: `BL-0011` ist als externes Thema dokumentiert und gehoert
+  nicht zum Implementierungsscope der geplanten `1.4.0`-Linie in diesem
+  Repository. Verbleibender In-Repo-Scope ist `BL-0016`.
 
 ## Verbindliche Leitplanken
 
@@ -53,6 +57,9 @@
 
 - Vorbereitende Leitplanken fuer die Folgeversion `1.4.0` sichtbar halten,
   ohne `BL-0016` oder `BL-0011` in den 1.3.0-Release-Kern zu ziehen.
+- Die spaetere Scope-Klaerung aus Sprint 24 beachten: `BL-0011` bleibt zwar
+  als Planungsreferenz sichtbar, ist fuer das `Betankungen`-Repo aber
+  externalisiert und kein Implementierungsblock.
 
 ### Nicht Teil von 1.3.0
 

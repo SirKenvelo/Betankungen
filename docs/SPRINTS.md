@@ -1036,7 +1036,36 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`,
     `.artifacts/sprint_23_commit_1_von_1.diff` (nach Push lokal erzeugen)
 
-## General-Stream nach Sprint 23 - PR-Titel-Konvention
+## Sprint 24 - 1.4.0 Scope formal festziehen
+
+- Status: done
+- Ziel: fuer die geplante `1.4.0`-Linie verbindlich klaeren, ob `BL-0011`
+  zum Betankungen-Repo-Scope gehoert, und den Folge-Scope ohne vorgezogenen
+  Dev-Start sauber dokumentieren.
+
+### Geplante Bloecke
+
+- S24C1/1: done - `BL-0011` als externes Thema fuer `Betankungen`
+  festziehen und die direkt betroffenen `1.4.0`-Planungsquellen auf den
+  bereinigten Repo-Scope synchronisieren.
+
+### Fortschritt (2026-03-28)
+
+- `S24C1/1` abgeschlossen:
+  - `BL-0011` im kanonischen Tracker auf externalisierten
+    Research-/Handover-Stand gesetzt (`blocked`, `research`,
+    `lane:exploratory`).
+  - neues Entscheidungsdokument
+    `docs/BL-0011_SCOPE_DECISION_1_4_0.md` angelegt.
+  - `docs/BACKLOG.md`, `docs/STATUS.md` und `docs/ROADMAP_1_3_0.md` auf den
+    bereinigten `1.4.0`-Repo-Scope synchronisiert.
+  - `BL-0016` bleibt der verbleibende In-Repo-Scope fuer die spaetere
+    `1.4.0`-Linie; `APP_VERSION=1.3.0` bleibt unveraendert.
+  - Git-Commit: `a8af75d`
+  - Artefakte: `.artifacts/sprint_24_commit_1_von_1.md`,
+    `.artifacts/sprint_24_commit_1_von_1.diff` (nach Push lokal erzeugen)
+
+## General-Stream nach Sprint 24 - PR-Titel-Konvention
 
 - Status: done
 - Ziel: PR-Titel fuer Sprint-Arbeit explizit von Commit-Labels und generischen

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-27
+**Stand:** 2026-03-28
 **Zielversion:** Transition-Hold nach 1.3.0 (technischer Stand `APP_VERSION=1.3.0`; `1.4.0-dev` noch nicht gestartet)
 
 ## Fundament & Architektur (erledigt)
@@ -232,8 +232,9 @@ Bereits erledigt:
     `APP_VERSION=1.3.0-dev`, neue Roadmap verankert).
   - Gate 2 abgeschlossen am 2026-03-24 (Scope-Freeze: `BL-0017` +
     `TSK-0018`/`TSK-0019` sowie `BL-0018` + `TSK-0020`/`TSK-0021` als
-    release-blocking; Folgeversion `1.4.0` bleibt auf `BL-0016` + `BL-0011`
-    festgelegt).
+    release-blocking; die Folgeversion `1.4.0` wurde initial auf
+    `BL-0016` + `BL-0011` vorgemerkt und in Sprint 24 repo-seitig
+    nachgeschaerft).
   - Gate 3 abgeschlossen am 2026-03-24 (`BL-0017` + `BL-0018` auf `done`,
     Polling-Runner/Regression geliefert, lokaler Abschlusslauf `make verify`
     gruen).
@@ -281,9 +282,14 @@ Bereits erledigt:
     `TSK-0020`/`TSK-0021` sind als release-blocking verankert.
   - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
     Fuel-Price-History-Regression-Check und lief lokal gruen.
-  - Die 1.4.0-Linie bleibt als naechster Planungsfokus gemaess Option C
-    vorgemerkt (`BL-0016` + `BL-0011`), startet aber erst mit separatem
-    `APP_VERSION`-Wechsel auf `1.4.0-dev`.
+  - Der fruehere Planungsmarker `1.4.0 = BL-0016 + BL-0011` ist
+    repo-seitig praezisiert: `BL-0016` bleibt der verbleibende In-Repo-Scope
+    fuer `Betankungen`; `BL-0011` ist als externes Scaffolder-Thema
+    dokumentiert und gehoert nicht zum Implementierungsscope dieses
+    Repositories.
+  - Der dokumentierte Handover-/Externalisierungsstand fuer `BL-0011` liegt in
+    `docs/BL-0011_SCOPE_DECISION_1_4_0.md`; `1.4.0-dev` bleibt bis zu einem
+    separaten Aktivierungs-Commit ungestartet.
   - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
     Entrypoint ist `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff und finaler RC-Abschlusslauf fuer Gate 4 sind
@@ -294,8 +300,10 @@ Bereits erledigt:
     Status `success`.
   - Gate-5-Closeout ist in `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert
     (Scope/Version/Audit/Exit-Checks, finaler Umschalt- und Release-Block).
-  - Die naechste Folgeversion bleibt verbindlich auf `1.4.0` = Option C
-    (`BL-0016` + `BL-0011`) gesetzt.
+  - Die naechste Folgeversion bleibt verbindlich `1.4.0`; fuer das
+    `Betankungen`-Repo umfasst der vorbereitete Implementierungsscope aktuell
+    `BL-0016`, waehrend `BL-0011` ausserhalb des Repo-Scope dokumentiert
+    bleibt.
 
 ## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 
@@ -328,7 +336,11 @@ Bereits erledigt:
   - Non-blocking Doku-Stream `BL-0023` ist abgeschlossen: Dev-Diary-Baustein
     (`docs/DEV_DIARY.md`) mit initialem Eintrag und Tracker-/Navigations-Sync
     ist verankert.
-  - verbindliche Folge-Reihenfolge: `1.3.0` = Option B (`BL-0017` + `BL-0018`), `1.4.0` = Option C (`BL-0016` + `BL-0011`).
+  - historische Folge-Reihenfolge beim 1.2.0-Abschluss: `1.3.0` = Option B
+    (`BL-0017` + `BL-0018`); `1.4.0` war initial als Option C
+    (`BL-0016` + `BL-0011`) vorgemerkt und wurde in Sprint 24 fuer das
+    `Betankungen`-Repo auf `BL-0016` als In-Repo-Scope plus externes
+    `BL-0011` praezisiert.
 
 ### Vorschlagsabgleich (ADR/BL) vom 2026-03-15
 
