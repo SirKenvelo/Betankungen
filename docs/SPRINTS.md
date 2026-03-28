@@ -1035,3 +1035,20 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   - Git-Commit: `60e30f6`
   - Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`,
     `.artifacts/sprint_23_commit_1_von_1.diff` (nach Push lokal erzeugen)
+
+## General-Stream nach Sprint 23 - PR-Titel-Konvention
+
+- Status: done
+- Ziel: PR-Titel fuer Sprint-Arbeit explizit von Commit-Labels und generischen
+  Platzhaltern abgrenzen, damit Sprint-Branches und PRs konsistent benannt
+  bleiben.
+
+### Fortschritt (2026-03-28)
+
+- Kurzregel in `AGENTS.md` verankert: Sprint-PR-Titel folgen auf GitHub dem
+  Format `[Sxx] type: short description`.
+- Commit-Labels wie `[S24C1/1]` und generische Platzhalter wie `[Sprint 24]`
+  sind fuer PR-Titel jetzt explizit ausgeschlossen.
+- Detailregel in `docs/GIT_WORKFLOW.md` unter `Pull Requests` ergaenzt,
+  inklusive fachlicher Scope-Anforderung und Englisch-Leitplanke fuer
+  GitHub-PR-Titel.

@@ -73,6 +73,11 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S23C1/1 - Semantische Entflechtung von `BL-0011` umgesetzt: Odometer-Validierung aus der Scaffolder-Kette geloest und als eigener Hardening-Block `BL-0029` mit `TSK-0001`/`ISS-0001` neu verankert; Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`, `.artifacts/sprint_23_commit_1_von_1.diff`; Basis-Commit: `60e30f6`. (2026-03-28)
 
 ### Changed
+- [General] Process/PR-Workflow: Sprint-PR-Titel als eigene Konvention
+  verankert. Fuer Sprint-Arbeit gilt auf GitHub jetzt `[Sxx] type: short
+  description`; Commit-Labels wie `[S24C1/1]` und generische Titel wie
+  `[Sprint 24]` sind als PR-Titel nicht zulaessig. Kurzregel in `AGENTS.md`,
+  Detailregel in `docs/GIT_WORKFLOW.md`. (2026-03-28)
 - [S23C1/1] Tracker/Backlog: Semantischen Kettenbruch rund um `BL-0011`
   bereinigt. `BL-0011` ist jetzt wieder ein reiner Scaffolder-Backlog ohne
   Odometer-Referenzen; neuer fachlicher Block `BL-0029` wurde angelegt,

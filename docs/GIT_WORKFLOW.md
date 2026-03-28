@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-03-27
+**Stand:** 2026-03-28
 
 ## Ziel
 
@@ -134,6 +134,16 @@ Es ist **nicht erforderlich**, alles erst am Ende zu pushen.
 
 - genau **ein PR pro Sprint**
 
+### Titel-Konvention
+
+- PR-Titel fuer Sprint-Arbeit folgen dem Format `[Sxx] type: short description`.
+- `Sxx` bezeichnet den Sprint, nicht den einzelnen Commit.
+- Commit-Labels wie `[S24C1/1]` gehoeren nicht in PR-Titel.
+- Generische Titel wie `Sprint 24`, `[Sprint 24]`, `update` oder `docs: ...`
+  ohne Sprint-Prefix sind fuer Sprint-PRs nicht zulaessig.
+- PR-Titel muessen den fachlichen Scope klar benennen und werden auf GitHub
+  in Englisch verfasst.
+
 ### Inhalt
 
 Der PR beschreibt:
@@ -146,6 +156,8 @@ Der PR beschreibt:
 ### Zeitpunkt
 
 Die Beschreibung wird **beim Erstellen des PR** gepflegt, nicht erst beim Merge.
+Sie wird auf GitHub in Englisch verfasst und enthaelt mindestens die Bloecke
+`Summary` und `Validation`.
 
 ## Merge-Regeln
 

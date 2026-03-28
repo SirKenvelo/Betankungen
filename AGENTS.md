@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-27
+**Stand:** 2026-03-28
 
 <INSTRUCTIONS>
 
@@ -41,6 +41,7 @@
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
+- PR-Titel fuer Sprint-Arbeit folgen auf GitHub dem Format `[Sxx] type: short description`; Commit-Labels wie `[S24C1/1]` oder generische Titel wie `[Sprint 24]` sind als PR-Titel nicht zulaessig.
 - Verbindliche Detailleitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen liegt in `docs/GIT_WORKFLOW.md`.
 - Standard-Merge-Strategie ist verbindlich `Create a merge commit`.
 - Prioritaetsregel: Wenn ein fester Merge-Standard definiert ist, muss dieser immer verwendet werden; heuristische Entscheidungsregeln (z. B. "Squash bei kleinen Aenderungen") gelten nur ohne expliziten Standard.
