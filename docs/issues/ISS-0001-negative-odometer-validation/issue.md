@@ -6,13 +6,13 @@ priority: P1
 type: bug
 tags: [cli, validation, regression, needs-tests]
 created: 2026-03-13
-updated: 2026-03-13
+updated: 2026-03-28
 related:
-  - BL-0011
+  - BL-0029
   - TSK-0001
   - POL-001
 ---
-**Stand:** 2026-03-13
+**Stand:** 2026-03-28
 
 # Summary
 Negative odometer values are not consistently rejected with a clear, actionable

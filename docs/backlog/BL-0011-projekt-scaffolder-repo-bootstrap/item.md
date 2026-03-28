@@ -6,14 +6,12 @@ priority: P2
 type: feature
 tags: [tooling, docs, bootstrap]
 created: 2026-03-13
-updated: 2026-03-13
+updated: 2026-03-28
 related:
   - BL-011
-  - ISS-0001
-  - TSK-0001
   - POL-001
 ---
-**Stand:** 2026-03-13
+**Stand:** 2026-03-28
 
 # Goal
 Ein reproduzierbarer Projekt-Scaffold soll neue Repositories mit minimalen
@@ -45,7 +43,9 @@ Ein kleines CLI-Tool mit klaren Templates, das reproduzierbar ein
 commit-bereites Grundgeruest erzeugt.
 
 # Derived Tasks
-- TSK-0001
+- Keine aktiven Tasks.
+- Neue Task-Ableitungen werden erst bei einer expliziten Scope-Aktivierung von
+  `BL-0011` angelegt.
 
 # Legacy Reference
 - Inhaltliche Legacy-Beschreibung: `docs/BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md`

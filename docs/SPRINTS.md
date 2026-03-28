@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-27
+**Stand:** 2026-03-28
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -1007,3 +1007,31 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
     `docs/wiki/Home.md` / `docs/wiki/README.md` verlinkt.
 - Wiki-Guardrails fuer die neue Seite erweitert
   (`scripts/wiki_link_check.sh`) und per `make wiki-link-check` abgesichert.
+
+## Sprint 23 - BL-0011 fachlich entflechten
+
+- Status: done
+- Ziel: den semantischen Kettenbruch zwischen Scaffolder-Backlog `BL-0011` und
+  Odometer-Validierungsarbeit (`ISS-0001`/`TSK-0001`) sauber aufloesen.
+
+### Geplante Bloecke
+
+- S23C1/1: done - `BL-0011` auf reinen Scaffolder-Scope zurueckfuehren und
+  die Odometer-Hardening-Kette in einen eigenen fachlichen Backlog-Block
+  ueberfuehren.
+
+### Fortschritt (2026-03-28)
+
+- `S23C1/1` abgeschlossen:
+  - neues Backlog `BL-0029` (`Odometer Validation Contract Hardening`) als
+    fachlich passende Klammer fuer die Odometer-Validierungsarbeit angelegt
+    (`docs/backlog/BL-0029-odometer-validation-contract-hardening/item.md`).
+  - `TSK-0001` aus `BL-0011` herausgeloest, in den neuen BL-Pfad verschoben
+    und auf `parent: BL-0029` umgestellt.
+  - `ISS-0001` auf `BL-0029` referenziert; `BL-0011` wieder auf reinen
+    Scaffolder-Zuschnitt ohne Odometer-Taskbezug gebracht.
+  - Backlog-Index auf den neuen kanonischen Eintrag synchronisiert
+    (`docs/BACKLOG.md`).
+  - Git-Commit: `60e30f6`
+  - Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`,
+    `.artifacts/sprint_23_commit_1_von_1.diff` (nach Push lokal erzeugen)

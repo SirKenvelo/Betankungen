@@ -6,14 +6,14 @@ priority: P1
 type: task
 tags: [validation, cli, tests]
 created: 2026-03-13
-updated: 2026-03-13
-parent: BL-0011
+updated: 2026-03-28
+parent: BL-0029
 related:
-  - BL-0011
+  - BL-0029
   - ISS-0001
   - POL-001
 ---
-**Stand:** 2026-03-13
+**Stand:** 2026-03-28
 
 # Task
 Harmonize negative-odometer validation behavior so all relevant code paths
