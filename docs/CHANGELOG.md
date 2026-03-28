@@ -71,8 +71,17 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S19C3/4 - Gate-5-Release-Umschaltpaket vorbereitet (ohne vorgezogenen Versionswechsel) und Doku-Fokus auf den finalen Abschlussblock `S19C4/4` gesetzt; Artefakte: `.artifacts/sprint_19_commit_3_von_4.md`, `.artifacts/sprint_19_commit_3_von_4.diff`; Basis-Commit: `99fc714`. (2026-03-18)
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 - S23C1/1 - Semantische Entflechtung von `BL-0011` umgesetzt: Odometer-Validierung aus der Scaffolder-Kette geloest und als eigener Hardening-Block `BL-0029` mit `TSK-0001`/`ISS-0001` neu verankert; Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`, `.artifacts/sprint_23_commit_1_von_1.diff`; Basis-Commit: `60e30f6`. (2026-03-28)
+- S24C1/1 - `1.4.0`-Repo-Scope formal festgezogen: `BL-0011` aus dem Betankungen-Implementierungsscope herausgeloest, als externes Research-/Handover-Thema dokumentiert und die betroffenen Planungsquellen auf `BL-0016` als verbleibenden In-Repo-Scope synchronisiert; Artefakte: `.artifacts/sprint_24_commit_1_von_1.md`, `.artifacts/sprint_24_commit_1_von_1.diff`; Basis-Commit: `a8af75d`. (2026-03-28)
 
 ### Changed
+- [S24C1/1] Planning/Tracker: `BL-0011` fuer die geplante `1.4.0`-Linie
+  formal aus dem Betankungen-Implementierungsscope externalisiert.
+  `BL-0011` steht jetzt im kanonischen Tracker als blocked/research mit
+  explizitem Externalisierungs-Handover; neues Entscheidungsdokument
+  `docs/BL-0011_SCOPE_DECISION_1_4_0.md` haelt Begruendung, MVP-Snapshot und
+  Re-Entry-Kriterien fest. `docs/BACKLOG.md`, `docs/STATUS.md` und
+  `docs/ROADMAP_1_3_0.md` fuehren fuer das Betankungen-Repo jetzt nur noch
+  `BL-0016` als verbleibenden In-Repo-Scope fuer `1.4.0`. (2026-03-28)
 - [S23C1/1] Tracker/Backlog: Semantischen Kettenbruch rund um `BL-0011`
   bereinigt. `BL-0011` ist jetzt wieder ein reiner Scaffolder-Backlog ohne
   Odometer-Referenzen; neuer fachlicher Block `BL-0029` wurde angelegt,
