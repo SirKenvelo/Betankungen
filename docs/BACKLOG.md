@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-27
+**Stand:** 2026-03-28
 
 Dieses Dokument sammelt bewusst verschobene oder spaeter geplante Themen.
 Nur umsetzbare Arbeitspakete gehoeren hier hinein; offene Architektur-/Produktentscheidungen liegen in `docs/ADR/`.
@@ -55,3 +55,4 @@ Hinweis: Die Lane kann in BL-Frontmatter als Tag (`lane:*`) gefuehrt werden.
 - [BL-0022 - User-Flow- und QA-Hardening aus Nutzertests](backlog/BL-0022-user-flow-and-qa-hardening/item.md) - Status: `done`, Typ: Improvement (reproduzierbare Nutzertest-Funde in Matrix, Tracker und Folgetasks ueberfuehren), Lane: `planned`
 - [BL-0023 - Dev-Diary als kuratierte Projektchronik](backlog/BL-0023-dev-diary-project-chronicle/item.md) - Status: `done`, Typ: Improvement (kuratierte Entwicklungschronik in `docs/DEV_DIARY.md` + Initialeintrag), Lane: `planned`
 - [BL-0024 - Cookie als persoenliche Wiki-Notiz mit optionalem Bild](backlog/BL-0024-cookie-personal-wiki-note/item.md) - Status: `done`, Typ: Improvement (kleine persoenliche Wiki-Notiz mit behutsamem Public-Readiness-Rahmen), Lane: `planned`, Tasks: `TSK-0022` (`done`), `TSK-0023` (`done`)
+- [BL-0029 - Odometer Validation Contract Hardening](backlog/BL-0029-odometer-validation-contract-hardening/item.md) - Status: `proposed`, Typ: Improvement (fachlich entkoppelte Odometer-Hardening-Kette fuer `ISS-0001`/`TSK-0001`), Lane: `planned`, Tasks: `TSK-0001` (`todo`)
