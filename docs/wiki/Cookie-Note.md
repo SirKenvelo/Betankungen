@@ -1,13 +1,14 @@
 # Cookie Note
-**Stand:** 2026-03-27
+**Stand:** 2026-03-29
 
 This page is a small personal side note.
-It is intentionally brief and does not replace technical documentation.
+It stays intentionally brief and does not replace technical documentation.
 
-## Why This Exists
+## Editorial Role
 
 Cookie is part of the project's day-to-day context and motivation.
 This note keeps that context visible in a calm, lightweight form.
+It is deliberately placed outside the core technical start path.
 
 ## Editorial Guardrails
 
@@ -22,7 +23,7 @@ This note keeps that context visible in a calm, lightweight form.
 - Use only images with clear rights and source transparency.
 - If added later, keep placement subtle and non-disruptive.
 
-## Source Of Truth
+## Editorial References
 
 - [BL-0024 tracker item](https://github.com/SirKenvelo/Betankungen/blob/main/docs/backlog/BL-0024-cookie-personal-wiki-note/item.md)
-- [AGENTS policy](https://github.com/SirKenvelo/Betankungen/blob/main/AGENTS.md)
+- [Wiki source README](https://github.com/SirKenvelo/Betankungen/blob/main/docs/wiki/README.md)
