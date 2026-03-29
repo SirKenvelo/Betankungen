@@ -229,7 +229,8 @@ Bereits erledigt:
 
 ## Roadmap 1.3.0 - verbindlicher Fahrplan (abgeschlossen)
 
-- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_3_0.md`.
+- Der verbindliche Gate-Plan der abgeschlossenen 1.3.0-Linie liegt in
+  `docs/ROADMAP_1_3_0.md`.
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-24 (Zyklusstart auf
     `APP_VERSION=1.3.0-dev`, neue Roadmap verankert).
@@ -261,7 +262,7 @@ Bereits erledigt:
 - Operativer Fokus:
   - `1.3.0` ist seit 2026-03-26 final freigegeben.
   - Finaler technischer Stand fuer die 1.3.0-Linie: `APP_VERSION=1.3.0`.
-  - Verbindlicher Uebergangszustand `post-1-3-0-transition` ist aktiv:
+  - Verbindlicher Uebergangszustand `post-1-3-0-transition` ist bewusst aktiv:
     `APP_VERSION` bleibt bis zum dedizierten Dev-Start-Commit auf `1.3.0`.
   - `ADR-0010` ist als MVP jetzt umgesetzt: repo-lokales Wrapper-CLI
     `btkgit` ist verfuegbar (`./btkgit`, `scripts/btkgit.sh`) fuer
