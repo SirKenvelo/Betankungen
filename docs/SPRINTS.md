@@ -1156,3 +1156,44 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
     `.artifacts/sprint_26_commit_2_von_2.diff` (nach Push lokal erzeugen)
 - Validierung:
   - `make verify`
+
+## Sprint 27 - Wiki- und Public-Readiness-Layer nachschaerfen
+
+- Status: done
+- Ziel: die Wiki-Schicht als ruhigen oeffentlichen Einstieg schaerfen, ohne
+  die Source-of-Truth-Rolle von `docs/` zu verwischen.
+
+### Geplante Bloecke
+
+- S27C1/2: done - Wiki-Home, Wiki-README und `Cookie-Note` so nachschaerfen,
+  dass Kernnavigation, Source-of-Truth-Hinweise und persoenlicher Kontext
+  bewusst getrennt sind.
+- S27C2/2: done - Root-`README.md`, `CONTRIBUTING.md` und
+  `docs/README_EN.md` auf publizierten Wiki-Einstieg plus versionierte
+  Wiki-Quelle ausrichten.
+
+### Fortschritt (2026-03-29)
+
+- `S27C1/2` abgeschlossen:
+  - `docs/wiki/Home.md` trennt jetzt Kernnavigation, Zusatzkontext,
+    Repository-Source-of-Truth und redaktionelle Side Note.
+  - `docs/wiki/README.md` dokumentiert die Wiki-Rolle explizit als ruhige
+    Entry-Layer und ordnet `Cookie-Note.md` bewusst ausserhalb des
+    technischen Startpfads ein.
+  - `docs/wiki/Cookie-Note.md` benennt ihre redaktionelle Rolle jetzt offen
+    als bewusst nachgeordneten Kontext.
+  - Git-Commit: `fc283cc`
+  - Artefakte: `.artifacts/sprint_27_commit_1_von_2.md`,
+    `.artifacts/sprint_27_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S27C2/2` abgeschlossen:
+  - `README.md`, `CONTRIBUTING.md` und `docs/README_EN.md` verweisen jetzt
+    auf den publizierten GitHub-Wiki-Einstieg und weiterhin auf `docs/wiki/`
+    als versionierte Quelle.
+  - Die Repo-Einstiege trennen klarer zwischen kuratierter Orientierung im
+    Wiki und technischer Source of Truth unter `docs/`.
+  - Git-Commit: `cc7d107`
+  - Artefakte: `.artifacts/sprint_27_commit_2_von_2.md`,
+    `.artifacts/sprint_27_commit_2_von_2.diff` (nach Push lokal erzeugen)
+- Validierung:
+  - `make wiki-link-check`
+  - `make verify`

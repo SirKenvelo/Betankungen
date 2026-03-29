@@ -9,6 +9,8 @@ Transition-Hold (`APP_VERSION=1.3.0`)
 Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.0-dev`.
 
 ### Sprint / Commit References
+- S27C1/2 - Wiki-Entry-Layer beruhigt und klarer auf Source-of-Truth-Grenzen ausgerichtet (`docs/wiki/Home.md`, `docs/wiki/README.md`, `docs/wiki/Cookie-Note.md`); Artefakte: `.artifacts/sprint_27_commit_1_von_2.md`, `.artifacts/sprint_27_commit_1_von_2.diff`; Basis-Commit: `fc283cc`. (2026-03-29)
+- S27C2/2 - Oeffentliche Repo-Einstiege auf publizierten Wiki-Entry und versionierte Wiki-Quelle ausgerichtet (`README.md`, `CONTRIBUTING.md`, `docs/README_EN.md`); Artefakte: `.artifacts/sprint_27_commit_2_von_2.md`, `.artifacts/sprint_27_commit_2_von_2.diff`; Basis-Commit: `cc7d107`. (2026-03-29)
 - S26C1/2 - Oeffentliche Einstiegsdoku auf den bewussten Transition-Hold nach `1.3.0` synchronisiert (`README.md`, `CONTRIBUTING.md`, `docs/README_EN.md`); Artefakte: `.artifacts/sprint_26_commit_1_von_2.md`, `.artifacts/sprint_26_commit_1_von_2.diff`; Basis-Commit: `5e10687`. (2026-03-29)
 - S26C2/2 - Deutsche Einstiegs-/Statusdoku auf denselben Hold-Narrativ und den bereinigten `1.4.0`-Planungsstand gezogen (`docs/README.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_26_commit_2_von_2.md`, `.artifacts/sprint_26_commit_2_von_2.diff`; Basis-Commit: `bab3e9e`. (2026-03-29)
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
@@ -78,6 +80,17 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S27C2/2] Docs/Public Entry: Root-README, `CONTRIBUTING.md` und
+  `docs/README_EN.md` verlinken den publizierten GitHub-Wiki-Einstieg jetzt
+  explizit neben den versionierten Wiki-Quellseiten. Die oeffentlichen
+  Repo-Einstiege kommunizieren damit ruhiger, dass das Wiki die kuratierte
+  Orientierungsschicht ist, waehrend `docs/` die technische Source of Truth
+  bleibt. (2026-03-29)
+- [S27C1/2] Docs/Wiki: Wiki-Home, Wiki-README und `Cookie-Note` auf eine
+  klarere Entry-Layer-Rolle ausgerichtet. Die Kernnavigation ist jetzt von
+  Zusatzkontext getrennt, die Source-of-Truth-Grenze zu `docs/` wird explizit
+  benannt und persoenlicher Kontext bleibt sichtbar, aber bewusst
+  nachgeordnet. (2026-03-29)
 - [General] Docs/CI: Sprint-26-Referenzen im Abschnitt `Sprint / Commit
   References` auf das vom Doku-Lint erwartete Ein-Zeilen-Format normalisiert,
   damit `scripts/sprint_docs_lint.sh` die `Basis-Commit`-Hashes in GitHub
