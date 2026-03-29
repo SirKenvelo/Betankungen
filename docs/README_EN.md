@@ -10,6 +10,9 @@ Detailed documents are currently maintained primarily in German.
 - Technical runtime state: `APP_VERSION=1.3.0`.
 - The repository is in a deliberate transition hold after `1.3.0`;
   `1.4.0-dev` has not started yet.
+- Sprint 29 documents the pre-activation start gate in
+  `docs/DEV_START_GATE_1_4_0.md`: current decision is `GO` for a separate
+  activation commit, while the activation itself is still pending.
 - The most recently completed binding roadmap is `1.3.0`
   (`docs/ROADMAP_1_3_0.md`):
   - Gate 1 and Gate 2 are completed.
@@ -36,12 +39,14 @@ Detailed documents are currently maintained primarily in German.
 
 1. `docs/ARCHITECTURE_EN.md` (compact English architecture summary)
 2. `docs/README.md` (main project documentation, German)
-3. `docs/STATUS.md` (current roadmap and completion state)
-4. `docs/ARCHITECTURE.md` (full architecture and long-term design, German)
-5. `docs/ADR/README.md` (architecture decisions index)
-6. `docs/BACKLOG.md` (deferred/planned topics index)
-7. `docs/CHANGELOG.md` (dated change history)
-8. `docs/DEV_DIARY.md` (curated project chronicle, German)
+3. `docs/DEV_START_GATE_1_4_0.md` (formal pre-activation gate before
+   `1.4.0-dev`)
+4. `docs/STATUS.md` (current roadmap and completion state)
+5. `docs/ARCHITECTURE.md` (full architecture and long-term design, German)
+6. `docs/ADR/README.md` (architecture decisions index)
+7. `docs/BACKLOG.md` (deferred/planned topics index)
+8. `docs/CHANGELOG.md` (dated change history)
+9. `docs/DEV_DIARY.md` (curated project chronicle, German)
 
 ## Language Policy
 

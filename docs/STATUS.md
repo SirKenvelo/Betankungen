@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-03-29
-**Zielversion:** Transition-Hold nach 1.3.0 (technischer Stand `APP_VERSION=1.3.0`; `1.4.0-dev` noch nicht gestartet)
+**Zielversion:** Transition-Hold nach 1.3.0 (technischer Stand `APP_VERSION=1.3.0`; Sprint-29-Startgate auf `GO`, `1.4.0-dev` noch nicht gestartet)
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -264,6 +264,15 @@ Bereits erledigt:
   - Finaler technischer Stand fuer die 1.3.0-Linie: `APP_VERSION=1.3.0`.
   - Verbindlicher Uebergangszustand `post-1-3-0-transition` ist bewusst aktiv:
     `APP_VERSION` bleibt bis zum dedizierten Dev-Start-Commit auf `1.3.0`.
+  - Sprint 29 dokumentiert den formalen Startgate vor `1.4.0-dev` in
+    `docs/DEV_START_GATE_1_4_0.md`.
+  - Aktueller Go-/No-Go-Stand: `GO` fuer einen separaten Aktivierungs-Commit,
+    aber weiterhin `NO-GO` fuer einen impliziten oder mit `BL-0016`
+    vermischten Dev-Start.
+  - Die Abgrenzung ist verbindlich geschaerft:
+    abgeschlossener Vorbereitungsblock (Sprint 23-28) != Startfreigabe
+    (Sprint 29) != eigentlicher Dev-Start (`APP_VERSION -> 1.4.0-dev` in
+    einem spaeteren eigenen Commit).
   - `ADR-0010` ist als MVP jetzt umgesetzt: repo-lokales Wrapper-CLI
     `btkgit` ist verfuegbar (`./btkgit`, `scripts/btkgit.sh`) fuer
     `sync`, `preflight`, `ready` und `cleanup`.
@@ -313,6 +322,9 @@ Bereits erledigt:
     `Betankungen`-Repo umfasst der vorbereitete Implementierungsscope aktuell
     `BL-0016`, waehrend `BL-0011` ausserhalb des Repo-Scope dokumentiert
     bleibt.
+  - Der naechste zulaessige Schritt ist damit kein inhaltlicher Sprint-Start,
+    sondern zunaechst ein separater Aktivierungs-Commit fuer `1.4.0-dev`;
+    erst danach darf die Folgearbeit auf `BL-0016` beginnen.
 
 ## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 

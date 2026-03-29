@@ -64,6 +64,12 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Aktueller technischer Stand: `APP_VERSION=1.3.0`.
 - Der bewusste Transition-Hold nach `1.3.0` ist aktiv; `1.4.0-dev` wurde
   noch nicht gestartet.
+- Sprint 29 haelt den formalen Startgate vor dem Dev-Start fest:
+  `docs/DEV_START_GATE_1_4_0.md`.
+- Aktueller Go-/No-Go-Stand:
+  - `GO` fuer einen separaten Aktivierungs-Commit zu `1.4.0-dev`
+  - `NO-GO` fuer einen impliziten Start zusammen mit `BL-0016` oder spaeteren
+    Inhaltsarbeiten
 - Zuletzt abgeschlossener verbindlicher Gate-Plan:
   `docs/ROADMAP_1_3_0.md` (Gate 1/2/3/4/5 abgeschlossen).
 - Gelieferter Release-Kern fuer `1.3.0`:
@@ -78,11 +84,17 @@ Das Hauptprogramm steuert – die Units arbeiten.
   `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert, inklusive lokalem
   Abschlusslauf, finalem Versionswechsel und Release-/Backup-Ausfuehrung.
 - Verbindlicher naechster Planungsstand:
+  - abgeschlossener Vorbereitungsblock (Sprint 23-28), dokumentierte
+    Startfreigabe (Sprint 29) und eigentlicher Dev-Start sind bewusst
+    getrennte Schritte
   - die naechste Folgeversion bleibt `1.4.0`, aber noch ohne Dev-Start-Commit
   - der vorbereitete In-Repo-Scope liegt aktuell bei `BL-0016`
   - `BL-0011` bleibt fuer dieses Repository ein externes
     Research-/Handover-Thema:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
+  - der geplante naechste technische Schritt ist ein eigener
+    Aktivierungs-Commit fuer `1.4.0-dev`; erst danach folgt die inhaltliche
+    Folgearbeit
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
   `docs/ROADMAP_1_0_0.md`.
@@ -98,6 +110,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der abgeschlossenen
   1.3.0-Linie.
+- `docs/DEV_START_GATE_1_4_0.md`: formaler Go-/No-Go-Stand vor dem separaten
+  Start von `1.4.0-dev`.
 - `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,
   Fallback-Strategie und Betriebsgrenzen fuer den 1.3.0-Provider-Fit.
 - `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`: verbindlicher
