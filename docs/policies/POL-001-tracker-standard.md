@@ -1,7 +1,7 @@
 # POL-001: Tracker Standard (Maintainer Schema)
-**Stand:** 2026-03-18
+**Stand:** 2026-03-29
 **Status:** active
-**Datum:** 2026-03-18
+**Datum:** 2026-03-29
 
 ## Ziel
 
@@ -33,17 +33,27 @@ Verbindlich fuer:
 
 ## Artefaktarten und Verzeichnisse
 
-### Kanonische Zielstruktur (neu)
+### Verbindlicher Arbeitszustand im Repository
 
-- `docs/adr/`
-- `docs/backlog/`
-- `docs/issues/`
-- `docs/policies/`
+- `docs/backlog/` fuer neue Backlog-Items (`BL-xxxx`) und neue Tasks
+  (`TSK-xxxx`)
+- `docs/issues/` fuer neue Issues (`ISS-xxxx`)
+- `docs/policies/` fuer Policies/Standards (`POL-xxx`)
+- `docs/ADR/` fuer ADRs (`ADR-xxxx`), bis ein separater ADR-
+  Migrationsschritt explizit beschlossen wird
+- `docs/BACKLOG.md` als uebergreifender Navigationsindex fuer kanonischen und
+  Legacy-Backlog-Bestand
 
-### Legacy-Kompatibilitaet (Bestand)
+### Legacy- und Sonderfaelle
 
-Bestehende Pfade bleiben waehrend der Migration gueltig (z. B. `docs/ADR/`,
-`docs/BACKLOG/`). Es gibt keine harte Massenumbenennung in einem Schritt.
+- `docs/BACKLOG/` bleibt als lesbarer Legacy-Bestand gueltig und
+  referenzierbar.
+- `docs/tasks/` bleibt nur fuer bereits vorhandene Alt-Tasks gueltig; neue
+  Tasks werden dort nicht mehr angelegt.
+- `docs/adr/` ist aktuell kein aktiver Zielpfad in diesem Repository. Eine
+  Umstellung dorthin waere ein separater Folgeschritt und wird nicht implizit
+  parallel gestartet.
+- Es gibt keine harte Massenumbenennung in einem Schritt.
 
 ## ID-Regeln
 
@@ -182,8 +192,10 @@ Erlaubte Werte je Artefaktart:
 ## Task-Struktur
 
 - Tasks sind global eindeutig ueber `TSK-xxxx`.
-- Tasks duerfen thematisch unter dem zugehoerigen Backlog-Ordner liegen.
-- Beispiel: `docs/backlog/BL-0010-.../tasks/TSK-0001-...md`
+- Neue Tasks liegen unter dem zugehoerigen Backlog-Ordner in
+  `docs/backlog/BL-0010-.../tasks/TSK-0001-...md`.
+- Bestehende Alt-Tasks unter `docs/tasks/` bleiben lesbar und lintbar, werden
+  aber nicht als Zielpfad fuer neue Arbeit verwendet.
 
 ## Code-Kommentar-Referenzen
 
@@ -232,8 +244,13 @@ Referenzimplementierung (v1):
 - Parser lesen Alt- und Neuformat (IDs, Verzeichnisse, Status-Mapping).
 
 3. Neuanlage nach Standard
-- Neue Eintraege in kanonischen Pfaden und mit kanonischen IDs.
+- Neue `BL`/`TSK` unter `docs/backlog/`, neue `ISS` unter `docs/issues`, neue
+  `POL` unter `docs/policies/`.
+- Neue `ADR` verbleiben bis auf Weiteres unter `docs/ADR/`.
 
 4. Schrittweise Bereinigung
 - Legacy-Dateien werden nur bei inhaltlicher Bearbeitung sanft ueberfuehrt.
+- `docs/tasks/` bekommt keine neuen Eintraege mehr.
+- Eine moegliche ADR-Pfadumstellung auf `docs/adr/` ist ein separater
+  spaeterer Entscheid.
 - Keine globale Rename-Aktion als Big-Bang.

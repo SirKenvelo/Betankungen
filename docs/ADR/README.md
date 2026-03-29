@@ -1,9 +1,16 @@
 # ADR Index
-**Stand:** 2026-03-26
+**Stand:** 2026-03-29
 
-Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer produkt- und architekturrelevante Entscheidungen.
+Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer
+produkt- und architekturrelevante Entscheidungen und ist der aktuell
+verwendete ADR-Ablagepfad dieses Repositories.
 Backlog-Themen ohne finale Entscheidung stehen im Index `docs/BACKLOG.md`;
-die Detaileintraege liegen in `docs/BACKLOG/BL-*.md`.
+neue BL-/TSK-Eintraege liegen im kanonischen Tracker unter `docs/backlog/`,
+historische BL-0xx weiterhin unter `docs/BACKLOG/`.
+
+Die in aelteren Planungsnotizen auftauchende Kleinschreibung `docs/adr/` ist
+hier noch nicht aktiviert; eine solche Umstellung waere ein separater
+Migrationsschritt und wird nicht implizit parallel gestartet.
 
 ## Entscheidungen
 

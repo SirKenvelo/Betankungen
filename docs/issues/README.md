@@ -1,5 +1,5 @@
 # Issues Tracker
-**Stand:** 2026-03-13
+**Stand:** 2026-03-29
 
 Dieser Ordner enthaelt konkrete Problemfaelle (`ISS-xxxx`) gemaess
 `docs/policies/POL-001-tracker-standard.md`.
@@ -21,5 +21,9 @@ Dieser Ordner enthaelt konkrete Problemfaelle (`ISS-xxxx`) gemaess
 ## Verweise
 
 - Beziehungen zu Backlog/Tasks/Policies immer ueber IDs in `related`.
+- Neue Folge-Tasks werden unter dem zugehoerigen Backlog-Ordner in
+  `docs/backlog/BL-xxxx-.../tasks/` angelegt.
+- `docs/tasks/` enthaelt nur historische Ausnahmefaelle und ist kein
+  Zielpfad fuer neue Arbeit.
 - Code-Kommentare bevorzugt als `FIXME(ISS-xxxx): ...` oder
   `TODO(ISS-xxxx): ...`.
