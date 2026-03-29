@@ -3,7 +3,7 @@ set -euo pipefail
 
 # btkgit.sh
 # CREATED: 2026-03-27
-# UPDATED: 2026-03-27
+# UPDATED: 2026-03-29
 # Repo-lokales Workflow-Wrapper-CLI gemaess ADR-0010.
 
 SCRIPT_NAME="$(basename "$0")"
@@ -19,6 +19,8 @@ Usage:
 Commands:
   sync
       Fuehrt Session-Sync aus: git fetch --prune origin + git pull --ff-only.
+      Bei Auth-/Remote-/Upstream-Problemen gibt btkgit klare Hinweise aus,
+      repariert Credentials oder Remote-Konfiguration aber nicht automatisch.
 
   preflight <version> [-- <args...>]
       Startet den versionsspezifischen Readiness-Preflight.
@@ -27,9 +29,9 @@ Commands:
   ready [--skip-verify]
       Menschenlesbarer lokaler Readiness-Wrapper (Status + optional make verify).
 
-  cleanup [--branch <name>]
-      Nach Merge: checkout main, sync main, lokalen Branch loeschen.
-      Ohne --branch wird (falls nicht auf main) der aktuelle Branch geloescht.
+  cleanup [--branch <name>] [--delete-local]
+      Nach Merge: checkout main, sync main, lokalen Branch optional loeschen.
+      Ohne --delete-local bleibt der lokale Branch bewusst erhalten.
 
   help
       Diese Hilfe anzeigen.
@@ -45,6 +47,10 @@ info() {
   printf '[INFO] %s\n' "$*"
 }
 
+hint() {
+  printf '[INFO] %s\n' "$*" >&2
+}
+
 ok() {
   printf '[OK] %s\n' "$*"
 }
@@ -58,6 +64,30 @@ run_cmd() {
   "$@"
 }
 
+run_cmd_checked() {
+  local output rc
+  printf '[RUN]'
+  for arg in "$@"; do
+    printf ' %q' "$arg"
+  done
+  printf '\n'
+
+  set +e
+  output="$("$@" 2>&1)"
+  rc=$?
+  set -e
+
+  if [[ -n "$output" ]]; then
+    if [[ $rc -eq 0 ]]; then
+      printf '%s\n' "$output"
+    else
+      printf '%s\n' "$output" >&2
+    fi
+  fi
+
+  return $rc
+}
+
 require_repo() {
   [[ -d "$ROOT_DIR/.git" ]] || die "Kein Git-Repository gefunden unter $ROOT_DIR"
 }
@@ -66,10 +96,135 @@ current_branch() {
   git -C "$ROOT_DIR" branch --show-current
 }
 
+origin_remote_url() {
+  git -C "$ROOT_DIR" remote get-url origin 2>/dev/null || true
+}
+
+require_origin_remote() {
+  local remote_url
+  remote_url="$(origin_remote_url)"
+  [[ -n "$remote_url" ]] || die "Remote 'origin' fehlt. btkgit erwartet einen origin-Remote fuer sync und cleanup."
+}
+
+print_git_failure_guidance() {
+  local context="$1"
+  local output="$2"
+  local branch="${3:-}"
+  local remote_url auth_hint=false remote_hint=false branch_hint=false network_hint=false
+
+  remote_url="$(origin_remote_url)"
+  if [[ -n "$remote_url" ]]; then
+    hint "Kontext $context: origin -> $remote_url"
+  else
+    hint "Kontext $context: origin ist nicht konfiguriert."
+  fi
+
+  if grep -Eqi \
+    'Authentication failed|Permission denied|could not read Username|access denied|Repository not found|requested URL returned error: 401|requested URL returned error: 403|403 Forbidden' \
+    <<<"$output"; then
+    auth_hint=true
+    if [[ "$remote_url" == https://* ]]; then
+      hint "Auth-Hinweis: pruefe 'gh auth status' oder erneuere die HTTPS-Credentials fuer GitHub."
+    else
+      hint "Auth-Hinweis: pruefe SSH-Key/Agent oder die Zugangsdaten fuer den Remote."
+    fi
+  fi
+
+  if grep -Eqi \
+    "No such remote 'origin'|does not appear to be a git repository|Could not read from remote repository|couldn't find remote ref" \
+    <<<"$output"; then
+    remote_hint=true
+    hint "Remote-Hinweis: pruefe 'git remote -v' und den Zugriff auf 'origin'."
+  fi
+
+  if grep -Eqi \
+    "There is no tracking information for the current branch|no upstream configured for branch" \
+    <<<"$output"; then
+    branch_hint=true
+    if [[ -n "$branch" ]]; then
+      hint "Branch-Hinweis: '$branch' hat noch kein Upstream. Nutze z. B.: git push -u origin $branch"
+    else
+      hint "Branch-Hinweis: dem aktuellen Branch fehlt ein Upstream. Nutze z. B.: git push -u origin <branch>"
+    fi
+  fi
+
+  if grep -Eqi \
+    "Could not resolve host|Failed to connect|Connection timed out|Connection refused|Network is unreachable|Operation timed out|Couldn't connect" \
+    <<<"$output"; then
+    network_hint=true
+    hint "Netzwerk-Hinweis: pruefe Verbindung, Proxy/VPN oder GitHub-Erreichbarkeit und wiederhole danach den Befehl."
+  fi
+
+  if ! $auth_hint && ! $remote_hint && ! $branch_hint && ! $network_hint; then
+    hint "btkgit fuehrt Git-Schritte transparent aus, behebt aber keine Remote- oder Credential-Probleme automatisch."
+  fi
+}
+
+run_git_cmd_checked() {
+  local context="$1"
+  local branch output rc
+  shift
+  branch="$(current_branch 2>/dev/null || true)"
+
+  set +e
+  output="$(
+    run_cmd_checked "$@" 2>&1
+  )"
+  rc=$?
+  set -e
+
+  if [[ -n "$output" ]]; then
+    if [[ $rc -eq 0 ]]; then
+      printf '%s\n' "$output"
+    else
+      printf '%s\n' "$output" >&2
+    fi
+  fi
+
+  if [[ $rc -ne 0 ]]; then
+    print_git_failure_guidance "$context" "$output" "$branch"
+  fi
+
+  return $rc
+}
+
+delete_local_branch() {
+  local branch="$1"
+  local output rc
+
+  set +e
+  output="$(
+    run_cmd_checked git -C "$ROOT_DIR" branch -d "$branch" 2>&1
+  )"
+  rc=$?
+  set -e
+
+  if [[ -n "$output" ]]; then
+    if [[ $rc -eq 0 ]]; then
+      printf '%s\n' "$output"
+    else
+      printf '%s\n' "$output" >&2
+    fi
+  fi
+
+  if [[ $rc -ne 0 ]]; then
+    if grep -Eqi 'not fully merged' <<<"$output"; then
+      hint "Cleanup-Hinweis: lokale Branch-Loeschung bleibt absichtlich konservativ ('git branch -d'). Merge oder pruefe den Branch zuerst manuell."
+    elif grep -Eqi 'not found' <<<"$output"; then
+      hint "Cleanup-Hinweis: pruefe den Branchnamen mit 'git branch --list'."
+    fi
+    die "Lokales Branch-Cleanup fehlgeschlagen."
+  fi
+}
+
 cmd_sync() {
   require_repo
-  run_cmd git -C "$ROOT_DIR" fetch --prune origin
-  run_cmd git -C "$ROOT_DIR" pull --ff-only
+  require_origin_remote
+
+  run_git_cmd_checked "git fetch --prune origin" \
+    git -C "$ROOT_DIR" fetch --prune origin || die "Session-Sync konnte nicht abgeschlossen werden."
+  run_git_cmd_checked "git pull --ff-only" \
+    git -C "$ROOT_DIR" pull --ff-only || die "Session-Sync konnte nicht abgeschlossen werden."
   ok "Sync abgeschlossen."
 }
 
@@ -155,14 +310,20 @@ cmd_ready() {
 
 cmd_cleanup() {
   require_repo
+  require_origin_remote
 
   local explicit_branch=""
+  local delete_local=false
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --branch)
         [[ $# -ge 2 ]] || die "Option --branch braucht einen Branchnamen."
         explicit_branch="$2"
         shift 2
+        ;;
+      --delete-local)
+        delete_local=true
+        shift
         ;;
       -h|--help)
         usage
@@ -179,23 +340,37 @@ cmd_cleanup() {
   [[ -n "$start_branch" ]] || die "Kein aktiver Branch (detached HEAD)."
 
   delete_branch="$explicit_branch"
-  if [[ -z "$delete_branch" && "$start_branch" != "main" ]]; then
+  if $delete_local && [[ -z "$delete_branch" && "$start_branch" != "main" ]]; then
     delete_branch="$start_branch"
   fi
 
-  if [[ "$start_branch" != "main" ]]; then
-    run_cmd git -C "$ROOT_DIR" checkout main
+  if $delete_local && [[ -z "$delete_branch" ]]; then
+    die "cleanup --delete-local braucht auf 'main' zusaetzlich --branch <name>."
   fi
 
-  run_cmd git -C "$ROOT_DIR" fetch --prune origin
-  run_cmd git -C "$ROOT_DIR" pull --ff-only
+  if [[ -n "$delete_branch" && "$delete_branch" == "main" ]]; then
+    die "Branch 'main' darf nicht geloescht werden."
+  fi
 
-  if [[ -n "$delete_branch" ]]; then
-    [[ "$delete_branch" != "main" ]] || die "Branch 'main' darf nicht geloescht werden."
-    run_cmd git -C "$ROOT_DIR" branch -d "$delete_branch"
+  if [[ "$start_branch" != "main" ]]; then
+    run_git_cmd_checked "git checkout main" \
+      git -C "$ROOT_DIR" checkout main || die "Cleanup konnte 'main' nicht auschecken."
+  fi
+
+  run_git_cmd_checked "git fetch --prune origin" \
+    git -C "$ROOT_DIR" fetch --prune origin || die "Cleanup-Sync konnte nicht abgeschlossen werden."
+  run_git_cmd_checked "git pull --ff-only" \
+    git -C "$ROOT_DIR" pull --ff-only || die "Cleanup-Sync konnte nicht abgeschlossen werden."
+
+  if $delete_local; then
+    delete_local_branch "$delete_branch"
     ok "Cleanup abgeschlossen (lokaler Branch geloescht: $delete_branch)."
   else
-    info "Kein Loeschziel angegeben; lokaler Branch bleibt unveraendert."
+    if [[ -n "$explicit_branch" ]]; then
+      info "Branch '$explicit_branch' bleibt erhalten; fuer lokale Loeschung explizit --delete-local angeben."
+    else
+      info "Kein lokales Branch-Delete angefordert; cleanup bleibt bewusst konservativ."
+    fi
     ok "Cleanup abgeschlossen."
   fi
 }
