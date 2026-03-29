@@ -1,14 +1,19 @@
 # Betankungen
-**Stand:** 2026-03-26
+**Stand:** 2026-03-29
 
 CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
 ## Project State
 
 - Latest release: `1.3.0` (released on 2026-03-26)
-- Current development line: not started yet (post-release closeout on
-  `APP_VERSION=1.3.0`)
-- Active release roadmap: `1.3.0` (Gate 1 to Gate 5 completed).
+- Technical runtime state: `APP_VERSION=1.3.0`
+- Current repository state: deliberate transition hold after `1.3.0`
+  (`1.4.0-dev` has not started yet)
+- Most recently completed release roadmap: `1.3.0`
+  (`docs/ROADMAP_1_3_0.md`, Gate 1 to Gate 5 completed)
+- Planned next line: `1.4.0` remains pending; current in-repo follow-up scope
+  is `BL-0016`, while `BL-0011` stays an external handover topic
+  (`docs/BL-0011_SCOPE_DECISION_1_4_0.md`)
 
 ## Documentation
 

@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-27
+**Stand:** 2026-03-29
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -55,19 +55,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
 
 ## Roadmap – Kurzstand
 
-- `0.9.0` wurde am `2026-03-15` final freigegeben.
-- `1.0.0` wurde am `2026-03-16` final freigegeben.
-- `1.1.0` wurde am `2026-03-18` final freigegeben.
-- Verbindlicher Fahrplan bis `1.3.0` ist abgeschlossen: `docs/ROADMAP_1_3_0.md`.
-- Verbindlicher Fahrplan bis `1.2.0` ist abgeschlossen: `docs/ROADMAP_1_2_0.md`.
-- Verbindlicher Fahrplan bis `1.1.0` ist abgeschlossen: `docs/ROADMAP_1_1_0.md`.
-- Verbindlicher Fahrplan bis `1.0.0` ist abgeschlossen: `docs/ROADMAP_1_0_0.md`.
-- Gate-Stand 1.3.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.0.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.1.0: Gate 1/2/3/4/5 abgeschlossen.
-- Gate-Stand 1.2.0: Gate 1/2/3/4/5 abgeschlossen.
-- Aktueller Finalstand: `APP_VERSION=1.3.0`.
-- Release-Kern fuer 1.3.0 gemaess Entscheidungsentwurf:
+- Finale Release-Linien:
+  - `0.9.0` wurde am `2026-03-15` final freigegeben.
+  - `1.0.0` wurde am `2026-03-16` final freigegeben.
+  - `1.1.0` wurde am `2026-03-18` final freigegeben.
+  - `1.2.0` wurde am `2026-03-24` final freigegeben.
+  - `1.3.0` wurde am `2026-03-26` final freigegeben.
+- Aktueller technischer Stand: `APP_VERSION=1.3.0`.
+- Der bewusste Transition-Hold nach `1.3.0` ist aktiv; `1.4.0-dev` wurde
+  noch nicht gestartet.
+- Zuletzt abgeschlossener verbindlicher Gate-Plan:
+  `docs/ROADMAP_1_3_0.md` (Gate 1/2/3/4/5 abgeschlossen).
+- Gelieferter Release-Kern fuer `1.3.0`:
   - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
     abgeschlossen; Entscheidungsbasis liegt in
     `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`.
@@ -75,71 +74,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
     abgeschlossen; Contract und Runtime-Basis liegen in
     `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` und
     `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
-- Scope-Freeze 1.3.0 ist gesetzt:
-  - `BL-0017` + `TSK-0018`/`TSK-0019` (release-blocking).
-  - `BL-0018` + `TSK-0020`/`TSK-0021` (release-blocking).
-- Gate-4-Closeout fuer 1.3.0 ist dokumentiert:
-  - lokaler finaler RC-Abschlusslauf `make release-preflight-1-3-0` gruen
-    (inkl. `make verify` und Dry-Runs).
-  - CI-Referenz auf `main`: `CI` Run `23515516312`, Commit `027e963`.
-- Gate-5-Closeout fuer 1.3.0 ist dokumentiert:
-  - Scope-/Version-/Audit-Entscheid und Exit-Checks sind nachvollziehbar in
-    `docs/RELEASE_1_3_0_PREFLIGHT.md`.
-  - Finaler Versionswechsel, Doku-Sync und Release-/Backup-Ausfuehrung sind
-    abgeschlossen.
-- Verbindliche Folge-Reihenfolge nach 1.2.0:
-  - `1.3.0`: Option B (`BL-0017` + `BL-0018`)
-  - `1.4.0`: Option C (`BL-0016` + `BL-0011`)
-- 1.0.0-Abschlusspaket (historisch):
-  - `BL-0012` Module Capability Discovery (`--module-info` mit stabilen `capabilities`) ist umgesetzt.
-  - Contract-Haertung gemaess `POL-002` (JSON/CSV/CLI, additiv, keine stillen Breaks).
-  - Deprecation-Status ist explizit sichtbar (aktuell: keine aktiven Deprecations; siehe `docs/EXPORT_CONTRACT.md`).
-  - Public-Readiness-Mindestpaket gemaess `BL-012` (Wiki/FAQ/Troubleshooting/Link-Checks).
-- Trigger-basierte Performance-Arbeit (`BL-0013`) bleibt optional und datengetrieben.
-- Scope-Freeze 1.1.0 ist gesetzt:
-  - Feature-Block: `BL-0014` + `TSK-0006` ist abgeschlossen (Paketformat-Contract/Manifest/Dry-Run-Fixtures + optionaler Fixture-Runner).
-  - Hardening-Block: `BL-0015` + `TSK-0007` ist abgeschlossen (operatives 1.1.0-Preflight-Skript + Doku-Gates).
-- Verify-/Contract-DoD fuer Gate 3 ist konkretisiert:
-  - `docs/CONTRACT_HARDENING_1_1_0.md`
-  - `docs/RELEASE_1_1_0_PREFLIGHT.md`
-- Finalisierung 1.1.0: finaler Release-Umschalt-Commit + Gate-5-Closeout (`S19C4/4`) abgeschlossen.
-- Scope-Freeze 1.2.0 ist gesetzt:
-  - Ops-/Feature-Block: `BL-0020` + `TSK-0008`/`TSK-0009` (release-blocking).
-  - Feature-Block: `BL-0021` + `TSK-0010`/`TSK-0011` (release-blocking).
-- Gate-3-Abschluss 1.2.0:
-  - `BL-0020` ist auf `done` (Multi-DB-Backup-Operations inkl. Regression/Verify-Verdrahtung).
-  - `BL-0021` ist auf `done` (Receipt-Link-Write-Path + Guardrails + Contract-Checks).
-- Verify-/Contract-Hardening fuer Gate 3 der 1.2.0-Linie ist abgeschlossen:
-  - `docs/CONTRACT_HARDENING_1_2_0.md`
-  - `docs/RELEASE_1_2_0_PREFLIGHT.md`
-- Gate-4-Abschluss 1.2.0:
-  - RC-Haertung ist abgeschlossen (`S22C2/3` + `S22C3/3`).
-  - Abschlussnachweis: lokales `make verify` gruen und CI-Referenz auf `main`
-    (`CI` Run `23307738745`, Commit `3e9be17`).
-- Gate-5-Closeout 1.2.0:
-  - Finaler Release-Umschalt-Commit (`APP_VERSION=1.2.0`) und finaler
-    Doku-Sync sind abgeschlossen.
-  - Finale Release-/Backup-Ausfuehrung ist dokumentiert
-    (`./kpr.sh --note "Release 1.2.0 final"`,
-    `scripts/backup_snapshot.sh --note "Backup after release 1.2.0"`;
-    Artefakt `.releases/Betankungen_1_2_0.tar`,
-    SHA-256 `b8798ab376bdc0b4cd17c7e8f47f6904d5337b26e96472a2b2ab99dcfddbca1d`,
-    Snapshot `.backup/2026-03-24_1809`).
-- Gate-5-Hardening 1.2.0 (non-blocking):
-  - `BL-0022` ist abgeschlossen (EOF-/Seed-Demo-Haertung, Fuelup-Cross-Field-
-    Guardrail `P-033`, Stations-Plausibilitaetschecks `P-080` bis `P-084`,
-    Resolver-Matrix-Sync fuer den zusaetzlichen `P-050`-Prompt und
-    geschaerfte First-Run-/Multi-Car-Guidance).
-- Historischer Follow-up-Stand aus 1.1.0: `BL-0016` wurde als non-blocking
-  in den Tracker aufgenommen; `BL-0021` ist fuer 1.2.0 jetzt release-blocking.
-- Non-blocking Follow-ups fuer 1.2.0: `BL-0016`, `BL-0017`, `BL-0018`, `BL-0019`, `BL-0011`.
-- BL-Priorisierung fuer hohe Backlog-Dichte ist auf Lanes geschaerft:
-  `release-blocking` / `planned` / `exploratory`.
-- Gate-5-Checklisten-/Scope-Snapshot und Release-Umschaltpaket sind dokumentiert
-  und final ausgefuehrt (`S19C2/4` bis `S19C4/4`).
-- Leitplanke fuer 1.1.0:
-  - Runtime-Config-Profile im Core (`ADR-0009` abgelehnt).
-  - Keine stillen Breaking-Changes in JSON/CSV/CLI (`POL-002`).
+- Gate-4- und Gate-5-Closeout fuer `1.3.0` sind nachvollziehbar in
+  `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert, inklusive lokalem
+  Abschlusslauf, finalem Versionswechsel und Release-/Backup-Ausfuehrung.
+- Verbindlicher naechster Planungsstand:
+  - die naechste Folgeversion bleibt `1.4.0`, aber noch ohne Dev-Start-Commit
+  - der vorbereitete In-Repo-Scope liegt aktuell bei `BL-0016`
+  - `BL-0011` bleibt fuer dieses Repository ein externes
+    Research-/Handover-Thema:
+    `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
+- Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
+  `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
+  `docs/ROADMAP_1_0_0.md`.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
@@ -150,7 +96,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
-- `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der aktiven 1.3.0-Linie.
+- `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der abgeschlossenen
+  1.3.0-Linie.
 - `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,
   Fallback-Strategie und Betriebsgrenzen fuer den 1.3.0-Provider-Fit.
 - `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`: verbindlicher
@@ -160,7 +107,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
   den getrennten Preis-Historienpfad (`scripts/fuel_price_polling_run.sh`,
   Regression, Verify-Einbindung).
 - `docs/RELEASE_1_3_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer
-  Gate 4/5 der aktiven 1.3.0-Linie.
+  Gate 4/5 der abgeschlossenen 1.3.0-Linie.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
