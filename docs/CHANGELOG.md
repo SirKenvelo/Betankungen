@@ -9,6 +9,17 @@ Transition-Hold (`APP_VERSION=1.3.0`)
 Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.0-dev`.
 
 ### Sprint / Commit References
+- S26C1/2 - Oeffentliche Einstiegsdoku auf den bewussten Transition-Hold nach
+  `1.3.0` synchronisiert (`README.md`, `CONTRIBUTING.md`,
+  `docs/README_EN.md`); Artefakte:
+  `.artifacts/sprint_26_commit_1_von_2.md`,
+  `.artifacts/sprint_26_commit_1_von_2.diff`; Basis-Commit: `5e10687`.
+  (2026-03-29)
+- S26C2/2 - Deutsche Einstiegs-/Statusdoku auf denselben Hold-Narrativ und den
+  bereinigten `1.4.0`-Planungsstand gezogen (`docs/README.md`,
+  `docs/STATUS.md`); Artefakte: `.artifacts/sprint_26_commit_2_von_2.md`,
+  `.artifacts/sprint_26_commit_2_von_2.diff`; Basis-Commit: `bab3e9e`.
+  (2026-03-29)
 - S1C1/4 - Multi-Car CSV-Stats feldbasiert (Quick-Win auf aktuellem Aggregat-CSV-Contract); Artefakte: `sprint_1_commit_1_von_4.md`, `sprint_1_commit_1_von_4.diff`; Basis-Commit: `11127c6`. (2026-03-01)
 - S1C2/4 - cars_crud: CSV-Stats Scope feldbasiert (Header + Token-Checks statt Zeilenregex); Artefakte: `sprint_1_commit_2_von_4.md`, `sprint_1_commit_2_von_4.diff`; Basis-Commit: `da4e74c`. (2026-03-02)
 - S1C3/4 - Audit/Polish: smoke_clean_home-Check, CSV-Helper `csv_row_count`, knowledge_archive-Regeln; Artefakte: `sprint_1_commit_3_von_4.md`, `sprint_1_commit_3_von_4.diff`; Basis-Commit: `b4273c4`. (2026-03-04)
@@ -76,6 +87,20 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S26C2/2] Docs/Entry: Deutschen Einstieg und Status-Narrativ auf den
+  bewussten Transition-Hold nach `1.3.0` synchronisiert. `docs/README.md`
+  fuehrt jetzt einen kompakten Kurzstand mit finaler `1.3.0`-Linie,
+  aktivem Hold, unveraendertem `APP_VERSION=1.3.0`, `BL-0016` als
+  vorbereitetem In-Repo-Scope und `BL-0011` als externem Handover-Thema.
+  `docs/STATUS.md` markiert den 1.3.0-Gate-Plan zusaetzlich explizit als
+  abgeschlossene Linie mit bewusst aktivem `post-1-3-0-transition`.
+  (2026-03-29)
+- [S26C1/2] Docs/Public Entry: Root-README, `CONTRIBUTING.md` und
+  `docs/README_EN.md` auf den post-`1.3.0`-Hold umgestellt. Die
+  Einstiegsdoku kommuniziert jetzt konsistent: `1.3.0` ist final,
+  `APP_VERSION=1.3.0` bleibt technisch stehen, `1.4.0-dev` ist bewusst noch
+  nicht gestartet, `main` bleibt PR-/Verify-gesteuert und `BL-0011` ist fuer
+  dieses Repository kein aktiver In-Repo-Implementierungsscope. (2026-03-29)
 - [S25C2/2] Docs/Tracker: Task-Navigation als Legacy-Ausnahmefall
   nachgeschaerft. `docs/issues/README.md` verweist neue Folge-Tasks
   verbindlich auf `docs/backlog/.../tasks/`, und eine neue Legacy-Notiz im

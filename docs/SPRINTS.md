@@ -1120,3 +1120,39 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Validierung:
   - `scripts/projtrack_lint.sh`
   - `make verify`
+
+## Sprint 26 - Transition-Hold und Entry-Doku synchronisieren
+
+- Status: done
+- Ziel: alle zentralen Einstiegsdokumente auf denselben Zustand ziehen:
+  `1.3.0` ist final, `APP_VERSION=1.3.0` bleibt unveraendert, `1.4.0-dev`
+  ist bewusst noch nicht gestartet.
+
+### Geplante Bloecke
+
+- S26C1/2: done - Root-README, `CONTRIBUTING.md` und `docs/README_EN.md`
+  auf den bewussten Hold nach `1.3.0` synchronisieren.
+- S26C2/2: done - `docs/README.md` und `docs/STATUS.md` auf denselben
+  Hold-Narrativ und den bereinigten `1.4.0`-Planungsstand ziehen.
+
+### Fortschritt (2026-03-29)
+
+- `S26C1/2` abgeschlossen:
+  - `README.md`, `CONTRIBUTING.md` und `docs/README_EN.md` kommunizieren jetzt
+    konsistent: `1.3.0` ist die letzte finale Linie, `APP_VERSION=1.3.0`
+    bleibt stehen, `1.4.0-dev` ist noch nicht gestartet.
+  - Der vorbereitete In-Repo-Folgescope wird als `BL-0016` benannt; `BL-0011`
+    bleibt explizit ein externes Research-/Handover-Thema.
+  - Git-Commit: `5e10687`
+  - Artefakte: `.artifacts/sprint_26_commit_1_von_2.md`,
+    `.artifacts/sprint_26_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S26C2/2` abgeschlossen:
+  - `docs/README.md` fuehrt den aktuellen Kurzstand jetzt kompakt ueber
+    Transition-Hold statt ueber eine implizit aktive `1.3.0`-Roadmap.
+  - `docs/STATUS.md` markiert die 1.3.0-Linie explizit als abgeschlossen und
+    den `post-1-3-0-transition` als bewusst aktiven Uebergangszustand.
+  - Git-Commit: `bab3e9e`
+  - Artefakte: `.artifacts/sprint_26_commit_2_von_2.md`,
+    `.artifacts/sprint_26_commit_2_von_2.diff` (nach Push lokal erzeugen)
+- Validierung:
+  - `make verify`
