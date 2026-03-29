@@ -33,8 +33,11 @@ Thank you for your interest in Betankungen.
 
 ## Wiki Maintenance
 
-- Public-readiness wiki pages are versioned under `docs/wiki/`.
-- Wiki is an entry layer; repository docs under `docs/` remain source of truth.
+- Published GitHub Wiki: curated public entry layer for external readers.
+- Repository docs under `docs/` remain the technical source of truth.
+- `docs/wiki/` contains the versioned source pages for the published wiki.
+- Personal/contextual pages may exist, but they stay secondary to the core
+  technical entry path.
 - Run `make wiki-link-check` when wiki/source links are touched.
 
 ## License

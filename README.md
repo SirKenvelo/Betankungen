@@ -17,6 +17,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 
 ## Documentation
 
+- Published GitHub Wiki (curated public entry): `https://github.com/SirKenvelo/Betankungen/wiki`
 - English docs entry: `docs/README_EN.md`
 - English architecture summary: `docs/ARCHITECTURE_EN.md`
 - Main project documentation (currently German): `docs/README.md`
@@ -26,7 +27,7 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 - Fuel-price release preflight baseline: `docs/RELEASE_1_3_0_PREFLIGHT.md`
 - Curated project chronicle (Dev Diary): `docs/DEV_DIARY.md`
 - Test strategy and matrix: `docs/TEST_MATRIX.md`
-- Wiki source pages (v1 bootstrap): `docs/wiki/README.md`
+- Versioned wiki source pages: `docs/wiki/README.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Backlog index: `docs/BACKLOG.md`
 - ADR index: `docs/ADR/README.md`
@@ -35,6 +36,8 @@ CLI project for fuel tracking, built with Free Pascal/Lazarus and SQLite.
 ## Language Note
 
 Most detailed documentation is currently written in German.
+The GitHub Wiki is a lighter public entry layer; binding technical details stay
+in the repository docs under `docs/`.
 Issue/PR/review communication on GitHub is expected in English.
 
 ## License

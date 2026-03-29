@@ -51,6 +51,8 @@ Detailed documents are currently maintained primarily in German.
 ## Notes For Contributors
 
 - See `CONTRIBUTING.md` in the project root.
-- Public-readiness wiki source pages: `docs/wiki/README.md`.
+- Published public-readiness wiki entry:
+  `https://github.com/SirKenvelo/Betankungen/wiki`.
+- Versioned wiki source pages: `docs/wiki/README.md`.
 - Build baseline:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
