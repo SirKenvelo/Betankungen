@@ -1238,3 +1238,41 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Validierung:
   - `tests/smoke/smoke_cli.sh`
   - `make verify`
+
+## Sprint 29 - Go-/No-Go-Gate vor `1.4.0-dev`
+
+- Status: done
+- Ziel: die Startfreigabe fuer `1.4.0-dev` als eigenen Gate-Sprint
+  dokumentieren, ohne den eigentlichen Dev-Start oder `BL-0016` vorwegzunehmen.
+
+### Geplante Bloecke
+
+- S29C1/2: done - formales Startgate und Status-/Entry-Sync fuer den
+  separaten Aktivierungs-Commit liefern.
+- S29C2/2: done - Sprint-Traceability und Go-/No-Go-Narrativ in
+  `docs/CHANGELOG.md` und `docs/SPRINTS.md` finalisieren.
+
+### Fortschritt (2026-03-29)
+
+- `S29C1/2` abgeschlossen:
+  - Neues Gate-Dokument `docs/DEV_START_GATE_1_4_0.md` definiert
+    Preconditions, Go-/No-Go-Kriterien und den aktuellen Stand `GO` fuer
+    einen spaeteren separaten Aktivierungs-Commit.
+  - `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md` und `README.md`
+    trennen jetzt explizit zwischen abgeschlossenem Vorbereitungsblock,
+    Startfreigabe und eigentlichem Dev-Start.
+  - `APP_VERSION=1.3.0` bleibt unveraendert; der Dev-Start wurde bewusst
+    nicht vorgezogen.
+  - Git-Commit: `f97a591`
+  - Artefakte: `.artifacts/sprint_29_commit_1_von_2.md`,
+    `.artifacts/sprint_29_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S29C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` fuehren Sprint 29 jetzt als
+    eigenen Go-/No-Go-Gate-Sprint.
+  - Der naechste zulaessige Schritt bleibt explizit ein separater
+    Aktivierungs-Commit fuer `1.4.0-dev`; inhaltliche Folgearbeit ist erst
+    danach zulaessig.
+
+### Validierung
+
+- `make verify`
