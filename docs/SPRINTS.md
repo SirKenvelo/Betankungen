@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-28
+**Stand:** 2026-03-29
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -1081,3 +1081,42 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Detailregel in `docs/GIT_WORKFLOW.md` unter `Pull Requests` ergaenzt,
   inklusive fachlicher Scope-Anforderung und Englisch-Leitplanke fuer
   GitHub-PR-Titel.
+
+## Sprint 25 - Tracker-Endzustand definieren
+
+- Status: done
+- Ziel: kanonische vs. Legacy-Pfade fuer neue Tracker-Arbeit eindeutig
+  dokumentieren und die verbleibende Task-/ADR-Mehrdeutigkeit vor
+  `1.4.0-dev` aufloesen.
+
+### Geplante Bloecke
+
+- S25C1/2: done - Policy, Backlog-Index, ADR-Index und Status auf einen
+  verbindlichen Tracker-Endzustand bringen.
+- S25C2/2: done - Task-Navigation fuer Legacy-Ausnahmefaelle explizit
+  dokumentieren.
+
+### Fortschritt (2026-03-29)
+
+- `S25C1/2` abgeschlossen:
+  - `POL-001` definiert den verbindlichen Arbeitszustand fuer neue
+    Tracker-Arbeit.
+  - `docs/BACKLOG.md` trennt kanonische `BL-xxxx` von Legacy `BL-0xx`
+    inklusive der jeweiligen Statuswelt.
+  - `docs/backlog/README.md`, `docs/ADR/README.md` und `docs/STATUS.md`
+    fuehren den aktiven ADR-Pfad und die Legacy-Grenzen konsistent.
+  - Git-Commit: `0968b70`
+  - Artefakte: `.artifacts/sprint_25_commit_1_von_2.md`,
+    `.artifacts/sprint_25_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S25C2/2` abgeschlossen:
+  - `docs/issues/README.md` verweist neue Folge-Tasks verbindlich auf
+    `docs/backlog/.../tasks/`.
+  - Eine neue Legacy-Notiz im `docs/tasks/`-Ordner ordnet `docs/tasks/` als
+    historischen Ausnahmeordner ein, ohne den Tracker-Linter auf eine
+    zusaetzliche Markdown-Taskdatei zu lenken.
+  - Git-Commit: `25df1d6`
+  - Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`,
+    `.artifacts/sprint_25_commit_2_von_2.diff` (nach Push lokal erzeugen)
+- Validierung:
+  - `scripts/projtrack_lint.sh`
+  - `make verify`

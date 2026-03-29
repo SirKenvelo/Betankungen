@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-28
+**Stand:** 2026-03-29
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -72,8 +72,24 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S19C4/4 - Finalen 1.1.0-Release ausgefuehrt (`APP_VERSION=1.1.0`), Gate-5-Closeout in Roadmap-/Status-/Entry-/Preflight-/Sprint-Doku finalisiert und Release-/Backup-Ausfuehrung dokumentiert; Artefakte: `.artifacts/sprint_19_commit_4_von_4.md`, `.artifacts/sprint_19_commit_4_von_4.diff`; Basis-Commit: `cf74b1c`. (2026-03-18)
 - S23C1/1 - Semantische Entflechtung von `BL-0011` umgesetzt: Odometer-Validierung aus der Scaffolder-Kette geloest und als eigener Hardening-Block `BL-0029` mit `TSK-0001`/`ISS-0001` neu verankert; Artefakte: `.artifacts/sprint_23_commit_1_von_1.md`, `.artifacts/sprint_23_commit_1_von_1.diff`; Basis-Commit: `60e30f6`. (2026-03-28)
 - S24C1/1 - `1.4.0`-Repo-Scope formal festgezogen: `BL-0011` aus dem Betankungen-Implementierungsscope herausgeloest, als externes Research-/Handover-Thema dokumentiert und die betroffenen Planungsquellen auf `BL-0016` als verbleibenden In-Repo-Scope synchronisiert; Artefakte: `.artifacts/sprint_24_commit_1_von_1.md`, `.artifacts/sprint_24_commit_1_von_1.diff`; Basis-Commit: `a8af75d`. (2026-03-28)
+- S25C1/2 - Tracker-Endzustand fuer neue Arbeit definiert: Policy, Backlog-Index, ADR-Index und Status auf kanonische vs. Legacy-Pfade synchronisiert; Artefakte: `.artifacts/sprint_25_commit_1_von_2.md`, `.artifacts/sprint_25_commit_1_von_2.diff`; Basis-Commit: `0968b70`. (2026-03-29)
+- S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S25C2/2] Docs/Tracker: Task-Navigation als Legacy-Ausnahmefall
+  nachgeschaerft. `docs/issues/README.md` verweist neue Folge-Tasks
+  verbindlich auf `docs/backlog/.../tasks/`, und eine neue Legacy-Notiz im
+  `docs/tasks/`-Ordner ordnet `TSK-0005` als historischen Ausnahmefall klar
+  ein. Der Hinweis liegt bewusst nicht als Markdown-Tracker-Datei vor, damit
+  `projtrack_lint` unter `docs/tasks/` weiterhin nur echte Task-Artefakte
+  bewertet. (2026-03-29)
+- [S25C1/2] Docs/Tracker: Verbindlichen Tracker-Endzustand fuer neue Arbeit
+  festgezogen. `POL-001`, `docs/BACKLOG.md`, `docs/backlog/README.md`,
+  `docs/ADR/README.md` und `docs/STATUS.md` trennen jetzt explizit zwischen
+  kanonischen Pfaden (`docs/backlog/`, `docs/issues/`, `docs/policies/`) und
+  lesbarem Legacy-Bestand. `docs/ADR/` bleibt bis zu einem separaten
+  Migrationsentscheid der aktive ADR-Pfad; `docs/adr/` wird nicht implizit
+  parallel eingefuehrt. (2026-03-29)
 - [General] Process/PR-Workflow: Sprint-PR-Titel als eigene Konvention
   verankert. Fuer Sprint-Arbeit gilt auf GitHub jetzt `[Sxx] type: short
   description`; Commit-Labels wie `[S24C1/1]` und generische Titel wie
