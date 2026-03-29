@@ -1,15 +1,17 @@
-# Wiki Source (v1)
-**Stand:** 2026-03-27
+# Wiki Source
+**Stand:** 2026-03-29
 
-This folder contains the versioned source pages for the public-readiness wiki
-bootstrap (`BL-012` / `TSK-0005`).
+This folder contains the versioned source pages for the published
+public-readiness wiki entry.
 
 ## Purpose
 
-- GitHub Wiki: curated entry layer for external readers.
+- GitHub Wiki: calm external entry layer for navigation and orientation.
 - Repository docs (`docs/`): technical source of truth.
+- `docs/wiki/`: editorial source for the published wiki pages, not a second
+  deep-documentation tree.
 
-## v1 Pages
+## Page Set
 
 - `Home.md`
 - `Getting-Started.md`
@@ -19,15 +21,18 @@ bootstrap (`BL-012` / `TSK-0005`).
 - `Troubleshooting-Playbooks.md`
 - `Cookie-Note.md`
 
+## Editorial Guardrails
+
+- Keep wiki pages short, readable, and link-oriented.
+- Let `docs/` carry contracts, release details, tracker state, and long-form
+  history.
+- Keep personal/contextual pages such as `Cookie-Note.md` secondary to the
+  technical start path.
+- Every page should point to concrete repository source-of-truth documents.
+
 ## Maintenance Flow
 
 1. Edit wiki source pages in this folder.
 2. Run `make wiki-link-check`.
 3. Publish/sync the same content to the GitHub Wiki pages.
 4. Keep deep technical details in `docs/` and link to them from wiki pages.
-
-## Governance
-
-- Keep wiki pages short and navigational.
-- Avoid duplicating deep contracts or full historical details.
-- Every page should link to concrete source-of-truth documents in `docs/`.
