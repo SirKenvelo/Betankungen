@@ -3,8 +3,15 @@ set -euo pipefail
 
 # btkgit
 # CREATED: 2026-03-27
-# UPDATED: 2026-03-27
+# UPDATED: 2026-03-29
 # Kompatibler Root-Wrapper: delegiert auf scripts/btkgit.sh
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-exec "$ROOT_DIR/scripts/btkgit.sh" "$@"
+TARGET="$ROOT_DIR/scripts/btkgit.sh"
+
+if [[ ! -x "$TARGET" ]]; then
+  printf '[FAIL] Entrypoint fehlt oder ist nicht ausfuehrbar: %s\n' "$TARGET" >&2
+  exit 1
+fi
+
+exec "$TARGET" "$@"

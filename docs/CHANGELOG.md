@@ -9,6 +9,7 @@ Transition-Hold (`APP_VERSION=1.3.0`)
 Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.0-dev`.
 
 ### Sprint / Commit References
+- S28C1/2 - `btkgit`-Wrapper auf klarere Failure-UX und konservativeres Cleanup gehaertet (`btkgit`, `scripts/btkgit.sh`, `tests/smoke/smoke_cli.sh`); Artefakte: `.artifacts/sprint_28_commit_1_von_2.md`, `.artifacts/sprint_28_commit_1_von_2.diff`; Basis-Commit: `ebf8626`. (2026-03-29)
 - S27C1/2 - Wiki-Entry-Layer beruhigt und klarer auf Source-of-Truth-Grenzen ausgerichtet (`docs/wiki/Home.md`, `docs/wiki/README.md`, `docs/wiki/Cookie-Note.md`); Artefakte: `.artifacts/sprint_27_commit_1_von_2.md`, `.artifacts/sprint_27_commit_1_von_2.diff`; Basis-Commit: `fc283cc`. (2026-03-29)
 - S27C2/2 - Oeffentliche Repo-Einstiege auf publizierten Wiki-Entry und versionierte Wiki-Quelle ausgerichtet (`README.md`, `CONTRIBUTING.md`, `docs/README_EN.md`); Artefakte: `.artifacts/sprint_27_commit_2_von_2.md`, `.artifacts/sprint_27_commit_2_von_2.diff`; Basis-Commit: `cc7d107`. (2026-03-29)
 - S26C1/2 - Oeffentliche Einstiegsdoku auf den bewussten Transition-Hold nach `1.3.0` synchronisiert (`README.md`, `CONTRIBUTING.md`, `docs/README_EN.md`); Artefakte: `.artifacts/sprint_26_commit_1_von_2.md`, `.artifacts/sprint_26_commit_1_von_2.diff`; Basis-Commit: `5e10687`. (2026-03-29)
@@ -80,6 +81,19 @@ Ziel: definierter Uebergang zwischen `1.3.0` final und spaeterem Start von `1.4.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S28C2/2] Docs/ADR: `ADR-0010` und `docs/README.md` dokumentieren den
+  gehaerteten `btkgit`-Ist-Zustand jetzt explizit: `sync` liefert nur klare
+  Operator-Hinweise fuer Auth-/Remote-/Upstream-Probleme, `cleanup` bleibt
+  ohne `--delete-local` bewusst nicht-destruktiv, und der Wrapper wird klar
+  als kleines Repo-Werkzeug mit Grenzen gegenueber `git`/`gh` beschrieben.
+  (2026-03-29)
+- [S28C1/2] Tooling/Workflow: `btkgit` wurde fuer Solo-Maintenance
+  gehaertet. Der Root-Entrypoint scheitert jetzt klar, wenn das eigentliche
+  Script fehlt; `sync` erklaert fehlendes `origin`, fehlenden Branch-Upstream
+  sowie Auth-/Remote-Probleme gezielter; `cleanup` fuehrt nur noch ein
+  explizites lokales Branch-Delete via `--delete-local` aus und loescht nie
+  stillschweigend `main`. Die Smoke-Abdeckung prueft diese Pfade jetzt
+  nicht-destruktiv in isolierten Temp-Repositories. (2026-03-29)
 - [S27C2/2] Docs/Public Entry: Root-README, `CONTRIBUTING.md` und
   `docs/README_EN.md` verlinken den publizierten GitHub-Wiki-Einstieg jetzt
   explizit neben den versionierten Wiki-Quellseiten. Die oeffentlichen

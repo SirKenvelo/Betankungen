@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-27
+# UPDATED: 2026-03-29
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -148,6 +148,12 @@ print_plan() {
   printf '[LIST] kpr dry-run\n'
   printf '[LIST] backup_snapshot dry-run\n'
   printf '[LIST] btkgit --help\n'
+  printf '[LIST] btkgit ready --skip-verify\n'
+  printf '[LIST] btkgit preflight default -- --help\n'
+  printf '[LIST] btkgit sync ohne origin -> klarer Fehlerpfad\n'
+  printf '[LIST] btkgit sync ohne Upstream -> Branch-Hinweis\n'
+  printf '[LIST] btkgit cleanup behaelt Branch standardmaessig\n'
+  printf '[LIST] btkgit cleanup --delete-local loescht Branch nur explizit\n'
   printf '[LIST] Test-DB Build: Betankungen_Big.db + Betankungen_Policy.db\n'
   printf '[LIST] Betankungen --version\n'
   printf '[LIST] Betankungen --help\n'
@@ -415,6 +421,32 @@ register_tmp_dir() {
   printf '%s\n' "$d"
 }
 
+setup_btkgit_fixture_repo() {
+  local sandbox remote repo
+
+  sandbox="$(register_tmp_dir)"
+  remote="$sandbox/remote.git"
+  repo="$sandbox/repo"
+
+  git init --bare "$remote" >/dev/null 2>&1 || return 1
+  git clone "$remote" "$repo" >/dev/null 2>&1 || return 1
+  mkdir -p "$repo/scripts" || return 1
+  cp "$ROOT_DIR/btkgit" "$repo/btkgit" || return 1
+  cp "$ROOT_DIR/scripts/btkgit.sh" "$repo/scripts/btkgit.sh" || return 1
+  chmod +x "$repo/btkgit" "$repo/scripts/btkgit.sh" || return 1
+
+  git -C "$repo" config user.name 'Smoke Bot' || return 1
+  git -C "$repo" config user.email 'smoke@example.invalid' || return 1
+
+  printf 'fixture\n' >"$repo/README.md" || return 1
+  git -C "$repo" add README.md btkgit scripts/btkgit.sh || return 1
+  git -C "$repo" commit -m 'fixture init' >/dev/null 2>&1 || return 1
+  git -C "$repo" branch -M main >/dev/null 2>&1 || return 1
+  git -C "$repo" push -u origin main >/dev/null 2>&1 || return 1
+
+  printf '%s\n' "$repo"
+}
+
 cleanup_tmp_dirs() {
   local d
   for d in "${TMP_DIRS[@]}"; do
@@ -423,6 +455,205 @@ cleanup_tmp_dirs() {
 }
 
 # Bootstrap-/First-Run-Checks sind in smoke_bootstrap_helpers.sh ausgelagert.
+
+test_btkgit_ready_skip_verify_ok() {
+  local tmp out err rc
+
+  tmp="$(register_tmp_dir)"
+  out="$tmp/out.txt"
+  err="$tmp/err.txt"
+
+  set +e
+  "$ROOT_DIR/btkgit" ready --skip-verify >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'make verify wurde via --skip-verify uebersprungen\.' "$out" &&
+     grep -q '\[OK\] Readiness-Check abgeschlossen\.' "$out"; then
+    printf '[OK] btkgit ready --skip-verify\n'
+  else
+    printf '[FAIL] btkgit ready --skip-verify\n'
+    add_fail
+  fi
+}
+
+test_btkgit_preflight_default_help_ok() {
+  local tmp out err rc
+
+  tmp="$(register_tmp_dir)"
+  out="$tmp/out.txt"
+  err="$tmp/err.txt"
+
+  set +e
+  "$ROOT_DIR/btkgit" preflight default -- --help >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'release_preflight.sh - 0.9.0 Readiness-Preflight ausfuehren' "$out" &&
+     grep -q -- '--skip-verify' "$out"; then
+    printf '[OK] btkgit preflight default -- --help\n'
+  else
+    printf '[FAIL] btkgit preflight default -- --help\n'
+    add_fail
+  fi
+}
+
+test_btkgit_sync_missing_origin_fails_cleanly() {
+  local repo out err rc
+
+  repo="$(setup_btkgit_fixture_repo)" || {
+    printf '[FAIL] btkgit sync ohne origin: Fixture-Repo konnte nicht vorbereitet werden\n'
+    add_fail
+    return
+  }
+
+  git -C "$repo" remote remove origin >/dev/null 2>&1 || {
+    printf '[FAIL] btkgit sync ohne origin: origin konnte nicht entfernt werden\n'
+    add_fail
+    return
+  }
+  git -C "$repo" checkout -b feature/no-origin >/dev/null 2>&1 || {
+    printf '[FAIL] btkgit sync ohne origin: Feature-Branch konnte nicht erstellt werden\n'
+    add_fail
+    return
+  }
+
+  out="$repo/out.txt"
+  err="$repo/err.txt"
+
+  set +e
+  (
+    cd "$repo"
+    ./btkgit sync
+  ) >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] && grep -q "Remote 'origin' fehlt" "$err"; then
+    printf '[OK] btkgit sync ohne origin: klarer Fehlerpfad\n'
+  else
+    printf '[FAIL] btkgit sync ohne origin: klarer Fehlerpfad\n'
+    add_fail
+  fi
+}
+
+test_btkgit_sync_without_upstream_fails_cleanly() {
+  local repo out err rc
+
+  repo="$(setup_btkgit_fixture_repo)" || {
+    printf '[FAIL] btkgit sync ohne Upstream: Fixture-Repo konnte nicht vorbereitet werden\n'
+    add_fail
+    return
+  }
+
+  git -C "$repo" checkout -b feature/no-upstream >/dev/null 2>&1 || {
+    printf '[FAIL] btkgit sync ohne Upstream: Feature-Branch konnte nicht erstellt werden\n'
+    add_fail
+    return
+  }
+
+  out="$repo/out.txt"
+  err="$repo/err.txt"
+
+  set +e
+  (
+    cd "$repo"
+    ./btkgit sync
+  ) >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -ne 0 ]] &&
+     grep -q "hat noch kein Upstream" "$err" &&
+     grep -q "Session-Sync konnte nicht abgeschlossen werden" "$err"; then
+    printf '[OK] btkgit sync ohne Upstream: Branch-Hinweis\n'
+  else
+    printf '[FAIL] btkgit sync ohne Upstream: Branch-Hinweis\n'
+    add_fail
+  fi
+}
+
+test_btkgit_cleanup_keeps_branch_by_default() {
+  local repo out err rc current_branch branch_listing
+
+  repo="$(setup_btkgit_fixture_repo)" || {
+    printf '[FAIL] btkgit cleanup Default: Fixture-Repo konnte nicht vorbereitet werden\n'
+    add_fail
+    return
+  }
+
+  git -C "$repo" checkout -b feature/cleanup-keep >/dev/null 2>&1 || {
+    printf '[FAIL] btkgit cleanup Default: Feature-Branch konnte nicht erstellt werden\n'
+    add_fail
+    return
+  }
+
+  out="$repo/out.txt"
+  err="$repo/err.txt"
+
+  set +e
+  (
+    cd "$repo"
+    ./btkgit cleanup
+  ) >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  current_branch="$(git -C "$repo" branch --show-current)"
+  branch_listing="$(git -C "$repo" branch --list 'feature/cleanup-keep')"
+
+  if [[ $rc -eq 0 ]] &&
+     [[ "$current_branch" == "main" ]] &&
+     [[ -n "$branch_listing" ]] &&
+     grep -q 'Kein lokales Branch-Delete angefordert' "$out"; then
+    printf '[OK] btkgit cleanup behaelt Branch standardmaessig\n'
+  else
+    printf '[FAIL] btkgit cleanup behaelt Branch standardmaessig\n'
+    add_fail
+  fi
+}
+
+test_btkgit_cleanup_delete_local_ok() {
+  local repo out err rc current_branch branch_listing
+
+  repo="$(setup_btkgit_fixture_repo)" || {
+    printf '[FAIL] btkgit cleanup --delete-local: Fixture-Repo konnte nicht vorbereitet werden\n'
+    add_fail
+    return
+  }
+
+  git -C "$repo" checkout -b feature/cleanup-delete >/dev/null 2>&1 || {
+    printf '[FAIL] btkgit cleanup --delete-local: Feature-Branch konnte nicht erstellt werden\n'
+    add_fail
+    return
+  }
+
+  out="$repo/out.txt"
+  err="$repo/err.txt"
+
+  set +e
+  (
+    cd "$repo"
+    ./btkgit cleanup --delete-local
+  ) >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  current_branch="$(git -C "$repo" branch --show-current)"
+  branch_listing="$(git -C "$repo" branch --list 'feature/cleanup-delete')"
+
+  if [[ $rc -eq 0 ]] &&
+     [[ "$current_branch" == "main" ]] &&
+     [[ -z "$branch_listing" ]] &&
+     grep -q 'Cleanup abgeschlossen (lokaler Branch geloescht: feature/cleanup-delete)\.' "$out"; then
+    printf '[OK] btkgit cleanup --delete-local loescht Branch explizit\n'
+  else
+    printf '[FAIL] btkgit cleanup --delete-local loescht Branch explizit\n'
+    add_fail
+  fi
+}
 
 prepare_seeded_demo_home() {
   local home
@@ -1075,6 +1306,12 @@ require_path "$ROOT_DIR/.backup"
 run_check "kpr dry-run" "$ROOT_DIR/kpr.sh" --dry-run
 run_check "backup_snapshot dry-run" "$ROOT_DIR/scripts/backup_snapshot.sh" --dry-run
 run_check "btkgit --help" "$ROOT_DIR/btkgit" --help
+test_btkgit_ready_skip_verify_ok
+test_btkgit_preflight_default_help_ok
+test_btkgit_sync_missing_origin_fails_cleanly
+test_btkgit_sync_without_upstream_fails_cleanly
+test_btkgit_cleanup_keeps_branch_by_default
+test_btkgit_cleanup_delete_local_ok
 run_check "Test-DB Build: Betankungen_Big.db + Betankungen_Policy.db" "$ROOT_DIR/tests/domain_policy/helpers/build_test_dbs.sh"
 
 if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
