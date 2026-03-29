@@ -1197,3 +1197,44 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - Validierung:
   - `make wiki-link-check`
   - `make verify`
+
+## Sprint 28 - `btkgit` absichern und operationalisieren
+
+- Status: done
+- Ziel: das repo-lokale Workflow-Wrapper-CLI fuer Auth-/Remote-/Cleanup-Faelle
+  klarer, sicherer und im Solo-Maintenance-Alltag belastbarer machen.
+
+### Geplante Bloecke
+
+- S28C1/2: done - Wrapper-Logik und Smoke-Absicherung fuer Failure-UX,
+  konservatives Cleanup und klare Operator-Hinweise haerten.
+- S28C2/2: done - ADR, Einstiegsdoku und Sprint-Traceability auf den
+  gehaerteten `btkgit`-Ist-Zustand synchronisieren.
+
+### Fortschritt (2026-03-29)
+
+- `S28C1/2` abgeschlossen:
+  - `btkgit` und `scripts/btkgit.sh` liefern jetzt gezielte Hinweise fuer
+    fehlendes `origin`, fehlenden Branch-Upstream sowie Auth-/Remote-Probleme,
+    ohne Credentials oder Remotes automatisch zu veraendern.
+  - `cleanup` loescht lokale Branches nur noch explizit via
+    `--delete-local`; der Default-Fall bleibt konservativ und `main`
+    unloeschbar.
+  - `tests/smoke/smoke_cli.sh` deckt `ready --skip-verify`,
+    `preflight default -- --help`, `sync`-Fehlerpfade und die neue
+    `cleanup`-Semantik jetzt nicht-destruktiv in isolierten Temp-Repos ab.
+  - Git-Commit: `ebf8626`
+  - Artefakte: `.artifacts/sprint_28_commit_1_von_2.md`,
+    `.artifacts/sprint_28_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S28C2/2` abgeschlossen:
+  - `docs/ADR/ADR-0010-repo-local-workflow-wrapper-cli.md` haelt jetzt den
+    gehaerteten MVP-Vertrag, die Failure-UX-Leitplanke und die
+    Nicht-Ziele fuer Auth-/Remote-/Delete-Automation explizit fest.
+  - `docs/README.md` beschreibt `btkgit` jetzt als bewusst kleines
+    Repo-Werkzeug mit konservativem Cleanup und klaren Grenzen gegenueber
+    `git`/`gh`.
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` fuehren Sprint 28 und die
+    verifizierten Checks nach.
+- Validierung:
+  - `tests/smoke/smoke_cli.sh`
+  - `make verify`

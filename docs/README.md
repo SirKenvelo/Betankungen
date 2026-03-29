@@ -173,7 +173,7 @@ Details zur Regelbasis:
 
 ### Root-Ordner (Workflow ohne Git)
 - `scripts/`: Wartungsskripte (Release/Backup/Netzwerkdiagnose)
-- `btkgit`: repo-lokaler Workflow-Wrapper fuer Sync/Preflight/Readiness/Cleanup (Wrapper auf `scripts/btkgit.sh`)
+- `btkgit`: repo-lokaler Workflow-Wrapper fuer Sync/Preflight/Readiness und konservatives Cleanup (Wrapper auf `scripts/btkgit.sh`)
 - `data/`: entkoppelte Daten-Assets (u. a. `dev_messages.b64` fuer optionale Easter-Egg-Messages)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
 - `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
@@ -461,20 +461,31 @@ Beispiel:
 ### `scripts/btkgit.sh` / `./btkgit`
 Repo-lokales Workflow-Wrapper-CLI gemaess `ADR-0010`.
 
-**Funktionen (MVP)**
-- `btkgit sync`: Session-Sync (`git fetch --prune origin` + `git pull --ff-only`)
+**Funktionen (gehaerteter MVP)**
+- `btkgit sync`: Session-Sync (`git fetch --prune origin` + `git pull --ff-only`);
+  bei Auth-/Remote-/Upstream-Problemen liefert `btkgit` gezielte Hinweise,
+  aendert Credentials oder Remotes aber nicht automatisch
 - `btkgit preflight <version>`: delegiert auf den passenden versionsspezifischen
   Preflight (z. B. `1.3.0` -> `scripts/release_preflight_1_3_0.sh`)
 - `btkgit ready`: menschenlesbarer lokaler Readiness-Wrapper (`git status`,
   optional `make verify`)
-- `btkgit cleanup`: Post-Merge-Flow (`checkout main`, Sync, lokales
-  Branch-Cleanup)
+- `btkgit cleanup`: Post-Merge-Flow (`checkout main`, Sync); lokales
+  Branch-Cleanup nur explizit via `--delete-local`
+
+**Bewusste Grenzen**
+- erwartet ein Git-Repository mit `origin` als Standard-Remote
+- loescht nie `main` und fuehrt kein Remote-Branch-Cleanup aus
+- ersetzt keine direkten `git`-/`gh`-Schritte fuer Commit, Push oder PR
+- fuehrt nur auf, was das Repo ohnehin als Source of Truth vorgibt
+  (`git`, `make verify`, `make release-preflight-*`)
 
 Beispiele:
 - `./btkgit sync`
 - `./btkgit preflight 1.3.0 -- --skip-verify`
 - `./btkgit ready`
 - `./btkgit cleanup`
+- `./btkgit cleanup --delete-local`
+- `./btkgit cleanup --branch chore/1-4-0-btkgit-hardening --delete-local`
 
 ### `scripts/release_preflight.sh`
 Readiness-Preflight fuer den 0.9.0-Releasepfad.
