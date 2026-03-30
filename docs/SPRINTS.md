@@ -1333,6 +1333,43 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - `make verify`
 
+## Sprint 31 - `BL-0011` repo-seitig externalisiert abschliessen
+
+- Status: done
+- Ziel: den repo-seitigen Externalisierungs-/Handover-Stand von `BL-0011`
+  final abschliessen und klar dokumentieren, dass weitere fachliche Arbeit
+  ausserhalb von `Betankungen` stattfindet.
+
+### Geplante Bloecke
+
+- S31C1/2: done - Tracker-, Scope-Decision-, Backlog- und Status-Texte auf
+  finalen Closeout fuer `Betankungen` ziehen.
+- S31C2/2: done - Sprint-Traceability und Verifikationsnachweis fuer den
+  Externalisierungs-Closeout finalisieren.
+
+### Fortschritt (2026-03-30)
+
+- `S31C1/2` abgeschlossen:
+  - `docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md` steht
+    fuer `Betankungen` jetzt auf `done`.
+  - `docs/BL-0011_SCOPE_DECISION_1_4_0.md`, `docs/BACKLOG.md` und
+    `docs/STATUS.md` behandeln `BL-0011` nicht mehr als offenen In-Repo-Block
+    der `1.4.0`-Linie.
+  - Weitere Umsetzung ist explizit nur noch in einem separaten Zielprojekt
+    vorgesehen.
+  - Git-Commit: `7a5c038`
+  - Artefakte: `.artifacts/sprint_31_commit_1_von_2.md`,
+    `.artifacts/sprint_31_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S31C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` fuehren Sprint 31 jetzt als
+    repo-seitigen Externalisierungs-Closeout fuer `BL-0011`.
+  - Der gruene Vollnachweis `make verify` ist fuer den Sprint dokumentiert.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## Traceability-Backfill fuer Sprint 25 bis 28
 
 - Status: done
