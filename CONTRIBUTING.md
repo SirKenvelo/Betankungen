@@ -1,13 +1,12 @@
 # Contributing
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 
 Thank you for your interest in Betankungen.
 
 ## Current Contribution Policy
 
-- The repository is public and currently in a deliberate post-`1.3.0`
-  transition hold; `APP_VERSION=1.3.0` remains unchanged until a separate
-  `1.4.0-dev` start commit is explicitly made.
+- The repository is public and currently on the active `1.4.0-dev`
+  development line after a dedicated post-`1.3.0` activation commit.
 - The main branch follows a PR-based workflow with green verification before
   merge; maintainership stays with the project owner.
 - External issues are welcome.

@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -61,15 +61,14 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `1.1.0` wurde am `2026-03-18` final freigegeben.
   - `1.2.0` wurde am `2026-03-24` final freigegeben.
   - `1.3.0` wurde am `2026-03-26` final freigegeben.
-- Aktueller technischer Stand: `APP_VERSION=1.3.0`.
-- Der bewusste Transition-Hold nach `1.3.0` ist aktiv; `1.4.0-dev` wurde
-  noch nicht gestartet.
-- Sprint 29 haelt den formalen Startgate vor dem Dev-Start fest:
+- Aktueller technischer Stand: `APP_VERSION=1.4.0-dev`.
+- Der bewusste Transition-Hold nach `1.3.0` ist beendet; `1.4.0-dev` wurde
+  per separatem Aktivierungs-Commit gestartet.
+- Sprint 29 bleibt als formaler Pre-Activation-Gate dokumentiert:
   `docs/DEV_START_GATE_1_4_0.md`.
-- Aktueller Go-/No-Go-Stand:
-  - `GO` fuer einen separaten Aktivierungs-Commit zu `1.4.0-dev`
-  - `NO-GO` fuer einen impliziten Start zusammen mit `BL-0016` oder spaeteren
-    Inhaltsarbeiten
+- Die dort definierte Abgrenzung wurde eingehalten:
+  - separater Aktivierungs-Commit fuer `1.4.0-dev` ist erfolgt
+  - inhaltliche Folgearbeit auf `BL-0016` folgt erst nach diesem Startschritt
 - Zuletzt abgeschlossener verbindlicher Gate-Plan:
   `docs/ROADMAP_1_3_0.md` (Gate 1/2/3/4/5 abgeschlossen).
 - Gelieferter Release-Kern fuer `1.3.0`:
@@ -85,16 +84,15 @@ Das Hauptprogramm steuert – die Units arbeiten.
   Abschlusslauf, finalem Versionswechsel und Release-/Backup-Ausfuehrung.
 - Verbindlicher naechster Planungsstand:
   - abgeschlossener Vorbereitungsblock (Sprint 23-28), dokumentierte
-    Startfreigabe (Sprint 29) und eigentlicher Dev-Start sind bewusst
+    Startfreigabe (Sprint 29) und eigentlicher Dev-Start bleiben bewusst
     getrennte Schritte
-  - die naechste Folgeversion bleibt `1.4.0`, aber noch ohne Dev-Start-Commit
+  - die aktive Folgeversion ist jetzt `1.4.0-dev`
   - der vorbereitete In-Repo-Scope liegt aktuell bei `BL-0016`
   - `BL-0011` bleibt fuer dieses Repository ein externes
     Research-/Handover-Thema:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
-  - der geplante naechste technische Schritt ist ein eigener
-    Aktivierungs-Commit fuer `1.4.0-dev`; erst danach folgt die inhaltliche
-    Folgearbeit
+  - der Startschritt ist als eigener Aktivierungs-Commit erfolgt; danach darf
+    jetzt die inhaltliche Folgearbeit auf `BL-0016` beginnen
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
   `docs/ROADMAP_1_0_0.md`.

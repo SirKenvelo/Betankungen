@@ -5,9 +5,9 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-Transition-Hold (`APP_VERSION=1.3.0`)
-Ziel: dokumentierte Go-/No-Go-Freigabebasis vor separatem Aktivierungs-Commit
-zu `1.4.0-dev`.
+Aktive Entwicklungsbasis `1.4.0-dev` (`APP_VERSION=1.4.0-dev`)
+Ziel: separaten Dev-Start sauber dokumentieren und anschliessend den ersten
+In-Repo-Block der neuen Linie umsetzen.
 
 ### Sprint / Commit References
 - S29C1/2 - Formales Startgate vor `1.4.0-dev` definiert (`docs/DEV_START_GATE_1_4_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`); Artefakte: `.artifacts/sprint_29_commit_1_von_2.md`, `.artifacts/sprint_29_commit_1_von_2.diff`; Basis-Commit: `f97a591`. (2026-03-29)
@@ -83,6 +83,12 @@ zu `1.4.0-dev`.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S30C1/4] Release/Docs: Die aktive Entwicklungsbasis wurde in einem
+  separaten Aktivierungs-Commit auf `APP_VERSION=1.4.0-dev` gesetzt
+  (`src/Betankungen.lpr`). Root-README, deutsche/englische Einstiegsdoku,
+  `CONTRIBUTING.md` und `docs/STATUS.md` fuehren den Sprint-29-Gate jetzt als
+  eingeloesten Vorstart-Nachweis und kommunizieren `BL-0016` weiterhin als
+  ersten In-Repo-Folgeblock der 1.4.0-Linie. (2026-03-30)
 - [General] Docs/Traceability: Fehlende kanonische Tracker-/ADR-Referenzen
   fuer den bereits abgeschlossenen Vorbereitungsblock Sprint 25 bis 28
   nachgezogen. Neue Backfill-Eintraege `BL-0025` bis `BL-0028` und
