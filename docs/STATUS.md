@@ -298,10 +298,9 @@ Bereits erledigt:
   - Gate 3 ist auf Abschlussstand: `make verify` enthaelt jetzt zusaetzlich den
     Fuel-Price-History-Regression-Check und lief lokal gruen.
   - Der fruehere Planungsmarker `1.4.0 = BL-0016 + BL-0011` ist
-    repo-seitig praezisiert: `BL-0016` bleibt der verbleibende In-Repo-Scope
-    fuer `Betankungen`; `BL-0011` ist als externes Scaffolder-Thema
-    dokumentiert und gehoert nicht zum Implementierungsscope dieses
-    Repositories.
+    repo-seitig abgeschlossen: `BL-0016` wurde als Community-Standards-
+    Baseline geliefert; `BL-0011` ist als externes Scaffolder-Thema final
+    externalisiert und fuer `Betankungen` repo-seitig geschlossen.
   - Tracker-Endzustand vor `1.4.0-dev` ist fuer neue Arbeit explizit
     festgelegt: neue `BL`/`TSK` unter `docs/backlog/`, neue `ISS` unter
     `docs/issues/`, neue `POL` unter `docs/policies/`; `docs/ADR/` bleibt bis
@@ -312,9 +311,10 @@ Bereits erledigt:
     sowie `ADR-0011` bis `ADR-0013` dokumentieren Tracker-Endzustand,
     Entry-/Wiki-Layer und `btkgit`-Safety explizit, ohne neuen Scope zu
     aktivieren.
-  - Der dokumentierte Handover-/Externalisierungsstand fuer `BL-0011` liegt in
-    `docs/BL-0011_SCOPE_DECISION_1_4_0.md`; `BL-0011` bleibt auch nach dem
-    Start von `1.4.0-dev` ausserhalb des Repo-Implementierungsscope.
+  - Der dokumentierte Handover-/Externalisierungsstand fuer `BL-0011` liegt
+    in `docs/BL-0011_SCOPE_DECISION_1_4_0.md`; eventuelle Folgearbeit findet
+    nur in einem separaten Zielprojekt statt, solange keine neue Re-Entry-
+    Entscheidung getroffen wird.
   - Gate-4-Blueprint liegt in `docs/RELEASE_1_3_0_PREFLIGHT.md`; operativer
     Entrypoint ist `make release-preflight-1-3-0`.
   - Lokaler RC-Kickoff und finaler RC-Abschlusslauf fuer Gate 4 sind
@@ -330,7 +330,8 @@ Bereits erledigt:
     Baseline des Public-Repositories.
   - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`, standardisierte
     Bug-/Feature-Issue-Templates sowie ein PR-Template mit `Summary` und
-    `Validation`; `BL-0011` bleibt weiterhin ausserhalb des Repo-Scope.
+    `Validation`; `BL-0011` gilt fuer `Betankungen` jetzt als sauber
+    externalisiert und repo-seitig abgeschlossen.
 
 ## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 
