@@ -18,6 +18,14 @@ Thank you for your interest in Betankungen.
 - GitHub issues, pull requests, and reviews should be written in English.
 - Internal project documentation may remain in German.
 
+## Community Standards
+
+- Code of conduct: `CODE_OF_CONDUCT.md`
+- Security reporting process: `SECURITY.md`
+- Use the repository issue templates for bug reports and feature requests.
+- Pull requests should keep the minimum structure `Summary` and `Validation`
+  from `.github/pull_request_template.md`.
+
 ## Technical Baseline
 
 - Build command (from project root):
@@ -29,6 +37,8 @@ Thank you for your interest in Betankungen.
 - Keep changes focused and reversible.
 - Avoid unrelated refactors in the same PR.
 - Update docs when behavior, flags, output format, or architecture decisions change.
+- Do not mix version activation, feature scope, and unrelated cleanup in the
+  same PR without an explicit reason.
 
 ## Wiki Maintenance
 

@@ -83,6 +83,12 @@ In-Repo-Block der neuen Linie umsetzen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S30C2/4] Docs/Community: `BL-0016` als erste `1.4.0-dev`-Inhaltsarbeit
+  umgesetzt. Neue Public-Repository-Baseline aus `CODE_OF_CONDUCT.md`,
+  `SECURITY.md`, Bug-/Feature-Issue-Templates und PR-Template geliefert;
+  `CONTRIBUTING.md`, Root-README, deutsche/englische Einstiegsdoku,
+  `docs/STATUS.md`, `docs/BACKLOG.md` und der BL-Tracker sind darauf
+  synchronisiert. (2026-03-30)
 - [S30C1/4] Release/Docs: Die aktive Entwicklungsbasis wurde in einem
   separaten Aktivierungs-Commit auf `APP_VERSION=1.4.0-dev` gesetzt
   (`src/Betankungen.lpr`). Root-README, deutsche/englische Einstiegsdoku,

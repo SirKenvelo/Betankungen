@@ -325,11 +325,12 @@ Bereits erledigt:
     Status `success`.
   - Gate-5-Closeout ist in `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert
     (Scope/Version/Audit/Exit-Checks, finaler Umschalt- und Release-Block).
-  - Die aktive Folgeversion ist jetzt `1.4.0-dev`; fuer das `Betankungen`-Repo
-    umfasst der erste In-Repo-Implementierungsscope weiterhin `BL-0016`,
-    waehrend `BL-0011` ausserhalb des Repo-Scope dokumentiert bleibt.
-  - Der separate Aktivierungs-Commit ist erfolgt; damit darf die Folgearbeit
-    auf `BL-0016` jetzt regelkonform beginnen.
+  - Die aktive Folgeversion ist jetzt `1.4.0-dev`; `BL-0016` wurde als erster
+    In-Repo-Block geliefert und bildet jetzt die Community-Standards-
+    Baseline des Public-Repositories.
+  - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`, standardisierte
+    Bug-/Feature-Issue-Templates sowie ein PR-Template mit `Summary` und
+    `Validation`; `BL-0011` bleibt weiterhin ausserhalb des Repo-Scope.
 
 ## Roadmap 1.2.0 - verbindlicher Fahrplan (abgeschlossen)
 

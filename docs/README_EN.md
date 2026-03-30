@@ -28,8 +28,8 @@ Detailed documents are currently maintained primarily in German.
 - The Gate-4 and Gate-5 closeouts for `1.3.0` are documented in
   `docs/RELEASE_1_3_0_PREFLIGHT.md`, including the final local RC run, final
   version switch, release/backup execution, and artifact references.
-- The active in-repo follow-up scope for `1.4.0-dev` is now:
-  - `BL-0016` as the first repository-internal content block
+- The first in-repo block of `1.4.0-dev` is now delivered:
+  - `BL-0016` as the public community-standards baseline
   - `BL-0011` as an external handover topic for this repository
     (`docs/BL-0011_SCOPE_DECISION_1_4_0.md`)
 - CI/verify governance remains active for `main` (PR-based flow with green verification gate).
@@ -55,6 +55,11 @@ Detailed documents are currently maintained primarily in German.
 ## Notes For Contributors
 
 - See `CONTRIBUTING.md` in the project root.
+- Community standards:
+  - `CODE_OF_CONDUCT.md`
+  - `SECURITY.md`
+  - `.github/ISSUE_TEMPLATE/`
+  - `.github/pull_request_template.md`
 - Published public-readiness wiki entry:
   `https://github.com/SirKenvelo/Betankungen/wiki`.
 - Versioned wiki source pages: `docs/wiki/README.md`.

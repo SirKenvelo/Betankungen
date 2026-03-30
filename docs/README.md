@@ -87,12 +87,13 @@ Das Hauptprogramm steuert – die Units arbeiten.
     Startfreigabe (Sprint 29) und eigentlicher Dev-Start bleiben bewusst
     getrennte Schritte
   - die aktive Folgeversion ist jetzt `1.4.0-dev`
-  - der vorbereitete In-Repo-Scope liegt aktuell bei `BL-0016`
+  - der erste In-Repo-Block `BL-0016` ist als Community-Standards-Baseline
+    umgesetzt
   - `BL-0011` bleibt fuer dieses Repository ein externes
     Research-/Handover-Thema:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
-  - der Startschritt ist als eigener Aktivierungs-Commit erfolgt; danach darf
-    jetzt die inhaltliche Folgearbeit auf `BL-0016` beginnen
+  - das Public-Repository hat jetzt eine dokumentierte Mindestbaseline fuer
+    Verhaltensregeln, Sicherheitsmeldungen, Issue-Intake und PR-Struktur
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
   `docs/ROADMAP_1_0_0.md`.
@@ -102,6 +103,9 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 ## Doku-Navigation
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
+- `CONTRIBUTING.md`: englische Contribution-Leitplanke fuer externe Mitarbeit.
+- `CODE_OF_CONDUCT.md`: Verhaltensrahmen fuer oeffentliche Zusammenarbeit.
+- `SECURITY.md`: Responsible-Disclosure-Prozess fuer Sicherheitsmeldungen.
 - `docs/GIT_WORKFLOW.md`: verbindlicher Git-/Branch-/PR-/Merge-Workflow fuer Sprint- und Traceability-Arbeit.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
