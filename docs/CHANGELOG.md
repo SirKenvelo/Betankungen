@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -83,6 +83,14 @@ zu `1.4.0-dev`.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Traceability: Fehlende kanonische Tracker-/ADR-Referenzen
+  fuer den bereits abgeschlossenen Vorbereitungsblock Sprint 25 bis 28
+  nachgezogen. Neue Backfill-Eintraege `BL-0025` bis `BL-0028` und
+  `ADR-0011` bis `ADR-0013` machen Tracker-Endzustand, Entry-/Wiki-Layer und
+  `btkgit`-Safety referenzierbar; `docs/BACKLOG.md`, `docs/ADR/README.md`,
+  `docs/STATUS.md` und `docs/SPRINTS.md` sind minimal darauf synchronisiert.
+  `APP_VERSION=1.3.0`, der Sprint-29-Startgate und der Scope vor
+  `1.4.0-dev` bleiben unveraendert. (2026-03-30)
 - [S29C2/2] Docs/Traceability: Sprint 29 ist jetzt als eigener Go-/No-Go-
   Gate-Sprint vor `1.4.0-dev` in `docs/CHANGELOG.md` und `docs/SPRINTS.md`
   verankert. Die Doku haelt fest, dass der naechste zulaessige Schritt ein
@@ -546,6 +554,9 @@ zu `1.4.0-dev`.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Tracker-/ADR-Backfill, Index-Sync und Traceability-Pflege fuer Sprint 25
+  bis 28 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
+  (2026-03-30)
 - Workflow-Korrektur und Governance-Schaerfung zur Branch-Naming-Disziplin
   erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
   (2026-03-26)

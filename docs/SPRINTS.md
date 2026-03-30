@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -1275,4 +1275,28 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Validierung
 
+- `make verify`
+
+## Traceability-Backfill fuer Sprint 25 bis 28
+
+- Status: done
+- Ziel: die fehlenden kanonischen BL-/ADR-Referenzen fuer den bereits
+  abgeschlossenen Vorbereitungsblock nachziehen, ohne Sprint 25 bis 28
+  inhaltlich neu zu oeffnen.
+
+### Stand (2026-03-30)
+
+- `BL-0025` bis `BL-0028` dokumentieren Sprint 25 bis 28 jetzt auch im
+  kanonischen Backlog.
+- `ADR-0011` bis `ADR-0013` halten den bereits entschiedenen Tracker-,
+  Entry-Layer- und `btkgit`-Vertrag explizit fest.
+- `docs/BACKLOG.md`, `docs/ADR/README.md` und `docs/STATUS.md` sind auf diese
+  Backfills synchronisiert; bestehende Sprint-Ziele, Commit-Folgen und
+  Gate-Aussagen bleiben unveraendert.
+- Kein Start von `1.4.0-dev`, keine Aktivierung von `BL-0016`, keine neue
+  `btkgit`-Umsetzung.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
 - `make verify`
