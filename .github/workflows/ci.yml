@@ -1,5 +1,5 @@
 # CREATED: 2026-03-11
-# UPDATED: 2026-03-15
+# UPDATED: 2026-03-30
 name: CI
 
 on:
@@ -39,8 +39,17 @@ jobs:
       - name: Install dependencies (FPC + sqlite3)
         run: |
           sudo apt-get update
-          # Vollstaendiges FPC-Set statt nur Compiler, damit FCL/IniFiles und DB-Units vorhanden sind.
-          sudo apt-get install -y fpc sqlite3
+          # Minimaler FPC-Satz fuer dieses Repo:
+          # - fp-compiler bringt Compiler + RTL
+          # - fp-units-fcl deckt u. a. IniFiles, Process, fpjson, jsonparser ab
+          # - fp-units-db deckt SQLDB/SQLite3Conn ab
+          # Das vermeidet das deutlich groessere fpc-Metapaket mit IDE-/GUI-/Tooling-Zusaetzen.
+          sudo apt-get install -y --no-install-recommends \
+            fp-compiler \
+            fp-units-base \
+            fp-units-fcl \
+            fp-units-db \
+            sqlite3
 
       - name: Build (FPC standard)
         run: |
