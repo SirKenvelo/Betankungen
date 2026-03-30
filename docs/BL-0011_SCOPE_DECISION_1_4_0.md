@@ -1,6 +1,6 @@
 # BL-0011 Scope Decision fuer 1.4.0
-**Stand:** 2026-03-28
-**Status:** decided
+**Stand:** 2026-03-30
+**Status:** closed for Betankungen
 
 ## Entscheidung
 
@@ -9,7 +9,8 @@ Repositories fuer die geplante `1.4.0`-Linie.
 
 `Betankungen` fuehrt dazu nur den Research-/Handover-Stand und die
 Repo-seitige Referenzpflege. Die eigentliche Umsetzung bleibt ein separates
-Repository-Thema.
+Repository-Thema. Dieser repo-seitige Closeout ist fuer `Betankungen`
+abgeschlossen.
 
 ## Begruendung
 
@@ -22,7 +23,8 @@ Repository-Thema.
 
 ## In Scope fuer Betankungen 1.4.0
 
-- Repo-seitige Scope-Bereinigung und Referenzpflege fuer `BL-0011`.
+- Repo-seitige Scope-Bereinigung, Referenzpflege und finaler Closeout fuer
+  `BL-0011`.
 - Dokumentierter Handover-/Research-Stand fuer ein spaeteres separates
   Repository.
 - Public-Repository-Baseline aus `BL-0016` als verbleibender In-Repo-Scope.
@@ -50,6 +52,15 @@ Repository-Thema.
 - Kein vollstaendiger CI/CD-Stack-Generator.
 - Kein framework-spezifisches Dependency-Bootstrapping.
 - Keine tiefgreifende Projekt-Spezialisierung jenseits eines Basisprofils.
+
+## Repo-seitiger Abschlussstand
+
+- `BL-0011` ist im kanonischen Tracker fuer `Betankungen` auf `done`
+  gesetzt.
+- `docs/BACKLOG.md` und `docs/STATUS.md` behandeln das Thema nicht mehr als
+  offenen In-Repo-Block der `1.4.0`-Linie.
+- Weitere Umsetzung, Release- oder Packaging-Arbeit fuer einen Projekt-
+  Scaffolder findet nur ausserhalb dieses Repositories statt.
 
 ## Re-Entry-Kriterien
 

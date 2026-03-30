@@ -1,23 +1,23 @@
 ---
 id: BL-0011
 title: Projekt-Scaffolder (Repo Bootstrap)
-status: blocked
+status: done
 priority: P3
 type: research
 tags: [tooling, docs, bootstrap, externalization, 'lane:exploratory']
 created: 2026-03-13
-updated: 2026-03-28
+updated: 2026-03-30
 related:
   - BL-011
   - BL-0016
   - POL-001
 ---
-**Stand:** 2026-03-28
+**Stand:** 2026-03-30
 
 # Goal
-Den Bedarf fuer einen generischen Projekt-Scaffolder als externes, vom
-`Betankungen`-Repository getrenntes Thema sauber dokumentieren und fuer einen
-spaeteren Handover belastbar festhalten.
+Den repo-seitigen Externalisierungs- und Handover-Stand fuer einen
+generischen Projekt-Scaffolder final abschliessen und fuer eine spaetere
+Weiterarbeit ausserhalb von `Betankungen` belastbar festhalten.
 
 # Motivation
 Neues Projekt-Setup kostet wiederholt Zeit und fuehrt ohne Standard leicht zu
@@ -27,9 +27,12 @@ selbst und wuerde den Produkt-Scope mit Meta-Tooling vermischen.
 
 # Scope
 In Scope:
-- Repo-seitige Scope-Entscheidung und Externalisierungsdoku fuer `Betankungen`.
+- Repo-seitige Scope-Entscheidung, Referenzpflege und finaler Closeout fuer
+  `Betankungen`.
 - MVP-/Nicht-Ziel-Snapshot fuer ein separates Scaffolder-Repository.
 - Referenzpflege zu `BL-011`, `BL-0016` und `POL-001`.
+- Klarer Handover-Hinweis, dass weitere fachliche Umsetzung ausserhalb dieses
+  Repositories liegt.
 
 Out of Scope:
 - Umsetzung des Scaffolder-CLI innerhalb von `Betankungen`.
@@ -51,22 +54,25 @@ Out of Scope:
 - Spaetere Rueckkopplung in den Repo-Scope ohne explizite Maintainer-Entscheidung.
 
 # Output
-Ein dokumentierter Externalisierungs- und Handover-Stand fuer `BL-0011`,
-inklusive MVP-Snapshot, Nicht-Zielen und klarer Repo-Scope-Grenze fuer
-`Betankungen`.
+Ein abgeschlossener repo-seitiger Externalisierungs- und Handover-Stand fuer
+`BL-0011`, inklusive MVP-Snapshot, Nicht-Zielen, klarer Repo-Scope-Grenze
+fuer `Betankungen` und explizitem Verweis auf die externe Weiterarbeit.
 
 # Repo Scope Decision
 - `BL-0011` gehoert nicht zum Implementierungsscope des `Betankungen`-
   Repositories fuer die geplante `1.4.0`-Linie.
-- `Betankungen` fuehrt hierzu nur den Research-/Handover-Stand und die
-  Referenzpflege.
+- Der repo-seitige Research-/Handover-Stand ist fuer `Betankungen`
+  abgeschlossen.
+- Eventuelle Folgearbeit findet ausschliesslich in einem separaten
+  Zielprojekt/Repository statt, sofern keine neue Re-Entry-Entscheidung
+  getroffen wird.
 - Details der Entscheidung liegen in `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
 
 # Derived Tasks
 - Keine Betankungen-internen Tasks.
-- Neue Task-Ableitungen werden erst bei einer expliziten Aktivierung im
-  Zielprojekt oder nach einer ausdruecklichen Rueckholung in den Repo-Scope
-  angelegt.
+- Neue Task-Ableitungen werden nicht mehr in diesem Repository angelegt,
+  sondern erst bei einer expliziten Aktivierung im Zielprojekt oder nach
+  einer ausdruecklichen Rueckholung in den Repo-Scope.
 
 # Legacy Reference
 - Inhaltliche Legacy-Beschreibung: `docs/BACKLOG/BL-011-projekt-scaffolder-repo-bootstrap.md`
