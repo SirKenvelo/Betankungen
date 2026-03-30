@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 **Zielversion:** Transition-Hold nach 1.3.0 (technischer Stand `APP_VERSION=1.3.0`; Sprint-29-Startgate auf `GO`, `1.4.0-dev` noch nicht gestartet)
 
 ## Fundament & Architektur (erledigt)
@@ -305,6 +305,11 @@ Bereits erledigt:
     `docs/issues/`, neue `POL` unter `docs/policies/`; `docs/ADR/` bleibt bis
     zu einer separaten Migrationsentscheidung der aktive ADR-Pfad, waehrend
     `docs/BACKLOG/` und `docs/tasks/` als Legacy lesbar bleiben.
+  - Die abgeschlossenen Sprints 25 bis 28 sind dafuer jetzt auch ueber
+    kanonische Backfill-Artefakte referenzierbar: `BL-0025` bis `BL-0028`
+    sowie `ADR-0011` bis `ADR-0013` dokumentieren Tracker-Endzustand,
+    Entry-/Wiki-Layer und `btkgit`-Safety explizit, ohne neuen Scope zu
+    aktivieren.
   - Der dokumentierte Handover-/Externalisierungsstand fuer `BL-0011` liegt in
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`; `1.4.0-dev` bleibt bis zu einem
     separaten Aktivierungs-Commit ungestartet.

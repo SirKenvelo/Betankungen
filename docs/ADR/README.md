@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer
 produkt- und architekturrelevante Entscheidungen und ist der aktuell
@@ -24,6 +24,9 @@ Migrationsschritt und wird nicht implizit parallel gestartet.
 - `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)
 - `ADR-0009` - Runtime-Config-Profile im Core abgelehnt (`rejected`)
 - `ADR-0010` - Repo-lokales Workflow-Wrapper-CLI (`btkgit`) (`accepted`)
+- `ADR-0011` - Tracker-Endzustand und Legacy-Read-Policy (`accepted`)
+- `ADR-0012` - Documentation Entry Layer und Source-of-Truth-Vertrag (`accepted`)
+- `ADR-0013` - `btkgit` Safety- und Betriebsvertrag (`accepted`)
 
 ## Ergaenzende Policy-/UX-Notizen
 
