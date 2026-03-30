@@ -10,6 +10,9 @@ Ziel: separaten Dev-Start sauber dokumentieren und anschliessend den ersten
 In-Repo-Block der neuen Linie umsetzen.
 
 ### Sprint / Commit References
+- S30C1/4 - `1.4.0-dev` in separatem Aktivierungs-Commit gestartet (`src/Betankungen.lpr`, `README.md`, `docs/README.md`, `docs/README_EN.md`, `CONTRIBUTING.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_30_commit_1_von_4.md`, `.artifacts/sprint_30_commit_1_von_4.diff`; Basis-Commit: `5a2d69b`. (2026-03-30)
+- S30C2/4 - `BL-0016` als Community-Standards-Baseline geliefert (`CODE_OF_CONDUCT.md`, `SECURITY.md`, `.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/feature_request.md`, `.github/pull_request_template.md`, `docs/backlog/BL-0016-community-standards-baseline/item.md`, `docs/BACKLOG.md`); Artefakte: `.artifacts/sprint_30_commit_2_von_4.md`, `.artifacts/sprint_30_commit_2_von_4.diff`; Basis-Commit: `72e0d06`. (2026-03-30)
+- S30C3/4 - Legacy-Task-Index auf Markdown migriert und `projtrack_lint` fuer `docs/tasks/` auf echte `TSK-*.md` begrenzt (`docs/tasks/README.md`, `scripts/projtrack_lint.sh`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_30_commit_3_von_4.md`, `.artifacts/sprint_30_commit_3_von_4.diff`; Basis-Commit: `cc3d8f6`. (2026-03-30)
 - S29C1/2 - Formales Startgate vor `1.4.0-dev` definiert (`docs/DEV_START_GATE_1_4_0.md`, `docs/STATUS.md`, `docs/README.md`, `docs/README_EN.md`, `README.md`); Artefakte: `.artifacts/sprint_29_commit_1_von_2.md`, `.artifacts/sprint_29_commit_1_von_2.diff`; Basis-Commit: `f97a591`. (2026-03-29)
 - S28C1/2 - `btkgit`-Wrapper auf klarere Failure-UX und konservativeres Cleanup gehaertet (`btkgit`, `scripts/btkgit.sh`, `tests/smoke/smoke_cli.sh`); Artefakte: `.artifacts/sprint_28_commit_1_von_2.md`, `.artifacts/sprint_28_commit_1_von_2.diff`; Basis-Commit: `ebf8626`. (2026-03-29)
 - S27C1/2 - Wiki-Entry-Layer beruhigt und klarer auf Source-of-Truth-Grenzen ausgerichtet (`docs/wiki/Home.md`, `docs/wiki/README.md`, `docs/wiki/Cookie-Note.md`); Artefakte: `.artifacts/sprint_27_commit_1_von_2.md`, `.artifacts/sprint_27_commit_1_von_2.diff`; Basis-Commit: `fc283cc`. (2026-03-29)
@@ -83,6 +86,11 @@ In-Repo-Block der neuen Linie umsetzen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S30C4/4] Docs/Traceability: Sprint 30 als vierteiligen Dev-Start-Sprint
+  dokumentiert. `docs/CHANGELOG.md` und `docs/SPRINTS.md` referenzieren jetzt
+  den isolierten Aktivierungs-Commit, die `BL-0016`-Baseline, die
+  Markdown-Migration des Legacy-Task-Index und den gruennen Vollnachweis
+  `make verify`. (2026-03-30)
 - [S30C3/4] Docs/Tracker: `docs/tasks/README.txt` auf Markdown umgestellt und
   `scripts/projtrack_lint.sh` gezielt auf echte Legacy-Task-Dateien
   (`TSK-*.md`) unter `docs/tasks/` begrenzt, damit ein Markdown-Index im
