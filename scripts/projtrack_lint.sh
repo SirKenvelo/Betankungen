@@ -3,7 +3,7 @@ set -euo pipefail
 
 # projtrack_lint.sh
 # CREATED: 2026-03-13
-# UPDATED: 2026-03-13
+# UPDATED: 2026-03-30
 # Lint fuer Tracker-Dateien unter docs/issues + docs/backlog gemaess POL-001.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -124,7 +124,7 @@ def collect_tracker_docs() -> list[TrackerDoc]:
         ("issue", "docs/issues/**/issue.md"),
         ("backlog", "docs/backlog/**/item.md"),
         ("task", "docs/backlog/**/tasks/TSK-*.md"),
-        ("task", "docs/tasks/**/*.md"),
+        ("task", "docs/tasks/**/TSK-*.md"),
     ]
 
     for kind, pattern in patterns:

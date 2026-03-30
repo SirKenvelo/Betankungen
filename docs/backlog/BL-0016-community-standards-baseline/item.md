@@ -1,22 +1,22 @@
 ---
 id: BL-0016
 title: Community-Standards-Baseline fuer das Public Repository
-status: proposed
+status: done
 priority: P3
 type: improvement
 tags: [community, governance, docs, templates, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-18
+updated: 2026-03-30
 related:
   - BL-012
   - POL-001
 ---
-**Stand:** 2026-03-18
+**Stand:** 2026-03-30
 
 # Goal
 Die oeffentlichen Community-Standards im Repository auf eine saubere
-Mindestbaseline bringen, ohne den laufenden 1.1.0-Feature-/Hardening-Scope zu
-blockieren.
+Mindestbaseline bringen und als ersten In-Repo-Block der `1.4.0-dev`-Linie
+liefern.
 
 # Motivation
 GitHub Community Standards zeigt derzeit offene Punkte (Code of Conduct,
@@ -40,8 +40,9 @@ Out of Scope:
 - Pflegeaufwand bei Templates ohne klaren Mehrwert.
 
 # Output
-Ein priorisierter, aber non-blocking Follow-up-Block fuer Community-Hygiene im
-Public-Repository, der bei freier Kapazitaet umgesetzt werden kann.
+Eine gelieferte Public-Repository-Baseline mit `CODE_OF_CONDUCT.md`,
+`SECURITY.md`, standardisierten Bug-/Feature-Issue-Templates und
+PR-Mindeststruktur.
 
 # Derived Tasks
-- Werden bei Aktivierung des Backlog-Items als `TSK-xxxx` angelegt.
+- Direkte Umsetzung in Sprint 30; keine separaten `TSK-xxxx` angelegt.

@@ -1277,6 +1277,62 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - `make verify`
 
+## Sprint 30 - `1.4.0-dev` starten und `BL-0016` als Baseline liefern
+
+- Status: done
+- Ziel: `1.4.0-dev` per isoliertem Aktivierungs-Commit starten, danach
+  `BL-0016` als ersten In-Repo-Block umsetzen und den Legacy-Task-Index
+  sauber auf Markdown heben.
+
+### Geplante Bloecke
+
+- S30C1/4: done - `1.4.0-dev` separat aktivieren und nur die aktive
+  Roadmap-/Status-/Entry-Doku synchronisieren.
+- S30C2/4: done - `BL-0016` als Community-Standards-Baseline liefern.
+- S30C3/4: done - `docs/tasks/README.txt` nach Markdown migrieren und den
+  Tracker-Lint dafuer gezielt nachziehen.
+- S30C4/4: done - Sprint-Traceability und Verifikationsnachweis finalisieren.
+
+### Fortschritt (2026-03-30)
+
+- `S30C1/4` abgeschlossen:
+  - `src/Betankungen.lpr` setzt `APP_VERSION` in einem klar isolierten
+    Aktivierungs-Commit auf `1.4.0-dev`.
+  - Root-README, deutsche/englische Einstiegsdoku, `CONTRIBUTING.md` und
+    `docs/STATUS.md` fuehren den Sprint-29-Gate ab jetzt als eingeloesten
+    Vorstart-Nachweis.
+  - Git-Commit: `5a2d69b`
+  - Artefakte: `.artifacts/sprint_30_commit_1_von_4.md`,
+    `.artifacts/sprint_30_commit_1_von_4.diff` (nach Push lokal erzeugen)
+- `S30C2/4` abgeschlossen:
+  - `BL-0016` ist als Community-Standards-Baseline umgesetzt.
+  - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`,
+    Bug-/Feature-Issue-Templates und ein PR-Template mit `Summary` und
+    `Validation`.
+  - `docs/BACKLOG.md` und
+    `docs/backlog/BL-0016-community-standards-baseline/item.md` stehen auf
+    `done`; Root-README, `CONTRIBUTING.md`, `docs/README.md`,
+    `docs/README_EN.md` und `docs/STATUS.md` sind synchronisiert.
+  - Git-Commit: `72e0d06`
+  - Artefakte: `.artifacts/sprint_30_commit_2_von_4.md`,
+    `.artifacts/sprint_30_commit_2_von_4.diff` (nach Push lokal erzeugen)
+- `S30C3/4` abgeschlossen:
+  - `docs/tasks/README.txt` wurde zu `docs/tasks/README.md` migriert.
+  - `scripts/projtrack_lint.sh` lintet unter `docs/tasks/` jetzt gezielt nur
+    echte Legacy-Task-Dateien `TSK-*.md`, damit der Markdown-Index nicht als
+    Tracker-Artefakt fehlinterpretiert wird.
+  - Git-Commit: `cc3d8f6`
+  - Artefakte: `.artifacts/sprint_30_commit_3_von_4.md`,
+    `.artifacts/sprint_30_commit_3_von_4.diff` (nach Push lokal erzeugen)
+- `S30C4/4` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` dokumentieren Sprint 30 jetzt
+    als vierteiligen Dev-Start-Sprint mit getrenntem Aktivierungs-Commit,
+    Inhaltsblock `BL-0016`, Legacy-Markdown-Migration und Vollnachweis.
+
+### Validierung
+
+- `make verify`
+
 ## Traceability-Backfill fuer Sprint 25 bis 28
 
 - Status: done

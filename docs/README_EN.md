@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-29
+**Stand:** 2026-03-30
 
 This is the English entry point for the project documentation.
 Detailed documents are currently maintained primarily in German.
@@ -7,12 +7,11 @@ Detailed documents are currently maintained primarily in German.
 ## Current State
 
 - Latest release: `1.3.0` (released on 2026-03-26).
-- Technical runtime state: `APP_VERSION=1.3.0`.
-- The repository is in a deliberate transition hold after `1.3.0`;
-  `1.4.0-dev` has not started yet.
-- Sprint 29 documents the pre-activation start gate in
-  `docs/DEV_START_GATE_1_4_0.md`: current decision is `GO` for a separate
-  activation commit, while the activation itself is still pending.
+- Technical runtime state: `APP_VERSION=1.4.0-dev`.
+- The repository is now on the active `1.4.0-dev` development line, started
+  through a dedicated activation commit after the Sprint-29 gate.
+- Sprint 29 remains documented in `docs/DEV_START_GATE_1_4_0.md` as the
+  formal pre-activation gate record for this separate start step.
 - The most recently completed binding roadmap is `1.3.0`
   (`docs/ROADMAP_1_3_0.md`):
   - Gate 1 and Gate 2 are completed.
@@ -29,9 +28,9 @@ Detailed documents are currently maintained primarily in German.
 - The Gate-4 and Gate-5 closeouts for `1.3.0` are documented in
   `docs/RELEASE_1_3_0_PREFLIGHT.md`, including the final local RC run, final
   version switch, release/backup execution, and artifact references.
-- The next planned line remains `1.4.0`, but it is still on hold:
-  - current prepared in-repo follow-up scope: `BL-0016`
-  - `BL-0011` stays an external handover topic for this repository
+- The first in-repo block of `1.4.0-dev` is now delivered:
+  - `BL-0016` as the public community-standards baseline
+  - `BL-0011` as an external handover topic for this repository
     (`docs/BL-0011_SCOPE_DECISION_1_4_0.md`)
 - CI/verify governance remains active for `main` (PR-based flow with green verification gate).
 
@@ -39,8 +38,8 @@ Detailed documents are currently maintained primarily in German.
 
 1. `docs/ARCHITECTURE_EN.md` (compact English architecture summary)
 2. `docs/README.md` (main project documentation, German)
-3. `docs/DEV_START_GATE_1_4_0.md` (formal pre-activation gate before
-   `1.4.0-dev`)
+3. `docs/DEV_START_GATE_1_4_0.md` (formal pre-activation gate record before
+   the separate `1.4.0-dev` start)
 4. `docs/STATUS.md` (current roadmap and completion state)
 5. `docs/ARCHITECTURE.md` (full architecture and long-term design, German)
 6. `docs/ADR/README.md` (architecture decisions index)
@@ -56,6 +55,11 @@ Detailed documents are currently maintained primarily in German.
 ## Notes For Contributors
 
 - See `CONTRIBUTING.md` in the project root.
+- Community standards:
+  - `CODE_OF_CONDUCT.md`
+  - `SECURITY.md`
+  - `.github/ISSUE_TEMPLATE/`
+  - `.github/pull_request_template.md`
 - Published public-readiness wiki entry:
   `https://github.com/SirKenvelo/Betankungen/wiki`.
 - Versioned wiki source pages: `docs/wiki/README.md`.
