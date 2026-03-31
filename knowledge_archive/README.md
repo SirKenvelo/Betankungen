@@ -1,25 +1,39 @@
 # knowledge_archive
-**Stand:** 2026-03-14
+**Stand:** 2026-03-31
 
-Ziel: Archiviert entfernte/ersetzte Implementationen zur Nachvollziehbarkeit.
+Ziel: Historischen Archiv-Bestand lesbar erhalten, ohne den Mechanismus im
+Repository weiter aktiv zu nutzen.
 
-## Regeln
-- Bei Loeschung von Prozeduren/Funktionen: Original verpflichtend archivieren.
-- Bei funktionalen Verhaltensaenderungen: Original ebenfalls archivieren.
+## Status
+- `knowledge_archive/` ist deprecated und bleibt vorerst als Legacy-/
+  Read-only-Bestand im Repository.
+- Neue Archiv-Snippets werden repo-seitig nicht mehr verpflichtend erzeugt.
+- Fuer fruehere Implementationsstaende ist die Git-Historie der primaere
+  Rueckgriff.
 - Keine produktive Nutzung direkt aus diesem Ordner.
+- Historische Eintraege und Dateinamen bleiben unveraendert.
 
-## Pflicht-Doku pro Archiv-Datei
+## Pflegeleitplanke
+- Bestehendes Inventar bleibt read-only, sofern kein separater
+  Aufraeum-/Migrationsentscheid getroffen wird.
+- Eine spaetere vollstaendige Herausloesung aus dem Repository ist als
+  optionaler Folgeschritt moeglich, aber nicht Teil dieser Stilllegung.
+- Falls kuenftig ein lokaler Ersatzpfad noetig wird, sollte er bewusst
+  ausserhalb des getrackten Repo-Bestands eingefuehrt werden.
+
+## Historischer Mechanismus (nicht mehr aktiv)
+### Pflicht-Doku pro Archiv-Datei
 - Quelle (Dateipfad)
 - Symbol/Topic
 - Anlass (`loeschung` oder `behavior change`)
 - Datum
 - Commit (Hash; falls historisch nicht bekannt: `n/a (historisch)`)
 
-## Namenskonvention
+### Namenskonvention
 - Neu: `archive_<symbol_or_topic>_<YYYY-MM-DD>.<ext>`
 - Bestand: Historische Dateien ohne Datum im Namen bleiben gueltig, werden nicht rueckwirkend umbenannt.
 
-## Header-Template fuer Archiv-Dateien
+### Header-Template fuer Archiv-Dateien
 ```pascal
 {
   ARCHIVE-SNIPPET
