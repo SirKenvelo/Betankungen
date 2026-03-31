@@ -1459,6 +1459,47 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## Sprint 34 - Paket C strategisch auf EV-Discovery ziehen
+
+- Status: done
+- Ziel: nach den abgeschlossenen Paketen A und B genau eine groessere
+  Domaenenerweiterung fuer die aktive `1.4.x`-Linie priorisieren und als
+  kontrollierten Discovery-Block im Repo verankern.
+
+### Geplante Bloecke
+
+- S34C1/2: done - EV als naechsten strategischen Discovery-Pfad priorisieren,
+  `ADR-0008` akzeptieren und einen einzelnen kanonischen Backlog-Block mit
+  Folge-Tasks aktivieren.
+- S34C2/2: done - Sprint-Traceability und Vollverifikation fuer die
+  Paket-C-Entscheidung finalisieren.
+
+### Fortschritt (2026-03-31)
+
+- `S34C1/2` abgeschlossen:
+  - `ADR-0008` ist jetzt `accepted` und fixiert EV als priorisierte erste
+    modulare Domaenenerweiterung gegenueber einem unmittelbaren Core-Ausbau.
+  - Neuer kanonischer Discovery-Block `BL-0030` aktiviert den
+    Feasibility-Pfad fuer ein moegliches Modul `betankungen-ev`.
+  - `TSK-0024` und `TSK-0025` machen Scope-/Contract- sowie
+    Storage-/Boundary-Fragen explizit; `docs/BACKLOG.md`,
+    `docs/ADR/README.md` und `docs/STATUS.md` fuehren Paket C jetzt mit
+    derselben Priorisierung.
+  - Git-Commit: `23cdef6`
+  - Artefakte: `.artifacts/sprint_34_commit_1_von_2.md`,
+    `.artifacts/sprint_34_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S34C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 34 jetzt mit
+    Hash-/Verifikationsbezug.
+  - Paket C bleibt damit als bewusster Richtungs- und Discovery-Sprint
+    referenzierbar; Household Drivers werden nicht stillschweigend parallel
+    aktiviert.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
 
 - Status: in_progress
