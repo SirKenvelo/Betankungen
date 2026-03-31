@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer
 produkt- und architekturrelevante Entscheidungen und ist der aktuell
@@ -21,7 +21,7 @@ Migrationsschritt und wird nicht implizit parallel gestartet.
 - `ADR-0005` - Modulstrategie fuer Betankungen (Core + Module, Companion-Binaries statt Runtime-Plugins) (`accepted`)
 - `ADR-0006` - Household Drivers (optionales `driver`-Objekt + `fuelups.driver_id`) (`proposed`)
 - `ADR-0007` - Core Boundary: Core vs Module (`accepted`)
-- `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`proposed`)
+- `ADR-0008` - Elektrofahrzeuge-Strategie (EV als Modul `betankungen-ev`) (`accepted`)
 - `ADR-0009` - Runtime-Config-Profile im Core abgelehnt (`rejected`)
 - `ADR-0010` - Repo-lokales Workflow-Wrapper-CLI (`btkgit`) (`accepted`)
 - `ADR-0011` - Tracker-Endzustand und Legacy-Read-Policy (`accepted`)

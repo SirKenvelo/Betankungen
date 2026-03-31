@@ -329,6 +329,14 @@ Bereits erledigt:
   - Die aktive Folgeversion ist jetzt `1.4.0-dev`; `BL-0016` wurde als erster
     In-Repo-Block geliefert und bildet jetzt die Community-Standards-
     Baseline des Public-Repositories.
+  - Die ersten beiden `1.4.x`-Weiterentwicklungspakete sind abgeschlossen:
+    `BL-0029` haertet den Odometer-Contract, `BL-0019` erweitert
+    Stationsstammdaten kontrolliert um Geodaten und Plus Codes.
+  - Paket C ist als strategische Richtungsentscheidung jetzt auf EV als
+    naechsten Discovery-Pfad festgezogen: `ADR-0008` ist `accepted`,
+    `BL-0030` priorisiert den begrenzten Feasibility-Block fuer ein moegliches
+    Modul `betankungen-ev`; Household Drivers bleiben fachlich moeglich, aber
+    fuer die aktuelle `1.4.x`-Linie weiter nachgeordnet.
   - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`, standardisierte
     Bug-/Feature-Issue-Templates sowie ein PR-Template mit `Summary` und
     `Validation`; `BL-0011` gilt fuer `Betankungen` jetzt als sauber
