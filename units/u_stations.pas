@@ -2,7 +2,7 @@
   u_stations.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-21
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Fachmodul fuer Stammdatenverwaltung von Tankstellen (stations).
 
@@ -58,6 +58,12 @@ const
   COL_CITY = 16;
   COL_PHONE = 14;
   COL_OWNER = 16;
+  MIN_LATITUDE_E6 = -90000000;
+  MAX_LATITUDE_E6 = 90000000;
+  MIN_LONGITUDE_E6 = -180000000;
+  MAX_LONGITUDE_E6 = 180000000;
+  COORD_SCALE_E6 = 1000000;
+  PLUS_CODE_ALPHABET = '23456789CFGHJMPQRVWX';
 
 function HasDigit(const S: string): boolean;
 var
@@ -140,6 +146,237 @@ begin
     );
 end;
 
+function NormalizePlusCode(const S: string): string;
+var
+  I: Integer;
+  C: Char;
+  Trimmed: string;
+begin
+  Trimmed := Trim(S);
+  Result := '';
+  for I := 1 to Length(Trimmed) do
+  begin
+    C := Trimmed[I];
+    if (C = ' ') or (C = #9) then
+      Continue;
+    Result := Result + UpCase(C);
+  end;
+end;
+
+function IsValidPlusCodeChar(const C: Char): boolean;
+begin
+  Result := Pos(UpCase(C), PLUS_CODE_ALPHABET) > 0;
+end;
+
+function ParseCoordinateToE6OrFail(
+  const Raw, PolicyId, FieldName: string;
+  const MinValueE6, MaxValueE6: Int64
+): Int64;
+var
+  T, IntPart, FracPart: string;
+  P, I, Sign: Integer;
+  IntValue, FracValue: Int64;
+begin
+  T := Trim(Raw);
+  if T = '' then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  T := StringReplace(T, ',', '.', [rfReplaceAll]);
+  Sign := 1;
+
+  if T[1] in ['+', '-'] then
+  begin
+    if T[1] = '-' then
+      Sign := -1;
+    Delete(T, 1, 1);
+  end;
+
+  if T = '' then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  P := Pos('.', T);
+  if (P > 0) and (Pos('.', Copy(T, P + 1, MaxInt)) > 0) then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  if P > 0 then
+  begin
+    IntPart := Copy(T, 1, P - 1);
+    FracPart := Copy(T, P + 1, MaxInt);
+  end
+  else
+  begin
+    IntPart := T;
+    FracPart := '';
+  end;
+
+  if IntPart = '' then
+    IntPart := '0';
+
+  for I := 1 to Length(IntPart) do
+    if not (IntPart[I] in ['0'..'9']) then
+      raise Exception.Create(
+        PolicyId + ': ' + FieldName +
+        ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+      );
+
+  for I := 1 to Length(FracPart) do
+    if not (FracPart[I] in ['0'..'9']) then
+      raise Exception.Create(
+        PolicyId + ': ' + FieldName +
+        ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+      );
+
+  if Length(FracPart) > 6 then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  while Length(FracPart) < 6 do
+    FracPart := FracPart + '0';
+
+  if not TryStrToInt64(IntPart, IntValue) then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  if not TryStrToInt64(FracPart, FracValue) then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (erwartet Dezimalgrad mit max. 6 Nachkommastellen).'
+    );
+
+  Result := (IntValue * COORD_SCALE_E6) + FracValue;
+  if Sign < 0 then
+    Result := -Result;
+
+  if (Result < MinValueE6) or (Result > MaxValueE6) then
+    raise Exception.Create(
+      PolicyId + ': ' + FieldName +
+      ' ungueltig (ausserhalb des erlaubten Bereichs).'
+    );
+end;
+
+function FormatCoordinateE6(const Value: Int64): string;
+var
+  AbsValue: Int64;
+begin
+  AbsValue := Abs(Value);
+  Result := IntToStr(AbsValue div COORD_SCALE_E6) + '.' +
+    Format('%.6d', [AbsValue mod COORD_SCALE_E6]);
+  if Value < 0 then
+    Result := '-' + Result;
+end;
+
+function CoordinateFieldOrEmpty(Q: TSQLQuery; const FieldName: string): string;
+begin
+  if Q.FieldByName(FieldName).IsNull then
+    Exit('');
+  Result := FormatCoordinateE6(Q.FieldByName(FieldName).AsLargeInt);
+end;
+
+function BuildStationGeoSummary(
+  const Latitude, Longitude, PlusCode: string
+): string;
+begin
+  Result := '';
+
+  if Latitude <> '' then
+    Result := 'lat=' + Latitude;
+
+  if Longitude <> '' then
+  begin
+    if Result <> '' then
+      Result := Result + ' ';
+    Result := Result + 'lon=' + Longitude;
+  end;
+
+  if PlusCode <> '' then
+  begin
+    if Result <> '' then
+      Result := Result + ' ';
+    Result := Result + 'plus_code=' + PlusCode;
+  end;
+end;
+
+procedure NormalizeStationGeodataOrFail(
+  const LatitudeRaw, LongitudeRaw, PlusCodeRaw: string;
+  out HasCoordinates: boolean;
+  out LatitudeE6, LongitudeE6: Int64;
+  out NormalizedPlusCode: string
+);
+var
+  HasLatitude, HasLongitude: boolean;
+  I, PlusPos: Integer;
+begin
+  HasLatitude := Trim(LatitudeRaw) <> '';
+  HasLongitude := Trim(LongitudeRaw) <> '';
+  HasCoordinates := False;
+  LatitudeE6 := 0;
+  LongitudeE6 := 0;
+
+  if HasLatitude <> HasLongitude then
+    raise Exception.Create(
+      'P-085: latitude/longitude muessen gemeinsam gesetzt oder gemeinsam leer sein.'
+    );
+
+  if HasLatitude and HasLongitude then
+  begin
+    LatitudeE6 := ParseCoordinateToE6OrFail(
+      LatitudeRaw, 'P-086', 'latitude', MIN_LATITUDE_E6, MAX_LATITUDE_E6
+    );
+    LongitudeE6 := ParseCoordinateToE6OrFail(
+      LongitudeRaw, 'P-087', 'longitude', MIN_LONGITUDE_E6, MAX_LONGITUDE_E6
+    );
+    HasCoordinates := True;
+  end;
+
+  NormalizedPlusCode := NormalizePlusCode(PlusCodeRaw);
+  if NormalizedPlusCode = '' then
+    Exit;
+
+  PlusPos := Pos('+', NormalizedPlusCode);
+  if (PlusPos <> 9) or (Length(NormalizedPlusCode) < 11) or
+     (Length(NormalizedPlusCode) > 15) or
+     (Pos('+', Copy(NormalizedPlusCode, PlusPos + 1, MaxInt)) > 0) then
+    raise Exception.Create(
+      'P-088: plus_code ungueltig (erwartet vollen Open Location Code, z.B. 9F4MGC2M+H4).'
+    );
+
+  for I := 1 to Length(NormalizedPlusCode) do
+  begin
+    if NormalizedPlusCode[I] = '+' then
+      Continue;
+    if not IsValidPlusCodeChar(NormalizedPlusCode[I]) then
+      raise Exception.Create(
+        'P-088: plus_code ungueltig (erwartet vollen Open Location Code, z.B. 9F4MGC2M+H4).'
+      );
+  end;
+end;
+
+procedure SetNullableLargeIntParam(
+  Q: TSQLQuery;
+  const ParamName: string;
+  const HasValue: boolean;
+  const Value: Int64
+);
+begin
+  if HasValue then
+    Q.ParamByName(ParamName).AsLargeInt := Value
+  else
+    Q.ParamByName(ParamName).Clear;
+end;
+
 procedure PrintSep;
 begin
   // Optik wie Debug-Rahmen (C_CYAN/C_RESET kommen aus u_fmt)
@@ -169,6 +406,7 @@ var
   Tran: TSQLTransaction;
   Q: TSQLQuery;
   SId, SBrand, SStreet, SHouseNo, SZip, SCity, SPhone, SOwner: string;
+  SLatitude, SLongitude, SPlusCode, GeoSummary: string;
   RowCount: integer;
 begin
   Dbg('ListStations: detailed=' + BoolToStr(Detailed, True));
@@ -189,7 +427,8 @@ begin
         Tran.StartTransaction;
 
       Q.SQL.Text :=
-        'SELECT id, brand, street, house_no, zip, city, phone, owner ' +
+        'SELECT id, brand, street, house_no, zip, city, phone, owner, ' +
+        'latitude_e6, longitude_e6, plus_code ' +
         'FROM stations ' + 'ORDER BY brand, city, street, house_no;';
       Q.Open;
 
@@ -220,9 +459,18 @@ begin
         SCity := Q.FieldByName('city').AsString;
         SPhone := Q.FieldByName('phone').AsString;
         SOwner := Q.FieldByName('owner').AsString;
+        SLatitude := CoordinateFieldOrEmpty(Q, 'latitude_e6');
+        SLongitude := CoordinateFieldOrEmpty(Q, 'longitude_e6');
+        SPlusCode := Q.FieldByName('plus_code').AsString;
+        GeoSummary := BuildStationGeoSummary(SLatitude, SLongitude, SPlusCode);
 
         if Detailed then
+        begin
           PrintRow(SId, SBrand, SStreet, SHouseNo, SZip, SCity, SPhone, SOwner)
+          ;
+          if GeoSummary <> '' then
+            WriteLn('      geodata: ', GeoSummary);
+        end
         else
           WriteLn(StationLine(SBrand, SStreet, SHouseNo, SZip, SCity));
 
@@ -254,6 +502,10 @@ end;
 procedure AddStationInteractive(const DbPath: string);
 var
   Brand, Street, HouseNo, Zip, City, Phone, Owner: string;
+  LatitudeRaw, LongitudeRaw, PlusCodeRaw: string;
+  LatitudeE6, LongitudeE6: Int64;
+  HasCoordinates: boolean;
+  NormalizedPlusCode: string;
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
   Q: TSQLQuery;
@@ -268,8 +520,15 @@ begin
   City := AskRequired('City: ');
   Phone := AskOptional('Phone (Optional): ');
   Owner := AskOptional('Owner (Optional): ');
+  LatitudeRaw := AskOptional('Latitude (Optional, Dezimalgrad): ');
+  LongitudeRaw := AskOptional('Longitude (Optional, Dezimalgrad): ');
+  PlusCodeRaw := AskOptional('Plus code (Optional): ');
 
   ValidateStationMasterDataOrFail(Brand, Street, HouseNo, Zip, City, Phone);
+  NormalizeStationGeodataOrFail(
+    LatitudeRaw, LongitudeRaw, PlusCodeRaw,
+    HasCoordinates, LatitudeE6, LongitudeE6, NormalizedPlusCode
+  );
 
   Conn := TSQLite3Connection.Create(nil);
   Tran := TSQLTransaction.Create(nil);
@@ -288,8 +547,11 @@ begin
         Tran.StartTransaction;
 
       Q.SQL.Text :=
-        'INSERT INTO stations(brand, street, house_no, zip, city, phone, owner) ' +
-        'VALUES(:brand, :street, :house_no, :zip, :city, :phone, :owner);';
+        'INSERT INTO stations(' +
+        '  brand, street, house_no, zip, city, phone, owner, latitude_e6, longitude_e6, plus_code' +
+        ') VALUES (' +
+        '  :brand, :street, :house_no, :zip, :city, :phone, :owner, :latitude_e6, :longitude_e6, :plus_code' +
+        ');';
 
       Q.Params.ParamByName('brand').AsString := Brand;
       Q.Params.ParamByName('street').AsString := Street;
@@ -298,6 +560,12 @@ begin
       Q.Params.ParamByName('city').AsString := City;
       Q.Params.ParamByName('phone').AsString := Phone;
       Q.Params.ParamByName('owner').AsString := Owner;
+      SetNullableLargeIntParam(Q, 'latitude_e6', HasCoordinates, LatitudeE6);
+      SetNullableLargeIntParam(Q, 'longitude_e6', HasCoordinates, LongitudeE6);
+      if NormalizedPlusCode = '' then
+        Q.Params.ParamByName('plus_code').Clear
+      else
+        Q.Params.ParamByName('plus_code').AsString := NormalizedPlusCode;
 
       Dbg('AddStation: brand=' + Brand + ' city=' + City);
       Q.ExecSQL;
@@ -469,10 +737,12 @@ end;
 
 // Helfer: Anzeige fuer Aenderungen
 function ReplaceLine(const Brand, Street, HouseNo, Zip, City, Phone,
-  Owner: string): string;
+  Owner, GeoSummary: string): string;
 begin
   Result := Format('%s (%s %s, %s %s %s %s)', [Brand, Street, HouseNo,
     Zip, City, Phone, Owner]);
+  if GeoSummary <> '' then
+    Result := Result + ' [' + GeoSummary + ']';
 end;
 
 procedure EditStationInteractive(const DbPath: string);
@@ -486,8 +756,15 @@ var
   Confirm: string;
 
   TmpBrand, TmpStreet, TmpHouseNo, TmpZip, TmpCity, TmpPhone, TmpOwner: string;
+  TmpLatitude, TmpLongitude, TmpPlusCode, TmpGeoSummary: string;
   OldBrand, OldStreet, OldHouseNo, OldZip, OldCity, OldPhone, OldOwner: string;
+  OldLatitude, OldLongitude, OldPlusCode, OldGeoSummary: string;
   NewBrand, NewStreet, NewHouseNo, NewZip, NewCity, NewPhone, NewOwner: string;
+  NewLatitudeRaw, NewLongitudeRaw, NewPlusCodeRaw, NewGeoSummary: string;
+  NewLatitudeNormalized, NewLongitudeNormalized: string;
+  NewLatitudeE6, NewLongitudeE6: Int64;
+  HasCoordinates: boolean;
+  NormalizedPlusCode: string;
 begin
   Conn := TSQLite3Connection.Create(nil);
   Tran := TSQLTransaction.Create(nil);
@@ -507,7 +784,8 @@ begin
 
       // Liste anzeigen (nur id und Anzeigezeile)
       Q.SQL.Text :=
-        'SELECT id, brand, street, house_no, zip, city, phone, owner ' +
+        'SELECT id, brand, street, house_no, zip, city, phone, owner, ' +
+        'latitude_e6, longitude_e6, plus_code ' +
         'FROM stations ' +
         'ORDER BY brand, city, street, house_no, phone, owner;';
       Q.Open;
@@ -530,10 +808,14 @@ begin
         TmpCity := Q.FieldByName('city').AsString;
         TmpPhone := Q.FieldByName('phone').AsString;
         TmpOwner := Q.FieldByName('owner').AsString;
+        TmpLatitude := CoordinateFieldOrEmpty(Q, 'latitude_e6');
+        TmpLongitude := CoordinateFieldOrEmpty(Q, 'longitude_e6');
+        TmpPlusCode := Q.FieldByName('plus_code').AsString;
+        TmpGeoSummary := BuildStationGeoSummary(TmpLatitude, TmpLongitude, TmpPlusCode);
 
         WriteLn(Q.FieldByName('id').AsString, ': ',
           ReplaceLine(TmpBrand, TmpStreet, TmpHouseNo, TmpZip, TmpCity,
-          TmpPhone, TmpOwner));
+          TmpPhone, TmpOwner, TmpGeoSummary));
         Q.Next;
       end;
 
@@ -560,7 +842,8 @@ begin
 
       // Station zur ID laden
       Q.SQL.Text :=
-        'SELECT brand, street, house_no, zip, city, phone, owner ' +
+        'SELECT brand, street, house_no, zip, city, phone, owner, ' +
+        'latitude_e6, longitude_e6, plus_code ' +
         'FROM stations WHERE id = :id;';
       Q.Params.ParamByName('id').AsInteger := Id;
       Q.Open;
@@ -581,6 +864,10 @@ begin
       OldCity := Q.FieldByName('city').AsString;
       OldPhone := Q.FieldByName('phone').AsString;
       OldOwner := Q.FieldByName('owner').AsString;
+      OldLatitude := CoordinateFieldOrEmpty(Q, 'latitude_e6');
+      OldLongitude := CoordinateFieldOrEmpty(Q, 'longitude_e6');
+      OldPlusCode := Q.FieldByName('plus_code').AsString;
+      OldGeoSummary := BuildStationGeoSummary(OldLatitude, OldLongitude, OldPlusCode);
 
       // Aenderungen abfragen und eintragen
       NewBrand := AskKeep('Brand*: (ENTER=behalten)', Q.FieldByName('brand').AsString);
@@ -592,16 +879,38 @@ begin
       NewCity := AskKeep('City*: (ENTER=behalten)', Q.FieldByName('city').AsString);
       NewPhone := AskKeep('Phone: (ENTER=behalten)', Q.FieldByName('phone').AsString);
       NewOwner := AskKeep('Owner: (ENTER=behalten)', Q.FieldByName('owner').AsString);
+      NewLatitudeRaw := AskKeep('Latitude: (ENTER=behalten)', OldLatitude);
+      NewLongitudeRaw := AskKeep('Longitude: (ENTER=behalten)', OldLongitude);
+      NewPlusCodeRaw := AskKeep('Plus code: (ENTER=behalten)', OldPlusCode);
 
       ValidateStationMasterDataOrFail(
         NewBrand, NewStreet, NewHouseNo, NewZip, NewCity, NewPhone
       );
+      NormalizeStationGeodataOrFail(
+        NewLatitudeRaw, NewLongitudeRaw, NewPlusCodeRaw,
+        HasCoordinates, NewLatitudeE6, NewLongitudeE6, NormalizedPlusCode
+      );
+      if HasCoordinates then
+      begin
+        NewLatitudeNormalized := FormatCoordinateE6(NewLatitudeE6);
+        NewLongitudeNormalized := FormatCoordinateE6(NewLongitudeE6);
+      end
+      else
+      begin
+        NewLatitudeNormalized := '';
+        NewLongitudeNormalized := '';
+      end;
+      NewGeoSummary := BuildStationGeoSummary(
+        NewLatitudeNormalized,
+        NewLongitudeNormalized,
+        NormalizedPlusCode
+      );
       Q.Close;
 
       WriteLn('Ausgewählt: ', ReplaceLine(OldBrand, OldStreet, OldHouseNo,
-        OldZip, OldCity, OldPhone, OldOwner));
+        OldZip, OldCity, OldPhone, OldOwner, OldGeoSummary));
       Writeln('Ändern in: ', ReplaceLine(NewBrand, NewStreet,
-        NewHouseNo, NewZip, NewCity, NewPhone, NewOwner));
+        NewHouseNo, NewZip, NewCity, NewPhone, NewOwner, NewGeoSummary));
       Write('Sicher ändern (y/n)? ');
       ReadLn(Confirm);
       Confirm := Trim(LowerCase(Confirm));
@@ -617,7 +926,9 @@ begin
       Q.SQL.Text :=
         'UPDATE stations ' +
         'SET brand=:brand, street=:street, house_no=:house_no, zip=:zip, city=:city, ' +
-        'phone=:phone, owner=:owner ' + 'WHERE id = :id;';
+        'phone=:phone, owner=:owner, latitude_e6=:latitude_e6, ' +
+        'longitude_e6=:longitude_e6, plus_code=:plus_code ' +
+        'WHERE id = :id;';
 
       // Parameter zuweisen
       Q.Params.ParamByName('brand').AsString := NewBrand;
@@ -627,6 +938,12 @@ begin
       Q.Params.ParamByName('city').AsString := NewCity;
       Q.Params.ParamByName('phone').AsString := NewPhone;
       Q.Params.ParamByName('owner').AsString := NewOwner;
+      SetNullableLargeIntParam(Q, 'latitude_e6', HasCoordinates, NewLatitudeE6);
+      SetNullableLargeIntParam(Q, 'longitude_e6', HasCoordinates, NewLongitudeE6);
+      if NormalizedPlusCode = '' then
+        Q.Params.ParamByName('plus_code').Clear
+      else
+        Q.Params.ParamByName('plus_code').AsString := NormalizedPlusCode;
       Q.Params.ParamByName('id').AsInteger := Id;
       Dbg('EditStation: id=' + IntToStr(Id));
       Q.ExecSQL;

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p080__01__station_zip_city_shift_rejected.sh
-# UPDATED: 2026-03-21
+# UPDATED: 2026-03-31
 # Policy P-080: offensichtliche zip/city-Feldverschiebung wird geblockt.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -47,6 +47,9 @@ INPUT_LINES=(
   '10'
   'Dortmund'
   '44135'
+  ''
+  ''
+  ''
   ''
   ''
 )

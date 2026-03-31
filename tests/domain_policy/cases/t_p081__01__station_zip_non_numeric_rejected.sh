@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # t_p081__01__station_zip_non_numeric_rejected.sh
-# UPDATED: 2026-03-21
+# UPDATED: 2026-03-31
 # Policy P-081: zip muss numerisch sein.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -47,6 +47,9 @@ INPUT_LINES=(
   '10'
   '44abc'
   'Dortmund'
+  ''
+  ''
+  ''
   ''
   ''
 )

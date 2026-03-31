@@ -58,7 +58,17 @@ Kommandos:
 
 Eingabe bei `--add stations`:
 - Pflichtfelder: Brand, Street, HouseNo, Plz, City
-- Optional: Phone, Owner
+- Optional: Phone, Owner, Latitude, Longitude, Plus Code
+- Geodaten-Regeln:
+  - `Latitude` und `Longitude` nur gemeinsam oder beide leer
+  - Format: Dezimalgrad mit max. 6 Nachkommastellen
+  - Bereiche: `latitude` `[-90, 90]`, `longitude` `[-180, 180]`
+  - `Plus code` wird whitespace-frei gespeichert, in Grossbuchstaben
+    normalisiert und nur als voller Open Location Code akzeptiert
+- Ausgabe-Regeln:
+  - `Betankungen --list stations` bleibt kompakt ohne Geodaten-Zusatz
+  - `Betankungen --list stations --detail` zeigt vorhandene Geodaten als
+    zusaetzliche `geodata:`-Zeile je Station
 
 **Betankungen erfassen**
 Kommandos:

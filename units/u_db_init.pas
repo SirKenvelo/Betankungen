@@ -2,7 +2,7 @@
   u_db_init.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-18
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Datenbank-Bootstrapper und Schema-Verwaltung fuer SQLite.
 
@@ -32,6 +32,7 @@
   v4: Fuelups erweitert um car_id + missed_previous, neue cars-Tabelle
   v5: cars erweitert um vin, reg_doc_path, reg_doc_sha256
   v5a: fuelups erweitert um receipt_link (additiv via ALTER, schema_version bleibt 5)
+  v6: stations erweitert um latitude_e6, longitude_e6, plus_code
 
   Hinweis: Bei Schema-Änderungen bitte die 'schema_version' in der 
   EnsureDatabase-Prozedur UND hier im Header inkrementieren.
@@ -67,6 +68,9 @@ var
   Q: TSQLQuery;
   HasFuelupsTable: boolean;
   HasCarsTable: boolean;
+  HasStationLatitudeE6: boolean;
+  HasStationLongitudeE6: boolean;
+  HasStationPlusCode: boolean;
   HasCarPlate: boolean;
   HasCarNote: boolean;
   HasCarOdometerStartKm: boolean;
@@ -152,7 +156,7 @@ begin
       // Schema-Version setzen (fuer spaetere Migrationen)
       Q.SQL.Text := 'INSERT OR REPLACE INTO meta(key, value) VALUES(:k, :v);';
       Q.Params.ParamByName('k').AsString := 'schema_version';
-      Q.Params.ParamByName('v').AsString := '5';
+      Q.Params.ParamByName('v').AsString := '6';
       Q.ExecSQL;
 
       // App-Name (rein informativ)
@@ -200,10 +204,37 @@ begin
         '  city       TEXT NOT NULL,' +
         '  phone      TEXT,' + 
         '  owner      TEXT,' +
+        '  latitude_e6  INTEGER,' +
+        '  longitude_e6 INTEGER,' +
+        '  plus_code    TEXT,' +
         '  created_at TEXT NOT NULL DEFAULT (datetime(''now'')),' +
-        '  updated_at TEXT' + 
+        '  updated_at TEXT,' +
+        '  CHECK (latitude_e6 IS NULL OR (latitude_e6 BETWEEN -90000000 AND 90000000)),' +
+        '  CHECK (longitude_e6 IS NULL OR (longitude_e6 BETWEEN -180000000 AND 180000000))' +
         ');';
       Q.ExecSQL;
+
+      HasStationLatitudeE6 := ColumnExists('stations', 'latitude_e6');
+      HasStationLongitudeE6 := ColumnExists('stations', 'longitude_e6');
+      HasStationPlusCode := ColumnExists('stations', 'plus_code');
+
+      if not HasStationLatitudeE6 then
+      begin
+        Q.SQL.Text := 'ALTER TABLE stations ADD COLUMN latitude_e6 INTEGER;';
+        Q.ExecSQL;
+      end;
+
+      if not HasStationLongitudeE6 then
+      begin
+        Q.SQL.Text := 'ALTER TABLE stations ADD COLUMN longitude_e6 INTEGER;';
+        Q.ExecSQL;
+      end;
+
+      if not HasStationPlusCode then
+      begin
+        Q.SQL.Text := 'ALTER TABLE stations ADD COLUMN plus_code TEXT;';
+        Q.ExecSQL;
+      end;
 
       // Indizes und Unique-Constraint fuer Duplikate (Adresse)
       Dbg('Ensuring stations indexes...');
@@ -219,6 +250,15 @@ begin
 
       Q.SQL.Text :=
         'CREATE INDEX IF NOT EXISTS idx_stations_city ON stations(city);';
+      Q.ExecSQL;
+
+      Q.SQL.Text :=
+        'CREATE INDEX IF NOT EXISTS idx_stations_geo_pair ' +
+        'ON stations(latitude_e6, longitude_e6);';
+      Q.ExecSQL;
+
+      Q.SQL.Text :=
+        'CREATE INDEX IF NOT EXISTS idx_stations_plus_code ON stations(plus_code);';
       Q.ExecSQL;
 
       MetaOdoStartKm := 1;
@@ -545,7 +585,7 @@ begin
       // Schema-Version final absichern (nach evtl. Migration)
       Q.SQL.Text := 'INSERT OR REPLACE INTO meta(key, value) VALUES(:k, :v);';
       Q.Params.ParamByName('k').AsString := 'schema_version';
-      Q.Params.ParamByName('v').AsString := '5';
+      Q.Params.ParamByName('v').AsString := '6';
       Q.ExecSQL;
 
       // Transaktion abschliessen

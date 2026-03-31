@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-29
+# UPDATED: 2026-03-31
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -241,9 +241,9 @@ print_plan() {
 
   if $RUN_MIGRATIONS_SUITE; then
     printf '[LIST] (Migrations) tests/smoke_migrations.sh (Wrapper)\n'
-    printf '[LIST] (Migrations) v4 -> v5 per Flag (--v4-to-v5)\n'
-    printf '[LIST] (Migrations) schema_version wird auf 5 angehoben\n'
-    printf '[LIST] (Migrations) cars-Spalten vin/reg_doc_path/reg_doc_sha256 vorhanden\n'
+    printf '[LIST] (Migrations) v4 -> v6 und v5 -> v6 per Flag (--all)\n'
+    printf '[LIST] (Migrations) schema_version wird auf 6 angehoben\n'
+    printf '[LIST] (Migrations) cars(vin/reg_doc_*) und stations(latitude_e6/longitude_e6/plus_code) vorhanden\n'
     printf '[LIST] (Migrations) Re-Run ist idempotent\n'
   fi
 
@@ -1251,10 +1251,10 @@ run_cars_suite() {
 }
 
 test_migrations_script_ok() {
-  if "$ROOT_DIR/tests/smoke_migrations.sh" --v4-to-v5 >/dev/null 2>&1; then
-    printf '[OK] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --v4-to-v5'
+  if "$ROOT_DIR/tests/smoke_migrations.sh" --all >/dev/null 2>&1; then
+    printf '[OK] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --all'
   else
-    printf '[FAIL] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --v4-to-v5'
+    printf '[FAIL] Migrations: dedizierter Migration-Smoke (%s)\n' 'tests/smoke_migrations.sh --all'
     add_fail
   fi
 }

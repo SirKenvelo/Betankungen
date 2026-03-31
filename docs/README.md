@@ -369,6 +369,10 @@ Fachlogik für Tankstellen (`stations`).
 - Auflisten (Standard / Detail)
 - Bearbeiten (Alt-/Neu-Vergleich)
 - Löschen mit Sicherheitsabfrage
+- Optionale Stations-Geodaten (`latitude_e6`, `longitude_e6`, `plus_code`)
+  inkl. Normalisierung und Validierung im Dialogfluss
+- Kompakte Listen bleiben adressfokussiert; Detailansicht zeigt Geodaten als
+  zusaetzliche `geodata:`-Zeile
 
 ---
 

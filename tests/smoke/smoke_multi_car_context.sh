@@ -125,7 +125,7 @@ if [[ -z "${CAR1_ID:-}" ]]; then
 fi
 
 set +e
-printf 'OneBrand\nOneStreet\n1\n12345\nOneCity\n\n\n' \
+printf 'OneBrand\nOneStreet\n1\n12345\nOneCity\n\n\n\n\n\n' \
   | "$APP_BIN" --db "$DB_ONE" --add stations >"$OUT" 2>"$ERR"
 RC=$?
 set -e
@@ -259,7 +259,7 @@ if [[ -z "${CAR_B_ID:-}" || -z "${CAR_C_ID:-}" ]]; then
 fi
 
 set +e
-printf 'MultiBrand\nMultiStreet\n1\n12345\nMultiCity\n\n\n' \
+printf 'MultiBrand\nMultiStreet\n1\n12345\nMultiCity\n\n\n\n\n\n' \
   | "$APP_BIN" --db "$DB_MULTI" --add stations >"$OUT" 2>"$ERR"
 RC=$?
 set -e

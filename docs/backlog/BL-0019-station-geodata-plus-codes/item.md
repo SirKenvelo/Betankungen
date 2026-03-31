@@ -1,19 +1,20 @@
 ---
 id: BL-0019
 title: Tankstellen-Geodaten und Plus-Codes erweitern
-status: proposed
+status: done
 priority: P3
 type: feature
 tags: [stations, geodata, plus-codes, enrichment, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-18
+updated: 2026-03-31
 related:
   - BL-0018
 ---
-**Stand:** 2026-03-18
+**Stand:** 2026-03-31
 
 # Goal
-Tankstellenstammdaten um Koordinaten und optional Plus Codes erweitern.
+Tankstellenstammdaten um belastbare Geokoordinaten und optionale Plus Codes
+erweitern.
 
 # Motivation
 Geodaten ermoeglichen bessere Zuordnung, Distanz-basierte Auswertungen und
@@ -21,21 +22,49 @@ kontextstabile Stationserkennung ueber verschiedene Datenquellen hinweg.
 
 # Scope
 In Scope:
-- Datenfelder fuer Breiten-/Laengengrad und Plus Codes.
-- Validierungsregeln fuer Geodatenfelder.
+- Datenfelder fuer Breiten-/Laengengrad und optionale Plus Codes.
+- Validierungsregeln fuer Geodatenfelder und Plus-Code-Normalisierung.
+- Additive Schema-Migration fuer Bestandsdatenbanken.
 - Grundlegende Doku fuer Ausgabe-/Nutzungsstrategie.
 
 Out of Scope:
 - Kartenvisualisierung oder GUI-Funktionen.
 - Vollstaendige Geocoding-Pipeline mit externen Paid-Diensten.
 
+# Implemented Rules
+- Koordinaten werden als optionales Stationsmerkmal gefuehrt, aber immer als
+  Paar (`latitude` + `longitude`) geschrieben.
+- Werte werden vor Persistenz in Dezimalgrad validiert und intern als
+  `latitude_e6` / `longitude_e6` gespeichert.
+- Plus Codes bleiben optional, werden whitespace-frei und in Grossbuchstaben
+  normalisiert und nur als voller Open Location Code akzeptiert.
+- Die kompakte Stationsliste bleibt ruhig; Geodaten und Plus Codes erscheinen
+  nur in `--list stations --detail`.
+
+# Source of Truth
+- Die lokale `stations`-Tabelle ist die technische Source of Truth fuer
+  manuell gepflegte Geodaten.
+- Plus Codes sind ein zusaetzlicher Locator und keine Identitaets- oder
+  Duplikatsquelle fuer Stationen.
+- Es gibt bewusst keine automatische Geocoding- oder Plus-Code-Ableitung im
+  Core.
+
 # Risks
-- Uneinheitliche Datenqualitaet aus externen Quellen.
-- Zusatzaufwand fuer Datenpflege bei fehlenden Plus Codes.
+- Uneinheitliche Datenqualitaet aus externen Quellen bleibt moeglich und wird
+  nur ueber Eingabevalidierung, nicht ueber externe Verifikation, begrenzt.
+- Historische Bestandsdaten ohne Geodaten bleiben bewusst zulaessig.
 
 # Output
 Ein klar abgegrenzter Geodaten-Erweiterungsrahmen fuer Stationen, kompatibel
-mit spaeteren Historien-/Vergleichsfeatures.
+mit spaeteren Distanz-, Vergleichs- und Quellenabgleich-Features, ohne den
+aktuellen CLI-Flow in Richtung Mapping/GUI auszubauen.
+
+# Validation
+- Schema-/Migrations-Smoke fuer `v4 -> v6` und `v5 -> v6`
+- Domain-Policy-Block `P-085` bis `P-088`
+- Regression fuer Persistenz und kompakte vs. Detail-Sichtbarkeit in
+  `--list stations`
 
 # Derived Tasks
-- Werden bei Aktivierung als `TSK-xxxx` angelegt.
+- Keine separaten Folge-Tasks erforderlich; der Block wurde direkt als Sprint
+  33 geschlossen.

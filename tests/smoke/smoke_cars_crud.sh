@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cars_crud.sh
-# UPDATED: 2026-03-22
+# UPDATED: 2026-03-31
 # Fokus-Smoke fuer Cars-CRUD inkl. Delete-Guard bei vorhandenen fuelups
 # und Car-Resolver-Scope fuer fuelups add/list/stats.
 
@@ -193,7 +193,7 @@ OUT_SCOPE_STATS_CAR2="$TMP_DIR/scope_stats_car2.out"
 ERR_SCOPE_STATS_CAR2="$TMP_DIR/scope_stats_car2.err"
 
 set +e
-printf 'ScopeBrand\nScopeStreet\n1\n12345\nScopeCity\n\n\n' \
+printf 'ScopeBrand\nScopeStreet\n1\n12345\nScopeCity\n\n\n\n\n\n' \
   | "$APP_BIN" --db "$RES_DB" --add stations >"$OUT_SCOPE_ADD_STATION" 2>"$ERR_SCOPE_ADD_STATION"
 RC=$?
 set -e

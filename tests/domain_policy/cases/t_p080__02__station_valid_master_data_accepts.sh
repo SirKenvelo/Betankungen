@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # t_p080__02__station_valid_master_data_accepts.sh
-# UPDATED: 2026-03-21
-# Positive Referenz fuer den P-080..P-084-Block: valide Stammdaten werden gespeichert.
+# UPDATED: 2026-03-31
+# Positive Referenz fuer den P-080..P-088-Block: valide Stammdaten werden gespeichert.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 DB_POLICY="$ROOT_DIR/tests/domain_policy/fixtures/Betankungen_Policy.db"
@@ -47,6 +47,9 @@ INPUT_LINES=(
   'Dortmund'
   '+49 231 123456'
   'TestOwner'
+  '51,514200'
+  '7.465300'
+  '9f4m gc2m+h4'
 )
 
 set +e
@@ -63,9 +66,9 @@ if ! grep -q 'OK: Tankstelle' "$OUT_FILE"; then
   fail 'Erwartete Erfolgsmeldung nicht gefunden.'
 fi
 
-ROW_OK="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM stations WHERE brand='ValidStation' AND zip='44135' AND city='Dortmund';")"
+ROW_OK="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM stations WHERE brand='ValidStation' AND zip='44135' AND city='Dortmund' AND latitude_e6=51514200 AND longitude_e6=7465300 AND plus_code='9F4MGC2M+H4';")"
 if [[ "$ROW_OK" != "1" ]]; then
   fail "Erwartet genau einen gueltigen Stationssatz, erhalten: $ROW_OK"
 fi
 
-printf '[OK] P-080/02: valide Stations-Stammdaten werden gespeichert.\n'
+printf '[OK] P-080/02: valide Stations-Stammdaten inkl. Geodaten werden gespeichert.\n'

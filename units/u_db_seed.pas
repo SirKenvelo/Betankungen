@@ -2,7 +2,7 @@
   u_db_seed.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-18
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Demo-Datenbank-Seeding fuer Betankungen.
 
@@ -144,9 +144,28 @@ begin
     '  city       TEXT NOT NULL,' +
     '  phone      TEXT,' +
     '  owner      TEXT,' +
+    '  latitude_e6  INTEGER,' +
+    '  longitude_e6 INTEGER,' +
+    '  plus_code    TEXT,' +
     '  created_at TEXT NOT NULL DEFAULT (datetime(''now'')),' +
-    '  updated_at TEXT' +
+    '  updated_at TEXT,' +
+    '  CHECK (latitude_e6 IS NULL OR (latitude_e6 BETWEEN -90000000 AND 90000000)),' +
+    '  CHECK (longitude_e6 IS NULL OR (longitude_e6 BETWEEN -180000000 AND 180000000))' +
     ');'
+  );
+
+  if not ColumnExists(Conn, Tran, 'stations', 'latitude_e6') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE stations ADD COLUMN latitude_e6 INTEGER;');
+  if not ColumnExists(Conn, Tran, 'stations', 'longitude_e6') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE stations ADD COLUMN longitude_e6 INTEGER;');
+  if not ColumnExists(Conn, Tran, 'stations', 'plus_code') then
+    ExecSQL(Conn, Tran, 'ALTER TABLE stations ADD COLUMN plus_code TEXT;');
+
+  ExecSQL(Conn, Tran,
+    'CREATE INDEX IF NOT EXISTS idx_stations_geo_pair ON stations(latitude_e6, longitude_e6);'
+  );
+  ExecSQL(Conn, Tran,
+    'CREATE INDEX IF NOT EXISTS idx_stations_plus_code ON stations(plus_code);'
   );
 
   // cars (v5)
@@ -257,10 +276,13 @@ const
   STREETS: array[0..9] of string = ('Hauptstr.','Bahnhofstr.','Dortmunder Str.','Muensterstr.','Bismarckstr.','Ringstr.','Kaiserstr.','Nordstr.','Suedstr.','Hagenstr.');
   CITIES: array[0..9] of string = ('Unna','Dortmund','Hamm','Kamen','Schwerte','Luenen','Bochum','Essen','Wuppertal','Muenster');
   ZIPS: array[0..9] of string = ('59423','44135','59065','59174','58239','44532','44787','45127','42103','48143');
+  LATITUDE_E6: array[0..9] of Int64 = (51534700, 51514200, 51673900, 51592900, 51443900, 51616400, 51481800, 51455600, 51256200, 51960700);
+  LONGITUDE_E6: array[0..9] of Int64 = (7689100, 7465300, 7816000, 7664700, 7567100, 7528700, 7216200, 7011600, 7150800, 7626100);
 var
   Q: TSQLQuery;
-  i, bi: integer;
+  i, bi, localityIdx: integer;
   brand, street, houseNo, zip, city, phone, owner: string;
+  latitudeE6, longitudeE6: Int64;
 begin
   Dbg('SeedStations: count=' + IntToStr(StationCount));
   Q := TSQLQuery.Create(nil);
@@ -268,17 +290,23 @@ begin
     Q.DataBase := Conn;
     Q.Transaction := Tran;
     Q.SQL.Text :=
-      'INSERT INTO stations (brand, street, house_no, zip, city, phone, owner) ' +
-      'VALUES (:brand, :street, :house_no, :zip, :city, :phone, :owner);';
+      'INSERT INTO stations (' +
+      '  brand, street, house_no, zip, city, phone, owner, latitude_e6, longitude_e6, plus_code' +
+      ') VALUES (' +
+      '  :brand, :street, :house_no, :zip, :city, :phone, :owner, :latitude_e6, :longitude_e6, :plus_code' +
+      ');';
 
     for i := 1 to StationCount do
     begin
       bi := Random(Length(BRANDS));
+      localityIdx := Random(Length(CITIES));
       brand := BRANDS[bi];
       street := STREETS[Random(Length(STREETS))];
       houseNo := IntToStr(1 + Random(180));
-      city := CITIES[Random(Length(CITIES))];
-      zip := ZIPS[Random(Length(ZIPS))];
+      city := CITIES[localityIdx];
+      zip := ZIPS[localityIdx];
+      latitudeE6 := LATITUDE_E6[localityIdx] + (Random(6000) - 3000);
+      longitudeE6 := LONGITUDE_E6[localityIdx] + (Random(6000) - 3000);
 
       if Random(100) < 60 then phone := '+49 23' + IntToStr(10 + Random(90)) + ' ' + IntToStr(100000 + Random(900000))
       else phone := '';
@@ -291,6 +319,9 @@ begin
       Q.ParamByName('house_no').AsString := houseNo;
       Q.ParamByName('zip').AsString := zip;
       Q.ParamByName('city').AsString := city;
+      Q.ParamByName('latitude_e6').AsLargeInt := latitudeE6;
+      Q.ParamByName('longitude_e6').AsLargeInt := longitudeE6;
+      Q.ParamByName('plus_code').Clear;
 
       if phone = '' then Q.ParamByName('phone').Clear else Q.ParamByName('phone').AsString := phone;
       if owner = '' then Q.ParamByName('owner').Clear else Q.ParamByName('owner').AsString := owner;
