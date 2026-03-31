@@ -381,25 +381,37 @@ begin
       Q.Params.ParamByName('start_date').AsString := MetaOdoStartDate;
       Q.ExecSQL;
 
-      // Immutability-Trigger fuer Startwerte
-      Dbg('Ensuring cars immutability triggers...');
+      // Startwerte duerfen vor dem ersten Fuelup noch korrigiert werden,
+      // bleiben danach aber auch auf DB-Ebene gesperrt.
+      Dbg('Ensuring cars start-value lock triggers...');
+      Q.SQL.Text := 'DROP TRIGGER IF EXISTS trg_cars_immutable_start_km;';
+      Q.ExecSQL;
+      Q.SQL.Text := 'DROP TRIGGER IF EXISTS trg_cars_immutable_start_date;';
+      Q.ExecSQL;
+      Q.SQL.Text := 'DROP TRIGGER IF EXISTS trg_cars_lock_start_km_after_fuelups;';
+      Q.ExecSQL;
+      Q.SQL.Text := 'DROP TRIGGER IF EXISTS trg_cars_lock_start_date_after_fuelups;';
+      Q.ExecSQL;
+
       Q.SQL.Text :=
-        'CREATE TRIGGER IF NOT EXISTS trg_cars_immutable_start_km ' +
+        'CREATE TRIGGER IF NOT EXISTS trg_cars_lock_start_km_after_fuelups ' +
         'BEFORE UPDATE OF odometer_start_km ON cars ' +
         'FOR EACH ROW ' +
         'WHEN NEW.odometer_start_km <> OLD.odometer_start_km ' +
+        ' AND EXISTS(SELECT 1 FROM fuelups WHERE car_id = OLD.id LIMIT 1) ' +
         'BEGIN ' +
-        '  SELECT RAISE(ABORT, ''odometer_start_km is immutable''); ' +
+        '  SELECT RAISE(ABORT, ''P-071: odometer_start_km locked after first fuelup''); ' +
         'END;';
       Q.ExecSQL;
 
       Q.SQL.Text :=
-        'CREATE TRIGGER IF NOT EXISTS trg_cars_immutable_start_date ' +
+        'CREATE TRIGGER IF NOT EXISTS trg_cars_lock_start_date_after_fuelups ' +
         'BEFORE UPDATE OF odometer_start_date ON cars ' +
         'FOR EACH ROW ' +
         'WHEN NEW.odometer_start_date <> OLD.odometer_start_date ' +
+        ' AND EXISTS(SELECT 1 FROM fuelups WHERE car_id = OLD.id LIMIT 1) ' +
         'BEGIN ' +
-        '  SELECT RAISE(ABORT, ''odometer_start_date is immutable''); ' +
+        '  SELECT RAISE(ABORT, ''P-071: odometer_start_date locked after first fuelup''); ' +
         'END;';
       Q.ExecSQL;
 

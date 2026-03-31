@@ -2,14 +2,15 @@
   u_cars.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-24
-  UPDATED: 2026-02-27
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Domain-Unit fuer DB-basiertes CRUD auf der Tabelle `cars`.
 
   Verantwortlichkeiten:
   - Fuegt Fahrzeuge hinzu und liefert die neue ID zurueck.
   - Listet Fahrzeuge als strukturierte Datensaetze.
-  - Bearbeitet Fahrzeug-Stammdaten (name/plate/note).
+  - Bearbeitet Fahrzeug-Stammdaten inkl. Startwerte, solange noch keine
+    Fuelups fuer das Fahrzeug existieren.
   - Loescht Fahrzeuge (mit Schutz vor bestehenden fuelups-Referenzen).
   - Liefert Pruef-Helfer fuer Existenz und fuelup-Referenzen.
   - Liefert kompakte Car-Kontext-Helfer (Anzahl/Single-ID-Aufloesung).
@@ -53,7 +54,9 @@ function CarsGetById(const DbPath: string; const Id: Integer; out Car: TCar): Bo
 function CarsEdit(
   const DbPath: string;
   const Id: Integer;
-  const Name, Plate, Note: string
+  const Name, Plate, Note: string;
+  const OdometerStartKm: Integer;
+  const OdometerStartDate: string
 ): Boolean;
 
 function CarsDelete(const DbPath: string; const Id: Integer): Boolean;
@@ -273,7 +276,9 @@ end;
 function CarsEdit(
   const DbPath: string;
   const Id: Integer;
-  const Name, Plate, Note: string
+  const Name, Plate, Note: string;
+  const OdometerStartKm: Integer;
+  const OdometerStartDate: string
 ): Boolean;
 var
   Conn: TSQLite3Connection;
@@ -284,6 +289,10 @@ begin
     raise Exception.Create('CarsEdit: id muss > 0 sein.');
   if Trim(Name) = '' then
     raise Exception.Create('CarsEdit: name darf nicht leer sein.');
+  if OdometerStartKm <= 0 then
+    raise Exception.Create('CarsEdit: odometer_start_km muss > 0 sein.');
+  if Trim(OdometerStartDate) = '' then
+    raise Exception.Create('CarsEdit: odometer_start_date darf nicht leer sein.');
 
   Result := False;
   PrepareDb(DbPath, True, Conn, Tran, Q);
@@ -291,11 +300,16 @@ begin
     try
       Q.SQL.Text :=
         'UPDATE cars ' +
-        'SET name = :name, plate = :plate, note = :note, updated_at = datetime(''now'') ' +
+        'SET name = :name, plate = :plate, note = :note, ' +
+        '    odometer_start_km = :odometer_start_km, ' +
+        '    odometer_start_date = :odometer_start_date, ' +
+        '    updated_at = datetime(''now'') ' +
         'WHERE id = :id;';
       Q.Params.ParamByName('name').AsString := Trim(Name);
       Q.Params.ParamByName('plate').AsString := Trim(Plate);
       Q.Params.ParamByName('note').AsString := Trim(Note);
+      Q.Params.ParamByName('odometer_start_km').AsInteger := OdometerStartKm;
+      Q.Params.ParamByName('odometer_start_date').AsString := Trim(OdometerStartDate);
       Q.Params.ParamByName('id').AsInteger := Id;
       Q.ExecSQL;
 
@@ -309,6 +323,10 @@ begin
 
         if Pos('UNIQUE', UpperCase(E.Message)) > 0 then
           raise Exception.Create('CarsEdit: UNIQUE constraint verletzt.')
+        else if Pos('P-071:', E.Message) > 0 then
+          raise Exception.Create(
+            'P-071: Start-KM und Start-Datum koennen nach dem ersten Fuelup nicht mehr geaendert werden.'
+          )
         else
           raise Exception.Create('CarsEdit fehlgeschlagen: ' + E.Message);
       end;

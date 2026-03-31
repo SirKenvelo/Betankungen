@@ -18,6 +18,9 @@ Alle car-sensitiven Kommandos (`--add fuelups`, `--list fuelups`, `--stats fuelu
 - 1 Fahrzeug: automatische Auswahl.
 - >1 Fahrzeuge: `--car-id <id>` verpflichtend.
 - Mit `--car-id <id>`: ID wird auf Existenz validiert, ungueltige/fehlende IDs sind Hard Errors.
+- Fahrzeug-Start-KM und Start-Datum koennen ueber `--edit cars --car-id <id>`
+  korrigiert werden, solange fuer dieses Fahrzeug noch keine Betankung
+  gespeichert ist. Nach dem ersten Fuelup bleiben diese Startwerte gesperrt.
 
 **Start und Hilfe**
 - Hilfe: `Betankungen --help`
