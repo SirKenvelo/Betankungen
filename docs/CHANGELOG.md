@@ -6,10 +6,12 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 ## [Unreleased]
 ### Zielversion
 Aktive Entwicklungsbasis `1.4.0-dev` (`APP_VERSION=1.4.0-dev`)
-Ziel: die aktive `1.4.0-dev`-Linie ueber gezielte Hardening-Bloecke
-stabilisieren und offene Validierungscontracts sauber schliessen.
+Ziel: die aktive `1.4.0-dev`-Linie ueber gezielte Hardening- und
+Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
+schliessen.
 
 ### Sprint / Commit References
+- S33C1/2 - Stations-Stammdaten um Geodaten/Plus-Code-Write-Path, Schema v6, Migrations-Smokes und Contract-Regression erweitert (`units/u_stations.pas`, `units/u_db_init.pas`, `units/u_db_seed.pas`, `tests/smoke/smoke_migrations.sh`, `tests/regression/run_station_geodata_contract_check.sh`, `tests/domain_policy/p080.md`, `tests/domain_policy/README.md`, `docs/backlog/BL-0019-station-geodata-plus-codes/item.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `Makefile`); Artefakte: `.artifacts/sprint_33_commit_1_von_2.md`, `.artifacts/sprint_33_commit_1_von_2.diff`; Basis-Commit: `2064fbd`. (2026-03-31)
 - S32C1/2 - Odometer-Validierungscontract fuer negative Eingaben gehaertet (`units/u_fuelups.pas`, `tests/domain_policy/cases/t_p010__02__negative_odometer_input_contract.sh`, `tests/domain_policy/p010.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/item.md`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/tasks/TSK-0001-unify-odometer-hard-error-validation.md`, `docs/issues/ISS-0001-negative-odometer-validation/issue.md`, `docs/BACKLOG.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_32_commit_1_von_2.md`, `.artifacts/sprint_32_commit_1_von_2.diff`; Basis-Commit: `193a7e0`. (2026-03-31)
 - S31C1/2 - `BL-0011` repo-seitig auf finalen Externalisierungs-/Handover-Closeout gezogen (`docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md`, `docs/BL-0011_SCOPE_DECISION_1_4_0.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_31_commit_1_von_2.md`, `.artifacts/sprint_31_commit_1_von_2.diff`; Basis-Commit: `7a5c038`. (2026-03-30)
 - S30C1/4 - `1.4.0-dev` in separatem Aktivierungs-Commit gestartet (`src/Betankungen.lpr`, `README.md`, `docs/README.md`, `docs/README_EN.md`, `CONTRIBUTING.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_30_commit_1_von_4.md`, `.artifacts/sprint_30_commit_1_von_4.diff`; Basis-Commit: `5a2d69b`. (2026-03-30)
@@ -88,6 +90,19 @@ stabilisieren und offene Validierungscontracts sauber schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S33C2/2] Docs/Traceability: Sprint 33 und der Abschluss von `BL-0019`
+  sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  Der Sprint dokumentiert den gruenen Abschluss ueber
+  `scripts/projtrack_lint.sh` und `make verify`. (2026-03-31)
+- [S33C1/2] Feat/Stations: `stations` wurden um optionale Geodaten und
+  Plus Codes erweitert. Das Core-Schema ist auf `v6` angehoben, additiv
+  fuer `v4 -> v6` und `v5 -> v6` migrierbar, und die Dialogpfade
+  `--add stations`/`--edit stations` validieren jetzt Koordinatenpaare,
+  Wertebereiche und volle Open Location Codes (`P-085` bis `P-088`).
+  Die kompakte Stationsliste bleibt adressfokussiert; `--list stations
+  --detail` zeigt vorhandene Geodaten als `geodata:`-Zeile. `BL-0019`,
+  Status-/Benutzerdoku und der Verify-Gate sind darauf synchronisiert.
+  (2026-03-31)
 - [S32C2/2] Docs/Traceability: Sprint 32 und der Abschluss von `BL-0029`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert die gruene Verifikation ueber

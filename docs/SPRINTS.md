@@ -1411,6 +1411,54 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## Sprint 33 - `BL-0019` Stations-Geodaten und Plus Codes
+
+- Status: done
+- Ziel: den Stationskontext der aktiven `1.4.0-dev`-Linie kontrolliert um
+  Geokoordinaten und optionale Plus Codes erweitern, ohne die kompakte
+  CLI-Nutzung in Richtung Mapping/GUI auszuweiten.
+
+### Geplante Bloecke
+
+- S33C1/2: done - Schema, Dialogpfade, Migrationen, Regressionen und direkt
+  betroffene Produkt-/Tracker-Doku fuer `BL-0019` liefern.
+- S33C2/2: done - Sprint-Traceability, Abschlussstatus und Vollverifikation
+  fuer `BL-0019` finalisieren.
+
+### Fortschritt (2026-03-31)
+
+- `S33C1/2` abgeschlossen:
+  - `stations` fuehren jetzt optionale Geodaten ueber
+    `latitude_e6`/`longitude_e6` sowie `plus_code`.
+  - `--add stations` und `--edit stations` validieren Koordinatenpaare,
+    Dezimalgrad-Bereiche und volle Open Location Codes; Plus Codes werden vor
+    Persistenz whitespace-frei und in Grossbuchstaben normalisiert.
+  - Die kompakte Stationsliste bleibt adressfokussiert; `--list stations
+    --detail` zeigt vorhandene Geodaten als zusaetzliche `geodata:`-Zeile.
+  - `tests/smoke/smoke_migrations.sh` deckt jetzt `v4 -> v6` und `v5 -> v6`
+    ab; Domain-Policy `P-085` bis `P-088` und die neue Regression
+    `run_station_geodata_contract_check.sh` sichern Persistenz und
+    Sichtbarkeit.
+  - `BL-0019` und `docs/BACKLOG.md` wurden auf `done` synchronisiert.
+  - Git-Commit: `2064fbd`
+  - Artefakte: `.artifacts/sprint_33_commit_1_von_2.md`,
+    `.artifacts/sprint_33_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S33C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 33 jetzt mit
+    Hash-/Verifikationsbezug.
+  - `BL-0019` ist als abgeschlossener Paket-B-Block der aktiven
+    `1.4.0-dev`-Linie dokumentiert.
+
+### Validierung
+
+- `tests/smoke/smoke_migrations.sh --all`
+- `tests/regression/run_station_geodata_contract_check.sh`
+- `tests/domain_policy/run_domain_policy_tests.sh`
+- `tests/smoke/smoke_cars_crud.sh`
+- `tests/smoke/smoke_multi_car_context.sh`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 31 - Knowledge-Archive stilllegen
 
 - Status: done
