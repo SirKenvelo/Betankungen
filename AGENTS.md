@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-28
+**Stand:** 2026-03-31
 
 <INSTRUCTIONS>
 
@@ -138,11 +138,11 @@
 - Leitplanke: Wiki bleibt kuratierter Einstieg, tiefe/finale Details verbleiben in `docs/` (Source of Truth).
 
 ## Knowledge-Archive-Regeln
-- Bei Loeschung von Prozeduren/Funktionen muss die urspruengliche Version vor dem Entfernen in `knowledge_archive/` gesichert werden.
-- Bei funktionalen Verhaltensaenderungen (nicht nur Refactoring/Formatierung) soll die urspruengliche Version ebenfalls in `knowledge_archive/` gesichert werden, damit die Historie ohne Git-Dive nachvollziehbar bleibt.
-- Jede neue Archivdatei wird in `knowledge_archive/README.md` dokumentiert (Quelle/Datei, Symbolname, Anlass, Datum, zugehoeriger Commit-Hash falls vorhanden).
-- Dateinamenskonvention fuer neue Archive: `archive_<symbol_or_topic>_<YYYY-MM-DD>.<ext>`.
-- Archiv-Snippets verwenden einen standardisierten Header im Stil `ARCHIVE-SNIPPET` gemaess Template in `knowledge_archive/README.md`.
+- `knowledge_archive/` ist als Legacy-/Read-only-Bestand eingefroren.
+- Neue Archiv-Snippets werden repo-seitig nicht mehr verpflichtend erzeugt und sind kein Standardpfad fuer normale Codeaenderungen mehr.
+- Fuer fruehere Implementationsstaende ist die Git-Historie der primaere Rueckgriff.
+- Der vorhandene Bestand in `knowledge_archive/` bleibt zunaechst lesbar erhalten und wird nicht rueckwirkend umgeschrieben.
+- Eine spaetere vollstaendige Herausloesung aus dem Repository bleibt als optionaler Folgeschritt moeglich, ist aber nicht Teil des laufenden Standards.
 
 ## Priorisierung von Änderungen & Dokumentations-Pflicht
 Nach Änderungen muss die KI die Relevanz für die Dokumentation (insb. im `docs`-Ordner) wie folgt bewerten:

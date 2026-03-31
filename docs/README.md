@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -192,7 +192,8 @@ Details zur Regelbasis:
 - `btkgit`: repo-lokaler Workflow-Wrapper fuer Sync/Preflight/Readiness und konservatives Cleanup (Wrapper auf `scripts/btkgit.sh`)
 - `data/`: entkoppelte Daten-Assets (u. a. `dev_messages.b64` fuer optionale Easter-Egg-Messages)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
-- `knowledge_archive/`: Wissens-Archiv fuer verworfene oder spaeter nutzbare Snippets
+- `knowledge_archive/`: Legacy-Wissensarchiv (read-only); Git-Historie bleibt
+  der primaere Rueckgriff fuer fruehere Implementationsstaende
 - `docs/ADR/`: Entscheidungen im ADR-Format (accepted/proposed)
 - `docs/BACKLOG.md`: zentrale Backlog-Uebersicht
 - `docs/BACKLOG/`: einzelne Backlog-Eintraege `BL-xxx` als Detaildokumente

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -22,7 +22,8 @@
 - Release-Logging via `scripts/kpr.sh` (kompatibel via Root-Wrapper `kpr.sh`)
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)
 - Restore-Ablauf dokumentiert in `RESTORE.md`
-- Wissens-Archiv fuer verworfene Snippets in `knowledge_archive/`
+- Legacy-Wissensarchiv in `knowledge_archive/` (read-only; Git-Historie ist
+  der primaere Rueckgriff fuer fruehere Implementationsstaende)
 - Smoke-Checks unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`)
 
 ## Datenmodell & Domain-Logik (erledigt)

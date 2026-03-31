@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -87,6 +87,15 @@ Ziel: `BL-0011` repo-seitig sauber externalisiert abschliessen und die
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Process: `knowledge_archive/` repo-seitig auf
+  deprecated/read-only gestellt. `AGENTS.md` hebt die fruehere Pflicht fuer
+  neue Archiv-Snippets auf, `knowledge_archive/README.md` dokumentiert den
+  Legacy-/Freeze-Status und `docs/STATUS.md`, `docs/README.md` sowie
+  `docs/ARCHITECTURE.md` ordnen den Ordner nur noch als historischen
+  Bestand ein. Git-Historie ist jetzt explizit der primaere Rueckgriff fuer
+  fruehere Implementationsstaende; historische Referenzen in
+  `docs/CHANGELOG.md` und `docs/SPRINTS.md` bleiben bewusst unveraendert.
+  (2026-03-31)
 - [S31C2/2] Docs/Traceability: Sprint 31 ist jetzt als repo-seitiger
   Externalisierungs-Closeout fuer `BL-0011` in `docs/CHANGELOG.md` und
   `docs/SPRINTS.md` verankert. Der Sprint dokumentiert den gruennen
@@ -590,6 +599,9 @@ Ziel: `BL-0011` repo-seitig sauber externalisiert abschliessen und die
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Governance-/Docs-Cleanup zur stillen Stilllegung des repo-getrackten
+  Knowledge-Archive-Mechanismus erfolgte mit Unterstuetzung durch AI-Tools
+  als Sparringspartner. (2026-03-31)
 - Tracker-/ADR-Backfill, Index-Sync und Traceability-Pflege fuer Sprint 25
   bis 28 erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
   (2026-03-30)

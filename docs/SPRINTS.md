@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -1368,6 +1368,30 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 ### Validierung
 
 - `scripts/projtrack_lint.sh`
+- `make verify`
+
+## General-Stream nach Sprint 31 - Knowledge-Archive stilllegen
+
+- Status: done
+- Ziel: `knowledge_archive/` repo-seitig ruhig stilllegen, den Bestand als
+  Legacy-/Read-only-Ordner behalten und die Pflicht fuer neue
+  Archiv-Snippets aufheben.
+
+### Stand (2026-03-31)
+
+- `AGENTS.md` und `knowledge_archive/README.md` markieren
+  `knowledge_archive/` jetzt explizit als deprecated/read-only.
+- Neue Archiv-Snippets sind nicht mehr verpflichtender Repo-Standard; fuer
+  fruehere Implementationsstaende ist die Git-Historie der primaere
+  Rueckgriff.
+- `docs/STATUS.md`, `docs/README.md` und `docs/ARCHITECTURE.md` ordnen den
+  Ordner nur noch als Legacy-Bestand ein.
+- Historische Referenzen in `docs/CHANGELOG.md` und `docs/SPRINTS.md`
+  bleiben bewusst unveraendert; der neue Status wird nur transparent
+  dokumentiert.
+
+### Validierung
+
 - `make verify`
 
 ## Traceability-Backfill fuer Sprint 25 bis 28

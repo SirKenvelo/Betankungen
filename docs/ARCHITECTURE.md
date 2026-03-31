@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-03-09
+**Stand:** 2026-03-31
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -208,7 +208,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 
 ### Version 0.6.0 – Fundament fuer Fahrzeug-Domain — abgeschlossen
 *Ziel: stabile Struktur fuer spaeteres Multi-Car ohne sofortigen Feature-Ausbau.*
-- [x] Projektstruktur fuer Wissensarchiv/Backups/Skripte/Tests ist etabliert (`knowledge_archive/`, `.backup/`, `scripts/`, `tests/`).
+- [x] Projektstruktur fuer Legacy-Wissensarchiv/Backups/Skripte/Tests ist etabliert (`knowledge_archive/` bleibt read-only im Repo; Git-Historie ist der primaere Rueckgriff fuer fruehere Implementationsstaende).
 - [x] Technische Basis `cars` + `fuelups.car_id` + `missed_previous` ist im aktuellen Arbeitsstand vorhanden.
 - [x] Domain-Policy-Matrix v1 als Regression-Fundament aufgebaut (inkl. Gap-/Date-/Cost-/Price-/Stats-Guards).
 - [x] Release-Zuordnung und fachliche Konsolidierung als 0.6.0-Rahmen dokumentiert (Hauptauto-Flow ohne Multi-Car-CLI-Ausbau).
