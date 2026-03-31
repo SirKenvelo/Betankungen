@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S34C1/2 - Paket C als strategischen EV-Discovery-Pfad verankert (`docs/ADR/ADR-0008-ev-charging.md`, `docs/ADR/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`); Artefakte: `.artifacts/sprint_34_commit_1_von_2.md`, `.artifacts/sprint_34_commit_1_von_2.diff`; Basis-Commit: `23cdef6`. (2026-03-31)
 - S33C1/2 - Stations-Stammdaten um Geodaten/Plus-Code-Write-Path, Schema v6, Migrations-Smokes und Contract-Regression erweitert (`units/u_stations.pas`, `units/u_db_init.pas`, `units/u_db_seed.pas`, `tests/smoke/smoke_migrations.sh`, `tests/regression/run_station_geodata_contract_check.sh`, `tests/domain_policy/p080.md`, `tests/domain_policy/README.md`, `docs/backlog/BL-0019-station-geodata-plus-codes/item.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `Makefile`); Artefakte: `.artifacts/sprint_33_commit_1_von_2.md`, `.artifacts/sprint_33_commit_1_von_2.diff`; Basis-Commit: `2064fbd`. (2026-03-31)
 - S32C1/2 - Odometer-Validierungscontract fuer negative Eingaben gehaertet (`units/u_fuelups.pas`, `tests/domain_policy/cases/t_p010__02__negative_odometer_input_contract.sh`, `tests/domain_policy/p010.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/item.md`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/tasks/TSK-0001-unify-odometer-hard-error-validation.md`, `docs/issues/ISS-0001-negative-odometer-validation/issue.md`, `docs/BACKLOG.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_32_commit_1_von_2.md`, `.artifacts/sprint_32_commit_1_von_2.diff`; Basis-Commit: `193a7e0`. (2026-03-31)
 - S31C1/2 - `BL-0011` repo-seitig auf finalen Externalisierungs-/Handover-Closeout gezogen (`docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md`, `docs/BL-0011_SCOPE_DECISION_1_4_0.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_31_commit_1_von_2.md`, `.artifacts/sprint_31_commit_1_von_2.diff`; Basis-Commit: `7a5c038`. (2026-03-30)
@@ -90,6 +91,19 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S34C2/2] Docs/Traceability: Sprint 34 ist jetzt mit Hash-,
+  Tracker- und Verifikationsbezug in `docs/CHANGELOG.md` und
+  `docs/SPRINTS.md` verankert. Paket C bleibt damit als bewusster
+  Richtungs-/Discovery-Sprint referenzierbar; der gruene Abschlussnachweis
+  laeuft ueber `scripts/projtrack_lint.sh` und `make verify`. (2026-03-31)
+- [S34C1/2] Docs/Strategy: Paket C priorisiert EV als naechste grosse
+  Domaenenerweiterung der aktiven `1.4.x`-Linie. `ADR-0008` ist jetzt
+  `accepted`, `BL-0030` aktiviert einen einzelnen kanonischen
+  Discovery-/Feasibility-Block fuer `betankungen-ev`, und `TSK-0024`/
+  `TSK-0025` machen Scope sowie Storage-/Boundary-Fragen explizit.
+  `docs/BACKLOG.md`, `docs/ADR/README.md` und `docs/STATUS.md` sind auf
+  diesen EV-first-Pfad synchronisiert; Household Drivers bleiben bewusst
+  nachgeordnet. (2026-03-31)
 - [General] Fix/Cars: `--edit cars` kann Fahrzeug-Startwerte jetzt vor dem
   ersten Fuelup korrigieren. Sobald fuer ein Fahrzeug `fuelups` existieren,
   bleiben `odometer_start_km` und `odometer_start_date` ueber CLI und DB-Guard
