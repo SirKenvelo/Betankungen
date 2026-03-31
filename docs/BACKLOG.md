@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-03-30
+**Stand:** 2026-03-31
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
@@ -58,7 +58,7 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0026 - Transition-Hold und Entry-Doku-Sync nach 1.3.0](backlog/BL-0026-transition-hold-entry-doc-sync/item.md) - Status: `done`, Typ: Improvement (Einstiegsdoku konsistent auf finaler `1.3.0`-Linie und bewusstem Hold gehalten), Lane: `planned` (historisch)
 - [BL-0027 - Wiki-Entry-Layer und Public-Readiness-Ausrichtung](backlog/BL-0027-wiki-entry-layer-public-alignment/item.md) - Status: `done`, Typ: Improvement (Wiki-Entry und Repo-Einstiege ruhig gegenueber `docs/` als Source of Truth ausgerichtet), Lane: `planned` (historisch)
 - [BL-0028 - `btkgit`-Safety-Guardrails fuer Solo-Maintenance](backlog/BL-0028-btkgit-safety-guardrails/item.md) - Status: `done`, Typ: Improvement (`btkgit`-Failure-UX, konservatives Cleanup und Smoke-Guardrails explizit nachgeschaerft), Lane: `planned` (historisch)
-- [BL-0029 - Odometer Validation Contract Hardening](backlog/BL-0029-odometer-validation-contract-hardening/item.md) - Status: `proposed`, Typ: Improvement (fachlich entkoppelte Odometer-Hardening-Kette fuer `ISS-0001`/`TSK-0001`), Lane: `planned`, Tasks: `TSK-0001` (`todo`)
+- [BL-0029 - Odometer Validation Contract Hardening](backlog/BL-0029-odometer-validation-contract-hardening/item.md) - Status: `done`, Typ: Improvement (kanonischer Hard-Error-Contract fuer negative `odometer_km`-Eingaben umgesetzt und regressionsgesichert), Lane: `planned`, Tasks: `TSK-0001` (`done`)
 
 ## Legacy Backlog-Index (BL-0xx)
 

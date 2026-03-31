@@ -11,7 +11,7 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-03-22
+# UPDATED: 2026-03-31
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -148,6 +148,19 @@ RC=$?
 set -e
 if [[ $RC -ne 0 ]]; then
   fail 'Matrix 1 Car: --stats fuelups ohne --car-id fehlgeschlagen.'
+fi
+
+COUNT_BEFORE_NEG_ONE="$(sqlite3 "$DB_ONE" "SELECT COUNT(*) FROM fuelups;")"
+set +e
+printf '1\n2026-02-09 12:00:00\n-1\n' \
+  | "$APP_BIN" --db "$DB_ONE" --add fuelups >"$OUT" 2>"$ERR"
+RC=$?
+set -e
+COUNT_AFTER_NEG_ONE="$(sqlite3 "$DB_ONE" "SELECT COUNT(*) FROM fuelups;")"
+if [[ $RC -eq 0 ]] ||
+   ! grep -q 'odometer_km muss eine Ganzzahl >= 0 sein' "$ERR" ||
+   [[ "$COUNT_AFTER_NEG_ONE" != "$COUNT_BEFORE_NEG_ONE" ]]; then
+  fail 'Matrix 1 Car: negativer odometer_km ohne --car-id wurde nicht konsistent als Hard Error geblockt.'
 fi
 
 set +e

@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-22
+**Stand:** 2026-03-31
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -77,6 +77,7 @@ Eingabe bei `--add fuelups`:
 - Datum+Uhrzeit: `YYYY-MM-DD HH:MM:SS`
 - Kilometerstand (km)
 - Odometer-Checks pro Fahrzeug:
+  - `odometer_km` muss eine Ganzzahl `>= 0` sein
   - muss >= Fahrzeug-Start-KM sein
   - muss strikt groesser als der letzte Odometer des Fahrzeugs sein
 - Bei grosser Distanzluecke (> 1500 km) wird gezielt nach "fehlender vorheriger Betankung" gefragt (`missed_previous`)

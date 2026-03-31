@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-21
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -76,6 +76,8 @@ const
   MAX_TANK_ML_WARNING = 150000; // 150 L
   // Rundungs-/Toleranzregel fuer P-033 (Cross-Field total vs. liters*ppl).
   PRICE_CONSISTENCY_TOLERANCE_CENTS = 10;
+  // Kanonischer CLI-Hard-Error fuer ungueltige Odometer-Eingaben.
+  ODOMETER_KM_INPUT_ERROR = 'odometer_km muss eine Ganzzahl >= 0 sein.';
 
 // Prueft strikt das erwartete ISO-Format "YYYY-MM-DD HH:MM:SS".
 function TryParseFueledAtIso(const S: string; out DT: TDateTime): boolean;
@@ -220,6 +222,34 @@ begin
   if Q.EOF then Result := -1
   else Result := Q.FieldByName('odometer_km').AsInteger;
   Q.Close;
+end;
+
+function ParseOdometerKmOrFail(const S: string): Integer;
+var
+  ParsedKm: Integer;
+begin
+  if (not TryStrToInt(Trim(S), ParsedKm)) or (ParsedKm < 0) then
+    raise Exception.Create(ODOMETER_KM_INPUT_ERROR);
+  Result := ParsedKm;
+end;
+
+procedure ResolveOdometerBoundsOrFail(
+  Q: TSQLQuery;
+  const ACarId, ACurrentKm: Integer;
+  out StartKm, LastKm: Integer
+);
+begin
+  StartKm := GetCarOdometerStartKm(Q, ACarId);
+  LastKm := GetLastOdometerKm(Q, ACarId);
+
+  if ACurrentKm < StartKm then
+    raise Exception.Create(Format('P-010: odometer_km < cars.odometer_start_km (start=%d, current=%d).', [StartKm, ACurrentKm]));
+
+  if (LastKm >= 0) and (ACurrentKm = LastKm) then
+    raise Exception.Create(Format('P-013: odometer_km - last_odometer_km = 0 (duplicate-km, current=%d, last=%d).', [ACurrentKm, LastKm]));
+
+  if (LastKm >= 0) and (ACurrentKm < LastKm) then
+    raise Exception.Create(Format('P-011: odometer_km <= last_odometer_km (pro car, current=%d, last=%d).', [ACurrentKm, LastKm]));
 end;
 
 // Interaktive Auswahl des Fahrzeugs mit Validierungsschleife.
@@ -414,21 +444,10 @@ begin
           raise Exception.Create('P-041: Abbruch durch Benutzer (Datum in der Zukunft).');
       end;
 
-      S := AskRequired('Kilometerstand (km): ');
-      if not TryStrToInt(S, Inp.OdometerKm) then
-        raise Exception.Create('Ungültiger Kilometerstand.');
+      Inp.OdometerKm := ParseOdometerKmOrFail(AskRequired('Kilometerstand (km): '));
 
-      // Domain-Validation: Startpunkt + Monotonie pro Fahrzeug
-      StartKm := GetCarOdometerStartKm(QS, Inp.CarId);
-      if Inp.OdometerKm < StartKm then
-        raise Exception.Create(Format('P-010: odometer_km < cars.odometer_start_km (start=%d, current=%d).', [StartKm, Inp.OdometerKm]));
-
-      LastKm := GetLastOdometerKm(QS, Inp.CarId);
-      if (LastKm >= 0) and (Inp.OdometerKm = LastKm) then
-        raise Exception.Create(Format('P-013: odometer_km - last_odometer_km = 0 (duplicate-km, current=%d, last=%d).', [Inp.OdometerKm, LastKm]));
-
-      if (LastKm >= 0) and (Inp.OdometerKm < LastKm) then
-        raise Exception.Create(Format('P-011: odometer_km <= last_odometer_km (pro car, current=%d, last=%d).', [Inp.OdometerKm, LastKm]));
+      // Kanonischer Odometer-Contract: erst Input-Untergrenze, dann DB-bezogene Bounds.
+      ResolveOdometerBoundsOrFail(QS, Inp.CarId, Inp.OdometerKm, StartKm, LastKm);
 
       DiffKm := 0;
       if LastKm >= 0 then
