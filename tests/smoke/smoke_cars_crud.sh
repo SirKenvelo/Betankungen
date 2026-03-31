@@ -49,10 +49,13 @@ OUT_LIST="$TMP_DIR/list.out"
 ERR_LIST="$TMP_DIR/list.err"
 OUT_EDIT="$TMP_DIR/edit.out"
 ERR_EDIT="$TMP_DIR/edit.err"
+OUT_EDIT_LOCKED="$TMP_DIR/edit_locked.out"
+ERR_EDIT_LOCKED="$TMP_DIR/edit_locked.err"
 OUT_DEL="$TMP_DIR/del.out"
 ERR_DEL="$TMP_DIR/del.err"
 OUT_DEL_BLOCK="$TMP_DIR/del_block.out"
 ERR_DEL_BLOCK="$TMP_DIR/del_block.err"
+ERR_DB_LOCK="$TMP_DIR/db_lock.err"
 
 cleanup() {
   rm -rf "$TMP_DIR"
@@ -103,7 +106,7 @@ fi
 printf '[OK] Cars CRUD: list\n'
 
 set +e
-printf 'SmokeCarEdited\nSC-002\nEdited note\n' \
+printf 'SmokeCarEdited\nSC-002\nEdited note\n4321\n2026-03-01\n' \
   | "$APP_BIN" --db "$DB_PATH" --edit cars --car-id "$CAR_ID" >"$OUT_EDIT" 2>"$ERR_EDIT"
 RC=$?
 set -e
@@ -112,6 +115,9 @@ if [[ $RC -ne 0 ]]; then
 fi
 if ! grep -q 'OK: Car aktualisiert' "$OUT_EDIT"; then
   fail '--edit cars liefert keine Erfolgsmeldung.'
+fi
+if [[ "$(sqlite3 "$DB_PATH" "SELECT name || '|' || plate || '|' || note || '|' || odometer_start_km || '|' || odometer_start_date FROM cars WHERE id=$CAR_ID;")" != "SmokeCarEdited|SC-002|Edited note|4321|2026-03-01" ]]; then
+  fail '--edit cars hat Stammdaten/Startwerte nicht korrekt aktualisiert.'
 fi
 printf '[OK] Cars CRUD: edit\n'
 
@@ -163,6 +169,35 @@ if [[ "$(sqlite3 "$DB_PATH" "SELECT COUNT(*) FROM cars WHERE id = 1;")" != "1" ]
   fail 'Delete-Guard verletzt: car_id=1 wurde trotz Referenzen geloescht.'
 fi
 printf '[OK] Cars CRUD: delete mit fuelups -> Guard aktiv\n'
+
+LOCKED_STARTS_BEFORE="$(sqlite3 "$DB_PATH" "SELECT odometer_start_km || '|' || odometer_start_date FROM cars WHERE id = 1;")"
+set +e
+printf 'HauptautoEdited\n\nFuelup note\n' \
+  | "$APP_BIN" --db "$DB_PATH" --edit cars --car-id 1 >"$OUT_EDIT_LOCKED" 2>"$ERR_EDIT_LOCKED"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]]; then
+  fail '--edit cars mit vorhandenen fuelups sollte fuer Name/Plate/Note weiterhin funktionieren.'
+fi
+if ! grep -q 'gesperrt nach dem ersten Fuelup' "$OUT_EDIT_LOCKED"; then
+  fail '--edit cars zeigt keinen stabilen Hinweis auf gesperrte Startwerte nach dem ersten Fuelup.'
+fi
+if [[ "$(sqlite3 "$DB_PATH" "SELECT odometer_start_km || '|' || odometer_start_date FROM cars WHERE id = 1;")" != "$LOCKED_STARTS_BEFORE" ]]; then
+  fail 'Startwerte wurden trotz vorhandener fuelups veraendert.'
+fi
+printf '[OK] Cars CRUD: edit mit fuelups behaelt Startwerte gesperrt\n'
+
+set +e
+sqlite3 "$DB_PATH" "UPDATE cars SET odometer_start_km = odometer_start_km + 1 WHERE id = 1;" >/dev/null 2>"$ERR_DB_LOCK"
+RC=$?
+set -e
+if [[ $RC -eq 0 ]]; then
+  fail 'DB-Guard verletzt: odometer_start_km konnte trotz vorhandener fuelups direkt aktualisiert werden.'
+fi
+if ! grep -q 'P-071' "$ERR_DB_LOCK"; then
+  fail 'DB-Guard fuer gesperrte Startwerte liefert keinen stabilen P-071-Hinweis.'
+fi
+printf '[OK] Cars CRUD: DB-Guard sperrt Startwerte nach erstem fuelup\n'
 
 RES_DB="$TMP_DIR/fuelups_scope.db"
 OUT_SCOPE_ADD_STATION="$TMP_DIR/scope_add_station.out"

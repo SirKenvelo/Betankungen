@@ -2,7 +2,7 @@
   Betankungen.lpr
   ---------------------------------------------------------------------------
   CREATED: 2026-01-19
-  UPDATED: 2026-03-30
+  UPDATED: 2026-03-31
   AUTHOR : Christof Kempinski
   Haupteinstiegspunkt und Kommandozeilen-Schnittstelle (CLI) der
   Betankungs-Verwaltung.
@@ -447,7 +447,9 @@ var
   procedure HandleCarsEdit(const ADbPath: string; const CarId: Integer);
   var
     Car: TCar;
-    NewName, NewPlate, NewNote: string;
+    NewName, NewPlate, NewNote, NewStartDate, StartKmRaw: string;
+    NewStartKm: Integer;
+    HasFuelups: Boolean;
   begin
     if not CarsGetById(ADbPath, CarId, Car) then
       raise Exception.Create('P-002: Fahrzeug nicht gefunden (car_id nicht mehr vorhanden).');
@@ -461,8 +463,31 @@ var
 
     NewPlate := AskKeepLocal('Plate', Car.Plate);
     NewNote := AskKeepLocal('Note', Car.Note);
+    HasFuelups := CarsHasFuelups(ADbPath, CarId);
+    NewStartKm := Car.OdometerStartKm;
+    NewStartDate := Car.OdometerStartDate;
 
-    if not CarsEdit(ADbPath, CarId, NewName, NewPlate, NewNote) then
+    if HasFuelups then
+    begin
+      WriteLn('Start-KM* [', Car.OdometerStartKm,
+        '] (gesperrt nach dem ersten Fuelup)');
+      WriteLn('Start-Datum* [', Car.OdometerStartDate,
+        '] (gesperrt nach dem ersten Fuelup)');
+    end
+    else
+    begin
+      StartKmRaw := AskKeepLocal('Start-KM*', IntToStr(Car.OdometerStartKm));
+      if (not TryStrToInt(Trim(StartKmRaw), NewStartKm)) or (NewStartKm <= 0) then
+        raise Exception.Create('Start-KM muss > 0 sein.');
+
+      NewStartDate := AskKeepLocal('Start-Datum*', Car.OdometerStartDate);
+      if Trim(NewStartDate) = '' then
+        raise Exception.Create('Start-Datum darf nicht leer sein.');
+    end;
+
+    if not CarsEdit(
+      ADbPath, CarId, NewName, NewPlate, NewNote, NewStartKm, NewStartDate
+    ) then
       raise Exception.Create('Car konnte nicht aktualisiert werden (keine Zeile betroffen).');
 
     Msg('OK: Car aktualisiert (id=' + IntToStr(CarId) + ').');

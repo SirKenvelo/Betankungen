@@ -90,6 +90,11 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Fix/Cars: `--edit cars` kann Fahrzeug-Startwerte jetzt vor dem
+  ersten Fuelup korrigieren. Sobald fuer ein Fahrzeug `fuelups` existieren,
+  bleiben `odometer_start_km` und `odometer_start_date` ueber CLI und DB-Guard
+  gesperrt; die Cars-Smokes und die Benutzerdoku sind auf diesen Vertrag
+  synchronisiert. (2026-03-31)
 - [S33C2/2] Docs/Traceability: Sprint 33 und der Abschluss von `BL-0019`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruenen Abschluss ueber

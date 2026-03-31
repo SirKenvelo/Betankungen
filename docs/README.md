@@ -50,6 +50,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - 0 Cars: Hard Error.
   - 1 Car: automatische Auswahl.
   - >1 Cars: `--car-id` verpflichtend.
+- Start-KM/-Datum eines Fahrzeugs koennen ueber `--edit cars --car-id <id>`
+  korrigiert werden, solange fuer dieses Fahrzeug noch keine `fuelups`
+  existieren; danach bleiben die Startwerte gesperrt.
 
 ---
 

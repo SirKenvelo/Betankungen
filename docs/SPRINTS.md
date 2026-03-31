@@ -1459,6 +1459,31 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
+
+- Status: in_progress
+- Ziel: den Cars-Edit-Flow so oeffnen, dass Start-KM/-Datum eines Fahrzeugs
+  vor dem ersten Fuelup korrigiert werden koennen, ohne die spaetere
+  Odometer-Historie zu destabilisieren.
+
+### Stand (2026-03-31)
+
+- `--edit cars` fragt Start-KM und Start-Datum jetzt mit ab, solange fuer das
+  Fahrzeug noch keine `fuelups` existieren.
+- Sobald bereits `fuelups` vorhanden sind, zeigt der Edit-Flow die Startwerte
+  nur noch als gesperrt an; Name/Plate/Note bleiben weiterhin editierbar.
+- `u_db_init` ersetzt die fruehere globale Immutability durch DB-Trigger, die
+  Startwert-Aenderungen erst **nach** dem ersten Fuelup blockieren.
+- `tests/smoke/smoke_cars_crud.sh` deckt jetzt sowohl die erfolgreiche
+  Korrektur vor dem ersten Fuelup als auch den CLI-/DB-Guard danach ab.
+- `docs/README.md` und `docs/BENUTZERHANDBUCH.md` dokumentieren die neue
+  Produktregel fuer Fahrzeug-Startwerte.
+
+### Validierung
+
+- `tests/smoke/smoke_cars_crud.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 31 - Knowledge-Archive stilllegen
 
 - Status: done
