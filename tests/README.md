@@ -1,5 +1,5 @@
 # Tests
-**Stand:** 2026-03-24
+**Stand:** 2026-03-31
 
 ## Abgrenzung / Source of Truth
 
@@ -90,6 +90,8 @@ Direktlauf:
 - Zweck: validiert den getrennten Preis-Historienpfad (`scripts/fuel_price_polling_run.sh`) inkl. Dry-Run, Pflichtargumenten, Raw-Snapshot-Ablage, SQLite-Persistenz, State-Datei, Duplikat-Guardrail und Fehlerpfad ohne Partial-Write.
 - Script: `tests/regression/run_receipt_link_contract_check.sh`
 - Zweck: validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe und JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
+- Script: `tests/regression/run_station_geodata_contract_check.sh`
+- Zweck: validiert den Stations-Geodaten-Contract fuer `latitude/longitude` und `plus_code` (Write-Path in `stations`, Normalisierung sowie kompakte vs. Detail-Sichtbarkeit in `--list stations`).
 - Script: `tests/regression/run_user_flow_break_matrix_check.sh`
 - Zweck: validiert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (Initialisierung/Leerzustaende, Seed/Demo-Basisfluss, unknown-flag, EOF-Abbruch bei `--add fuelups`, Multi-Car-Guidance-Hints).
 
@@ -101,6 +103,7 @@ Direktlauf:
 - `tests/regression/run_db_backup_ops_check.sh`
 - `tests/regression/run_fuel_price_history_check.sh`
 - `tests/regression/run_receipt_link_contract_check.sh`
+- `tests/regression/run_station_geodata_contract_check.sh`
 - `tests/regression/run_user_flow_break_matrix_check.sh`
 
 ## Benchmark (optional)
@@ -129,7 +132,7 @@ Direktlauf:
 - Der Smoke-Lauf baut Test-DBs mit auf und startet den Domain-Policy-Runner.
 - Dedizierter Cars-CRUD-Smoke: `tests/smoke/smoke_cars_crud.sh`.
 - Dedizierter Resolver-Matrix-Smoke: `tests/smoke/smoke_multi_car_context.sh`.
-- Dedizierter Migrations-Smoke: `tests/smoke/smoke_migrations.sh` (aktuell: `--v4-to-v5`).
+- Dedizierter Migrations-Smoke: `tests/smoke/smoke_migrations.sh` (aktuell: `--v4-to-v6` und `--v5-to-v6`).
 - Dedizierter Module-Contract-Smoke: `tests/smoke/smoke_modules.sh` (`--module-info` compact/pretty inkl. `capabilities`, `--migrate` inkl. idempotentem Re-Run, `--add maintenance`, `--list maintenance`, `--stats maintenance` Text/JSON/Pretty/Scope, Guardrails fuer ungueltige Stats-/JSON-Kombinationen, unknown-flag-Fehlerpfad).
 - Die `-c`-Cars-Suite in `tests/smoke/smoke_cli.sh` prueft den kompatiblen Wrapper `tests/smoke_cars_crud.sh` (inkl. Transit auf `tests/smoke/smoke_cars_crud.sh`).
 - Die `-c`-Cars-Suite prueft zusaetzlich den Wrapper `tests/smoke_multi_car_context.sh` (inkl. Transit auf `tests/smoke/smoke_multi_car_context.sh`).
@@ -172,7 +175,7 @@ Ausfuehrung:
 - `tests/smoke/smoke_cli.sh -m|-y|-c|--migrations|--modules|-a`
 - `tests/smoke/smoke_cars_crud.sh`
 - `tests/smoke/smoke_multi_car_context.sh`
-- `tests/smoke/smoke_migrations.sh --v4-to-v5`
+- `tests/smoke/smoke_migrations.sh --all`
 - `tests/smoke/smoke_modules.sh`
 - kompatibel: `tests/smoke_cli.sh`
 

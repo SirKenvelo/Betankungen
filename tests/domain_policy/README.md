@@ -87,7 +87,7 @@
   - `P-070` Hard Error (cars delete bei vorhandenen fuelup-Referenzen verboten):
     - `cases/t_p070__01__cars_delete_blocked_by_fuelups.sh`
     - `fixtures/p070_base.sql`
-- Stations-Masterdata-Block P-080..P-084:
+- Stations-Masterdata-Block P-080..P-088:
   - `P-080` Shift-Guard + Positive Referenz:
     - `cases/t_p080__01__station_zip_city_shift_rejected.sh`
     - `cases/t_p080__02__station_valid_master_data_accepts.sh`
@@ -97,6 +97,18 @@
     - `fixtures/p080_base.sql`
   - `P-084` phone mit Ziffern:
     - `cases/t_p084__01__station_phone_without_digits_rejected.sh`
+    - `fixtures/p080_base.sql`
+  - `P-085` Geodaten nur als Koordinatenpaar:
+    - `cases/t_p085__01__station_geodata_pair_required.sh`
+    - `fixtures/p080_base.sql`
+  - `P-086` latitude im gueltigen Bereich:
+    - `cases/t_p086__01__station_latitude_range_rejected.sh`
+    - `fixtures/p080_base.sql`
+  - `P-087` longitude im gueltigen Bereich:
+    - `cases/t_p087__01__station_longitude_range_rejected.sh`
+    - `fixtures/p080_base.sql`
+  - `P-088` voller Plus Code:
+    - `cases/t_p088__01__station_plus_code_invalid_rejected.sh`
     - `fixtures/p080_base.sql`
 
 ## Einstieg

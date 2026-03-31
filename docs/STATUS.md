@@ -27,8 +27,8 @@
 - Smoke-Checks unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`)
 
 ## Datenmodell & Domain-Logik (erledigt)
-- SQLite-Schema v5 stabil (`cars`, `fuelups.car_id`, `fuelups.missed_previous`, additives Feld `fuelups.receipt_link`)
-- `stations` voll editierbar
+- SQLite-Schema v6 stabil (`stations.latitude_e6`/`longitude_e6`/`plus_code`, `cars`, `fuelups.car_id`, `fuelups.missed_previous`, additives Feld `fuelups.receipt_link`)
+- `stations` voll editierbar, inkl. optionaler Geodaten und Plus Codes
 - `fuelups` append-only, historisch korrekt
 - Fuelups referenzieren `stations` und `cars` (FK)
 - `cars` enthaelt Startwerte (`odometer_start_km`, `odometer_start_date`) als Validierungsbasis pro Fahrzeug
