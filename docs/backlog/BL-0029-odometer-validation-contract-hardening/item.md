@@ -1,18 +1,18 @@
 ---
 id: BL-0029
 title: Odometer Validation Contract Hardening
-status: proposed
+status: done
 priority: P1
 type: improvement
 tags: [validation, cli, quality, 'lane:planned']
 created: 2026-03-28
-updated: 2026-03-28
+updated: 2026-03-31
 related:
   - ISS-0001
   - TSK-0001
   - POL-001
 ---
-**Stand:** 2026-03-28
+**Stand:** 2026-03-31
 
 # Goal
 Die Validierung negativer Kilometerstaende (`odometer_km`) soll in allen
@@ -43,4 +43,4 @@ Ein klar abgegrenzter Hardening-Backlog fuer Odometer-Validierung mit
 nachvollziehbarer Task-/Issue-Verkettung und testbarer Done-Definition.
 
 # Derived Tasks
-- `TSK-0001` - Hard-Error-Contract fuer negative Odometer-Werte vereinheitlichen. (todo)
+- `TSK-0001` - Hard-Error-Contract fuer negative Odometer-Werte vereinheitlichen. (done)

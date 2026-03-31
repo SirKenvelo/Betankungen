@@ -1370,6 +1370,47 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## Sprint 32 - `BL-0029` Odometer-Contract haerten
+
+- Status: done
+- Ziel: negative `odometer_km`-Eingaben ueber die relevanten
+  `--add fuelups`-Pfade auf einen klaren Hard-Error-Contract ziehen und
+  regressionssicher absichern.
+
+### Geplante Bloecke
+
+- S32C1/2: done - kanonischen Odometer-Untergrenzen-Guard im Fuelup-Flow
+  einfuehren, Regressionen ergaenzen und die direkt betroffenen
+  Tracker-/Benutzerdokumente synchronisieren.
+- S32C2/2: done - Sprint-Traceability, Abschlussstatus und Vollverifikation
+  fuer `BL-0029` finalisieren.
+
+### Fortschritt (2026-03-31)
+
+- `S32C1/2` abgeschlossen:
+  - `units/u_fuelups.pas` nutzt jetzt einen kanonischen Untergrenzen-Guard
+    fuer `odometer_km`.
+  - Negative Werte werden vor `P-010`/`P-011`/`P-013` mit derselben
+    handlungsorientierten Fehlermeldung geblockt.
+  - Neue Regressionen decken den expliziten `--car-id`-Pfad und den
+    1-Car-Autoresolve-Pfad ab.
+  - `BL-0029`, `TSK-0001` und `ISS-0001` wurden auf `done`/`resolved`
+    gezogen; `docs/BACKLOG.md` und `docs/BENUTZERHANDBUCH.md`
+    sind synchronisiert.
+  - Git-Commit: `193a7e0`
+  - Artefakte: `.artifacts/sprint_32_commit_1_von_2.md`,
+    `.artifacts/sprint_32_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S32C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 32 jetzt mit
+    Hash-/Verifikationsbezug.
+  - `BL-0029` ist als abgeschlossener Stabilisierungssprint der aktiven
+    `1.4.0-dev`-Linie dokumentiert.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 31 - Knowledge-Archive stilllegen
 
 - Status: done

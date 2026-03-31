@@ -1,5 +1,5 @@
 # Domain-Policy-Tests
-**Stand:** 2026-03-21
+**Stand:** 2026-03-31
 
 ## Inhalt
 - `cases/`: fokussierte Case-Dateien nach Policy-ID (`t_<policy>__<nn>__<kurzname>.*`, `.pas` oder `.sh`)
@@ -15,8 +15,9 @@
   - `cases/t_p002__01__car_id_missing_fk.sh`
   - `fixtures/p002_base.sql`
 - Odometer-Policy-Block P-010..P-013:
-  - `P-010` Hard Error (unter Start-KM):
+  - `P-010` Hard Error (unter zulaessiger Odometer-Untergrenze bzw. unter Start-KM):
     - `cases/t_p010__01__odometer_below_start_km.sh`
+    - `cases/t_p010__02__negative_odometer_input_contract.sh`
     - `fixtures/p010_base.sql`
   - `P-011` Hard Error (unter Last-KM pro car):
     - `cases/t_p011__01__odometer_below_last_km.sh`

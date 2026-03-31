@@ -6,10 +6,11 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 ## [Unreleased]
 ### Zielversion
 Aktive Entwicklungsbasis `1.4.0-dev` (`APP_VERSION=1.4.0-dev`)
-Ziel: `BL-0011` repo-seitig sauber externalisiert abschliessen und die
-`1.4.0`-Linie ohne In-Repo-Scaffolder weiterfuehren.
+Ziel: die aktive `1.4.0-dev`-Linie ueber gezielte Hardening-Bloecke
+stabilisieren und offene Validierungscontracts sauber schliessen.
 
 ### Sprint / Commit References
+- S32C1/2 - Odometer-Validierungscontract fuer negative Eingaben gehaertet (`units/u_fuelups.pas`, `tests/domain_policy/cases/t_p010__02__negative_odometer_input_contract.sh`, `tests/domain_policy/p010.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/item.md`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/tasks/TSK-0001-unify-odometer-hard-error-validation.md`, `docs/issues/ISS-0001-negative-odometer-validation/issue.md`, `docs/BACKLOG.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_32_commit_1_von_2.md`, `.artifacts/sprint_32_commit_1_von_2.diff`; Basis-Commit: `193a7e0`. (2026-03-31)
 - S31C1/2 - `BL-0011` repo-seitig auf finalen Externalisierungs-/Handover-Closeout gezogen (`docs/backlog/BL-0011-projekt-scaffolder-repo-bootstrap/item.md`, `docs/BL-0011_SCOPE_DECISION_1_4_0.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_31_commit_1_von_2.md`, `.artifacts/sprint_31_commit_1_von_2.diff`; Basis-Commit: `7a5c038`. (2026-03-30)
 - S30C1/4 - `1.4.0-dev` in separatem Aktivierungs-Commit gestartet (`src/Betankungen.lpr`, `README.md`, `docs/README.md`, `docs/README_EN.md`, `CONTRIBUTING.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_30_commit_1_von_4.md`, `.artifacts/sprint_30_commit_1_von_4.diff`; Basis-Commit: `5a2d69b`. (2026-03-30)
 - S30C2/4 - `BL-0016` als Community-Standards-Baseline geliefert (`CODE_OF_CONDUCT.md`, `SECURITY.md`, `.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/feature_request.md`, `.github/pull_request_template.md`, `docs/backlog/BL-0016-community-standards-baseline/item.md`, `docs/BACKLOG.md`); Artefakte: `.artifacts/sprint_30_commit_2_von_4.md`, `.artifacts/sprint_30_commit_2_von_4.diff`; Basis-Commit: `72e0d06`. (2026-03-30)
@@ -87,6 +88,18 @@ Ziel: `BL-0011` repo-seitig sauber externalisiert abschliessen und die
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S32C2/2] Docs/Traceability: Sprint 32 und der Abschluss von `BL-0029`
+  sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  Der Sprint dokumentiert die gruene Verifikation ueber
+  `scripts/projtrack_lint.sh` und `make verify`. (2026-03-31)
+- [S32C1/2] Fix/Validation: Negative `odometer_km`-Eingaben werden im
+  Fuelup-Dialog jetzt ueber einen kanonischen Untergrenzen-Guard
+  abgefangen, bevor DB-bezogene Odometer-Policies greifen.
+  `units/u_fuelups.pas` liefert damit denselben handlungsorientierten
+  Hard-Error-Contract fuer relevante `--add fuelups`-Pfade; neue
+  Regressionen sichern den expliziten `--car-id`-Pfad und den
+  1-Car-Autoresolve-Pfad ab. `BL-0029`, `TSK-0001` und `ISS-0001`
+  wurden auf den abgeschlossenen Stand synchronisiert. (2026-03-31)
 - [General] Docs/Process: `knowledge_archive/` repo-seitig auf
   deprecated/read-only gestellt. `AGENTS.md` hebt die fruehere Pflicht fuer
   neue Archiv-Snippets auf, `knowledge_archive/README.md` dokumentiert den
@@ -599,6 +612,9 @@ Ziel: `BL-0011` repo-seitig sauber externalisiert abschliessen und die
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Odometer-Contract-Hardening, Tracker-Sync und Sprint-32-Traceability
+  erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
+  (2026-03-31)
 - Governance-/Docs-Cleanup zur stillen Stilllegung des repo-getrackten
   Knowledge-Archive-Mechanismus erfolgte mit Unterstuetzung durch AI-Tools
   als Sparringspartner. (2026-03-31)
