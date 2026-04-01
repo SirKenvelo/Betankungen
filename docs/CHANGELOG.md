@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S35C1/2 - Minimales Charging-Event- und Storage-Modell fuer `betankungen-ev` definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_35_commit_1_von_2.md`, `.artifacts/sprint_35_commit_1_von_2.diff`; Basis-Commit: `b613acd`. (2026-04-01)
 - General-2026-04-01-ev-scope-baseline - EV-Discovery-Rahmen fuer `betankungen-ev` mit Scope-, Boundary- und CLI-Contract-Baseline definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Basis-Commit: `0d5cac6`. (2026-04-01)
 - S34C1/2 - Paket C als strategischen EV-Discovery-Pfad verankert (`docs/ADR/ADR-0008-ev-charging.md`, `docs/ADR/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`); Artefakte: `.artifacts/sprint_34_commit_1_von_2.md`, `.artifacts/sprint_34_commit_1_von_2.diff`; Basis-Commit: `23cdef6`. (2026-03-31)
 - S33C1/2 - Stations-Stammdaten um Geodaten/Plus-Code-Write-Path, Schema v6, Migrations-Smokes und Contract-Regression erweitert (`units/u_stations.pas`, `units/u_db_init.pas`, `units/u_db_seed.pas`, `tests/smoke/smoke_migrations.sh`, `tests/regression/run_station_geodata_contract_check.sh`, `tests/domain_policy/p080.md`, `tests/domain_policy/README.md`, `docs/backlog/BL-0019-station-geodata-plus-codes/item.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `Makefile`); Artefakte: `.artifacts/sprint_33_commit_1_von_2.md`, `.artifacts/sprint_33_commit_1_von_2.diff`; Basis-Commit: `2064fbd`. (2026-03-31)
@@ -92,6 +93,21 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S35C2/2] Docs/Traceability: Sprint 35 und der Abschluss von `BL-0030`
+  sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  Der Sprint dokumentiert den gruennen Abschlussnachweis ueber
+  `scripts/projtrack_lint.sh` und `make verify`. (2026-04-01)
+- [S35C1/2] Docs/EV: `TSK-0025` schliesst `BL-0030` als
+  Discovery-/Boundary-Block ab. `docs/MODULES_ARCHITECTURE.md` definiert
+  fuer `betankungen-ev` jetzt das minimale Event-Modell mit `car_id`,
+  `event_date`, `energy_wh` und `cost_cents` als Pflichtfeldern sowie
+  `odometer_km`, `location_id` und `notes` als optionale Zusatzfelder.
+  Der erste Storage-Schnitt bleibt modul-lokal (`charging_events`,
+  `charging_locations`, `module_meta`); ein generisches Core-
+  `energy_events`-Modell und die Wiederverwendung von Core-`stations` als
+  kanonischer Ladeort-Speicher bleiben fuer `1.4.x` explizit
+  ausgeschlossen. `BL-0030`, `TSK-0025`, `docs/BACKLOG.md` und
+  `docs/STATUS.md` fuehren denselben Abschlussstand. (2026-04-01)
 - [General] Docs/Traceability: Der EV-Modul-Scope-Block ist jetzt
   ohne neuen Sprint-Rahmen als General-Stream in
   `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
