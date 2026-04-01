@@ -1,18 +1,18 @@
 ---
 id: BL-0030
 title: EV Companion Feasibility Spike
-status: approved
+status: in_progress
 priority: P2
 type: research
 tags: [module, ev, discovery, 'lane:exploratory']
 created: 2026-03-31
-updated: 2026-03-31
+updated: 2026-04-01
 related:
   - ADR-0005
   - ADR-0007
   - ADR-0008
 ---
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 # Goal
 Den naechsten grossen Domaenenpfad fuer Betankungen als begrenzten
@@ -55,8 +55,10 @@ Out of Scope:
 # Output
 Ein klarer, referenzierbarer Discovery-Backlog fuer EV als naechste
 strategische Domaenenerweiterung, inklusive priorisierter Folge-Tasks und
-abgegrenzter Nicht-Ziele.
+abgegrenzter Nicht-Ziele. `TSK-0024` liefert dafuer jetzt die minimale
+Scope-/Boundary-Baseline; `TSK-0025` baut darauf auf und bewertet das
+minimale Charging-Event- sowie Storage-Modell.
 
 # Derived Tasks
-- `TSK-0024` - EV-Modul-Scope und Contract-Rahmen definieren. (todo)
+- `TSK-0024` - EV-Modul-Scope und Contract-Rahmen definieren. (done)
 - `TSK-0025` - Minimales Charging-Event-Modell und Storage-Grenzen evaluieren. (todo)

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -334,9 +334,13 @@ Bereits erledigt:
     Stationsstammdaten kontrolliert um Geodaten und Plus Codes.
   - Paket C ist als strategische Richtungsentscheidung jetzt auf EV als
     naechsten Discovery-Pfad festgezogen: `ADR-0008` ist `accepted`,
-    `BL-0030` priorisiert den begrenzten Feasibility-Block fuer ein moegliches
-    Modul `betankungen-ev`; Household Drivers bleiben fachlich moeglich, aber
-    fuer die aktuelle `1.4.x`-Linie weiter nachgeordnet.
+    `BL-0030` ist aktiv in Arbeit, und `TSK-0024` definiert jetzt den
+    minimalen Scope sowie die CLI-/Boundary-Baseline fuer ein moegliches
+    Modul `betankungen-ev`.
+  - Fuer den naechsten EV-Folgeschritt bleibt der Scope bewusst eng:
+    `TSK-0025` bewertet nur das minimale Charging-Event- und Storage-Modell;
+    Household Drivers, generische `energy_events` im Core und sonstige
+    Nebenpfade bleiben fuer die aktuelle `1.4.x`-Linie weiter nachgeordnet.
   - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`, standardisierte
     Bug-/Feature-Issue-Templates sowie ein PR-Template mit `Summary` und
     `Validation`; `BL-0011` gilt fuer `Betankungen` jetzt als sauber

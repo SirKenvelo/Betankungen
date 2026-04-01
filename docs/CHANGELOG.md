@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- General-2026-04-01-ev-scope-baseline - EV-Discovery-Rahmen fuer `betankungen-ev` mit Scope-, Boundary- und CLI-Contract-Baseline definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Basis-Commit: `0d5cac6`. (2026-04-01)
 - S34C1/2 - Paket C als strategischen EV-Discovery-Pfad verankert (`docs/ADR/ADR-0008-ev-charging.md`, `docs/ADR/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`); Artefakte: `.artifacts/sprint_34_commit_1_von_2.md`, `.artifacts/sprint_34_commit_1_von_2.diff`; Basis-Commit: `23cdef6`. (2026-03-31)
 - S33C1/2 - Stations-Stammdaten um Geodaten/Plus-Code-Write-Path, Schema v6, Migrations-Smokes und Contract-Regression erweitert (`units/u_stations.pas`, `units/u_db_init.pas`, `units/u_db_seed.pas`, `tests/smoke/smoke_migrations.sh`, `tests/regression/run_station_geodata_contract_check.sh`, `tests/domain_policy/p080.md`, `tests/domain_policy/README.md`, `docs/backlog/BL-0019-station-geodata-plus-codes/item.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `Makefile`); Artefakte: `.artifacts/sprint_33_commit_1_von_2.md`, `.artifacts/sprint_33_commit_1_von_2.diff`; Basis-Commit: `2064fbd`. (2026-03-31)
 - S32C1/2 - Odometer-Validierungscontract fuer negative Eingaben gehaertet (`units/u_fuelups.pas`, `tests/domain_policy/cases/t_p010__02__negative_odometer_input_contract.sh`, `tests/domain_policy/p010.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/item.md`, `docs/backlog/BL-0029-odometer-validation-contract-hardening/tasks/TSK-0001-unify-odometer-hard-error-validation.md`, `docs/issues/ISS-0001-negative-odometer-validation/issue.md`, `docs/BACKLOG.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_32_commit_1_von_2.md`, `.artifacts/sprint_32_commit_1_von_2.diff`; Basis-Commit: `193a7e0`. (2026-03-31)
@@ -91,6 +92,21 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Traceability: Der EV-Modul-Scope-Block ist jetzt
+  ohne neuen Sprint-Rahmen als General-Stream in
+  `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  `TSK-0024` bleibt damit als abgeschlossener Discovery-/
+  Contract-Block referenzierbar; `TSK-0025` steht als
+  naechster isolierter Folgeauftrag bereit. (2026-04-01)
+- [General] Docs/Architecture: `TSK-0024` definiert jetzt den
+  minimalen Scope fuer `betankungen-ev`: `BL-0030` steht auf
+  `in_progress`, `TSK-0024` auf `done`, und
+  `docs/MODULES_ARCHITECTURE.md` beschreibt den `charging`-Fokus,
+  die Core-vs-Modul-Grenzen sowie die erwartete CLI-/Contract-
+  Baseline. `docs/BACKLOG.md`, `docs/STATUS.md` und der
+  BL-/TSK-Tracker sind auf denselben Discovery-Schnitt
+  synchronisiert; `TSK-0025` bleibt bewusst auf Event-/Storage-
+  Fragen begrenzt. (2026-04-01)
 - [General] Fix/Stations: `stations` akzeptieren bei Geodaten jetzt neben
   vollen/globalen Open Location Codes auch lokale/short Plus Codes aus
   gaengigen Karten-UIs, sofern `latitude` und `longitude` gesetzt sind.
