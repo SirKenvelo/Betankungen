@@ -1531,6 +1531,33 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## General-Stream nach Sprint 34 - EV module scope baseline
+
+- Status: done
+- Ziel: `TSK-0024` als klaren Discovery-/Contract-Block abschliessen und den
+  minimalen Scope fuer `betankungen-ev` so schneiden, dass `TSK-0025`
+  unmittelbar mit Event-/Storage-Fragen weiterarbeiten kann, ohne schon eine
+  produktive EV-Implementierung oder ein generisches Core-Refactoring
+  vorzuziehen.
+
+### Stand (2026-04-01)
+
+- `BL-0030` wurde auf `in_progress` gezogen und `TSK-0024` auf `done`
+  gestellt.
+- `docs/MODULES_ARCHITECTURE.md` definiert jetzt den minimalen
+  `charging`-Scope, die Core-vs-Modul-Grenzen, die erwarteten
+  `capabilities` und die expliziten Nicht-Ziele fuer `betankungen-ev`.
+- `docs/BACKLOG.md` und `docs/STATUS.md` fuehren denselben Discovery-
+  Zuschnitt; `TSK-0025` bleibt auf das minimale Event-/Storage-Modell
+  begrenzt.
+- `docs/CHANGELOG.md` und `docs/SPRINTS.md` fuehren diesen Block bewusst als
+  General-Stream ohne neuen Sprint-Prefix.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
 
 - Status: done
