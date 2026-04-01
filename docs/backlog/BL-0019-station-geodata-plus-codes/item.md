@@ -6,11 +6,12 @@ priority: P3
 type: feature
 tags: [stations, geodata, plus-codes, enrichment, 'lane:planned']
 created: 2026-03-17
-updated: 2026-03-31
+updated: 2026-04-01
 related:
   - BL-0018
+  - ISS-0007
 ---
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 # Goal
 Tankstellenstammdaten um belastbare Geokoordinaten und optionale Plus Codes
@@ -36,8 +37,9 @@ Out of Scope:
   Paar (`latitude` + `longitude`) geschrieben.
 - Werte werden vor Persistenz in Dezimalgrad validiert und intern als
   `latitude_e6` / `longitude_e6` gespeichert.
-- Plus Codes bleiben optional, werden whitespace-frei und in Grossbuchstaben
-  normalisiert und nur als voller Open Location Code akzeptiert.
+- Plus Codes bleiben optional, werden normalisiert und als voller Open
+  Location Code gespeichert; zusaetzlich sind lokale/short Codes erlaubt,
+  wenn `latitude` und `longitude` gesetzt sind.
 - Die kompakte Stationsliste bleibt ruhig; Geodaten und Plus Codes erscheinen
   nur in `--list stations --detail`.
 

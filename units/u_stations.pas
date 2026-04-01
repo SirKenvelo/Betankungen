@@ -2,7 +2,7 @@
   u_stations.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-31
+  UPDATED: 2026-04-01
   AUTHOR : Christof Kempinski
   Fachmodul fuer Stammdatenverwaltung von Tankstellen (stations).
 
@@ -64,6 +64,11 @@ const
   MAX_LONGITUDE_E6 = 180000000;
   COORD_SCALE_E6 = 1000000;
   PLUS_CODE_ALPHABET = '23456789CFGHJMPQRVWX';
+  FULL_PLUS_SEPARATOR_POS = 9;
+  FULL_PLUS_CODE_EXAMPLE = '9F4MGC2M+H4';
+  SHORT_PLUS_CODE_EXAMPLE = 'GC2M+H4 Dortmund';
+  PAIR_RESOLUTIONS: array[0..4] of Double =
+    (20.0, 1.0, 0.05, 0.0025, 0.000125);
 
 function HasDigit(const S: string): boolean;
 var
@@ -151,8 +156,23 @@ var
   I: Integer;
   C: Char;
   Trimmed: string;
+  FirstToken: string;
 begin
   Trimmed := Trim(S);
+  if Trimmed = '' then
+    Exit('');
+
+  FirstToken := '';
+  I := 1;
+  while (I <= Length(Trimmed)) and not (Trimmed[I] in [' ', #9]) do
+  begin
+    FirstToken := FirstToken + UpCase(Trimmed[I]);
+    Inc(I);
+  end;
+
+  if Pos('+', FirstToken) > 0 then
+    Exit(FirstToken);
+
   Result := '';
   for I := 1 to Length(Trimmed) do
   begin
@@ -166,6 +186,151 @@ end;
 function IsValidPlusCodeChar(const C: Char): boolean;
 begin
   Result := Pos(UpCase(C), PLUS_CODE_ALPHABET) > 0;
+end;
+
+function NormalizeLongitudeDegrees(const Value: Double): Double;
+begin
+  Result := Value;
+  while Result < -180.0 do
+    Result := Result + 360.0;
+  while Result >= 180.0 do
+    Result := Result - 360.0;
+end;
+
+function PlusCodeInvalidMessage: string;
+begin
+  Result :=
+    'P-088: plus_code ungueltig (erwartet vollen Open Location Code, z.B. ' +
+    FULL_PLUS_CODE_EXAMPLE + ', oder lokalen/short Code mit gesetzter latitude/longitude, z.B. ' +
+    SHORT_PLUS_CODE_EXAMPLE + ').';
+end;
+
+function ShortPlusCodeNeedsCoordinatesMessage: string;
+begin
+  Result :=
+    'P-088: lokaler plus_code erfordert gesetzte latitude und longitude oder einen vollen Open Location Code, z.B. ' +
+    FULL_PLUS_CODE_EXAMPLE + '.';
+end;
+
+function HasSinglePlusSeparator(const Code: string; out PlusPos: Integer): boolean;
+begin
+  PlusPos := Pos('+', Code);
+  Result := (PlusPos > 0) and
+    (Pos('+', Copy(Code, PlusPos + 1, MaxInt)) = 0);
+end;
+
+function HasOnlyValidPlusCodeChars(const Code: string): boolean;
+var
+  I: Integer;
+begin
+  for I := 1 to Length(Code) do
+  begin
+    if Code[I] = '+' then
+      Continue;
+    if not IsValidPlusCodeChar(Code[I]) then
+      Exit(False);
+  end;
+  Result := True;
+end;
+
+function IsFullPlusCode(const Code: string; out PlusPos: Integer): boolean;
+begin
+  if not HasSinglePlusSeparator(Code, PlusPos) then
+    Exit(False);
+  Result :=
+    (PlusPos = FULL_PLUS_SEPARATOR_POS) and
+    (Length(Code) >= 11) and
+    (Length(Code) <= 15) and
+    HasOnlyValidPlusCodeChars(Code);
+end;
+
+function IsShortPlusCode(const Code: string; out PlusPos: Integer): boolean;
+var
+  MissingPrefixChars, SignificantChars: Integer;
+begin
+  if not HasSinglePlusSeparator(Code, PlusPos) then
+    Exit(False);
+
+  MissingPrefixChars := FULL_PLUS_SEPARATOR_POS - PlusPos;
+  SignificantChars := Length(Code) - 1;
+
+  Result :=
+    (PlusPos > 0) and
+    (PlusPos < FULL_PLUS_SEPARATOR_POS) and
+    (MissingPrefixChars > 0) and
+    ((MissingPrefixChars mod 2) = 0) and
+    ((Length(Code) - PlusPos) >= 2) and
+    (SignificantChars >= 6) and
+    (SignificantChars < 10) and
+    HasOnlyValidPlusCodeChars(Code);
+end;
+
+function EncodeFullPlusCodeFromCoordinates(
+  const LatitudeE6, LongitudeE6: Int64
+): string;
+var
+  LatitudeDegrees, LongitudeDegrees: Double;
+  LatitudeValue, LongitudeValue, Place: Double;
+  I, Digit: Integer;
+begin
+  LatitudeDegrees := LatitudeE6 / COORD_SCALE_E6;
+  LongitudeDegrees := LongitudeE6 / COORD_SCALE_E6;
+
+  if LatitudeDegrees < -90.0 then
+    LatitudeDegrees := -90.0
+  else if LatitudeDegrees > 90.0 then
+    LatitudeDegrees := 90.0;
+
+  if LatitudeDegrees = 90.0 then
+    LatitudeDegrees := LatitudeDegrees - (PAIR_RESOLUTIONS[High(PAIR_RESOLUTIONS)] / 2.0);
+
+  LongitudeDegrees := NormalizeLongitudeDegrees(LongitudeDegrees);
+
+  LatitudeValue := LatitudeDegrees + 90.0;
+  LongitudeValue := LongitudeDegrees + 180.0;
+  Result := '';
+
+  for I := 0 to High(PAIR_RESOLUTIONS) do
+  begin
+    Place := PAIR_RESOLUTIONS[I];
+
+    Digit := Trunc(LatitudeValue / Place);
+    if Digit < 0 then
+      Digit := 0
+    else if Digit > 19 then
+      Digit := 19;
+    LatitudeValue := LatitudeValue - (Digit * Place);
+    Result := Result + PLUS_CODE_ALPHABET[Digit + 1];
+
+    Digit := Trunc(LongitudeValue / Place);
+    if Digit < 0 then
+      Digit := 0
+    else if Digit > 19 then
+      Digit := 19;
+    LongitudeValue := LongitudeValue - (Digit * Place);
+    Result := Result + PLUS_CODE_ALPHABET[Digit + 1];
+
+    if Length(Result) = 8 then
+      Result := Result + '+';
+  end;
+end;
+
+function RecoverFullPlusCodeFromCoordinates(
+  const ShortCode: string;
+  const LatitudeE6, LongitudeE6: Int64
+): string;
+var
+  PlusPos, MissingPrefixChars: Integer;
+  ReferenceFullCode: string;
+begin
+  if not IsShortPlusCode(ShortCode, PlusPos) then
+    raise Exception.Create(PlusCodeInvalidMessage);
+
+  MissingPrefixChars := FULL_PLUS_SEPARATOR_POS - PlusPos;
+  ReferenceFullCode := EncodeFullPlusCodeFromCoordinates(
+    LatitudeE6, LongitudeE6
+  );
+  Result := Copy(ReferenceFullCode, 1, MissingPrefixChars) + ShortCode;
 end;
 
 function ParseCoordinateToE6OrFail(
@@ -317,7 +482,7 @@ procedure NormalizeStationGeodataOrFail(
 );
 var
   HasLatitude, HasLongitude: boolean;
-  I, PlusPos: Integer;
+  PlusPos: Integer;
 begin
   HasLatitude := Trim(LatitudeRaw) <> '';
   HasLongitude := Trim(LongitudeRaw) <> '';
@@ -345,23 +510,22 @@ begin
   if NormalizedPlusCode = '' then
     Exit;
 
-  PlusPos := Pos('+', NormalizedPlusCode);
-  if (PlusPos <> 9) or (Length(NormalizedPlusCode) < 11) or
-     (Length(NormalizedPlusCode) > 15) or
-     (Pos('+', Copy(NormalizedPlusCode, PlusPos + 1, MaxInt)) > 0) then
-    raise Exception.Create(
-      'P-088: plus_code ungueltig (erwartet vollen Open Location Code, z.B. 9F4MGC2M+H4).'
-    );
+  if IsFullPlusCode(NormalizedPlusCode, PlusPos) then
+    Exit;
 
-  for I := 1 to Length(NormalizedPlusCode) do
+  if IsShortPlusCode(NormalizedPlusCode, PlusPos) then
   begin
-    if NormalizedPlusCode[I] = '+' then
-      Continue;
-    if not IsValidPlusCodeChar(NormalizedPlusCode[I]) then
-      raise Exception.Create(
-        'P-088: plus_code ungueltig (erwartet vollen Open Location Code, z.B. 9F4MGC2M+H4).'
-      );
+    if not HasCoordinates then
+      raise Exception.Create(ShortPlusCodeNeedsCoordinatesMessage);
+    NormalizedPlusCode := RecoverFullPlusCodeFromCoordinates(
+      NormalizedPlusCode, LatitudeE6, LongitudeE6
+    );
+    if not IsFullPlusCode(NormalizedPlusCode, PlusPos) then
+      raise Exception.Create(PlusCodeInvalidMessage);
+    Exit;
   end;
+
+  raise Exception.Create(PlusCodeInvalidMessage);
 end;
 
 procedure SetNullableLargeIntParam(
@@ -522,7 +686,9 @@ begin
   Owner := AskOptional('Owner (Optional): ');
   LatitudeRaw := AskOptional('Latitude (Optional, Dezimalgrad): ');
   LongitudeRaw := AskOptional('Longitude (Optional, Dezimalgrad): ');
-  PlusCodeRaw := AskOptional('Plus code (Optional): ');
+  PlusCodeRaw := AskOptional(
+    'Plus code (Optional; full OLC or local/short with Latitude+Longitude): '
+  );
 
   ValidateStationMasterDataOrFail(Brand, Street, HouseNo, Zip, City, Phone);
   NormalizeStationGeodataOrFail(
@@ -881,7 +1047,10 @@ begin
       NewOwner := AskKeep('Owner: (ENTER=behalten)', Q.FieldByName('owner').AsString);
       NewLatitudeRaw := AskKeep('Latitude: (ENTER=behalten)', OldLatitude);
       NewLongitudeRaw := AskKeep('Longitude: (ENTER=behalten)', OldLongitude);
-      NewPlusCodeRaw := AskKeep('Plus code: (ENTER=behalten)', OldPlusCode);
+      NewPlusCodeRaw := AskKeep(
+        'Plus code: (ENTER=behalten; full OLC or local/short with Latitude+Longitude)',
+        OldPlusCode
+      );
 
       ValidateStationMasterDataOrFail(
         NewBrand, NewStreet, NewHouseNo, NewZip, NewCity, NewPhone

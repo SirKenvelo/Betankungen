@@ -107,8 +107,10 @@
   - `P-087` longitude im gueltigen Bereich:
     - `cases/t_p087__01__station_longitude_range_rejected.sh`
     - `fixtures/p080_base.sql`
-  - `P-088` voller Plus Code:
+  - `P-088` voller oder aufloesbarer Short Plus Code:
     - `cases/t_p088__01__station_plus_code_invalid_rejected.sh`
+    - `cases/t_p088__02__station_short_plus_code_without_coordinates_rejected.sh`
+    - `cases/t_p088__03__station_short_plus_code_with_coordinates_accepts.sh`
     - `fixtures/p080_base.sql`
 
 ## Einstieg

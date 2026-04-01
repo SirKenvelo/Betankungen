@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -1500,9 +1500,40 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## General-Stream nach Sprint 34 - Stations-Short-Codes und Geodata-Contract
+
+- Status: done
+- Ziel: den Stations-Geodata-Flow fuer realistische Plus-Code-Eingaben aus
+  mobilen Karten-UIs oeffnen, ohne den kanonischen Speichervertrag fuer
+  `plus_code` aufzugeben.
+
+### Stand (2026-04-01)
+
+- `u_stations` akzeptiert jetzt sowohl volle/globalen Open Location Codes als
+  auch lokale/short Plus Codes, wenn `latitude` und `longitude` gesetzt sind.
+- Ortszusaetze aus gaengigen Karten-UIs (z. B. `GC2M+H4 Dortmund`) werden
+  bei der Normalisierung auf den eigentlichen Plus-Code-Token reduziert.
+- Short Codes ohne Koordinaten liefern weiter einen Hard Error, aber jetzt mit
+  expliziter Guidance auf `latitude`/`longitude` oder einen vollen Code.
+- Persistiert wird weiterhin ein kanonischer Vollcode; die Detailausgabe
+  `--list stations --detail` zeigt ihn wie vorgesehen in der `geodata:`-Zeile.
+- `ISS-0007`, `BL-0019`, `tests/domain_policy/p080.md`, die neuen
+  `P-088/02`- und `P-088/03`-Cases sowie
+  `tests/regression/run_station_geodata_contract_check.sh` sichern den neuen
+  Contract ab.
+
+### Validierung
+
+- `bash tests/domain_policy/cases/t_p088__01__station_plus_code_invalid_rejected.sh`
+- `bash tests/domain_policy/cases/t_p088__02__station_short_plus_code_without_coordinates_rejected.sh`
+- `bash tests/domain_policy/cases/t_p088__03__station_short_plus_code_with_coordinates_accepts.sh`
+- `tests/regression/run_station_geodata_contract_check.sh`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
 
-- Status: in_progress
+- Status: done
 - Ziel: den Cars-Edit-Flow so oeffnen, dass Start-KM/-Datum eines Fahrzeugs
   vor dem ersten Fuelup korrigiert werden koennen, ohne die spaetere
   Odometer-Historie zu destabilisieren.

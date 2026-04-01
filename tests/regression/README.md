@@ -1,5 +1,5 @@
 # Regression-Tests
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 Hier liegen reproduzierbare Regression-Cases fuer bereits behobene Bugs.
 
@@ -22,6 +22,6 @@ Aktueller automatischer Check:
 - `tests/regression/run_receipt_link_contract_check.sh`
   - validiert den Receipt-Link-Contract fuer `--receipt-link` (Scope-Guardrails, Write-Path in `fuelups.receipt_link`, Detailausgabe sowie JSON-Sichtbarkeit `receipt_links_set`/`receipt_links_missing`).
 - `tests/regression/run_station_geodata_contract_check.sh`
-  - validiert den Stations-Geodaten-Contract fuer `latitude/longitude` und `plus_code` (Normalisierung, Persistenz und kompakte vs. Detail-Ausgabe bei `--list stations`).
+  - validiert den Stations-Geodaten-Contract fuer `latitude/longitude` und `plus_code` (Normalisierung, Short-Code-Recovery auf Vollcode, Persistenz und kompakte vs. Detail-Ausgabe bei `--list stations`).
 - `tests/regression/run_user_flow_break_matrix_check.sh`
   - validiert priorisierte User-Flow-/Break-Pfade aus `docs/TEST_MATRIX.md` (u. a. INIT-/DEMO-Basispfade, unknown-flag-Fehler, EOF-Abbruch bei `--add fuelups`, Multi-Car-Guidance-Hints).
