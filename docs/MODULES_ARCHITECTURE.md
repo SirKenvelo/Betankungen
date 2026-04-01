@@ -1,5 +1,5 @@
 # Betankungen Module Architecture
-**Stand:** 2026-03-15
+**Stand:** 2026-04-01
 **Status:** baseline v1 (operational)
 
 Dieses Dokument definiert den technischen Contract fuer optionale Module in
@@ -164,7 +164,101 @@ Stats-Baseline aus `S10C3/4` (`--stats maintenance`):
 - JSON: `contract_version=1`, `kind="maintenance_stats_v1"`, `generated_at`, `app_version`, Payload `maintenance` mit `scope_mode`, `scope_car_id`, `events_total`, `cars_total`, `total_cost_cents`, `avg_cost_per_event_cents`, `period_from`, `period_to`.
 - Contract-Referenz: siehe `docs/EXPORT_CONTRACT.md` (Abschnitt "Module JSON Contract (Maintenance Companion v1)").
 
-## 8) Startpunkt fuer erste Module
+## 8) EV Discovery Profile (`betankungen-ev`)
+
+Diese Sektion definiert den Discovery-/Contract-Rahmen aus `TSK-0024` fuer
+das priorisierte EV-Companion-Modul. Sie beschreibt bewusst den kleinsten
+belastbaren Startpunkt und soll `TSK-0025` einen klaren Folgeauftrag geben,
+ohne das Event-/Storage-Design schon vollstaendig festzuschreiben.
+
+### Minimaler Scope
+
+- Das erste EV-Modul fokussiert ausschliesslich `charging`-Flows.
+- Mindestfaehigkeiten des ersten Blocks:
+  - Ladevorgaenge erfassen
+  - Ladevorgaenge listen
+  - modul-lokale `charging`-Stats bereitstellen
+  - Energiemenge (`kWh`/`Wh`), Kosten und Ladeort-Referenzen fuehren
+- Scoping bleibt zunaechst klein:
+  - per `car_id`
+  - optional per Zeitraum (`--from`/`--to`) fuer Listen/Stats
+- Es gibt noch keine Verpflichtung auf ein vollstaendiges EV-Fachmodell
+  (z. B. Ladeleistung, SoC-Kurven, Tarife, Provider-Sync).
+
+### Boundary zum Core
+
+- Der Core bleibt verantwortlich fuer:
+  - `cars`
+  - `fuelups`
+  - `stations`
+  - Basis-Stats
+  - Konfigurations-/DB-Grundlagen
+  - Modul-Discovery / Modul-Delegation
+- Die erste harte fachliche Kopplung fuer `betankungen-ev` ist nur
+  `car_id` gegen den Core.
+- EV-spezifische Tabellen, Ladeort-/Anbieter-Metadaten und fachliche
+  Charging-Semantik bleiben modul-eigene Verantwortung.
+- Der Core bekommt in `1.4.x` keine neuen EV-spezifischen
+  CRUD-/Stats-Targets.
+- Ein generisches Core-Modell `energy_events` ist fuer diesen Pfad explizit
+  ausgeschlossen.
+- Die bestehenden Core-`stations` sind **nicht** der kanonische
+  Ladeort-Speicher des ersten EV-Blocks. Wenn spaeter eine Wiederverwendung
+  oder Verknuepfung sinnvoll wird, braucht das einen separaten Entscheid.
+
+### Erwartete CLI-/Contract-Baseline
+
+- Binary-Name: `betankungen-ev`
+- Stabiler Modul-Identifier in `--module-info`: `module_name="ev"`
+- Verbindliche Grundkommandos:
+  - `--help`
+  - `--version`
+  - `--module-info`
+  - `--migrate`
+  - `--add charging`
+  - `--list charging`
+  - `--stats charging`
+- Erwartete Scope-/Output-Leitplanken:
+  - `--car-id` fuer car-scoped Operationen
+  - `--from`/`--to` nur additiv und konsistent zu Core-Konventionen
+  - `--json [--pretty]` nur im Stats-Kontext
+- Erwartete `capabilities` fuer einen ersten EV-MVP:
+  - `supports_migrate`
+  - `supports_add_charging`
+  - `supports_list_charging`
+  - `supports_stats_charging`
+  - `supports_stats_json`
+  - `supports_stats_pretty`
+  - `supports_car_scope`
+  - `supports_period_scope`
+- Wenn JSON-Stats im ersten Block geliefert werden, bleibt der Contract klar
+  versioniert und nutzt mindestens:
+  - `contract_version`
+  - `kind="ev_charging_stats_v1"`
+  - `generated_at`
+  - `app_version`
+
+### Explizite Nicht-Ziele
+
+- keine produktive EV-Implementierung in diesem Discovery-Task
+- kein generisches `energy`-Alias oder gemischtes Fuel+EV-Target im Core
+- keine Karten-, Routing-, Provider-Sync- oder Tarifmodell-Arbeit
+- keine Household-Drivers-/Shared-Cars-Kopplung
+- keine Vorfestlegung auf Ladeleistungs-, SoC- oder Batteriegesundheits-
+  Modellierung
+
+### Handover fuer `TSK-0025`
+
+`TSK-0025` soll auf dieser Baseline jetzt nur noch die offenen Modellfragen
+fuer einen MVP konkretisieren:
+
+- minimales Charging-Event-Payload
+- notwendige vs. optionale Event-Felder
+- Tabellen-/Storage-Zuschnitt im Modul
+- Ladeort- und Anbieter-Referenzmodell
+- konkrete Stats-/JSON-Payload fuer den ersten `charging`-Pfad
+
+## 9) Startpunkt fuer erste Module
 
 Priorisierte Kandidaten gemaess Backlog:
 
