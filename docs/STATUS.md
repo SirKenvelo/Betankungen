@@ -332,15 +332,21 @@ Bereits erledigt:
   - Die ersten beiden `1.4.x`-Weiterentwicklungspakete sind abgeschlossen:
     `BL-0029` haertet den Odometer-Contract, `BL-0019` erweitert
     Stationsstammdaten kontrolliert um Geodaten und Plus Codes.
-  - Paket C ist als strategische Richtungsentscheidung jetzt auf EV als
-    naechsten Discovery-Pfad festgezogen: `ADR-0008` ist `accepted`,
-    `BL-0030` ist aktiv in Arbeit, und `TSK-0024` definiert jetzt den
-    minimalen Scope sowie die CLI-/Boundary-Baseline fuer ein moegliches
-    Modul `betankungen-ev`.
-  - Fuer den naechsten EV-Folgeschritt bleibt der Scope bewusst eng:
-    `TSK-0025` bewertet nur das minimale Charging-Event- und Storage-Modell;
-    Household Drivers, generische `energy_events` im Core und sonstige
-    Nebenpfade bleiben fuer die aktuelle `1.4.x`-Linie weiter nachgeordnet.
+  - Paket C plus Sprint 35 sind als EV-Discovery jetzt abgeschlossen:
+    `ADR-0008` ist `accepted`, `BL-0030` steht auf `done`, und
+    `TSK-0024`/`TSK-0025` definieren gemeinsam den minimalen Scope sowie den
+    Event-/Storage-Rahmen fuer ein moegliches Modul `betankungen-ev`.
+  - Der moegliche erste EV-MVP bleibt bewusst klein:
+    `charging_events` mit `car_id`, `event_date`, `energy_wh`,
+    `cost_cents` als Pflichtfeldern sowie optionalem `odometer_km`,
+    `location_id` und `notes`, plus modul-lokale `charging_locations` und
+    `module_meta`.
+  - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
+    `energy_events` im Core, keine stillschweigende Wiederverwendung von
+    `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen
+    Core-CRUD-/Stats-Targets. Ein separater EV-MVP-Folgeblock ist damit
+    vorbereitet, Household Drivers und andere Nebenpfade bleiben weiter
+    nachgeordnet.
   - Geliefert wurden `CODE_OF_CONDUCT.md`, `SECURITY.md`, standardisierte
     Bug-/Feature-Issue-Templates sowie ein PR-Template mit `Summary` und
     `Validation`; `BL-0011` gilt fuer `Betankungen` jetzt als sauber

@@ -238,6 +238,85 @@ ohne das Event-/Storage-Design schon vollstaendig festzuschreiben.
   - `generated_at`
   - `app_version`
 
+### Minimales Charging-Event-Modell
+
+Verpflichtende Event-Felder fuer einen ersten EV-MVP:
+- `car_id` (FK gegen Core-`cars`)
+- `event_date` (TEXT, `YYYY-MM-DD`)
+- `energy_wh` (INTEGER, `> 0`)
+- `cost_cents` (INTEGER, `>= 0`)
+
+Bewusst optionale Felder:
+- `odometer_km`
+- `location_id`
+- `notes`
+
+Bewusst **nicht** Teil des ersten Pflichtmodells:
+- Start-/Endzeitpunkte einer Session
+- Ladeleistung / Peak-Power
+- SoC-Start/SoC-Ende
+- Connector-/Plug-Typ
+- Tarif-/Session-Identifier
+- getrennte Provider-IDs pro Event
+
+Leitidee:
+- Das erste Modell soll oeffentliche und private/kostenlose Ladevorgaenge
+  erfassen koennen, ohne schon einen grossen EV-Domain-Katalog
+  vorwegzunehmen.
+
+### Storage-Zuschnitt fuer den ersten EV-Block
+
+Minimaler Modul-Speicher:
+- `module_meta`
+- `charging_events`
+- `charging_locations`
+
+Erwartete Tabellenrollen:
+- `module_meta`: modul-lokale Schema-/Contract-Metadaten
+- `charging_locations`: leichter Ladeort-Speicher mit mindestens
+  `label`, optional `provider_name`, `address_text`, `notes`
+- `charging_events`: Event-Tabelle mit `car_id`, `event_date`,
+  `energy_wh`, `cost_cents`, optional `odometer_km`, optional
+  `location_id`, optional `notes`, plus `created_at`/`updated_at`
+
+Boundary-Regeln:
+- Die einzige harte Core-Kopplung bleibt `charging_events.car_id`.
+- `charging_events.location_id` zeigt nur auf modul-lokale
+  `charging_locations`; die Core-`stations` werden nicht als kanonischer
+  Ladeort-Speicher wiederverwendet.
+- Ein separates Modul-Provider-Register ist fuer den ersten Block nicht
+  noetig; Provider-Kontext bleibt zunaechst ein optionales Feld auf
+  `charging_locations`.
+- Keine stillen Writes in Core-Tabellen, kein Core-Schema-Bump fuer EV.
+
+### Warum kein generisches Core-`energy_events`
+
+- Ein generisches `energy_events`-Modell wuerde den Core der aktiven
+  `1.4.x`-Linie vor dem ersten EV-MVP auf ein neues universelles Schema
+  umstellen.
+- Fuelups und Charging unterscheiden sich schon im Minimalfall in
+  Energiemenge, Ortsmodell, Preislogik und optionalen Zusatzdaten.
+- Der Modulpfad ermoeglicht ein kleines, nutzbares EV-MVP-Modell, ohne die
+  stabilen Core-Contracts (`fuelups`, `stations`, Core-CLI) aufzuweichen.
+
+### Minimaler Stats-/JSON-Rahmen
+
+Fuer einen ersten `charging`-Stats-Block reicht:
+- `contract_version`
+- `kind="ev_charging_stats_v1"`
+- `generated_at`
+- `app_version`
+- Payload `charging` mit:
+  - `scope_mode`
+  - `scope_car_id`
+  - `events_total`
+  - `cars_total`
+  - `total_energy_wh`
+  - `total_cost_cents`
+  - `avg_energy_per_event_wh`
+  - `period_from`
+  - `period_to`
+
 ### Explizite Nicht-Ziele
 
 - keine produktive EV-Implementierung in diesem Discovery-Task
@@ -247,16 +326,21 @@ ohne das Event-/Storage-Design schon vollstaendig festzuschreiben.
 - keine Vorfestlegung auf Ladeleistungs-, SoC- oder Batteriegesundheits-
   Modellierung
 
-### Handover fuer `TSK-0025`
+### Handover nach `TSK-0025`
 
-`TSK-0025` soll auf dieser Baseline jetzt nur noch die offenen Modellfragen
-fuer einen MVP konkretisieren:
+Mit dem Abschluss von `TSK-0025` ist der fachliche Discovery-Rahmen fuer
+einen moeglichen EV-MVP jetzt klar genug fuer einen separaten
+Implementierungsblock:
 
-- minimales Charging-Event-Payload
-- notwendige vs. optionale Event-Felder
-- Tabellen-/Storage-Zuschnitt im Modul
-- Ladeort- und Anbieter-Referenzmodell
-- konkrete Stats-/JSON-Payload fuer den ersten `charging`-Pfad
+- `--migrate` kann sich auf `module_meta`, `charging_events` und
+  `charging_locations` stuetzen.
+- `--add charging` muss nur das kleine Pflichtmodell plus optionale
+  `odometer_km`-/`location_id`-/`notes`-Felder bedienen.
+- `--list charging` und `--stats charging` koennen car-scoped und
+  period-scoped starten, ohne Tarif-, SoC- oder Kartenlogik mitzuziehen.
+- Jede spaetere Wiederverwendung von Core-`stations` oder ein generisches
+  `energy_events`-Modell bleibt ein separater Entscheid und ist nicht Teil
+  dieses Discovery-Ergebnisses.
 
 ## 9) Startpunkt fuer erste Module
 

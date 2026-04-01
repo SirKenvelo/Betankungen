@@ -1,7 +1,7 @@
 ---
 id: BL-0030
 title: EV Companion Feasibility Spike
-status: in_progress
+status: done
 priority: P2
 type: research
 tags: [module, ev, discovery, 'lane:exploratory']
@@ -55,10 +55,21 @@ Out of Scope:
 # Output
 Ein klarer, referenzierbarer Discovery-Backlog fuer EV als naechste
 strategische Domaenenerweiterung, inklusive priorisierter Folge-Tasks und
-abgegrenzter Nicht-Ziele. `TSK-0024` liefert dafuer jetzt die minimale
-Scope-/Boundary-Baseline; `TSK-0025` baut darauf auf und bewertet das
-minimale Charging-Event- sowie Storage-Modell.
+abgegrenzter Nicht-Ziele. `TSK-0024` liefert die Scope-/Boundary-Baseline;
+`TSK-0025` schliesst den Block jetzt mit einem minimalen Charging-Event-
+Modell und expliziten Storage-Grenzen ab.
+
+# Discovery Result
+- Ein erster EV-MVP kann auf einem kleinen modul-lokalen Modell aufsetzen:
+  `charging_events`, optionale `charging_locations` und `module_meta`.
+- Das minimale Event bleibt bewusst klein: `car_id`, `event_date`,
+  `energy_wh` und `cost_cents` sind verpflichtend; `odometer_km`,
+  `location_id` und `notes` bleiben optional.
+- Der Core wird fuer `1.4.x` nicht auf ein generisches `energy_events`-
+  Modell umgebaut; `stations` bleiben kein kanonischer Ladeort-Speicher.
+- Damit ist ein separater EV-MVP-Folgeblock fachlich vorbereitet, ohne den
+  aktiven Core-Scope aufzuweichen.
 
 # Derived Tasks
 - `TSK-0024` - EV-Modul-Scope und Contract-Rahmen definieren. (done)
-- `TSK-0025` - Minimales Charging-Event-Modell und Storage-Grenzen evaluieren. (todo)
+- `TSK-0025` - Minimales Charging-Event-Modell und Storage-Grenzen evaluieren. (done)
