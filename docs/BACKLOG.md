@@ -59,7 +59,7 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0027 - Wiki-Entry-Layer und Public-Readiness-Ausrichtung](backlog/BL-0027-wiki-entry-layer-public-alignment/item.md) - Status: `done`, Typ: Improvement (Wiki-Entry und Repo-Einstiege ruhig gegenueber `docs/` als Source of Truth ausgerichtet), Lane: `planned` (historisch)
 - [BL-0028 - `btkgit`-Safety-Guardrails fuer Solo-Maintenance](backlog/BL-0028-btkgit-safety-guardrails/item.md) - Status: `done`, Typ: Improvement (`btkgit`-Failure-UX, konservatives Cleanup und Smoke-Guardrails explizit nachgeschaerft), Lane: `planned` (historisch)
 - [BL-0029 - Odometer Validation Contract Hardening](backlog/BL-0029-odometer-validation-contract-hardening/item.md) - Status: `done`, Typ: Improvement (kanonischer Hard-Error-Contract fuer negative `odometer_km`-Eingaben umgesetzt und regressionsgesichert), Lane: `planned`, Tasks: `TSK-0001` (`done`)
-- [BL-0030 - EV Companion Feasibility Spike](backlog/BL-0030-ev-companion-feasibility-spike/item.md) - Status: `in_progress`, Typ: Research (Task-24-Baseline fuer Scope-/Contract-Grenzen liegt; Event-/Storage-Evaluation folgt in `TSK-0025`), Lane: `exploratory`, Tasks: `TSK-0024` (`done`), `TSK-0025` (`todo`)
+- [BL-0030 - EV Companion Feasibility Spike](backlog/BL-0030-ev-companion-feasibility-spike/item.md) - Status: `done`, Typ: Research (EV-Discovery fuer `betankungen-ev` abgeschlossen; minimaler Charging-Event-/Storage-Rahmen ist dokumentiert und ein separater EV-MVP-Folgeblock fachlich vorbereitet), Lane: `exploratory`, Tasks: `TSK-0024` (`done`), `TSK-0025` (`done`)
 
 ## Legacy Backlog-Index (BL-0xx)
 

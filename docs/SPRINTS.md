@@ -1459,6 +1459,47 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## Sprint 35 - Minimales EV-Charging-Modell und Storage-Grenzen
+
+- Status: done
+- Ziel: den EV-Discovery-Block `BL-0030` mit einem kleinen, belastbaren
+  Charging-Event-Modell und klaren Storage-Grenzen abschliessen, damit ein
+  separater EV-MVP-Block ohne Core-Generalisierung starten kann.
+
+### Geplante Bloecke
+
+- S35C1/2: done - `TSK-0025` fachlich abschliessen und die Event-/
+  Storage-Grenze in Tracker, Architektur und Status festziehen.
+- S35C2/2: done - Sprint-Traceability und Vollverifikation fuer den
+  abgeschlossenen Discovery-Block finalisieren.
+
+### Fortschritt (2026-04-01)
+
+- `S35C1/2` abgeschlossen:
+  - `BL-0030` und `TSK-0025` stehen jetzt auf `done`.
+  - Das minimale EV-Event-Modell bleibt klein: `car_id`, `event_date`,
+    `energy_wh` und `cost_cents` sind verpflichtend; `odometer_km`,
+    `location_id` und `notes` bleiben optional.
+  - Der erste Storage-Schnitt bleibt modul-lokal ueber `module_meta`,
+    `charging_events` und `charging_locations`.
+  - Ein generisches Core-`energy_events` und die Wiederverwendung von
+    Core-`stations` als kanonischer Ladeort-Speicher sind fuer `1.4.x`
+    explizit ausgeschlossen.
+  - Git-Commit: `b613acd`
+  - Artefakte: `.artifacts/sprint_35_commit_1_von_2.md`,
+    `.artifacts/sprint_35_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S35C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 35 jetzt mit
+    Hash- und Verifikationsbezug.
+  - `BL-0030` ist damit als abgeschlossener Discovery-/Boundary-Sprint
+    referenzierbar; ein separater EV-MVP-Folgeblock kann darauf aufsetzen,
+    ohne in `1.4.x` den Core in Richtung `energy_events` aufzubiegen.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## Sprint 34 - Paket C strategisch auf EV-Discovery ziehen
 
 - Status: done
