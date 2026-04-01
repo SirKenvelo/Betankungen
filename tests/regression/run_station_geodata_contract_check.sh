@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # run_station_geodata_contract_check.sh
-# UPDATED: 2026-03-31
+# UPDATED: 2026-04-01
 # Contract-Check fuer Stations-Geodaten und Plus-Code-Sichtbarkeit.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -93,21 +93,32 @@ printf '%s\n' \
   'GeoOwner' \
   '51,514200' \
   '7.465300' \
-  '9f4m gc2m+h4' \
+  'GC2M+H4 Dortmund' \
   | "$BIN_FILE" --add stations >"$LAST_OUT" 2>"$LAST_ERR"
 LAST_RC=$?
 set -e
 if [[ $LAST_RC -ne 0 ]]; then
-  fail 'Add-Flow fuer Station mit Geodaten fehlgeschlagen.'
+  fail 'Add-Flow fuer Station mit Geodaten und short plus code fehlgeschlagen.'
 fi
 assert_contains "$LAST_OUT" 'OK: Tankstelle' 'Add-Flow liefert keine Erfolgsmeldung.'
-ok 'Add-Flow speichert Station mit Geodaten'
+ok 'Add-Flow speichert Station mit Geodaten und short plus code'
 
 ROW="$(sqlite3 "$DB_FILE" "SELECT latitude_e6 || '|' || longitude_e6 || '|' || plus_code FROM stations WHERE brand='GeoStation';")"
-if [[ "$ROW" != '51514200|7465300|9F4MGC2M+H4' ]]; then
-  fail "Persistierte Geodaten unerwartet: ${ROW:-<leer>}"
+IFS='|' read -r STORED_LAT STORED_LON STORED_PLUS_CODE <<< "$ROW"
+
+if [[ "$STORED_LAT" != '51514200' || "$STORED_LON" != '7465300' ]]; then
+  fail "Persistierte Koordinaten unerwartet: ${ROW:-<leer>}"
 fi
-ok 'Persistenz normalisiert Koordinaten und Plus Code'
+
+if [[ ! "$STORED_PLUS_CODE" =~ ^[23456789CFGHJMPQRVWX]{8}\+[23456789CFGHJMPQRVWX]{2,6}$ ]]; then
+  fail "Persistierter plus_code ist kein kanonischer Vollcode: ${STORED_PLUS_CODE:-<leer>}"
+fi
+
+if [[ "$STORED_PLUS_CODE" != *GC2M+H4 ]]; then
+  fail "Persistierter plus_code behaelt das erwartete Short-Code-Suffix nicht: ${STORED_PLUS_CODE:-<leer>}"
+fi
+
+ok 'Persistenz normalisiert Koordinaten und ermittelt einen kanonischen Vollcode'
 
 run_capture "$BIN_FILE" --list stations
 if [[ $LAST_RC -ne 0 ]]; then
@@ -122,7 +133,8 @@ run_capture "$BIN_FILE" --list stations --detail
 if [[ $LAST_RC -ne 0 ]]; then
   fail '--list stations --detail fehlgeschlagen.'
 fi
-assert_contains "$LAST_OUT" 'geodata: lat=51.514200 lon=7.465300 plus_code=9F4MGC2M+H4' 'Detail-Ausgabe zeigt Geodaten/Plus Code nicht im erwarteten Format.'
+assert_contains "$LAST_OUT" 'geodata: lat=51.514200 lon=7.465300 plus_code=' 'Detail-Ausgabe zeigt die Geodaten-Zeile nicht im erwarteten Format.'
+assert_contains "$LAST_OUT" 'GC2M+H4' 'Detail-Ausgabe zeigt den normalisierten Vollcode nicht mit erwartetem Short-Code-Suffix.'
 ok 'Detail-Ausgabe zeigt normalisierte Geodaten-Zeile'
 
 ok 'Station-Geodata-Contract erfolgreich'

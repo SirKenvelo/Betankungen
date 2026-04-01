@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -373,7 +373,8 @@ Fachlogik für Tankstellen (`stations`).
 - Bearbeiten (Alt-/Neu-Vergleich)
 - Löschen mit Sicherheitsabfrage
 - Optionale Stations-Geodaten (`latitude_e6`, `longitude_e6`, `plus_code`)
-  inkl. Normalisierung und Validierung im Dialogfluss
+  inkl. Normalisierung und Validierung im Dialogfluss; `plus_code` akzeptiert
+  globale OLCs direkt und lokale/short Codes bei gesetzten Koordinaten
 - Kompakte Listen bleiben adressfokussiert; Detailansicht zeigt Geodaten als
   zusaetzliche `geodata:`-Zeile
 

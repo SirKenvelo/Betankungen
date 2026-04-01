@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -66,8 +66,12 @@ Eingabe bei `--add stations`:
   - `Latitude` und `Longitude` nur gemeinsam oder beide leer
   - Format: Dezimalgrad mit max. 6 Nachkommastellen
   - Bereiche: `latitude` `[-90, 90]`, `longitude` `[-180, 180]`
-  - `Plus code` wird whitespace-frei gespeichert, in Grossbuchstaben
-    normalisiert und nur als voller Open Location Code akzeptiert
+  - `Plus code` wird normalisiert und als voller Open Location Code
+    gespeichert
+  - Akzeptiert werden entweder ein voller/globaler Open Location Code oder ein
+    lokaler/short Code (z. B. aus Google Maps), sofern `Latitude` und
+    `Longitude` gesetzt sind
+  - Short Codes ohne Koordinaten werden mit einem klaren Hinweis geblockt
 - Ausgabe-Regeln:
   - `Betankungen --list stations` bleibt kompakt ohne Geodaten-Zusatz
   - `Betankungen --list stations --detail` zeigt vorhandene Geodaten als

@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-03-31
+**Stand:** 2026-04-01
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -91,6 +91,19 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Fix/Stations: `stations` akzeptieren bei Geodaten jetzt neben
+  vollen/globalen Open Location Codes auch lokale/short Plus Codes aus
+  gaengigen Karten-UIs, sofern `latitude` und `longitude` gesetzt sind.
+  `u_stations` normalisiert Eingaben mit Ortszusatz (z. B.
+  `GC2M+H4 Dortmund`) auf den eigentlichen Plus-Code-Token, blockiert Short
+  Codes ohne Koordinaten mit klarer Guidance (`P-088`) und speichert
+  weiterhin einen kanonischen Vollcode in `plus_code`. Die Detailausgabe
+  `--list stations --detail` bleibt die Source fuer vorhandene Geodaten und
+  zeigt den normalisierten Vollcode wie vorgesehen an; der beobachtete
+  Anzeigeeffekt trat nur auf, wenn der Short-Code zuvor gar nicht
+  gespeichert wurde. `ISS-0007`, Domain-Policy- und Regressionstests sowie
+  Benutzerdoku/BL-0019 sind auf den neuen Contract synchronisiert.
+  (2026-04-01)
 - [S34C2/2] Docs/Traceability: Sprint 34 ist jetzt mit Hash-,
   Tracker- und Verifikationsbezug in `docs/CHANGELOG.md` und
   `docs/SPRINTS.md` verankert. Paket C bleibt damit als bewusster

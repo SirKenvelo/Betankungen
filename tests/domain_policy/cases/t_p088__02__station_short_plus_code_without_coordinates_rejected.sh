@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# t_p088__01__station_plus_code_invalid_rejected.sh
+# t_p088__02__station_short_plus_code_without_coordinates_rejected.sh
 # UPDATED: 2026-04-01
-# Policy P-088: plus_code muss voll oder als short-code mit Koordinaten aufloesbar sein.
+# Policy P-088: lokaler/short plus_code ohne Koordinaten wird geblockt.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 DB_POLICY="$ROOT_DIR/tests/domain_policy/fixtures/Betankungen_Policy.db"
@@ -11,7 +11,7 @@ FIXTURE_SQL="$ROOT_DIR/tests/domain_policy/fixtures/p080_base.sql"
 DB_BUILDER="$ROOT_DIR/tests/domain_policy/helpers/build_test_dbs.sh"
 APP_BIN="$ROOT_DIR/bin/Betankungen"
 
-TMP_DIR="$(mktemp -d /tmp/t_p088_plus_code_XXXXXX)"
+TMP_DIR="$(mktemp -d /tmp/t_p088_short_plus_code_missing_coords_XXXXXX)"
 OUT_FILE="$TMP_DIR/stdout.txt"
 ERR_FILE="$TMP_DIR/stderr.txt"
 
@@ -42,16 +42,16 @@ sqlite3 "$DB_POLICY" < "$FIXTURE_SQL"
 COUNT_BEFORE="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM stations;")"
 
 INPUT_LINES=(
-  'PlusCodeStation'
+  'ShortCodeStation'
   'Testweg'
-  '10'
+  '11'
   '44135'
   'Dortmund'
   ''
   ''
   ''
   ''
-  'INVALID'
+  'GC2M+H4 Dortmund'
 )
 
 set +e
@@ -61,11 +61,15 @@ RC=$?
 set -e
 
 if [[ $RC -eq 0 ]]; then
-  fail 'Erwartet Exitcode != 0 fuer P-088, erhalten: 0'
+  fail 'Erwartet Exitcode != 0 fuer short plus_code ohne Koordinaten, erhalten: 0'
 fi
 
 if ! grep -q 'P-088' "$ERR_FILE"; then
   fail 'Erwartete P-088-Fehlermeldung nicht gefunden.'
+fi
+
+if ! grep -q 'latitude und longitude' "$ERR_FILE"; then
+  fail 'Erwartete Guidance zu latitude/longitude nicht gefunden.'
 fi
 
 COUNT_AFTER="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM stations;")"
@@ -73,4 +77,4 @@ if [[ "$COUNT_AFTER" != "$COUNT_BEFORE" ]]; then
   fail "Erwartet unveraenderten stations-Count ($COUNT_BEFORE), erhalten: $COUNT_AFTER"
 fi
 
-printf '[OK] P-088/01: ungueltiger Plus Code wird sauber geblockt.\n'
+printf '[OK] P-088/02: short plus_code ohne Koordinaten wird sauber geblockt.\n'
