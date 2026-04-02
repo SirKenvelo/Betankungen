@@ -84,6 +84,8 @@ Kommandos:
 - `Betankungen --list fuelups`
 - `Betankungen --list fuelups --car-id <id>`
 - `Betankungen --list fuelups --detail`
+- Die Hauptzeile der Fuelup-Liste bleibt stationsfokussiert; der
+  Fahrzeugkontext wird in `--detail` separat ueber `Car: ...` gezeigt.
 
 Eingabe bei `--add fuelups`:
 - Fahrzeugauswahl (`cars`) via Resolver:

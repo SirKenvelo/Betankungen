@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-31
+  UPDATED: 2026-04-02
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -685,7 +685,7 @@ begin
           Q.FieldByName('liters_ml').AsLargeInt,
           Q.FieldByName('price_per_liter_milli_eur').AsLargeInt,
           Q.FieldByName('total_cents').AsLargeInt,
-          Q.FieldByName('brand').AsString + ' (' + Q.FieldByName('city').AsString + ') / ' + Q.FieldByName('car_name').AsString
+          Q.FieldByName('brand').AsString + ' (' + Q.FieldByName('city').AsString + ')'
         );
     
         if Detailed then
