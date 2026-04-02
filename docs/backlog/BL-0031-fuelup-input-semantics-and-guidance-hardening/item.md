@@ -13,6 +13,7 @@ related:
   - ISS-0009
   - BL-0021
   - BL-0029
+  - BL-0032
 ---
 **Stand:** 2026-04-02
 
@@ -30,6 +31,11 @@ sichtbar gemacht:
 - die aktuelle Car-Zuordnung ist im Add-Flow nicht sichtbar genug
 - der Vorab-Contract fuer `--receipt-link` ist im interaktiven Lauf zu leicht
   zu uebersehen, obwohl Fuelups append-only sind
+- lokale Receipt-Pfade aus Drag-and-Drop oder Shell-History sind fuer Nutzer
+  plausibel, werden aber noch nicht auf einen kanonischen `file://`-Write-Path
+  normalisiert
+- lokale Vertipper in Receipt-Links bleiben heute vor dem append-only-Insert
+  unbemerkt, obwohl der Nachbearbeitungspfad bewusst gesperrt ist
 
 Die technische Basis ist bereits korrekt. Was fehlt, ist eine bewusst
 geschnittene Guidance-/Semantik-Haertung fuer die naechste Core-UX-Stufe.
@@ -41,12 +47,18 @@ In Scope:
 - sichtbare Car-Kontext-Fuehrung im Add-Flow und in zugehoeriger Help/Doku
 - klare Vorab-Hinweise fuer `--receipt-link` im Zusammenhang mit append-only
   Fuelups
+- kanonische Normalisierung lokaler Receipt-Pfade auf einen stabilen
+  `file://`-Speicherwert
+- Guidance fuer lokale Receipt-Links mit fehlender Datei, ohne sofort einen
+  unbarmherzigen Hard-Error zu erzwingen
 - saubere Verknuepfung zwischen Issue-, ADR-, Backlog- und Folge-Task-Ebene
 
 Out of Scope:
 - Runtime-Implementierung in diesem Rahmungsblock
 - neuer Trip-/Delta-Input als alternative Erfassungslogik
 - neue Fuelup-Editierbarkeit oder nachtraeglicher Receipt-Link-Write-Path
+- verpflichtende XDG-Belegablage oder sofortige app-verwaltete Receipt-Kopie
+- OSC8-/Label-Rendering wie `[Tankbeleg]` als erste Loesungsstufe
 - Vermischung mit EV-Discovery, Household Drivers oder groesseren CLI-Umbauten
 
 # Risks
@@ -56,14 +68,24 @@ Out of Scope:
   `ADR-0014` den kanonischen Gesamt-Odometer festzieht.
 - Receipt-Link- und Car-Resolver-Themen werden als Architekturproblem
   missverstanden, obwohl es primaer UX-/Dialogfragen sind.
+- Eine zu harte Existenzpruefung fuer lokale Receipt-Dateien blockiert
+  legitime Faelle wie spaet gemountete Ordner oder bewusst vorgezogene
+  Eintraege ohne Belegdatei vor Ort.
+- Die spaetere Hybrid-Idee fuer app-verwaltete Belegspeicherung wird zu frueh
+  in den aktuellen Guidance-Block hineingezogen statt als eigener Folge-BL
+  sauber abgetrennt.
 
 # Output
 Ein umsetzungsreifer Hardening-Block fuer einen spaeteren Fuelup-UX-Sprint:
 mit akzeptierter Semantik-Entscheidung (`ADR-0014`), zwei konkreten offenen
-Problemfaellen (`ISS-0008`, `ISS-0009`) und klar abgegrenzten Folgeaufgaben.
+Problemfaellen (`ISS-0008`, `ISS-0009`), Receipt-Link-Normalisierung/
+Existenz-Guidance und klar abgegrenzten Folgeaufgaben. Eine moegliche
+spaetere Hybrid-Strategie fuer verwaltete XDG-Belegspeicherung bleibt als
+separater Folge-BL (`BL-0032`) vorgemerkt.
 
 # Derived Tasks
 - `TSK-0026` - Fuelup-Kilometerstands-Wording und Guidance auf den
   Gesamt-Odometer ausrichten. (todo)
 - `TSK-0027` - Car-Kontext und Receipt-Link-Timing im Fuelup-Add-Flow
-  sichtbar machen. (todo)
+  sichtbar machen, lokale Receipt-Pfade normalisieren und lokale
+  Existenz-Guidance ergaenzen. (todo)

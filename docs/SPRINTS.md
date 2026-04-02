@@ -1668,6 +1668,33 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `tests/regression/run_receipt_link_contract_check.sh`
 - `make verify`
 
+## General-Stream nach Sprint 36 - Receipt-Link-Normalisierung und Hybrid-Folgepfad schaerfen
+
+- Status: done
+- Ziel: den bereits vorbereiteten Fuelup-Guidance-Block so praezisieren, dass
+  Receipt-Link-Normalisierung, lokale Existenz-Guidance und ein spaeterer
+  Hybrid-Folgepfad fuer Belegspeicherung sauber voneinander getrennt bleiben.
+
+### Stand (2026-04-02)
+
+- `BL-0031` fuehrt Receipt-Link-Normalisierung und lokale
+  Existenz-Guidance jetzt explizit im Scope.
+- `TSK-0027` benennt den erwarteten Guidance-Contract genauer:
+  lokale absolute Pfade bleiben zulaessig, sollen spaeter aber auf einen
+  kanonischen `file://`-Wert normalisiert werden; fehlende lokale Dateien
+  sollen nicht still akzeptiert werden.
+- Ein neuer optionaler Folge-Backlog `BL-0032` beschreibt die spaetere
+  Hybrid-Idee fuer Receipt-Speicherung:
+  externe Nutzerordner bleiben erlaubt, ein app-verwalteter
+  XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus.
+- `docs/BACKLOG.md`, `docs/STATUS.md` und `docs/README.md` fuehren denselben
+  Planungsstand.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
 
 - Status: done

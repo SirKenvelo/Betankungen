@@ -100,7 +100,12 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `BL-0031` rahmt den naechsten kleinen Core-UX-Block fuer Fuelups:
     `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
     `ISS-0008`/`ISS-0009` sammeln die offenen Guidance-Funde fuer
-    Kilometerstand, Car-Kontext und `--receipt-link`
+    Kilometerstand, Car-Kontext und `--receipt-link`; `TSK-0027` umfasst
+    dabei auch lokale Receipt-Pfadnormalisierung und lokale
+    Existenz-Guidance
+  - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
+    benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
+    XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
   `docs/ROADMAP_1_0_0.md`.

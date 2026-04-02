@@ -347,7 +347,12 @@ Bereits erledigt:
     `ADR-0014` akzeptiert dazu `odometer_km` explizit als kanonischen
     Gesamt-Kilometerstand; ein moeglicher Trip-/Delta-Input bleibt
     bewusst ein spaeterer Komfortmodus und wird nicht stillschweigend in die
-    aktuelle Core-Semantik eingemischt.
+    aktuelle Core-Semantik eingemischt. `TSK-0027` umfasst zusaetzlich
+    lokale Receipt-Pfadnormalisierung und lokale Existenz-Guidance.
+  - Ein spaeterer Folgeblock `BL-0032` bleibt bewusst optional:
+    externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
+    XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und
+    nicht Teil der unmittelbaren `1.4.0-dev`-Arbeit.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen
