@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -341,6 +341,13 @@ Bereits erledigt:
     `cost_cents` als Pflichtfeldern sowie optionalem `odometer_km`,
     `location_id` und `notes`, plus modul-lokale `charging_locations` und
     `module_meta`.
+  - Als naechster kleiner Core-UX-Block ist `BL-0031` vorbereitet:
+    `ISS-0008` und `ISS-0009` halten die offenen Fuelup-Funde fuer
+    Kilometerstands-Semantik sowie Car-/Receipt-Link-Guidance fest.
+    `ADR-0014` akzeptiert dazu `odometer_km` explizit als kanonischen
+    Gesamt-Kilometerstand; ein moeglicher Trip-/Delta-Input bleibt
+    bewusst ein spaeterer Komfortmodus und wird nicht stillschweigend in die
+    aktuelle Core-Semantik eingemischt.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

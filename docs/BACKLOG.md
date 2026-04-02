@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
@@ -60,6 +60,7 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0028 - `btkgit`-Safety-Guardrails fuer Solo-Maintenance](backlog/BL-0028-btkgit-safety-guardrails/item.md) - Status: `done`, Typ: Improvement (`btkgit`-Failure-UX, konservatives Cleanup und Smoke-Guardrails explizit nachgeschaerft), Lane: `planned` (historisch)
 - [BL-0029 - Odometer Validation Contract Hardening](backlog/BL-0029-odometer-validation-contract-hardening/item.md) - Status: `done`, Typ: Improvement (kanonischer Hard-Error-Contract fuer negative `odometer_km`-Eingaben umgesetzt und regressionsgesichert), Lane: `planned`, Tasks: `TSK-0001` (`done`)
 - [BL-0030 - EV Companion Feasibility Spike](backlog/BL-0030-ev-companion-feasibility-spike/item.md) - Status: `done`, Typ: Research (EV-Discovery fuer `betankungen-ev` abgeschlossen; minimaler Charging-Event-/Storage-Rahmen ist dokumentiert und ein separater EV-MVP-Folgeblock fachlich vorbereitet), Lane: `exploratory`, Tasks: `TSK-0024` (`done`), `TSK-0025` (`done`)
+- [BL-0031 - Fuelup Input Semantics and Guidance Hardening](backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md) - Status: `approved`, Typ: Improvement (real beobachtete Fuelup-Semantik- und Guidance-Luecken fuer den Folge-Sprint sauber gerahmt; `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik), Lane: `planned`, Tasks: `TSK-0026` (`todo`), `TSK-0027` (`todo`)
 
 ## Legacy Backlog-Index (BL-0xx)
 
