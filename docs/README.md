@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -97,6 +97,10 @@ Das Hauptprogramm steuert – die Units arbeiten.
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
   - das Public-Repository hat jetzt eine dokumentierte Mindestbaseline fuer
     Verhaltensregeln, Sicherheitsmeldungen, Issue-Intake und PR-Struktur
+  - `BL-0031` rahmt den naechsten kleinen Core-UX-Block fuer Fuelups:
+    `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
+    `ISS-0008`/`ISS-0009` sammeln die offenen Guidance-Funde fuer
+    Kilometerstand, Car-Kontext und `--receipt-link`
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
   `docs/ROADMAP_1_0_0.md`.
@@ -130,6 +134,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/MODULES_ARCHITECTURE.md`: technischer Contract fuer Module (Build, CLI, DB, Stats).
 - `docs/BACKLOG.md`: zentrale Uebersicht fuer bewusst verschobene, spaeter umzusetzende Themen.
 - `docs/BACKLOG/`: einzelne Backlog-Items als eigene Dateien (`BL-xxx`).
+- `docs/issues/`: konkrete beobachtete Problemfaelle und UX-/Contract-Funde als `ISS-xxxx`.
 - `docs/ADR/README.md`: Entscheidungen und offene Entscheidungsfragen (ADR-Index).
 - `docs/policies/`: formale Regeln/Standards/Vertraege (`POL-xxx`), inkl. Tracker-Standard.
 - `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.

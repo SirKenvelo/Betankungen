@@ -1,7 +1,51 @@
 # SPRINTS
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## Sprint 36 - Fuelup Guidance und Kilometerstands-Semantik rahmen
+
+- Status: done
+- Ziel: die realen UX-/Semantik-Funde aus `--add fuelups` in Tracker-, ADR-
+  und Backlog-Artefakte ueberfuehren, ohne Runtime-Verhalten vorwegzunehmen.
+
+### Geplante Bloecke
+
+- S36C1/2: done - `ISS-0008`/`ISS-0009`, `ADR-0014`, `BL-0031` und
+  `TSK-0026`/`TSK-0027` anlegen sowie Status-/Entry-Doku auf den neuen
+  Planungsstand ziehen.
+- S36C2/2: done - Sprint-Traceability und Vollverifikation fuer den
+  Rahmungsblock finalisieren.
+
+### Fortschritt (2026-04-02)
+
+- `S36C1/2` abgeschlossen:
+  - `ISS-0008` dokumentiert die offene Odometer-vs-Trip-Semantik des
+    Prompts `Kilometerstand (km)`.
+  - `ISS-0009` dokumentiert die versteckte Car-/Receipt-Link-Guidance im
+    Fuelup-Add-Flow.
+  - `ADR-0014` akzeptiert `odometer_km` als kanonischen
+    Gesamt-Kilometerstand; ein moeglicher Trip-/Delta-Input bleibt ein
+    spaeterer Komfortmodus.
+  - `BL-0031` priorisiert daraus einen kleinen Folgeblock mit `TSK-0026`
+    und `TSK-0027`.
+  - `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`,
+    `docs/README.md` und `docs/ADR/README.md` fuehren denselben
+    Planungsstand.
+  - Git-Commit: `d243df3`
+  - Artefakte: `.artifacts/sprint_36_commit_1_von_2.md`,
+    `.artifacts/sprint_36_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S36C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 36 jetzt mit
+    Hash- und Verifikationsbezug.
+  - Sprint 36 bleibt bewusst ein Rahmungs-/Planungssprint: keine
+    Runtime-Aenderung an `--add fuelups`, kein Trip-/Delta-Write-Path und
+    kein Dialogumbau wurden vorgezogen.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## Sprint 1 - Road to 0.8.x
 

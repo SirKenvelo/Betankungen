@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -90,9 +90,14 @@ Eingabe bei `--add fuelups`:
   - mit `--car-id <id>`: diese ID wird auf Existenz validiert
   - ohne `--car-id`: bei genau einem Fahrzeug automatische Auswahl
   - ohne `--car-id` und 0 oder >1 Fahrzeuge: Hard Error mit Hinweis
+  - bei genau einem Fahrzeug bleibt dieses Fahrzeug fuer den gesamten
+    Add-Flow aktiv; wer den Kontext vorab explizit sehen will, kann
+    `Betankungen --list cars` nutzen oder `--car-id <id>` bewusst setzen
 - Auswahl der Tankstelle (Liste mit IDs)
 - Datum+Uhrzeit: `YYYY-MM-DD HH:MM:SS`
 - Kilometerstand (km)
+  - gemeint ist der aktuelle **Gesamt-Kilometerstand des Fahrzeugs**
+    (`odometer_km`), nicht die Strecke seit der letzten Tankung
 - Odometer-Checks pro Fahrzeug:
   - `odometer_km` muss eine Ganzzahl `>= 0` sein
   - muss >= Fahrzeug-Start-KM sein
@@ -106,6 +111,11 @@ Eingabe bei `--add fuelups`:
 - Bei sehr grosser Tankmenge (> 150 L) kommt eine Warnung mit Bestaetigungsabfrage
 - Optional: Spritart, Bezahlart, Zapfsaeule, Notiz
 - Optional: externer Beleg-Link via `--receipt-link <path|uri>` (nur Referenz, keine Bilddaten in SQLite).
+- Wenn ein Beleg-Link gespeichert werden soll, muss `--receipt-link` bereits
+  **vor** dem Start von `--add fuelups` gesetzt werden; der interaktive Dialog
+  fragt diesen Wert aktuell nicht noch einmal separat ab.
+- Wichtig: `fuelups` bleiben append-only und koennen spaeter nicht per
+  `--edit fuelups` nachbearbeitet werden.
 - Guardrails fuer `--receipt-link`: nur bei `--add fuelups`, nicht leer, keine Steuerzeichen.
 
 Policy-Hinweis (Matrix v1):

@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-01
+**Stand:** 2026-04-02
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S36C1/2 - Fuelup-Guidance- und Kilometerstands-Semantik fuer die naechste Core-UX-Stufe gerahmt (`docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `docs/ADR/ADR-0014-fuelup-mileage-input-semantics.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/ADR/README.md`); Artefakte: `.artifacts/sprint_36_commit_1_von_2.md`, `.artifacts/sprint_36_commit_1_von_2.diff`; Basis-Commit: `d243df3`. (2026-04-02)
 - S35C1/2 - Minimales Charging-Event- und Storage-Modell fuer `betankungen-ev` definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_35_commit_1_von_2.md`, `.artifacts/sprint_35_commit_1_von_2.diff`; Basis-Commit: `b613acd`. (2026-04-01)
 - General-2026-04-01-ev-scope-baseline - EV-Discovery-Rahmen fuer `betankungen-ev` mit Scope-, Boundary- und CLI-Contract-Baseline definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Basis-Commit: `0d5cac6`. (2026-04-01)
 - S34C1/2 - Paket C als strategischen EV-Discovery-Pfad verankert (`docs/ADR/ADR-0008-ev-charging.md`, `docs/ADR/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0024-define-ev-module-scope-and-contract.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`); Artefakte: `.artifacts/sprint_34_commit_1_von_2.md`, `.artifacts/sprint_34_commit_1_von_2.diff`; Basis-Commit: `23cdef6`. (2026-03-31)
@@ -93,6 +94,22 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S36C2/2] Docs/Traceability: Sprint 36 ist jetzt mit Hash-,
+  Tracker- und Verifikationsbezug in `docs/CHANGELOG.md` und
+  `docs/SPRINTS.md` verankert. Der Sprint dokumentiert den gruennen
+  Abschlussnachweis ueber `scripts/projtrack_lint.sh` und `make verify`.
+  (2026-04-02)
+- [S36C1/2] Docs/Fuelups: Neue Tracker-/Entscheidungsbasis fuer die
+  beobachteten Fuelup-Funde aus realer Nutzung angelegt. `ISS-0008`
+  dokumentiert die offene Odometer-vs-Trip-Semantik des Prompts,
+  `ISS-0009` die versteckte Car-/Receipt-Link-Guidance im Add-Flow,
+  `ADR-0014` akzeptiert `odometer_km` als kanonischen Gesamt-KM-Stand,
+  und `BL-0031` samt `TSK-0026`/`TSK-0027` schneidet daraus einen
+  spaeteren UX-Hardening-Block. `docs/BACKLOG.md`, `docs/STATUS.md`,
+  `docs/BENUTZERHANDBUCH.md`, `docs/README.md` und `docs/ADR/README.md`
+  fuehren denselben Planungsstand; eine Runtime-Aenderung an
+  `--add fuelups` wurde bewusst nicht vorgezogen. (2026-04-02)
+
 - [S35C2/2] Docs/Traceability: Sprint 35 und der Abschluss von `BL-0030`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruennen Abschlussnachweis ueber
