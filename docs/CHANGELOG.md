@@ -94,6 +94,15 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Fuelups: `BL-0031` und `TSK-0027` schneiden den
+  Receipt-Link-Teil jetzt konkreter: lokale Receipt-Pfade aus
+  Drag-and-Drop/Shell-Nutzung sollen spaeter auf einen kanonischen
+  `file://`-Speicherwert normalisiert werden, und fehlende lokale Dateien
+  sollen eine explizite Guidance statt stiller Annahme bekommen. Als bewusst
+  spaeterer Hybrid-Folgeblock ist `BL-0032` neu angelegt: benutzerverwaltete
+  Receipt-Ordner bleiben erlaubt, ein app-verwalteter XDG-Belegordner ist nur
+  als optionaler Komfortmodus vorgemerkt. `docs/BACKLOG.md`, `docs/STATUS.md`
+  und `docs/README.md` fuehren denselben Planungsstand. (2026-04-02)
 - [General] Fix/Fuelups: `--list fuelups` haengt den Fahrzeugnamen nicht mehr
   an die Stationsspalte an. Die Hauptzeile bleibt damit stationsfokussiert
   und schneidet bei ueblichen Stationsnamen nicht mehr mit einem
