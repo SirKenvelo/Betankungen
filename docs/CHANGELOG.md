@@ -94,6 +94,13 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Fix/Fuelups: `--list fuelups` haengt den Fahrzeugnamen nicht mehr
+  an die Stationsspalte an. Die Hauptzeile bleibt damit stationsfokussiert
+  und schneidet bei ueblichen Stationsnamen nicht mehr mit einem
+  uneindeutigen ` / ...`-Suffix ab; der Fahrzeugkontext bleibt in
+  `--list fuelups --detail` separat ueber `Car: ...` sichtbar. Die
+  Receipt-Link-Regression sichert jetzt explizit ab, dass die kompakte Liste
+  den Stationsnamen ohne abgeschnittenen Car-Suffix zeigt. (2026-04-02)
 - [S36C2/2] Docs/Traceability: Sprint 36 ist jetzt mit Hash-,
   Tracker- und Verifikationsbezug in `docs/CHANGELOG.md` und
   `docs/SPRINTS.md` verankert. Der Sprint dokumentiert den gruennen

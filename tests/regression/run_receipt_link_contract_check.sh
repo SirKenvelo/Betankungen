@@ -3,7 +3,7 @@ set -euo pipefail
 
 # run_receipt_link_contract_check.sh
 # CREATED: 2026-03-18
-# UPDATED: 2026-03-18
+# UPDATED: 2026-04-02
 # Regression fuer Receipt-Link-Contract (Scope-Guardrails, Write-Path, Text/JSON-Sichtbarkeit).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -65,6 +65,15 @@ assert_contains() {
   grep -Fq -- "$needle" "$file" || fail "$label"
 }
 
+assert_not_contains() {
+  local file="$1"
+  local needle="$2"
+  local label="$3"
+  if grep -Fq -- "$needle" "$file"; then
+    fail "$label"
+  fi
+}
+
 main() {
   require_tool sqlite3
   require_tool python3
@@ -108,7 +117,13 @@ INSERT INTO fuelups(
 SQL
   ok "Referenzdatensatz ohne receipt_link angelegt"
 
+  run_expect_ok "List kompakt bleibt stationsfokussiert" "$BIN_FILE" --list fuelups --car-id 1
+  assert_contains "$LAST_OUT" "ReceiptSmoke (Unna)" "Kompakte Liste zeigt den Stationsnamen nicht."
+  assert_not_contains "$LAST_OUT" "ReceiptSmoke (Unna) / Hauptauto" "Kompakte Liste haengt unnoetig den Fahrzeugnamen an die Stationsspalte an."
+  ok "Kompakte Liste zeigt die Station ohne abgeschnittenen Car-Suffix"
+
   run_expect_ok "List detail zeigt Receipt-Link" "$BIN_FILE" --list fuelups --detail --car-id 1
+  assert_contains "$LAST_OUT" "Car: Hauptauto" "Detail-Ausgabe enthaelt den Fahrzeugkontext nicht separat."
   assert_contains "$LAST_OUT" "Receipt link: file:///data/receipts/first.jpg" "Detail-Ausgabe enthaelt den gesetzten Receipt-Link nicht."
   ok "Detail-Ausgabe zeigt Receipt-Link"
 

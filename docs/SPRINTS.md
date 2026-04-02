@@ -1643,6 +1643,31 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `scripts/projtrack_lint.sh`
 - `make verify`
 
+## General-Stream nach Sprint 36 - Fuelup-Listen bleiben stationsfokussiert
+
+- Status: done
+- Ziel: die `fuelups`-Listenzeile so schaerfen, dass der Stationsname nicht
+  durch einen abgeschnittenen ` / <car>`-Suffix entwertet wird und der
+  Fahrzeugkontext weiter nur dort sichtbar bleibt, wo er wirklich Platz hat.
+
+### Stand (2026-04-02)
+
+- Die Hauptzeile von `--list fuelups` und `--list fuelups --detail` zeigt
+  jetzt nur noch `brand (city)` als Stationslabel.
+- Der Fahrzeugkontext bleibt in `--detail` separat ueber `Car: ...`
+  sichtbar, statt die Stationsspalte zu ueberladen.
+- `tests/regression/run_receipt_link_contract_check.sh` sichert jetzt
+  explizit ab, dass die kompakte Liste den Stationsnamen ohne
+  abgeschnittenen Car-Suffix zeigt und die Detailansicht den Fahrzeugkontext
+  separat beibehaltet.
+- `docs/BENUTZERHANDBUCH.md` beschreibt die neue Rollenverteilung zwischen
+  stationsfokussierter Hauptzeile und separatem Fahrzeugkontext in `--detail`.
+
+### Validierung
+
+- `tests/regression/run_receipt_link_contract_check.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 33 - Car-Startwerte vor erstem Fuelup korrigieren
 
 - Status: done
