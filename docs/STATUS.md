@@ -349,7 +349,11 @@ Bereits erledigt:
     Trip-/Delta-Input wird weiterhin bewusst nicht in die aktuelle
     Core-Semantik eingemischt. `TSK-0027` bleibt auf Car-Kontext,
     `--receipt-link`, lokale Receipt-Pfadnormalisierung und lokale
-    Existenz-Guidance begrenzt.
+    Existenz-Guidance begrenzt. Der zusaetzliche Realnutzungsbefund
+    `ISS-0010` ist jetzt separat verankert: `TSK-0028` bereitet die
+    spaetere Entkopplung der `P-050`-Reset-Guidance vom normalen
+    Fuelup-Flow vor, waehrend `P-012` fuer grosse Distanzluecken
+    ausdruecklich unberuehrt bleibt.
   - Ein spaeterer Folgeblock `BL-0032` bleibt bewusst optional:
     externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
     XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und

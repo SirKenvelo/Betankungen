@@ -95,6 +95,14 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Tracker: `ISS-0010` dokumentiert jetzt den realen
+  Nutzungsbefund, dass `P-050` bei normalen kurzen Fuelup-Distanzen im
+  aktuellen Add-Flow irrefuehrend wirkt. Unter `BL-0031` ist dafuer
+  `TSK-0028` neu angelegt, um die spaetere Entkopplung der
+  `P-050`-Reset-Guidance vom normalen Fuelup-Flow sauber von `TSK-0027`
+  zu trennen; `P-012` fuer grosse Distanzluecken bleibt ausdruecklich
+  unberuehrt. `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md` und
+  `docs/SPRINTS.md` fuehren denselben Planungsstand. (2026-04-03)
 - [S37C2/2] Docs/Traceability: Sprint 37 und der Abschluss von `TSK-0026`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruennen Abschlussnachweis ueber
@@ -738,6 +746,9 @@ schliessen.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Tracker-/Planungs-Sync fuer `ISS-0010`, `TSK-0028` und den zugehoerigen
+  BL-/Status-/Traceability-Stand erfolgte mit Unterstuetzung durch AI-Tools
+  als Sparringspartner. (2026-04-03)
 - Odometer-Contract-Hardening, Tracker-Sync und Sprint-32-Traceability
   erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
   (2026-03-31)

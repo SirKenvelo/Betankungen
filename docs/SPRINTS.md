@@ -3,6 +3,39 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 37 - P-050 reset guidance follow-up
+
+- Status: done
+- Ziel: den zusaetzlichen Realnutzungsbefund rund um `P-050` als getrennten
+  Tracker-Folgeblock verankern, ohne `TSK-0027` umzuschneiden oder
+  Runtime-Aenderungen an `--add fuelups` vorzuziehen.
+
+### Stand (2026-04-03)
+
+- Der vorherige P1/P2-Delta-Audit blieb gruen; `ISS-0010` haelt den
+  spaeteren orange markierten Realnutzungsbefund jetzt bewusst getrennt
+  fest.
+- `ISS-0010` dokumentiert, dass die aktuelle `P-050`-Rueckfrage bei
+  normalen kurzen Distanzen im Add-Flow irrefuehrend wirkt.
+- `TSK-0028` liegt neu unter `BL-0031` und schneidet die spaetere
+  Runtime-Folgearbeit so, dass `P-050` vom normalen Fuelup-Flow entkoppelt
+  wird.
+- `P-012` fuer grosse Distanzluecken bleibt ausdruecklich unberuehrt; ein
+  moeglicher manueller Reset bei kleiner Distanz bleibt hoechstens eine
+  explizite Ausnahmefuehrung.
+- `TSK-0027` bleibt als offener Guidance-Block fuer Car-Kontext,
+  `--receipt-link`, lokale Receipt-Pfadnormalisierung und lokale
+  Existenz-Guidance bestehen.
+- `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md` und
+  `docs/CHANGELOG.md` fuehren denselben Planungsstand; der Block bleibt
+  bewusst tracker-seitig und zieht keine Runtime-Aenderung an
+  `--add fuelups` vor.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## Sprint 37 - Fuelup Odometer Guidance klarziehen
 
 - Status: done
