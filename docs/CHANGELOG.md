@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S38C1/2 - Sichtbaren Fahrzeugkontext, fruehe Receipt-Link-Guidance und lokale Receipt-Pfadnormalisierung im Fuelup-Add-Flow geliefert (`units/u_car_context.pas`, `units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_38_commit_1_von_2.md`, `.artifacts/sprint_38_commit_1_von_2.diff`; Basis-Commit: `1e6ef9e`. (2026-04-03)
 - S37C1/2 - Fuelup-Prompt, Help und Doku auf expliziten Gesamt-Odometer-Contract gezogen (`units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`); Artefakte: `.artifacts/sprint_37_commit_1_von_2.md`, `.artifacts/sprint_37_commit_1_von_2.diff`; Basis-Commit: `cdd0aeb`. (2026-04-03)
 - S36C1/2 - Fuelup-Guidance- und Kilometerstands-Semantik fuer die naechste Core-UX-Stufe gerahmt (`docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `docs/ADR/ADR-0014-fuelup-mileage-input-semantics.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/ADR/README.md`); Artefakte: `.artifacts/sprint_36_commit_1_von_2.md`, `.artifacts/sprint_36_commit_1_von_2.diff`; Basis-Commit: `d243df3`. (2026-04-02)
 - S35C1/2 - Minimales Charging-Event- und Storage-Modell fuer `betankungen-ev` definiert (`docs/backlog/BL-0030-ev-companion-feasibility-spike/item.md`, `docs/backlog/BL-0030-ev-companion-feasibility-spike/tasks/TSK-0025-evaluate-charging-event-minimum-and-storage-boundary.md`, `docs/MODULES_ARCHITECTURE.md`, `docs/BACKLOG.md`, `docs/STATUS.md`); Artefakte: `.artifacts/sprint_35_commit_1_von_2.md`, `.artifacts/sprint_35_commit_1_von_2.diff`; Basis-Commit: `b613acd`. (2026-04-01)
@@ -95,6 +96,14 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S38C2/2] Docs/Traceability: Sprint 38 und der Abschluss von `TSK-0027`
+  sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  Der Sprint dokumentiert den gruennen Abschlussnachweis ueber
+  `tests/regression/run_receipt_link_contract_check.sh`,
+  `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`,
+  `scripts/projtrack_lint.sh`, `make verify` sowie einen manuellen
+  Realtest fuer gueltigen lokalen Pfad, fehlende lokale Datei und den Lauf
+  ohne `--receipt-link`. (2026-04-03)
 - [S38C1/2] Feat/Fuelups: `--add fuelups` zeigt den aktiven
   Fahrzeugkontext jetzt frueh und explizit an, kommuniziert den
   Vorab-Charakter von `--receipt-link` im Add-Flow und haertet lokale

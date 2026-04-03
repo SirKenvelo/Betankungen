@@ -3,6 +3,62 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## Sprint 38 - Fuelup Car-Kontext und Receipt-Guidance haerten
+
+- Status: done
+- Ziel: den zweiten UX-Block aus `BL-0031` im laufenden Add-Flow liefern,
+  ohne den append-only-Contract aufzuweichen oder `P-050` vorzeitig
+  umzuschneiden.
+
+### Geplante Bloecke
+
+- S38C1/2: done - Runtime, Help, Tracker und Regressionen auf sichtbaren
+  Car-Kontext, fruehe `--receipt-link`-Guidance und lokale
+  Receipt-Pfadnormalisierung ziehen.
+- S38C2/2: done - Sprint-Traceability, Vollverifikation und Abschluss von
+  `TSK-0027` dokumentieren.
+
+### Fortschritt (2026-04-03)
+
+- `S38C1/2` abgeschlossen:
+  - `units/u_car_context.pas` liefert jetzt ein explizites Label fuer den
+    aktiven Fahrzeugkontext.
+  - `units/u_fuelups.pas` zeigt dieses Label zu Beginn von `--add fuelups`
+    sichtbar an, kommuniziert den Vorab-Charakter von `--receipt-link`
+    frueh, normalisiert lokale absolute Receipt-Pfade vor der Persistenz auf
+    einen kanonischen `file://`-Wert und fragt bei fehlenden lokalen
+    Dateien per Warning+Confirm nach.
+  - `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md` und
+    `docs/README.md` fuehren denselben Guidance-Contract.
+  - `ISS-0009` ist `resolved`, `TSK-0027` ist `done`, `BL-0031` bleibt
+    wegen `TSK-0028` bewusst `in_progress`.
+  - `tests/regression/run_receipt_link_contract_check.sh`,
+    `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`
+    und `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`
+    decken den neuen Contract regressionsseitig ab.
+  - Git-Commit: `1e6ef9e`
+  - Artefakte: `.artifacts/sprint_38_commit_1_von_2.md`,
+    `.artifacts/sprint_38_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S38C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 38 jetzt mit
+    Hash-, Tracker- und Verifikationsbezug.
+  - Der Abschlusslauf dokumentiert bewusst den verbleibenden Scope:
+    `TSK-0028` fuer die spaetere `P-050`-Entkopplung bleibt offen; es wurde
+    weder ein neuer Fuelup-Edit-Path noch eine app-verwaltete Receipt-
+    Ablage eingefuehrt.
+
+### Validierung
+
+- `tests/regression/run_receipt_link_contract_check.sh`
+- `tests/smoke/smoke_cli.sh`
+- `tests/smoke/smoke_multi_car_context.sh`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+- Manueller Realtest:
+  - gueltiger lokaler Pfad via `--receipt-link /abs/pfad/...`
+  - fehlende lokale Datei via `file://`-URI mit Confirm=`n`
+  - Lauf ohne `--receipt-link`
+
 ## General-Stream nach Sprint 37 - P-050 reset guidance follow-up
 
 - Status: done
