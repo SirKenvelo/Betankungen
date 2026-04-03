@@ -1,18 +1,18 @@
 ---
 id: ISS-0009
 title: Fuelup add flow hides active car context and receipt-link timing
-status: open
+status: resolved
 priority: P2
 type: problem
 tags: [fuelups, cars, receipts, guidance, ux, needs-tests]
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-04-03
 related:
   - BL-0021
   - BL-0031
   - ISS-0006
 ---
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 # Summary
 The interactive `--add fuelups` flow currently makes two important pieces of
@@ -51,9 +51,9 @@ fuelup under the wrong mental context and makes the receipt-link feature easy
 to miss despite the append-only design.
 
 # Acceptance Criteria
-- [ ] The add flow makes the active car context visible before data entry
+- [x] The add flow makes the active car context visible before data entry
       continues.
-- [ ] User-facing help/docs explain that `--receipt-link` must be provided
+- [x] User-facing help/docs explain that `--receipt-link` must be provided
       before the interactive add flow starts.
-- [ ] The append-only nature of `fuelups` is referenced where this guidance is
+- [x] The append-only nature of `fuelups` is referenced where this guidance is
       needed most.

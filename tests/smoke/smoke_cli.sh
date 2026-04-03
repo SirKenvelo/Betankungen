@@ -159,7 +159,7 @@ print_plan() {
   printf '[LIST] Betankungen --help\n'
   printf '[LIST] --help enthaelt Struktur-Keywords (Commands/Stats options/Examples/--yearly/--dashboard)\n'
   printf '[LIST] --help enthaelt Odometer-Guidance fuer --add fuelups\n'
-  printf '[LIST] --help enthaelt Receipt-Link-Option (--receipt-link)\n'
+  printf '[LIST] --help enthaelt Receipt-Link-Guidance (Option, append-only, file://-Normalisierung)\n'
   printf '[LIST] --receipt-link ausserhalb --add fuelups -> Validierungsfehler\n'
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
   printf '[LIST] --stats fuelups --json --csv -> Fehler im 3-Zeilen-Format ohne Voll-Help\n'
@@ -318,10 +318,14 @@ test_help_mentions_receipt_link() {
   rc=$?
   set -e
 
-  if [[ $rc -eq 0 ]] && grep -q -- '--receipt-link <path|uri>' "$out"; then
-    printf '[OK] --help enthaelt --receipt-link\n'
+  if [[ $rc -eq 0 ]] &&
+     grep -q -- '--receipt-link <path|uri>' "$out" &&
+     grep -q 'fuelups bleiben append-only' "$out" &&
+     grep -q 'Lokale absolute Receipt-Pfade werden vor dem Speichern auf einen kanonischen' "$out" &&
+     grep -q 'file://-Wert normalisiert; fehlt die lokale Datei, folgt eine Warnung mit Confirm.' "$out"; then
+    printf '[OK] --help enthaelt Receipt-Link-Guidance\n'
   else
-    printf '[FAIL] --help enthaelt --receipt-link\n'
+    printf '[FAIL] --help enthaelt Receipt-Link-Guidance\n'
     add_fail
   fi
 }

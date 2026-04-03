@@ -95,6 +95,20 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S38C1/2] Feat/Fuelups: `--add fuelups` zeigt den aktiven
+  Fahrzeugkontext jetzt frueh und explizit an, kommuniziert den
+  Vorab-Charakter von `--receipt-link` im Add-Flow und haertet lokale
+  Receipt-Links ohne neuen Edit-Path. `units/u_car_context.pas` liefert
+  dafuer ein sichtbares Car-Kontext-Label; `units/u_fuelups.pas`
+  normalisiert lokale absolute Receipt-Pfade vor der Persistenz auf einen
+  kanonischen `file://`-Wert und fragt bei fehlenden lokalen Dateien per
+  Warning+Confirm nach, statt die Referenz still zu uebernehmen.
+  `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`,
+  `docs/README.md`, `ISS-0009`, `BL-0031` und `TSK-0027` fuehren
+  denselben Guidance-Contract; `tests/regression/run_receipt_link_contract_check.sh`,
+  `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`
+  und `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`
+  decken die neue Add-Flow-Guidance regressionsseitig ab. (2026-04-03)
 - [General] Docs/Tracker: `ISS-0010` dokumentiert jetzt den realen
   Nutzungsbefund, dass `P-050` bei normalen kurzen Fuelup-Distanzen im
   aktuellen Add-Flow irrefuehrend wirkt. Unter `BL-0031` ist dafuer

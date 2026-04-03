@@ -92,9 +92,8 @@ Eingabe bei `--add fuelups`:
   - mit `--car-id <id>`: diese ID wird auf Existenz validiert
   - ohne `--car-id`: bei genau einem Fahrzeug automatische Auswahl
   - ohne `--car-id` und 0 oder >1 Fahrzeuge: Hard Error mit Hinweis
-  - bei genau einem Fahrzeug bleibt dieses Fahrzeug fuer den gesamten
-    Add-Flow aktiv; wer den Kontext vorab explizit sehen will, kann
-    `Betankungen --list cars` nutzen oder `--car-id <id>` bewusst setzen
+  - zu Beginn des Add-Flows wird der aktive Fahrzeugkontext explizit als
+    `Aktiver Fahrzeugkontext: <Name> (ID <id>)` angezeigt
 - Auswahl der Tankstelle (Liste mit IDs)
 - Datum+Uhrzeit: `YYYY-MM-DD HH:MM:SS`
 - Aktueller Gesamt-Kilometerstand des Fahrzeugs (km)
@@ -116,9 +115,19 @@ Eingabe bei `--add fuelups`:
 - Wenn ein Beleg-Link gespeichert werden soll, muss `--receipt-link` bereits
   **vor** dem Start von `--add fuelups` gesetzt werden; der interaktive Dialog
   fragt diesen Wert aktuell nicht noch einmal separat ab.
+- Der Add-Flow zeigt diesen Vorab-Contract frueh an:
+  - ohne `--receipt-link`: expliziter Hinweis, dass der Fuelup ohne Link
+    gespeichert wird
+  - mit `--receipt-link`: expliziter Hinweis, welcher Link mit diesem Fuelup
+    gespeichert wird
 - Wichtig: `fuelups` bleiben append-only und koennen spaeter nicht per
   `--edit fuelups` nachbearbeitet werden.
 - Guardrails fuer `--receipt-link`: nur bei `--add fuelups`, nicht leer, keine Steuerzeichen.
+- Lokale absolute Receipt-Pfade werden vor der Persistenz auf einen
+  kanonischen `file://`-Wert normalisiert.
+- Wenn ein lokaler absoluter Pfad oder eine lokale `file://`-URI auf keine
+  vorhandene Datei zeigt, folgt vor der weiteren Eingabe eine explizite
+  Warning+Confirm-Guidance statt stiller Annahme.
 
 Policy-Hinweis (Matrix v1):
 - Hard Error ohne Write: `P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`.

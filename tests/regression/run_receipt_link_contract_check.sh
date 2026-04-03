@@ -3,8 +3,9 @@ set -euo pipefail
 
 # run_receipt_link_contract_check.sh
 # CREATED: 2026-03-18
-# UPDATED: 2026-04-02
-# Regression fuer Receipt-Link-Contract (Scope-Guardrails, Write-Path, Text/JSON-Sichtbarkeit).
+# UPDATED: 2026-04-03
+# Regression fuer Receipt-Link-Contract (Scope-Guardrails, Write-Path, lokale
+# Pfadnormalisierung, Missing-File-Guidance, Text/JSON-Sichtbarkeit).
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BIN_FILE="$ROOT_DIR/bin/Betankungen"
@@ -74,6 +75,15 @@ assert_not_contains() {
   fi
 }
 
+to_file_uri() {
+  python3 - "$1" <<'PY'
+import pathlib
+import sys
+
+print(pathlib.Path(sys.argv[1]).resolve().as_uri())
+PY
+}
+
 main() {
   require_tool sqlite3
   require_tool python3
@@ -96,15 +106,41 @@ INSERT OR IGNORE INTO stations(
 SQL
   ok "Test-Station angelegt"
 
-  # Write-Path: validierter Link via --receipt-link im Add-Flow speichern.
-  run_expect_ok "Add fuelup mit --receipt-link" bash -lc "
-    printf '1\n2026-03-17 10:00:00\n1000\n50,01\n30,00\n1,667\ny\n\n\n\n\n' | \"$BIN_FILE\" --add fuelups --car-id 1 --receipt-link file:///data/receipts/first.jpg
+  local existing_receipt
+  local existing_uri
+  local missing_receipt
+  local missing_uri
+  mkdir -p "$TMP_DIR/receipts"
+  existing_receipt="$TMP_DIR/receipts/first receipt.jpg"
+  printf 'dummy receipt\n' >"$existing_receipt"
+  existing_uri="$(to_file_uri "$existing_receipt")"
+  missing_receipt="$TMP_DIR/receipts/missing receipt.jpg"
+  missing_uri="$(to_file_uri "$missing_receipt")"
+
+  # Write-Path: absoluter lokaler Pfad wird auf kanonisches file:// normalisiert.
+  run_expect_ok "Add fuelup mit lokalem Receipt-Pfad" bash -lc "
+    printf '1\n2026-03-17 10:00:00\n1000\n50,01\n30,00\n1,667\ny\n\n\n\n\n' | \"$BIN_FILE\" --add fuelups --car-id 1 --receipt-link \"$existing_receipt\"
   "
 
   local saved_link
   saved_link="$(sqlite3 "$DB_FILE" "SELECT COALESCE(receipt_link,'') FROM fuelups WHERE id=1;")"
-  [[ "$saved_link" == "file:///data/receipts/first.jpg" ]] || fail "Write-Path: receipt_link wurde nicht korrekt gespeichert"
-  ok "Write-Path persistiert receipt_link"
+  [[ "$saved_link" == "$existing_uri" ]] || fail "Write-Path: receipt_link wurde nicht als kanonischer file://-Wert gespeichert"
+  assert_contains "$LAST_OUT" "Aktiver Fahrzeugkontext: Hauptauto (ID 1)" "Add-Flow zeigt den aktiven Fahrzeugkontext nicht."
+  assert_contains "$LAST_OUT" "Receipt-Link (vorab): $existing_uri" "Add-Flow zeigt den normalisierten Receipt-Link nicht."
+  assert_contains "$LAST_OUT" "Lokale Receipt-Referenzen werden kanonisch als file:// gespeichert." "Add-Flow nennt die lokale Path-Normalisierung nicht."
+  ok "Write-Path persistiert normalisierten receipt_link"
+
+  local count_before_missing
+  local count_after_missing
+  count_before_missing="$(sqlite3 "$DB_FILE" "SELECT COUNT(*) FROM fuelups;")"
+  run_expect_fail "Missing local receipt-link bricht nach Confirm=NO ab" bash -lc "
+    printf 'n\n' | \"$BIN_FILE\" --add fuelups --car-id 1 --receipt-link \"$missing_uri\"
+  "
+  count_after_missing="$(sqlite3 "$DB_FILE" "SELECT COUNT(*) FROM fuelups;")"
+  [[ "$count_after_missing" == "$count_before_missing" ]] || fail "Missing-File-Abbruch hat trotzdem einen Fuelup gespeichert"
+  assert_contains "$LAST_OUT" "Warnung: Lokale Receipt-Datei nicht gefunden" "Missing-File-Warnung fuer lokalen Receipt-Link fehlt."
+  assert_contains "$LAST_ERR" "fehlende lokale Receipt-Datei" "Abbruchtext fuer fehlende lokale Receipt-Datei fehlt."
+  ok "Missing-File-Guidance fuer lokale Receipt-Links"
 
   # Zweiter Datensatz ohne Link fuer gesetzt/fehlend-Matrix.
   sqlite3 "$DB_FILE" <<'SQL'
@@ -124,7 +160,7 @@ SQL
 
   run_expect_ok "List detail zeigt Receipt-Link" "$BIN_FILE" --list fuelups --detail --car-id 1
   assert_contains "$LAST_OUT" "Car: Hauptauto" "Detail-Ausgabe enthaelt den Fahrzeugkontext nicht separat."
-  assert_contains "$LAST_OUT" "Receipt link: file:///data/receipts/first.jpg" "Detail-Ausgabe enthaelt den gesetzten Receipt-Link nicht."
+  assert_contains "$LAST_OUT" "Receipt link: $existing_uri" "Detail-Ausgabe enthaelt den gesetzten Receipt-Link nicht."
   ok "Detail-Ausgabe zeigt Receipt-Link"
 
   run_expect_ok "Stats fuelups JSON full" "$BIN_FILE" --stats fuelups --json --car-id 1

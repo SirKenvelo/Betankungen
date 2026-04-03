@@ -81,6 +81,123 @@ const
   // Knappe, aber explizite Guidance fuer den kanonischen Odometer-Contract.
   ODOMETER_KM_PROMPT = 'Aktueller Gesamt-Kilometerstand des Fahrzeugs (km): ';
 
+function IsAsciiAlpha(const C: Char): Boolean;
+begin
+  Result := (C in ['A'..'Z']) or (C in ['a'..'z']);
+end;
+
+function IsAbsoluteLocalPath(const S: string): Boolean;
+var
+  T: string;
+begin
+  T := Trim(S);
+  if T = '' then
+    Exit(False);
+
+  Result := T[1] = PathDelim;
+  {$IFDEF Windows}
+  if (not Result) and (Length(T) >= 3) then
+    Result := IsAsciiAlpha(T[1]) and (T[2] = ':') and (T[3] in ['\', '/']);
+  {$ENDIF}
+end;
+
+function HexDigitValue(const C: Char): Integer;
+begin
+  case C of
+    '0'..'9': Result := Ord(C) - Ord('0');
+    'A'..'F': Result := 10 + Ord(C) - Ord('A');
+    'a'..'f': Result := 10 + Ord(C) - Ord('a');
+  else
+    Result := -1;
+  end;
+end;
+
+function DecodePercentEncoded(const S: string): string;
+var
+  I: Integer;
+  Hi, Lo: Integer;
+  B: Byte;
+begin
+  Result := '';
+  I := 1;
+  while I <= Length(S) do
+  begin
+    if (S[I] = '%') and (I + 2 <= Length(S)) then
+    begin
+      Hi := HexDigitValue(S[I + 1]);
+      Lo := HexDigitValue(S[I + 2]);
+      if (Hi >= 0) and (Lo >= 0) then
+      begin
+        B := (Hi shl 4) or Lo;
+        Result := Result + Chr(B);
+        Inc(I, 3);
+        Continue;
+      end;
+    end;
+
+    Result := Result + S[I];
+    Inc(I);
+  end;
+end;
+
+function EncodeFileUriPath(const Path: string): string;
+var
+  I: Integer;
+  Ch: Char;
+begin
+  Result := '';
+  for I := 1 to Length(Path) do
+  begin
+    Ch := Path[I];
+    if Ch = '\' then
+      Ch := '/';
+
+    if (Ch in ['A'..'Z', 'a'..'z', '0'..'9', '-', '_', '.', '~', '/']) then
+      Result := Result + Ch
+    else
+      Result := Result + '%' + IntToHex(Ord(Path[I]), 2);
+  end;
+end;
+
+function TryFileUriToLocalPath(const Uri: string; out LocalPath: string): Boolean;
+var
+  T: string;
+begin
+  LocalPath := '';
+  T := Trim(Uri);
+
+  if AnsiStartsText('file://localhost/', T) then
+    LocalPath := DecodePercentEncoded(Copy(T, 17, MaxInt))
+  else if AnsiStartsText('file:///', T) then
+    LocalPath := DecodePercentEncoded(Copy(T, 8, MaxInt))
+  else
+    Exit(False);
+
+  Result := IsAbsoluteLocalPath(LocalPath);
+end;
+
+function NormalizeLocalReceiptLink(const RawLink: string; out NormalizedLink, LocalPath: string): Boolean;
+var
+  T: string;
+begin
+  T := Trim(RawLink);
+  NormalizedLink := T;
+  LocalPath := '';
+
+  if T = '' then
+    Exit(False);
+
+  if IsAbsoluteLocalPath(T) then
+    LocalPath := ExpandFileName(T)
+  else if TryFileUriToLocalPath(T, LocalPath) then
+    LocalPath := ExpandFileName(LocalPath)
+  else
+    Exit(False);
+
+  NormalizedLink := 'file://' + EncodeFileUriPath(LocalPath);
+  Result := True;
+end;
+
 // Prueft strikt das erwartete ISO-Format "YYYY-MM-DD HH:MM:SS".
 function TryParseFueledAtIso(const S: string; out DT: TDateTime): boolean;
 var
@@ -389,6 +506,10 @@ var
   MissedPreviousConfirmed: boolean;
   ExpectedTotalCents: Int64;
   DeltaCents: Int64;
+  CarContextLabel: string;
+  RawReceiptLink: string;
+  ReceiptLinkLocalPath: string;
+  ReceiptLinkIsLocal: Boolean;
 
   // Setzt optionale String-Parameter (leerer String wird zu NULL)
   procedure SetOptStr(const P, V: string);
@@ -405,6 +526,48 @@ var
     if Tran.Active then
       Tran.Rollback;
     raise Exception.Create(Prefix + E.Message);
+  end;
+
+  procedure PrintFuelupContextGuidance;
+  begin
+    WriteLn('Aktiver Fahrzeugkontext: ', CarContextLabel);
+
+    if Inp.ReceiptLink = '' then
+    begin
+      WriteLn('Receipt-Link: keiner vorgegeben.');
+      WriteLn('Hinweis: Wenn du einen Beleg speichern willst, starte diesen Add-Flow mit --receipt-link <path|uri>.');
+      WriteLn('Hinweis: Fuelups bleiben append-only; ein Receipt-Link kann spaeter nicht nachgetragen werden.');
+      WriteLn('Hinweis: Lokale absolute Pfade werden vor dem Speichern auf einen kanonischen file://-Wert normalisiert.');
+    end
+    else
+    begin
+      WriteLn('Receipt-Link (vorab): ', Inp.ReceiptLink);
+      WriteLn('Hinweis: Dieser Link wird jetzt zusammen mit dem Fuelup gespeichert; fuelups bleiben append-only.');
+      if ReceiptLinkIsLocal then
+        WriteLn('Hinweis: Lokale Receipt-Referenzen werden kanonisch als file:// gespeichert.');
+    end;
+
+    WriteLn;
+  end;
+
+  procedure PrepareReceiptLink;
+  begin
+    RawReceiptLink := Trim(ReceiptLink);
+    Inp.ReceiptLink := RawReceiptLink;
+    ReceiptLinkIsLocal := NormalizeLocalReceiptLink(RawReceiptLink, Inp.ReceiptLink, ReceiptLinkLocalPath);
+  end;
+
+  procedure ConfirmMissingLocalReceiptOrFail;
+  begin
+    if ReceiptLinkIsLocal and (not FileExists(ReceiptLinkLocalPath)) then
+    begin
+      if not AskYesNo(
+        'Warnung: Lokale Receipt-Datei nicht gefunden (' + ReceiptLinkLocalPath + '). ' +
+        'Fuelups bleiben append-only; der Link kann spaeter nicht nachgetragen werden. Trotzdem mit diesem Receipt-Link fortfahren?',
+        True
+      ) then
+        raise Exception.Create('Abbruch durch Benutzer (fehlende lokale Receipt-Datei).');
+    end;
   end;
 begin
   WriteLn('--- Neue Betankung erfassen ---');
@@ -430,7 +593,10 @@ begin
     
     try
       Inp.CarId := ResolveCarIdOrFail(DbPath, CarId);
-      Inp.ReceiptLink := Trim(ReceiptLink);
+      CarContextLabel := DescribeCarContextOrFail(DbPath, Inp.CarId);
+      PrepareReceiptLink;
+      PrintFuelupContextGuidance;
+      ConfirmMissingLocalReceiptOrFail;
 
       Inp.StationId := SelectStationIdInteractive(QS);
       Inp.FueledAt := AskRequired('Datum+Uhrzeit (YYYY-MM-DD HH:MM:SS): ');

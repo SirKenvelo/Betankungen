@@ -93,7 +93,13 @@ Ein umsetzungsreifer Hardening-Block fuer den laufenden Fuelup-UX-Sprint:
 `TSK-0026` ist umgesetzt und zieht Prompting, Help und Benutzerdoku auf die
 akzeptierte Gesamt-Odometer-Semantik aus `ADR-0014`. Offen bleiben der zweite
 Problemfall (`ISS-0009`), Receipt-Link-Normalisierung/Existenz-Guidance und
-die dazu sauber abgegrenzte Folgeaufgabe `TSK-0027`. Zusaetzlich haelt
+die dazu sauber abgegrenzte Folgeaufgabe `TSK-0027`. Sprint 38 hat diesen
+zweiten Guidance-Block inzwischen geliefert: Der Add-Flow zeigt den aktiven
+Fahrzeugkontext explizit, kommuniziert den Vorab-Charakter von
+`--receipt-link` frueh, normalisiert lokale absolute Pfade auf einen
+kanonischen `file://`-Speicherwert und warnt bei fehlenden lokalen Dateien
+mit Confirm statt stiller Annahme. Offen bleibt damit nur noch der spaetere
+`P-050`-Folgeblock `TSK-0028`. Zusaetzlich haelt
 `ISS-0010` den spaeteren Realnutzungsbefund fest, dass `P-050` im normalen
 Flow fuer kurze Distanzen irrefuehrend wirkt; `TSK-0028` schneidet daraus
 einen separaten Folgeauftrag, der `P-050` spaeter vom normalen Fuelup-Flow
@@ -106,6 +112,6 @@ bleibt als separater Folge-BL (`BL-0032`) vorgemerkt.
   Gesamt-Odometer ausrichten. (done)
 - `TSK-0027` - Car-Kontext und Receipt-Link-Timing im Fuelup-Add-Flow
   sichtbar machen, lokale Receipt-Pfade normalisieren und lokale
-  Existenz-Guidance ergaenzen. (todo)
+  Existenz-Guidance ergaenzen. (done)
 - `TSK-0028` - `P-050`-Reset-Guidance vom normalen Fuelup-Flow entkoppeln,
   waehrend `P-012` fuer grosse Distanzluecken unveraendert bleibt. (todo)

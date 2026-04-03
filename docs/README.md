@@ -100,12 +100,13 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `BL-0031` ist als kleiner Core-UX-Block fuer Fuelups aktiv:
     `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
     `TSK-0026` zieht Prompt, Help und Benutzerdoku explizit auf den
-    aktuellen Gesamt-Kilometerstand des Fahrzeugs; offen bleiben `TSK-0027`
-    fuer Car-Kontext, `--receipt-link`, lokale Receipt-Pfadnormalisierung
-    und lokale Existenz-Guidance sowie `TSK-0028` fuer die spaetere
-    Entkopplung der `P-050`-Reset-Guidance vom normalen Fuelup-Flow bei
-    kleinen Distanzen; `P-012` fuer grosse Distanzluecken bleibt
-    ausdruecklich unberuehrt
+    aktuellen Gesamt-Kilometerstand des Fahrzeugs; `TSK-0027` liefert
+    jetzt sichtbaren Car-Kontext im Add-Flow, fruehe `--receipt-link`-
+    Guidance, lokale Receipt-Pfadnormalisierung auf `file://` sowie
+    Missing-File-Warnungen mit Confirm; offen bleibt nur noch `TSK-0028`
+    fuer die spaetere Entkopplung der `P-050`-Reset-Guidance vom normalen
+    Fuelup-Flow bei kleinen Distanzen; `P-012` fuer grosse
+    Distanzluecken bleibt ausdruecklich unberuehrt
   - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
     benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
     XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
