@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-03-31
+# UPDATED: 2026-04-03
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -158,6 +158,7 @@ print_plan() {
   printf '[LIST] Betankungen --version\n'
   printf '[LIST] Betankungen --help\n'
   printf '[LIST] --help enthaelt Struktur-Keywords (Commands/Stats options/Examples/--yearly/--dashboard)\n'
+  printf '[LIST] --help enthaelt Odometer-Guidance fuer --add fuelups\n'
   printf '[LIST] --help enthaelt Receipt-Link-Option (--receipt-link)\n'
   printf '[LIST] --receipt-link ausserhalb --add fuelups -> Validierungsfehler\n'
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
@@ -321,6 +322,28 @@ test_help_mentions_receipt_link() {
     printf '[OK] --help enthaelt --receipt-link\n'
   else
     printf '[FAIL] --help enthaelt --receipt-link\n'
+    add_fail
+  fi
+}
+
+test_help_mentions_odometer_guidance() {
+  local home out err rc
+
+  home="$(register_tmp_dir)"
+  out="$home/out.txt"
+  err="$home/err.txt"
+
+  set +e
+  HOME="$home" "$ROOT_DIR/bin/Betankungen" --help >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'Bei --add fuelups ist der Kilometerstand immer der aktuelle Gesamt-Kilometerstand' "$out" &&
+     grep -q 'nicht die Strecke seit der letzten Tankung' "$out"; then
+    printf '[OK] --help enthaelt Odometer-Guidance fuer --add fuelups\n'
+  else
+    printf '[FAIL] --help enthaelt Odometer-Guidance fuer --add fuelups\n'
     add_fail
   fi
 }
@@ -1318,6 +1341,7 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   run_check "Betankungen --version" "$ROOT_DIR/bin/Betankungen" --version
   run_check "Betankungen --help" "$ROOT_DIR/bin/Betankungen" --help
   test_help_keywords_stable
+  test_help_mentions_odometer_guidance
   test_help_mentions_receipt_link
   test_receipt_link_scope_guardrail_fails
   test_stats_stations_fails_short_usage

@@ -11,7 +11,7 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-03-31
+# UPDATED: 2026-04-03
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -158,9 +158,10 @@ RC=$?
 set -e
 COUNT_AFTER_NEG_ONE="$(sqlite3 "$DB_ONE" "SELECT COUNT(*) FROM fuelups;")"
 if [[ $RC -eq 0 ]] ||
+   ! grep -Fq 'Aktueller Gesamt-Kilometerstand des Fahrzeugs (km):' "$OUT" ||
    ! grep -q 'odometer_km muss eine Ganzzahl >= 0 sein' "$ERR" ||
    [[ "$COUNT_AFTER_NEG_ONE" != "$COUNT_BEFORE_NEG_ONE" ]]; then
-  fail 'Matrix 1 Car: negativer odometer_km ohne --car-id wurde nicht konsistent als Hard Error geblockt.'
+  fail 'Matrix 1 Car: Prompt- und Hard-Error-Contract fuer den Gesamt-Odometer ohne --car-id ist inkonsistent.'
 fi
 
 set +e

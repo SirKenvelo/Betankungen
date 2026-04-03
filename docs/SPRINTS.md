@@ -1,7 +1,51 @@
 # SPRINTS
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## Sprint 37 - Fuelup Odometer Guidance klarziehen
+
+- Status: done
+- Ziel: den Fuelup-Kilometerstands-Prompt, Help und Benutzerdoku auf den
+  kanonischen Gesamt-Odometer des Fahrzeugs ziehen, ohne einen
+  Trip-/Delta-Modus einzufuehren.
+
+### Geplante Bloecke
+
+- S37C1/2: done - Prompt, Help, Benutzerdoku, Tracker und Smoke-Checks auf
+  die explizite Gesamt-KM-Semantik ziehen.
+- S37C2/2: done - Sprint-Traceability und Vollverifikation fuer `TSK-0026`
+  finalisieren.
+
+### Fortschritt (2026-04-03)
+
+- `S37C1/2` abgeschlossen:
+  - `units/u_fuelups.pas` fragt jetzt nach dem aktuellen
+    Gesamt-Kilometerstand des Fahrzeugs.
+  - `units/u_cli_help.pas` nennt denselben Fuelup-Contract jetzt explizit.
+  - `docs/BENUTZERHANDBUCH.md` und `docs/README.md` verwenden dieselbe
+    Terminologie fuer `odometer_km`.
+  - `ISS-0008` ist `resolved`, `TSK-0026` ist `done`, `BL-0031` ist
+    `in_progress`.
+  - `tests/smoke/smoke_cli.sh` und
+    `tests/smoke/smoke_multi_car_context.sh` sichern Help- und
+    Prompt-Guidance regressionsseitig ab.
+  - Git-Commit: `cdd0aeb`
+  - Artefakte: `.artifacts/sprint_37_commit_1_von_2.md`,
+    `.artifacts/sprint_37_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S37C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 37 jetzt mit
+    Hash-, Tracker- und Verifikationsbezug.
+  - Der Sprint bleibt bewusst auf Wording-/Guidance-Haertung begrenzt:
+    kein Trip-/Delta-Modus, kein Umbau des Add-Flows und keine
+    Receipt-Link-Normalisierung wurden vorgezogen.
+
+### Validierung
+
+- `tests/smoke/smoke_multi_car_context.sh`
+- `tests/smoke/smoke_cli.sh`
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## Sprint 36 - Fuelup Guidance und Kilometerstands-Semantik rahmen
 

@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -341,14 +341,15 @@ Bereits erledigt:
     `cost_cents` als Pflichtfeldern sowie optionalem `odometer_km`,
     `location_id` und `notes`, plus modul-lokale `charging_locations` und
     `module_meta`.
-  - Als naechster kleiner Core-UX-Block ist `BL-0031` vorbereitet:
-    `ISS-0008` und `ISS-0009` halten die offenen Fuelup-Funde fuer
-    Kilometerstands-Semantik sowie Car-/Receipt-Link-Guidance fest.
-    `ADR-0014` akzeptiert dazu `odometer_km` explizit als kanonischen
-    Gesamt-Kilometerstand; ein moeglicher Trip-/Delta-Input bleibt
-    bewusst ein spaeterer Komfortmodus und wird nicht stillschweigend in die
-    aktuelle Core-Semantik eingemischt. `TSK-0027` umfasst zusaetzlich
-    lokale Receipt-Pfadnormalisierung und lokale Existenz-Guidance.
+  - `BL-0031` ist als kleiner Core-UX-Block aktiv:
+    `ISS-0008` ist mit `TSK-0026` aufgeloest; Prompt, Help und
+    Benutzerdoku benennen den Kilometerstand fuer `--add fuelups` jetzt
+    explizit als aktuellen Gesamt-Kilometerstand des Fahrzeugs.
+    `ADR-0014` bleibt dabei die kanonische Semantikbasis; ein moeglicher
+    Trip-/Delta-Input wird weiterhin bewusst nicht in die aktuelle
+    Core-Semantik eingemischt. `TSK-0027` bleibt auf Car-Kontext,
+    `--receipt-link`, lokale Receipt-Pfadnormalisierung und lokale
+    Existenz-Guidance begrenzt.
   - Ein spaeterer Folgeblock `BL-0032` bleibt bewusst optional:
     externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
     XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und

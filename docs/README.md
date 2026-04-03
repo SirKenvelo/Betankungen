@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -97,12 +97,12 @@ Das Hauptprogramm steuert – die Units arbeiten.
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
   - das Public-Repository hat jetzt eine dokumentierte Mindestbaseline fuer
     Verhaltensregeln, Sicherheitsmeldungen, Issue-Intake und PR-Struktur
-  - `BL-0031` rahmt den naechsten kleinen Core-UX-Block fuer Fuelups:
+  - `BL-0031` ist als kleiner Core-UX-Block fuer Fuelups aktiv:
     `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
-    `ISS-0008`/`ISS-0009` sammeln die offenen Guidance-Funde fuer
-    Kilometerstand, Car-Kontext und `--receipt-link`; `TSK-0027` umfasst
-    dabei auch lokale Receipt-Pfadnormalisierung und lokale
-    Existenz-Guidance
+    `TSK-0026` zieht Prompt, Help und Benutzerdoku explizit auf den
+    aktuellen Gesamt-Kilometerstand des Fahrzeugs; offen bleibt `TSK-0027`
+    fuer Car-Kontext, `--receipt-link`, lokale Receipt-Pfadnormalisierung
+    und lokale Existenz-Guidance
   - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
     benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
     XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
