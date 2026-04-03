@@ -438,10 +438,10 @@ begin
   Cmd := NewCmd;
   SetMainCommand(Cmd, ckAdd, tkFuelups);
   Cmd.ReceiptLinkProvided := True;
-  Cmd.ReceiptLink := 'file:///data/receipts/2026-03-18-1234.jpg';
+  Cmd.ReceiptLink := '/data/receipts/2026-03-18-1234.jpg';
 
   AssertTrue(ValidateCommand(Cmd), 'receipt-link for add fuelups must be ok');
-  Ok('Policy: --receipt-link allowed with --add fuelups');
+  Ok('Policy: lokaler absoluter receipt-link allowed with --add fuelups');
 end;
 
 procedure Test_ReceiptLink_NonAddFuelups_Fails;

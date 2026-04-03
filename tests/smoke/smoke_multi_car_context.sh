@@ -158,10 +158,11 @@ RC=$?
 set -e
 COUNT_AFTER_NEG_ONE="$(sqlite3 "$DB_ONE" "SELECT COUNT(*) FROM fuelups;")"
 if [[ $RC -eq 0 ]] ||
+   ! grep -Fq 'Aktiver Fahrzeugkontext: Hauptauto (ID 1)' "$OUT" ||
    ! grep -Fq 'Aktueller Gesamt-Kilometerstand des Fahrzeugs (km):' "$OUT" ||
    ! grep -q 'odometer_km muss eine Ganzzahl >= 0 sein' "$ERR" ||
    [[ "$COUNT_AFTER_NEG_ONE" != "$COUNT_BEFORE_NEG_ONE" ]]; then
-  fail 'Matrix 1 Car: Prompt- und Hard-Error-Contract fuer den Gesamt-Odometer ohne --car-id ist inkonsistent.'
+  fail 'Matrix 1 Car: Fahrzeugkontext-, Prompt- und Hard-Error-Contract fuer den Gesamt-Odometer ohne --car-id ist inkonsistent.'
 fi
 
 set +e
@@ -199,6 +200,9 @@ RC=$?
 set -e
 if [[ $RC -ne 0 ]]; then
   fail 'Matrix 1 Car: --add fuelups mit gueltiger --car-id fehlgeschlagen.'
+fi
+if ! grep -Fq 'Aktiver Fahrzeugkontext: Hauptauto (ID 1)' "$OUT"; then
+  fail 'Matrix 1 Car: expliziter Add-Flow zeigt den aktiven Fahrzeugkontext nicht.'
 fi
 
 # mit ungueltiger --car-id => unknown

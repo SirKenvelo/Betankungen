@@ -1,18 +1,18 @@
 ---
 id: TSK-0027
 title: Car-Kontext und Receipt-Link-Timing im Fuelup-Add-Flow sichtbar machen
-status: todo
+status: done
 priority: P2
 type: task
 tags: [fuelups, cars, receipts, ux]
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-04-03
 parent: BL-0031
 related:
   - ISS-0009
   - BL-0021
 ---
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 # Task
 Den Fuelup-Add-Flow so fuehren, dass Nutzer den aktiven Fahrzeugkontext und
@@ -37,10 +37,10 @@ akzeptiert werden.
   separate spaetere Komfortschicht.
 
 # Done When
-- [ ] Der aktive Car-Kontext ist im Add-Flow sichtbar genug.
-- [ ] `--receipt-link` wird als Vorab-Flag klar kommuniziert.
-- [ ] Lokale absolute Receipt-Pfade werden auf einen kanonischen
+- [x] Der aktive Car-Kontext ist im Add-Flow sichtbar genug.
+- [x] `--receipt-link` wird als Vorab-Flag klar kommuniziert.
+- [x] Lokale absolute Receipt-Pfade werden auf einen kanonischen
       `file://`-Wert normalisiert.
-- [ ] Lokale Receipt-Pfade oder `file://`-URIs mit fehlender Datei liefern
+- [x] Lokale Receipt-Pfade oder `file://`-URIs mit fehlender Datei liefern
       eine explizite Warning+Confirm-Guidance statt stiller Annahme.
-- [ ] Help/Doku und Regressionen decken den Guidance-Contract ab.
+- [x] Help/Doku und Regressionen decken den Guidance-Contract ab.
