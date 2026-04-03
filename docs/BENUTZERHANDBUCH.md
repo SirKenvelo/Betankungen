@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -97,10 +97,10 @@ Eingabe bei `--add fuelups`:
     `Betankungen --list cars` nutzen oder `--car-id <id>` bewusst setzen
 - Auswahl der Tankstelle (Liste mit IDs)
 - Datum+Uhrzeit: `YYYY-MM-DD HH:MM:SS`
-- Kilometerstand (km)
-  - gemeint ist der aktuelle **Gesamt-Kilometerstand des Fahrzeugs**
-    (`odometer_km`), nicht die Strecke seit der letzten Tankung
-- Odometer-Checks pro Fahrzeug:
+- Aktueller Gesamt-Kilometerstand des Fahrzeugs (km)
+  - dies ist der kanonische `odometer_km`-Wert im Fuelup-Dialog
+  - gemeint ist nicht die Strecke seit der letzten Tankung
+- Odometer-Checks fuer diesen Gesamtstand pro Fahrzeug:
   - `odometer_km` muss eine Ganzzahl `>= 0` sein
   - muss >= Fahrzeug-Start-KM sein
   - muss strikt groesser als der letzte Odometer des Fahrzeugs sein

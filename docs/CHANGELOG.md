@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -94,6 +94,14 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S37C1/2] Docs/Fuelups: `--add fuelups` fragt den Kilometerstand jetzt
+  explizit als aktuellen Gesamt-Kilometerstand des Fahrzeugs ab.
+  `units/u_fuelups.pas`, `units/u_cli_help.pas`,
+  `docs/BENUTZERHANDBUCH.md` und `docs/README.md` fuehren damit denselben
+  kanonischen `odometer_km`-Contract ohne Trip-/Delta-Semantik.
+  `ISS-0008` ist auf `resolved`, `BL-0031` auf `in_progress` und
+  `TSK-0026` auf `done` synchronisiert; die Smoke-Abdeckung prueft Help-
+  und Prompt-Guidance fuer den geklaerten Odometer-Contract. (2026-04-03)
 - [General] Docs/Fuelups: `BL-0031` und `TSK-0027` schneiden den
   Receipt-Link-Teil jetzt konkreter: lokale Receipt-Pfade aus
   Drag-and-Drop/Shell-Nutzung sollen spaeter auf einen kanonischen

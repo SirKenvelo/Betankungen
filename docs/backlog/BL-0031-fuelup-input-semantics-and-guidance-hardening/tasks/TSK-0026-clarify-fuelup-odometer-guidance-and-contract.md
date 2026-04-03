@@ -1,18 +1,18 @@
 ---
 id: TSK-0026
 title: Fuelup-Kilometerstands-Wording und Guidance auf Gesamt-Odometer ausrichten
-status: todo
+status: done
 priority: P2
 type: task
 tags: [fuelups, odometer, ux, docs]
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-04-03
 parent: BL-0031
 related:
   - ISS-0008
   - ADR-0014
 ---
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 # Task
 Den Fuelup-Add-Flow, die Help-Texte und die Benutzerdoku so nachziehen, dass
@@ -26,6 +26,6 @@ Fahrzeugs verstanden wird.
   `units/u_cli_help.pas` und `docs/BENUTZERHANDBUCH.md`.
 
 # Done When
-- [ ] Prompting/Guidance benennen den Gesamt-Odometer explizit.
-- [ ] Help und Doku verwenden dieselbe Terminologie.
-- [ ] Regressionen oder gezielte Dialog-Checks sind nachgezogen.
+- [x] Prompting/Guidance benennen den Gesamt-Odometer explizit.
+- [x] Help und Doku verwenden dieselbe Terminologie.
+- [x] Regressionen oder gezielte Dialog-Checks sind nachgezogen.

@@ -1,18 +1,18 @@
 ---
 id: ISS-0008
 title: Fuelup mileage prompt leaves total odometer and trip semantics ambiguous
-status: open
+status: resolved
 priority: P2
 type: problem
 tags: [fuelups, odometer, semantics, ux, needs-tests]
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-04-03
 related:
   - ADR-0014
   - BL-0031
   - BL-0029
 ---
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 # Summary
 The interactive `--add fuelups` flow currently asks only for
@@ -53,7 +53,17 @@ validation behavior because the prompt does not clearly communicate the domain
 concept behind `odometer_km`.
 
 # Acceptance Criteria
-- [ ] The current fuelup input contract is worded as total vehicle odometer.
-- [ ] Help and user-facing documentation use the same terminology.
-- [ ] Any later trip/delta convenience mode stays explicitly separate from the
+- [x] The current fuelup input contract is worded as total vehicle odometer.
+- [x] Help and user-facing documentation use the same terminology.
+- [x] Any later trip/delta convenience mode stays explicitly separate from the
       canonical `odometer_km` contract.
+
+# Resolution
+- The interactive `--add fuelups` prompt now asks for the current total
+  vehicle odometer explicitly instead of the semantically open
+  `Kilometerstand (km)` wording.
+- CLI help and user-facing documentation use the same total-odometer framing
+  and keep `odometer_km` clearly separate from any future trip/delta
+  convenience mode.
+- Smoke coverage now checks the clarified prompt and help guidance so the
+  wording contract stays regression-safe.

@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-22
+  UPDATED: 2026-04-03
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -131,6 +131,10 @@ begin
   Line('  0 Cars ohne --car-id: Hard Error (zuerst --add cars).');
   Line('  1 Car ohne --car-id: automatische Auswahl.');
   Line('  >1 Cars ohne --car-id: Hard Error mit Hinweis auf --car-id und --list cars.');
+
+  Sec('Fuelup input');
+  Line('  Bei --add fuelups ist der Kilometerstand immer der aktuelle Gesamt-Kilometerstand');
+  Line('  des Fahrzeugs (odometer_km), nicht die Strecke seit der letzten Tankung.');
 
   Sec('Advanced options');
   Item('--db-set <pfad>',            'DB-Pfad speichern und beenden (nicht mit --db).');

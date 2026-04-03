@@ -1,12 +1,12 @@
 ---
 id: BL-0031
 title: Fuelup Input Semantics and Guidance Hardening
-status: approved
+status: in_progress
 priority: P2
 type: improvement
 tags: [fuelups, ux, semantics, guidance, 'lane:planned']
 created: 2026-04-02
-updated: 2026-04-02
+updated: 2026-04-03
 related:
   - ADR-0014
   - ISS-0008
@@ -15,7 +15,7 @@ related:
   - BL-0029
   - BL-0032
 ---
-**Stand:** 2026-04-02
+**Stand:** 2026-04-03
 
 # Goal
 Die Fuelup-Eingabe fuer neue und gelegentliche Nutzer semantisch klarer und
@@ -76,16 +76,17 @@ Out of Scope:
   sauber abgetrennt.
 
 # Output
-Ein umsetzungsreifer Hardening-Block fuer einen spaeteren Fuelup-UX-Sprint:
-mit akzeptierter Semantik-Entscheidung (`ADR-0014`), zwei konkreten offenen
-Problemfaellen (`ISS-0008`, `ISS-0009`), Receipt-Link-Normalisierung/
-Existenz-Guidance und klar abgegrenzten Folgeaufgaben. Eine moegliche
-spaetere Hybrid-Strategie fuer verwaltete XDG-Belegspeicherung bleibt als
-separater Folge-BL (`BL-0032`) vorgemerkt.
+Ein umsetzungsreifer Hardening-Block fuer den laufenden Fuelup-UX-Sprint:
+`TSK-0026` ist umgesetzt und zieht Prompting, Help und Benutzerdoku auf die
+akzeptierte Gesamt-Odometer-Semantik aus `ADR-0014`. Offen bleiben der zweite
+Problemfall (`ISS-0009`), Receipt-Link-Normalisierung/Existenz-Guidance und
+die dazu sauber abgegrenzte Folgeaufgabe `TSK-0027`. Eine moegliche spaetere
+Hybrid-Strategie fuer verwaltete XDG-Belegspeicherung bleibt als separater
+Folge-BL (`BL-0032`) vorgemerkt.
 
 # Derived Tasks
 - `TSK-0026` - Fuelup-Kilometerstands-Wording und Guidance auf den
-  Gesamt-Odometer ausrichten. (todo)
+  Gesamt-Odometer ausrichten. (done)
 - `TSK-0027` - Car-Kontext und Receipt-Link-Timing im Fuelup-Add-Flow
   sichtbar machen, lokale Receipt-Pfade normalisieren und lokale
   Existenz-Guidance ergaenzen. (todo)

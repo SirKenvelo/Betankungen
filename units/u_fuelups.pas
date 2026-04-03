@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-02
+  UPDATED: 2026-04-03
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -78,6 +78,8 @@ const
   PRICE_CONSISTENCY_TOLERANCE_CENTS = 10;
   // Kanonischer CLI-Hard-Error fuer ungueltige Odometer-Eingaben.
   ODOMETER_KM_INPUT_ERROR = 'odometer_km muss eine Ganzzahl >= 0 sein.';
+  // Knappe, aber explizite Guidance fuer den kanonischen Odometer-Contract.
+  ODOMETER_KM_PROMPT = 'Aktueller Gesamt-Kilometerstand des Fahrzeugs (km): ';
 
 // Prueft strikt das erwartete ISO-Format "YYYY-MM-DD HH:MM:SS".
 function TryParseFueledAtIso(const S: string; out DT: TDateTime): boolean;
@@ -444,7 +446,7 @@ begin
           raise Exception.Create('P-041: Abbruch durch Benutzer (Datum in der Zukunft).');
       end;
 
-      Inp.OdometerKm := ParseOdometerKmOrFail(AskRequired('Kilometerstand (km): '));
+      Inp.OdometerKm := ParseOdometerKmOrFail(AskRequired(ODOMETER_KM_PROMPT));
 
       // Kanonischer Odometer-Contract: erst Input-Untergrenze, dann DB-bezogene Bounds.
       ResolveOdometerBoundsOrFail(QS, Inp.CarId, Inp.OdometerKm, StartKm, LastKm);
