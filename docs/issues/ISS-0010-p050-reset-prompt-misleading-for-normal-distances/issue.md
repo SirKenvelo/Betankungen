@@ -1,19 +1,19 @@
 ---
 id: ISS-0010
 title: P-050 reset prompt is misleading for normal short-distance fuelups
-status: open
+status: resolved
 priority: P2
 type: problem
 tags: [fuelups, guidance, ux, policy, needs-tests]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-07
 related:
   - ADR-0014
   - BL-0031
   - ISS-0009
   - TSK-0028
 ---
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 # Summary
 Real usage showed that the current `P-050` prompt in `--add fuelups` can read
@@ -56,11 +56,17 @@ This is a UX and policy-framing problem. It can reduce confidence in the add
 flow, blur the clear distinction between `P-012` and `P-050`, and make a
 normal fuelup feel like a special-case correction path.
 
+# Resolution
+Sprint 39 delivered the follow-up: normal short-distance fuelups now proceed
+without a `P-050` reset prompt. A manual short-distance reset remains only as
+an explicit exception path via `--missed-previous`, while `P-012` for large
+distance gaps stays unchanged.
+
 # Acceptance Criteria
-- [ ] The short-distance reset case is tracked separately from the already
+- [x] The short-distance reset case is tracked separately from the already
       open car-context / receipt-link guidance work.
-- [ ] A follow-up task explicitly keeps `P-012` for large distance gaps
+- [x] A follow-up task explicitly keeps `P-012` for large distance gaps
       unchanged.
-- [ ] Any future manual reset for small distances is treated as an explicit
+- [x] Any future manual reset for small distances is treated as an explicit
       exception flow instead of a misleading default prompt in normal fuelup
       entry.

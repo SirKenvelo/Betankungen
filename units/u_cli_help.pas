@@ -2,7 +2,7 @@
   u_cli_help.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-03
+  UPDATED: 2026-04-07
   AUTHOR : Christof Kempinski
   Zentrale Help-/Usage-/About-Ausgabe fuer die CLI.
 
@@ -59,9 +59,9 @@ begin
   if FocusFlag = '--seed' then
     Writeln('Usage: Betankungen --seed [--stations N] [--fuelups N] [--seed-value N] [--force]')
   else if FocusFlag = '--car-id' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] | --edit cars --car-id <id> | --delete cars --car-id <id>')
-  else if FocusFlag = '--receipt-link' then
-    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>]')
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>] [--missed-previous] | --list fuelups [--car-id <id>] | --stats fuelups [--car-id <id>] (required for multiple cars) | --stats cost [--car-id <id>] [--from YYYY-MM[-DD]] [--to YYYY-MM[-DD]] [--maintenance-source none|module] | --edit cars --car-id <id> | --delete cars --car-id <id>')
+  else if (FocusFlag = '--receipt-link') or (FocusFlag = '--missed-previous') then
+    Writeln('Usage: Betankungen --add fuelups [--car-id <id>] [--receipt-link <path|uri>] [--missed-previous]')
   else if FocusFlag = '--db-set' then
     Writeln('Usage: Betankungen --db-set <pfad>')
   else if FocusFlag = '--stats' then
@@ -125,6 +125,7 @@ begin
   Item('--demo',                     'Demo-DB fuer diesen Lauf (nicht mit --seed).');
   Item('--car-id <id>',              'Bei --add/--list/--stats fuelups, --stats cost sowie --edit/--delete cars; bei >1 Cars Pflicht (IDs via --list cars).');
   Item('--receipt-link <path|uri>',  'Optionaler externer Beleg-Link (nur bei --add fuelups; lokale absolute Pfade werden als file:// gespeichert).');
+  Item('--missed-previous',          'Expliziter Ausnahme-Opt-in fuer kleinen Distanz-Reset (`P-050`) bei --add fuelups.');
   Item('--detail',                   'Detailausgabe fuer Listen.');
 
   Sec('Car resolver (fuelups)');
@@ -140,6 +141,9 @@ begin
   Line('  gesetzt werden; fuelups bleiben append-only und koennen spaeter nicht editiert werden.');
   Line('  Lokale absolute Receipt-Pfade werden vor dem Speichern auf einen kanonischen');
   Line('  file://-Wert normalisiert; fehlt die lokale Datei, folgt eine Warnung mit Confirm.');
+  Line('  Normale kurze Distanzen loesen keine P-050-Rueckfrage mehr aus.');
+  Line('  Nur mit --missed-previous wird bei kleiner Distanz ein expliziter Ausnahme-Reset');
+  Line('  fuer missed_previous=1 mit bestaetigender Rueckfrage angeboten.');
 
   Sec('Advanced options');
   Item('--db-set <pfad>',            'DB-Pfad speichern und beenden (nicht mit --db).');
@@ -165,6 +169,7 @@ begin
   Line('  Betankungen --add cars');
   Line('  Betankungen --add fuelups');
   Line('  Betankungen --add fuelups --car-id 1');
+  Line('  Betankungen --add fuelups --car-id 1 --missed-previous');
   Line('  Betankungen --list cars');
   Line('  Betankungen --add fuelups --car-id 1 --receipt-link /data/receipts/2026-03-18.jpg');
   Line('  Betankungen --add fuelups --car-id 1 --receipt-link file:///data/receipts/2026-03-18.jpg');

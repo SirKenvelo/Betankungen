@@ -1,12 +1,12 @@
 ---
 id: BL-0031
 title: Fuelup Input Semantics and Guidance Hardening
-status: in_progress
+status: done
 priority: P2
 type: improvement
 tags: [fuelups, ux, semantics, guidance, 'lane:planned']
 created: 2026-04-02
-updated: 2026-04-03
+updated: 2026-04-07
 related:
   - ADR-0014
   - ISS-0008
@@ -16,7 +16,7 @@ related:
   - BL-0029
   - BL-0032
 ---
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 # Goal
 Die Fuelup-Eingabe fuer neue und gelegentliche Nutzer semantisch klarer und
@@ -105,7 +105,12 @@ Flow fuer kurze Distanzen irrefuehrend wirkt; `TSK-0028` schneidet daraus
 einen separaten Folgeauftrag, der `P-050` spaeter vom normalen Fuelup-Flow
 entkoppeln soll, ohne `P-012` fuer grosse Distanzluecken anzutasten. Eine
 moegliche spaetere Hybrid-Strategie fuer verwaltete XDG-Belegspeicherung
-bleibt als separater Folge-BL (`BL-0032`) vorgemerkt.
+bleibt als separater Folge-BL (`BL-0032`) vorgemerkt. Sprint 39 hat diesen
+letzten offenen Fuelup-UX-Block nun abgeschlossen: normale kurze Distanzen
+laufen ohne irrefuehrende `P-050`-Standard-Rueckfrage, waehrend
+`--missed-previous` den Reset nur noch als expliziten Ausnahme-Opt-in
+aktiviert. `P-012` fuer grosse Distanzluecken bleibt unveraendert; damit ist
+`BL-0031` insgesamt abgeschlossen.
 
 # Derived Tasks
 - `TSK-0026` - Fuelup-Kilometerstands-Wording und Guidance auf den
@@ -114,4 +119,4 @@ bleibt als separater Folge-BL (`BL-0032`) vorgemerkt.
   sichtbar machen, lokale Receipt-Pfade normalisieren und lokale
   Existenz-Guidance ergaenzen. (done)
 - `TSK-0028` - `P-050`-Reset-Guidance vom normalen Fuelup-Flow entkoppeln,
-  waehrend `P-012` fuer grosse Distanzluecken unveraendert bleibt. (todo)
+  waehrend `P-012` fuer grosse Distanzluecken unveraendert bleibt. (done)

@@ -11,7 +11,7 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-04-03
+# UPDATED: 2026-04-07
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -192,9 +192,8 @@ if [[ $RC -ne 0 ]]; then
 fi
 
 set +e
-# Der zweite Fuelup im 1-Car-Pfad triggert P-050 (kleine Distanz); daher
-# explizit mit "n" bestaetigen, damit der Dialog nicht in EOF laeuft.
-printf '1\n2026-02-11 12:00:00\n220\n80,00\n50,00\n1,600\ny\nn\n\n\n\n\n' \
+# Normale kurze Distanzen duerfen keinen P-050-Default-Prompt mehr ausloesen.
+printf '1\n2026-02-11 12:00:00\n220\n80,00\n50,00\n1,600\ny\n\n\n\n\n' \
   | "$APP_BIN" --db "$DB_ONE" --add fuelups --car-id "$CAR1_ID" >"$OUT" 2>"$ERR"
 RC=$?
 set -e
@@ -203,6 +202,9 @@ if [[ $RC -ne 0 ]]; then
 fi
 if ! grep -Fq 'Aktiver Fahrzeugkontext: Hauptauto (ID 1)' "$OUT"; then
   fail 'Matrix 1 Car: expliziter Add-Flow zeigt den aktiven Fahrzeugkontext nicht.'
+fi
+if grep -Fq 'P-050:' "$OUT"; then
+  fail 'Matrix 1 Car: normaler Kurzdistanz-Fuelup zeigt weiterhin einen P-050-Default-Prompt.'
 fi
 
 # mit ungueltiger --car-id => unknown

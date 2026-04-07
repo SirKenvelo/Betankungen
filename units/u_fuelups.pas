@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-03
+  UPDATED: 2026-04-07
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -34,7 +34,12 @@ uses
 // Oeffentliche Schnittstelle
 
 // Startet den interaktiven Dialog zum Hinzufuegen einer Betankung.
-procedure AddFuelupInteractive(const DbPath: string; const CarId: integer = 0; const ReceiptLink: string = '');
+procedure AddFuelupInteractive(
+  const DbPath: string;
+  const CarId: integer = 0;
+  const ReceiptLink: string = '';
+  const ManualMissedPreviousRequested: boolean = False
+);
 
 // Zeigt die Betankungen des aufgeloesten Fahrzeugs an (Detailed steuert Zusatzinfos).
 procedure ListFuelups(const DbPath: string; Detailed: boolean; const CarId: integer = 0);
@@ -492,7 +497,12 @@ begin
 end;
 
 // Hauptprozedur zum Erfassen neuer Daten
-procedure AddFuelupInteractive(const DbPath: string; const CarId: integer; const ReceiptLink: string);
+procedure AddFuelupInteractive(
+  const DbPath: string;
+  const CarId: integer;
+  const ReceiptLink: string;
+  const ManualMissedPreviousRequested: boolean
+);
 var
   Conn: TSQLite3Connection;
   Tran: TSQLTransaction;
@@ -545,6 +555,12 @@ var
       WriteLn('Hinweis: Dieser Link wird jetzt zusammen mit dem Fuelup gespeichert; fuelups bleiben append-only.');
       if ReceiptLinkIsLocal then
         WriteLn('Hinweis: Lokale Receipt-Referenzen werden kanonisch als file:// gespeichert.');
+    end;
+
+    if ManualMissedPreviousRequested then
+    begin
+      WriteLn('Hinweis: Ausnahme-Modus --missed-previous ist aktiv.');
+      WriteLn('Hinweis: Nur fuer diese Eingabe wird bei kleiner Distanz ein bewusster Zyklus-Reset (`P-050`) explizit abgefragt.');
     end;
 
     WriteLn;
@@ -707,11 +723,11 @@ begin
         Inp.MissedPrevious := True;
         MissedPreviousConfirmed := True;
       end
-      else if (LastKm >= 0) and (DiffKm <= GAP_THRESHOLD_KM) then
+      else if ManualMissedPreviousRequested and (LastKm >= 0) and (DiffKm <= GAP_THRESHOLD_KM) then
       begin
         if AskYesNo(
-          Format('P-050: Warnung: Distanz seit letzter Betankung ist nur %d km (<= %d). Zyklus bewusst resetten (missed_previous=1)?', [DiffKm, GAP_THRESHOLD_KM]),
-          True
+          Format('P-050: Ausnahme: --missed-previous ist fuer eine kurze Distanz von %d km (<= %d) aktiv. Zyklus bewusst resetten und missed_previous=1 speichern?', [DiffKm, GAP_THRESHOLD_KM]),
+          False
         ) then
         begin
           Inp.MissedPrevious := True;

@@ -2,7 +2,7 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-18
+  UPDATED: 2026-04-07
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
@@ -194,6 +194,7 @@ begin
   Cmd.CarId := 0;
   Cmd.ReceiptLink := '';
   Cmd.ReceiptLinkProvided := False;
+  Cmd.MissedPreviousRequested := False;
   Cmd.MaintenanceSource := msNone;
   Cmd.MaintenanceSourceProvided := False;
 
@@ -257,6 +258,13 @@ begin
       Cmd.ReceiptLink := ParamStr(i + 1);
       Cmd.ReceiptLinkProvided := True;
       Inc(i, 2);
+      Continue;
+    end;
+
+    if ParamStr(i) = '--missed-previous' then
+    begin
+      Cmd.MissedPreviousRequested := True;
+      Inc(i);
       Continue;
     end;
 

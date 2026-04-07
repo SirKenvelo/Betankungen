@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # t_p051__01__no_auto_gap_flag_without_confirm.sh
-# UPDATED: 2026-02-22
-# Policy P-051: missed_previous darf ohne bestaetigtes Confirm nicht automatisch gesetzt werden.
+# UPDATED: 2026-04-07
+# Policy P-051: ohne expliziten Ausnahme-Opt-in gibt es bei kleiner Distanz weder Auto-Reset noch P-050-Standardprompt.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 DB_POLICY="$ROOT_DIR/tests/domain_policy/fixtures/Betankungen_Policy.db"
@@ -47,11 +47,10 @@ sqlite3 "$DB_POLICY" < "$FIXTURE_SQL"
 #  5) liters
 #  6) price_per_liter_eur
 #  7) is_full_tank (y/n)
-#  8) confirm_manual_missed_previous_reset (y/n)
-#  9) fuel_type (optional)
-# 10) payment_type (optional)
-# 11) pump_no (optional)
-# 12) note (optional)
+#  8) fuel_type (optional)
+#  9) payment_type (optional)
+# 10) pump_no (optional)
+# 11) note (optional)
 INPUT_LINES=(
   '1'
   '2025-02-01 08:00:00'
@@ -60,7 +59,6 @@ INPUT_LINES=(
   '40,00'
   '1,500'
   'y'
-  'n'
   ''
   ''
   ''
@@ -77,9 +75,18 @@ if [[ $RC -ne 0 ]]; then
   fail "Erwartet Exitcode 0, erhalten: $RC"
 fi
 
+if grep -q 'P-050:' "$OUT_FILE"; then
+  fail 'P-051 verletzt: normaler Kurzdistanz-Fall darf keinen P-050-Prompt mehr zeigen.'
+fi
+
+COUNT_ROW="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM fuelups WHERE odometer_km = 10100;")"
+if [[ "$COUNT_ROW" != "1" ]]; then
+  fail "Erwartet genau einen Datensatz fuer odometer_km=10100, erhalten: $COUNT_ROW"
+fi
+
 MISSED_PREVIOUS="$(sqlite3 "$DB_POLICY" "SELECT missed_previous FROM fuelups WHERE odometer_km = 10100 LIMIT 1;")"
 if [[ "$MISSED_PREVIOUS" != "0" ]]; then
   fail "P-051 verletzt: missed_previous wurde ohne Confirm gesetzt (erhalten=${MISSED_PREVIOUS:-<leer>})."
 fi
 
-printf '[OK] P-051/01: ohne Confirm bleibt missed_previous=0 (kein automatisches Setzen).\n'
+printf '[OK] P-051/01: ohne --missed-previous bleibt missed_previous=0 und es gibt keinen P-050-Prompt.\n'

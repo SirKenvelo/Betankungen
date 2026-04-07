@@ -486,6 +486,31 @@ begin
   Ok('Policy: --receipt-link control chars rejected');
 end;
 
+procedure Test_MissedPrevious_AddFuelups_Ok;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckAdd, tkFuelups);
+  Cmd.MissedPreviousRequested := True;
+
+  AssertTrue(ValidateCommand(Cmd), '--missed-previous for add fuelups must be ok');
+  Ok('Policy: --missed-previous allowed with --add fuelups');
+end;
+
+procedure Test_MissedPrevious_NonAddFuelups_Fails;
+var
+  Cmd: TCommand;
+begin
+  Cmd := NewCmd;
+  SetMainCommand(Cmd, ckList, tkFuelups);
+  Cmd.MissedPreviousRequested := True;
+
+  AssertFalse(ValidateCommand(Cmd), '--missed-previous outside add fuelups must fail');
+  AssertEqInt(Ord(efMissedPrevious), Ord(Cmd.ErrorFocus), '--missed-previous scope focus');
+  Ok('Policy: --missed-previous restricted to --add fuelups');
+end;
+
 begin
   Test_MetaHelp_Standalone;
   Test_ActionDbSet_Standalone;
@@ -520,6 +545,8 @@ begin
   Test_ReceiptLink_NonAddFuelups_Fails;
   Test_ReceiptLink_Empty_Fails;
   Test_ReceiptLink_ControlChar_Fails;
+  Test_MissedPrevious_AddFuelups_Ok;
+  Test_MissedPrevious_NonAddFuelups_Fails;
 
   WriteLn('[OK]   all validate tests passed');
   Halt(0);
