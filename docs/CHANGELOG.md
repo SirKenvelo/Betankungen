@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -96,6 +96,15 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/TUI: `ADR-0015` verankert jetzt die CLI-first-TUI-Strategie
+  fuer Betankungen. Klassische CLI- und non-interactive-Pfade bleiben
+  verbindlich erhalten; eine TUI wird nur als optionale Komfortschicht
+  iterativ eingefuehrt. `BL-0033` schneidet dafuer einen spaeteren
+  read-only-View-Refresh mit einem einzelnen Referenzscreen, waehrend
+  `BL-0034` ein moegliches spaeteres Formular-/Widget-System erst nach
+  bewaehrter View-/Painter-Basis vorbereitet. `docs/BACKLOG.md`,
+  `docs/STATUS.md`, `docs/README.md`, `docs/ADR/README.md` und
+  `docs/SPRINTS.md` fuehren denselben Planungsstand. (2026-04-07)
 - [S38C2/2] Docs/Traceability: Sprint 38 und der Abschluss von `TSK-0027`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruennen Abschlussnachweis ueber

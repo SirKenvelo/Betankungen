@@ -1,7 +1,34 @@
 # SPRINTS
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 38 - CLI-first TUI-Strang rahmen
+
+- Status: done
+- Ziel: einen spaeteren UI-/TUI-Refresh bewusst als optionalen
+  CLI-first-Folgepfad rahmen, ohne laufende Fuelup- oder EV-Arbeit mit
+  einem grossen UI-Refactor zu vermischen.
+
+### Stand (2026-04-07)
+
+- `ADR-0015` ist `accepted` und zieht die Leitplanke klar:
+  klassische CLI- und non-interactive-Pfade bleiben voll erhalten; eine TUI
+  ist nur Komfort- und Interaktionsschicht, nicht neue Fachlogik.
+- `BL-0033` ist als spaeterer read-only-View-Refresh fuer einen einzelnen
+  Referenzscreen vorgeschlagen, z. B. `fuelups --list --detail`.
+- `BL-0034` ist als spaeterer Formular-/Input-Block vorgeschlagen, aber
+  bewusst nachgeordnet: zuerst muss sich die View-/Painter-Basis bewaehren.
+- Ein Big-Bang-Refactor aller Screens ist ausgeschlossen; neue UI-Bausteine
+  muessen Domainlogik, Persistenzregeln und CLI-Semantik unveraendert
+  lassen.
+- Es wurden keine Runtime-Aenderungen eingefuehrt; der Block bleibt bewusst
+  auf ADR-/Backlog-/Status-Rahmung begrenzt.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## Sprint 38 - Fuelup Car-Kontext und Receipt-Guidance haerten
 
