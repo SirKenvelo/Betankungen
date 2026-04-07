@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -358,6 +358,14 @@ Bereits erledigt:
     externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
     XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und
     nicht Teil der unmittelbaren `1.4.0-dev`-Arbeit.
+  - Ein spaeterer CLI-first-TUI-Strang ist jetzt formal gerahmt:
+    `ADR-0015` fixiert die Strategie, dass klassische CLI- und
+    non-interactive-Pfade voll erhalten bleiben und eine TUI nur als
+    optionale Komfortschicht iterativ eingefuehrt wird. `BL-0033` ist der
+    bewusst kleine Folgeblock fuer einen einzelnen read-only
+    Referenzscreen, `BL-0034` bleibt der spaetere und groessere
+    Folgeblock fuer ein optionales Form-System nach bewaehrter
+    View-/Painter-Basis.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

@@ -1,5 +1,5 @@
 # ADR Index
-**Stand:** 2026-04-02
+**Stand:** 2026-04-07
 
 Dieses Verzeichnis enthaelt Architecture Decision Records (ADRs) fuer
 produkt- und architekturrelevante Entscheidungen und ist der aktuell
@@ -28,6 +28,7 @@ Migrationsschritt und wird nicht implizit parallel gestartet.
 - `ADR-0012` - Documentation Entry Layer und Source-of-Truth-Vertrag (`accepted`)
 - `ADR-0013` - `btkgit` Safety- und Betriebsvertrag (`accepted`)
 - `ADR-0014` - Fuelup-Kilometerstands-Semantik (`accepted`)
+- `ADR-0015` - CLI-first TUI Evolution Strategy (`accepted`)
 
 ## Ergaenzende Policy-/UX-Notizen
 

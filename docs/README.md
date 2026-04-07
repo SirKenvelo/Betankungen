@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -110,9 +110,14 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
     benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
     XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
-- Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
-  `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
-  `docs/ROADMAP_1_0_0.md`.
+  - ein spaeterer CLI-first-TUI-Strang ist jetzt formal vorbereitet:
+    `ADR-0015` haelt fest, dass klassische CLI- und non-interactive-Pfade
+    voll erhalten bleiben und eine TUI nur als optionale Komfortschicht
+    eingefuehrt wird; `BL-0033` bleibt der kleine View-/Presentation-Block
+    fuer einen Referenzscreen, `BL-0034` der spaetere Formular-/Input-Block
+  - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
+    `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
+    `docs/ROADMAP_1_0_0.md`.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 

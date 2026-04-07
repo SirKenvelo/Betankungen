@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
@@ -62,6 +62,8 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0030 - EV Companion Feasibility Spike](backlog/BL-0030-ev-companion-feasibility-spike/item.md) - Status: `done`, Typ: Research (EV-Discovery fuer `betankungen-ev` abgeschlossen; minimaler Charging-Event-/Storage-Rahmen ist dokumentiert und ein separater EV-MVP-Folgeblock fachlich vorbereitet), Lane: `exploratory`, Tasks: `TSK-0024` (`done`), `TSK-0025` (`done`)
 - [BL-0031 - Fuelup Input Semantics and Guidance Hardening](backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md) - Status: `in_progress`, Typ: Improvement (Prompt, Help und Benutzerdoku sind jetzt auf den kanonischen Gesamt-Odometer ausgerichtet; `ADR-0014` bleibt die Semantikbasis, `TSK-0027` deckt weiterhin Car-/Receipt-Link-Guidance, lokale Receipt-Pfadnormalisierung und lokale Existenz-Guidance ab, waehrend `ISS-0010`/`TSK-0028` die spaetere Entkopplung der `P-050`-Reset-Guidance vom normalen Fuelup-Flow bei kleinen Distanzen sauber vorbereiten, ohne `P-012` fuer grosse Distanzluecken anzutasten), Lane: `planned`, Tasks: `TSK-0026` (`done`), `TSK-0027` (`todo`), `TSK-0028` (`todo`)
 - [BL-0032 - Receipt Storage Strategy and Optional Managed Archive](backlog/BL-0032-receipt-storage-strategy-and-optional-managed-archive/item.md) - Status: `proposed`, Typ: Research (spaeterer Hybrid-Pfad: externe Receipt-Ordner bleiben erlaubt, optionaler app-verwalteter XDG-Belegordner nur als moeglicher Komfortmodus), Lane: `exploratory`
+- [BL-0033 - TUI Presentation and View-Layer Refresh](backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md) - Status: `proposed`, Typ: Improvement (spaeterer CLI-first-TUI-Refresh mit einem einzelnen Referenzscreen wie `fuelups --list --detail`, leichter eigener Terminal-/Painter-/View-Basis und bewusst ohne sofortiges Form-System), Lane: `planned`
+- [BL-0034 - TUI Form System for Interactive Flows](backlog/BL-0034-tui-form-system-for-interactive-flows/item.md) - Status: `proposed`, Typ: Feature (spaetere optionale Formular-/Widget-Schicht fuer interaktive Add-/Edit-Pfade; CLI bleibt steuernd, non-interactive bleibt voll erhalten, Einfuehrung erst nach bewaehrter View-Basis), Lane: `exploratory`
 
 ## Legacy Backlog-Index (BL-0xx)
 
