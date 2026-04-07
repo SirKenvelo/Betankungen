@@ -341,19 +341,20 @@ Bereits erledigt:
     `cost_cents` als Pflichtfeldern sowie optionalem `odometer_km`,
     `location_id` und `notes`, plus modul-lokale `charging_locations` und
     `module_meta`.
-  - `BL-0031` ist als kleiner Core-UX-Block aktiv:
+  - `BL-0031` ist als kleiner Core-UX-Block abgeschlossen:
     `ISS-0008` ist mit `TSK-0026` aufgeloest; Prompt, Help und
     Benutzerdoku benennen den Kilometerstand fuer `--add fuelups` jetzt
     explizit als aktuellen Gesamt-Kilometerstand des Fahrzeugs.
     `ADR-0014` bleibt dabei die kanonische Semantikbasis; ein moeglicher
     Trip-/Delta-Input wird weiterhin bewusst nicht in die aktuelle
-    Core-Semantik eingemischt. `TSK-0027` bleibt auf Car-Kontext,
+    Core-Semantik eingemischt. `TSK-0027` hat Car-Kontext,
     `--receipt-link`, lokale Receipt-Pfadnormalisierung und lokale
-    Existenz-Guidance begrenzt. Der zusaetzliche Realnutzungsbefund
-    `ISS-0010` ist jetzt separat verankert: `TSK-0028` bereitet die
-    spaetere Entkopplung der `P-050`-Reset-Guidance vom normalen
-    Fuelup-Flow vor, waehrend `P-012` fuer grosse Distanzluecken
-    ausdruecklich unberuehrt bleibt.
+    Existenz-Guidance geliefert. Der zusaetzliche Realnutzungsbefund
+    `ISS-0010` ist mit Sprint 39 aufgeloest: `TSK-0028` entkoppelt
+    `P-050` fuer kleine Distanzen aus dem normalen Fuelup-Flow,
+    verschiebt einen manuellen Reset in den expliziten Ausnahme-Opt-in
+    `--missed-previous` und laesst `P-012` fuer grosse Distanzluecken
+    unveraendert. Damit ist `BL-0031` abgeschlossen.
   - Ein spaeterer Folgeblock `BL-0032` bleibt bewusst optional:
     externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
     XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und

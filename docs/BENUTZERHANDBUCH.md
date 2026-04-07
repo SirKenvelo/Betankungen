@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-04-03
+**Stand:** 2026-04-07
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -81,6 +81,7 @@ Eingabe bei `--add stations`:
 Kommandos:
 - `Betankungen --add fuelups`
 - `Betankungen --add fuelups --receipt-link <path|uri>`
+- `Betankungen --add fuelups --missed-previous`
 - `Betankungen --list fuelups`
 - `Betankungen --list fuelups --car-id <id>`
 - `Betankungen --list fuelups --detail`
@@ -105,6 +106,11 @@ Eingabe bei `--add fuelups`:
   - muss strikt groesser als der letzte Odometer des Fahrzeugs sein
 - Bei grosser Distanzluecke (> 1500 km) wird gezielt nach "fehlender vorheriger Betankung" gefragt (`missed_previous`)
 - Wird diese Rueckfrage mit `n` beantwortet, wird der Add-Flow abgebrochen (kein Insert).
+- Normale kurze Distanzen loesen keine `P-050`-Reset-Rueckfrage mehr als
+  Standardpfad aus.
+- Nur mit `--missed-previous` wird bei kleiner Distanz eine explizite
+  Ausnahmefuehrung aktiviert; erst dann fragt `P-050` nach einem bewussten
+  Zyklus-Reset mit `missed_previous=1`.
 - Gesamtpreis (EUR, z.B. `50,01`)
 - Getankte Menge (Liter, z.B. `28,76`)
 - Preis pro Liter (EUR/L, z.B. `1,739`)
@@ -123,6 +129,8 @@ Eingabe bei `--add fuelups`:
 - Wichtig: `fuelups` bleiben append-only und koennen spaeter nicht per
   `--edit fuelups` nachbearbeitet werden.
 - Guardrails fuer `--receipt-link`: nur bei `--add fuelups`, nicht leer, keine Steuerzeichen.
+- Guardrail fuer `--missed-previous`: nur bei `--add fuelups`; ohne dieses
+  Flag bleibt der Kurzdistanz-Fall frei von `P-050`.
 - Lokale absolute Receipt-Pfade werden vor der Persistenz auf einen
   kanonischen `file://`-Wert normalisiert.
 - Wenn ein lokaler absoluter Pfad oder eine lokale `file://`-URI auf keine
@@ -131,7 +139,7 @@ Eingabe bei `--add fuelups`:
 
 Policy-Hinweis (Matrix v1):
 - Hard Error ohne Write: `P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`.
-- Warning+Confirm (nur speichern bei `y`): `P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`.
+- Warning+Confirm (nur speichern bei `y`): `P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050` (`P-050` nur im expliziten Ausnahme-Modus via `--missed-previous`).
 - `--list fuelups` nutzt dasselbe Car-Resolver-Regelwerk wie Add:
   - bei 0 Fahrzeugen: Hard Error
   - bei genau 1 Fahrzeug: automatische Aufloesung

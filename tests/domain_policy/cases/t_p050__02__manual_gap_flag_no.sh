@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # t_p050__02__manual_gap_flag_no.sh
-# UPDATED: 2026-02-22
-# Policy P-050: bei kleiner Distanz und Confirm=NO wird normal gespeichert (missed_previous=0).
+# UPDATED: 2026-04-07
+# Policy P-050: der explizite Ausnahme-Reset bei kleiner Distanz bleibt bei Confirm=NO folgenlos.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 DB_POLICY="$ROOT_DIR/tests/domain_policy/fixtures/Betankungen_Policy.db"
@@ -69,7 +69,7 @@ INPUT_LINES=(
 
 set +e
 printf '%s\n' "${INPUT_LINES[@]}" \
-  | "$APP_BIN" --db "$DB_POLICY" --add fuelups --car-id 1 >"$OUT_FILE" 2>"$ERR_FILE"
+  | "$APP_BIN" --db "$DB_POLICY" --add fuelups --car-id 1 --missed-previous >"$OUT_FILE" 2>"$ERR_FILE"
 RC=$?
 set -e
 
@@ -77,8 +77,8 @@ if [[ $RC -ne 0 ]]; then
   fail "Erwartet Exitcode 0, erhalten: $RC"
 fi
 
-if ! grep -q 'P-050: Warnung: Distanz seit letzter Betankung ist nur' "$OUT_FILE"; then
-  fail 'Erwartete P-050-Warnung nicht gefunden.'
+if ! grep -q 'P-050: Ausnahme: --missed-previous ist fuer eine kurze Distanz' "$OUT_FILE"; then
+  fail 'Erwartete P-050-Ausnahmefuehrung nicht gefunden.'
 fi
 
 COUNT_ROW="$(sqlite3 "$DB_POLICY" "SELECT COUNT(*) FROM fuelups WHERE odometer_km = 10100;")"

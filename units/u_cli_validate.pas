@@ -2,7 +2,7 @@
   u_cli_validate.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-03-18
+  UPDATED: 2026-04-07
   AUTHOR : Christof Kempinski
   CLI-Validierungsschicht fuer den Parser.
 
@@ -189,6 +189,21 @@ begin
   begin
     Cmd.ErrorMsg := 'Fehler: --receipt-link enthaelt unzulaessige Steuerzeichen.';
     Cmd.ErrorFocus := efReceiptLink;
+    Exit(False);
+  end;
+end;
+
+function ValidateMissedPreviousPolicy(var Cmd: TCommand): boolean;
+begin
+  Result := True;
+
+  if not Cmd.MissedPreviousRequested then
+    Exit(True);
+
+  if not IsAddFuelups(Cmd) then
+  begin
+    Cmd.ErrorMsg := 'Fehler: --missed-previous ist nur zusammen mit "--add fuelups" erlaubt.';
+    Cmd.ErrorFocus := efMissedPrevious;
     Exit(False);
   end;
 end;
@@ -413,6 +428,9 @@ begin
     Exit(False);
 
   if not ValidateReceiptLinkPolicy(Cmd) then
+    Exit(False);
+
+  if not ValidateMissedPreviousPolicy(Cmd) then
     Exit(False);
 
   if not ValidateStatsTargetPolicy(Cmd) then

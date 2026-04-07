@@ -97,16 +97,18 @@ Das Hauptprogramm steuert – die Units arbeiten.
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
   - das Public-Repository hat jetzt eine dokumentierte Mindestbaseline fuer
     Verhaltensregeln, Sicherheitsmeldungen, Issue-Intake und PR-Struktur
-  - `BL-0031` ist als kleiner Core-UX-Block fuer Fuelups aktiv:
+  - `BL-0031` ist als kleiner Core-UX-Block fuer Fuelups abgeschlossen:
     `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
     `TSK-0026` zieht Prompt, Help und Benutzerdoku explizit auf den
     aktuellen Gesamt-Kilometerstand des Fahrzeugs; `TSK-0027` liefert
     jetzt sichtbaren Car-Kontext im Add-Flow, fruehe `--receipt-link`-
     Guidance, lokale Receipt-Pfadnormalisierung auf `file://` sowie
-    Missing-File-Warnungen mit Confirm; offen bleibt nur noch `TSK-0028`
-    fuer die spaetere Entkopplung der `P-050`-Reset-Guidance vom normalen
-    Fuelup-Flow bei kleinen Distanzen; `P-012` fuer grosse
-    Distanzluecken bleibt ausdruecklich unberuehrt
+    Missing-File-Warnungen mit Confirm; `TSK-0028` schliesst den Block
+    jetzt ab, indem normale kurze Distanzen ohne irrefuehrenden
+    `P-050`-Prompt gespeichert werden und ein manueller Reset nur noch
+    ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar
+    bleibt; `P-012` fuer grosse Distanzluecken bleibt ausdruecklich
+    unberuehrt und `BL-0031` ist damit `done`
   - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
     benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
     XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
@@ -292,10 +294,12 @@ Fachlogik für Betankungen (`fuelups`).
 - Auflisten (Standard / Detail)
 - Zuordnung zu Fahrzeugen via Resolver (kein implizites `car_id=1`; bei >1 Cars ist `--car-id` Pflicht)
 - Golden-Info-Flag `missed_previous` (vorheriger Tankstopp fehlt) wird bei grosser KM-Luecke gezielt abgefragt
+- Normale kurze Distanzen laufen ohne `P-050`-Reset-Prompt durch; `P-050`
+  bleibt nur noch als expliziter Ausnahmeweg via `--missed-previous`
 - Bei Ablehnung der Gap-Rueckfrage (`n`) wird der Add-Flow abgebrochen (kein Fuelup-Insert)
 - Plausibilitaetsregeln: `odometer_km >= car.odometer_start_km`, streng monoton pro Fahrzeug, Warnung bei sehr grosser Tankmenge
 - Policy-Haertegrade (Matrix v1): Hard Errors (`P-001`, `P-002`, `P-010`, `P-011`, `P-013`, `P-020`, `P-030`, `P-040`, `P-051`) brechen ohne Write ab.
-- Warning+Confirm (`P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`) speichern nur bei expliziter Bestaetigung.
+- Warning+Confirm (`P-012`, `P-021`, `P-022`, `P-031`, `P-032`, `P-041`, `P-050`) speichern nur bei expliziter Bestaetigung; `P-050` wird nur noch ueber den Ausnahme-Opt-in `--missed-previous` erreicht.
 - Append-only (keine Edit/Delete)
 
 ---
