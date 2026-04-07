@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S39C1/2 - `P-050`-Reset-Guidance vom normalen Kurzdistanz-Fuelup entkoppelt und einen manuellen Reset nur noch ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar gemacht (`src/Betankungen.lpr`, `units/u_cli_types.pas`, `units/u_cli_parse.pas`, `units/u_cli_validate.pas`, `units/u_cli_help.pas`, `units/u_fuelups.pas`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`, `tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`, `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`, `tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0028-decouple-p050-reset-guidance-from-normal-fuelup-flow.md`, `docs/issues/ISS-0010-p050-reset-prompt-misleading-for-normal-distances/issue.md`); Artefakte: `.artifacts/sprint_39_commit_1_von_2.md`, `.artifacts/sprint_39_commit_1_von_2.diff`; Basis-Commit: `8be52b1`. (2026-04-07)
 - S38C1/2 - Sichtbaren Fahrzeugkontext, fruehe Receipt-Link-Guidance und lokale Receipt-Pfadnormalisierung im Fuelup-Add-Flow geliefert (`units/u_car_context.pas`, `units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_38_commit_1_von_2.md`, `.artifacts/sprint_38_commit_1_von_2.diff`; Basis-Commit: `1e6ef9e`. (2026-04-03)
 - S37C1/2 - Fuelup-Prompt, Help und Doku auf expliziten Gesamt-Odometer-Contract gezogen (`units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`); Artefakte: `.artifacts/sprint_37_commit_1_von_2.md`, `.artifacts/sprint_37_commit_1_von_2.diff`; Basis-Commit: `cdd0aeb`. (2026-04-03)
 - S36C1/2 - Fuelup-Guidance- und Kilometerstands-Semantik fuer die naechste Core-UX-Stufe gerahmt (`docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `docs/ADR/ADR-0014-fuelup-mileage-input-semantics.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/ADR/README.md`); Artefakte: `.artifacts/sprint_36_commit_1_von_2.md`, `.artifacts/sprint_36_commit_1_von_2.diff`; Basis-Commit: `d243df3`. (2026-04-02)
@@ -96,6 +97,23 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S39C2/2] Docs/Traceability: Sprint 39 und der Abschluss von `TSK-0028`
+  sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
+  Der Sprint dokumentiert den gruennen Abschlussnachweis ueber den
+  Repo-Standard-Build (`fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`),
+  gezielte `P-012`-/`P-050`-/`P-051`-Checks, einen manuellen Kurzlauf fuer
+  normale kleine Distanz ohne `--missed-previous`, einen manuellen
+  Distanzluecken-Abbruch fuer `P-012`, `scripts/projtrack_lint.sh` und
+  `make verify`. (2026-04-07)
+- [S39C1/2] Fix/Fuelups: `--add fuelups` stellt `P-050` fuer kleine
+  Distanzen nicht mehr als irrefuehrenden Standarddialog in den normalen
+  Add-Flow. Ein bewusster Kurzdistanz-Reset bleibt nur noch ueber den
+  expliziten Ausnahme-Opt-in `--missed-previous` erreichbar; dann fragt
+  `P-050` klar nach einem manuellen Zyklus-Reset mit `missed_previous=1`.
+  `P-012` fuer grosse Distanzluecken bleibt fachlich und dialogseitig
+  unveraendert. `BL-0031` ist damit `done`, `TSK-0028` ist `done`,
+  `ISS-0010` ist `resolved`, und Help-/Test-/Entry-Doku fuehren denselben
+  Contract. (2026-04-07)
 - [General] Docs/TUI: `ADR-0015` verankert jetzt die CLI-first-TUI-Strategie
   fuer Betankungen. Klassische CLI- und non-interactive-Pfade bleiben
   verbindlich erhalten; eine TUI wird nur als optionale Komfortschicht

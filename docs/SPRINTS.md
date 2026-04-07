@@ -3,6 +3,72 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## Sprint 39 - P-050 reset guidance vom Standardpfad entkoppeln
+
+- Status: done
+- Ziel: normale kurze Fuelup-Distanzen ohne irrefuehrenden `P-050`-Prompt
+  speichern, waehrend ein manueller Reset nur noch als expliziter
+  Ausnahmeweg erhalten bleibt und `P-012` fuer grosse Distanzluecken
+  unveraendert bleibt.
+
+### Geplante Bloecke
+
+- S39C1/2: done - Runtime, CLI, Tracker, Help und Regressionen auf den
+  expliziten Ausnahme-Opt-in `--missed-previous` umstellen.
+- S39C2/2: done - Sprint-Traceability, Vollverifikation und Abschluss von
+  `TSK-0028` dokumentieren.
+
+### Fortschritt (2026-04-07)
+
+- `S39C1/2` abgeschlossen:
+  - `units/u_cli_types.pas`, `units/u_cli_parse.pas`,
+    `units/u_cli_validate.pas`, `units/u_cli_help.pas` und
+    `src/Betankungen.lpr` fuehren den expliziten CLI-Opt-in
+    `--missed-previous` ein.
+  - `units/u_fuelups.pas` zeigt `P-050` bei kleiner Distanz nur noch,
+    wenn dieser Ausnahme-Opt-in aktiv ist; normale kurze Distanzen laufen
+    ohne Reset-Prompt durch.
+  - `P-012` fuer grosse Distanzluecken bleibt unveraendert; `P-050` wird
+    klar als manueller Ausnahme-Reset gerahmt.
+  - `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`,
+    `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`,
+    `tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`,
+    `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`,
+    `tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`,
+    `tests/domain_policy/README.md` und
+    `tests/smoke/smoke_multi_car_context.sh` decken den neuen Contract
+    regressionsseitig ab.
+  - `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`,
+    `docs/STATUS.md`, `BL-0031`, `TSK-0028` und `ISS-0010` fuehren
+    denselben Abschlussstand; `BL-0031` ist `done`, `TSK-0028` ist `done`,
+    `ISS-0010` ist `resolved`.
+  - Git-Commit: `8be52b1`
+  - Artefakte: `.artifacts/sprint_39_commit_1_von_2.md`,
+    `.artifacts/sprint_39_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S39C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 39 jetzt mit
+    Hash-, Tracker- und Verifikationsbezug.
+  - Der Abschlusslauf dokumentiert bewusst den engen Scope:
+    keine neue Trip-/Delta-Logik, keine Fuelup-Editierbarkeit und keine
+    Receipt-/Car-Folgearbeit aus `TSK-0027`.
+
+### Validierung
+
+- `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
+- `bash tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`
+- `bash tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`
+- `bash tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`
+- `bash tests/domain_policy/cases/t_p012__01__gap_confirm_yes.sh`
+- `bash tests/domain_policy/cases/t_p012__02__gap_confirm_no.sh`
+- `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits -obin/t_p000__01__cli_validate_core tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`
+- `bin/t_p000__01__cli_validate_core`
+- Manueller Realtest:
+  - normaler Kurzdistanz-Fuelup ohne `--missed-previous` speichert ohne
+    `P-050`-Prompt
+  - grosse Distanzluecke bleibt auf `P-012` mit Abbruch bei Confirm=`n`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 38 - CLI-first TUI-Strang rahmen
 
 - Status: done
