@@ -1,7 +1,36 @@
 # SPRINTS
-**Stand:** 2026-04-07
+**Stand:** 2026-04-08
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream vor Sprint 40 - Steuerungs-Sync und TUI-Slice zuschneiden
+
+- Status: done
+- Ziel: den Audit-/Tracker-/Prompt-Rahmen vor Sprint 40 auf den aktuellen
+  `1.4.0-dev`-Stand ziehen und `BL-0033` als naechsten belastbaren
+  Runtime-Slice vorbereiten, ohne schon eine TUI-Implementierung zu starten.
+
+### Stand (2026-04-08)
+
+- `AUDIT_STATUS_BOARD.md` markiert die fruehen `1.2.0`-Einordnungen jetzt
+  explizit als historische Basis und beschreibt die aktuelle
+  triggerbasierte Audit-Realitaet fuer `1.4.0-dev`.
+- `BL-0033` ist von `proposed` auf `approved` gezogen und legt genau einen
+  Referenzscreen fest: `Betankungen --list fuelups --detail`.
+- Unter `BL-0033` ist `TSK-0029` neu angelegt; der Task schneidet den
+  ersten kleinen Runtime-Slice fuer eine read-only View-/Painter-Basis,
+  explizit ohne Form-System und ohne neue Fachlogik.
+- `docs/BACKLOG.md`, `docs/STATUS.md` und `docs/CHANGELOG.md` fuehren
+  denselben Steuerungsstand; `BL-0034` bleibt bewusst nachgeordnet und
+  `exploratory`.
+- Im Audit-Repo liegt jetzt genau ein offener Sprint-Prompt:
+  `prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md`.
+- Dieser Block fuehrt bewusst keine Runtime-Aenderungen ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## Sprint 39 - P-050 reset guidance vom Standardpfad entkoppeln
 

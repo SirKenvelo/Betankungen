@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-07
+**Stand:** 2026-04-08
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -97,6 +97,17 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Planning: Der Steuerungs-Sync vor Sprint 40 zieht Audit-,
+  Tracker- und Prompt-Artefakte auf den aktuellen `1.4.0-dev`-Stand.
+  `AUDIT_STATUS_BOARD.md` markiert die fruehe `1.2.0`-Bewertung jetzt
+  explizit als historisch und spiegelt die triggerbasierte Audit-Realitaet
+  der aktiven Linie; `BL-0033` ist auf `approved` gezogen, der erste
+  Referenzscreen ist fest auf `Betankungen --list fuelups --detail`
+  zugeschnitten und `TSK-0029` bereitet den naechsten kleinen Runtime-Slice
+  ohne Form-System vor. `docs/BACKLOG.md`, `docs/STATUS.md`,
+  `docs/SPRINTS.md`, `prompts/README.md` und der neue offene Sprint-Prompt
+  `prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md` fuehren
+  denselben Steuerungsstand. (2026-04-08)
 - [S39C2/2] Docs/Traceability: Sprint 39 und der Abschluss von `TSK-0028`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruennen Abschlussnachweis ueber den
