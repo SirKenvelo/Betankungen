@@ -97,6 +97,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Process: Die Sync-Regel fuer Arbeitskopien trennt jetzt
+  klar zwischen beobachtender Zustandspruefung und bewusst ausgeloesten
+  Git-Aenderungen. `docs/GIT_WORKFLOW.md` fuehrt am Session-Start
+  `git remote -v`, `git fetch --prune origin`,
+  `git status --short --branch` und `git log -1 --oneline` als
+  Standardfolge; `git pull --ff-only` bleibt zulaessig, aber nur noch als
+  explizite Folgeaktion. `AGENTS.md`, `docs/README.md`,
+  `docs/ADR/ADR-0010-repo-local-workflow-wrapper-cli.md` sowie die
+  Audit-Prompt-Artefakte werden auf denselben Regelstand gezogen.
+  Es wurde keine Produkt-Runtime geaendert. (2026-04-08)
 - [General] Docs/Planning: Der Steuerungs-Sync vor Sprint 40 zieht Audit-,
   Tracker- und Prompt-Artefakte auf den aktuellen `1.4.0-dev`-Stand.
   `AUDIT_STATUS_BOARD.md` markiert die fruehe `1.2.0`-Bewertung jetzt
