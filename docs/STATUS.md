@@ -359,16 +359,16 @@ Bereits erledigt:
     externe Receipt-Ordner bleiben weiter legitim; ein app-verwalteter
     XDG-Belegordner waere nur ein moeglicher Hybrid-/Komfortmodus und
     nicht Teil der unmittelbaren `1.4.0-dev`-Arbeit.
-  - Ein spaeterer CLI-first-TUI-Strang ist jetzt nicht mehr nur gerahmt,
-    sondern fuer den naechsten Sprint konkret zugeschnitten:
-    `ADR-0015` fixiert die Strategie, dass klassische CLI- und
+  - Der CLI-first-TUI-Strang ist in einem ersten read-only Slice jetzt
+    geliefert: `ADR-0015` bleibt die Leitplanke, dass klassische CLI- und
     non-interactive-Pfade voll erhalten bleiben und eine TUI nur als
     optionale Komfortschicht iterativ eingefuehrt wird. `BL-0033` ist jetzt
-    `approved`, zieht genau einen read-only-Referenzscreen fest
-    (`Betankungen --list fuelups --detail`) und bereitet mit `TSK-0029`
-    einen ersten kleinen Runtime-Slice fuer eine View-/Painter-Basis vor.
-    `BL-0034` bleibt weiterhin der spaetere und groessere Folgeblock fuer
-    ein optionales Form-System nach bewaehrter View-/Painter-Basis.
+    `done`; `TSK-0029` liefert fuer `Betankungen --list fuelups --detail`
+    einen ersten Referenzscreen mit kleiner `u_painter`-/`u_view_fuelups`-
+    Basis, waehrend der kompakte `--list fuelups`-Pfad bewusst
+    stationsfokussiert und unveraendert bleibt. `BL-0034` bleibt weiterhin
+    der spaetere und groessere Folgeblock fuer ein optionales Form-System
+    nach bewaehrter View-/Painter-Basis.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

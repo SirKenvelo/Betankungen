@@ -112,11 +112,13 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
     benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
     XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
-  - ein spaeterer CLI-first-TUI-Strang ist jetzt formal vorbereitet:
+  - der erste CLI-first-TUI-Slice ist jetzt geliefert:
     `ADR-0015` haelt fest, dass klassische CLI- und non-interactive-Pfade
     voll erhalten bleiben und eine TUI nur als optionale Komfortschicht
-    eingefuehrt wird; `BL-0033` bleibt der kleine View-/Presentation-Block
-    fuer einen Referenzscreen, `BL-0034` der spaetere Formular-/Input-Block
+    eingefuehrt wird; `BL-0033` liefert jetzt den Referenzscreen
+    `Betankungen --list fuelups --detail` mit kleiner `u_painter`-/
+    `u_view_fuelups`-Basis, waehrend `BL-0034` der spaetere Formular-/
+    Input-Block bleibt
   - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
     `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
     `docs/ROADMAP_1_0_0.md`.

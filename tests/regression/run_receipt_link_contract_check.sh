@@ -3,7 +3,7 @@ set -euo pipefail
 
 # run_receipt_link_contract_check.sh
 # CREATED: 2026-03-18
-# UPDATED: 2026-04-03
+# UPDATED: 2026-04-08
 # Regression fuer Receipt-Link-Contract (Scope-Guardrails, Write-Path, lokale
 # Pfadnormalisierung, Missing-File-Guidance, Text/JSON-Sichtbarkeit).
 
@@ -159,6 +159,8 @@ SQL
   ok "Kompakte Liste zeigt die Station ohne abgeschnittenen Car-Suffix"
 
   run_expect_ok "List detail zeigt Receipt-Link" "$BIN_FILE" --list fuelups --detail --car-id 1
+  assert_contains "$LAST_OUT" "Fuelups detail reference screen" "Detail-Ausgabe nutzt den Referenzscreen nicht."
+  assert_contains "$LAST_OUT" "Mode: --list fuelups --detail" "Detail-Ausgabe zeigt den Referenzscreen-Metakontext nicht."
   assert_contains "$LAST_OUT" "Car: Hauptauto" "Detail-Ausgabe enthaelt den Fahrzeugkontext nicht separat."
   assert_contains "$LAST_OUT" "Receipt link: $existing_uri" "Detail-Ausgabe enthaelt den gesetzten Receipt-Link nicht."
   ok "Detail-Ausgabe zeigt Receipt-Link"

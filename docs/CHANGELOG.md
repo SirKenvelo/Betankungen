@@ -11,6 +11,7 @@ Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
 schliessen.
 
 ### Sprint / Commit References
+- S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)
 - S39C1/2 - `P-050`-Reset-Guidance vom normalen Kurzdistanz-Fuelup entkoppelt und einen manuellen Reset nur noch ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar gemacht (`src/Betankungen.lpr`, `units/u_cli_types.pas`, `units/u_cli_parse.pas`, `units/u_cli_validate.pas`, `units/u_cli_help.pas`, `units/u_fuelups.pas`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`, `tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`, `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`, `tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0028-decouple-p050-reset-guidance-from-normal-fuelup-flow.md`, `docs/issues/ISS-0010-p050-reset-prompt-misleading-for-normal-distances/issue.md`); Artefakte: `.artifacts/sprint_39_commit_1_von_2.md`, `.artifacts/sprint_39_commit_1_von_2.diff`; Basis-Commit: `8be52b1`. (2026-04-07)
 - S38C1/2 - Sichtbaren Fahrzeugkontext, fruehe Receipt-Link-Guidance und lokale Receipt-Pfadnormalisierung im Fuelup-Add-Flow geliefert (`units/u_car_context.pas`, `units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_38_commit_1_von_2.md`, `.artifacts/sprint_38_commit_1_von_2.diff`; Basis-Commit: `1e6ef9e`. (2026-04-03)
 - S37C1/2 - Fuelup-Prompt, Help und Doku auf expliziten Gesamt-Odometer-Contract gezogen (`units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0026-clarify-fuelup-odometer-guidance-and-contract.md`, `docs/issues/ISS-0008-fuelup-odometer-trip-semantics-gap/issue.md`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`); Artefakte: `.artifacts/sprint_37_commit_1_von_2.md`, `.artifacts/sprint_37_commit_1_von_2.diff`; Basis-Commit: `cdd0aeb`. (2026-04-03)
@@ -97,6 +98,26 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [S40C2/2] Docs/Traceability: Sprint 40, der Abschluss von `TSK-0029`
+  und der erreichte `BL-0033`-Stand sind jetzt in `docs/CHANGELOG.md`
+  und `docs/SPRINTS.md` verankert. Der Abschlusslauf dokumentiert den
+  gruennen Nachweis ueber den Repo-Standard-Build
+  (`fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`),
+  `tests/regression/run_receipt_link_contract_check.sh`,
+  `tests/smoke/smoke_multi_car_context.sh`, `tests/smoke/smoke_cli.sh`,
+  `scripts/projtrack_lint.sh` und `make verify`. Der Sprint haelt
+  ausdruecklich fest, dass weder ein Form-System noch Add-/Edit-Flows oder
+  neue Fachlogik vorgezogen wurden. (2026-04-08)
+- [S40C1/2] Feat/TUI: `--list fuelups --detail` nutzt jetzt den ersten
+  read-only Referenzscreen der CLI-first-TUI-Linie. `units/u_painter.pas`
+  und `units/u_view_fuelups.pas` liefern dafuer eine kleine
+  wiederverwendbare Painter-/View-Basis; `units/u_fuelups.pas` routet nur
+  den Detailpfad auf diesen neuen Screen, waehrend der kompakte
+  `--list fuelups`-Pfad stationsfokussiert und fachlich unveraendert
+  bleibt. Die bestehende Detailinformation bleibt sichtbar, gezielte
+  Receipt-/Mehrfahrzeug-Smokes fuehren denselben Contract, `BL-0033` und
+  `TSK-0029` sind damit `done`, und `BL-0034` bleibt bewusst spaeter.
+  (2026-04-08)
 - [General] Docs/Process: Die Sync-Regel fuer Arbeitskopien trennt jetzt
   klar zwischen beobachtender Zustandspruefung und bewusst ausgeloesten
   Git-Aenderungen. `docs/GIT_WORKFLOW.md` fuehrt am Session-Start
@@ -817,6 +838,9 @@ schliessen.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Referenzscreen-Umsetzung, Tracker-Sync und Sprint-40-Traceability
+  erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
+  (2026-04-08)
 - Tracker-/Planungs-Sync fuer `ISS-0010`, `TSK-0028` und den zugehoerigen
   BL-/Status-/Traceability-Stand erfolgte mit Unterstuetzung durch AI-Tools
   als Sparringspartner. (2026-04-03)

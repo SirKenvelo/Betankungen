@@ -2,7 +2,7 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-07
+  UPDATED: 2026-04-08
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
@@ -50,7 +50,8 @@ uses
   u_car_context,
   u_db_common,
   u_fmt,
-  u_log;
+  u_log,
+  u_view_fuelups;
 
 type
   // ----------------
@@ -794,6 +795,8 @@ var
   ResolvedCarId: Integer;
   IsFirstRow: boolean;
   RowCount: integer;
+  DetailItems: TFuelupDetailViewItems;
+  DetailItem: TFuelupDetailViewItem;
 
   // Rollback und Fehler weiterreichen
   procedure Fail(const Prefix: string; E: Exception);
@@ -847,51 +850,70 @@ begin
         Exit;
       end;
 
-      PrintFuelupHeader;
-
-      IsFirstRow := True;
       RowCount := 0;
-      while not Q.EOF do
+      if Detailed then
       begin
-        Inc(RowCount);
-        if not IsFirstRow then
-          if Detailed then
-            // Duenne Linie fuer den Detail-Block-Trenner
-            PrintFuelupSeparator
-          else
+        SetLength(DetailItems, 0);
+        while not Q.EOF do
+        begin
+          Inc(RowCount);
+          DetailItem.Id := Q.FieldByName('id').AsInteger;
+          DetailItem.FueledAt := Q.FieldByName('fueled_at').AsString;
+          DetailItem.OdometerKm := Q.FieldByName('odometer_km').AsLargeInt;
+          DetailItem.LitersMl := Q.FieldByName('liters_ml').AsLargeInt;
+          DetailItem.TotalCents := Q.FieldByName('total_cents').AsLargeInt;
+          DetailItem.PricePerLiterMilliEur := Q.FieldByName('price_per_liter_milli_eur').AsLargeInt;
+          DetailItem.IsFullTank := Q.FieldByName('is_full_tank').AsInteger = 1;
+          DetailItem.MissedPrevious := Q.FieldByName('missed_previous').AsInteger = 1;
+          DetailItem.CarName := Q.FieldByName('car_name').AsString;
+          DetailItem.FuelType := Q.FieldByName('fuel_type').AsString;
+          DetailItem.PaymentType := Q.FieldByName('payment_type').AsString;
+          DetailItem.PumpNo := Q.FieldByName('pump_no').AsString;
+          DetailItem.Note := Q.FieldByName('note').AsString;
+          DetailItem.ReceiptLink := Q.FieldByName('receipt_link').AsString;
+          DetailItem.StationName :=
+            Q.FieldByName('brand').AsString + ' (' + Q.FieldByName('city').AsString + ')';
+          DetailItem.Address :=
+            Q.FieldByName('street').AsString + ' ' +
+            Q.FieldByName('house_no').AsString + ', ' +
+            Q.FieldByName('city').AsString;
+
+          SetLength(DetailItems, Length(DetailItems) + 1);
+          DetailItems[High(DetailItems)] := DetailItem;
+          Q.Next;
+        end;
+
+        RenderFuelupDetailReferenceScreen(ResolvedCarId, DetailItems);
+      end
+      else
+      begin
+        PrintFuelupHeader;
+
+        IsFirstRow := True;
+        while not Q.EOF do
+        begin
+          Inc(RowCount);
+          if not IsFirstRow then
             // Dicke Linie fuer den Standard-Zeilentrenner
             PrintFuelupSeparatorDouble;
 
-        PrintFuelupRow(
-          Q.FieldByName('id').AsInteger,
-          Q.FieldByName('fueled_at').AsString,
-          Q.FieldByName('odometer_km').AsLargeInt,
-          Q.FieldByName('liters_ml').AsLargeInt,
-          Q.FieldByName('price_per_liter_milli_eur').AsLargeInt,
-          Q.FieldByName('total_cents').AsLargeInt,
-          Q.FieldByName('brand').AsString + ' (' + Q.FieldByName('city').AsString + ')'
-        );
-    
-        if Detailed then
-        begin
-          PrintFuelupDetail(
-            Q.FieldByName('is_full_tank').AsInteger = 1,
-            Q.FieldByName('missed_previous').AsInteger = 1,
-            Q.FieldByName('car_name').AsString,
-            Q.FieldByName('fuel_type').AsString,
-            Q.FieldByName('payment_type').AsString,
-            Q.FieldByName('pump_no').AsString,
-            Q.FieldByName('note').AsString,
-            Q.FieldByName('receipt_link').AsString,
-            Q.FieldByName('street').AsString + ' ' + Q.FieldByName('house_no').AsString + ', ' + Q.FieldByName('city').AsString
+          PrintFuelupRow(
+            Q.FieldByName('id').AsInteger,
+            Q.FieldByName('fueled_at').AsString,
+            Q.FieldByName('odometer_km').AsLargeInt,
+            Q.FieldByName('liters_ml').AsLargeInt,
+            Q.FieldByName('price_per_liter_milli_eur').AsLargeInt,
+            Q.FieldByName('total_cents').AsLargeInt,
+            Q.FieldByName('brand').AsString + ' (' + Q.FieldByName('city').AsString + ')'
           );
+
+          IsFirstRow := False;
+          Q.Next;
         end;
-        
-        IsFirstRow := False;
-        Q.Next;
+
+        PrintFuelupFooter(False);
       end;
 
-      PrintFuelupFooter(Detailed);
       Dbg('ListFuelups: rows=' + IntToStr(RowCount));
       Tran.Commit;
     except
