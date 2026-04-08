@@ -3,6 +3,59 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## Sprint 40 - Ersten TUI-Referenzscreen fuer Fuelup-Details liefern
+
+- Status: done
+- Ziel: fuer `Betankungen --list fuelups --detail` genau einen read-only
+  Referenzscreen mit kleiner View-/Painter-Basis liefern, ohne
+  Form-Systeme, Add-/Edit-Flows oder neue Fachlogik vorzuziehen.
+
+### Geplante Bloecke
+
+- S40C1/2: done - Referenzscreen, minimale Painter-/View-Basis, gezielte
+  Smokes und fachliche Tracker-/Handbuch-Synchronisierung liefern.
+- S40C2/2: done - Sprint-Traceability, Vollverifikation und PR-Vorbereitung
+  dokumentieren.
+
+### Fortschritt (2026-04-08)
+
+- `S40C1/2` abgeschlossen:
+  - `units/u_painter.pas` liefert jetzt kleine Painter-Helfer fuer
+    Headline-, Rule-, Inline-Fact- und Wrapped-Fact-Ausgabe.
+  - `units/u_view_fuelups.pas` rendert den neuen read-only
+    Referenzscreen fuer `Betankungen --list fuelups --detail`.
+  - `units/u_fuelups.pas` routet nur den Detailpfad auf den neuen Screen;
+    der kompakte `--list fuelups`-Pfad bleibt stationsfokussiert und
+    unveraendert.
+  - `tests/regression/run_receipt_link_contract_check.sh`,
+    `tests/smoke/smoke_cli.sh` und `tests/smoke/smoke_multi_car_context.sh`
+    decken Referenzscreen, Receipt-Link-Sichtbarkeit und
+    Mehrfahrzeug-Scoping regressionsseitig ab.
+  - `BL-0033` und `TSK-0029` sind auf `done` gezogen; `docs/BACKLOG.md`,
+    `docs/STATUS.md`, `docs/README.md` und `docs/BENUTZERHANDBUCH.md`
+    fuehren denselben Abschlussstand.
+  - `BL-0034` bleibt weiterhin bewusst spaeter und ausserhalb dieses
+    Sprint-Slices.
+  - Git-Commit: `e9dc1c0`
+  - Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`,
+    `.artifacts/sprint_40_commit_1_von_2.diff` (nach Push lokal erzeugen)
+- `S40C2/2` abgeschlossen:
+  - `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankern Sprint 40 jetzt mit
+    Hash-, Tracker- und Verifikationsbezug.
+  - Der Abschlusslauf dokumentiert bewusst den engen Scope:
+    kein Form-System, keine Add-/Edit-Flows und keine neue Fachlogik.
+  - Als naechster Audit-Kandidat bleibt ein kleiner P1/P4-Delta-/Risiko-
+    Check fuer den sichtbaren Screen-Slice vorbereitet.
+
+### Validierung
+
+- `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
+- `tests/regression/run_receipt_link_contract_check.sh`
+- `tests/smoke/smoke_multi_car_context.sh`
+- `tests/smoke/smoke_cli.sh`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream vor Sprint 40 - Sync-Regel fuer Arbeitskopien nachziehen
 
 - Status: done
