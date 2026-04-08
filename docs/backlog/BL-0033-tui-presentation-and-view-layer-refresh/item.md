@@ -1,17 +1,17 @@
 ---
 id: BL-0033
 title: TUI Presentation and View-Layer Refresh
-status: proposed
+status: approved
 priority: P3
 type: improvement
 tags: [tui, ui, terminal, renderer, views, 'lane:planned']
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-04-08
 related:
   - ADR-0015
   - BL-0034
 ---
-**Stand:** 2026-04-07
+**Stand:** 2026-04-08
 
 # Goal
 Die read-only Darstellung von Betankungen kontrolliert modernisieren, ohne die
@@ -34,8 +34,8 @@ read-only-Views.
 
 # Scope
 In Scope:
-- einen einzelnen Referenzscreen als ersten TUI-Migrationskandidaten
-  definieren und modernisieren, z. B. `fuelups --list --detail`
+- genau einen einzelnen Referenzscreen als ersten TUI-Migrationskandidaten
+  festziehen und modernisieren: `Betankungen --list fuelups --detail`
 - leichte Render-Abstraktion fuer Terminal-/Painter-/View-Trennung
   vorbereiten oder einziehen
 - visuelle Hierarchie, Weissraum und Tabellen-/Detaildarstellung verbessern
@@ -59,6 +59,20 @@ Out of Scope:
   Darstellungsoberflaeche verbessert werden soll.
 
 # Output
-Ein bewusst begrenzter TUI-View-Refresh-Block mit einem bewaehrten
-Referenzscreen, klaren Render-Konventionen und einer wiederverwendbaren Basis
-fuer spaetere weitere read-only Views.
+Ein bewusst begrenzter TUI-View-Refresh-Block mit genau einem festgezogenen
+Referenzscreen `Betankungen --list fuelups --detail`, klaren
+Render-Konventionen und einer wiederverwendbaren Basis fuer spaetere weitere
+read-only Views. Der naechste umsetzbare Slice bleibt bewusst klein:
+`TSK-0029` liefert nur fuer diesen Screen eine leichte
+Terminal-/Painter-/View-Basis und laesst Form-Systeme (`BL-0034`) explizit
+draussen.
+
+# Reference Screen
+- Kanonischer erster Migrationskandidat: `Betankungen --list fuelups --detail`
+- Grund fuer die Auswahl: Der Screen ist read-only, fachlich bereits
+  etabliert, car-scoped und zeigt genug Tabellen-/Detailstruktur, um
+  Render-Konventionen ohne Add-/Edit-Risiko zu schaerfen.
+
+# Derived Tasks
+- `TSK-0029` - Referenzscreen `Betankungen --list fuelups --detail` mit
+  leichter View-/Painter-Basis liefern. (todo)
