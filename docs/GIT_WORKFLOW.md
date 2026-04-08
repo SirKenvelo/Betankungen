@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-03-28
+**Stand:** 2026-04-08
 
 ## Ziel
 
@@ -209,8 +209,17 @@ Reihenfolge:
 
 ## Sync-Regel fuer Arbeitskopien
 
-- Session-Start: `git fetch` + `git pull --ff-only`
-- Session-Ende: `git fetch` + `git pull --ff-only`
+- Standardregel: zuerst den Zustand der Arbeitskopie beobachtend einordnen,
+  dann erst bewusst veraendernde Git-Schritte ausloesen.
+- Session-Start: `git remote -v`, `git fetch --prune origin`,
+  `git status --short --branch`, `git log -1 --oneline`
+- `git pull --ff-only` ist kein automatischer Startschritt mehr, sondern
+  eine explizite Folgeaktion, wenn ein Task bewusst einen Fast-Forward-Sync
+  auf den aktuellen Remote-Stand verlangt.
+- Session-Ende: finaler Beobachtungs-/Sync-Check mit
+  `git fetch --prune origin` und `git status --short --branch`; ein
+  zusaetzlicher `git pull --ff-only` erfolgt nur bewusst und nur dann,
+  wenn der konkrete Abschlussfluss ihn wirklich braucht.
 - Kein lokales Rebase von bereits artefakt-/traceability-relevanten Commits.
 
 ## Tagging-Regeln

@@ -3,6 +3,31 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream vor Sprint 40 - Sync-Regel fuer Arbeitskopien nachziehen
+
+- Status: done
+- Ziel: den kanonischen Repo- und Prompt-Workflow vor Sprint 40 von einem
+  automatischen Pull-Reflex auf eine beobachtende Standardregel
+  umstellen, ohne Produkt-Runtime zu veraendern.
+
+### Stand (2026-04-08)
+
+- `docs/GIT_WORKFLOW.md` trennt jetzt explizit zwischen beobachtender
+  Arbeitskopien-Pruefung und bewusst ausgeloesten Git-Aenderungen.
+- `AGENTS.md` fuehrt denselben Regelstand fuer Repo-Pflege,
+  Session-Start/-Ende und den Standardablauf ueber `main`.
+- `docs/README.md` und `ADR-0010` rahmen `btkgit sync` bzw. den
+  Post-Merge-Sync jetzt als explizite Operator-Aktion statt als
+  automatischen Startreflex.
+- Master-Template, Leitstand und Prompt-README in der Audit-Ablage werden
+  auf denselben beobachtenden Startablauf gezogen.
+- Dieser Block fuehrt bewusst keine Runtime-Aenderungen im Produkt ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream vor Sprint 40 - Steuerungs-Sync und TUI-Slice zuschneiden
 
 - Status: done

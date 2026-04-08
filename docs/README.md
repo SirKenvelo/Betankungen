@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-07
+**Stand:** 2026-04-08
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -510,14 +510,15 @@ Beispiel:
 Repo-lokales Workflow-Wrapper-CLI gemaess `ADR-0010`.
 
 **Funktionen (gehaerteter MVP)**
-- `btkgit sync`: Session-Sync (`git fetch --prune origin` + `git pull --ff-only`);
+- `btkgit sync`: expliziter Fast-Forward-Sync nach beobachtender
+  Arbeitskopien-Pruefung (`git fetch --prune origin` + `git pull --ff-only`);
   bei Auth-/Remote-/Upstream-Problemen liefert `btkgit` gezielte Hinweise,
   aendert Credentials oder Remotes aber nicht automatisch
 - `btkgit preflight <version>`: delegiert auf den passenden versionsspezifischen
   Preflight (z. B. `1.3.0` -> `scripts/release_preflight_1_3_0.sh`)
 - `btkgit ready`: menschenlesbarer lokaler Readiness-Wrapper (`git status`,
   optional `make verify`)
-- `btkgit cleanup`: Post-Merge-Flow (`checkout main`, Sync); lokales
+- `btkgit cleanup`: Post-Merge-Flow (`checkout main`, bewusster Sync); lokales
   Branch-Cleanup nur explizit via `--delete-local`
 
 **Bewusste Grenzen**

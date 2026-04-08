@@ -1,5 +1,5 @@
 # ADR-0010: Repo-lokales Workflow-Wrapper-CLI (`btkgit`)
-**Stand:** 2026-03-29
+**Stand:** 2026-04-08
 **Status:** accepted
 **Datum:** 2026-03-26
 
@@ -9,7 +9,8 @@ Die `1.3.0`-Linie ist abgeschlossen (Gate 5 finalisiert am 2026-03-26). Der
 Git-/PR-/Preflight-Ablauf ist stabil dokumentiert, aber in der taeglichen
 Nutzung weiterhin stark manuell:
 
-- Session-Sync (`fetch` / `pull --ff-only`)
+- beobachtende Arbeitskopien-Pruefung plus bei Bedarf bewusster
+  Fast-Forward-Sync
 - versionsspezifische Preflight-Laeufe
 - Readiness-/Merge-Pruefungen
 - Branch-Aufraeumen nach Merges
@@ -38,7 +39,7 @@ ersetzt deren fachliche Source of Truth nicht.
 ## Startumfang (MVP)
 
 - `btkgit sync`
-  - `fetch` + `pull --ff-only`
+  - expliziter Operator-Schritt fuer `fetch` + `pull --ff-only`
   - erklaert Auth-/Remote-/Upstream-Probleme mit gezielten Operator-Hinweisen,
     aendert Credentials oder Remote-Konfiguration aber nicht automatisch
 - `btkgit preflight <version>`
@@ -46,8 +47,9 @@ ersetzt deren fachliche Source of Truth nicht.
 - `btkgit ready`
   - menschenlesbarer Wrapper fuer lokale Readiness-Checks
 - `btkgit cleanup`
-  - nach Merge: `checkout main`, `pull --ff-only`, lokalen Branch nur
-    explizit via `--delete-local` loeschen
+  - nach Merge: `checkout main`, bei Bedarf bewusst wieder auf aktuellen
+    Remote-Stand ziehen, lokalen Branch nur explizit via `--delete-local`
+    loeschen
 
 ## Nicht-Ziele (MVP)
 
@@ -77,8 +79,8 @@ Stand 2026-03-29:
 
 - Root-Wrapper `./btkgit` delegiert auf `scripts/btkgit.sh` und bricht mit
   klarer Fehlermeldung ab, wenn der Script-Entrypoint lokal fehlt.
-- `btkgit sync` fuehrt `git fetch --prune origin` und `git pull --ff-only`
-  aus.
+- `btkgit sync` fuehrt als expliziter Operator-Schritt
+  `git fetch --prune origin` und `git pull --ff-only` aus.
 - Fehlerbilder fuer fehlendes `origin`, fehlenden Branch-Upstream sowie
   Auth-/Remote-Probleme liefern jetzt konkrete Operator-Hinweise
   (`gh auth status`, `git remote -v`, `git push -u origin <branch>`), ohne
@@ -89,7 +91,7 @@ Stand 2026-03-29:
 - `btkgit ready` liefert menschenlesbaren Status und optionalen lokalen
   Vollcheck via `make verify`.
 - `btkgit cleanup` fuehrt den Post-Merge-Pfad transparent aus (`checkout main`,
-  Sync auf `main`) und loescht lokale Branches nur noch explizit via
+  bewusster Sync auf `main`) und loescht lokale Branches nur noch explizit via
   `--delete-local`; `main` bleibt unloeschbar.
 - Nicht-destruktive Smoke-Abdeckung prueft jetzt neben `--help` auch
   `ready --skip-verify`, `preflight default -- --help`, einen klaren

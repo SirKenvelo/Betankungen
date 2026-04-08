@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-03-31
+**Stand:** 2026-04-08
 
 <INSTRUCTIONS>
 
@@ -32,14 +32,14 @@
 - Neue Tracker-Eintraege werden ueber die Vorlagen in `docs/policies/templates/` gestartet.
 
 ## Repo-Pflege
-- Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch`, `pull --ff-only`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
+- Codex uebernimmt auf Wunsch die laufende Repo-Pflege (z. B. `status`, `fetch`, bewusster `pull --ff-only`, `stash`, `add/commit/push`, Remote-Checks und Branch-Sync).
 - Commit + Push werden von Codex auf Wunsch vollstaendig uebernommen (inkl. Branch-Flow), sodass nach fachlicher Freigabe kein separater manueller Push durch den User noetig ist.
 - Bei Auth-/Transportproblemen (SSH/Passphrase) darf Codex fuer nicht-interaktive Laeufe den HTTPS-Weg mit vorhandener `gh`-Authentifizierung nutzen, sofern kein Sicherheitsrisiko entsteht.
 - Potenziell destruktive Git-Aktionen (z. B. `reset --hard`, History-Rewrite auf geteilten Branches, erzwungene Pushes) erfolgen nur nach expliziter User-Freigabe.
 
 ### Public-Repo-Governance (verbindlich)
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
-- Standardablauf fuer Aenderungen: `main` aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
+- Standardablauf fuer Aenderungen: `main`-Stand beobachtend pruefen, bei Bedarf bewusst fast-forward aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
 - PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
 - PR-Titel fuer Sprint-Arbeit folgen auf GitHub dem Format `[Sxx] type: short description`; Commit-Labels wie `[S24C1/1]` oder generische Titel wie `[Sprint 24]` sind als PR-Titel nicht zulaessig.
 - Verbindliche Detailleitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen liegt in `docs/GIT_WORKFLOW.md`.
@@ -59,9 +59,9 @@
 - Bei Fehlermeldungen/Logs in oeffentlichen Doku-/PR-Texten keine unnoetigen lokalen Systemdetails offenlegen (nur technisch relevante Ausschnitte).
 
 ### Repo-Pflege-Rhythmus
-- Session-Start: einmaliger Sync mit `fetch` und `pull --ff-only`, damit lokal auf aktuellem Remote-Stand gearbeitet wird.
+- Session-Start: einmalige Arbeitskopien-Pruefung mit `git remote -v`, `git fetch --prune origin`, `git status --short --branch` und `git log -1 --oneline`; `git pull --ff-only` nur als bewusste Folgeaktion, wenn der konkrete Task einen Fast-Forward-Sync verlangt.
 - Waehrend der Session: Commits und Pushes erfolgen pro fachlich-logischer Einheit (z. B. Feature-Block, Bugfix-Block, Doku-Block).
-- Session-Ende: finaler Sync-Check (`fetch`/ggf. `pull --ff-only`), danach Abschluss-Commit(s) und Push.
+- Session-Ende: finaler Beobachtungs-/Sync-Check mit `git fetch --prune origin` und `git status --short --branch`; ein zusaetzlicher `git pull --ff-only` bleibt eine bewusste Ausnahme fuer konkrete Abschluss- oder Integrationsschritte.
 - Bei laengeren Tasks: mehrere Zwischen-Commits sind gewuenscht; bei kurzen Tasks reicht in der Regel ein Abschluss-Commit.
 - Release-Disziplin: Tags/Release-Artefakte erst bei `Done` (nach finaler Freigabe); vorher nur normale Commits/Pushes ohne Release-Schritt.
 - Commit-Message-Konvention (verbindlich): `[Scope] type: kurze beschreibung`.
