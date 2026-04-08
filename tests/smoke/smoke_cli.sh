@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-04-03
+# UPDATED: 2026-04-08
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -160,6 +160,7 @@ print_plan() {
   printf '[LIST] --help enthaelt Struktur-Keywords (Commands/Stats options/Examples/--yearly/--dashboard)\n'
   printf '[LIST] --help enthaelt Odometer-Guidance fuer --add fuelups\n'
   printf '[LIST] --help enthaelt Receipt-Link-Guidance (Option, append-only, file://-Normalisierung)\n'
+  printf '[LIST] --list fuelups --detail nutzt den Referenzscreen fuer Fuelup-Details\n'
   printf '[LIST] --receipt-link ausserhalb --add fuelups -> Validierungsfehler\n'
   printf '[LIST] --stats stations -> Fehler + Kurz-Usage + Tipp\n'
   printf '[LIST] --stats fuelups --json --csv -> Fehler im 3-Zeilen-Format ohne Voll-Help\n'
@@ -368,6 +369,55 @@ test_receipt_link_scope_guardrail_fails() {
     printf '[OK] --receipt-link ausserhalb --add fuelups: Validierungsfehler\n'
   else
     printf '[FAIL] --receipt-link ausserhalb --add fuelups: Validierungsfehler\n'
+    add_fail
+  fi
+}
+
+test_fuelups_detail_reference_screen_ok() {
+  local home db out err receipt_file rc
+
+  home="$(register_tmp_dir)"
+  db="$home/detail_reference.db"
+  out="$home/out.txt"
+  err="$home/err.txt"
+  receipt_file="$home/detail-receipt.jpg"
+
+  printf 'receipt fixture\n' >"$receipt_file"
+
+  "$ROOT_DIR/bin/Betankungen" --db "$db" --list cars >/dev/null 2>&1 || {
+    printf '[FAIL] --list fuelups --detail: Referenzscreen-Setup (Bootstrap)\n'
+    add_fail
+    return
+  }
+
+  printf 'DetailBrand\nDetailStreet\n1\n12345\nDetailCity\n\n\n\n\n\n' \
+    | "$ROOT_DIR/bin/Betankungen" --db "$db" --add stations >/dev/null 2>&1 || {
+      printf '[FAIL] --list fuelups --detail: Referenzscreen-Setup (Station)\n'
+      add_fail
+      return
+    }
+
+  printf '1\n2026-04-08 09:15:00\n1500\n55,00\n32,00\n1,718\ny\nDiesel\nCard\n7\nReference screen row\n' \
+    | "$ROOT_DIR/bin/Betankungen" --db "$db" --add fuelups --receipt-link "$receipt_file" >/dev/null 2>&1 || {
+      printf '[FAIL] --list fuelups --detail: Referenzscreen-Setup (Fuelup)\n'
+      add_fail
+      return
+    }
+
+  set +e
+  "$ROOT_DIR/bin/Betankungen" --db "$db" --list fuelups --detail >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'Fuelups detail reference screen' "$out" &&
+     grep -q 'Mode: --list fuelups --detail' "$out" &&
+     grep -q 'Station: DetailBrand (DetailCity)' "$out" &&
+     grep -q 'Car: Hauptauto' "$out" &&
+     grep -q 'Receipt link: file://' "$out"; then
+    printf '[OK] --list fuelups --detail nutzt den Referenzscreen\n'
+  else
+    printf '[FAIL] --list fuelups --detail nutzt den Referenzscreen\n'
     add_fail
   fi
 }
@@ -1347,6 +1397,7 @@ if [[ -x "$ROOT_DIR/bin/Betankungen" ]]; then
   test_help_keywords_stable
   test_help_mentions_odometer_guidance
   test_help_mentions_receipt_link
+  test_fuelups_detail_reference_screen_ok
   test_receipt_link_scope_guardrail_fails
   test_stats_stations_fails_short_usage
   test_stats_json_csv_fails_short_3line_no_full_help

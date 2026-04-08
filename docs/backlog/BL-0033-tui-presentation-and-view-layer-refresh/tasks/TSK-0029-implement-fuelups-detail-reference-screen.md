@@ -1,7 +1,7 @@
 ---
 id: TSK-0029
 title: Referenzscreen fuer `--list fuelups --detail` mit kleiner View-/Painter-Basis liefern
-status: todo
+status: done
 priority: P2
 type: task
 tags: [tui, ui, terminal, views, fuelups, 'lane:planned']
@@ -29,12 +29,12 @@ einem Big-Bang mitzuziehen.
   und neuen kleinen View-/Renderer-Units.
 
 # Done When
-- [ ] `Betankungen --list fuelups --detail` nutzt den neuen
+- [x] `Betankungen --list fuelups --detail` nutzt den neuen
   Referenzscreen-Pfad und bleibt read-only.
-- [ ] Die bestehende Detailinformation bleibt sichtbar und semantisch
+- [x] Die bestehende Detailinformation bleibt sichtbar und semantisch
   unveraendert.
-- [ ] Eine kleine wiederverwendbare Terminal-/Painter-/View-Basis ist fuer
+- [x] Eine kleine wiederverwendbare Terminal-/Painter-/View-Basis ist fuer
   diesen Screen vorhanden, ohne schon ein Form-System einzufuehren.
-- [ ] Help oder Doku sind nachgezogen, falls sich der sichtbare
+- [x] Help oder Doku sind nachgezogen, falls sich der sichtbare
   Darstellungs-Contract merklich veraendert.
-- [ ] Gezielte Checks und Repo-Standardvalidierung laufen gruen.
+- [x] Gezielte Checks und Repo-Standardvalidierung laufen gruen.

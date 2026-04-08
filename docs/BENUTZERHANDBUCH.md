@@ -1,5 +1,5 @@
 # Benutzerhandbuch Betankungen
-**Stand:** 2026-04-07
+**Stand:** 2026-04-08
 
 CLI-Anwendung zum Erfassen und Auswerten von Tankvorgaengen (SQLite, lokal).
 
@@ -86,7 +86,13 @@ Kommandos:
 - `Betankungen --list fuelups --car-id <id>`
 - `Betankungen --list fuelups --detail`
 - Die Hauptzeile der Fuelup-Liste bleibt stationsfokussiert; der
-  Fahrzeugkontext wird in `--detail` separat ueber `Car: ...` gezeigt.
+  kompakte Pfad `--list fuelups` bleibt bewusst unveraendert.
+- `--list fuelups --detail` nutzt jetzt einen read-only Referenzscreen mit
+  Screen-Headline, einem klaren Metablock fuer Modus/Fahrzeug/Eintragszahl
+  sowie einzelnen Fuelup-Abschnitten.
+- Die bestehende Detailinformation bleibt sichtbar: Datum, Station,
+  Odometer, Volumen, Preis, Gesamtbetrag, Flags, Kraftstoff, Payment/Pumpe,
+  Fahrzeugkontext, Adresse, Notiz und optionaler Receipt-Link.
 
 Eingabe bei `--add fuelups`:
 - Fahrzeugauswahl (`cars`) via Resolver:
@@ -144,7 +150,8 @@ Policy-Hinweis (Matrix v1):
   - bei 0 Fahrzeugen: Hard Error
   - bei genau 1 Fahrzeug: automatische Aufloesung
   - bei mehreren Fahrzeugen: `--car-id` erforderlich
-- In `--list fuelups --detail` wird ein gesetzter Beleg-Link als `Receipt link: ...` angezeigt.
+- In `--list fuelups --detail` wird ein gesetzter Beleg-Link weiterhin als
+  `Receipt link: ...` angezeigt.
 
 **Statistiken: Volltank-Zyklen, Monate und Jahre**
 - Textausgabe: `Betankungen --stats fuelups`

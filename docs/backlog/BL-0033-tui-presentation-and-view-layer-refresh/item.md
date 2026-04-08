@@ -1,7 +1,7 @@
 ---
 id: BL-0033
 title: TUI Presentation and View-Layer Refresh
-status: approved
+status: done
 priority: P3
 type: improvement
 tags: [tui, ui, terminal, renderer, views, 'lane:planned']
@@ -59,13 +59,12 @@ Out of Scope:
   Darstellungsoberflaeche verbessert werden soll.
 
 # Output
-Ein bewusst begrenzter TUI-View-Refresh-Block mit genau einem festgezogenen
+Ein bewusst begrenzter TUI-View-Refresh-Block mit genau einem gelieferten
 Referenzscreen `Betankungen --list fuelups --detail`, klaren
 Render-Konventionen und einer wiederverwendbaren Basis fuer spaetere weitere
-read-only Views. Der naechste umsetzbare Slice bleibt bewusst klein:
-`TSK-0029` liefert nur fuer diesen Screen eine leichte
-Terminal-/Painter-/View-Basis und laesst Form-Systeme (`BL-0034`) explizit
-draussen.
+read-only Views. `TSK-0029` liefert dafuer jetzt eine leichte
+Terminal-/Painter-/View-Basis nur fuer diesen Screen und laesst
+Form-Systeme (`BL-0034`) explizit draussen.
 
 # Reference Screen
 - Kanonischer erster Migrationskandidat: `Betankungen --list fuelups --detail`
@@ -75,4 +74,4 @@ draussen.
 
 # Derived Tasks
 - `TSK-0029` - Referenzscreen `Betankungen --list fuelups --detail` mit
-  leichter View-/Painter-Basis liefern. (todo)
+  leichter View-/Painter-Basis geliefert. (done)

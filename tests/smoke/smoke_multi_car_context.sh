@@ -11,7 +11,7 @@ source "$ROOT_DIR/tests/helpers/assert.sh"
 source "$ROOT_DIR/tests/helpers/csv.sh"
 
 # smoke_multi_car_context.sh
-# UPDATED: 2026-04-07
+# UPDATED: 2026-04-08
 # Finale Resolver-/CLI-Matrix fuer 0/1/>1 Cars:
 # - add/list/stats fuelups (inkl. scoped Output, unknown car_id, invalid car_id)
 # - edit/delete cars Guards (required/unknown/valid)
@@ -374,6 +374,37 @@ if [[ $RC -ne 0 ]] ||
   fail 'Matrix >1 Cars: list scope fuer carB ist nicht korrekt.'
 fi
 
+OUT_DETAIL_A="$TMP_DIR/detail_a.out"
+ERR_DETAIL_A="$TMP_DIR/detail_a.err"
+OUT_DETAIL_B="$TMP_DIR/detail_b.out"
+ERR_DETAIL_B="$TMP_DIR/detail_b.err"
+
+set +e
+"$APP_BIN" --db "$DB_MULTI" --list fuelups --detail --car-id "$CAR_A_ID" >"$OUT_DETAIL_A" 2>"$ERR_DETAIL_A"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q 'Fuelups detail reference screen' "$OUT_DETAIL_A" ||
+   ! grep -q 'Mode: --list fuelups --detail' "$OUT_DETAIL_A" ||
+   ! grep -q 'Car: Hauptauto' "$OUT_DETAIL_A" ||
+   ! grep -q 'Entries: 2' "$OUT_DETAIL_A" ||
+   grep -q 'MatrixCarB' "$OUT_DETAIL_A"; then
+  fail 'Matrix >1 Cars: detail reference screen fuer carA ist nicht korrekt car-scoped.'
+fi
+
+set +e
+"$APP_BIN" --db "$DB_MULTI" --list fuelups --detail --car-id "$CAR_B_ID" >"$OUT_DETAIL_B" 2>"$ERR_DETAIL_B"
+RC=$?
+set -e
+if [[ $RC -ne 0 ]] ||
+   ! grep -q 'Fuelups detail reference screen' "$OUT_DETAIL_B" ||
+   ! grep -q 'Mode: --list fuelups --detail' "$OUT_DETAIL_B" ||
+   ! grep -q 'Car: MatrixCarB' "$OUT_DETAIL_B" ||
+   ! grep -q 'Entries: 2' "$OUT_DETAIL_B" ||
+   grep -q 'Car: Hauptauto' "$OUT_DETAIL_B"; then
+  fail 'Matrix >1 Cars: detail reference screen fuer carB ist nicht korrekt car-scoped.'
+fi
+
 # stats scoped + cross-car isolation
 OUT_STATS_A="$TMP_DIR/stats_a.out"
 ERR_STATS_A="$TMP_DIR/stats_a.err"
@@ -436,7 +467,7 @@ EXP_ROWS_B="$((DB_COUNT_B - 1))"
 if [[ "$ROWS_A" != "$EXP_ROWS_A" || "$ROWS_B" != "$EXP_ROWS_B" ]]; then
   fail 'Matrix >1 Cars: Cross-Car-Isolation Check ist nicht konsistent (DB vs. Stats).'
 fi
-printf '[OK] Matrix >1 Cars: scoped add/list/stats + Cross-Car-Isolation\n'
+printf '[OK] Matrix >1 Cars: scoped add/list/detail/stats + Cross-Car-Isolation\n'
 
 # invalid --car-id bei >1 cars => unknown
 set +e
