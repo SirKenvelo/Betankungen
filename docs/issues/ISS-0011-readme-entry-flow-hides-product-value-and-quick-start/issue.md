@@ -1,7 +1,7 @@
 ---
 id: ISS-0011
 title: README entry flow hides product value and quick start
-status: open
+status: resolved
 priority: P1
 type: problem
 tags: [readme, docs, onboarding, public-readiness, ux]
@@ -43,6 +43,15 @@ dominate the first entry flow.
 The current landing sequence requires a new visitor to read through internal
 state and planning cues before finding a clear quick-start or trial path.
 
+# Resolution
+- `README.md` now leads with product value, primary use cases, a visible quick
+  start, and an early wiki-first entry path.
+- `docs/README_EN.md` now mirrors the same entry-layer orientation for English
+  readers and keeps status/planning detail lower in the reading flow.
+- Status, roadmap, and traceability detail remain available via
+  `docs/STATUS.md`, `docs/CHANGELOG.md`, and `docs/SPRINTS.md`, but no longer
+  dominate the first landing layer.
+
 # Reproduction
 1. Open the public GitHub repository landing page as a first-time visitor.
 2. Read the `About` box and the first screenful of the `README`.
@@ -57,10 +66,10 @@ product clarity, raises the cognitive load for first-time visitors and makes
 the wiki-based quick-start path harder to discover than necessary.
 
 # Acceptance Criteria
-- [ ] The top of the `README` leads with concise product value and primary use
+- [x] The top of the `README` leads with concise product value and primary use
       cases before internal status detail.
-- [ ] A visible quick-start path appears near the top of the `README`.
-- [ ] The recommended wiki or entry-layer path is surfaced early enough for a
+- [x] A visible quick-start path appears near the top of the `README`.
+- [x] The recommended wiki or entry-layer path is surfaced early enough for a
       cold-start visitor.
-- [ ] Internal status, sprint and backlog context remain available but no
+- [x] Internal status, sprint and backlog context remain available but no
       longer dominate the first repo-entry flow.
