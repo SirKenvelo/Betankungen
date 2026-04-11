@@ -2,7 +2,7 @@
   u_painter.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-04-08
-  UPDATED: 2026-04-08
+  UPDATED: 2026-04-11
   AUTHOR : Christof Kempinski
   Kleine Painter-Helfer fuer read-only Referenzscreens im Terminal.
 
@@ -45,17 +45,14 @@ begin
   if Remaining = '' then
     Exit('');
 
-  Candidate := Cut(Remaining, Width);
-  if Candidate = Remaining then
+  if Utf8VisibleLen(Remaining) <= Width then
   begin
     Result := Remaining;
     Remaining := '';
     Exit;
   end;
 
-  if (Candidate <> '') and (Candidate[Length(Candidate)] = '…') then
-    Delete(Candidate, Length(Candidate), 1);
-
+  Candidate := Utf8Cut(Remaining, Width);
   BreakPos := RPos(' ', Candidate);
   if BreakPos > 0 then
   begin
@@ -110,19 +107,20 @@ end;
 procedure PaintWrappedFact(const Width: Integer; const LabelText, ValueText: string);
 var
   Prefix, Continuation, Remaining, LineText: string;
-  LineWidth: Integer;
+  PrefixWidth, LineWidth: Integer;
   FirstLine: Boolean;
 begin
   Prefix := LabelText + ': ';
-  Continuation := StringOfChar(' ', Length(Prefix));
+  PrefixWidth := Utf8VisibleLen(Prefix);
+  Continuation := StringOfChar(' ', PrefixWidth);
   Remaining := Trim(ValueText);
   FirstLine := True;
 
   repeat
     if FirstLine then
-      LineWidth := Width - Length(Prefix)
+      LineWidth := Width - PrefixWidth
     else
-      LineWidth := Width - Length(Continuation);
+      LineWidth := Width - PrefixWidth;
 
     if LineWidth < 8 then
       LineWidth := 8;
@@ -133,9 +131,9 @@ begin
       LineText := ConsumeWrappedLine(Remaining, LineWidth);
 
     if FirstLine then
-      WriteLn(Cut(Prefix + LineText, Width))
+      WriteLn(Prefix + LineText)
     else
-      WriteLn(Cut(Continuation + LineText, Width));
+      WriteLn(Continuation + LineText);
 
     if Remaining = '' then
       Break;
