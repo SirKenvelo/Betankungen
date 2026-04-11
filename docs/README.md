@@ -119,13 +119,12 @@ Das Hauptprogramm steuert – die Units arbeiten.
     `Betankungen --list fuelups --detail` mit kleiner `u_painter`-/
     `u_view_fuelups`-Basis, waehrend `BL-0034` der spaetere Formular-/
     Input-Block bleibt
-  - als naechster Public-Readiness-Discovery-Block ist `BL-0035` jetzt in
-    Arbeit: ein zweistufiger GitHub-Entry-Audit (erst Cold-Start auf den
-    oeffentlichen Repo-/Wiki-Einstieg, dann Kontext-Pass) soll
-    Professionalitaet, Orientierung und Onboarding sichtbar bewerten;
-    `TSK-0030` liefert dafuer den Agenten-Prompt, `TSK-0031` uebersetzt
-    spaetere Findings erst danach in Quick Wins, konkrete `ISS`, groessere
-    `BL` und nur bei echtem Strukturbedarf in `ADR`-Kandidaten
+  - der Public-Readiness-Discovery-Block `BL-0035` ist jetzt abgeschlossen:
+    der externe GitHub-Entry-Audit bestaetigt die starke Governance-Basis,
+    zeigt aber sichtbare Reibung im README-/Quick-Start-Einstieg; daraus
+    sind `ISS-0011` (README-/Entry-Flow), `ISS-0012` (Release-Signal vs.
+    GitHub-Releases) und `BL-0036` als spaeterer Contributor-/English-Entry-
+    Layer-Folgeblock hervorgegangen; ein neuer `ADR` war dafuer nicht noetig
   - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
     `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
     `docs/ROADMAP_1_0_0.md`.

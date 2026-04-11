@@ -369,12 +369,14 @@ Bereits erledigt:
     stationsfokussiert und unveraendert bleibt. `BL-0034` bleibt weiterhin
     der spaetere und groessere Folgeblock fuer ein optionales Form-System
     nach bewaehrter View-/Painter-Basis.
-  - Als naechster Public-Readiness-Discovery-Block ist `BL-0035` jetzt in
-    Arbeit: `TSK-0030` liefert den wiederverwendbaren Agenten-Prompt jetzt
-    bewusst in der externen Audit-Ablage, waehrend `TSK-0031` spaetere
-    Findings erst nach einem Cold-Start-Pass in Quick Wins, konkrete `ISS`,
-    groessere `BL` und nur bei echtem Strukturbedarf in neue
-    `ADR`-Kandidaten uebersetzen soll.
+  - Der Public-Readiness-Discovery-Block `BL-0035` ist jetzt abgeschlossen:
+    der externe GitHub-Entry-Audit bestaetigt die vorhandene Governance-
+    Basis, schneidet aber konkrete Reibung im README-/Quick-Start-Einstieg.
+    Daraus sind `ISS-0011` fuer den README-/Entry-Flow, `ISS-0012` fuer die
+    Inkonsistenz zwischen Release-Signal und sichtbarer GitHub-Release-
+    Oberflaeche sowie `BL-0036` fuer spaeteres Contributor-Onboarding- und
+    English-Entry-Layer-Hardening hervorgegangen. Ein neuer `ADR` ist dafuer
+    aktuell nicht erforderlich.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

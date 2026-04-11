@@ -1,7 +1,7 @@
 ---
 id: TSK-0031
 title: Audit-Funde in Tracker-Kandidaten und Quick Wins uebersetzen
-status: todo
+status: done
 priority: P2
 type: task
 tags: [github, audit, public-readiness, tracker, docs]
@@ -10,6 +10,9 @@ updated: 2026-04-11
 parent: BL-0035
 related:
   - ADR-0012
+  - BL-0036
+  - ISS-0011
+  - ISS-0012
 ---
 **Stand:** 2026-04-11
 
@@ -26,8 +29,20 @@ werden.
 - Ein neuer `ADR`-Kandidat ist nur dann sinnvoll, wenn Rollen, Grenzen oder
   dauerhafte Entry-Layer-Regeln neu entschieden werden muessen.
 
+# Result
+- Der externe Audit vom 2026-04-11 wurde in konkrete Repo-Folgen
+  uebersetzt.
+- `ISS-0011` schneidet den README-/Quick-Start-/Entry-Flow als direkte
+  Erstbesucher-Reibung.
+- `ISS-0012` schneidet die Inkonsistenz zwischen oeffentlichem Release-Signal
+  und sichtbarer GitHub-Release-Oberflaeche.
+- `BL-0036` buendelt das spaetere Contributor-Onboarding- und
+  English-Entry-Layer-Hardening.
+- Kleine Copy-/Signal-Funde bleiben bewusst Quick Wins; ein neuer `ADR` ist
+  aktuell nicht erforderlich.
+
 # Done When
-- [ ] Audit-Funde sind in Quick Wins, `ISS`, `BL` und eventuelle
+- [x] Audit-Funde sind in Quick Wins, `ISS`, `BL` und eventuelle
   `ADR`-Kandidaten gruppiert.
-- [ ] Tracker-Kandidaten sind mit klaren Titeln und Prioritaet vorgeschnitten.
-- [ ] Es ist explizit entschieden, ob ueberhaupt ein neuer `ADR` noetig ist.
+- [x] Tracker-Kandidaten sind mit klaren Titeln und Prioritaet vorgeschnitten.
+- [x] Es ist explizit entschieden, ob ueberhaupt ein neuer `ADR` noetig ist.

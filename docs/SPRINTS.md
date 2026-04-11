@@ -3,6 +3,32 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Audit-Funde in Tracker schneiden
+
+- Status: done
+- Ziel: den abgeschlossenen Public-Repo-Entry-Audit in konkrete
+  Repo-Folgen uebersetzen, ohne schon README-, Release- oder
+  Onboarding-Aenderungen vorwegzunehmen.
+
+### Stand (2026-04-11)
+
+- `TSK-0031` ist abgeschlossen und schneidet die belastbaren Audit-Funde in
+  konkrete Tracker-Folgen.
+- `ISS-0011` adressiert die README-/Quick-Start-Friktion im oeffentlichen
+  Repo-Einstieg.
+- `ISS-0012` adressiert die Luecke zwischen oeffentlichem Release-Signal und
+  sichtbarer GitHub-Release-Oberflaeche.
+- `BL-0036` buendelt den spaeteren Contributor-Onboarding- und
+  English-Entry-Layer-Folgeblock.
+- `BL-0035` ist damit `done`; ein neuer `ADR` war fuer die Audit-Funde nicht
+  erforderlich.
+- Dieser Block fuehrt bewusst keine Produkt- oder Runtime-Aenderung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Public-entry-Audit vorbereiten
 
 - Status: done
@@ -16,9 +42,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   bewusst zwischen Audit-Vorbereitung und spaeterer Umsetzung.
 - `TSK-0030` ist `done` und liefert den wiederverwendbaren Prompt unter
   `/home/christof/Projekte/Audit/Betankungen/prompts/audits/offen/2026-04-11_public-repo-entry-audit_prompt.md`.
-- `TSK-0031` bleibt offen und zieht spaetere Findings erst nach einem
-  Cold-Start-Pass in Quick Wins, konkrete `ISS`, groessere `BL` und nur bei
-  echtem Strukturbedarf in `ADR`-Kandidaten.
+- Der nachgelagerte Tracker-Uebersetzungsblock hat die Audit-Funde inzwischen
+  in `ISS-0011`, `ISS-0012` und `BL-0036` geschnitten; ein neuer `ADR` war
+  dabei nicht noetig.
 - `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`,
   `docs/CHANGELOG.md` und die externe Audit-Ablage fuehren denselben
   Planungsstand.
