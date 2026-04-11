@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-08
+**Stand:** 2026-04-11
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Audit: `BL-0035` rahmt jetzt einen zweistufigen
+  Public-Repo-Entry-Audit fuer den GitHub-Einstieg. `TSK-0030` liefert den
+  wiederverwendbaren Prompt jetzt bewusst in der externen Audit-Ablage unter
+  `/home/christof/Projekte/Audit/Betankungen/prompts/audits/offen/2026-04-11_public-repo-entry-audit_prompt.md`,
+  waehrend `TSK-0031` spaetere Findings erst nach einem Cold-Start-Pass in
+  Quick Wins, konkrete `ISS`, groessere `BL` und nur bei echtem
+  Strukturbedarf in `ADR`-Kandidaten uebersetzt. `docs/BACKLOG.md`,
+  `docs/STATUS.md`, `docs/README.md`, `docs/SPRINTS.md` und die externe
+  Audit-Ablage fuehren denselben Planungsstand; eine Produkt- oder
+  Runtime-Aenderung wurde bewusst nicht vorgenommen. (2026-04-11)
 - [S40C2/2] Docs/Traceability: Sprint 40, der Abschluss von `TSK-0029`
   und der erreichte `BL-0033`-Stand sind jetzt in `docs/CHANGELOG.md`
   und `docs/SPRINTS.md` verankert. Der Abschlusslauf dokumentiert den
@@ -130,15 +140,17 @@ schliessen.
   Es wurde keine Produkt-Runtime geaendert. (2026-04-08)
 - [General] Docs/Planning: Der Steuerungs-Sync vor Sprint 40 zieht Audit-,
   Tracker- und Prompt-Artefakte auf den aktuellen `1.4.0-dev`-Stand.
-  `AUDIT_STATUS_BOARD.md` markiert die fruehe `1.2.0`-Bewertung jetzt
-  explizit als historisch und spiegelt die triggerbasierte Audit-Realitaet
-  der aktiven Linie; `BL-0033` ist auf `approved` gezogen, der erste
-  Referenzscreen ist fest auf `Betankungen --list fuelups --detail`
-  zugeschnitten und `TSK-0029` bereitet den naechsten kleinen Runtime-Slice
-  ohne Form-System vor. `docs/BACKLOG.md`, `docs/STATUS.md`,
-  `docs/SPRINTS.md`, `prompts/README.md` und der neue offene Sprint-Prompt
-  `prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md` fuehren
-  denselben Steuerungsstand. (2026-04-08)
+  `/home/christof/Projekte/Audit/Betankungen/AUDIT_STATUS_BOARD.md` markiert
+  die fruehe `1.2.0`-Bewertung jetzt explizit als historisch und spiegelt
+  die triggerbasierte Audit-Realitaet der aktiven Linie; `BL-0033` ist auf
+  `approved` gezogen, der erste Referenzscreen ist fest auf
+  `Betankungen --list fuelups --detail` zugeschnitten und `TSK-0029`
+  bereitet den naechsten kleinen Runtime-Slice ohne Form-System vor.
+  `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/SPRINTS.md`,
+  `/home/christof/Projekte/Audit/Betankungen/prompts/README.md` und der
+  neue offene Sprint-Prompt
+  `/home/christof/Projekte/Audit/Betankungen/prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md`
+  fuehren denselben Steuerungsstand. (2026-04-08)
 - [S39C2/2] Docs/Traceability: Sprint 39 und der Abschluss von `TSK-0028`
   sind jetzt in `docs/CHANGELOG.md` und `docs/SPRINTS.md` verankert.
   Der Sprint dokumentiert den gruennen Abschlussnachweis ueber den

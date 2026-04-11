@@ -1,7 +1,33 @@
 # SPRINTS
-**Stand:** 2026-04-08
+**Stand:** 2026-04-11
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - Public-entry-Audit vorbereiten
+
+- Status: done
+- Ziel: einen wiederverwendbaren Agentenpfad fuer einen kalten Audit des
+  oeffentlichen GitHub-Einstiegs vorbereiten, ohne schon voreilig Runtime-,
+  Doku- oder Governance-Aenderungen zu erzwingen.
+
+### Stand (2026-04-11)
+
+- `BL-0035` ist als Public-Readiness-Discovery-Block angelegt und trennt
+  bewusst zwischen Audit-Vorbereitung und spaeterer Umsetzung.
+- `TSK-0030` ist `done` und liefert den wiederverwendbaren Prompt unter
+  `/home/christof/Projekte/Audit/Betankungen/prompts/audits/offen/2026-04-11_public-repo-entry-audit_prompt.md`.
+- `TSK-0031` bleibt offen und zieht spaetere Findings erst nach einem
+  Cold-Start-Pass in Quick Wins, konkrete `ISS`, groessere `BL` und nur bei
+  echtem Strukturbedarf in `ADR`-Kandidaten.
+- `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`,
+  `docs/CHANGELOG.md` und die externe Audit-Ablage fuehren denselben
+  Planungsstand.
+- Dieser Block fuehrt bewusst keine Produkt- oder Runtime-Aenderung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## Sprint 40 - Ersten TUI-Referenzscreen fuer Fuelup-Details liefern
 
@@ -90,9 +116,10 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Stand (2026-04-08)
 
-- `AUDIT_STATUS_BOARD.md` markiert die fruehen `1.2.0`-Einordnungen jetzt
-  explizit als historische Basis und beschreibt die aktuelle
-  triggerbasierte Audit-Realitaet fuer `1.4.0-dev`.
+- `/home/christof/Projekte/Audit/Betankungen/AUDIT_STATUS_BOARD.md`
+  markiert die fruehen `1.2.0`-Einordnungen jetzt explizit als historische
+  Basis und beschreibt die aktuelle triggerbasierte Audit-Realitaet fuer
+  `1.4.0-dev`.
 - `BL-0033` ist von `proposed` auf `approved` gezogen und legt genau einen
   Referenzscreen fest: `Betankungen --list fuelups --detail`.
 - Unter `BL-0033` ist `TSK-0029` neu angelegt; der Task schneidet den
@@ -102,7 +129,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   denselben Steuerungsstand; `BL-0034` bleibt bewusst nachgeordnet und
   `exploratory`.
 - Im Audit-Repo liegt jetzt genau ein offener Sprint-Prompt:
-  `prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md`.
+  `/home/christof/Projekte/Audit/Betankungen/prompts/sprints/offen/2026-04-08_S40_TSK-0029_prompt.md`.
 - Dieser Block fuehrt bewusst keine Runtime-Aenderungen ein.
 
 ### Validierung

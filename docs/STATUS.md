@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-08
+**Stand:** 2026-04-11
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -369,6 +369,12 @@ Bereits erledigt:
     stationsfokussiert und unveraendert bleibt. `BL-0034` bleibt weiterhin
     der spaetere und groessere Folgeblock fuer ein optionales Form-System
     nach bewaehrter View-/Painter-Basis.
+  - Als naechster Public-Readiness-Discovery-Block ist `BL-0035` jetzt in
+    Arbeit: `TSK-0030` liefert den wiederverwendbaren Agenten-Prompt jetzt
+    bewusst in der externen Audit-Ablage, waehrend `TSK-0031` spaetere
+    Findings erst nach einem Cold-Start-Pass in Quick Wins, konkrete `ISS`,
+    groessere `BL` und nur bei echtem Strukturbedarf in neue
+    `ADR`-Kandidaten uebersetzen soll.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen
