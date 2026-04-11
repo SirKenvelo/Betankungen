@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-04-08
+**Stand:** 2026-04-11
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
@@ -64,6 +64,7 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0032 - Receipt Storage Strategy and Optional Managed Archive](backlog/BL-0032-receipt-storage-strategy-and-optional-managed-archive/item.md) - Status: `proposed`, Typ: Research (spaeterer Hybrid-Pfad: externe Receipt-Ordner bleiben erlaubt, optionaler app-verwalteter XDG-Belegordner nur als moeglicher Komfortmodus), Lane: `exploratory`
 - [BL-0033 - TUI Presentation and View-Layer Refresh](backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md) - Status: `done`, Typ: Improvement (erster read-only Referenzscreen `Betankungen --list fuelups --detail` ist geliefert; eine kleine View-/Painter-Basis traegt genau diesen Screen, ohne Form-System oder neue Fachlogik vorzuziehen), Lane: `planned`, Tasks: `TSK-0029` (`done`)
 - [BL-0034 - TUI Form System for Interactive Flows](backlog/BL-0034-tui-form-system-for-interactive-flows/item.md) - Status: `proposed`, Typ: Feature (spaetere optionale Formular-/Widget-Schicht fuer interaktive Add-/Edit-Pfade; CLI bleibt steuernd, non-interactive bleibt voll erhalten, Einfuehrung erst nach bewaehrter View-Basis), Lane: `exploratory`
+- [BL-0035 - Public-Repo-Entry-Audit und Onboarding-Hardening](backlog/BL-0035-public-repo-entry-audit-and-onboarding-hardening/item.md) - Status: `in_progress`, Typ: Research (zweistufiger GitHub-Entry-Audit fuer Professionalitaet, Orientierung und Contributor-Onboarding; wiederverwendbarer Agenten-Prompt liegt vor, spaetere Findings werden erst danach in Quick Wins, `ISS`, groessere `BL` und nur bei echtem Strukturbedarf in `ADR`-Kandidaten uebersetzt), Lane: `planned`, Tasks: `TSK-0030` (`done`), `TSK-0031` (`todo`)
 
 ## Legacy Backlog-Index (BL-0xx)
 
