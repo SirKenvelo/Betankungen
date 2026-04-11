@@ -3,6 +3,37 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - README entry flow und quick start haerten
+
+- Status: done
+- Ziel: den oeffentlichen Repo-Einstieg ueber `README.md` auf Produktwert,
+  Hauptanwendungsfaelle, fruehen Quick Start und sichtbaren Wiki-Pfad
+  umstellen, ohne Runtime-Aenderung und ohne den groesseren Contributor-/
+  English-Entry-Folgeblock `BL-0036` vorwegzunehmen.
+
+### Stand (2026-04-11)
+
+- `README.md` fuehrt jetzt mit knapper Produktbeschreibung, typischen
+  Anwendungsfaellen, einem belastbaren Quick-Start-Pfad
+  (`make build` -> `./bin/Betankungen` -> `--add stations` ->
+  `--add fuelups`) und einem fruehen Verweis auf den publizierten
+  GitHub-Wiki-Einstieg.
+- `docs/README_EN.md` fuehrt denselben Entry-Layer-Stand fuer
+  englischsprachige Erstbesucher weiter und haelt Status-/Planungsdetails
+  bewusst unterhalb der ersten Einstiegsebene.
+- `ISS-0011` ist auf `resolved` gezogen; der spaetere Folgeblock `BL-0036`
+  bleibt bewusst ausserhalb dieses kleinen `[General]`-Slices.
+- Status-, Roadmap- und Traceability-Details bleiben ueber
+  `docs/STATUS.md`, `docs/CHANGELOG.md` und `docs/SPRINTS.md` verfuegbar,
+  dominieren aber nicht mehr die erste Repo-Leseebene.
+- Dieser Block fuehrt keine Produkt- oder Runtime-Aenderung ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Audit-Funde in Tracker schneiden
 
 - Status: done

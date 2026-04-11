@@ -98,6 +98,15 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Entry: `README.md` fuehrt den oeffentlichen Repo-Einstieg
+  jetzt mit knapper Produktbeschreibung, Hauptanwendungsfaellen, sichtbarem
+  Quick Start und fruehem Verweis auf den publizierten GitHub-Wiki-Pfad
+  (`Getting Started`, `CLI Quick Reference`). `docs/README_EN.md` fuehrt
+  denselben Entry-Layer-Stand fuer englischsprachige Erstbesucher weiter,
+  waehrend `ISS-0011` damit auf `resolved` gezogen ist. Status-, Roadmap-
+  und Traceability-Details bleiben ueber `docs/STATUS.md`,
+  `docs/CHANGELOG.md` und `docs/SPRINTS.md` verfuegbar, dominieren aber
+  nicht mehr die erste Leseebene. (2026-04-11)
 - [General] Fix/TUI: `u_painter` verbraucht bei umbrochenen Fact-Values
   jetzt die korrekte UTF-8-Teilmenge ohne Zeichenverlust. Lange
   ununterbrochene `Receipt link`- oder `Note`-Werte im Referenzscreen

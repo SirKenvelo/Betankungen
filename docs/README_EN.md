@@ -1,67 +1,69 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-03-30
+**Stand:** 2026-04-11
 
-This is the English entry point for the project documentation.
-Detailed documents are currently maintained primarily in German.
+Betankungen is a CLI-first fuel tracking and full-tank cycle statistics tool
+for local SQLite data.
+This page is the English repository entry when you need a little more context
+than the public wiki provides.
+
+## Start Here
+
+Recommended first path for new visitors:
+
+1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
+2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
+3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
+4. [Main project documentation (German)](README.md)
+
+The wiki is the lighter public entry layer.
+Repository docs under `docs/` remain the technical source of truth.
+
+## Quick Project Fit
+
+- Interactive fuel-up capture in a local SQLite database
+- Multi-car workflow with strict car isolation
+- Full-tank cycle statistics in text, JSON, CSV, monthly, and yearly views
+- Additional fleet and cost views for broader snapshots
+
+## Quick Repo Start
+
+```bash
+make build
+./bin/Betankungen
+./bin/Betankungen --add stations
+./bin/Betankungen --add fuelups
+./bin/Betankungen --stats fuelups
+```
+
+On a fresh local setup, running `./bin/Betankungen` without arguments creates
+the config and SQLite database if needed and points to the next sensible step.
+A new database starts with the default car `Hauptauto (ID 1)`, so you only
+need to add a station before the first fuel-up flow.
 
 ## Current State
 
-- Latest release: `1.3.0` (released on 2026-03-26).
-- Technical runtime state: `APP_VERSION=1.4.0-dev`.
-- The repository is now on the active `1.4.0-dev` development line, started
-  through a dedicated activation commit after the Sprint-29 gate.
-- Sprint 29 remains documented in `docs/DEV_START_GATE_1_4_0.md` as the
-  formal pre-activation gate record for this separate start step.
-- The most recently completed binding roadmap is `1.3.0`
-  (`docs/ROADMAP_1_3_0.md`):
-  - Gate 1 and Gate 2 are completed.
-  - Gate 3 is completed.
-  - Gate 4 is completed.
-  - Gate 5 is completed.
-- The delivered release-blocking scope for the completed `1.3.0` line is:
-  - `BL-0017`: provider decision baseline documented in
-    `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md` (primary source:
-    `Tankerkoenig`, fallback `Benzinpreis-Aktuell.de`).
-  - `BL-0018`: polling/history contract and runtime baselines documented in
-    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` and
-    `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
-- The Gate-4 and Gate-5 closeouts for `1.3.0` are documented in
-  `docs/RELEASE_1_3_0_PREFLIGHT.md`, including the final local RC run, final
-  version switch, release/backup execution, and artifact references.
-- The first in-repo block of `1.4.0-dev` is now delivered:
-  - `BL-0016` as the public community-standards baseline
-  - `BL-0011` as an external handover topic for this repository
-    (`docs/BL-0011_SCOPE_DECISION_1_4_0.md`)
-- CI/verify governance remains active for `main` (PR-based flow with green verification gate).
+- Latest release: `1.3.0` (released on 2026-03-26)
+- Technical runtime state: `APP_VERSION=1.4.0-dev`
+- Active repository line: `1.4.0-dev`
+- Status, roadmap, and planning detail: `docs/STATUS.md`,
+  `docs/CHANGELOG.md`, `docs/SPRINTS.md`
 
 ## Recommended Reading Order
 
-1. `docs/ARCHITECTURE_EN.md` (compact English architecture summary)
-2. `docs/README.md` (main project documentation, German)
-3. `docs/DEV_START_GATE_1_4_0.md` (formal pre-activation gate record before
-   the separate `1.4.0-dev` start)
-4. `docs/STATUS.md` (current roadmap and completion state)
-5. `docs/ARCHITECTURE.md` (full architecture and long-term design, German)
-6. `docs/ADR/README.md` (architecture decisions index)
-7. `docs/BACKLOG.md` (deferred/planned topics index)
-8. `docs/CHANGELOG.md` (dated change history)
-9. `docs/DEV_DIARY.md` (curated project chronicle, German)
+1. [English architecture summary](ARCHITECTURE_EN.md)
+2. [Main project documentation (German)](README.md)
+3. [Project status and roadmap](STATUS.md)
+4. [Architecture decisions index](ADR/README.md)
+5. [Backlog index](BACKLOG.md)
+6. [Versioned wiki source pages](wiki/README.md)
 
-## Language Policy
+## Language And Contribution Notes
 
 - GitHub issues, pull requests, and code reviews: English
-- Detailed project documentation: currently German-first, with incremental English entry docs
-
-## Notes For Contributors
-
-- See `CONTRIBUTING.md` in the project root.
-- Community standards:
-  - `CODE_OF_CONDUCT.md`
-  - `SECURITY.md`
-  - `.github/ISSUE_TEMPLATE/`
-  - `.github/pull_request_template.md`
-- Published public-readiness wiki entry:
-  `https://github.com/SirKenvelo/Betankungen/wiki`.
-- Versioned wiki source pages: `docs/wiki/README.md`.
+- Detailed project documentation: currently German-first, with incremental
+  English entry docs
+- Contribution guide: `../CONTRIBUTING.md`
+- Community standards: `../CODE_OF_CONDUCT.md`, `../SECURITY.md`,
+  `../.github/ISSUE_TEMPLATE/`, `../.github/pull_request_template.md`
 - Build baseline:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
