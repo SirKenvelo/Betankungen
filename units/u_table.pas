@@ -2,7 +2,7 @@
   u_table.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-02-17
+  UPDATED: 2026-04-11
   AUTHOR : Christof Kempinski
   Leichter Tabellen- und Textlayout-Renderer fuer die CLI.
 
@@ -37,6 +37,10 @@ function PadR(const S: string; W: Integer): string;
 function PadL(const S: string; W: Integer): string;
 // Sichtbar auf Breite W kuerzen (mit Ellipse, falls noetig).
 function Cut(const S: string; W: Integer): string;
+// Sichtbare UTF-8-Laenge in Codepoints.
+function Utf8VisibleLen(const S: string): Integer;
+// UTF-8-sicher auf exakt W sichtbare Zeichen kuerzen (ohne Ellipse).
+function Utf8Cut(const S: string; W: Integer): string;
 
 type
   // Horizontale Ausrichtung je Spalte.

@@ -98,6 +98,13 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Fix/TUI: `u_painter` verbraucht bei umbrochenen Fact-Values
+  jetzt die korrekte UTF-8-Teilmenge ohne Zeichenverlust. Lange
+  ununterbrochene `Receipt link`- oder `Note`-Werte im Referenzscreen
+  `Betankungen --list fuelups --detail` ueberspringen dadurch beim Umbruch
+  keine Zeichen mehr. `tests/regression/run_receipt_link_contract_check.sh`
+  prueft den sichtbaren Contract jetzt explizit gegen lange ununterbrochene
+  Werte ohne Leerzeichen. (2026-04-11)
 - [General] Docs/Audit: Der externe Public-Repo-Entry-Audit vom 2026-04-11
   ist jetzt in konkrete Repo-Folgen uebersetzt. `TSK-0031` ist `done`,
   `BL-0035` ist `done`, `ISS-0011` schneidet den README-/Quick-Start-

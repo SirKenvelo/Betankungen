@@ -3,7 +3,7 @@ set -euo pipefail
 
 # run_receipt_link_contract_check.sh
 # CREATED: 2026-03-18
-# UPDATED: 2026-04-08
+# UPDATED: 2026-04-11
 # Regression fuer Receipt-Link-Contract (Scope-Guardrails, Write-Path, lokale
 # Pfadnormalisierung, Missing-File-Guidance, Text/JSON-Sichtbarkeit).
 
@@ -110,12 +110,19 @@ SQL
   local existing_uri
   local missing_receipt
   local missing_uri
+  local long_receipt
+  local long_uri
+  local long_note
   mkdir -p "$TMP_DIR/receipts"
   existing_receipt="$TMP_DIR/receipts/first receipt.jpg"
   printf 'dummy receipt\n' >"$existing_receipt"
   existing_uri="$(to_file_uri "$existing_receipt")"
   missing_receipt="$TMP_DIR/receipts/missing receipt.jpg"
   missing_uri="$(to_file_uri "$missing_receipt")"
+  long_receipt="$TMP_DIR/receipts/receipt-link-abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz.jpg"
+  printf 'dummy long receipt\n' >"$long_receipt"
+  long_uri="$(to_file_uri "$long_receipt")"
+  long_note="note-abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789"
 
   # Write-Path: absoluter lokaler Pfad wird auf kanonisches file:// normalisiert.
   run_expect_ok "Add fuelup mit lokalem Receipt-Pfad" bash -lc "
@@ -148,10 +155,18 @@ INSERT INTO fuelups(
   station_id, car_id, fueled_at, odometer_km, liters_ml, total_cents,
   price_per_liter_milli_eur, is_full_tank, missed_previous, fuel_type, payment_type, pump_no, note
 ) VALUES (
-  1, 1, '2026-03-18 10:00:00', 1500, 32000, 5334, 1667, 1, 0, 'E10', 'EC', '3', 'no link row'
+  1, 1, '2026-03-18 10:00:00', 1500, 32000, 5334, 1667, 1, 0, 'E10', 'EC', '3', ''
 );
 SQL
   ok "Referenzdatensatz ohne receipt_link angelegt"
+
+  sqlite3 "$DB_FILE" <<SQL
+UPDATE fuelups
+   SET note = '$long_note',
+       receipt_link = '$long_uri'
+ WHERE id = 1;
+SQL
+  ok "Langes Note-/Receipt-Fixture fuer Wrap-Contract gesetzt"
 
   run_expect_ok "List kompakt bleibt stationsfokussiert" "$BIN_FILE" --list fuelups --car-id 1
   assert_contains "$LAST_OUT" "ReceiptSmoke (Unna)" "Kompakte Liste zeigt den Stationsnamen nicht."
@@ -162,8 +177,36 @@ SQL
   assert_contains "$LAST_OUT" "Fuelups detail reference screen" "Detail-Ausgabe nutzt den Referenzscreen nicht."
   assert_contains "$LAST_OUT" "Mode: --list fuelups --detail" "Detail-Ausgabe zeigt den Referenzscreen-Metakontext nicht."
   assert_contains "$LAST_OUT" "Car: Hauptauto" "Detail-Ausgabe enthaelt den Fahrzeugkontext nicht separat."
-  assert_contains "$LAST_OUT" "Receipt link: $existing_uri" "Detail-Ausgabe enthaelt den gesetzten Receipt-Link nicht."
-  ok "Detail-Ausgabe zeigt Receipt-Link"
+  python3 - "$LAST_OUT" "$long_note" "$long_uri" <<'PY'
+import pathlib
+import sys
+
+lines = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8").splitlines()
+expected_note = sys.argv[2]
+expected_link = sys.argv[3]
+
+def extract_wrapped(label: str) -> str:
+    prefix = f"{label}: "
+    cont = " " * len(prefix)
+    for i, line in enumerate(lines):
+        if not line.startswith(prefix):
+            continue
+        parts = [line[len(prefix):]]
+        j = i + 1
+        while j < len(lines) and lines[j].startswith(cont) and lines[j].strip():
+            parts.append(lines[j][len(cont):])
+            j += 1
+        return "".join(parts)
+    raise SystemExit(f"{label} missing")
+
+note = extract_wrapped("Note")
+link = extract_wrapped("Receipt link")
+if note != expected_note:
+    raise SystemExit(f"note wrap mismatch: {note!r} != {expected_note!r}")
+if link != expected_link:
+    raise SystemExit(f"receipt-link wrap mismatch: {link!r} != {expected_link!r}")
+PY
+  ok "Detail-Ausgabe behaelt lange Note/Receipt-Werte ohne Zeichenverlust"
 
   run_expect_ok "Stats fuelups JSON full" "$BIN_FILE" --stats fuelups --json --car-id 1
   python3 - "$LAST_OUT" <<'PY'
