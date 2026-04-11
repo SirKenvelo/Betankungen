@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Audit: Der externe Public-Repo-Entry-Audit vom 2026-04-11
+  ist jetzt in konkrete Repo-Folgen uebersetzt. `TSK-0031` ist `done`,
+  `BL-0035` ist `done`, `ISS-0011` schneidet den README-/Quick-Start-
+  Einstieg als Erstbesucher-Reibung, `ISS-0012` schneidet die Inkonsistenz
+  zwischen oeffentlichem Release-Signal und sichtbarer GitHub-Release-
+  Oberflaeche, und `BL-0036` buendelt den spaeteren Contributor-Onboarding-
+  und English-Entry-Layer-Folgeblock. `docs/BACKLOG.md`, `docs/STATUS.md`,
+  `docs/README.md` und `docs/SPRINTS.md` fuehren denselben audit-gestuetzten
+  Stand; ein neuer `ADR` war nicht erforderlich und es wurde keine
+  Produkt-Runtime geaendert. (2026-04-11)
 - [General] Docs/Audit: `BL-0035` rahmt jetzt einen zweistufigen
   Public-Repo-Entry-Audit fuer den GitHub-Einstieg. `TSK-0030` liefert den
   wiederverwendbaren Prompt jetzt bewusst in der externen Audit-Ablage unter

@@ -1,7 +1,7 @@
 ---
 id: BL-0035
 title: Public-Repo-Entry-Audit und Onboarding-Hardening
-status: in_progress
+status: done
 priority: P2
 type: research
 tags: [github, public-readiness, audit, ux, onboarding, docs, 'lane:planned']
@@ -11,6 +11,9 @@ related:
   - ADR-0012
   - BL-0016
   - BL-0027
+  - BL-0036
+  - ISS-0011
+  - ISS-0012
 ---
 **Stand:** 2026-04-11
 
@@ -56,11 +59,11 @@ Out of Scope:
   Entscheidungen ueberhoeht.
 
 # Output
-Ein belastbarer Audit-Pfad mit Prompt, Bewertungsraster und klarer
-Tracker-Logik: konkrete Friktionspunkte gehen spaeter in `ISS`, groessere
-Verbesserungsbloecke in `BL`, und `ADR` entsteht nur bei stabilen Struktur-
-oder Governance-Entscheidungen. `TSK-0030` liefert den wiederverwendbaren
-Audit-Prompt; `TSK-0031` zieht spaetere Findings in den Tracker.
+Der Audit-Pfad ist jetzt komplett: ein wiederverwendbarer Prompt, ein
+abgeschlossener externer Audit-Lauf und die Uebersetzung der belastbaren
+Findings in konkrete Tracker-Folgen. Der Block hat zwei direkte `ISS`-
+Kandidaten (`ISS-0011`, `ISS-0012`) und einen groesseren Folgeblock
+(`BL-0036`) geschnitten; ein neuer `ADR` war dafuer nicht noetig.
 
 # Audit Guardrails
 - Phase 1 beginnt immer ohne tiefe Repo-Kontextlektuere.
@@ -71,8 +74,21 @@ Audit-Prompt; `TSK-0031` zieht spaetere Findings in den Tracker.
 - Nicht jeder Fund erzeugt einen Tracker-Eintrag; kleine Copy- oder
   Reihenfolge-Korrekturen koennen als Quick Wins gebuendelt werden.
 
+# Audit Outcome
+- Der externe Public-Repo-Entry-Audit vom 2026-04-11 liegt vor und bestaetigt
+  Professionalitaet und Governance-Basis, zeigt aber sichtbare Friktion im
+  README-/Entry-Flow.
+- `ISS-0011` adressiert den zu statuslastigen README-Einstieg und den zu
+  spaet sichtbaren Quick-Start-Pfad.
+- `ISS-0012` adressiert die Luecke zwischen oeffentlichem Release-Signal und
+  sichtbarer GitHub-Release-Oberflaeche.
+- `BL-0036` buendelt das spaetere Contributor-Onboarding- und
+  English-Entry-Layer-Hardening.
+- Ein neuer `ADR` ist aktuell nicht erforderlich; die Befunde sind
+  Discoverability- und Entry-Layer-Follow-ups, keine neue Strukturentscheidung.
+
 # Derived Tasks
 - `TSK-0030` - Agenten-Prompt und Audit-Raster fuer den Public-Repo-Einstieg
   definieren. (done)
 - `TSK-0031` - Audit-Funde in Quick Wins, `ISS`, `BL` und nur bei Bedarf
-  `ADR`-Kandidaten uebersetzen. (todo)
+  `ADR`-Kandidaten uebersetzen. (done)
