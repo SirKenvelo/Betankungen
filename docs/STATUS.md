@@ -385,6 +385,13 @@ Bereits erledigt:
     sind inzwischen ueber synchronisierte Entry-Layer- und GitHub-Release-
     Handoffs auf `resolved` gezogen; ein neuer `ADR` ist dafuer aktuell nicht
     erforderlich.
+  - `BL-0036` ist jetzt `approved` und operativ in drei kleine Folgepfade
+    geschnitten: `TSK-0032` fuer einen kompakten Contributor-Quickstart mit
+    erster PR-Checkliste, `TSK-0033` fuer klarere englische Entry-Signale und
+    `TSK-0034` fuer einen ruhigeren Handoff zwischen README, Wiki und
+    `CONTRIBUTING.md`. Der empfohlene naechste kleinste Umsetzungsblock ist
+    `TSK-0032`; dieser Planungsschnitt fuehrt bewusst keine Runtime-, CLI-
+    oder Entry-Layer-Implementierung ein.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen
