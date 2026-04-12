@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-04-08
+**Stand:** 2026-04-12
 
 ## Ziel
 
@@ -159,11 +159,28 @@ Die Beschreibung wird **beim Erstellen des PR** gepflegt, nicht erst beim Merge.
 Sie wird auf GitHub in Englisch verfasst und enthaelt mindestens die Bloecke
 `Summary` und `Validation`.
 
+### Trennung von PR-Text und Merge-Commit
+
+- PR-Beschreibung und Merge-Commit sind unterschiedliche Artefakte und duerfen
+  nicht gedanklich gleichgesetzt werden.
+- Beim finalen Merge via **Create a merge commit** ist der vorgeschlagene
+  Merge-Commit-Text bewusst zu pruefen und bei Bedarf manuell zu kuerzen.
+- Der Merge-Commit soll nur den kompakten fachlichen Betreff und hoechstens
+  einen kurzen, historientauglichen Body tragen.
+- Ausfuehrliche PR-Abschnitte wie `## Summary`, `## Validation`,
+  `## Scope Notes`, `## Note` oder `## Notes` gehoeren in die PR-Seite,
+  nicht ungeprueft in den Merge-Commit-Body.
+- Wenn GitHub beim Merge den PR-Body in die Commit-Message uebernimmt, ist
+  dieser Vorschlag vor dem finalen Merge aktiv zu bereinigen.
+
 ## Merge-Regeln
 
 ### Standard
 
 - **Create a merge commit** ist die verbindliche Standard-Merge-Strategie.
+- Die Commit-Message dieses Merge-Commits wird vor dem Abschluss aktiv
+  redaktionell geprueft; ein ungekuerztes Uebernehmen laengerer PR-Bloecke ist
+  nicht der Standardpfad.
 
 ### Prioritaetsregel
 

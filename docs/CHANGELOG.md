@@ -98,6 +98,15 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Workflow: `docs/GIT_WORKFLOW.md` trennt jetzt explizit
+  zwischen PR-Beschreibung und Merge-Commit-Text. Vor `Create a merge commit`
+  soll der vorgeschlagene Merge-Commit-Body aktiv bereinigt werden, damit
+  laengere PR-Abschnitte wie `## Summary`, `## Validation`, `## Scope Notes`,
+  `## Note` oder `## Notes` nicht ungeprueft in die Historie wandern.
+  `scripts/projtrack_lint.sh` blockiert zusaetzlich in Tracker-Dateien jetzt
+  die Ueberschriften `## Note` und `## Notes` und verweist auf die kanonische
+  Form `# Notes`. Es wurde keine Runtime-, CLI- oder Build-Aenderung
+  eingefuehrt. (2026-04-12)
 - [General] Docs/Planning: `BL-0036` ist jetzt von `proposed` auf
   `approved` gezogen und in drei nicht ueberlappende Folge-Tasks
   geschnitten. `TSK-0032` rahmt den kompakten Contributor-Quickstart mit
