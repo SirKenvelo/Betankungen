@@ -1,7 +1,7 @@
 ---
 id: TSK-0032
 title: Kompakten Contributor-Quickstart und erste PR-Checkliste definieren
-status: todo
+status: done
 priority: P2
 type: task
 tags: [contributors, onboarding, docs, public-readiness]
@@ -30,12 +30,22 @@ wenigen Minuten auffindbar und verstaendlich sind.
 - Der ruhigere Rollenhandoff zwischen README, Wiki und `CONTRIBUTING.md`
   gehoert in `TSK-0034`.
 
+# Outcome
+- `CONTRIBUTING.md` fuehrt jetzt einen sichtbaren Quickstart fuer den ersten
+  kleinen Beitrag mit minimalem Build-/Verify-Pfad, gezielten Zusatzchecks und
+  dem erwarteten PR-Rahmen.
+- Die Sprachregel fuer GitHub-Interaktion und der minimale PR-Aufbau
+  (`Summary`, `Validation`) sind frueh sichtbar, ohne die Governance-Doku neu
+  zu schreiben.
+- README-/Wiki-Handoff und breitere englische Entry-Signale bleiben bewusst
+  fuer `TSK-0033` und `TSK-0034` ausgespart.
+
 # Done When
-- [ ] Ein kompakter Contributor-Quickstart fuer den ersten kleinen Beitrag ist
+- [x] Ein kompakter Contributor-Quickstart fuer den ersten kleinen Beitrag ist
   sichtbar definiert.
-- [ ] Build-, Verify- und PR-Mindestpfad sind fuer gelegentliche Contributors
+- [x] Build-, Verify- und PR-Mindestpfad sind fuer gelegentliche Contributors
   klar und knapp beschrieben.
-- [ ] Die Sprache fuer GitHub-Interaktion und die Rolle von `CONTRIBUTING.md`
+- [x] Die Sprache fuer GitHub-Interaktion und die Rolle von `CONTRIBUTING.md`
   sind ohne tiefe Vorablektuere erkennbar.
-- [ ] Der Slice bleibt ohne Big-Bang-Umbau und ohne Ueberschneidung mit
+- [x] Der Slice bleibt ohne Big-Bang-Umbau und ohne Ueberschneidung mit
   `TSK-0033` oder `TSK-0034`.

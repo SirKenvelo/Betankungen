@@ -1,7 +1,7 @@
 ---
 id: BL-0036
 title: Contributor Onboarding and English Entry-Layer Hardening
-status: approved
+status: in_progress
 priority: P2
 type: improvement
 tags: [contributors, onboarding, english, public-readiness, docs, 'lane:planned']
@@ -72,6 +72,13 @@ Contributor-Quickstart, englische Entry-Signale und README-/Wiki-/
 `CONTRIBUTING.md`-Handoff sind getrennt priorisierbar und koennen ohne
 Scope-Ueberlappung nacheinander umgesetzt werden.
 
+Der erste Umsetzungsblock ist jetzt angelaufen:
+`TSK-0032` ist abgeschlossen und liefert in `CONTRIBUTING.md` einen
+kompakten Contributor-Quickstart mit minimalem Build-/Verify-/PR-Pfad.
+Die verbleibende Folgearbeit konzentriert sich weiter getrennt auf englische
+Entry-Signale (`TSK-0033`) und den ruhigeren README-/Wiki-/`CONTRIBUTING.md`-
+Handoff (`TSK-0034`).
+
 # Task Slices
 - `TSK-0032` - kompakten Contributor-Quickstart und erste PR-Checkliste fuer
   gelegentliche Mitwirkende schneiden.
@@ -81,7 +88,9 @@ Scope-Ueberlappung nacheinander umgesetzt werden.
   als lose nebeneinanderstehende Einstiege ausrichten.
 
 # Sequencing
-- Empfohlener naechster kleinster Umsetzungsblock: `TSK-0032`.
+- `TSK-0032` ist abgeschlossen und bildet jetzt die sichtbare Contributor-
+  Quickstart-Schicht in `CONTRIBUTING.md`.
+- Empfohlener naechster kleinster Umsetzungsblock: `TSK-0033`.
 - Reihenfolge danach: zuerst `TSK-0033`, dann `TSK-0034`, damit erst die
   sichtbaren Inhalts- und Sprachsignale geschaerft werden und der Handoff
   anschliessend auf dieser Basis beruhigt werden kann.

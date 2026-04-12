@@ -1,7 +1,40 @@
 # Contributing
-**Stand:** 2026-03-30
+**Stand:** 2026-04-12
 
 Thank you for your interest in Betankungen.
+
+## Quickstart for a Small First Contribution
+
+1. Align the idea in a GitHub issue or discussion before starting
+   implementation.
+2. Create a short-lived branch from `main` and keep the change focused,
+   small, and reversible.
+3. Update docs when behavior, flags, output format, or architecture guidance
+   changes.
+4. Run the minimum local path from the repository root:
+
+```bash
+make build
+make verify
+```
+
+5. Add targeted checks when your change touches these areas:
+   - tracker files under `docs/backlog/`, `docs/issues/`, or `docs/policies/`:
+     `scripts/projtrack_lint.sh`
+   - wiki source pages under `docs/wiki/` or wiki-facing links:
+     `make wiki-link-check`
+6. Open a pull request against `main` in English and keep the minimum PR
+   structure `Summary` and `Validation`.
+7. Mark the PR ready for review only after the relevant checks are green.
+
+## Minimal PR Checklist
+
+- Scope aligned in an issue or discussion
+- Branch stays focused and does not mix unrelated cleanup
+- Relevant docs updated for visible behavior or workflow changes
+- `make verify` passed locally
+- Extra targeted checks passed when tracker or wiki files were touched
+- PR title, description, and review comments are written in English
 
 ## Current Contribution Policy
 
@@ -28,7 +61,9 @@ Thank you for your interest in Betankungen.
 
 ## Technical Baseline
 
-- Build command (from project root):
+- Recommended contributor path from the project root:
+  `make build` and `make verify`
+- Canonical compiler invocation:
   `fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr`
 - Run relevant smoke/domain-policy checks for changed behavior before opening a PR.
 
