@@ -98,6 +98,12 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Entry: `README.md`, `docs/README_EN.md` und die
+  Wiki-Startseiten benennen jetzt die englische Einstiegsschicht klarer und
+  ruhiger. Die erste Anlaufstelle fuer internationale Erstbesucher fuehrt
+  sichtbarer auf `docs/README_EN.md` und den GitHub-Wiki-Einstieg, waehrend
+  die tiefere Repository-Doku weiter bewusst German-first bleibt.
+  `TSK-0033` ist damit `done`; Basis-Commit: `8e64391`. (2026-04-12)
 - [General] Docs/Contributors: `CONTRIBUTING.md` fuehrt jetzt einen klar
   sichtbaren Quickstart fuer den ersten kleinen Beitrag. Der minimale
   Contributor-Pfad nennt `make build` und `make verify`, verweist bei
@@ -924,6 +930,9 @@ schliessen.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Entry-Signal-Schaerfung, Tracker-Sync und die zugehoerige
+  Traceability-Pflege fuer `TSK-0033` erfolgten mit Unterstuetzung durch
+  AI-Tools als Sparringspartner. (2026-04-12)
 - Referenzscreen-Umsetzung, Tracker-Sync und Sprint-40-Traceability
   erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
   (2026-04-08)
