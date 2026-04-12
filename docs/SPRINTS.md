@@ -1,7 +1,34 @@
 # SPRINTS
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - Prompt-Ablage auf Audit-Repo konsolidieren
+
+- Status: done
+- Ziel: die Prompt-Ablage fuer Leitstand-, Audit- und Folge-Prompts sauber
+  im externen Audit-Repo konzentrieren, repo-lokale Restordner entfernen und
+  den neuen `[General]`-Folge-Prompt fuer den sichtbaren Public-Release-
+  Handoff an der richtigen Stelle ablegen.
+
+### Stand (2026-04-12)
+
+- Der repo-lokale Restordner `prompts/` wird aus Betankungen entfernt; die
+  externe Ablage unter `/home/christof/Projekte/Audit/Betankungen/prompts/`
+  bleibt der alleinige Ort fuer Leitstand-, Audit- und Folge-Prompts.
+- `TSK-0030` verweist fuer den Public-Repo-Entry-Audit jetzt auf die
+  wiederverwendbare Vorlage
+  `/home/christof/Projekte/Audit/Betankungen/prompts/templates/TEMPLATE_public-repo-entry-audit_prompt.md`.
+- Unter `general/offen/` liegt der neue Folge-Prompt
+  `2026-04-12_general_public-release-handoff_prompt.md`; die externe
+  `prompts/README.md` fuehrt Template-Bestand und offenen General-Prompt
+  konsistent.
+- Dieser Block fuehrt keine Produkt- oder Runtime-Aenderung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## General-Stream nach Sprint 40 - README entry flow und quick start haerten
 
@@ -71,8 +98,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 - `BL-0035` ist als Public-Readiness-Discovery-Block angelegt und trennt
   bewusst zwischen Audit-Vorbereitung und spaeterer Umsetzung.
-- `TSK-0030` ist `done` und liefert den wiederverwendbaren Prompt unter
-  `/home/christof/Projekte/Audit/Betankungen/prompts/audits/offen/2026-04-11_public-repo-entry-audit_prompt.md`.
+- `TSK-0030` ist `done` und liefert die wiederverwendbare Audit-Vorlage
+  unter
+  `/home/christof/Projekte/Audit/Betankungen/prompts/templates/TEMPLATE_public-repo-entry-audit_prompt.md`.
 - Der nachgelagerte Tracker-Uebersetzungsblock hat die Audit-Funde inzwischen
   in `ISS-0011`, `ISS-0012` und `BL-0036` geschnitten; ein neuer `ADR` war
   dabei nicht noetig.

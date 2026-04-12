@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Prompts: Die Prompt-Ablage fuer Leitstand-, Audit- und
+  Folge-Prompts wird jetzt konsequent ausserhalb des Repos unter
+  `/home/christof/Projekte/Audit/Betankungen/prompts/` gefuehrt. Der
+  repo-lokale Restordner `prompts/` wurde entfernt, `TSK-0030` verweist fuer
+  den Public-Repo-Entry-Audit jetzt auf die Vorlage
+  `templates/TEMPLATE_public-repo-entry-audit_prompt.md`, und unter
+  `general/offen/` liegt der neue Folge-Prompt
+  `2026-04-12_general_public-release-handoff_prompt.md`. Die externe
+  Prompt-README fuehrt den bereinigten Bestand; eine Produkt- oder
+  Runtime-Aenderung wurde nicht eingefuehrt. (2026-04-12)
 - [General] Docs/Entry: `README.md` fuehrt den oeffentlichen Repo-Einstieg
   jetzt mit knapper Produktbeschreibung, Hauptanwendungsfaellen, sichtbarem
   Quick Start und fruehem Verweis auf den publizierten GitHub-Wiki-Pfad
@@ -126,8 +136,9 @@ schliessen.
   Produkt-Runtime geaendert. (2026-04-11)
 - [General] Docs/Audit: `BL-0035` rahmt jetzt einen zweistufigen
   Public-Repo-Entry-Audit fuer den GitHub-Einstieg. `TSK-0030` liefert den
-  wiederverwendbaren Prompt jetzt bewusst in der externen Audit-Ablage unter
-  `/home/christof/Projekte/Audit/Betankungen/prompts/audits/offen/2026-04-11_public-repo-entry-audit_prompt.md`,
+  wiederverwendbaren Prompt jetzt bewusst als Vorlage in der externen
+  Audit-Ablage unter
+  `/home/christof/Projekte/Audit/Betankungen/prompts/templates/TEMPLATE_public-repo-entry-audit_prompt.md`,
   waehrend `TSK-0031` spaetere Findings erst nach einem Cold-Start-Pass in
   Quick Wins, konkrete `ISS`, groessere `BL` und nur bei echtem
   Strukturbedarf in `ADR`-Kandidaten uebersetzt. `docs/BACKLOG.md`,
