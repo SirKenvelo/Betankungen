@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Planning: `BL-0036` ist jetzt von `proposed` auf
+  `approved` gezogen und in drei nicht ueberlappende Folge-Tasks
+  geschnitten. `TSK-0032` rahmt den kompakten Contributor-Quickstart mit
+  erster PR-Checkliste, `TSK-0033` staerkt die englischen Entry-Signale fuer
+  internationale Erstbesucher, und `TSK-0034` beruhigt den Handoff zwischen
+  README, Wiki und `CONTRIBUTING.md`. `docs/BACKLOG.md`, `docs/STATUS.md`
+  und `docs/SPRINTS.md` fuehren denselben Planungsstand; als naechster
+  kleinster Umsetzungsblock ist `TSK-0032` empfohlen. Es wurde bewusst keine
+  Runtime-, CLI- oder direkte Entry-Layer-Implementierung eingefuehrt.
+  (2026-04-12)
 - [General] Docs/Release: Der sichtbare GitHub-Release-Handoff fuer die
   stabile Linie `1.3.0` ist jetzt veroeffentlicht und im Entry-Layer
   verlinkt. `README.md` und `docs/README_EN.md` fuehren Erstbesucher direkt

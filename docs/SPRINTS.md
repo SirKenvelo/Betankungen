@@ -3,6 +3,36 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - BL-0036 in konkrete Task-Slices schneiden
+
+- Status: done
+- Ziel: den verbleibenden Contributor-/English-Entry-Folgeblock `BL-0036`
+  von einem Sammelthema in 2-3 kleine, nicht ueberlappende Umsetzungs-
+  `TSK` ueberfuehren, ohne schon README-, Wiki- oder `CONTRIBUTING.md`-
+  Inhalte direkt umzubauen.
+
+### Stand (2026-04-12)
+
+- `BL-0036` ist jetzt `approved` und damit als belastbarer Folgeblock fuer
+  die aktive `1.4.0-dev`-Linie priorisierbar.
+- Unter `docs/backlog/BL-0036-contributor-onboarding-and-english-entry-layer-hardening/tasks/`
+  liegen jetzt drei neue, sauber getrennte Tasks:
+  `TSK-0032` fuer den kompakten Contributor-Quickstart,
+  `TSK-0033` fuer klarere englische Entry-Signale und `TSK-0034` fuer den
+  ruhigeren README-/Wiki-/`CONTRIBUTING.md`-Handoff.
+- Der empfohlene naechste kleinste Umsetzungsblock ist `TSK-0032`, weil der
+  erste Beitragspfad fuer gelegentliche Contributors am direktesten von der
+  verbleibenden Reibung betroffen ist.
+- `docs/BACKLOG.md`, `docs/STATUS.md` und `docs/CHANGELOG.md` fuehren
+  denselben Planungsstand.
+- Dieser Block fuehrt bewusst keine Produkt-, CLI- oder direkte Entry-Layer-
+  Implementierung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Sichtbaren Public-Release-Handoff fuer 1.3.0 liefern
 
 - Status: done
