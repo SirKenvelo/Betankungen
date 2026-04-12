@@ -3,7 +3,7 @@ set -euo pipefail
 
 # projtrack_lint.sh
 # CREATED: 2026-03-13
-# UPDATED: 2026-03-30
+# UPDATED: 2026-04-12
 # Lint fuer Tracker-Dateien unter docs/issues + docs/backlog gemaess POL-001.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -40,6 +40,7 @@ STATUS_TASK = {"todo", "doing", "blocked", "done", "cancelled"}
 TYPE_ISSUE = {"bug", "incident", "problem"}
 TYPE_BACKLOG = {"feature", "improvement", "refactor", "debt", "research"}
 TYPE_TASK = {"task"}
+RE_FORBIDDEN_TRACKER_HEADING = re.compile(r"^## (Note|Notes)\b")
 
 
 @dataclass
@@ -284,6 +285,21 @@ def scan_code_refs(known_ids: set[str]) -> None:
                         errors.append(f"{rel(path)}:{i}: defekte Code-Referenz {kind}({ref_id})")
 
 
+def scan_tracker_heading_style(docs: list[TrackerDoc]) -> None:
+    for doc in docs:
+        try:
+            lines = doc.path.read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            continue
+
+        for i, line in enumerate(lines, start=1):
+            if RE_FORBIDDEN_TRACKER_HEADING.match(line):
+                errors.append(
+                    f"{rel(doc.path)}:{i}: ungueltige Tracker-Ueberschrift '{line.strip()}'; "
+                    "verwende die kanonische Form '# Notes'."
+                )
+
+
 def main() -> int:
     docs = collect_tracker_docs()
 
@@ -312,6 +328,7 @@ def main() -> int:
     for doc in docs:
         validate_meta(doc, known_ids_all)
 
+    scan_tracker_heading_style(docs)
     scan_code_refs(known_ids_all)
 
     for w in warnings:

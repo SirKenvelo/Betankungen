@@ -3,6 +3,31 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Merge-Commit- und Notes-Guardrails nachschaerfen
+
+- Status: done
+- Ziel: den Repo-Workflow so nachschaerfen, dass laengere PR-Textbloecke nicht
+  ungeprueft in Merge-Commit-Messages landen und trackerseitig keine
+  versehentlichen `## Note`-/`## Notes`-Ueberschriften mehr durchrutschen.
+
+### Stand (2026-04-12)
+
+- `docs/GIT_WORKFLOW.md` trennt jetzt explizit zwischen PR-Beschreibung und
+  Merge-Commit und verlangt vor `Create a merge commit` eine bewusste
+  redaktionelle Pruefung des vorgeschlagenen Commit-Texts.
+- Die neue Leitplanke nennt `## Summary`, `## Validation`, `## Scope Notes`,
+  `## Note` und `## Notes` explizit als PR-Bloecke, die nicht ungeprueft in
+  den Merge-Commit-Body uebernommen werden sollen.
+- `scripts/projtrack_lint.sh` meldet in Tracker-Dateien jetzt
+  `## Note` und `## Notes` als harte Fehler und verweist auf die kanonische
+  Form `# Notes`.
+- Dieser Block fuehrt bewusst keine Produkt-, CLI- oder Build-Aenderung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - BL-0036 in konkrete Task-Slices schneiden
 
 - Status: done
