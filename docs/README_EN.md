@@ -1,5 +1,5 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 
 Betankungen is a CLI-first fuel tracking and full-tank cycle statistics tool
 for local SQLite data.
@@ -13,10 +13,13 @@ Recommended first path for new visitors:
 1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
 2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-4. [Main project documentation (German)](README.md)
+4. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+5. [Main project documentation (German)](README.md)
 
 The wiki is the lighter public entry layer.
 Repository docs under `docs/` remain the technical source of truth.
+Stable release handoff lives on GitHub Releases; when a release does not ship
+binary assets, the release notes state the source-build expectation clearly.
 
 ## Quick Project Fit
 
@@ -42,7 +45,12 @@ need to add a station before the first fuel-up flow.
 
 ## Current State
 
-- Latest release: `1.3.0` (released on 2026-03-26)
+- Latest stable release:
+  [`1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+  (released on 2026-03-26)
+- Stable release consumption: the current public handoff for `1.3.0` uses
+  source-build guidance via `make build`; binary assets are only expected when
+  a release explicitly ships them
 - Technical runtime state: `APP_VERSION=1.4.0-dev`
 - Active repository line: `1.4.0-dev`
 - Status, roadmap, and planning detail: `docs/STATUS.md`,

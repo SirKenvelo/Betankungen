@@ -3,6 +3,35 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Sichtbaren Public-Release-Handoff fuer 1.3.0 liefern
+
+- Status: done
+- Ziel: die bereits kommunizierte stabile Linie `1.3.0` auch auf der
+  GitHub-`Releases`-Oberflaeche als klaren oeffentlichen Handoff nutzbar
+  machen, ohne neue Version, neuen Tag oder Runtime-Aenderung.
+
+### Stand (2026-04-12)
+
+- Fuer den bestehenden Tag `1.3.0` ist jetzt ein sichtbarer GitHub-Release
+  mit englischen Release-Notes und klarer Nutzungs-Guidance veroeffentlicht.
+- Der Handoff bleibt bewusst bei der vorhandenen stabilen Linie:
+  keine neue Version, kein neuer Tag und kein neuer Release-Build.
+- `README.md` und `docs/README_EN.md` verlinken den stabilen Release jetzt
+  frueh im Entry-Layer und benennen explizit, dass `1.3.0` aktuell ueber
+  Source-Build (`make build`) konsumiert wird, solange keine Release-
+  Binarys explizit mitgeliefert werden.
+- `ISS-0012` ist damit auf `resolved` gezogen; `docs/STATUS.md` und
+  `docs/CHANGELOG.md` fuehren denselben Closeout ohne widerspruechliche
+  Restformulierungen.
+- Dieser Block fuehrt keine Produkt-, CLI- oder Runtime-Aenderung ein.
+
+### Validierung
+
+- `gh release view 1.3.0`
+- `make wiki-link-check`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Prompt-Ablage auf Audit-Repo konsolidieren
 
 - Status: done

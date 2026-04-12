@@ -1,16 +1,16 @@
 ---
 id: ISS-0012
 title: Public release signals and published GitHub releases are out of sync
-status: open
+status: resolved
 priority: P1
 type: problem
 tags: [release, github, public-readiness, trust, docs]
 created: 2026-04-11
-updated: 2026-04-11
+updated: 2026-04-12
 related:
   - BL-0035
 ---
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 
 # Summary
 The public repository currently signals stable release availability more
@@ -39,6 +39,17 @@ The repository communicates release maturity, but the corresponding public
 GitHub release surface does not yet provide the same level of visible closure
 for first-time visitors.
 
+# Resolution
+- The GitHub release `1.3.0` is now published as the visible public handoff
+  for the current stable line, with English release notes and explicit
+  consumption guidance.
+- `README.md` and `docs/README_EN.md` now point first-time visitors to the
+  stable release page and keep the source-build expectation visible when no
+  binary assets are attached.
+- `docs/STATUS.md`, `docs/CHANGELOG.md`, and `docs/SPRINTS.md` now carry the
+  same release-story closeout, so the entry layer and the GitHub
+  `Releases` surface no longer contradict each other.
+
 # Reproduction
 1. Open the public GitHub repository landing page.
 2. Note the visible release messaging in the main entry documents.
@@ -52,9 +63,9 @@ the project is release-oriented, then hesitate when the public GitHub release
 surface does not clearly confirm how a stable release should be consumed.
 
 # Acceptance Criteria
-- [ ] Public release messaging and the GitHub `Releases` surface communicate a
+- [x] Public release messaging and the GitHub `Releases` surface communicate a
       consistent release story.
-- [ ] Stable releases expose at least one clear public handoff: release notes,
+- [x] Stable releases expose at least one clear public handoff: release notes,
       download artifacts, or explicit source-build guidance.
-- [ ] The chosen release strategy is documented consistently across the repo
+- [x] The chosen release strategy is documented consistently across the repo
       entry layer.

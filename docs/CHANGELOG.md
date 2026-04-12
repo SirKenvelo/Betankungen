@@ -98,6 +98,14 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Release: Der sichtbare GitHub-Release-Handoff fuer die
+  stabile Linie `1.3.0` ist jetzt veroeffentlicht und im Entry-Layer
+  verlinkt. `README.md` und `docs/README_EN.md` fuehren Erstbesucher direkt
+  zur Release-Seite, die `1.3.0`-Release-Notes benennen die aktuelle
+  Source-Build-Erwartung ruhig und explizit, und `ISS-0012` ist damit auf
+  `resolved` gezogen. `docs/STATUS.md` und `docs/SPRINTS.md` fuehren
+  denselben Closeout; es wurde weder eine neue Version noch ein neuer
+  Runtime- oder Build-Slice eingefuehrt. (2026-04-12)
 - [General] Docs/Prompts: Die Prompt-Ablage fuer Leitstand-, Audit- und
   Folge-Prompts wird jetzt konsequent ausserhalb des Repos unter
   `/home/christof/Projekte/Audit/Betankungen/prompts/` gefuehrt. Der

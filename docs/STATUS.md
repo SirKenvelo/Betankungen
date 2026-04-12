@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -262,6 +262,12 @@ Bereits erledigt:
   - Public-Repo-Governance mit PR-only auf `main` und gruener `verify`-Pflicht.
 - Operativer Fokus:
   - `1.3.0` ist seit 2026-03-26 final freigegeben.
+  - Der sichtbare oeffentliche Handoff fuer die stabile `1.3.0`-Linie ist
+    jetzt ueber GitHub `Releases` veroeffentlicht; die Release-Seite fuehrt
+    englische Notes und klare Nutzungs-Guidance.
+  - Die aktuelle Public-Release-Guidance fuer `1.3.0` bleibt bewusst
+    source-build-basiert (`make build`), solange ein Release nicht
+    ausdruecklich eigene Binary-Artefakte mitliefert.
   - Finaler technischer Stand der abgeschlossenen 1.3.0-Linie bleibt
     `APP_VERSION=1.3.0` als historischer Release-Stand.
   - Die aktive Entwicklungsbasis wurde jetzt per separatem
@@ -375,8 +381,10 @@ Bereits erledigt:
     Daraus sind `ISS-0011` fuer den README-/Entry-Flow, `ISS-0012` fuer die
     Inkonsistenz zwischen Release-Signal und sichtbarer GitHub-Release-
     Oberflaeche sowie `BL-0036` fuer spaeteres Contributor-Onboarding- und
-    English-Entry-Layer-Hardening hervorgegangen. Ein neuer `ADR` ist dafuer
-    aktuell nicht erforderlich.
+    English-Entry-Layer-Hardening hervorgegangen. `ISS-0011` und `ISS-0012`
+    sind inzwischen ueber synchronisierte Entry-Layer- und GitHub-Release-
+    Handoffs auf `resolved` gezogen; ein neuer `ADR` ist dafuer aktuell nicht
+    erforderlich.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

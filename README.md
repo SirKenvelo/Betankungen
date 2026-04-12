@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-11
+**Stand:** 2026-04-12
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal/Lazarus.
@@ -18,10 +18,13 @@ If you are new to the repository, use this path first:
 1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
 2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-4. [English docs entry](docs/README_EN.md)
+4. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+5. [English docs entry](docs/README_EN.md)
 
 The GitHub Wiki is the recommended public entry layer.
 Repository docs under `docs/` remain the technical source of truth.
+Stable release handoff lives on GitHub Releases; if a release does not ship
+binary assets, the release notes point to the expected source-build path.
 
 ## Quick Start
 
@@ -48,7 +51,12 @@ need to add a station before the first fuel-up flow.
 
 ## Current State
 
-- Latest release: `1.3.0` (released on 2026-03-26)
+- Latest stable release:
+  [`1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+  (released on 2026-03-26)
+- Stable release consumption: the current public handoff for `1.3.0` uses
+  source-build guidance via `make build`; binary assets are only expected when
+  a release explicitly ships them
 - Technical runtime state: `APP_VERSION=1.4.0-dev`
 - Active repository line: `1.4.0-dev`
 - Roadmap, gate history, and planning detail:
