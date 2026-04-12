@@ -75,9 +75,10 @@ Scope-Ueberlappung nacheinander umgesetzt werden.
 Der erste Umsetzungsblock ist jetzt angelaufen:
 `TSK-0032` ist abgeschlossen und liefert in `CONTRIBUTING.md` einen
 kompakten Contributor-Quickstart mit minimalem Build-/Verify-/PR-Pfad.
-Die verbleibende Folgearbeit konzentriert sich weiter getrennt auf englische
-Entry-Signale (`TSK-0033`) und den ruhigeren README-/Wiki-/`CONTRIBUTING.md`-
-Handoff (`TSK-0034`).
+`TSK-0033` ist abgeschlossen und schaerft die englischen Entry-Signale fuer
+internationale Erstbesucher, ohne die deutsche Tiefendoku zu uebernehmen.
+Die verbleibende Folgearbeit konzentriert sich jetzt nur noch auf den
+ruhigeren README-/Wiki-/`CONTRIBUTING.md`-Handoff (`TSK-0034`).
 
 # Task Slices
 - `TSK-0032` - kompakten Contributor-Quickstart und erste PR-Checkliste fuer
@@ -90,7 +91,6 @@ Handoff (`TSK-0034`).
 # Sequencing
 - `TSK-0032` ist abgeschlossen und bildet jetzt die sichtbare Contributor-
   Quickstart-Schicht in `CONTRIBUTING.md`.
-- Empfohlener naechster kleinster Umsetzungsblock: `TSK-0033`.
-- Reihenfolge danach: zuerst `TSK-0033`, dann `TSK-0034`, damit erst die
-  sichtbaren Inhalts- und Sprachsignale geschaerft werden und der Handoff
-  anschliessend auf dieser Basis beruhigt werden kann.
+- `TSK-0033` ist abgeschlossen.
+- Reihenfolge danach: nur noch `TSK-0034`, damit der Handoff auf der bereits
+  geschaerften Einstiegsbasis beruhigt werden kann.

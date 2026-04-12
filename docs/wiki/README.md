@@ -1,5 +1,5 @@
 # Wiki Source
-**Stand:** 2026-03-29
+**Stand:** 2026-04-12
 
 This folder contains the versioned source pages for the published
 public-readiness wiki entry.
@@ -7,6 +7,8 @@ public-readiness wiki entry.
 ## Purpose
 
 - GitHub Wiki: calm external entry layer for navigation and orientation.
+- `Home.md`: visible entry page that points English-first visitors to
+  `docs/README_EN.md` and keeps the German deep docs clearly separated.
 - Repository docs (`docs/`): technical source of truth.
 - `docs/wiki/`: editorial source for the published wiki pages, not a second
   deep-documentation tree.

@@ -388,11 +388,11 @@ Bereits erledigt:
   - `BL-0036` ist jetzt `in_progress`: `TSK-0032` ist abgeschlossen und
     liefert in `CONTRIBUTING.md` einen kompakten Contributor-Quickstart mit
     erstem Build-/Verify-/PR-Pfad fuer gelegentliche Mitwirkende.
-  - Die verbleibende Folgearbeit bleibt bewusst getrennt: `TSK-0033` schaerft
-    spaeter die englischen Entry-Signale, `TSK-0034` beruhigt erst danach den
-    Handoff zwischen README, Wiki und `CONTRIBUTING.md`.
-  - Der empfohlene naechste kleinste Umsetzungsblock ist jetzt `TSK-0033`;
-    der Abschluss von `TSK-0032` fuehrt weiterhin keine Runtime-, CLI-,
+  - `TSK-0033` ist abgeschlossen und hat die englischen Entry-Signale fuer
+    internationale Erstbesucher sichtbar nachgeschaerft; der verbleibende
+    Folgeblock ist damit nur noch `TSK-0034` fuer den ruhigeren Handoff
+    zwischen README, Wiki und `CONTRIBUTING.md`.
+  - Der Abschluss von `TSK-0032` fuehrt weiterhin keine Runtime-, CLI-,
     Build- oder groessere Entry-Layer-Aenderung ein.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
