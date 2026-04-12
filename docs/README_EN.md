@@ -3,8 +3,9 @@
 
 Betankungen is a CLI-first fuel tracking and full-tank cycle statistics tool
 for local SQLite data.
-This page is the English repository entry when you need a little more context
-than the public wiki provides.
+Use this page and the public wiki as the English entry layer; detailed
+repository docs under `docs/` remain German-first and are the technical
+source of truth.
 
 ## Start Here
 
@@ -13,8 +14,8 @@ Recommended first path for new visitors:
 1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
 2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-4. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
-5. [Main project documentation (German)](README.md)
+4. [Main project documentation (German)](README.md)
+5. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
 
 The wiki is the lighter public entry layer.
 Repository docs under `docs/` remain the technical source of truth.

@@ -3,6 +3,9 @@
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal/Lazarus.
+English entry path for first-time visitors: `docs/README_EN.md` and the
+public GitHub Wiki. Detailed repository docs under `docs/` stay German-first
+and remain the technical source of truth.
 
 ## What Betankungen Does
 
@@ -15,13 +18,15 @@ data, built with Free Pascal/Lazarus.
 
 If you are new to the repository, use this path first:
 
-1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
-2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
-3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-4. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
-5. [English docs entry](docs/README_EN.md)
+1. [English docs entry](docs/README_EN.md)
+2. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
+3. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
+4. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
+5. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+6. [Main project documentation (German)](docs/README.md)
 
-The GitHub Wiki is the recommended public entry layer.
+The English docs entry and the GitHub Wiki are the recommended public entry
+layer.
 Repository docs under `docs/` remain the technical source of truth.
 Stable release handoff lives on GitHub Releases; if a release does not ship
 binary assets, the release notes point to the expected source-build path.
@@ -64,9 +69,9 @@ need to add a station before the first fuel-up flow.
 
 ## Documentation
 
+- [English docs entry](docs/README_EN.md)
 - [Published GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
   (recommended public entry)
-- [English docs entry](docs/README_EN.md)
 - [Main project documentation (German)](docs/README.md)
 - [English architecture summary](docs/ARCHITECTURE_EN.md)
 - [Contribution guide](CONTRIBUTING.md)

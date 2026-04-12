@@ -3,6 +3,32 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Englische Entry-Signale fuer Erstbesucher staerken
+
+- Status: done
+- Ziel: die englische Einstiegsschicht fuer internationale Erstbesucher
+  sichtbarer und ruhiger machen, ohne die deutsche Tiefendoku vollstaendig
+  zu uebersetzen oder den spaeteren README-/Wiki-/`CONTRIBUTING.md`-
+  Handoff vorwegzunehmen.
+
+### Stand (2026-04-12)
+
+- `docs/README_EN.md`, `README.md` und die Wiki-Startseiten benennen jetzt
+  den englischen Einstieg sichtbarer und ordnen die deutsche Tiefendoku als
+  bewusst German-first ein.
+- `TSK-0033` ist damit `done`; `BL-0036` bleibt als Ueberblock weiter
+  `in_progress`, waehrend nur `TSK-0034` fuer den ruhigeren Handoff offen
+  bleibt.
+- Der zugehoerige Inhalts-Commit ist `8e64391`.
+- Dieser Block fuehrt bewusst keine Volluebersetzung und keinen groesseren
+  Handoff-Umbau ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Kompakten Contributor-Quickstart liefern
 
 - Status: done

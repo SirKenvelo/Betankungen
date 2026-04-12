@@ -1,7 +1,7 @@
 ---
 id: TSK-0033
 title: Englische Entry-Signale fuer internationale Erstbesucher staerken
-status: todo
+status: done
 priority: P2
 type: task
 tags: [english, docs, public-readiness, onboarding]
@@ -31,11 +31,16 @@ welche Tiefendoku deutsch bleibt und wie sie trotzdem sinnvoll weiterkommen.
   `CONTRIBUTING.md` gehoert in `TSK-0034`.
 
 # Done When
-- [ ] Die englische Einstiegsschicht signalisiert sichtbar, wo internationale
+- [x] Die englische Einstiegsschicht signalisiert sichtbar, wo internationale
   Erstbesucher starten sollen.
-- [ ] Die Grenze zwischen englischem Einstieg und deutscher Tiefendoku ist
+- [x] Die Grenze zwischen englischem Einstieg und deutscher Tiefendoku ist
   ruhig und ohne Abschreckung erklaert.
-- [ ] Die naechsten englisch geeigneten Ziele fuer Erstbesucher sind klar
+- [x] Die naechsten englisch geeigneten Ziele fuer Erstbesucher sind klar
   verlinkt oder benannt.
-- [ ] Es wird keine Volluebersetzung und kein Big-Bang-Umbau des Entry-Layers
+- [x] Es wird keine Volluebersetzung und kein Big-Bang-Umbau des Entry-Layers
   gestartet.
+
+# Result
+Die englische Einstiegsschicht verweist jetzt sichtbar auf `docs/README_EN.md`
+und den Wiki-Einstieg, benennt die deutsche Tiefendoku klar als technische
+Source of Truth und bleibt dabei kurz, ruhig und ohne Volluebersetzung.
