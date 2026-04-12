@@ -3,6 +3,34 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Kompakten Contributor-Quickstart liefern
+
+- Status: done
+- Ziel: in `CONTRIBUTING.md` einen sichtbaren ersten Beitragspfad fuer
+  gelegentliche Contributors liefern, ohne englische Entry-Signale oder den
+  README-/Wiki-/`CONTRIBUTING.md`-Handoff vorwegzunehmen.
+
+### Stand (2026-04-12)
+
+- `CONTRIBUTING.md` fuehrt jetzt frueh einen kompakten Quickstart fuer den
+  ersten kleinen Beitrag.
+- Der sichtbare Mindestpfad nennt `make build` und `make verify` und ergaenzt
+  gezielte Zusatzchecks fuer Tracker-Dateien (`scripts/projtrack_lint.sh`) und
+  Wiki-/wiki-nahe Link-Aenderungen (`make wiki-link-check`).
+- Die GitHub-Sprachregel und der minimale PR-Rahmen `Summary`/`Validation`
+  sind jetzt ohne tiefe Vorablektuere erkennbar.
+- `TSK-0032` ist damit `done`; `BL-0036` ist auf `in_progress` gezogen.
+- Die verbleibende Folgearbeit bleibt getrennt: `TSK-0033` fuer englische
+  Entry-Signale, `TSK-0034` fuer den ruhigeren Handoff zwischen README, Wiki
+  und `CONTRIBUTING.md`.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, Release- oder groessere
+  Entry-Layer-Aenderung ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Merge-Commit- und Notes-Guardrails nachschaerfen
 
 - Status: done

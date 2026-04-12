@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Contributors: `CONTRIBUTING.md` fuehrt jetzt einen klar
+  sichtbaren Quickstart fuer den ersten kleinen Beitrag. Der minimale
+  Contributor-Pfad nennt `make build` und `make verify`, verweist bei
+  Tracker-Aenderungen gezielt auf `scripts/projtrack_lint.sh`, bei
+  Wiki-/wiki-nahen Link-Aenderungen auf `make wiki-link-check`, und macht die
+  GitHub-Sprachregel sowie den PR-Rahmen `Summary`/`Validation` frueh
+  sichtbar. `TSK-0032` ist damit `done`, `BL-0036` ist auf `in_progress`
+  gezogen, und `TSK-0033`/`TSK-0034` bleiben als getrennte Folgearbeit
+  erhalten. Es wurde keine Runtime-, CLI-, Release- oder groessere
+  Entry-Layer-Aenderung eingefuehrt. (2026-04-12)
 - [General] Docs/Workflow: `docs/GIT_WORKFLOW.md` trennt jetzt explizit
   zwischen PR-Beschreibung und Merge-Commit-Text. Vor `Create a merge commit`
   soll der vorgeschlagene Merge-Commit-Body aktiv bereinigt werden, damit
