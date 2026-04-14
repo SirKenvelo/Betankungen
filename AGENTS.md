@@ -61,6 +61,7 @@
 - Keine produktiven personenbezogenen oder sensiblen Nutzdaten als Testfixtures committen; nur Demo-/synthetische Daten.
 - Bei Fehlermeldungen/Logs in oeffentlichen Doku-/PR-Texten keine unnoetigen lokalen Systemdetails offenlegen (nur technisch relevante Ausschnitte).
 - Sicherheitsrelevante Schutzmechanismen im Tooling oder Repo duerfen nicht fuer den Arbeitsfortschritt abgeschaltet, umkonfiguriert oder umgangen werden; bei Blockern ist anzuhalten und Rueckfrage zu halten.
+- Smoke-/Fixture-Pfade duerfen Git-Sicherheitsfeatures nicht per lokaler Repo-Config oder Inline-Override abschalten (z. B. kein `commit.gpgsign false`); sichere Strategien sind Clone-/Bare-Remote-/Read-only-Snapshots oder ein klar dokumentierter Blocker.
 
 ### Repo-Pflege-Rhythmus
 - Session-Start: einmalige Arbeitskopien-Pruefung mit `git remote -v`, `git fetch --prune origin`, `git status --short --branch` und `git log -1 --oneline`; `git pull --ff-only` nur als bewusste Folgeaktion, wenn der konkrete Task einen Fast-Forward-Sync verlangt.

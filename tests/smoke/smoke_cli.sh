@@ -5,7 +5,8 @@ set -euo pipefail
 # UPDATED: 2026-04-14
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle, robuste CLI-Guardrails und
-# signaturkonforme btkgit-Fixtures fuer den 1.4.0-Readiness-Rahmen.
+# signaturkonforme btkgit-Fixtures ueber Clone-only/Bare-Remote fuer den
+# 1.4.0-Readiness-Rahmen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 FAILS=0
@@ -507,8 +508,9 @@ setup_btkgit_fixture_repo() {
   remote="$sandbox/remote.git"
   repo="$sandbox/repo"
 
-  # Fixture nutzt ein lokales Bare-Remote mit echter main-Ref, damit fetch/
-  # pull/pull --ff-only in btkgit auch unter CI-Checkouts stabil bleiben.
+  # Fixture nutzt einen Clone-only-Pfad mit lokalem Bare-Remote und echter
+  # main-Ref. Dadurch pruefen wir btkgit gegen einen realistischen Upstream,
+  # ohne lokale Git-Sicherheitsfeatures per Repo-Config abzuschalten.
   git clone --bare "$ROOT_DIR" "$remote" >/dev/null 2>&1 || return 1
   head_sha="$(git -C "$ROOT_DIR" rev-parse HEAD)" || return 1
   git --git-dir="$remote" update-ref refs/heads/main "$head_sha" || return 1
@@ -516,6 +518,9 @@ setup_btkgit_fixture_repo() {
 
   git clone "$remote" "$repo" >/dev/null 2>&1 || return 1
   git -C "$repo" checkout -B main origin/main >/dev/null 2>&1 || return 1
+  if git -C "$repo" config --local --get-all commit.gpgsign 2>/dev/null | grep -Eq '^false$'; then
+    return 1
+  fi
 
   printf '%s\n' "$repo"
 }

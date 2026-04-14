@@ -14,6 +14,8 @@ abgeschlossen.
 
 Der aktive `1.4.0`-Freeze-/Readiness-Rahmen fuehrt diese Abgrenzung jetzt
 explizit fort: `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`.
+Damit bleibt die Linie ohne Scope-Drift und ohne Sicherheitsausnahme
+prozessual bewertbar.
 
 ## Begruendung
 

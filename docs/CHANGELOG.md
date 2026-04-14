@@ -19,10 +19,10 @@ nachzuschieben.
   Stand. `tests/smoke/smoke_cli.sh` nutzt fuer `btkgit`-Fixtures keinen
   Commit-Signatur-Bypass mehr und nutzt dafuer ein lokales Bare-Remote mit
   echter `main`-Ref, damit auch `btkgit cleanup` unter CI stabil gegen einen
-  echten Upstream prueft;
-  `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-
-  Linie. Es wurden keine neuen Runtime- oder Produktfeatures eingefuehrt.
-  (2026-04-14)
+  echten Upstream prueft. Gate 4 und Gate 5 bleiben die einzigen offenen
+  Release-Schritte; `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der
+  `1.4.0`-Release-Linie. Es wurden keine neuen Runtime- oder Produktfeatures
+  eingefuehrt. (2026-04-14)
 
 ### Sprint / Commit References
 - S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)
@@ -118,10 +118,11 @@ nachzuschieben.
   auf den englischen Einstieg, die Wiki-Seiten bleiben die kuratierte
   Navigationsschicht, und `CONTRIBUTING.md` setzt erst nach der Entry-
   Orientierung an. `TSK-0034` ist damit `done`; `tests/smoke/smoke_cli.sh`
-  schaltet fuer die btkgit-Fixture-Repo-Erzeugung lokales commit.gpgsign aus,
-  damit `make verify` auch in Umgebungen mit global aktivem Git-Signing
-  reproduzierbar bleibt. Es wurden keine Runtime- oder CLI-Aenderungen
-  eingefuehrt. (2026-04-14)
+  prueft die btkgit-Fixture-Repo-Erzeugung jetzt ueber ein lokales
+  Bare-Remote mit echter `main`-Ref und frischem Clone, damit `make verify`
+  auch in Umgebungen mit global aktivem Git-Signing reproduzierbar bleibt,
+  ohne Signaturen lokal abzuschalten. Es wurden keine Runtime- oder
+  CLI-Aenderungen eingefuehrt. (2026-04-14)
 - [General] Docs/Entry: `README.md`, `docs/README_EN.md` und die
   Wiki-Startseiten benennen jetzt die englische Einstiegsschicht klarer und
   ruhiger. Die erste Anlaufstelle fuer internationale Erstbesucher fuehrt

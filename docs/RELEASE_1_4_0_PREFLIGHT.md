@@ -1,6 +1,6 @@
 # Release-Readiness-Preflight fuer 1.4.0
 **Stand:** 2026-04-14
-**Status:** aktiv
+**Status:** aktiv (Gate 2 und Gate 3 abgeschlossen; Gate 4 und Gate 5 offen)
 
 ## Zweck
 
@@ -31,6 +31,17 @@ Explizit ausserhalb der 1.4.0-Release-Linie bleiben:
   Commit-Signatur-Policy per `commit.gpgsign false` abschalten.
 - Wenn ein aktives Sicherheitsfeature einen Task blockiert, ist das ein
   sichtbarer Blocker und kein Anlass fuer einen stillen Test-Bypass.
+
+## Sichere Fixture-Strategie
+
+- `tests/smoke/smoke_cli.sh` prueft `btkgit` ueber einen Clone-only-Pfad:
+  lokales Bare-Remote aus dem aktuellen Repo-Snapshot, echte `main`-Ref und
+  frischer Arbeitsclone fuer Sync-/Cleanup-Faelle.
+- Der Fixture-Pfad braucht damit keinen lokalen Git-Config-Override fuer
+  Signaturen.
+- Sollte kuenftig doch ein Commit im Fixture-Pfad noetig werden und ein
+  aktives Sicherheitsfeature blockieren, gilt das als sichtbarer Blocker und
+  nicht als Test-Workaround.
 
 ## Operativer Entrypoint
 
@@ -63,10 +74,19 @@ Erwarteter Abschlusslauf fuer diesen Rahmen:
 Auch bei gruener lokaler Readiness bleibt `1.4.0` erst dann final
 freigabefaehig, wenn zusaetzlich gilt:
 
+- Gate 4 ist als RC-Freeze-Snapshot formal dokumentiert.
 - kein neuer Scope-Drift nach dem Freeze
 - explizite Release-Freigabe fuer den finalen Versionswechsel
 - finaler Gate-4-/Gate-5-Snapshot in Roadmap/Status/Changelog/Sprints
 - Release-/Backup-Ausfuehrung mit finaler Version statt Dry-Run
+
+## Bewertungslogik dieses Preflights
+
+- Ein gruener Preflight bedeutet: Die Linie ist lokal als Gate-4-Kandidat
+  bewertbar.
+- Ein gruener Preflight bedeutet nicht: `1.4.0` ist bereits final freigegeben.
+- Der Preflight ersetzt weder die explizite Release-Freigabe noch den
+  finalen Versionswechsel.
 
 ## Bewusste Nicht-Ziele dieses Dokuments
 

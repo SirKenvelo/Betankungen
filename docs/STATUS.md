@@ -32,6 +32,11 @@
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
   - Der lokale Readiness-Entrypoint ist
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`.
+  - Der `btkgit`-Smoke-Pfad nutzt einen Clone-only-Fixture-Rahmen mit
+    lokalem Bare-Remote und echter `main`-Ref; lokale Signing-Overrides
+    gehoeren nicht zur Strategie.
+  - Fuer Gate 4 und Gate 5 verbleiben nur RC-/Freigabethemen; neue
+    Produktarbeit ist nicht Teil der aktiven Linie.
   - Finale Release-Freigabe, finaler Versionswechsel und Release-Tag sind
     nicht Teil dieses Blocks.
 
