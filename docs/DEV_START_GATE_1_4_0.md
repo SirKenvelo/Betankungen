@@ -1,14 +1,18 @@
 # Startgate fuer `1.4.0-dev`
-**Stand:** 2026-03-29
-**Status:** `GO` fuer separaten Aktivierungs-Commit; `1.4.0-dev` selbst noch nicht gestartet
+**Stand:** 2026-04-14
+**Status:** historischer Gate-Nachweis; durch separaten Aktivierungs-Commit in Sprint 30 eingeloest
 
 ## Zweck
 
-Dieses Dokument definiert den formalen Go-/No-Go-Stand vor dem eigentlichen
-Dev-Start von `1.4.0-dev`.
+Dieses Dokument definiert den historischen Go-/No-Go-Stand vor dem
+eigentlichen Dev-Start von `1.4.0-dev`.
 
 Sprint 29 liefert damit bewusst **nicht** den Dev-Start selbst, sondern die
 saubere, dokumentierte Freigabebasis davor.
+
+Der aktive Freeze-/Readiness-Rahmen fuer die laufende Linie wird nach dem
+eingeloesten Startgate jetzt separat in `docs/ROADMAP_1_4_0.md` und
+`docs/RELEASE_1_4_0_PREFLIGHT.md` weitergefuehrt.
 
 ## Abgrenzung
 
@@ -92,12 +96,14 @@ eintritt:
   Repo-Implementierungsscope gezogen.
 - Status-, README- und Gate-Dokumente laufen wieder auseinander.
 
-## Aktueller Gate-Stand am 2026-03-29
+## Historischer Gate-Stand am 2026-04-14
 
 - **Vorbereitungsblock:** abgeschlossen.
-- **Startfreigabe:** `GO`.
-- **Eigentlicher Dev-Start (`APP_VERSION -> 1.4.0-dev`):** noch offen und nur
-  als separater Folgeschritt zulaessig.
+- **Startfreigabe:** in Sprint 29 als `GO` dokumentiert.
+- **Eigentlicher Dev-Start (`APP_VERSION -> 1.4.0-dev`):** in Sprint 30 per
+  separatem Aktivierungs-Commit eingeloest.
+- **Aktiver Folge-Rahmen:** `docs/ROADMAP_1_4_0.md`,
+  `docs/RELEASE_1_4_0_PREFLIGHT.md`.
 
 ## Naechster Schritt nach Sprint 29
 
@@ -107,6 +113,9 @@ eintritt:
 Geplanter erster Inhaltsblock danach:
 
 - `BL-0016` als Community-Standards-Baseline fuer den naechsten Sprint.
+
+Diese beiden Schritte sind historisch abgeschlossen. Der laufende Fokus liegt
+jetzt auf Scope-Freeze und Release-Readiness der aktiven Linie.
 
 ## Explizit nicht Teil dieses Gates
 

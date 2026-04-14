@@ -1,6 +1,39 @@
 # Aktueller Projektstatus – Betankungen
 **Stand:** 2026-04-14
-**Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
+**Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Scope-Freeze aktiv, finale Freigabe noch offen)
+
+## Roadmap 1.4.0 - verbindlicher Fahrplan (aktiv)
+
+- Der aktive Gate-Plan liegt in `docs/ROADMAP_1_4_0.md`.
+- Gate-Stand:
+  - Gate 1 abgeschlossen am 2026-03-30 (separater Dev-Start auf
+    `APP_VERSION=1.4.0-dev` nach historischem Vorstart-Gate aus Sprint 29).
+  - Gate 2 abgeschlossen am 2026-04-14 (Scope-Freeze und Governance-
+    Konsolidierung; `BL-0011` bleibt externalisiert, `BL-0032` und `BL-0034`
+    bleiben ausserhalb der 1.4.0-Release-Linie).
+  - Gate 3 abgeschlossen am 2026-04-14 (formaler Readiness-Rahmen ueber
+    `docs/RELEASE_1_4_0_PREFLIGHT.md`, `scripts/release_preflight_1_4_0.sh`
+    und `make release-preflight-1-4-0` eingefuehrt).
+  - Gate 4 offen (Release-Candidate-Freeze und finaler RC-Snapshot).
+  - Gate 5 offen (finaler Versionswechsel, Release-/Backup-Ausfuehrung nur
+    nach expliziter Freigabe).
+- Leitplanken fuer die aktive 1.4.0-Linie:
+  - keine neuen Produktfeatures in diesem Freeze-/Readiness-Block;
+  - keine Deaktivierung oder Umgehung aktiver Sicherheitsfeatures, auch nicht
+    fuer Tests oder Fixtures;
+  - `main` bleibt PR-only mit gruener `verify`-Pflicht;
+  - `BL-0032` und `BL-0034` bleiben explizit ausserhalb der 1.4.0-
+    Release-Linie.
+- Operativer Fokus:
+  - `1.4.0-dev` ist die aktive technische Linie.
+  - Der historische Vorstart-Gate bleibt in `docs/DEV_START_GATE_1_4_0.md`
+    nachvollziehbar, ist aber bereits eingeloest.
+  - `BL-0011` bleibt fuer `Betankungen` repo-seitig geschlossen:
+    `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
+  - Der lokale Readiness-Entrypoint ist
+    `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`.
+  - Finale Release-Freigabe, finaler Versionswechsel und Release-Tag sind
+    nicht Teil dieses Blocks.
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
@@ -232,6 +265,9 @@ Bereits erledigt:
 
 - Der verbindliche Gate-Plan der abgeschlossenen 1.3.0-Linie liegt in
   `docs/ROADMAP_1_3_0.md`.
+- Historischer Abschlussstand: der aktive Freeze-/Readiness-Rahmen der
+  Folge-Linie wird ausschliesslich in `docs/ROADMAP_1_4_0.md` und
+  `docs/RELEASE_1_4_0_PREFLIGHT.md` gefuehrt.
 - Gate-Stand:
   - Gate 1 abgeschlossen am 2026-03-24 (Zyklusstart auf
     `APP_VERSION=1.3.0-dev`, neue Roadmap verankert).

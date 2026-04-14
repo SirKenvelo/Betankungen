@@ -54,6 +54,10 @@ need to add a station before the first fuel-up flow.
   a release explicitly ships them
 - Technical runtime state: `APP_VERSION=1.4.0-dev`
 - Active repository line: `1.4.0-dev`
+- Formal `1.4.0` scope freeze is active; exploratory follow-up blocks
+  `BL-0032` and `BL-0034` stay outside the release line
+- Release-readiness framework for the active line:
+  `ROADMAP_1_4_0.md`, `RELEASE_1_4_0_PREFLIGHT.md`
 - Status, roadmap, and planning detail: `docs/STATUS.md`,
   `docs/CHANGELOG.md`, `docs/SPRINTS.md`
 

@@ -6,9 +6,20 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 ## [Unreleased]
 ### Zielversion
 Aktive Entwicklungsbasis `1.4.0-dev` (`APP_VERSION=1.4.0-dev`)
-Ziel: die aktive `1.4.0-dev`-Linie ueber gezielte Hardening- und
-Datenanreicherungs-Bloecke stabilisieren und offene Contracts sauber
-schliessen.
+Ziel: die aktive `1.4.0-dev`-Linie formal auf Scope-Freeze und
+Release-Readiness ziehen, ohne neue Produktfeatures in die Linie
+nachzuschieben.
+
+### Changed
+- [General] Docs/Governance: Der `1.4.0`-Rahmen ist jetzt formal ueber
+  `docs/ROADMAP_1_4_0.md` und `docs/RELEASE_1_4_0_PREFLIGHT.md` verankert.
+  `AGENTS.md`, `docs/STATUS.md`, Root-/Entry-README, `docs/SPRINTS.md`,
+  `docs/DEV_START_GATE_1_4_0.md` und
+  `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Freeze-/Readiness-
+  Stand. `tests/smoke/smoke_cli.sh` nutzt fuer `btkgit`-Fixtures keinen
+  Commit-Signatur-Bypass mehr; `BL-0032` und `BL-0034` bleiben bewusst
+  ausserhalb der `1.4.0`-Release-Linie. Es wurden keine neuen Runtime- oder
+  Produktfeatures eingefuehrt. (2026-04-14)
 
 ### Sprint / Commit References
 - S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)
