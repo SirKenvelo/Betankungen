@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-11
+**Stand:** 2026-04-14
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -65,69 +65,26 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `1.2.0` wurde am `2026-03-24` final freigegeben.
   - `1.3.0` wurde am `2026-03-26` final freigegeben.
 - Aktueller technischer Stand: `APP_VERSION=1.4.0-dev`.
-- Der bewusste Transition-Hold nach `1.3.0` ist beendet; `1.4.0-dev` wurde
-  per separatem Aktivierungs-Commit gestartet.
-- Sprint 29 bleibt als formaler Pre-Activation-Gate dokumentiert:
-  `docs/DEV_START_GATE_1_4_0.md`.
-- Die dort definierte Abgrenzung wurde eingehalten:
-  - separater Aktivierungs-Commit fuer `1.4.0-dev` ist erfolgt
-  - inhaltliche Folgearbeit auf `BL-0016` folgt erst nach diesem Startschritt
-- Zuletzt abgeschlossener verbindlicher Gate-Plan:
-  `docs/ROADMAP_1_3_0.md` (Gate 1/2/3/4/5 abgeschlossen).
-- Gelieferter Release-Kern fuer `1.3.0`:
-  - `BL-0017`: API-Evaluation fuer externe Tankstellenpreise ist
-    abgeschlossen; Entscheidungsbasis liegt in
-    `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`.
-  - `BL-0018`: Polling-/Historienbasis fuer externe Preisdaten ist
-    abgeschlossen; Contract und Runtime-Basis liegen in
-    `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md` und
-    `docs/FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`.
-- Gate-4- und Gate-5-Closeout fuer `1.3.0` sind nachvollziehbar in
-  `docs/RELEASE_1_3_0_PREFLIGHT.md` dokumentiert, inklusive lokalem
-  Abschlusslauf, finalem Versionswechsel und Release-/Backup-Ausfuehrung.
-- Verbindlicher naechster Planungsstand:
-  - abgeschlossener Vorbereitungsblock (Sprint 23-28), dokumentierte
-    Startfreigabe (Sprint 29) und eigentlicher Dev-Start bleiben bewusst
-    getrennte Schritte
-  - die aktive Folgeversion ist jetzt `1.4.0-dev`
-  - der erste In-Repo-Block `BL-0016` ist als Community-Standards-Baseline
-    umgesetzt
-  - `BL-0011` bleibt fuer dieses Repository ein externes
-    Research-/Handover-Thema:
+- Die aktive Roadmap liegt jetzt in `docs/ROADMAP_1_4_0.md`.
+- Der historische Vorstart-Gate bleibt in `docs/DEV_START_GATE_1_4_0.md`
+  nachvollziehbar; der eigentliche Dev-Start wurde bereits in Sprint 30 per
+  separatem Aktivierungs-Commit vollzogen.
+- Der formale Release-Readiness-Rahmen fuer die aktive Linie liegt in
+  `docs/RELEASE_1_4_0_PREFLIGHT.md` und ist operativ ueber
+  `make release-preflight-1-4-0` erreichbar.
+- Die `1.4.0`-Linie ist jetzt formal eingefroren:
+  - bereits gelieferte `1.4.x`-Arbeit bleibt der stabile Release-Kandidat
+  - `BL-0011` bleibt fuer dieses Repository externalisiert:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
-  - das Public-Repository hat jetzt eine dokumentierte Mindestbaseline fuer
-    Verhaltensregeln, Sicherheitsmeldungen, Issue-Intake und PR-Struktur
-  - `BL-0031` ist als kleiner Core-UX-Block fuer Fuelups abgeschlossen:
-    `ADR-0014` fixiert den Gesamt-Odometer als kanonische Semantik,
-    `TSK-0026` zieht Prompt, Help und Benutzerdoku explizit auf den
-    aktuellen Gesamt-Kilometerstand des Fahrzeugs; `TSK-0027` liefert
-    jetzt sichtbaren Car-Kontext im Add-Flow, fruehe `--receipt-link`-
-    Guidance, lokale Receipt-Pfadnormalisierung auf `file://` sowie
-    Missing-File-Warnungen mit Confirm; `TSK-0028` schliesst den Block
-    jetzt ab, indem normale kurze Distanzen ohne irrefuehrenden
-    `P-050`-Prompt gespeichert werden und ein manueller Reset nur noch
-    ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar
-    bleibt; `P-012` fuer grosse Distanzluecken bleibt ausdruecklich
-    unberuehrt und `BL-0031` ist damit `done`
-  - ein spaeterer Hybrid-Folgeblock `BL-0032` bleibt optional:
-    benutzerverwaltete Receipt-Ordner bleiben erlaubt, ein app-verwalteter
-    XDG-Belegordner waere hoechstens ein spaeterer Komfortmodus
-  - der erste CLI-first-TUI-Slice ist jetzt geliefert:
-    `ADR-0015` haelt fest, dass klassische CLI- und non-interactive-Pfade
-    voll erhalten bleiben und eine TUI nur als optionale Komfortschicht
-    eingefuehrt wird; `BL-0033` liefert jetzt den Referenzscreen
-    `Betankungen --list fuelups --detail` mit kleiner `u_painter`-/
-    `u_view_fuelups`-Basis, waehrend `BL-0034` der spaetere Formular-/
-    Input-Block bleibt
-  - der Public-Readiness-Discovery-Block `BL-0035` ist jetzt abgeschlossen:
-    der externe GitHub-Entry-Audit bestaetigt die starke Governance-Basis,
-    zeigt aber sichtbare Reibung im README-/Quick-Start-Einstieg; daraus
-    sind `ISS-0011` (README-/Entry-Flow), `ISS-0012` (Release-Signal vs.
-    GitHub-Releases) und `BL-0036` als spaeterer Contributor-/English-Entry-
-    Layer-Folgeblock hervorgegangen; ein neuer `ADR` war dafuer nicht noetig
-  - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
-    `docs/ROADMAP_1_2_0.md`, `docs/ROADMAP_1_1_0.md`,
-    `docs/ROADMAP_1_0_0.md`.
+  - `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der
+    1.4.0-Release-Linie
+  - dieser Block fuehrt keine neuen Runtime-Features ein
+- Die lokale Governance ist dafuer nachgeschaerft:
+  Smoke-Fixtures schalten keine Commit-Signaturen mehr ab, und
+  Sicherheitsfeatures bleiben auch in Test-/Fixture-Pfaden verbindlich.
+- Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
+  `docs/ROADMAP_1_3_0.md`, `docs/ROADMAP_1_2_0.md`,
+  `docs/ROADMAP_1_1_0.md`, `docs/ROADMAP_1_0_0.md`.
 
 Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 
@@ -141,10 +98,12 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
-- `docs/ROADMAP_1_3_0.md`: verbindlicher Gate-Plan der abgeschlossenen
-  1.3.0-Linie.
-- `docs/DEV_START_GATE_1_4_0.md`: formaler Go-/No-Go-Stand vor dem separaten
-  Start von `1.4.0-dev`.
+- `docs/ROADMAP_1_4_0.md`: aktiver Gate-/Freeze-/Readiness-Rahmen fuer die
+  `1.4.0`-Linie.
+- `docs/RELEASE_1_4_0_PREFLIGHT.md`: aktiver lokaler Readiness-Rahmen fuer
+  `1.4.0` (Verify + Governance + Dry-Runs).
+- `docs/DEV_START_GATE_1_4_0.md`: historischer Go-/No-Go-Stand vor dem
+  separaten Start von `1.4.0-dev`.
 - `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,
   Fallback-Strategie und Betriebsgrenzen fuer den 1.3.0-Provider-Fit.
 - `docs/FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`: verbindlicher
@@ -523,7 +482,7 @@ Repo-lokales Workflow-Wrapper-CLI gemaess `ADR-0010`.
   bei Auth-/Remote-/Upstream-Problemen liefert `btkgit` gezielte Hinweise,
   aendert Credentials oder Remotes aber nicht automatisch
 - `btkgit preflight <version>`: delegiert auf den passenden versionsspezifischen
-  Preflight (z. B. `1.3.0` -> `scripts/release_preflight_1_3_0.sh`)
+  Preflight (z. B. `1.4.0` -> `scripts/release_preflight_1_4_0.sh`)
 - `btkgit ready`: menschenlesbarer lokaler Readiness-Wrapper (`git status`,
   optional `make verify`)
 - `btkgit cleanup`: Post-Merge-Flow (`checkout main`, bewusster Sync); lokales
@@ -538,7 +497,7 @@ Repo-lokales Workflow-Wrapper-CLI gemaess `ADR-0010`.
 
 Beispiele:
 - `./btkgit sync`
-- `./btkgit preflight 1.3.0 -- --skip-verify`
+- `./btkgit preflight 1.4.0 -- --skip-verify`
 - `./btkgit ready`
 - `./btkgit cleanup`
 - `./btkgit cleanup --delete-local`
@@ -661,6 +620,8 @@ Beispiel:
   - Fuehrt den 1.1.0-Readiness-Preflight aus (`scripts/release_preflight_1_1_0.sh`)
 - `make release-preflight-1-3-0`
   - Fuehrt den 1.3.0-Readiness-Preflight aus (`scripts/release_preflight_1_3_0.sh`)
+- `make release-preflight-1-4-0`
+  - Fuehrt den 1.4.0-Readiness-Preflight aus (`scripts/release_preflight_1_4_0.sh`)
 - `make release-dry`
   - Fuehrt `kpr.sh --dry-run` aus
 - optional:

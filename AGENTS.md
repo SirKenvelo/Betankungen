@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-04-08
+**Stand:** 2026-04-14
 
 <INSTRUCTIONS>
 
@@ -36,6 +36,9 @@
 - Commit + Push werden von Codex auf Wunsch vollstaendig uebernommen (inkl. Branch-Flow), sodass nach fachlicher Freigabe kein separater manueller Push durch den User noetig ist.
 - Bei Auth-/Transportproblemen (SSH/Passphrase) darf Codex fuer nicht-interaktive Laeufe den HTTPS-Weg mit vorhandener `gh`-Authentifizierung nutzen, sofern kein Sicherheitsrisiko entsteht.
 - Potenziell destruktive Git-Aktionen (z. B. `reset --hard`, History-Rewrite auf geteilten Branches, erzwungene Pushes) erfolgen nur nach expliziter User-Freigabe.
+- Sicherheitsfeatures duerfen niemals umgangen oder temporar deaktiviert werden, auch nicht zur Problemlosung oder als vermeintlicher Workaround.
+- Das gilt insbesondere fuer Commit-/Tag-Signaturen (z. B. GPG-Signing, SSH-Signing), Branch-Protection, Review-/Policy-Gates und vergleichbare Schutzmechanismen.
+- Wenn ein Task an einem aktiven Sicherheitsfeature scheitert, muss Codex stoppen, den Blocker klar benennen und den User nach dem naechsten sicheren Schritt fragen; ein Umgehen per Flag, Config-Override oder alternativer Befehl ist unzulaessig.
 
 ### Public-Repo-Governance (verbindlich)
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
@@ -57,6 +60,7 @@
 - Keine Secrets/API-Keys/Token in Repository-Dateien, Commit-Messages, PR-Texten oder Wiki-Inhalten.
 - Keine produktiven personenbezogenen oder sensiblen Nutzdaten als Testfixtures committen; nur Demo-/synthetische Daten.
 - Bei Fehlermeldungen/Logs in oeffentlichen Doku-/PR-Texten keine unnoetigen lokalen Systemdetails offenlegen (nur technisch relevante Ausschnitte).
+- Sicherheitsrelevante Schutzmechanismen im Tooling oder Repo duerfen nicht fuer den Arbeitsfortschritt abgeschaltet, umkonfiguriert oder umgangen werden; bei Blockern ist anzuhalten und Rueckfrage zu halten.
 
 ### Repo-Pflege-Rhythmus
 - Session-Start: einmalige Arbeitskopien-Pruefung mit `git remote -v`, `git fetch --prune origin`, `git status --short --branch` und `git log -1 --oneline`; `git pull --ff-only` nur als bewusste Folgeaktion, wenn der konkrete Task einen Fast-Forward-Sync verlangt.

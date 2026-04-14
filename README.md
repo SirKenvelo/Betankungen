@@ -64,6 +64,10 @@ need to add a station before the first fuel-up flow.
   a release explicitly ships them
 - Technical runtime state: `APP_VERSION=1.4.0-dev`
 - Active repository line: `1.4.0-dev`
+- Formal `1.4.0` scope freeze is active; exploratory follow-up blocks
+  `BL-0032` and `BL-0034` remain outside the release line
+- Release-readiness framework for the active line:
+  `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`
 - Roadmap, gate history, and planning detail:
   `docs/STATUS.md`, `docs/CHANGELOG.md`, `docs/SPRINTS.md`
 
@@ -79,6 +83,8 @@ need to add a station before the first fuel-up flow.
 - [Security reporting policy](SECURITY.md)
 - [Versioned wiki source pages](docs/wiki/README.md)
 - [Project status and roadmap](docs/STATUS.md)
+- [1.4.0 roadmap and gates](docs/ROADMAP_1_4_0.md)
+- [1.4.0 release preflight](docs/RELEASE_1_4_0_PREFLIGHT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Backlog index](docs/BACKLOG.md)
 - [ADR index](docs/ADR/README.md)

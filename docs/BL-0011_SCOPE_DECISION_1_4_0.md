@@ -1,6 +1,6 @@
 # BL-0011 Scope Decision fuer 1.4.0
-**Stand:** 2026-03-30
-**Status:** closed for Betankungen
+**Stand:** 2026-04-14
+**Status:** closed for Betankungen; Scope-Freeze fuer 1.4.0 bestaetigt
 
 ## Entscheidung
 
@@ -11,6 +11,9 @@ Repositories fuer die geplante `1.4.0`-Linie.
 Repo-seitige Referenzpflege. Die eigentliche Umsetzung bleibt ein separates
 Repository-Thema. Dieser repo-seitige Closeout ist fuer `Betankungen`
 abgeschlossen.
+
+Der aktive `1.4.0`-Freeze-/Readiness-Rahmen fuehrt diese Abgrenzung jetzt
+explizit fort: `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`.
 
 ## Begruendung
 
@@ -59,6 +62,8 @@ abgeschlossen.
   gesetzt.
 - `docs/BACKLOG.md` und `docs/STATUS.md` behandeln das Thema nicht mehr als
   offenen In-Repo-Block der `1.4.0`-Linie.
+- Auch der formale Scope-Freeze fuer `1.4.0` fuehrt `BL-0011` nicht mehr als
+  aktiven Release-Baustein.
 - Weitere Umsetzung, Release- oder Packaging-Arbeit fuer einen Projekt-
   Scaffolder findet nur ausserhalb dieses Repositories statt.
 

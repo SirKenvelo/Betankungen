@@ -4,7 +4,8 @@ set -euo pipefail
 # smoke_cli.sh
 # UPDATED: 2026-04-14
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
-# Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
+# Erweitert um First-Run-/Bootstrap-Faelle, robuste CLI-Guardrails und
+# signaturkonforme btkgit-Fixtures fuer den 1.4.0-Readiness-Rahmen.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 FAILS=0
@@ -150,6 +151,7 @@ print_plan() {
   printf '[LIST] btkgit --help\n'
   printf '[LIST] btkgit ready --skip-verify\n'
   printf '[LIST] btkgit preflight default -- --help\n'
+  printf '[LIST] btkgit preflight 1.4.0 -- --help\n'
   printf '[LIST] btkgit sync ohne origin -> klarer Fehlerpfad\n'
   printf '[LIST] btkgit sync ohne Upstream -> Branch-Hinweis\n'
   printf '[LIST] btkgit cleanup behaelt Branch standardmaessig\n'
@@ -499,28 +501,21 @@ register_tmp_dir() {
 }
 
 setup_btkgit_fixture_repo() {
-  local sandbox remote repo
+  local sandbox remote repo head_sha
 
   sandbox="$(register_tmp_dir)"
   remote="$sandbox/remote.git"
   repo="$sandbox/repo"
 
-  git init --bare "$remote" >/dev/null 2>&1 || return 1
+  # Fixture nutzt ein lokales Bare-Remote mit echter main-Ref, damit fetch/
+  # pull/pull --ff-only in btkgit auch unter CI-Checkouts stabil bleiben.
+  git clone --bare "$ROOT_DIR" "$remote" >/dev/null 2>&1 || return 1
+  head_sha="$(git -C "$ROOT_DIR" rev-parse HEAD)" || return 1
+  git --git-dir="$remote" update-ref refs/heads/main "$head_sha" || return 1
+  git --git-dir="$remote" symbolic-ref HEAD refs/heads/main || return 1
+
   git clone "$remote" "$repo" >/dev/null 2>&1 || return 1
-  mkdir -p "$repo/scripts" || return 1
-  cp "$ROOT_DIR/btkgit" "$repo/btkgit" || return 1
-  cp "$ROOT_DIR/scripts/btkgit.sh" "$repo/scripts/btkgit.sh" || return 1
-  chmod +x "$repo/btkgit" "$repo/scripts/btkgit.sh" || return 1
-
-  git -C "$repo" config user.name 'Smoke Bot' || return 1
-  git -C "$repo" config user.email 'smoke@example.invalid' || return 1
-  git -C "$repo" config commit.gpgsign false || return 1
-
-  printf 'fixture\n' >"$repo/README.md" || return 1
-  git -C "$repo" add README.md btkgit scripts/btkgit.sh || return 1
-  git -C "$repo" commit -m 'fixture init' >/dev/null 2>&1 || return 1
-  git -C "$repo" branch -M main >/dev/null 2>&1 || return 1
-  git -C "$repo" push -u origin main >/dev/null 2>&1 || return 1
+  git -C "$repo" checkout -B main origin/main >/dev/null 2>&1 || return 1
 
   printf '%s\n' "$repo"
 }
@@ -574,6 +569,28 @@ test_btkgit_preflight_default_help_ok() {
     printf '[OK] btkgit preflight default -- --help\n'
   else
     printf '[FAIL] btkgit preflight default -- --help\n'
+    add_fail
+  fi
+}
+
+test_btkgit_preflight_1_4_0_help_ok() {
+  local tmp out err rc
+
+  tmp="$(register_tmp_dir)"
+  out="$tmp/out.txt"
+  err="$tmp/err.txt"
+
+  set +e
+  "$ROOT_DIR/btkgit" preflight 1.4.0 -- --help >"$out" 2>"$err"
+  rc=$?
+  set -e
+
+  if [[ $rc -eq 0 ]] &&
+     grep -q 'release_preflight_1_4_0.sh - 1.4.0 Readiness-Preflight ausfuehren' "$out" &&
+     grep -q -- '--skip-doc-gates' "$out"; then
+    printf '[OK] btkgit preflight 1.4.0 -- --help\n'
+  else
+    printf '[FAIL] btkgit preflight 1.4.0 -- --help\n'
     add_fail
   fi
 }
@@ -1386,6 +1403,7 @@ run_check "backup_snapshot dry-run" "$ROOT_DIR/scripts/backup_snapshot.sh" --dry
 run_check "btkgit --help" "$ROOT_DIR/btkgit" --help
 test_btkgit_ready_skip_verify_ok
 test_btkgit_preflight_default_help_ok
+test_btkgit_preflight_1_4_0_help_ok
 test_btkgit_sync_missing_origin_fails_cleanly
 test_btkgit_sync_without_upstream_fails_cleanly
 test_btkgit_cleanup_keeps_branch_by_default

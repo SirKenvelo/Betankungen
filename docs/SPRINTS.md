@@ -3,6 +3,40 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - 1.4.0 Release-Readiness und Scope-Freeze festziehen
+
+- Status: done
+- Ziel: fuer die aktive `1.4.0-dev`-Linie einen belastbaren
+  Release-Readiness- und Scope-Freeze-Rahmen schaffen, ohne neue
+  Produktfeatures in die Linie zu ziehen.
+
+### Stand (2026-04-14)
+
+- `docs/ROADMAP_1_4_0.md` und `docs/RELEASE_1_4_0_PREFLIGHT.md` liefern jetzt
+  den formalen Gate-/Freeze-/Preflight-Rahmen fuer die aktive Linie.
+- `docs/STATUS.md`, `docs/CHANGELOG.md`, `docs/README.md`,
+  `docs/README_EN.md`, `README.md`, `docs/DEV_START_GATE_1_4_0.md` und
+  `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Stand: aktive
+  Linie `1.4.0-dev`, Scope-Freeze aktiv, finale Release-Freigabe noch offen.
+- `tests/smoke/smoke_cli.sh` erzeugt `btkgit`-Fixtures jetzt aus einem
+  Clone des bestehenden Repos und schaltet keine Commit-Signaturen mehr via
+  `commit.gpgsign false` ab.
+- Fuer stabile `btkgit`-Smoke-Checks unter GitHub Actions nutzt derselbe
+  Fixture-Pfad jetzt ein lokales Bare-Remote mit echter `main`-Ref, statt auf
+  implizite Checkout-Refs oder kuenstliche Tracking-Referenzen zu vertrauen.
+- `Makefile`, `scripts/release_preflight_1_4_0.sh` und `btkgit preflight 1.4.0`
+  bilden den operativen lokalen Readiness-Pfad.
+- `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-
+  Linie.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-
+  Features ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `make verify`
+- `make release-preflight-1-4-0`
+
 ## General-Stream nach Sprint 40 - Englische Entry-Signale fuer Erstbesucher staerken
 
 - Status: done
