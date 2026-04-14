@@ -17,9 +17,11 @@ nachzuschieben.
   `docs/DEV_START_GATE_1_4_0.md` und
   `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Freeze-/Readiness-
   Stand. `tests/smoke/smoke_cli.sh` nutzt fuer `btkgit`-Fixtures keinen
-  Commit-Signatur-Bypass mehr; `BL-0032` und `BL-0034` bleiben bewusst
-  ausserhalb der `1.4.0`-Release-Linie. Es wurden keine neuen Runtime- oder
-  Produktfeatures eingefuehrt. (2026-04-14)
+  Commit-Signatur-Bypass mehr und faellt fuer CI-Checkouts ohne `origin/main`
+  robust auf eine eigene `origin/fixture-base`-Tracking-Referenz zurueck;
+  `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-
+  Linie. Es wurden keine neuen Runtime- oder Produktfeatures eingefuehrt.
+  (2026-04-14)
 
 ### Sprint / Commit References
 - S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)

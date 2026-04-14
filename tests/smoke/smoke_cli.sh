@@ -501,7 +501,7 @@ register_tmp_dir() {
 }
 
 setup_btkgit_fixture_repo() {
-  local sandbox repo
+  local sandbox repo base_ref
 
   sandbox="$(register_tmp_dir)"
   repo="$sandbox/repo"
@@ -509,7 +509,18 @@ setup_btkgit_fixture_repo() {
   # Fixture basiert auf einem Clone des bestehenden Repos und schaltet keine
   # lokalen Sicherheitsfeatures wie Commit-Signing ab.
   git clone --no-checkout "$ROOT_DIR" "$repo" >/dev/null 2>&1 || return 1
-  git -C "$repo" checkout -B main origin/main >/dev/null 2>&1 || return 1
+
+  if git -C "$repo" show-ref --verify --quiet refs/remotes/origin/main; then
+    base_ref="origin/main"
+  else
+    # GitHub Actions kann in PR-Jobs ohne lokales origin/main auschecken.
+    git -C "$repo" fetch origin \
+      HEAD:refs/remotes/origin/fixture-base >/dev/null 2>&1 || return 1
+    base_ref="origin/fixture-base"
+  fi
+
+  git -C "$repo" checkout -B main "$base_ref" >/dev/null 2>&1 || return 1
+  git -C "$repo" branch --set-upstream-to="$base_ref" main >/dev/null 2>&1 || return 1
 
   printf '%s\n' "$repo"
 }
