@@ -1,7 +1,10 @@
 # Contributing
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 Thank you for your interest in Betankungen.
+
+This guide picks up after the public entry layer (`README.md`,
+`docs/README_EN.md`, and the wiki) has already given enough orientation.
 
 ## Quickstart for a Small First Contribution
 
@@ -78,8 +81,10 @@ make verify
 ## Wiki Maintenance
 
 - Published GitHub Wiki: curated public entry layer for external readers.
-- Repository docs under `docs/` remain the technical source of truth.
-- `docs/wiki/` contains the versioned source pages for the published wiki.
+- Repository docs under `docs/` remain the technical source of truth and the
+  canonical handoff for deeper context.
+- `docs/wiki/` contains the versioned source pages for the published wiki and
+  should stay link-oriented instead of restating deep documentation.
 - Personal/contextual pages may exist, but they stay secondary to the core
   technical entry path.
 - Run `make wiki-link-check` when wiki/source links are touched.

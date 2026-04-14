@@ -1,11 +1,11 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 Betankungen is a CLI-first fuel tracking and full-tank cycle statistics tool
 for local SQLite data.
-Use this page and the public wiki as the English entry layer; detailed
-repository docs under `docs/` remain German-first and are the technical
-source of truth.
+Use this page as the English repository entry; the public wiki is the lighter
+browsing layer. Detailed repository docs under `docs/` remain German-first
+and are the technical source of truth.
 
 ## Start Here
 
@@ -14,9 +14,9 @@ Recommended first path for new visitors:
 1. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
 2. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 3. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-4. [Main project documentation (German)](README.md)
-5. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+4. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
 
+If you need the repository-level overview, continue with `README.md`.
 The wiki is the lighter public entry layer.
 Repository docs under `docs/` remain the technical source of truth.
 Stable release handoff lives on GitHub Releases; when a release does not ship
@@ -59,9 +59,9 @@ need to add a station before the first fuel-up flow.
 
 ## Recommended Reading Order
 
-1. [English architecture summary](ARCHITECTURE_EN.md)
-2. [Main project documentation (German)](README.md)
-3. [Project status and roadmap](STATUS.md)
+1. [Main project documentation (German)](README.md)
+2. [Project status and roadmap](STATUS.md)
+3. [English architecture summary](ARCHITECTURE_EN.md)
 4. [Architecture decisions index](ADR/README.md)
 5. [Backlog index](BACKLOG.md)
 6. [Versioned wiki source pages](wiki/README.md)

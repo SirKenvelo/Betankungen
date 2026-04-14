@@ -1,11 +1,11 @@
 # Betankungen
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal/Lazarus.
-English entry path for first-time visitors: `docs/README_EN.md` and the
-public GitHub Wiki. Detailed repository docs under `docs/` stay German-first
-and remain the technical source of truth.
+English entry path for first-time visitors: `docs/README_EN.md`. The public
+GitHub Wiki is the lighter browsing layer. Detailed repository docs under
+`docs/` stay German-first and remain the technical source of truth.
 
 ## What Betankungen Does
 
@@ -23,10 +23,10 @@ If you are new to the repository, use this path first:
 3. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 4. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
 5. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
-6. [Main project documentation (German)](docs/README.md)
 
-The English docs entry and the GitHub Wiki are the recommended public entry
-layer.
+The English docs entry is the primary repo entry; the GitHub Wiki is the
+lighter public layer. Use the main project documentation in `docs/README.md`
+when you need the deeper repository overview.
 Repository docs under `docs/` remain the technical source of truth.
 Stable release handoff lives on GitHub Releases; if a release does not ship
 binary assets, the release notes point to the expected source-build path.

@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -98,6 +98,16 @@ schliessen.
 - S25C2/2 - Legacy-Task-Navigation explizit dokumentiert: Issue-Hinweise fuer neue Folge-Tasks im kanonischen Backlog-Pfad plus Legacy-Notiz im `docs/tasks/`-Ordner; Artefakte: `.artifacts/sprint_25_commit_2_von_2.md`, `.artifacts/sprint_25_commit_2_von_2.diff`; Basis-Commit: `25df1d6`. (2026-03-29)
 
 ### Changed
+- [General] Docs/Entry: `README.md`, `docs/README_EN.md`, `docs/wiki/Home.md`,
+  `docs/wiki/README.md` und `CONTRIBUTING.md` ordnen den Handoff zwischen
+  Public Entry und Beitragspfad ruhiger. Die README fokussiert jetzt klarer
+  auf den englischen Einstieg, die Wiki-Seiten bleiben die kuratierte
+  Navigationsschicht, und `CONTRIBUTING.md` setzt erst nach der Entry-
+  Orientierung an. `TSK-0034` ist damit `done`; `tests/smoke/smoke_cli.sh`
+  schaltet fuer die btkgit-Fixture-Repo-Erzeugung lokales commit.gpgsign aus,
+  damit `make verify` auch in Umgebungen mit global aktivem Git-Signing
+  reproduzierbar bleibt. Es wurden keine Runtime- oder CLI-Aenderungen
+  eingefuehrt. (2026-04-14)
 - [General] Docs/Entry: `README.md`, `docs/README_EN.md` und die
   Wiki-Startseiten benennen jetzt die englische Einstiegsschicht klarer und
   ruhiger. Die erste Anlaufstelle fuer internationale Erstbesucher fuehrt
