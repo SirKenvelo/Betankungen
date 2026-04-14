@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 **Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Sprint-29-Startgate per separatem Aktivierungs-Commit eingeloest)
 
 ## Fundament & Architektur (erledigt)
@@ -385,15 +385,15 @@ Bereits erledigt:
     sind inzwischen ueber synchronisierte Entry-Layer- und GitHub-Release-
     Handoffs auf `resolved` gezogen; ein neuer `ADR` ist dafuer aktuell nicht
     erforderlich.
-  - `BL-0036` ist jetzt `in_progress`: `TSK-0032` ist abgeschlossen und
-    liefert in `CONTRIBUTING.md` einen kompakten Contributor-Quickstart mit
-    erstem Build-/Verify-/PR-Pfad fuer gelegentliche Mitwirkende.
+  - `BL-0036` ist jetzt `done`: `TSK-0032` ist abgeschlossen und liefert in
+    `CONTRIBUTING.md` einen kompakten Contributor-Quickstart mit erstem
+    Build-/Verify-/PR-Pfad fuer gelegentliche Mitwirkende.
   - `TSK-0033` ist abgeschlossen und hat die englischen Entry-Signale fuer
-    internationale Erstbesucher sichtbar nachgeschaerft; der verbleibende
-    Folgeblock ist damit nur noch `TSK-0034` fuer den ruhigeren Handoff
-    zwischen README, Wiki und `CONTRIBUTING.md`.
-  - Der Abschluss von `TSK-0032` fuehrt weiterhin keine Runtime-, CLI-,
-    Build- oder groessere Entry-Layer-Aenderung ein.
+    internationale Erstbesucher sichtbar nachgeschaerft; `TSK-0034` ist
+    ebenfalls abgeschlossen und beruhigt den Handoff zwischen README, Wiki
+    und `CONTRIBUTING.md`.
+  - Die drei Slices fuehren weiterhin keine Runtime-, CLI-, Build- oder
+    groessere Entry-Layer-Aenderung ein.
   - Die Core-Grenze bleibt fuer `1.4.x` stabil: kein generisches
     `energy_events` im Core, keine stillschweigende Wiederverwendung von
     `stations` als kanonischer Ladeort-Speicher und keine EV-spezifischen

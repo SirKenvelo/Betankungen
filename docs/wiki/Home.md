@@ -1,8 +1,8 @@
 # Betankungen Wiki
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 This wiki is a curated public entry layer for Betankungen.
-For the English repository entry, start with `docs/README_EN.md`.
+For repository-level English context, continue with `docs/README_EN.md`.
 The repository documentation under `docs/` remains the German technical
 source of truth.
 
@@ -20,8 +20,8 @@ source of truth.
 
 ## Repository Source Of Truth
 
-- [Project status and roadmap](https://github.com/SirKenvelo/Betankungen/blob/main/docs/STATUS.md)
 - [Main documentation (German)](https://github.com/SirKenvelo/Betankungen/blob/main/docs/README.md)
+- [Project status and roadmap](https://github.com/SirKenvelo/Betankungen/blob/main/docs/STATUS.md)
 - [Changelog](https://github.com/SirKenvelo/Betankungen/blob/main/docs/CHANGELOG.md)
 - [Contributing policy](https://github.com/SirKenvelo/Betankungen/blob/main/CONTRIBUTING.md)
 

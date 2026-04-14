@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-04-08
+# UPDATED: 2026-04-14
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle und robuste CLI-Guardrails (0.5.4).
 
@@ -514,6 +514,7 @@ setup_btkgit_fixture_repo() {
 
   git -C "$repo" config user.name 'Smoke Bot' || return 1
   git -C "$repo" config user.email 'smoke@example.invalid' || return 1
+  git -C "$repo" config commit.gpgsign false || return 1
 
   printf 'fixture\n' >"$repo/README.md" || return 1
   git -C "$repo" add README.md btkgit scripts/btkgit.sh || return 1

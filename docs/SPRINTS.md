@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -11,17 +11,41 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   zu uebersetzen oder den spaeteren README-/Wiki-/`CONTRIBUTING.md`-
   Handoff vorwegzunehmen.
 
-### Stand (2026-04-12)
+### Stand (2026-04-14)
 
 - `docs/README_EN.md`, `README.md` und die Wiki-Startseiten benennen jetzt
   den englischen Einstieg sichtbarer und ordnen die deutsche Tiefendoku als
   bewusst German-first ein.
-- `TSK-0033` ist damit `done`; `BL-0036` bleibt als Ueberblock weiter
-  `in_progress`, waehrend nur `TSK-0034` fuer den ruhigeren Handoff offen
-  bleibt.
+- `TSK-0033` ist damit `done`; `TSK-0034` hat den ruhigeren Handoff
+  zwischen README, Wiki und `CONTRIBUTING.md` inzwischen ebenfalls
+  abgeschlossen.
+- `BL-0036` ist damit `done`.
 - Der zugehoerige Inhalts-Commit ist `8e64391`.
 - Dieser Block fuehrt bewusst keine Volluebersetzung und keinen groesseren
   Handoff-Umbau ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
+## General-Stream nach Sprint 40 - README/Wiki/Contributing-Handoff beruhigen
+
+- Status: done
+- Ziel: den letzten offenen Handoff-Pfad zwischen README, GitHub Wiki und
+  `CONTRIBUTING.md` glatten, ohne neue Einstiegsebene, neue Quickstart-
+  Substanz oder neue englische Signalpflege einzufuehren.
+
+### Stand (2026-04-14)
+
+- `README.md`, `docs/README_EN.md`, `docs/wiki/Home.md`,
+  `docs/wiki/README.md` und `CONTRIBUTING.md` trennen die Rollen der
+  Einstiegspfade jetzt klarer: der README- und English-Entry-Pfad fuehrt in
+  die Public-Entry-Schicht, die Wiki-Seiten bleiben kuratiert und
+  link-orientiert, und `CONTRIBUTING.md` setzt erst am Beitragspunkt an.
+- `TSK-0034` ist damit `done`; `BL-0036` ist ebenfalls `done`.
+- Es wurden keine Runtime-, CLI- oder Build-Aenderungen eingefuehrt.
 
 ### Validierung
 

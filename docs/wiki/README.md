@@ -1,5 +1,5 @@
 # Wiki Source
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 This folder contains the versioned source pages for the published
 public-readiness wiki entry.
@@ -9,7 +9,8 @@ public-readiness wiki entry.
 - GitHub Wiki: calm external entry layer for navigation and orientation.
 - `Home.md`: visible entry page that points English-first visitors to
   `docs/README_EN.md` and keeps the German deep docs clearly separated.
-- Repository docs (`docs/`): technical source of truth.
+- Repository docs (`docs/`): technical source of truth and deeper repository
+  context.
 - `docs/wiki/`: editorial source for the published wiki pages, not a second
   deep-documentation tree.
 
@@ -26,7 +27,8 @@ public-readiness wiki entry.
 ## Editorial Guardrails
 
 - Keep wiki pages short, readable, and link-oriented.
-- Let `docs/` carry contracts, release details, tracker state, and long-form
+- Let `docs/README_EN.md` and `docs/README.md` carry repository context while
+  `docs/` carries contracts, release details, tracker state, and long-form
   history.
 - Keep personal/contextual pages such as `Cookie-Note.md` secondary to the
   technical start path.

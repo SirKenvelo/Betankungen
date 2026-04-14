@@ -1,12 +1,12 @@
 ---
 id: BL-0036
 title: Contributor Onboarding and English Entry-Layer Hardening
-status: in_progress
+status: done
 priority: P2
 type: improvement
 tags: [contributors, onboarding, english, public-readiness, docs, 'lane:planned']
 created: 2026-04-11
-updated: 2026-04-12
+updated: 2026-04-14
 related:
   - BL-0016
   - BL-0027
@@ -15,7 +15,7 @@ related:
   - TSK-0033
   - TSK-0034
 ---
-**Stand:** 2026-04-12
+**Stand:** 2026-04-14
 
 # Goal
 Den oeffentlichen Einstieg fuer potenzielle Mitwirkende und englischsprachige
@@ -77,8 +77,8 @@ Der erste Umsetzungsblock ist jetzt angelaufen:
 kompakten Contributor-Quickstart mit minimalem Build-/Verify-/PR-Pfad.
 `TSK-0033` ist abgeschlossen und schaerft die englischen Entry-Signale fuer
 internationale Erstbesucher, ohne die deutsche Tiefendoku zu uebernehmen.
-Die verbleibende Folgearbeit konzentriert sich jetzt nur noch auf den
-ruhigeren README-/Wiki-/`CONTRIBUTING.md`-Handoff (`TSK-0034`).
+`TSK-0034` ist abgeschlossen und beruhigt den README-/Wiki-/
+`CONTRIBUTING.md`-Handoff ohne neue Einstiegsebene oder neue Substanz.
 
 # Task Slices
 - `TSK-0032` - kompakten Contributor-Quickstart und erste PR-Checkliste fuer
