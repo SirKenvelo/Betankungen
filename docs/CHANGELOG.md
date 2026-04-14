@@ -17,8 +17,9 @@ nachzuschieben.
   `docs/DEV_START_GATE_1_4_0.md` und
   `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Freeze-/Readiness-
   Stand. `tests/smoke/smoke_cli.sh` nutzt fuer `btkgit`-Fixtures keinen
-  Commit-Signatur-Bypass mehr und faellt fuer CI-Checkouts ohne `origin/main`
-  robust auf eine eigene `origin/fixture-base`-Tracking-Referenz zurueck;
+  Commit-Signatur-Bypass mehr und nutzt dafuer ein lokales Bare-Remote mit
+  echter `main`-Ref, damit auch `btkgit cleanup` unter CI stabil gegen einen
+  echten Upstream prueft;
   `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-
   Linie. Es wurden keine neuen Runtime- oder Produktfeatures eingefuehrt.
   (2026-04-14)

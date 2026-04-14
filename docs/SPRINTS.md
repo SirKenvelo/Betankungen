@@ -21,10 +21,9 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 - `tests/smoke/smoke_cli.sh` erzeugt `btkgit`-Fixtures jetzt aus einem
   Clone des bestehenden Repos und schaltet keine Commit-Signaturen mehr via
   `commit.gpgsign false` ab.
-- Fuer CI-Checkouts ohne lokales `origin/main` faellt derselbe Fixture-Pfad
-  jetzt robust auf eine eigene `origin/fixture-base`-Tracking-Referenz
-  zurueck, damit die `btkgit`-Smoke-Checks auch in GitHub Actions stabil
-  bleiben.
+- Fuer stabile `btkgit`-Smoke-Checks unter GitHub Actions nutzt derselbe
+  Fixture-Pfad jetzt ein lokales Bare-Remote mit echter `main`-Ref, statt auf
+  implizite Checkout-Refs oder kuenstliche Tracking-Referenzen zu vertrauen.
 - `Makefile`, `scripts/release_preflight_1_4_0.sh` und `btkgit preflight 1.4.0`
   bilden den operativen lokalen Readiness-Pfad.
 - `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-

@@ -501,26 +501,21 @@ register_tmp_dir() {
 }
 
 setup_btkgit_fixture_repo() {
-  local sandbox repo base_ref
+  local sandbox remote repo head_sha
 
   sandbox="$(register_tmp_dir)"
+  remote="$sandbox/remote.git"
   repo="$sandbox/repo"
 
-  # Fixture basiert auf einem Clone des bestehenden Repos und schaltet keine
-  # lokalen Sicherheitsfeatures wie Commit-Signing ab.
-  git clone --no-checkout "$ROOT_DIR" "$repo" >/dev/null 2>&1 || return 1
+  # Fixture nutzt ein lokales Bare-Remote mit echter main-Ref, damit fetch/
+  # pull/pull --ff-only in btkgit auch unter CI-Checkouts stabil bleiben.
+  git clone --bare "$ROOT_DIR" "$remote" >/dev/null 2>&1 || return 1
+  head_sha="$(git -C "$ROOT_DIR" rev-parse HEAD)" || return 1
+  git --git-dir="$remote" update-ref refs/heads/main "$head_sha" || return 1
+  git --git-dir="$remote" symbolic-ref HEAD refs/heads/main || return 1
 
-  if git -C "$repo" show-ref --verify --quiet refs/remotes/origin/main; then
-    base_ref="origin/main"
-  else
-    # GitHub Actions kann in PR-Jobs ohne lokales origin/main auschecken.
-    git -C "$repo" fetch origin \
-      HEAD:refs/remotes/origin/fixture-base >/dev/null 2>&1 || return 1
-    base_ref="origin/fixture-base"
-  fi
-
-  git -C "$repo" checkout -B main "$base_ref" >/dev/null 2>&1 || return 1
-  git -C "$repo" branch --set-upstream-to="$base_ref" main >/dev/null 2>&1 || return 1
+  git clone "$remote" "$repo" >/dev/null 2>&1 || return 1
+  git -C "$repo" checkout -B main origin/main >/dev/null 2>&1 || return 1
 
   printf '%s\n' "$repo"
 }
