@@ -80,8 +80,11 @@ Das Hauptprogramm steuert – die Units arbeiten.
     1.4.0-Release-Linie
   - dieser Block fuehrt keine neuen Runtime-Features ein
 - Die lokale Governance ist dafuer nachgeschaerft:
-  Smoke-Fixtures schalten keine Commit-Signaturen mehr ab, und
-  Sicherheitsfeatures bleiben auch in Test-/Fixture-Pfaden verbindlich.
+  - `tests/smoke/smoke_cli.sh` prueft `btkgit` ueber ein lokales Bare-Remote
+    mit echter `main`-Ref und frischem Clone statt ueber lokale
+    Signing-Overrides.
+  - Sicherheitsfeatures bleiben auch in Test-/Fixture-Pfaden verbindlich; ein
+    Blocker wuerde dokumentiert statt umgangen.
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_3_0.md`, `docs/ROADMAP_1_2_0.md`,
   `docs/ROADMAP_1_1_0.md`, `docs/ROADMAP_1_0_0.md`.

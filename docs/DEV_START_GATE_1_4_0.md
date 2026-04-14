@@ -13,6 +13,8 @@ saubere, dokumentierte Freigabebasis davor.
 Der aktive Freeze-/Readiness-Rahmen fuer die laufende Linie wird nach dem
 eingeloesten Startgate jetzt separat in `docs/ROADMAP_1_4_0.md` und
 `docs/RELEASE_1_4_0_PREFLIGHT.md` weitergefuehrt.
+Dieser Folge-Rahmen fuehrt den Scope-Freeze bewusst ohne Rueckgriff auf
+Sicherheits-Bypaesse im Smoke-/Fixture-Pfad fort.
 
 ## Abgrenzung
 

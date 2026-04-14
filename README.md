@@ -68,6 +68,11 @@ need to add a station before the first fuel-up flow.
   `BL-0032` and `BL-0034` remain outside the release line
 - Release-readiness framework for the active line:
   `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`
+- `tests/smoke/smoke_cli.sh` exercises `btkgit` through a local bare remote
+  with a real `main` ref and a fresh clone instead of overriding Git signing
+  policy
+- Security features stay mandatory even in test and fixture paths; blockers
+  must be documented instead of bypassed
 - Roadmap, gate history, and planning detail:
   `docs/STATUS.md`, `docs/CHANGELOG.md`, `docs/SPRINTS.md`
 

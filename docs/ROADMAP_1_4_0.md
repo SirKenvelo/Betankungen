@@ -79,7 +79,8 @@ Status:
 - Explorative Folgearbeit (`BL-0032`, `BL-0034`) sichtbar ausserhalb der
   1.4.0-Release-Linie halten.
 - Governance-Widerspruch in der Test-/Fixture-Strategie aufloesen:
-  keine Commit-Signatur-Deaktivierung fuer Smoke-Fixtures.
+  Smoke-Fixtures pruefen `btkgit` ueber lokales Bare-Remote plus frischen
+  Clone statt ueber lokale Commit-Signatur-Deaktivierung.
 
 Exit-Kriterium:
 - Kein offener Scope-Drift in Richtung Explorations-/Folgearbeit und kein
@@ -92,6 +93,8 @@ Status:
 
 - Einen eigenen `1.4.0`-Roadmap-/Preflight-Pfad verankern.
 - Doku, Entry-Layer und Status auf denselben Freeze-/Readiness-Stand ziehen.
+- Die Security-Hygiene und verbleibenden Gate-4/5-Kriterien als explizite
+  Readiness-Evidenz sichtbar machen.
 - Lokalen Abschlusslauf fuer den Readiness-Rahmen dokumentieren.
 
 Exit-Kriterium:
@@ -137,6 +140,20 @@ Status:
 - Ein eigener lokaler Readiness-Preflight existiert:
   `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`.
 - Finale Release-Freigabe ist noch nicht Teil dieses Blocks.
+
+## Formale Evidenz fuer Gate 2 und Gate 3
+
+- `tests/smoke/smoke_cli.sh` prueft `btkgit` ueber einen Clone-only-
+  Fixture-Pfad mit lokalem Bare-Remote und echter `main`-Ref; ein lokaler
+  Signing-Bypass gehoert nicht mehr zur Strategie.
+- `scripts/release_preflight_1_4_0.sh` blockiert ein Rueckfallen auf
+  `commit.gpgsign false` und verlangt weiter `APP_VERSION=1.4.0-dev`.
+- `README.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`,
+  `docs/DEV_START_GATE_1_4_0.md` und
+  `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Freeze-/
+  Readiness-Stand.
+- Fuer Gate 4 und Gate 5 verbleiben nur RC-/Freigabethemen; neue
+  Produktarbeit gehoert nicht mehr in diese Linie.
 
 ## Verbindliche Abweichungsregel
 

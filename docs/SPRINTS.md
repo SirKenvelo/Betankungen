@@ -18,16 +18,16 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   `docs/README_EN.md`, `README.md`, `docs/DEV_START_GATE_1_4_0.md` und
   `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Stand: aktive
   Linie `1.4.0-dev`, Scope-Freeze aktiv, finale Release-Freigabe noch offen.
-- `tests/smoke/smoke_cli.sh` erzeugt `btkgit`-Fixtures jetzt aus einem
-  Clone des bestehenden Repos und schaltet keine Commit-Signaturen mehr via
-  `commit.gpgsign false` ab.
-- Fuer stabile `btkgit`-Smoke-Checks unter GitHub Actions nutzt derselbe
-  Fixture-Pfad jetzt ein lokales Bare-Remote mit echter `main`-Ref, statt auf
-  implizite Checkout-Refs oder kuenstliche Tracking-Referenzen zu vertrauen.
+- `tests/smoke/smoke_cli.sh` erzeugt `btkgit`-Fixtures jetzt ueber einen
+  Clone-only-Pfad mit lokalem Bare-Remote und echter `main`-Ref.
+- Der Fixture-Pfad braucht damit keinen lokalen Signing-Override und prueft
+  `sync`/`cleanup` gegen einen echten Upstream statt gegen kuenstliche
+  Tracking-Referenzen.
 - `Makefile`, `scripts/release_preflight_1_4_0.sh` und `btkgit preflight 1.4.0`
   bilden den operativen lokalen Readiness-Pfad.
 - `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der `1.4.0`-Release-
   Linie.
+- Fuer Gate 4 und Gate 5 verbleiben nur RC-/Freigabethemen.
 - Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-
   Features ein.
 
