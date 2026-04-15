@@ -1,7 +1,33 @@
 # SPRINTS
-**Stand:** 2026-04-14
+**Stand:** 2026-04-15
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - 1.4.0 Gate-4-RC-Snapshot finalisieren
+
+- Status: done
+- Ziel: den Release-Candidate-/Freeze-Snapshot fuer die `1.4.0`-Linie auf
+  dem dev-Stand formal abschliessen, ohne den finalen Gate-5-Umschaltblock
+  vorwegzunehmen.
+
+### Stand (2026-04-15)
+
+- `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`,
+  `docs/STATUS.md` und `docs/CHANGELOG.md` fuehren jetzt denselben
+  Gate-Stand: Gate 4 abgeschlossen, Gate 5 aktiv, `APP_VERSION=1.4.0-dev`.
+- Der RC-Kandidat bleibt fachlich eingefroren; `BL-0032` und `BL-0034`
+  bleiben weiterhin ausserhalb der `1.4.0`-Release-Linie.
+- Der lokale Abschlusslauf fuer Gate 4 ist dokumentiert und gruensicher.
+- Gate 5 bleibt bewusst getrennt: finaler Versionswechsel, Release-/
+  Backup-Ausfuehrung und der Post-Release-Hold auf `1.4.0`.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-
+  Features ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `make verify`
+- `make release-preflight-1-4-0`
 
 ## General-Stream nach Sprint 40 - 1.4.0 Release-Readiness und Scope-Freeze festziehen
 

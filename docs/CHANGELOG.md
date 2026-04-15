@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-14
+**Stand:** 2026-04-15
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -11,6 +11,16 @@ Release-Readiness ziehen, ohne neue Produktfeatures in die Linie
 nachzuschieben.
 
 ### Changed
+- [General] Docs/Release: Gate 4 der `1.4.0`-Linie ist jetzt als finaler
+  RC-/Freeze-Snapshot dokumentiert. `docs/ROADMAP_1_4_0.md`,
+  `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md` und
+  `docs/SPRINTS.md` fuehren denselben Stand: `APP_VERSION=1.4.0-dev`,
+  Scope-Freeze unveraendert, finaler lokaler Abschlusslauf erfolgreich
+  (`make wiki-link-check`, `make verify`, `make release-preflight-1-4-0`)
+  und Gate 5 bleibt als bewusst getrennter Abschlussblock fuer
+  Versionswechsel, Release-/Backup-Ausfuehrung und Post-Release-Hold offen.
+  Es wurden keine neuen Runtime- oder Produktfeatures eingefuehrt.
+  (2026-04-15)
 - [General] Docs/Governance: Der `1.4.0`-Rahmen ist jetzt formal ueber
   `docs/ROADMAP_1_4_0.md` und `docs/RELEASE_1_4_0_PREFLIGHT.md` verankert.
   `AGENTS.md`, `docs/STATUS.md`, Root-/Entry-README, `docs/SPRINTS.md`,

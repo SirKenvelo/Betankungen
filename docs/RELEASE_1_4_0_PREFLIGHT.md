@@ -1,17 +1,19 @@
 # Release-Readiness-Preflight fuer 1.4.0
-**Stand:** 2026-04-14
-**Status:** aktiv (Gate 2 und Gate 3 abgeschlossen; Gate 4 und Gate 5 offen)
+**Stand:** 2026-04-15
+**Status:** aktiv (Gate 4 abgeschlossen; Gate 5 aktiv)
 
 ## Zweck
 
 Dieses Dokument definiert den formalen lokalen Readiness-Rahmen fuer die
-`1.4.0`-Linie, ohne eine finale Freigabe vorwegzunehmen.
+`1.4.0`-Linie, dokumentiert den finalen Gate-4-Abschlusslauf und haelt die
+verbleibenden Gate-5-Schritte fest.
 
 Der Fokus liegt auf drei Punkten:
 
 1. Scope-Freeze der aktiven `1.4.0-dev`-Linie
 2. Governance-Fit ohne Sicherheits-Workarounds
-3. reproduzierbarer lokaler Nachweis ueber Verify + Dry-Runs
+3. reproduzierbarer lokaler Nachweis ueber Verify + Dry-Runs vor dem finalen
+   Versionswechsel
 
 ## Scope-Freeze
 
@@ -61,9 +63,9 @@ Explizit ausserhalb der 1.4.0-Release-Linie bleiben:
 5. `kpr.sh` Dry-Run
 6. `scripts/backup_snapshot.sh` Dry-Run
 
-## Lokaler Abschlusslauf
+## Lokaler Abschlusslauf fuer Gate 4
 
-Erwarteter Abschlusslauf fuer diesen Rahmen:
+Ausgefuehrter Abschlusslauf am 2026-04-15:
 
 1. `make wiki-link-check`
 2. `make verify`
@@ -71,22 +73,37 @@ Erwarteter Abschlusslauf fuer diesen Rahmen:
 
 ## Restkriterien vor finalem Release
 
-Auch bei gruener lokaler Readiness bleibt `1.4.0` erst dann final
+Auch nach gruener Gate-4-Readiness bleibt `1.4.0` erst dann final
 freigabefaehig, wenn zusaetzlich gilt:
 
-- Gate 4 ist als RC-Freeze-Snapshot formal dokumentiert.
+- Gate 5 wird als eigener Abschlussblock ausgefuehrt.
 - kein neuer Scope-Drift nach dem Freeze
-- explizite Release-Freigabe fuer den finalen Versionswechsel
+- finaler Versionswechsel auf `APP_VERSION=1.4.0`
 - finaler Gate-4-/Gate-5-Snapshot in Roadmap/Status/Changelog/Sprints
 - Release-/Backup-Ausfuehrung mit finaler Version statt Dry-Run
+- bewusster Post-Release-Hold auf `1.4.0` ohne automatische `1.5.0-dev`-
+  Fortschreibung
 
 ## Bewertungslogik dieses Preflights
 
 - Ein gruener Preflight bedeutet: Die Linie ist lokal als Gate-4-Kandidat
-  bewertbar.
+  bewertbar und Gate 4 kann auf Dokumentenebene abgeschlossen werden.
 - Ein gruener Preflight bedeutet nicht: `1.4.0` ist bereits final freigegeben.
 - Der Preflight ersetzt weder die explizite Release-Freigabe noch den
   finalen Versionswechsel.
+
+## Gate-4-Closeout-Snapshot (Stand 2026-04-15)
+
+- Gate 4 ist formal abgeschlossen.
+- Der finale RC-Abschlusslauf ist lokal vollstaendig gruen dokumentiert:
+  `make wiki-link-check`, `make verify`, `make release-preflight-1-4-0`.
+- `scripts/release_preflight_1_4_0.sh` bleibt der historische
+  Dev-Stand-Guardrail und erwartet bis zum finalen Umschaltpunkt weiter
+  `APP_VERSION=1.4.0-dev`.
+- Scope-Freeze bleibt unverletzt; `BL-0032` und `BL-0034` bleiben weiterhin
+  ausserhalb der `1.4.0`-Release-Linie.
+- Gate 5 bleibt der explizit getrennte Abschlussblock fuer Versionswechsel,
+  Release-/Backup-Ausfuehrung und den bewussten Hold auf `1.4.0`.
 
 ## Bewusste Nicht-Ziele dieses Dokuments
 

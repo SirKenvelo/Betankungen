@@ -1,6 +1,6 @@
 # Verbindlicher Fahrplan bis Version 1.4.0
-**Stand:** 2026-04-14
-**Status:** aktiv (`APP_VERSION=1.4.0-dev`; Scope-Freeze aktiv, finale Freigabe offen)
+**Stand:** 2026-04-15
+**Status:** aktiv (`APP_VERSION=1.4.0-dev`; Gate 4 abgeschlossen, Gate 5 aktiv)
 
 ## Ausgangslage
 
@@ -28,8 +28,8 @@
 - `main` bleibt geschuetzter PR-Branch mit gruener `verify`-Pflicht.
 - `Squash and merge` und Rebase-Merge bleiben fuer diese Linie nicht der
   Standardpfad.
-- Die aktive Entwicklungsbasis bleibt `APP_VERSION=1.4.0-dev`, bis eine
-  explizite Release-Freigabe vorliegt.
+- Die aktive Entwicklungsbasis bleibt `APP_VERSION=1.4.0-dev`, bis der
+  finale Gate-5-Umschalt-Commit bewusst ausgefuehrt wird.
 
 ## Scope fuer 1.4.0
 
@@ -117,21 +117,23 @@ Exit-Kriterium:
   Governance-Widersprueche.
 
 Status:
-- offen.
+- abgeschlossen am 2026-04-15.
 
 ### Gate 5: Finalisierung 1.4.0
 
 - `APP_VERSION` von `1.4.0-dev` auf `1.4.0` setzen.
 - Finalen Doku-Sync sowie Release-/Backup-Ausfuehrung dokumentieren.
 - Finalen Release nur nach expliziter Freigabe durchfuehren.
+- Nach dem Release bewusst auf `1.4.0` bleiben; kein automatischer Sprung auf
+  `1.5.0-dev`.
 
 Exit-Kriterium:
 - `1.4.0` ist final freigegeben und nachvollziehbar dokumentiert.
 
 Status:
-- offen.
+- aktiv.
 
-## Aktueller Arbeitsstand am 2026-04-14
+## Aktueller Arbeitsstand am 2026-04-15
 
 - Dev-Start und fruehe Linienarbeit sind historisch geliefert.
 - Scope-Freeze fuer `1.4.0` ist jetzt formal gesetzt.
@@ -139,21 +141,30 @@ Status:
   aktiven Release-Linie.
 - Ein eigener lokaler Readiness-Preflight existiert:
   `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`.
-- Finale Release-Freigabe ist noch nicht Teil dieses Blocks.
+- Gate 4 ist jetzt als finaler RC-/Freeze-Snapshot dokumentiert:
+  `make wiki-link-check`, `make verify` und `make release-preflight-1-4-0`
+  liefen lokal gruen; Release-/Backup-Werkzeuge sind ueber Dry-Runs
+  nachvollziehbar abgesichert.
+- Gate 5 ist der verbleibende Abschlussblock:
+  finaler Versionswechsel auf `1.4.0`, Release-/Backup-Ausfuehrung,
+  finaler Doku-Sync und bewusster Post-Release-Hold ohne `1.5.0-dev`.
 
-## Formale Evidenz fuer Gate 2 und Gate 3
+## Formale Evidenz fuer Gate 2 bis Gate 4
 
 - `tests/smoke/smoke_cli.sh` prueft `btkgit` ueber einen Clone-only-
   Fixture-Pfad mit lokalem Bare-Remote und echter `main`-Ref; ein lokaler
   Signing-Bypass gehoert nicht mehr zur Strategie.
 - `scripts/release_preflight_1_4_0.sh` blockiert ein Rueckfallen auf
   `commit.gpgsign false` und verlangt weiter `APP_VERSION=1.4.0-dev`.
+- Der finale Gate-4-Abschlusslauf ist lokal auf dem dev-Stand dokumentiert:
+  `make wiki-link-check`, `make verify`, `make release-preflight-1-4-0`.
 - `README.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`,
   `docs/DEV_START_GATE_1_4_0.md` und
   `docs/BL-0011_SCOPE_DECISION_1_4_0.md` fuehren denselben Freeze-/
   Readiness-Stand.
-- Fuer Gate 4 und Gate 5 verbleiben nur RC-/Freigabethemen; neue
-  Produktarbeit gehoert nicht mehr in diese Linie.
+- Gate 4 ist abgeschlossen; fuer Gate 5 verbleiben nur finaler
+  Versionswechsel, Release-/Backup-Ausfuehrung und der dokumentierte
+  Post-Release-Hold auf `1.4.0`.
 
 ## Verbindliche Abweichungsregel
 
