@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-04-14
+**Stand:** 2026-04-15
 
 <INSTRUCTIONS>
 
@@ -77,6 +77,10 @@
 - Neue Commits muessen sich an diese Repo-Konvention anpassen; Abweichungen sind nur bei explizit eingefuehrter neuer Konvention erlaubt.
 - Sprint-Tagging: Nach komplett abgeschlossenem und freigegebenem Sprint wird genau ein annotierter Tag im Format `sprint-<nr>-done` erstellt und gepusht; keine Sprint-Tags auf Zwischenstaenden.
 - Version-Tagging: Release-/Version-Tags (z. B. `1.2.0`) werden nur nach expliziter User-Freigabe erstellt und gepusht (keine automatische Tag-Erstellung).
+- Tag-Nachrichten mit Markdown-Ueberschriften (z. B. `## Summary`, `## Validation`, `## Impact`) muessen immer mit `git tag -s --cleanup=verbatim ...` oder `git tag -a --cleanup=verbatim ...` erstellt werden.
+- Begruendung: Git behandelt Zeilen mit fuehrendem `#` bei der Standard-Bereinigung als Kommentar und entfernt sie sonst aus dem Tag-Objekt.
+- Vor dem Push eines neuen oder ersetzten annotierten Tags ist der Rohinhalt lokal mit `git cat-file -p refs/tags/<tag>` zu pruefen; die erwarteten `##`-Ueberschriften muessen dort sichtbar sein.
+- Ein bereits veroeffentlichter Tag darf nur nach expliziter User-Freigabe geloescht und neu gesetzt werden; auch dann bleibt die Signaturpflicht bestehen.
 - Sprint-Artefakte nach Push: Nach jedem erfolgreichen Push eines Sprint-Commits erstellt Codex selbststaendig lokale Artefakte in `.artifacts/` (`.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.diff` und `.artifacts/sprint_<nr>_commit_<nr>_von_<nr>.md`).
 - Reihenfolge fuer Sprint-Artefakte: 1) Commit und Push abschliessen. 2) `.diff` aus dem gepushten Commit erzeugen (z. B. `git show --stat --patch <hash> > .artifacts/sprint_<...>.diff`). 3) Begleit-`.md` mit Ziel, Hash, Message und Artefaktverweisen in `.artifacts/` erstellen.
 - Sprint-Artefakte bleiben lokal: `.artifacts/*.md` und `.artifacts/*.diff` werden grundsaetzlich nicht committed oder gepusht (nur bei expliziter User-Freigabe).
