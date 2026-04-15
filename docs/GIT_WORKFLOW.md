@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-04-12
+**Stand:** 2026-04-15
 
 ## Ziel
 
@@ -243,6 +243,19 @@ Reihenfolge:
 
 - Sprint-Tagging (`sprint-<nr>-done`) nur nach komplett abgeschlossenem und freigegebenem Sprint.
 - Release-/Version-Tags (z. B. `1.2.0`) nur nach expliziter User-Freigabe.
+- Wenn annotierte Tag-Nachrichten Markdown-Ueberschriften mit fuehrendem `#` enthalten
+  sollen (z. B. `## Summary`, `## Validation`, `## Impact`), muss der Tag mit
+  `--cleanup=verbatim` erstellt werden.
+- Verbindliches Muster fuer signierte Tags:
+  `git tag -s --cleanup=verbatim <tag> -F <nachrichtendatei>`
+- Ohne `--cleanup=verbatim` entfernt Git diese Ueberschriften bei der Standard-
+  Bereinigung als Kommentarzeilen aus dem Tag-Objekt.
+- Vor dem Push ist der Rohinhalt des Tags lokal mit
+  `git cat-file -p refs/tags/<tag>` zu pruefen.
+- Erst wenn die erwarteten `##`-Ueberschriften im Rohobjekt sichtbar sind, darf
+  der Tag gepusht werden.
+- Ein bereits veroeffentlichter Tag wird nur nach expliziter User-Freigabe
+  geloescht und neu gesetzt.
 
 ## Repository-Einstellungen
 

@@ -10,6 +10,14 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Workflow: Die Tagging-Regeln dokumentieren jetzt explizit den
+  Umgang mit Markdown-Ueberschriften in annotierten Git-Tags. `AGENTS.md` und
+  `docs/GIT_WORKFLOW.md` verlangen fuer Tag-Nachrichten mit `## Summary`,
+  `## Validation` oder `## Impact` kuenftig `--cleanup=verbatim` und eine
+  lokale Rohpruefung via `git cat-file -p refs/tags/<tag>`, bevor ein Tag
+  gepusht wird. Dadurch bleiben Ueberschriften in signierten Sprint- und
+  Release-Tags reproduzierbar erhalten. Es wurden keine Runtime-, CLI- oder
+  Release-Inhalte geaendert. (2026-04-15)
 - [General] Release/Docs: Version `1.4.0` ist final freigegeben.
   `src/Betankungen.lpr` wurde auf `APP_VERSION=1.4.0` umgestellt; Gate 4 und
   Gate 5 der `1.4.0`-Linie sind in `docs/ROADMAP_1_4_0.md`,
