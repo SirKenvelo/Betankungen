@@ -10,6 +10,16 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Release/GitHub: Der sichtbare GitHub-Release-Handoff fuer den
+  bestehenden Tag `1.4.0` ist jetzt publiziert. `README.md`,
+  `docs/README.md`, `docs/README_EN.md`, `docs/ROADMAP_1_4_0.md`,
+  `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md` und `docs/SPRINTS.md`
+  fuehren damit denselben Public-Handoff wie der lokale Gate-5-Closeout.
+  `APP_VERSION=1.4.0`, das Release-Artefakt
+  `.releases/Betankungen_1_4_0.tar` und der Snapshot
+  `.backup/2026-04-15_1822` bleiben unveraendert; eine automatische
+  `1.5.0-dev`-Fortschreibung wurde weiterhin nicht gestartet. Es wurden keine
+  Runtime-, CLI- oder Build-Features eingefuehrt. (2026-04-15)
 - [General] Docs/Workflow: Die Tagging-Regeln dokumentieren jetzt explizit den
   Umgang mit Markdown-Ueberschriften in annotierten Git-Tags. `AGENTS.md` und
   `docs/GIT_WORKFLOW.md` verlangen fuer Tag-Nachrichten mit `## Summary`,

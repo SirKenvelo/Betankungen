@@ -49,6 +49,8 @@ need to add a station before the first fuel-up flow.
 - Latest stable release:
   [`1.4.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0)
   (released on 2026-04-15)
+- Public GitHub release handoff for tag `1.4.0` is published and matches the
+  stable entry path
 - Stable release consumption: the current public handoff for `1.4.0` uses
   source-build guidance via `make build`; binary assets are only expected when
   a release explicitly ships them
