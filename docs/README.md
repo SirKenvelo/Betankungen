@@ -64,27 +64,31 @@ Das Hauptprogramm steuert – die Units arbeiten.
   - `1.1.0` wurde am `2026-03-18` final freigegeben.
   - `1.2.0` wurde am `2026-03-24` final freigegeben.
   - `1.3.0` wurde am `2026-03-26` final freigegeben.
-- Aktueller technischer Stand: `APP_VERSION=1.4.0-dev`.
-- Die aktive Roadmap liegt jetzt in `docs/ROADMAP_1_4_0.md`.
+  - `1.4.0` wurde am `2026-04-15` final freigegeben.
+- Aktueller technischer Stand: `APP_VERSION=1.4.0`.
+- Die abgeschlossene Gate-/Closeout-Doku der stabilen Linie liegt in
+  `docs/ROADMAP_1_4_0.md`.
 - Der historische Vorstart-Gate bleibt in `docs/DEV_START_GATE_1_4_0.md`
   nachvollziehbar; der eigentliche Dev-Start wurde bereits in Sprint 30 per
   separatem Aktivierungs-Commit vollzogen.
-- Der formale Release-Readiness-Rahmen fuer die aktive Linie liegt in
+- Der formale Release-Readiness-/Closeout-Rahmen fuer die 1.4.0-Linie liegt in
   `docs/RELEASE_1_4_0_PREFLIGHT.md` und ist operativ ueber
-  `make release-preflight-1-4-0` erreichbar.
-- Die `1.4.0`-Linie ist jetzt formal eingefroren:
-  - bereits gelieferte `1.4.x`-Arbeit bleibt der stabile Release-Kandidat
+  `make release-preflight-1-4-0` historisch nachvollziehbar.
+- Die `1.4.0`-Linie ist jetzt final freigegeben:
+  - bereits gelieferte `1.4.x`-Arbeit ist die stabile Release-Linie
   - `BL-0011` bleibt fuer dieses Repository externalisiert:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`
   - `BL-0032` und `BL-0034` bleiben bewusst ausserhalb der
     1.4.0-Release-Linie
-  - dieser Block fuehrt keine neuen Runtime-Features ein
+  - dieser Closeout fuehrt keine neuen Runtime-Features ein
 - Die lokale Governance ist dafuer nachgeschaerft:
   - `tests/smoke/smoke_cli.sh` prueft `btkgit` ueber ein lokales Bare-Remote
     mit echter `main`-Ref und frischem Clone statt ueber lokale
     Signing-Overrides.
   - Sicherheitsfeatures bleiben auch in Test-/Fixture-Pfaden verbindlich; ein
     Blocker wuerde dokumentiert statt umgangen.
+- Der Post-Release-Zustand bleibt bewusst auf `1.4.0`; eine automatische
+  `1.5.0-dev`-Linie wurde nicht gestartet.
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_3_0.md`, `docs/ROADMAP_1_2_0.md`,
   `docs/ROADMAP_1_1_0.md`, `docs/ROADMAP_1_0_0.md`.
@@ -101,10 +105,10 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
-- `docs/ROADMAP_1_4_0.md`: aktiver Gate-/Freeze-/Readiness-Rahmen fuer die
-  `1.4.0`-Linie.
-- `docs/RELEASE_1_4_0_PREFLIGHT.md`: aktiver lokaler Readiness-Rahmen fuer
-  `1.4.0` (Verify + Governance + Dry-Runs).
+- `docs/ROADMAP_1_4_0.md`: abgeschlossener Gate-/Freeze-/Release-Closeout-
+  Rahmen fuer die `1.4.0`-Linie.
+- `docs/RELEASE_1_4_0_PREFLIGHT.md`: dokumentierter lokaler Gate-4-/Gate-5-
+  Closeout fuer `1.4.0` (Verify + Governance + Dry-Runs + Finalisierung).
 - `docs/DEV_START_GATE_1_4_0.md`: historischer Go-/No-Go-Stand vor dem
   separaten Start von `1.4.0-dev`.
 - `docs/FUEL_PRICE_API_EVALUATION_1_3_0.md`: evaluierte Primaerquelle,

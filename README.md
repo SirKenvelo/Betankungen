@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-14
+**Stand:** 2026-04-15
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal/Lazarus.
@@ -22,7 +22,7 @@ If you are new to the repository, use this path first:
 2. [GitHub Wiki](https://github.com/SirKenvelo/Betankungen/wiki)
 3. [Getting Started](https://github.com/SirKenvelo/Betankungen/wiki/Getting-Started)
 4. [CLI Quick Reference](https://github.com/SirKenvelo/Betankungen/wiki/CLI-Quick-Reference)
-5. [Stable release `1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
+5. [Stable release `1.4.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0)
 
 The English docs entry is the primary repo entry; the GitHub Wiki is the
 lighter public layer. Use the main project documentation in `docs/README.md`
@@ -57,17 +57,18 @@ need to add a station before the first fuel-up flow.
 ## Current State
 
 - Latest stable release:
-  [`1.3.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.3.0)
-  (released on 2026-03-26)
-- Stable release consumption: the current public handoff for `1.3.0` uses
+  [`1.4.0`](https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0)
+  (released on 2026-04-15)
+- Stable release consumption: the current public handoff for `1.4.0` uses
   source-build guidance via `make build`; binary assets are only expected when
   a release explicitly ships them
-- Technical runtime state: `APP_VERSION=1.4.0-dev`
-- Active repository line: `1.4.0-dev`
-- Formal `1.4.0` scope freeze is active; exploratory follow-up blocks
-  `BL-0032` and `BL-0034` remain outside the release line
-- Release-readiness framework for the active line:
+- Technical runtime state: `APP_VERSION=1.4.0`
+- Active repository line: stable hold on `1.4.0`
+- Gate 4 and Gate 5 for `1.4.0` are complete; exploratory follow-up blocks
+  `BL-0032` and `BL-0034` remain outside the released line
+- Release closeout record for the stable line:
   `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`
+- No automatic `1.5.0-dev` line was started after the release
 - `tests/smoke/smoke_cli.sh` exercises `btkgit` through a local bare remote
   with a real `main` ref and a fresh clone instead of overriding Git signing
   policy

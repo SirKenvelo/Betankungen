@@ -1,8 +1,8 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-14
-**Zielversion:** Aktive Entwicklungsbasis `1.4.0-dev` (technischer Stand `APP_VERSION=1.4.0-dev`; Scope-Freeze aktiv, finale Freigabe noch offen)
+**Stand:** 2026-04-15
+**Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
-## Roadmap 1.4.0 - verbindlicher Fahrplan (aktiv)
+## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
 
 - Der aktive Gate-Plan liegt in `docs/ROADMAP_1_4_0.md`.
 - Gate-Stand:
@@ -14,10 +14,16 @@
   - Gate 3 abgeschlossen am 2026-04-14 (formaler Readiness-Rahmen ueber
     `docs/RELEASE_1_4_0_PREFLIGHT.md`, `scripts/release_preflight_1_4_0.sh`
     und `make release-preflight-1-4-0` eingefuehrt).
-  - Gate 4 offen (Release-Candidate-Freeze und finaler RC-Snapshot).
-  - Gate 5 offen (finaler Versionswechsel, Release-/Backup-Ausfuehrung nur
-    nach expliziter Freigabe).
-- Leitplanken fuer die aktive 1.4.0-Linie:
+  - Gate 4 abgeschlossen am 2026-04-15 (finaler RC-/Freeze-Snapshot ueber
+    `make wiki-link-check`, `make verify` und
+    `make release-preflight-1-4-0` lokal dokumentiert).
+  - Gate 5 abgeschlossen am 2026-04-15 (finaler Versionswechsel auf
+    `APP_VERSION=1.4.0`, finaler Doku-Sync sowie Release-/Backup-Ausfuehrung
+    auf dem stabilen Release-Stand; Artefakt
+    `.releases/Betankungen_1_4_0.tar`, SHA-256
+    `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`,
+    Snapshot `.backup/2026-04-15_1822`).
+- Leitplanken fuer die abgeschlossene 1.4.0-Linie:
   - keine neuen Produktfeatures in diesem Freeze-/Readiness-Block;
   - keine Deaktivierung oder Umgehung aktiver Sicherheitsfeatures, auch nicht
     fuer Tests oder Fixtures;
@@ -25,20 +31,20 @@
   - `BL-0032` und `BL-0034` bleiben explizit ausserhalb der 1.4.0-
     Release-Linie.
 - Operativer Fokus:
-  - `1.4.0-dev` ist die aktive technische Linie.
+  - `1.4.0` ist der aktuelle stabile technische Stand fuer Pflege und Audits.
   - Der historische Vorstart-Gate bleibt in `docs/DEV_START_GATE_1_4_0.md`
     nachvollziehbar, ist aber bereits eingeloest.
   - `BL-0011` bleibt fuer `Betankungen` repo-seitig geschlossen:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
-  - Der lokale Readiness-Entrypoint ist
-    `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`.
+  - Der lokale Readiness-Entrypoint
+    `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
+    bleibt als historischer Gate-4-Nachweis erhalten.
   - Der `btkgit`-Smoke-Pfad nutzt einen Clone-only-Fixture-Rahmen mit
     lokalem Bare-Remote und echter `main`-Ref; lokale Signing-Overrides
     gehoeren nicht zur Strategie.
-  - Fuer Gate 4 und Gate 5 verbleiben nur RC-/Freigabethemen; neue
-    Produktarbeit ist nicht Teil der aktiven Linie.
-  - Finale Release-Freigabe, finaler Versionswechsel und Release-Tag sind
-    nicht Teil dieses Blocks.
+  - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
+    auf `1.4.0` bleibt aktiv.
+  - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)
