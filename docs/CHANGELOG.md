@@ -5,12 +5,24 @@ Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-Aktive Entwicklungsbasis `1.4.0-dev` (`APP_VERSION=1.4.0-dev`)
-Ziel: die aktive `1.4.0-dev`-Linie formal auf Scope-Freeze und
-Release-Readiness ziehen, ohne neue Produktfeatures in die Linie
-nachzuschieben.
+Stabiler Stand `1.4.0` (`APP_VERSION=1.4.0`)
+Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
+ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Release/Docs: Version `1.4.0` ist final freigegeben.
+  `src/Betankungen.lpr` wurde auf `APP_VERSION=1.4.0` umgestellt; Gate 4 und
+  Gate 5 der `1.4.0`-Linie sind in `docs/ROADMAP_1_4_0.md`,
+  `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md`, `docs/SPRINTS.md`,
+  `README.md`, `docs/README.md` und `docs/README_EN.md` auf den finalen
+  Release-Stand synchronisiert. Der Post-Release-Zustand bleibt bewusst auf
+  `1.4.0`; eine automatische `1.5.0-dev`-Fortschreibung wurde nicht
+  vorgenommen. Finale Release-/Backup-Ausfuehrung ist erfolgt
+  (`./kpr.sh --note "Release 1.4.0 final"`,
+  `scripts/backup_snapshot.sh --note "Backup after release 1.4.0"`), inkl.
+  Artefakt `.releases/Betankungen_1_4_0.tar`
+  (SHA-256 `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`)
+  und Snapshot `.backup/2026-04-15_1822`. (2026-04-15)
 - [General] Docs/Release: Gate 4 der `1.4.0`-Linie ist jetzt als finaler
   RC-/Freeze-Snapshot dokumentiert. `docs/ROADMAP_1_4_0.md`,
   `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md` und
@@ -35,6 +47,7 @@ nachzuschieben.
   eingefuehrt. (2026-04-14)
 
 ### Sprint / Commit References
+- General-2026-04-15-1-4-0-gate4-closeout - Finalen RC-/Freeze-Snapshot fuer `1.4.0` dokumentiert (`docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`, `docs/SPRINTS.md`); Basis-Commit: `326299a`. (2026-04-15)
 - S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)
 - S39C1/2 - `P-050`-Reset-Guidance vom normalen Kurzdistanz-Fuelup entkoppelt und einen manuellen Reset nur noch ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar gemacht (`src/Betankungen.lpr`, `units/u_cli_types.pas`, `units/u_cli_parse.pas`, `units/u_cli_validate.pas`, `units/u_cli_help.pas`, `units/u_fuelups.pas`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`, `tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`, `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`, `tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0028-decouple-p050-reset-guidance-from-normal-fuelup-flow.md`, `docs/issues/ISS-0010-p050-reset-prompt-misleading-for-normal-distances/issue.md`); Artefakte: `.artifacts/sprint_39_commit_1_von_2.md`, `.artifacts/sprint_39_commit_1_von_2.diff`; Basis-Commit: `8be52b1`. (2026-04-07)
 - S38C1/2 - Sichtbaren Fahrzeugkontext, fruehe Receipt-Link-Guidance und lokale Receipt-Pfadnormalisierung im Fuelup-Add-Flow geliefert (`units/u_car_context.pas`, `units/u_fuelups.pas`, `units/u_cli_help.pas`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0027-surface-car-context-and-receipt-link-guidance.md`, `docs/issues/ISS-0009-fuelup-add-flow-guidance-gap/issue.md`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `docs/CHANGELOG.md`); Artefakte: `.artifacts/sprint_38_commit_1_von_2.md`, `.artifacts/sprint_38_commit_1_von_2.diff`; Basis-Commit: `1e6ef9e`. (2026-04-03)

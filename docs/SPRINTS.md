@@ -3,6 +3,37 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - 1.4.0 final freigeben und auf 1.4.0 halten
+
+- Status: done
+- Ziel: Gate 5 fuer die `1.4.0`-Linie nach dokumentiertem Gate-4-Snapshot
+  sauber abschliessen, die Version final auf `1.4.0` setzen und den
+  Post-Release-Stand bewusst ohne `1.5.0-dev` halten.
+
+### Stand (2026-04-15)
+
+- `src/Betankungen.lpr` fuehrt jetzt `APP_VERSION=1.4.0`.
+- `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`,
+  `docs/STATUS.md`, `docs/CHANGELOG.md`, `README.md`, `docs/README.md` und
+  `docs/README_EN.md` fuehren denselben Finalstand: Gate 4 und Gate 5
+  abgeschlossen, `1.4.0` ist die stabile Linie.
+- Die finale Release-/Backup-Ausfuehrung ist lokal erfolgt:
+  `.releases/Betankungen_1_4_0.tar`
+  (SHA-256 `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`)
+  und `.backup/2026-04-15_1822`.
+- Der Post-Release-Zustand bleibt bewusst auf `1.4.0`; eine automatische
+  `1.5.0-dev`-Fortschreibung wurde nicht gestartet.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-
+  Features ein.
+
+### Validierung
+
+- `make wiki-link-check`
+- `make verify`
+- `make release-preflight-1-4-0`
+- `./kpr.sh --note "Release 1.4.0 final"`
+- `scripts/backup_snapshot.sh --note "Backup after release 1.4.0"`
+
 ## General-Stream nach Sprint 40 - 1.4.0 Gate-4-RC-Snapshot finalisieren
 
 - Status: done
