@@ -84,6 +84,7 @@ Gate-4-Readiness ausgefuehrt.
 - Release-Artefakt: `.releases/Betankungen_1_4_0.tar`
   (SHA-256 `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`).
 - Snapshot: `.backup/2026-04-15_1822`.
+- GitHub-Release-Handoff fuer den bestehenden Tag `1.4.0` ist publiziert.
 
 ## Bewertungslogik dieses Preflights
 
@@ -115,6 +116,8 @@ Gate-4-Readiness ausgefuehrt.
 - `scripts/release_preflight_1_4_0.sh` bleibt als historischer
   Gate-4-Guardrail fuer den dev-basierten Abschlusslauf erhalten; der
   Post-Release-Stand selbst bleibt bewusst auf `1.4.0`.
+- Der sichtbare Public-Handoff auf GitHub Releases ist fuer `1.4.0`
+  publiziert.
 
 ## Bewusste Nicht-Ziele dieses Dokuments
 

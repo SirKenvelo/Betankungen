@@ -3,6 +3,36 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Sichtbaren Public-Release-Handoff fuer 1.4.0 publizieren
+
+- Status: done
+- Ziel: den lokal bereits abgeschlossenen `1.4.0`-Closeout mit einem
+  tatsaechlich sichtbaren GitHub-Release fuer Tag `1.4.0` abschliessen und
+  die Entry-/Status-Doku auf denselben Public-Handoff ziehen.
+
+### Stand (2026-04-15)
+
+- Der GitHub-Release-Handoff fuer `1.4.0` ist jetzt unter
+  `https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0`
+  publiziert.
+- `README.md`, `docs/README.md`, `docs/README_EN.md`, `docs/STATUS.md`,
+  `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md` und
+  `docs/CHANGELOG.md` fuehren denselben sichtbaren Public-Handoff.
+- `APP_VERSION=1.4.0`, das Release-Artefakt
+  `.releases/Betankungen_1_4_0.tar` und der Snapshot `.backup/2026-04-15_1822`
+  bleiben unveraendert.
+- Der Post-Release-Zustand bleibt bewusst auf `1.4.0`; eine automatische
+  `1.5.0-dev`-Fortschreibung wurde weiterhin nicht gestartet.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-
+  Features ein.
+
+### Validierung
+
+- `gh release create 1.4.0 --verify-tag --title "Betankungen 1.4.0" --notes-file /tmp/betankungen_release_1_4_0.md`
+- `gh release view 1.4.0`
+- `make wiki-link-check`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - 1.4.0 final freigeben und auf 1.4.0 halten
 
 - Status: done
@@ -21,6 +51,8 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   `.releases/Betankungen_1_4_0.tar`
   (SHA-256 `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`)
   und `.backup/2026-04-15_1822`.
+- Der sichtbare GitHub-Release-Handoff fuer Tag `1.4.0` ist publiziert:
+  `https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0`.
 - Der Post-Release-Zustand bleibt bewusst auf `1.4.0`; eine automatische
   `1.5.0-dev`-Fortschreibung wurde nicht gestartet.
 - Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI-, Receipt- oder EV-

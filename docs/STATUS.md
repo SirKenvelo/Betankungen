@@ -22,7 +22,8 @@
     auf dem stabilen Release-Stand; Artefakt
     `.releases/Betankungen_1_4_0.tar`, SHA-256
     `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`,
-    Snapshot `.backup/2026-04-15_1822`).
+    Snapshot `.backup/2026-04-15_1822`; sichtbarer GitHub-Release-Handoff
+    fuer Tag `1.4.0` publiziert).
 - Leitplanken fuer die abgeschlossene 1.4.0-Linie:
   - keine neuen Produktfeatures in diesem Freeze-/Readiness-Block;
   - keine Deaktivierung oder Umgehung aktiver Sicherheitsfeatures, auch nicht
@@ -39,6 +40,8 @@
   - Der lokale Readiness-Entrypoint
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
     bleibt als historischer Gate-4-Nachweis erhalten.
+  - Der oeffentliche Handoff ist jetzt auch auf GitHub Releases sichtbar:
+    `https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0`.
   - Der `btkgit`-Smoke-Pfad nutzt einen Clone-only-Fixture-Rahmen mit
     lokalem Bare-Remote und echter `main`-Ref; lokale Signing-Overrides
     gehoeren nicht zur Strategie.

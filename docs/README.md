@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-14
+**Stand:** 2026-04-15
 CLI-Projekt mit Free Pascal / Lazarus & SQLite
 
 ---
@@ -74,6 +74,10 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Der formale Release-Readiness-/Closeout-Rahmen fuer die 1.4.0-Linie liegt in
   `docs/RELEASE_1_4_0_PREFLIGHT.md` und ist operativ ueber
   `make release-preflight-1-4-0` historisch nachvollziehbar.
+- Der sichtbare GitHub-Release-Handoff fuer die stabile Linie ist unter
+  `https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0`
+  publiziert; Entry-Doku und Release-Seite fuehren damit denselben
+  Public-Handoff.
 - Die `1.4.0`-Linie ist jetzt final freigegeben:
   - bereits gelieferte `1.4.x`-Arbeit ist die stabile Release-Linie
   - `BL-0011` bleibt fuer dieses Repository externalisiert:
@@ -98,6 +102,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 ## Doku-Navigation
 
 - `docs/README_EN.md`: englischer Einstieg in die Projektdokumentation (inkrementell gepflegt).
+- GitHub Release `1.4.0`: sichtbarer Public-Handoff fuer die stabile Linie.
 - `CONTRIBUTING.md`: englische Contribution-Leitplanke fuer externe Mitarbeit.
 - `CODE_OF_CONDUCT.md`: Verhaltensrahmen fuer oeffentliche Zusammenarbeit.
 - `SECURITY.md`: Responsible-Disclosure-Prozess fuer Sicherheitsmeldungen.

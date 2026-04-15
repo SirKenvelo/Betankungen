@@ -153,6 +153,8 @@ Status:
   `.releases/Betankungen_1_4_0.tar`
   (SHA-256 `79dcf14b23ea51fb723662eb2ec496919c27fe8ca8f2598ce4363b265b6d898e`)
   und `.backup/2026-04-15_1822`.
+- Der sichtbare GitHub-Release-Handoff fuer den bestehenden Tag `1.4.0` ist
+  publiziert: `https://github.com/SirKenvelo/Betankungen/releases/tag/1.4.0`.
 
 ## Formale Evidenz fuer Gate 2 bis Gate 5
 
