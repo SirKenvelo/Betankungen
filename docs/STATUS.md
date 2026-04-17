@@ -63,10 +63,15 @@
 - Aktive Drift lag in Wording und Architekturrahmung, nicht im Runtime- oder
   Buildpfad; `README.md`, `docs/README.md` und `docs/ARCHITECTURE.md` fuehren
   jetzt dieselbe FPC-/CLI-Wahrheit.
-- `ADR-0016` ist als Strukturkandidat vorgeschlagen, `BL-0037` schneidet die
+- `ADR-0016` ist als Strukturkandidat vorgeschlagen; `BL-0037` schneidet die
   Folgearbeit fuer Purity-Guard und VS-Code-Build-Hardening.
-- Der naechste kleine Umsetzungsblock ist `TSK-0035`: ein expliziter
-  Fail-Fast-Purity-Check fuer den aktiven Baum und seine CI-/Make-Einbindung.
+- `TSK-0035` ist jetzt geliefert: `scripts/lazarus_purity_check.sh` prueft
+  den aktiven Baum explizit auf verbotene Lazarus-/LCL-Artefakte, `lazbuild`
+  sowie aktive GUI-/LCL-Tokens und trennt historische Kontexte bewusst aus.
+- `make verify` und `.github/workflows/ci.yml` fuehren denselben Guardrail
+  jetzt fail-fast vor Build und weiteren Verify-Schritten aus.
+- Der naechste kleine Folgeblock aus `BL-0037` ist damit `TSK-0036` fuer das
+  VS-Code-Build-Frontend.
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)

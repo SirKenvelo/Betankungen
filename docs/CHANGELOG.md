@@ -10,6 +10,18 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Build/CI/Guardrail: `scripts/lazarus_purity_check.sh` fuehrt
+  jetzt einen expliziten Fail-Fast-Purity-Check fuer den aktiven Baum aus:
+  `src/`, `units/`, `tests/`, `scripts/`, `Makefile`,
+  `.github/workflows/` und `.vscode/tasks.json`. Der Guardrail trennt bewusst
+  aktive Suchflaeche von historischem Kontext, blockiert verbotene
+  Lazarus-/LCL-Artefakte (`.lpi`, `.lfm`, `.lrs`, `.lps`), `lazbuild` sowie
+  aktive GUI-/LCL-Tokens und vermeidet naive Teilstring-Falschalarme wie
+  `TFormatSettings`. `make verify` fuehrt den Check jetzt vor dem Build aus,
+  und `.github/workflows/ci.yml` zieht denselben Guardrail vor den
+  Abhaengigkeits- und Compile-Schritt. `ADR-0016`, `docs/STATUS.md`,
+  `docs/SPRINTS.md` und `TSK-0035` fuehren denselben Abschlussstand. Es
+  wurden keine Runtime- oder Produktfeatures eingefuehrt. (2026-04-17)
 - [General] Docs/Audit: Die Lazarus-Purity-Baseline ist jetzt belastbar
   dokumentiert. `docs/LAZARUS_PURITY_AUDIT_2026-04-17.md` trennt aktive
   Source-/Build-/Test-Evidence von Doku-Drift und historischem Kontext,

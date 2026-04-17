@@ -1,7 +1,7 @@
 ---
 id: TSK-0035
 title: Fail-Fast-Purity-Check fuer aktiven Baum und CI einfuehren
-status: todo
+status: done
 priority: P1
 type: task
 tags: [architecture, audit, build, ci, purity]
@@ -30,7 +30,7 @@ sowie in der CI fail-fast abbricht.
   und CI.
 
 # Done When
-- [ ] Ein dedizierter Purity-Check ist als Skript im Repo vorhanden.
-- [ ] Der Check erkennt verbotene Artefakte/Tokens im aktiven Baum fail-fast.
-- [ ] `make verify` und die CI fuehren den Check verbindlich aus.
-- [ ] Doku benennt den Check als Teil der aktiven Architekturgrenze.
+- [x] Ein dedizierter Purity-Check ist als Skript im Repo vorhanden.
+- [x] Der Check erkennt verbotene Artefakte/Tokens im aktiven Baum fail-fast.
+- [x] `make verify` und die CI fuehren den Check verbindlich aus.
+- [x] Doku benennt den Check als Teil der aktiven Architekturgrenze.
