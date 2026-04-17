@@ -21,10 +21,31 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   vermeidet naive Teilstring-Falschalarme wie `TFormatSettings`.
 - `make verify` fuehrt den Check jetzt vor dem Build aus; die CI zieht
   denselben Schritt vor Dependency-Installation und FPC-Compile.
-- `TSK-0035` ist damit auf `done`; `TSK-0036` bleibt der naechste kleine
-  Folgeblock fuer das VS-Code-Build-Frontend.
+- `TSK-0035` ist damit auf `done`; `TSK-0036` bindet das VS-Code-Build-
+  Frontend jetzt an `make build`.
 - Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI- oder
   Produktfeature-Aenderungen ein.
+
+### Validierung
+
+- `make verify`
+
+## General-Stream nach Sprint 40 - VS-Code-Build-Frontend an make build binden
+
+- Status: done
+- Ziel: `.vscode/tasks.json` als Komfort-Frontend ohne konkurrierenden
+  Build-String an die kanonische Build-Wahrheit `make build` binden.
+
+### Stand (2026-04-17)
+
+- Der VS-Code-Buildtask ruft jetzt `make build` direkt auf.
+- Der separate FPC-Compile-String ist aus dem Editor-Buildpfad entfernt.
+- Der Clean-Task bleibt als getrennte Komfortfunktion erhalten und baut
+  keine zweite Build-Wahrheit auf.
+- `TSK-0036` ist damit abgeschlossen; die aktive Dokumentation verweist
+  weiterhin auf `make build` als kanonischen Build-Pfad.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI- oder Produktfeature-
+  Aenderungen ein.
 
 ### Validierung
 

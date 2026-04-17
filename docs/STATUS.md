@@ -58,8 +58,8 @@
   Lazarus-/LCL-Abhaengigkeiten und keine verbotenen Projektartefakte
   (`.lpi`, `.lfm`, `.lrs`, `.lps`) gefunden.
 - `make build` ist die kanonische Build-Wahrheit; die CI fuehrt denselben
-  FPC-Build aus, und `.vscode/tasks.json` ist derzeit nur ein Komfort-
-  Frontend ohne abweichende Build-Logik.
+  FPC-Build aus, und `.vscode/tasks.json` spiegelt diese Wahrheit jetzt
+  direkt ueber `make build` als Komfort-Frontend.
 - Aktive Drift lag in Wording und Architekturrahmung, nicht im Runtime- oder
   Buildpfad; `README.md`, `docs/README.md` und `docs/ARCHITECTURE.md` fuehren
   jetzt dieselbe FPC-/CLI-Wahrheit.
@@ -70,8 +70,9 @@
   sowie aktive GUI-/LCL-Tokens und trennt historische Kontexte bewusst aus.
 - `make verify` und `.github/workflows/ci.yml` fuehren denselben Guardrail
   jetzt fail-fast vor Build und weiteren Verify-Schritten aus.
-- Der naechste kleine Folgeblock aus `BL-0037` ist damit `TSK-0036` fuer das
-  VS-Code-Build-Frontend.
+- `TSK-0036` ist jetzt ebenfalls geliefert: `.vscode/tasks.json` ruft den
+  Build ueber `make build` auf, ohne einen separaten FPC-Compile-String im
+  Editor zu pflegen.
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)

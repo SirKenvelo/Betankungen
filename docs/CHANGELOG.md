@@ -10,6 +10,15 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Tooling/Build: `.vscode/tasks.json` ruft den Editor-Build jetzt
+  direkt ueber `make build` auf. Damit spiegelt das VS-Code-Frontend die
+  kanonische Build-Wahrheit aus dem `Makefile`, ohne einen separat gepflegten
+  FPC-Compile-String zu duplizieren. Der Clean-Task bleibt als getrennte
+  Komfortfunktion erhalten; `docs/STATUS.md`, `docs/SPRINTS.md`,
+  `docs/BACKLOG.md` und
+  `docs/backlog/BL-0037-fpc-cli-purity-and-lazarus-boundary-hardening/tasks/TSK-0036-pin-vscode-build-frontend-to-make-build.md`
+  fuehren denselben Abschlussstand. Es wurden keine Runtime- oder
+  Produktfeatures eingefuehrt. (2026-04-17)
 - [General] Build/CI/Guardrail: `scripts/lazarus_purity_check.sh` fuehrt
   jetzt einen expliziten Fail-Fast-Purity-Check fuer den aktiven Baum aus:
   `src/`, `units/`, `tests/`, `scripts/`, `Makefile`,
