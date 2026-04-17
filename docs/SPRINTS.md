@@ -1,7 +1,38 @@
 # SPRINTS
-**Stand:** 2026-04-15
+**Stand:** 2026-04-17
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - Lazarus-Purity-Baseline auditieren
+
+- Status: done
+- Ziel: den aktiven Repo-Zustand technisch auf FPC-/CLI-/SQLite-Wahrheit
+  pruefen, aktive Verstoesse sauber von historischer Legacy und Doku-Drift
+  trennen und daraus belastbare ADR-/TSK-Folgeschnitte ableiten.
+
+### Stand (2026-04-17)
+
+- `docs/LAZARUS_PURITY_AUDIT_2026-04-17.md` dokumentiert den Audit mit
+  Evidence-Liste, Befundklassifikation und expliziten Antworten auf die
+  Audit-Fragen.
+- Im aktiven Source-, Build- und Testpfad wurden keine Lazarus-/LCL-
+  Abhaengigkeiten und keine verbotenen Projektartefakte (`.lpi`, `.lfm`,
+  `.lrs`, `.lps`) gefunden.
+- `make build` ist als kanonische Build-Wahrheit bestaetigt; die CI fuehrt
+  denselben FPC-Build aus, `.vscode/tasks.json` ist aktuell nur ein
+  Komfort-Frontend ohne konkurrierende Build-Logik.
+- Aktive Drift lag im Wording von `README.md`, `docs/README.md` und
+  `docs/ARCHITECTURE.md`; diese Dokumente fuehren jetzt dieselbe FPC-/CLI-
+  Rahmung.
+- `ADR-0016` ist als vorgeschlagene Architekturentscheidung angelegt;
+  `BL-0037` schneidet daraus zwei kleine Folge-Tasks. Der empfohlene
+  naechste Umsetzungsblock ist `TSK-0035`.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make wiki-link-check`
+- `make verify`
 
 ## General-Stream nach Sprint 40 - Sichtbaren Public-Release-Handoff fuer 1.4.0 publizieren
 

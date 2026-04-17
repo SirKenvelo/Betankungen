@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-15
+**Stand:** 2026-04-17
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -48,6 +48,25 @@
   - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
     auf `1.4.0` bleibt aktiv.
   - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
+
+## Audit-Block - Lazarus-Purity Baseline (2026-04-17)
+
+- Der Audit `docs/LAZARUS_PURITY_AUDIT_2026-04-17.md` bestaetigt den aktiven
+  Projektkern als FPC-/CLI-/SQLite-Basis.
+- In `src/`, `units/`, `tests/`, `scripts/`, `Makefile`,
+  `.github/workflows/ci.yml` und `.vscode/tasks.json` wurden keine aktiven
+  Lazarus-/LCL-Abhaengigkeiten und keine verbotenen Projektartefakte
+  (`.lpi`, `.lfm`, `.lrs`, `.lps`) gefunden.
+- `make build` ist die kanonische Build-Wahrheit; die CI fuehrt denselben
+  FPC-Build aus, und `.vscode/tasks.json` ist derzeit nur ein Komfort-
+  Frontend ohne abweichende Build-Logik.
+- Aktive Drift lag in Wording und Architekturrahmung, nicht im Runtime- oder
+  Buildpfad; `README.md`, `docs/README.md` und `docs/ARCHITECTURE.md` fuehren
+  jetzt dieselbe FPC-/CLI-Wahrheit.
+- `ADR-0016` ist als Strukturkandidat vorgeschlagen, `BL-0037` schneidet die
+  Folgearbeit fuer Purity-Guard und VS-Code-Build-Hardening.
+- Der naechste kleine Umsetzungsblock ist `TSK-0035`: ein expliziter
+  Fail-Fast-Purity-Check fuer den aktiven Baum und seine CI-/Make-Einbindung.
 
 ## Fundament & Architektur (erledigt)
 - CLI-first-Architektur mit klarem Orchestrator (`Betankungen.lpr`)

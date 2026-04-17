@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-15
+**Stand:** 2026-04-17
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,20 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Audit: Die Lazarus-Purity-Baseline ist jetzt belastbar
+  dokumentiert. `docs/LAZARUS_PURITY_AUDIT_2026-04-17.md` trennt aktive
+  Source-/Build-/Test-Evidence von Doku-Drift und historischem Kontext,
+  `ADR-0016` formuliert die FPC-/CLI-Architekturgrenze als vorgeschlagenen
+  Entscheid, und `BL-0037` schneidet daraus die Folgearbeit
+  `TSK-0035`/`TSK-0036`. Der Audit bestaetigt: keine aktiven
+  Lazarus-/LCL-Abhaengigkeiten im aktiven Baum, keine verbotenen
+  Projektartefakte (`.lpi`, `.lfm`, `.lrs`, `.lps`), `make build` bleibt die
+  kanonische Build-Wahrheit, `.vscode/tasks.json` ist derzeit nur
+  Komfort-Frontend, und die verbleibende Luecke ist ein noch fehlender
+  expliziter Fail-Fast-Purity-Check in der CI. `README.md`,
+  `docs/README.md`, `docs/ARCHITECTURE.md`, `docs/STATUS.md`,
+  `docs/BACKLOG.md`, `docs/SPRINTS.md` und `docs/ADR/README.md` fuehren
+  denselben Befund. (2026-04-17)
 - [General] Release/GitHub: Der sichtbare GitHub-Release-Handoff fuer den
   bestehenden Tag `1.4.0` ist jetzt publiziert. `README.md`,
   `docs/README.md`, `docs/README_EN.md`, `docs/ROADMAP_1_4_0.md`,

@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-03-31
+**Stand:** 2026-04-17
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -86,7 +86,8 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **Migration Source-of-Truth:** Aktive Schema-Migrationen laufen runtime-idempotent in `units/u_db_init.pas`; `migrations/` ist ein historisches SQL-Archiv (aktuell `v3_to_v4.sql`).
 - [x] **I18n-Skeleton (Sprint 4):** Sprachkontext `language=de|en|pl` ist im Config-Flow verankert; zentrale i18n-Unit `u_i18n` stellt `TMsgId` und `Tr()` als Einstiegspunkt bereit (ohne breite Textmigration).
 - [x] **I18n Runtime Mini-Rollout (S4C3/3):** Erste risikoarme Meta-/Konfigurationsmeldungen laufen ueber `Tr()` (u. a. Config-Status, First-Run-Hinweise, generische Systemmeldung), ohne breite Help-/Fehlertext-Migration.
-- [x] **Build-Integration:** Vollständige Synchronisation zwischen Lazarus-IDE und VS Code Build-Tasks.
+- [x] **Build-Truth:** `make build`, CI und Editor-Frontends fuehren denselben FPC-CLI-Build fuer `src/Betankungen.lpr` aus.
+- [x] **FPC-/CLI-Purity:** Der aktive Source-, Build- und Testpfad ist ohne Lazarus-/LCL-Abhaengigkeit; historische Erwaehnungen bleiben auf explizite Legacy-Kontexte begrenzt.
 - [x] **Logging-System:** Global steuerbares Logging mit Debug-Tabelle und Trace-Ausgaben.
 - [x] **Demo-DB:** Separater Seed-Workflow via `--seed` und Nutzung via `--demo`.
 - [x] **Tabellen-Renderer:** Leichtgewichtige Tabellen-Ausgabe via `TTable` (Stats).
