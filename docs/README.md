@@ -1,6 +1,6 @@
 # Betankungen
-**Stand:** 2026-04-15
-CLI-Projekt mit Free Pascal / Lazarus & SQLite
+**Stand:** 2026-04-17
+CLI-Projekt mit Free Pascal, Linux und SQLite
 
 ---
 
@@ -31,6 +31,8 @@ Das Projekt ist **lernorientiert**, aber nicht als Spielzeug gedacht.
 ## Architektur – Überblick
 
 - Terminalbasierte CLI-Anwendung (bewusst ohne GUI)
+- Aktiver Build- und Runtime-Pfad: reines FPC-/CLI-Projekt ohne aktive
+  Lazarus-/LCL-Abhaengigkeit
 - SQLite als lokale Datenbank (eine Datei, kein Server)
 - Modularer Aufbau mit klar getrennten Units
 - Keine Fach- oder SQL-Logik im Hauptprogramm

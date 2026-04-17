@@ -1,8 +1,8 @@
 # Betankungen
-**Stand:** 2026-04-15
+**Stand:** 2026-04-17
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
-data, built with Free Pascal/Lazarus.
+data, built with Free Pascal as a Linux CLI application.
 English entry path for first-time visitors: `docs/README_EN.md`. The public
 GitHub Wiki is the lighter browsing layer. Detailed repository docs under
 `docs/` stay German-first and remain the technical source of truth.
