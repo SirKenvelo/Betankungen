@@ -44,6 +44,7 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
   keine zweite Build-Wahrheit auf.
 - `TSK-0036` ist damit abgeschlossen; die aktive Dokumentation verweist
   weiterhin auf `make build` als kanonischen Build-Pfad.
+- Zugehoeriger Commit: `32c7a68`.
 - Dieser Block fuehrt bewusst keine Runtime-, CLI- oder Produktfeature-
   Aenderungen ein.
 
