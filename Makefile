@@ -1,17 +1,18 @@
 # CREATED: 2026-03-12
-# UPDATED: 2026-04-14
+# UPDATED: 2026-04-17
 
 SHELL := bash
 .SHELLFLAGS := -e -o pipefail -c
 
 FPC_BUILD_CMD := fpc -Mobjfpc -Sh -gl -gw -FEbin -FUbuild -Fuunits src/Betankungen.lpr
 
-.PHONY: help build lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check station-geodata-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-preflight-1-3-0 release-preflight-1-4-0 release-dry
+.PHONY: help build purity-check lint-docs tracker-lint contract-check contract-check-json contract-check-csv cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check station-geodata-check user-flow-break-check package-manifest-check wiki-link-check policy smoke-fixtures smoke smoke-clean verify stats-benchmark release-preflight release-preflight-1-0-0 release-preflight-1-1-0 release-preflight-1-3-0 release-preflight-1-4-0 release-dry
 
 help:
 	@echo "Verfuegbare Targets:"
 	@echo "  make build         - FPC-Standardbuild (bin/build/units)"
-	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Build + Contract + Policy + Smokes)"
+	@echo "  make purity-check  - Fail-fast-Guard fuer den aktiven FPC-/CLI-Baum"
+	@echo "  make verify        - Lokales CI-Gate (Docs-Lint + Tracker-Lint + Purity + Build + Contract + Policy + Smokes)"
 	@echo "  make cost-integration-check - Regression fuer Cost-Integrationsmodi (none/module/fallback)"
 	@echo "  make db-backup-ops-check - Regression fuer Multi-DB-Backup-Operations (single/all/dry-run/retention)"
 	@echo "  make fuel-price-history-check - Regression fuer getrennten Preis-Historienpfad (runner/raw/db/state)"
@@ -33,6 +34,9 @@ help:
 build:
 	mkdir -p bin build units
 	$(FPC_BUILD_CMD)
+
+purity-check:
+	scripts/lazarus_purity_check.sh
 
 lint-docs:
 	scripts/sprint_docs_lint.sh
@@ -87,7 +91,7 @@ smoke:
 smoke-clean:
 	tests/smoke/smoke_clean_home.sh --modules
 
-verify: lint-docs tracker-lint wiki-link-check build contract-check cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check station-geodata-check user-flow-break-check policy smoke-fixtures smoke smoke-clean
+verify: lint-docs tracker-lint purity-check wiki-link-check build contract-check cost-integration-check db-backup-ops-check fuel-price-history-check receipt-link-check station-geodata-check user-flow-break-check policy smoke-fixtures smoke smoke-clean
 
 stats-benchmark:
 	tests/benchmark/run_stats_benchmark.sh

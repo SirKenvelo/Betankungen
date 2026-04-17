@@ -3,6 +3,33 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Fail-fast-Purity-Guard fuer aktiven Baum schneiden
+
+- Status: done
+- Ziel: den im Audit bestaetigten FPC-/CLI-Iststand als operativen
+  Guardrail festziehen, damit neue Lazarus-/LCL-Drift im aktiven Baum lokal
+  und in der CI frueh und nachvollziehbar blockiert wird.
+
+### Stand (2026-04-17)
+
+- `scripts/lazarus_purity_check.sh` fuehrt jetzt den dedizierten Purity-Check
+  fuer `src/`, `units/`, `tests/`, `scripts/`, `Makefile`,
+  `.github/workflows/` und `.vscode/tasks.json` aus.
+- Der Guardrail trennt bewusst aktive Suchflaeche von historischem Kontext,
+  prueft verbotene Projektartefakte (`.lpi`, `.lfm`, `.lrs`, `.lps`),
+  Lazarus-Build-Commands (`lazbuild`) sowie aktive GUI-/LCL-Tokens und
+  vermeidet naive Teilstring-Falschalarme wie `TFormatSettings`.
+- `make verify` fuehrt den Check jetzt vor dem Build aus; die CI zieht
+  denselben Schritt vor Dependency-Installation und FPC-Compile.
+- `TSK-0035` ist damit auf `done`; `TSK-0036` bleibt der naechste kleine
+  Folgeblock fuer das VS-Code-Build-Frontend.
+- Dieser Block fuehrt bewusst keine Runtime-, CLI-, TUI- oder
+  Produktfeature-Aenderungen ein.
+
+### Validierung
+
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Lazarus-Purity-Baseline auditieren
 
 - Status: done
