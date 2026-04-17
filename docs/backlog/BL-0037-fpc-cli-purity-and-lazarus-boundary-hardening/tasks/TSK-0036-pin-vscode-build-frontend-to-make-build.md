@@ -1,7 +1,7 @@
 ---
 id: TSK-0036
 title: VS-Code-Build-Frontend an make build binden
-status: todo
+status: done
 priority: P2
 type: task
 tags: [build, tooling, vscode, cli]
@@ -15,8 +15,8 @@ related:
 
 # Task
 `.vscode/tasks.json` so nachziehen, dass der Editor-Build explizit auf
-`make build` oder einen gleichwertig kanonischen Wrapper zeigt statt einen
-separat gepflegten FPC-Compile-String zu duplizieren.
+`make build` zeigt statt einen separat gepflegten FPC-Compile-String zu
+duplizieren.
 
 # Notes
 - Der Audit bewertet `.vscode/tasks.json` aktuell als Komfort-Frontend ohne
@@ -27,8 +27,7 @@ separat gepflegten FPC-Compile-String zu duplizieren.
   Build-Wahrheit aufbaut.
 
 # Done When
-- [ ] Der VS-Code-Build verweist auf `make build` oder eine gleichwertig
-  kanonische Huelle.
-- [ ] Es gibt keinen separat zu pflegenden konkurrierenden Build-String mehr.
-- [ ] Doku und Audit-Verweise benennen `.vscode/tasks.json` explizit als
+- [x] Der VS-Code-Build verweist auf `make build`.
+- [x] Es gibt keinen separat zu pflegenden konkurrierenden Build-String mehr.
+- [x] Doku und Audit-Verweise benennen `.vscode/tasks.json` explizit als
   Komfort-Frontend.

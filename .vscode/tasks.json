@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build (make build)",
+      "type": "shell",
+      "command": "make",
+      "args": ["build"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$gcc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Clean (bin/build/.o/.ppu)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "rm -rf build bin && find . -name '*.o' -delete && find . -name '*.ppu' -delete"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

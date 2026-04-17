@@ -1,7 +1,7 @@
 ---
 id: BL-0037
 title: FPC-CLI-Purity und Lazarus-Grenzen absichern
-status: proposed
+status: done
 priority: P2
 type: improvement
 tags: [architecture, audit, build, docs, cli, 'lane:planned']
@@ -44,10 +44,10 @@ Out of Scope:
 
 # Output
 Der Audit ist jetzt in belastbare Folgearbeit uebersetzt: `ADR-0016` rahmt die
-Architekturgrenze, `TSK-0035` schneidet den Purity-Guard, `TSK-0036` das
-VS-Code-Build-Hardening. Der empfohlene erste Umsetzungsblock ist
-`TSK-0035`.
+Architekturgrenze, `TSK-0035` schneidet den Purity-Guard, und `TSK-0036`
+bindet das VS-Code-Build-Frontend an `make build`. Der Block ist damit
+abgeschlossen.
 
 # Derived Tasks
 - `TSK-0035` - Fail-Fast-Purity-Check fuer aktiven Baum und CI einfuehren.
-- `TSK-0036` - VS-Code-Build-Frontend an `make build` binden.
+- `TSK-0036` - VS-Code-Build-Frontend an `make build` binden. (`done`)

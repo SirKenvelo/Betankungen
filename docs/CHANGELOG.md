@@ -10,6 +10,15 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Tooling/Build: `.vscode/tasks.json` ruft den Editor-Build jetzt
+  direkt ueber `make build` auf. Damit spiegelt das VS-Code-Frontend die
+  kanonische Build-Wahrheit aus dem `Makefile`, ohne einen separat gepflegten
+  FPC-Compile-String zu duplizieren. Der Clean-Task bleibt als getrennte
+  Komfortfunktion erhalten; `docs/STATUS.md`, `docs/SPRINTS.md`,
+  `docs/BACKLOG.md` und
+  `docs/backlog/BL-0037-fpc-cli-purity-and-lazarus-boundary-hardening/tasks/TSK-0036-pin-vscode-build-frontend-to-make-build.md`
+  fuehren denselben Abschlussstand. Es wurden keine Runtime- oder
+  Produktfeatures eingefuehrt. (2026-04-17)
 - [General] Build/CI/Guardrail: `scripts/lazarus_purity_check.sh` fuehrt
   jetzt einen expliziten Fail-Fast-Purity-Check fuer den aktiven Baum aus:
   `src/`, `units/`, `tests/`, `scripts/`, `Makefile`,
@@ -91,6 +100,7 @@ ohne automatisch eine `1.5.0-dev`-Linie zu starten.
   eingefuehrt. (2026-04-14)
 
 ### Sprint / Commit References
+- General-2026-04-17-vscode-make-build-frontend - VS-Code-Build-Frontend an `make build` gebunden (`.vscode/tasks.json`, `docs/STATUS.md`, `docs/SPRINTS.md`, `docs/BACKLOG.md`, `docs/backlog/BL-0037-fpc-cli-purity-and-lazarus-boundary-hardening/item.md`, `docs/backlog/BL-0037-fpc-cli-purity-and-lazarus-boundary-hardening/tasks/TSK-0036-pin-vscode-build-frontend-to-make-build.md`); Basis-Commit: `32c7a68`. (2026-04-17)
 - General-2026-04-15-1-4-0-gate4-closeout - Finalen RC-/Freeze-Snapshot fuer `1.4.0` dokumentiert (`docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`, `docs/STATUS.md`, `docs/CHANGELOG.md`, `docs/SPRINTS.md`); Basis-Commit: `326299a`. (2026-04-15)
 - S40C1/2 - Ersten read-only Referenzscreen fuer `Betankungen --list fuelups --detail` geliefert (`units/u_painter.pas`, `units/u_view_fuelups.pas`, `units/u_fuelups.pas`, `tests/regression/run_receipt_link_contract_check.sh`, `tests/smoke/smoke_cli.sh`, `tests/smoke/smoke_multi_car_context.sh`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/item.md`, `docs/backlog/BL-0033-tui-presentation-and-view-layer-refresh/tasks/TSK-0029-implement-fuelups-detail-reference-screen.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/README.md`, `docs/BENUTZERHANDBUCH.md`); Artefakte: `.artifacts/sprint_40_commit_1_von_2.md`, `.artifacts/sprint_40_commit_1_von_2.diff`; Basis-Commit: `e9dc1c0`. (2026-04-08)
 - S39C1/2 - `P-050`-Reset-Guidance vom normalen Kurzdistanz-Fuelup entkoppelt und einen manuellen Reset nur noch ueber den expliziten Ausnahme-Opt-in `--missed-previous` erreichbar gemacht (`src/Betankungen.lpr`, `units/u_cli_types.pas`, `units/u_cli_parse.pas`, `units/u_cli_validate.pas`, `units/u_cli_help.pas`, `units/u_fuelups.pas`, `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas`, `tests/domain_policy/cases/t_p050__01__manual_gap_flag_yes.sh`, `tests/domain_policy/cases/t_p050__02__manual_gap_flag_no.sh`, `tests/domain_policy/cases/t_p051__01__no_auto_gap_flag_without_confirm.sh`, `tests/domain_policy/p050.md`, `tests/domain_policy/p051.md`, `tests/domain_policy/README.md`, `tests/smoke/smoke_multi_car_context.sh`, `docs/BENUTZERHANDBUCH.md`, `docs/README.md`, `docs/BACKLOG.md`, `docs/STATUS.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/item.md`, `docs/backlog/BL-0031-fuelup-input-semantics-and-guidance-hardening/tasks/TSK-0028-decouple-p050-reset-guidance-from-normal-fuelup-flow.md`, `docs/issues/ISS-0010-p050-reset-prompt-misleading-for-normal-distances/issue.md`); Artefakte: `.artifacts/sprint_39_commit_1_von_2.md`, `.artifacts/sprint_39_commit_1_von_2.diff`; Basis-Commit: `8be52b1`. (2026-04-07)
