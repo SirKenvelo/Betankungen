@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-17
+**Stand:** 2026-04-18
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,17 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Audit: Der Audit-Block fuer Dokumentation, Wiki und externe
+  Evidence ist jetzt als belastbarer Befund geschnitten. Die Repo-Doku bleibt
+  im Kern auf dem `1.4.0`-Stand konsistent, aber der Audit trennt jetzt
+  explizit zwischen inhaltlicher Drift, Sichtbarkeitsproblem und
+  Strukturdrift: `docs/wiki/CLI-Quick-Reference.md` fuehrt veraltete
+  Beispielkommandos, `docs/DEV_DIARY.md` ist sauber gerahmt, aber im
+  Entry-/Wiki-Handoff zu schwach sichtbar, und die externe
+  Audit-/Nutzertest-Ablage braucht eine klarere Evidence-Indexschicht.
+  `BL-0038` uebersetzt diese Befunde in vier kleine Folge-Tasks
+  (`TSK-0037` bis `TSK-0040`), ohne Runtime-, Build- oder Datenmodell-
+  Aenderungen einzufuehren. (2026-04-18)
 - [General] Tooling/Build: `.vscode/tasks.json` ruft den Editor-Build jetzt
   direkt ueber `make build` auf. Damit spiegelt das VS-Code-Frontend die
   kanonische Build-Wahrheit aus dem `Makefile`, ohne einen separat gepflegten
