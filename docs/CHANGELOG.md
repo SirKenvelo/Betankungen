@@ -10,6 +10,17 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Wiki: `docs/wiki/CLI-Quick-Reference.md` auf den aktuellen
+  Core-CLI-Stand gezogen. Die Seite rahmt jetzt `make build` und
+  `./bin/Betankungen --help` als Wahrheitsbasis, entfernt das ungueltige
+  `--init`, ersetzt die alten Core-Beispiele durch aktuelle Flows
+  (`--add stations`, `--add cars`, `--add fuelups`, `--list fuelups --detail`,
+  `--stats fuelups --json --pretty`, `--stats cost --maintenance-source none`,
+  `--stats cost --maintenance-source module`, `--seed`) und trennt den
+  optionalen Companion `betankungen-maintenance` sichtbar vom Core.
+  `docs/STATUS.md`, `docs/SPRINTS.md` und die Task-Datei zu `TSK-0037`
+  fuehren denselben Abschlussstand. Es wurden keine Runtime- oder
+  Parser-Aenderungen eingefuehrt. (2026-04-18)
 - [General] Docs/Audit: Der Audit-Block fuer Dokumentation, Wiki und externe
   Evidence ist jetzt als belastbarer Befund geschnitten. Die Repo-Doku bleibt
   im Kern auf dem `1.4.0`-Stand konsistent, aber der Audit trennt jetzt
@@ -1043,6 +1054,9 @@ ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Doku-Sync und Plausibilisierung gegen `make build` und
+  `./bin/Betankungen --help` erfolgten mit Unterstuetzung durch AI-Tools als
+  Sparringspartner. (2026-04-18)
 - Entry-Signal-Schaerfung, Tracker-Sync und die zugehoerige
   Traceability-Pflege fuer `TSK-0033` erfolgten mit Unterstuetzung durch
   AI-Tools als Sparringspartner. (2026-04-12)

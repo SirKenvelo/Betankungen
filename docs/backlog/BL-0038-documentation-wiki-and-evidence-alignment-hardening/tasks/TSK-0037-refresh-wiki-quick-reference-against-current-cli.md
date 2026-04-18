@@ -1,7 +1,7 @@
 ---
 id: TSK-0037
 title: Wiki-Quick-Reference auf aktuellen CLI-/Build-Stand ziehen
-status: todo
+status: done
 priority: P1
 type: task
 tags: [docs, wiki, cli, public-readiness]
@@ -28,10 +28,10 @@ Referenzlinks keine falschen oder veralteten Nutzersignale mehr senden.
   Core-Kommandos und Build-/Pfadvoraussetzungen getrennt werden.
 
 # Done When
-- [ ] `docs/wiki/CLI-Quick-Reference.md` verwendet nur aktuelle, technisch
+- [x] `docs/wiki/CLI-Quick-Reference.md` verwendet nur aktuelle, technisch
   wahre Core-Beispiele.
-- [ ] Build-/Startpfad ist konsistent zu `README.md`, `docs/README_EN.md` und
-  `Betankungen --help`.
-- [ ] Verlinkte Vertrags- und Referenzdokumente sind noch passend und bewusst
+- [x] Build-/Startpfad ist konsistent zu `README.md`, `docs/README_EN.md` und
+  `./bin/Betankungen --help`.
+- [x] Verlinkte Vertrags- und Referenzdokumente sind noch passend und bewusst
   ausgewaehlt.
-- [ ] `make wiki-link-check` laeuft nach dem Doku-Sync gruen.
+- [x] `make wiki-link-check` laeuft nach dem Doku-Sync gruen.
