@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-17
+**Stand:** 2026-04-18
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -37,6 +37,10 @@
     nachvollziehbar, ist aber bereits eingeloest.
   - `BL-0011` bleibt fuer `Betankungen` repo-seitig geschlossen:
     `docs/BL-0011_SCOPE_DECISION_1_4_0.md`.
+  - `TSK-0037` ist abgeschlossen: `docs/wiki/CLI-Quick-Reference.md`
+    spiegelt jetzt die aktuelle Core-CLI-Wahrheit aus `make build` und
+    `./bin/Betankungen --help` und trennt den optionalen Companion-Binary-
+    Pfad sichtbar vom Core.
   - Der lokale Readiness-Entrypoint
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
     bleibt als historischer Gate-4-Nachweis erhalten.

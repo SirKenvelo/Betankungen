@@ -1,5 +1,5 @@
 # SPRINTS
-**Stand:** 2026-04-17
+**Stand:** 2026-04-18
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
@@ -28,6 +28,31 @@ Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Ar
 
 ### Validierung
 
+- `make verify`
+
+## General-Stream nach Sprint 40 - Wiki-Quick-Reference an aktuellen CLI-/Build-Stand anpassen
+
+- Status: done
+- Ziel: die oeffentliche Wiki-Quick-Reference auf die aktuelle Core-CLI-
+  Wahrheit ziehen, veraltete Beispielpfade entfernen und den optionalen
+  Companion sauber vom Core abgrenzen.
+
+### Stand (2026-04-18)
+
+- `docs/wiki/CLI-Quick-Reference.md` rahmt jetzt `make build` und
+  `./bin/Betankungen --help` als belastbare Eintrittspunkte.
+- Das ungueltige Core-Beispiel `Betankungen --init` wurde entfernt.
+- Die Core-Beispiele wurden auf aktuelle Flows wie `--add stations`,
+  `--add cars`, `--add fuelups`, `--list fuelups --detail`,
+  `--stats fuelups` und `--stats cost --maintenance-source none|module`
+  reduziert.
+- Der Companion-Pfad `betankungen-maintenance` ist jetzt klar als
+  optionales, getrenntes Binary beschrieben.
+- Dieser Block fuehrt bewusst keine Runtime- oder Parser-Aenderungen ein.
+
+### Validierung
+
+- `make wiki-link-check`
 - `make verify`
 
 ## General-Stream nach Sprint 40 - VS-Code-Build-Frontend an make build binden
