@@ -1,5 +1,5 @@
 # Backlog
-**Stand:** 2026-04-17
+**Stand:** 2026-04-18
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
@@ -67,6 +67,7 @@ Neue `BL-xxxx` und neue `TSK-xxxx` werden nur in dieser Struktur angelegt.
 - [BL-0035 - Public-Repo-Entry-Audit und Onboarding-Hardening](backlog/BL-0035-public-repo-entry-audit-and-onboarding-hardening/item.md) - Status: `done`, Typ: Research (zweistufiger GitHub-Entry-Audit fuer Professionalitaet, Orientierung und Contributor-Onboarding ist abgeschlossen; daraus sind `ISS-0011` fuer README-/Quick-Start-Friktion, `ISS-0012` fuer Release-Signal vs. GitHub-Releases und `BL-0036` fuer spaeteres Contributor-/English-Entry-Hardening hervorgegangen; ein neuer `ADR` war nicht noetig), Lane: `planned`, Tasks: `TSK-0030` (`done`), `TSK-0031` (`done`)
 - [BL-0036 - Contributor Onboarding and English Entry-Layer Hardening](backlog/BL-0036-contributor-onboarding-and-english-entry-layer-hardening/item.md) - Status: `done`, Typ: Improvement (der erste Slice fuer einen kompakten Contributor-Quickstart in `CONTRIBUTING.md` ist geliefert; `TSK-0033` hat die englischen Entry-Signale fuer Erstbesucher sichtbarer gemacht; `TSK-0034` beruhigt jetzt den README-/Wiki-/`CONTRIBUTING.md`-Handoff ohne neue Einstiegsebene), Lane: `planned`, Tasks: `TSK-0032` (`done`), `TSK-0033` (`done`), `TSK-0034` (`done`)
 - [BL-0037 - FPC-CLI-Purity und Lazarus-Grenzen absichern](backlog/BL-0037-fpc-cli-purity-and-lazarus-boundary-hardening/item.md) - Status: `done`, Typ: Improvement (der Audit vom 2026-04-17 bestaetigt einen aktiven FPC-/CLI-Kern ohne Lazarus-/LCL-Abhaengigkeit; `ADR-0016` rahmt die Architekturgrenze, `TSK-0035` schneidet den Fail-Fast-Purity-Check und `TSK-0036` bindet das VS-Code-Build-Frontend jetzt an `make build`), Lane: `planned`, Tasks: `TSK-0035` (`done`), `TSK-0036` (`done`)
+- [BL-0038 - Dokumentations-, Wiki- und Evidence-Ausrichtung nachschaerfen](backlog/BL-0038-documentation-wiki-and-evidence-alignment-hardening/item.md) - Status: `proposed`, Typ: Improvement (Audit-Folgeblock fuer veraltete Wiki-Kommandos, schwache `DEV_DIARY`-Sichtbarkeit, externe Evidence-Navigation und bewusst begrenzte English-Public-Readiness), Lane: `planned`, Tasks: `TSK-0037` (`todo`), `TSK-0038` (`todo`), `TSK-0039` (`todo`), `TSK-0040` (`todo`)
 
 ## Legacy Backlog-Index (BL-0xx)
 
