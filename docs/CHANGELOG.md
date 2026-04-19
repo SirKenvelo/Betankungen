@@ -10,6 +10,15 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Audit: Die Governance-Guardrails-, Artefakt-Policy- und
+  Template-Propagation-Baseline ist jetzt als externer Audit-Lauf
+  dokumentiert. Der Befund trennt Tracker-, PR-, Merge-, Tag- und Prompt-
+  Domaenen klarer, belegt die heutigen Weichstellen zwischen `AGENTS.md`,
+  `docs/GIT_WORKFLOW.md`, `scripts/projtrack_lint.sh` und der externen
+  Template-Schicht und empfiehlt als naechsten kleinen Hardening-Block eine
+  kanonische Artefaktmatrix samt domainenscharfer `Notes`-Entscheidung. Der
+  uebergreifende Backlog-Index fuehrt `BL-0038` jetzt ebenfalls auf `done`;
+  es wurden keine Runtime-Aenderungen eingefuehrt. (2026-04-19)
 - [General] Docs/Public-Readiness: Der englische Public-Entry-Scope ist jetzt
   explizit geschnitten statt implizit ausgedehnt. `CONTRIBUTING.md` und
   `SECURITY.md` fuehren denselben stabilen `1.4.0`-Hold wie die Entry-Seiten,
