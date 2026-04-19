@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-18
+**Stand:** 2026-04-19
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,18 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Audit: Die externe Audit-Ablage fuehrt jetzt eine kleine,
+  explizite Evidence-Indexschicht statt nur loser Root-Hinweise.
+  `/home/christof/Projekte/Audit/Betankungen/README.md` rahmt den Einstieg
+  ruhiger, `EVIDENCE_INDEX.md` trennt konkrete Audit-Evidence, ausgelagerte
+  Follow-up-Befunde, Planungsnotizen und nicht-evidente Hilfsordner sauber,
+  und neue Rollen-READMEs in `runs/`, `plans/` und `issues/` machen die
+  Unterordner lesbarer. Die separate Nutzertest-Ablage unter
+  `/home/christof/Dokumente/Betankungen_Nutzertests` ist jetzt als eigene
+  externe Evidence-Quelle dokumentiert angebunden, ohne Dateien zu
+  verschieben oder Inhalte zu duplizieren. `TSK-0038` fuehrt denselben
+  Abschlussstand; es wurden keine Runtime-, Build- oder Wiki-Quick-
+  Reference-Aenderungen eingefuehrt. (2026-04-19)
 - [General] Docs/Wiki: `docs/wiki/CLI-Quick-Reference.md` auf den aktuellen
   Core-CLI-Stand gezogen. Die Seite rahmt jetzt `make build` und
   `./bin/Betankungen --help` als Wahrheitsbasis, entfernt das ungueltige
