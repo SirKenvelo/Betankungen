@@ -48,6 +48,10 @@
     `/home/christof/Dokumente/Betankungen_Nutzertests` ist als eigene
     externe Evidence-Quelle dokumentiert angebunden, ohne Big-Bang-Umbau
     oder Inhaltsduplikation.
+  - `TSK-0039` ist abgeschlossen: `docs/DEV_DIARY.md` ist im
+    Entry-/Wiki-Handoff sichtbarer gerahmt und klarer von
+    `docs/CHANGELOG.md` und `docs/SPRINTS.md` abgegrenzt, ohne einen neuen
+    Doku-Hauptpfad einzufuehren.
   - Der lokale Readiness-Entrypoint
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
     bleibt als historischer Gate-4-Nachweis erhalten.
@@ -521,7 +525,8 @@ Bereits erledigt:
     verankert.
   - Non-blocking Doku-Stream `BL-0023` ist abgeschlossen: Dev-Diary-Baustein
     (`docs/DEV_DIARY.md`) mit initialem Eintrag und Tracker-/Navigations-Sync
-    ist verankert.
+    ist verankert; die aktuelle Sichtbarkeit im Entry-/Wiki-Handoff wurde
+    spaeter mit `TSK-0039` nachgeschaerft.
   - historische Folge-Reihenfolge beim 1.2.0-Abschluss: `1.3.0` = Option B
     (`BL-0017` + `BL-0018`); `1.4.0` war initial als Option C
     (`BL-0016` + `BL-0011`) vorgemerkt und wurde in Sprint 24 fuer das

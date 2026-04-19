@@ -71,7 +71,9 @@ Entry-Signale.
 - `TSK-0038` ist `done`: Die externe Audit-Ablage hat jetzt eine kleine
   Evidence-Indexschicht und eine explizite Bruecke zur separaten
   Nutzertest-Ablage.
-- `TSK-0039` und `TSK-0040` bleiben als getrennte Folgearbeit offen.
+- `TSK-0039` ist `done`: `docs/DEV_DIARY.md` ist im Entry-/Wiki-Handoff
+  sichtbarer und eindeutiger als kuratierte Chronik gerahmt.
+- `TSK-0040` bleibt als getrennte Folgearbeit offen.
 
 # Derived Tasks
 - `TSK-0037` - Wiki-Quick-Reference auf aktuellen CLI-/Build-Stand ziehen.

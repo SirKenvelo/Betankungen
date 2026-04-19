@@ -1,8 +1,12 @@
 # Dev Diary
-**Stand:** 2026-03-24
+**Stand:** 2026-04-19
 
 Kuratiertes Entwicklungsjournal mit bewusst knappen, projektbezogenen
 Notizen zu Entscheidungen, Huerden und Learnings.
+
+Diese Seite ist absichtlich sichtbar eingebunden, wenn ein Leser nach dem
+Warum hinter einem Schritt sucht. Sie bleibt aber eine Chronik und ersetzt
+weder Release-Fakten noch Sprint-Traceability.
 
 ## Zielbild
 
@@ -22,6 +26,10 @@ Es beantwortet vor allem:
   - Wie lief die Sprintfolge (Ziel, Commit-Folge, Traceability).
 - `docs/DEV_DIARY.md` + `docs/dev_diary/*.md`:
   - Warum sich ein Schritt menschlich/konzeptionell relevant angefuehlt hat.
+- Entry-/Wiki-Handoff:
+  - `README.md`, `docs/README.md`, `docs/README_EN.md` und `docs/wiki/*`
+    verlinken diese Chronik bewusst sichtbar, halten sie aber ausserhalb des
+    technischen Hauptpfads.
 
 ## Leitplanken
 
