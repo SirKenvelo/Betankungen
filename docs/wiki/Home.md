@@ -7,6 +7,10 @@ The repository documentation under `docs/` remains the German technical
 source of truth. For the human project chronicle, use `docs/DEV_DIARY.md`;
 it stays visible from the entry layer, but it is intentionally secondary to
 release facts and sprint traceability.
+English bridge pages stay intentionally small: the main entry, English repo
+entry, contribution guide, security policy, and core wiki pages should stay
+current, while deeper status, roadmap, and tracker material remains
+German-first inside the repository.
 
 ## Core Entry Pages
 

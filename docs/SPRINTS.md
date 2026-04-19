@@ -3,6 +3,35 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Selektive English-Public-Readiness-Folgepfade schneiden
+
+- Status: done
+- Ziel: kleine englische Brueckenschichten fuer Public Entry, Orientierung
+  und Policy sauber von tieferer deutsch/intern gehaltener Repo-Doku trennen, ohne
+  einen Volluebersetzungsauftrag zu erzeugen.
+
+### Stand (2026-04-19)
+
+- `TSK-0040` ist abgeschlossen: Die priorisierte englische Schicht bleibt auf
+  `README.md`, `docs/README_EN.md`, `CONTRIBUTING.md`, `SECURITY.md` und den
+  Wiki-Entry-/Quick-Reference-Pfad begrenzt.
+- `CONTRIBUTING.md` und `SECURITY.md` fuehren jetzt denselben stabilen
+  `1.4.0`-Hold wie die bereits aktualisierten Entry-Seiten.
+- `docs/README_EN.md` und `docs/wiki/Home.md` benennen jetzt explizit, dass
+  tiefe Status-, Roadmap-, Release- und Tracker-Doku bewusst deutsch/intern
+  bleibt.
+- `docs/backlog/BL-0038-documentation-wiki-and-evidence-alignment-hardening/item.md`,
+  die Task-Datei sowie `docs/CHANGELOG.md` und `docs/STATUS.md` fuehren
+  denselben Abschlussstand.
+- Dieser Block fuehrt bewusst keine Runtime-, Build-, Parser-, Evidence-
+  Index- oder Wiki-Quick-Reference-Aenderungen ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make wiki-link-check`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Dev-Diary-Sichtbarkeit und Rollenrahmung schaerfen
 
 - Status: done

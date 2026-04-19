@@ -10,6 +10,14 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Public-Readiness: Der englische Public-Entry-Scope ist jetzt
+  explizit geschnitten statt implizit ausgedehnt. `CONTRIBUTING.md` und
+  `SECURITY.md` fuehren denselben stabilen `1.4.0`-Hold wie die Entry-Seiten,
+  und `docs/README_EN.md` sowie `docs/wiki/Home.md` benennen jetzt
+  ausdruecklich die kleine englische Brueckenschicht fuer Public Entry,
+  Contribution und Policy. Tiefe Status-, Roadmap-, Release- und Tracker-Doku
+  bleibt bewusst deutsch/intern; es wurden keine Runtime-Aenderungen
+  eingefuehrt. (2026-04-19)
 - [General] Docs/Entry: `docs/DEV_DIARY.md` ist jetzt in README,
   `docs/README.md`, `docs/README_EN.md` und den Wiki-Startseiten sichtbarer
   als kuratierte Projektchronik gerahmt. Die Entry-Texte grenzen den Diary-
@@ -1073,9 +1081,8 @@ ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
-- Doku-Sync und Plausibilisierung gegen `make build` und
-  `./bin/Betankungen --help` erfolgten mit Unterstuetzung durch AI-Tools als
-  Sparringspartner. (2026-04-18)
+- Doku-Sync, Public-Truth-Plausibilisierung und Scope-Zuschnitt erfolgten
+  mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-04-19)
 - Entry-Signal-Schaerfung, Tracker-Sync und die zugehoerige
   Traceability-Pflege fuer `TSK-0033` erfolgten mit Unterstuetzung durch
   AI-Tools als Sparringspartner. (2026-04-12)

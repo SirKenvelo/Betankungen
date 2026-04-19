@@ -52,6 +52,12 @@
     Entry-/Wiki-Handoff sichtbarer gerahmt und klarer von
     `docs/CHANGELOG.md` und `docs/SPRINTS.md` abgegrenzt, ohne einen neuen
     Doku-Hauptpfad einzufuehren.
+  - `TSK-0040` ist abgeschlossen: Die englische Public-Readiness bleibt
+    bewusst auf eine kleine Brueckenschicht fuer Public Entry, Contribution,
+    Security und Wiki-Einstieg begrenzt. Tiefe Status-, Roadmap-, Release-
+    und Tracker-Doku bleibt bewusst deutsch/intern; `CONTRIBUTING.md` und
+    `SECURITY.md` fuehren jetzt denselben stabilen `1.4.0`-Hold wie die
+    Entry-Seiten.
   - Der lokale Readiness-Entrypoint
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
     bleibt als historischer Gate-4-Nachweis erhalten.

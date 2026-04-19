@@ -1,7 +1,7 @@
 ---
 id: BL-0038
 title: Dokumentations-, Wiki- und Evidence-Ausrichtung nachschaerfen
-status: proposed
+status: done
 priority: P2
 type: improvement
 tags: [docs, wiki, audit, evidence, public-readiness, navigation, 'lane:planned']
@@ -73,7 +73,10 @@ Entry-Signale.
   Nutzertest-Ablage.
 - `TSK-0039` ist `done`: `docs/DEV_DIARY.md` ist im Entry-/Wiki-Handoff
   sichtbarer und eindeutiger als kuratierte Chronik gerahmt.
-- `TSK-0040` bleibt als getrennte Folgearbeit offen.
+- `TSK-0040` ist `done`: Der englische Public-Readiness-Folgepfad ist jetzt
+  bewusst geschnitten. Kleine englische Bruecken fuer Public Entry,
+  Contribution und Security bleiben priorisiert; tiefe Status-, Roadmap- und
+  Tracker-Doku bleibt bewusst deutsch/intern.
 
 # Derived Tasks
 - `TSK-0037` - Wiki-Quick-Reference auf aktuellen CLI-/Build-Stand ziehen.
