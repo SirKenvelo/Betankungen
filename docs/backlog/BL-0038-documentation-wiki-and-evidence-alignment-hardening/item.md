@@ -6,13 +6,13 @@ priority: P2
 type: improvement
 tags: [docs, wiki, audit, evidence, public-readiness, navigation, 'lane:planned']
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-19
 related:
   - BL-0023
   - BL-0035
   - BL-0036
 ---
-**Stand:** 2026-04-18
+**Stand:** 2026-04-19
 
 # Goal
 Die im Audit vom 2026-04-18 gefundenen Doku-, Wiki- und Evidence-Friktionen in
@@ -64,6 +64,14 @@ technisch wahr und besser navigierbar machen: aktuelle Wiki-Kommandos,
 klarere DEV-Diary-Einordnung, eine lesbare Bruecke zwischen Audit-Ordner und
 Nutzertest-Ablage sowie ein bewusst begrenzter Plan fuer weitere englische
 Entry-Signale.
+
+# Progress
+- `TSK-0037` ist `done`: Die Wiki-Quick-Reference fuehrt wieder auf den
+  aktuellen Core-CLI-/Build-Stand.
+- `TSK-0038` ist `done`: Die externe Audit-Ablage hat jetzt eine kleine
+  Evidence-Indexschicht und eine explizite Bruecke zur separaten
+  Nutzertest-Ablage.
+- `TSK-0039` und `TSK-0040` bleiben als getrennte Folgearbeit offen.
 
 # Derived Tasks
 - `TSK-0037` - Wiki-Quick-Reference auf aktuellen CLI-/Build-Stand ziehen.

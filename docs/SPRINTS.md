@@ -1,7 +1,35 @@
 # SPRINTS
-**Stand:** 2026-04-18
+**Stand:** 2026-04-19
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - Externe Evidence-Indexschicht und Nutzertest-Bruecke schneiden
+
+- Status: done
+- Ziel: die externe Audit-Ablage fuer Evidence-Nutzung lesbarer machen, ohne
+  Historie umzuziehen, und die separate Nutzertest-Ablage als eigene Quelle
+  sichtbar an den Audit-Einstieg anbinden.
+
+### Stand (2026-04-19)
+
+- `/home/christof/Projekte/Audit/Betankungen/README.md` rahmt den Einstieg
+  jetzt klarer zwischen aktuellem Evidence-Zugriff, historischen Root-
+  Artefakten und nicht-evidenten Hilfsordnern.
+- `EVIDENCE_INDEX.md` im externen Audit-Root trennt konkrete Audit-Runs,
+  ausgelagerte Follow-up-Befunde, Planungsnotizen und die separate
+  Nutzertest-Ablage als eigenstaendige externe Evidence-Quelle.
+- Neue Rollen-READMEs in `runs/`, `plans/` und `issues/` machen die
+  Unterordner semantisch ruhiger, ohne einen Big-Bang-Umzug bestehender
+  Dateien zu erzwingen.
+- `TSK-0038` ist damit abgeschlossen; repo-seitig wurde nur der knappe
+  Traceability-Sync in `docs/CHANGELOG.md`, `docs/STATUS.md` und dieser
+  Sprint-Narrative nachgezogen.
+- Dieser Block fuehrt bewusst keine Runtime-, Build-, Parser- oder Wiki-
+  Quick-Reference-Aenderungen ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
 
 ## General-Stream nach Sprint 40 - Fail-fast-Purity-Guard fuer aktiven Baum schneiden
 

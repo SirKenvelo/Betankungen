@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-18
+**Stand:** 2026-04-19
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -41,6 +41,13 @@
     spiegelt jetzt die aktuelle Core-CLI-Wahrheit aus `make build` und
     `./bin/Betankungen --help` und trennt den optionalen Companion-Binary-
     Pfad sichtbar vom Core.
+  - `TSK-0038` ist abgeschlossen: Die externe Audit-Ablage unter
+    `/home/christof/Projekte/Audit/Betankungen` fuehrt jetzt eine kleine
+    Evidence-Indexschicht mit klaren Rollen fuer `runs/`, `plans/` und
+    `issues/`; die separate Nutzertest-Ablage unter
+    `/home/christof/Dokumente/Betankungen_Nutzertests` ist als eigene
+    externe Evidence-Quelle dokumentiert angebunden, ohne Big-Bang-Umbau
+    oder Inhaltsduplikation.
   - Der lokale Readiness-Entrypoint
     `scripts/release_preflight_1_4_0.sh` / `make release-preflight-1-4-0`
     bleibt als historischer Gate-4-Nachweis erhalten.
