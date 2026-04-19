@@ -1,11 +1,13 @@
 # Betankungen Documentation (English Entry)
-**Stand:** 2026-04-15
+**Stand:** 2026-04-19
 
 Betankungen is a CLI-first fuel tracking and full-tank cycle statistics tool
 for local SQLite data.
 Use this page as the English repository entry; the public wiki is the lighter
 browsing layer. Detailed repository docs under `docs/` remain German-first
-and are the technical source of truth.
+and are the technical source of truth. The curated project chronicle lives in
+`docs/DEV_DIARY.md`; it stays visible from the entry layer, but it is not a
+replacement for release notes or sprint traceability.
 
 ## Start Here
 
@@ -21,6 +23,7 @@ The wiki is the lighter public entry layer.
 Repository docs under `docs/` remain the technical source of truth.
 Stable release handoff lives on GitHub Releases; when a release does not ship
 binary assets, the release notes state the source-build expectation clearly.
+For the human project chronicle, use `docs/DEV_DIARY.md`.
 
 ## Quick Project Fit
 
@@ -68,6 +71,9 @@ need to add a station before the first fuel-up flow.
   be documented, not bypassed
 - Status, roadmap, and planning detail: `docs/STATUS.md`,
   `docs/CHANGELOG.md`, `docs/SPRINTS.md`
+- `docs/DEV_DIARY.md`: curated project chronicle for decisions, hurdles, and
+  learnings; intentionally secondary to `docs/CHANGELOG.md` and
+  `docs/SPRINTS.md`
 
 ## Recommended Reading Order
 

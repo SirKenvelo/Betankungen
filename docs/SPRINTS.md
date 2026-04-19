@@ -3,6 +3,34 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Dev-Diary-Sichtbarkeit und Rollenrahmung schaerfen
+
+- Status: done
+- Ziel: `docs/DEV_DIARY.md` im Entry-/Wiki-Handoff sichtbarer machen und
+  seine Rolle klarer von `docs/CHANGELOG.md` und `docs/SPRINTS.md`
+  abgrenzen, ohne einen neuen Doku-Hauptpfad zu erfinden.
+
+### Stand (2026-04-19)
+
+- `README.md`, `docs/README.md`, `docs/README_EN.md`,
+  `docs/wiki/Home.md` und `docs/wiki/README.md` rahmen das Dev Diary jetzt
+  sichtbarer als kuratierte Projektchronik.
+- `docs/DEV_DIARY.md` selbst betont jetzt deutlicher, dass es sichtbarer Teil
+  des Handoffs ist, aber weder Release-Fakten noch Sprint-Traceability
+  ersetzt.
+- `docs/CHANGELOG.md` und `docs/STATUS.md` sind im selben Doku-Sync auf
+  denselben Rollenrahmen gezogen; `docs/BACKLOG.md` und die TSK-Datei
+  spiegeln den Abschlussstand.
+- `TSK-0039` ist damit abgeschlossen.
+- Dieser Block fuehrt bewusst keine Runtime-, Build-, Parser- oder Wiki-
+  Quick-Reference-Aenderungen ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make wiki-link-check`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Externe Evidence-Indexschicht und Nutzertest-Bruecke schneiden
 
 - Status: done

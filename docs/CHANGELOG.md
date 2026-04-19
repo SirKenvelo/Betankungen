@@ -10,6 +10,13 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Entry: `docs/DEV_DIARY.md` ist jetzt in README,
+  `docs/README.md`, `docs/README_EN.md` und den Wiki-Startseiten sichtbarer
+  als kuratierte Projektchronik gerahmt. Die Entry-Texte grenzen den Diary-
+  Zweck klarer von `docs/CHANGELOG.md` als Release-/Faktenlog und
+  `docs/SPRINTS.md` als Traceability-/Ablaufdoku ab. `TSK-0039` ist damit
+  abgeschlossen; es wurden keine Runtime-Aenderungen eingefuehrt.
+  (2026-04-19)
 - [General] Docs/Audit: Die externe Audit-Ablage fuehrt jetzt eine kleine,
   explizite Evidence-Indexschicht statt nur loser Root-Hinweise.
   `/home/christof/Projekte/Audit/Betankungen/README.md` rahmt den Einstieg

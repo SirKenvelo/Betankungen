@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-17
+**Stand:** 2026-04-19
 CLI-Projekt mit Free Pascal, Linux und SQLite
 
 ---
@@ -109,7 +109,9 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `CODE_OF_CONDUCT.md`: Verhaltensrahmen fuer oeffentliche Zusammenarbeit.
 - `SECURITY.md`: Responsible-Disclosure-Prozess fuer Sicherheitsmeldungen.
 - `docs/GIT_WORKFLOW.md`: verbindlicher Git-/Branch-/PR-/Merge-Workflow fuer Sprint- und Traceability-Arbeit.
-- `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen, Huerden, Learnings) als Ergaenzung zu Changelog/Sprints.
+- `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen,
+  Huerden, Learnings); sichtbar im Handoff, aber bewusst sekundär zu
+  `docs/CHANGELOG.md` und `docs/SPRINTS.md`.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/ROADMAP_1_4_0.md`: abgeschlossener Gate-/Freeze-/Release-Closeout-

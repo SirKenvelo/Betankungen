@@ -1,11 +1,14 @@
 # Betankungen
-**Stand:** 2026-04-17
+**Stand:** 2026-04-19
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal as a Linux CLI application.
 English entry path for first-time visitors: `docs/README_EN.md`. The public
 GitHub Wiki is the lighter browsing layer. Detailed repository docs under
-`docs/` stay German-first and remain the technical source of truth.
+`docs/` stay German-first and remain the technical source of truth. The
+curated project chronicle lives in `docs/DEV_DIARY.md`; it stays visible from
+the entry layer, but it remains secondary to release facts and sprint
+traceability.
 
 ## What Betankungen Does
 
@@ -91,6 +94,7 @@ need to add a station before the first fuel-up flow.
 - [Security reporting policy](SECURITY.md)
 - [Versioned wiki source pages](docs/wiki/README.md)
 - [Project status and roadmap](docs/STATUS.md)
+- [Dev Diary](docs/DEV_DIARY.md)
 - [1.4.0 roadmap and gates](docs/ROADMAP_1_4_0.md)
 - [1.4.0 release preflight](docs/RELEASE_1_4_0_PREFLIGHT.md)
 - [Architecture](docs/ARCHITECTURE.md)
