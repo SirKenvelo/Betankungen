@@ -1,5 +1,5 @@
 # Contributing
-**Stand:** 2026-04-14
+**Stand:** 2026-04-19
 
 Thank you for your interest in Betankungen.
 
@@ -41,8 +41,9 @@ make verify
 
 ## Current Contribution Policy
 
-- The repository is public and currently on the active `1.4.0-dev`
-  development line after a dedicated post-`1.3.0` activation commit.
+- The repository is public and currently held on the stable `1.4.0` line for
+  maintenance, audits, and small documentation/governance follow-ups.
+- No automatic `1.5.0-dev` line was started after the `1.4.0` release.
 - The main branch follows a PR-based workflow with green verification before
   merge; maintainership stays with the project owner.
 - External issues are welcome.
@@ -52,7 +53,11 @@ make verify
 ## Communication
 
 - GitHub issues, pull requests, and reviews should be written in English.
-- Internal project documentation may remain in German.
+- Public-facing entry and policy pages stay in English where they shape first
+  contact or contribution truth (`README.md`, `docs/README_EN.md`, the wiki,
+  `CONTRIBUTING.md`, `SECURITY.md`).
+- Internal project documentation and deeper planning/tracker docs may remain
+  German-first.
 
 ## Community Standards
 

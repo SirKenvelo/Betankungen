@@ -25,6 +25,12 @@ Stable release handoff lives on GitHub Releases; when a release does not ship
 binary assets, the release notes state the source-build expectation clearly.
 For the human project chronicle, use `docs/DEV_DIARY.md`.
 
+English coverage is intentionally selective: this page, `README.md`,
+`CONTRIBUTING.md`, `SECURITY.md`, and the wiki entry path should stay current
+because they shape first contact, contribution onboarding, and policy truth.
+Deep status history, roadmaps, release gates, and tracker details remain
+German-first in the repository by design.
+
 ## Quick Project Fit
 
 - Interactive fuel-up capture in a local SQLite database

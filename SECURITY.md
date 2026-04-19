@@ -1,16 +1,16 @@
 # Security Policy
-**Stand:** 2026-03-30
+**Stand:** 2026-04-19
 
 ## Supported Versions
 
 | Version line | Status |
 | --- | --- |
-| `1.4.0-dev` | active development line |
-| `1.3.0` | latest stable release baseline |
+| `1.4.0` | current maintained stable line |
+| `1.3.0` | previous stable release line |
 | `<= 1.2.x` | no active support commitment |
 
-Security fixes will normally be prepared against the active development line
-first and then evaluated for backporting when needed.
+Security fixes will normally be prepared against the currently maintained
+`1.4.0` line first and then evaluated for backporting when needed.
 
 ## Reporting a Vulnerability
 
