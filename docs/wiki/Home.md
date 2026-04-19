@@ -35,3 +35,5 @@ release facts and sprint traceability.
 
 Personal context and the project chronicle stay visible, but they are
 intentionally kept outside the core technical start path.
+The Cookie Note is a small, lighter side page for the human side of the
+project.
