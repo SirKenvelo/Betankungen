@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-04-15
+**Stand:** 2026-04-20
 
 <INSTRUCTIONS>
 
@@ -43,7 +43,12 @@
 ### Public-Repo-Governance (verbindlich)
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main`-Stand beobachtend pruefen, bei Bedarf bewusst fast-forward aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
-- PR-Beschreibungen enthalten mindestens zwei Bloecke: `Summary` (was/warum) und `Validation` (ausgefuehrte Checks).
+- Die kanonische Artefaktmatrix und die domainenscharfe `Notes`-Policy liegen in `docs/policies/POL-004-artifact-domain-matrix.md`.
+- PR-Beschreibungen folgen einer exklusiven H2-Allowlist: erlaubt sind nur `## Summary` und `## Validation`.
+- Freie Zusatz-H2s in PR-Bodies sind unzulaessig; das gilt insbesondere fuer `## Note`, `## Notes`, `## Scope Notes`, `## Follow-Ups` und aehnliche Driftmuster.
+- Tracker-Dateien bleiben eine eigene Domaene: dort ist `# Notes` weiterhin zulaessig bzw. kanonisch, ohne die PR-Regel aufzuweichen.
+- Merge-Commit-Messages bleiben kompakte Historien-Artefakte und uebernehmen weder PR- noch Tag-H2-Schemata.
+- Tag-Messages bleiben eine eigene Domaene mit `## Summary`, `## Validation` und `## Impact`; diese Struktur gilt nicht fuer PRs oder Merge-Commits.
 - PR-Titel fuer Sprint-Arbeit folgen auf GitHub dem Format `[Sxx] type: short description`; Commit-Labels wie `[S24C1/1]` oder generische Titel wie `[Sprint 24]` sind als PR-Titel nicht zulaessig.
 - Verbindliche Detailleitplanke fuer Branch-/Commit-/PR-/Merge-Entscheidungen liegt in `docs/GIT_WORKFLOW.md`.
 - Standard-Merge-Strategie ist verbindlich `Create a merge commit`.

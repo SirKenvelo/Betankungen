@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-04-15
+**Stand:** 2026-04-20
 
 ## Ziel
 
@@ -28,6 +28,61 @@ Fuer das Projekt Betankungen gilt:
 - **Standard-Merge: Create a merge commit**
 - **Squash nur in Ausnahmefaellen**
 - **Rebase-Merge wird nicht verwendet**
+
+## Artefakt-Domaenen (verbindlich)
+
+Die kanonische Artefaktmatrix liegt in
+`docs/policies/POL-004-artifact-domain-matrix.md`.
+
+### Tracker-Dokumente
+
+- Zweck: repo-seitige Arbeits-, Entscheidungs- und Policy-Artefakte unter
+  `docs/backlog/`, `docs/issues/`, `docs/policies/` sowie dem lesbaren
+  Legacy-Bestand.
+- Erlaubte Struktur: tracker-spezifische Dokumentstruktur gemaess `POL-001`;
+  `# Notes` bleibt dort die kanonische Notes-Form.
+- Unzulaessige Struktur: PR-H2-Schemata als impliziter Standard fuer Tracker;
+  `## Note` und `## Notes` bleiben in Tracker-Dateien unzulaessig.
+- Pruefpfad: `docs/policies/POL-001-tracker-standard.md`,
+  `scripts/projtrack_lint.sh`.
+
+### PR-Bodies
+
+- Zweck: GitHub-Review-Artefakt fuer Scope, Begruendung und lokale Validierung.
+- Erlaubte Struktur: exklusive H2-Allowlist mit genau `## Summary` und
+  `## Validation`.
+- Unzulaessige Struktur: freie Zusatz-H2s wie `## Note`, `## Notes`,
+  `## Scope Notes`, `## Follow-Ups` oder andere PR-nahe Neben-Schemata.
+- Pruefpfad: `AGENTS.md`, dieses Dokument,
+  `.github/pull_request_template.md`, Review bei PR-Erstellung.
+
+### Merge-Commit-Messages
+
+- Zweck: kompakte, historientaugliche Integrationsnachricht nach dem PR.
+- Erlaubte Struktur: kurzer Betreff plus optional kurzer Plain-Body ohne
+  uebernommene Template-H2s.
+- Unzulaessige Struktur: ungekuerzte PR-Bodies oder Tag-Schemata mit
+  `## Summary`, `## Validation`, `## Notes` oder `## Impact`.
+- Pruefpfad: redaktionelle Pruefung direkt im GitHub-Merge-Dialog.
+
+### Tag-Messages
+
+- Zweck: signierte Sprint-/Release-Artefakte mit eigener Handoff-Struktur.
+- Erlaubte Struktur: `## Summary`, `## Validation`, `## Impact`.
+- Unzulaessige Struktur: stillschweigende Angleichung an PR- oder
+  Merge-Commit-Strukturen.
+- Pruefpfad: Tag-Erstellung mit `--cleanup=verbatim` und Rohpruefung per
+  `git cat-file -p refs/tags/<tag>`.
+
+### Prompt-/Template-Quellen
+
+- Zweck: Quellen, die die obigen Artefaktregeln in Prompts, PR-Templates oder
+  spaetere Automationspfade propagieren.
+- Erlaubte Struktur: domainenscharfe Weitergabe der jeweils passenden Regeln.
+- Unzulaessige Struktur: Vermischung der Domaenen, etwa wenn Tracker-`# Notes`
+  oder Tag-H2s als PR-Schema weitergereicht werden.
+- Pruefpfad: `.github/pull_request_template.md`, externe Prompt-/Template-
+  Quellen in der Audit-Ablage, manuelle Governance-Reviews.
 
 ## Branch-Strategie
 
@@ -156,8 +211,21 @@ Der PR beschreibt:
 ### Zeitpunkt
 
 Die Beschreibung wird **beim Erstellen des PR** gepflegt, nicht erst beim Merge.
-Sie wird auf GitHub in Englisch verfasst und enthaelt mindestens die Bloecke
-`Summary` und `Validation`.
+Sie wird auf GitHub in Englisch verfasst und verwendet ausschliesslich die
+H2-Bloecke `## Summary` und `## Validation`.
+
+### Strukturregel (verbindlich)
+
+- `## Summary` beschreibt Scope, Begruendung und bei Bedarf bewusst
+  offengelassene Folgearbeit als normale Listenpunkte oder Prosa innerhalb
+  dieses Blocks.
+- `## Validation` listet ausgefuehrte Checks und benennt offen, was nicht
+  gelaufen ist.
+- Weitere H2-Ueberschriften sind im PR-Body unzulaessig.
+- Das gilt insbesondere fuer `## Note`, `## Notes`, `## Scope Notes`,
+  `## Follow-Ups`, `## Impact` oder freie Zusatzsektionen.
+- Die repo-seitige technische Eintrittsstelle dafuer ist
+  `.github/pull_request_template.md`.
 
 ### Trennung von PR-Text und Merge-Commit
 
@@ -167,9 +235,9 @@ Sie wird auf GitHub in Englisch verfasst und enthaelt mindestens die Bloecke
   Merge-Commit-Text bewusst zu pruefen und bei Bedarf manuell zu kuerzen.
 - Der Merge-Commit soll nur den kompakten fachlichen Betreff und hoechstens
   einen kurzen, historientauglichen Body tragen.
-- Ausfuehrliche PR-Abschnitte wie `## Summary`, `## Validation`,
-  `## Scope Notes`, `## Note` oder `## Notes` gehoeren in die PR-Seite,
-  nicht ungeprueft in den Merge-Commit-Body.
+- Weder PR-H2s (`## Summary`, `## Validation`) noch verbotene Drift-H2s
+  (`## Note`, `## Notes`, `## Scope Notes`, `## Follow-Ups`) noch
+  Tag-H2s (`## Impact`) gehoeren ungeprueft in den Merge-Commit-Body.
 - Wenn GitHub beim Merge den PR-Body in die Commit-Message uebernimmt, ist
   dieser Vorschlag vor dem finalen Merge aktiv zu bereinigen.
 

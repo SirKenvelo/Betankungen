@@ -1,11 +1,16 @@
 # Backlog
-**Stand:** 2026-04-19
+**Stand:** 2026-04-20
 
 Dieses Dokument ist der uebergreifende Navigationsindex fuer Backlog-Themen.
 Neue Backlog-Arbeit wird im kanonischen Tracker unter `docs/backlog/`
 gepflegt; historische BL-0xx unter `docs/BACKLOG/` bleiben lesbar und
 referenzierbar. Offene Architektur-/Produktentscheidungen liegen aktuell in
 `docs/ADR/`; eine separate ADR-Pfadmigration ist derzeit nicht aktiviert.
+
+Die tracker-spezifische Domaene bleibt dabei bewusst von PR-, Merge- und
+Tag-Artefakten getrennt: `POL-001` regelt die Tracker-Struktur, waehrend
+`docs/policies/POL-004-artifact-domain-matrix.md` die uebergreifende
+Artefaktmatrix und die domainenscharfe `Notes`-Policy festzieht.
 
 ## Status-Legende
 

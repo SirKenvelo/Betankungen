@@ -3,8 +3,9 @@ set -euo pipefail
 
 # projtrack_lint.sh
 # CREATED: 2026-03-13
-# UPDATED: 2026-04-12
+# UPDATED: 2026-04-20
 # Lint fuer Tracker-Dateien unter docs/issues + docs/backlog gemaess POL-001.
+# Dieser Linter prueft bewusst nur die Tracker-Domaene, nicht PR-/Merge-/Tag-Artefakte.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -296,7 +297,7 @@ def scan_tracker_heading_style(docs: list[TrackerDoc]) -> None:
             if RE_FORBIDDEN_TRACKER_HEADING.match(line):
                 errors.append(
                     f"{rel(doc.path)}:{i}: ungueltige Tracker-Ueberschrift '{line.strip()}'; "
-                    "verwende die kanonische Form '# Notes'."
+                    "verwende in Tracker-Dateien die kanonische Form '# Notes'."
                 )
 
 

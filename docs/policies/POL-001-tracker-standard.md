@@ -1,7 +1,7 @@
 # POL-001: Tracker Standard (Maintainer Schema)
-**Stand:** 2026-03-29
+**Stand:** 2026-04-20
 **Status:** active
-**Datum:** 2026-03-29
+**Datum:** 2026-04-20
 
 ## Ziel
 
@@ -24,6 +24,20 @@ Verbindlich fuer:
 - Referenzen zwischen Tracker-Dateien
 - ID-Referenzen in Code-Kommentaren
 - Validierungsregeln fuer kuenftige Tracker-Tools
+
+Nicht Bestandteil dieser Policy sind PR-Bodies, Merge-Commit-Messages,
+Tag-Messages oder Prompt-/Template-Quellen ausserhalb der Tracker-Domaene.
+
+## Tracker-Domain-Abgrenzung
+
+- Die uebergreifende Artefaktmatrix liegt in
+  `docs/policies/POL-004-artifact-domain-matrix.md`.
+- Diese Policy regelt nur Tracker-Artefakte und deren technische Pruefpfade.
+- `# Notes` bleibt fuer Tracker-Dateien die kanonische Notes-Form, wenn ein
+  Notes-Abschnitt fachlich noetig ist.
+- `## Note` und `## Notes` bleiben in Tracker-Dateien unzulaessig.
+- PR-Bodies folgen nicht dieser Tracker-Regel, sondern der separaten
+  PR-Allowlist aus `POL-004`, `AGENTS.md` und `docs/GIT_WORKFLOW.md`.
 
 ## Source of Truth
 
