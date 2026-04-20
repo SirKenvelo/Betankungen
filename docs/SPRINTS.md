@@ -3,6 +3,35 @@
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
 
+## General-Stream nach Sprint 40 - Governance-Kernleitplanken an Artefaktmatrix angleichen
+
+- Status: done
+- Ziel: `AGENTS.md` und `docs/GIT_WORKFLOW.md` auf denselben operativen
+  `POL-004`-Stand ziehen, ohne die Artefaktmatrix erneut auszuwalzen.
+
+### Stand (2026-04-20)
+
+- `AGENTS.md` stellt jetzt explizit klar, dass Hinweise, Risiken, Nicht-Ziele
+  und Follow-ups im PR nur innerhalb von `## Summary` stehen und keine freie
+  Zusatz-H2 legitimieren.
+- `docs/GIT_WORKFLOW.md` fuehrt denselben Punkt deckungsgleich aus, rahmt den
+  PR-Inhalt allgemeiner als Branch-/Arbeitsblock-Artefakt statt nur als
+  Sprint-Beschreibung und haertet `Squash` auf explizite Override-/Task-
+  Freigabe.
+- Die Trennung der Domaenen bleibt dabei konsistent: PR-Bodies nutzen nur
+  `## Summary` und `## Validation`, Merge-Commit-Messages bleiben kompakte
+  Historien-Artefakte ohne PR-/Tag-H2-Schema, und Tag-Messages bleiben die
+  eigene `## Summary`/`## Validation`/`## Impact`-Domaene mit
+  `--cleanup=verbatim`.
+- `docs/CHANGELOG.md` und `docs/STATUS.md` fuehren denselben Governance-
+  Sync; es wurden bewusst keine Runtime-, Build-, Datenmodell- oder
+  Produktfeature-Aenderungen eingefuehrt.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
+
 ## General-Stream nach Sprint 40 - Governance-Artefaktmatrix und Notes-Policy schaerfen
 
 - Status: done

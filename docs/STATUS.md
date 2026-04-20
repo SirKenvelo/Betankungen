@@ -70,6 +70,13 @@
     `POL-004` zieht Tracker-, PR-, Merge-, Tag- und Prompt-/Template-Domaenen
     auseinander, haelt `# Notes` als tracker-spezifische Form und begrenzt
     PR-Bodies exklusiv auf `## Summary` und `## Validation`.
+  - `AGENTS.md` und `docs/GIT_WORKFLOW.md` operationalisieren diesen
+    Governance-Stand jetzt deckungsgleich: Hinweise, Risiken, Nicht-Ziele und
+    Follow-ups bleiben im PR innerhalb von `## Summary`, freie PR-H2s bleiben
+    unzulaessig, Merge-Commit-Messages bleiben kompakte Historien-Artefakte,
+    und Tag-Messages behalten ihre separate
+    `## Summary`/`## Validation`/`## Impact`-Domaene mit
+    `--cleanup=verbatim`.
   - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
     auf `1.4.0` bleibt aktiv.
   - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.

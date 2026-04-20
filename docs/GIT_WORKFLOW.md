@@ -26,7 +26,7 @@ Fuer das Projekt Betankungen gilt:
 - **mehrere Commits pro Sprint sind erlaubt und gewuenscht**
 - **Artefakte pro Commit sind erlaubt und gewuenscht**
 - **Standard-Merge: Create a merge commit**
-- **Squash nur in Ausnahmefaellen**
+- **Squash nur mit expliziter Override-/Task-Freigabe**
 - **Rebase-Merge wird nicht verwendet**
 
 ## Artefakt-Domaenen (verbindlich)
@@ -203,10 +203,10 @@ Es ist **nicht erforderlich**, alles erst am Ende zu pushen.
 
 Der PR beschreibt:
 
-- Ziel des Sprints
+- Ziel des Branches bzw. Arbeitsblocks
 - durchgefuehrte Aenderungen
 - relevante Dokumentationsanpassungen
-- ggf. offene Punkte
+- offene Punkte nur innerhalb von `## Summary`, nicht als eigene H2
 
 ### Zeitpunkt
 
@@ -219,6 +219,9 @@ H2-Bloecke `## Summary` und `## Validation`.
 - `## Summary` beschreibt Scope, Begruendung und bei Bedarf bewusst
   offengelassene Folgearbeit als normale Listenpunkte oder Prosa innerhalb
   dieses Blocks.
+- Hinweise, Risiken, Nicht-Ziele und Follow-ups bleiben dabei ebenfalls
+  innerhalb von `## Summary`; freie Neben-H2 legitimieren diese Inhalte
+  nicht.
 - `## Validation` listet ausgefuehrte Checks und benennt offen, was nicht
   gelaufen ist.
 - Weitere H2-Ueberschriften sind im PR-Body unzulaessig.
@@ -311,6 +314,9 @@ Reihenfolge:
 
 - Sprint-Tagging (`sprint-<nr>-done`) nur nach komplett abgeschlossenem und freigegebenem Sprint.
 - Release-/Version-Tags (z. B. `1.2.0`) nur nach expliziter User-Freigabe.
+- Tag-Messages bilden eine eigene Domaene mit genau `## Summary`,
+  `## Validation` und `## Impact`; diese Struktur wird nicht auf PR-Bodies
+  oder Merge-Commit-Messages uebertragen.
 - Wenn annotierte Tag-Nachrichten Markdown-Ueberschriften mit fuehrendem `#` enthalten
   sollen (z. B. `## Summary`, `## Validation`, `## Impact`), muss der Tag mit
   `--cleanup=verbatim` erstellt werden.
