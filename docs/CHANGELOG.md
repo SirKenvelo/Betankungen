@@ -10,6 +10,16 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Governance: `AGENTS.md` und `docs/GIT_WORKFLOW.md`
+  operationalisieren die Artefaktmatrix aus `POL-004` jetzt noch enger und
+  wortgleich an den kritischen Kanten. PR-Bodies bleiben eine exklusive
+  `## Summary`/`## Validation`-Domaene; Hinweise, Risiken, Nicht-Ziele und
+  Follow-ups werden ausdruecklich innerhalb von `## Summary` gefuehrt statt
+  ueber freie Zusatz-H2s. Merge-Commit-Messages bleiben kompakte
+  Historien-Artefakte ohne PR-/Tag-H2-Schema, und Tag-Messages bleiben die
+  getrennte `## Summary`/`## Validation`/`## Impact`-Domaene mit
+  `--cleanup=verbatim`. Es wurden keine Runtime-Aenderungen eingefuehrt.
+  (2026-04-20)
 - [General] Docs/Governance: Die repo-seitige Artefaktmatrix ist jetzt als
   eigener Vertrag verankert. `docs/policies/POL-004-artifact-domain-matrix.md`
   trennt Tracker-, PR-, Merge-, Tag- und Prompt-/Template-Domaenen mit

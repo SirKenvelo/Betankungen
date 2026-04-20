@@ -46,6 +46,7 @@
 - Die kanonische Artefaktmatrix und die domainenscharfe `Notes`-Policy liegen in `docs/policies/POL-004-artifact-domain-matrix.md`.
 - PR-Beschreibungen folgen einer exklusiven H2-Allowlist: erlaubt sind nur `## Summary` und `## Validation`.
 - Freie Zusatz-H2s in PR-Bodies sind unzulaessig; das gilt insbesondere fuer `## Note`, `## Notes`, `## Scope Notes`, `## Follow-Ups` und aehnliche Driftmuster.
+- Hinweise, Risiken, Nicht-Ziele und Follow-ups werden im PR innerhalb von `## Summary` als normale Listenpunkte oder Prosa gefuehrt; sie legitimieren keine eigene H2.
 - Tracker-Dateien bleiben eine eigene Domaene: dort ist `# Notes` weiterhin zulaessig bzw. kanonisch, ohne die PR-Regel aufzuweichen.
 - Merge-Commit-Messages bleiben kompakte Historien-Artefakte und uebernehmen weder PR- noch Tag-H2-Schemata.
 - Tag-Messages bleiben eine eigene Domaene mit `## Summary`, `## Validation` und `## Impact`; diese Struktur gilt nicht fuer PRs oder Merge-Commits.
