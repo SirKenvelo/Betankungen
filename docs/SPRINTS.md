@@ -1,7 +1,39 @@
 # SPRINTS
-**Stand:** 2026-04-19
+**Stand:** 2026-04-20
 
 Dieses Dokument fuehrt die Sprint-Narrative (Ziel, Fortschritt, Commit-Folge, Artefakte, Abschluss-Tag).
+
+## General-Stream nach Sprint 40 - Governance-Artefaktmatrix und Notes-Policy schaerfen
+
+- Status: done
+- Ziel: die Governance-Regeln nicht nur als Mindeststandard, sondern als
+  domainenscharfen Vertrag fuer Tracker-, PR-, Merge-, Tag- und Prompt-
+  Artefakte festziehen.
+
+### Stand (2026-04-20)
+
+- `docs/policies/POL-004-artifact-domain-matrix.md` verankert jetzt die
+  kanonische Artefaktmatrix mit Zweck, erlaubter Struktur, unzulaessiger
+  Struktur und jeweiligem Pruefpfad pro Domaene.
+- `AGENTS.md` und `docs/GIT_WORKFLOW.md` fuehren denselben Vertrag:
+  PR-Bodies verwenden exklusiv `## Summary` und `## Validation`, waehrend
+  Merge-Commit-Messages kompakt bleiben und Tag-Messages ihre eigene
+  `## Summary`/`## Validation`/`## Impact`-Struktur behalten.
+- `POL-001`, `scripts/projtrack_lint.sh`, `docs/BACKLOG.md` und
+  `docs/backlog/README.md` stellen klar, dass `# Notes` tracker-spezifisch
+  erlaubt bleibt und nicht als globales PR-/Merge-/Tag-Schema missverstanden
+  wird.
+- `.github/pull_request_template.md` spiegelt die exklusive PR-Allowlist jetzt
+  direkt an der repo-seitigen Eintrittsstelle; freie Zusatz-H2s wie
+  `## Notes`, `## Scope Notes` oder `## Follow-Ups` sind dort nicht mehr
+  vorgegeben.
+- Dieser Block fuehrt bewusst keine Runtime-, Build-, Datenmodell- oder
+  Produktfeature-Aenderungen ein.
+
+### Validierung
+
+- `scripts/projtrack_lint.sh`
+- `make verify`
 
 ## General-Stream nach Sprint 40 - Selektive English-Public-Readiness-Folgepfade schneiden
 

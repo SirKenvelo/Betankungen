@@ -1,5 +1,5 @@
 # Backlog Tracker
-**Stand:** 2026-03-29
+**Stand:** 2026-04-20
 
 Dieser Ordner ist der kanonische Arbeitsbereich fuer neue Backlog-Items
 (`BL-xxxx`) und neue Tasks (`TSK-xxxx`) gemaess
@@ -7,6 +7,12 @@ Dieser Ordner ist der kanonische Arbeitsbereich fuer neue Backlog-Items
 
 `docs/BACKLOG.md` bleibt der uebergreifende Navigationsindex; historische
 BL-0xx unter `docs/BACKLOG/` bleiben lesbar und referenzierbar.
+
+Tracker-Regeln bleiben dabei bewusst tracker-spezifisch: `POL-001` und
+`scripts/projtrack_lint.sh` gelten fuer diese Domaene, waehrend die
+uebergreifende Artefaktmatrix in
+`docs/policies/POL-004-artifact-domain-matrix.md` PR-, Merge- und
+Tag-Artefakte separat abgrenzt.
 
 ## Verbindlicher Einsatz heute
 

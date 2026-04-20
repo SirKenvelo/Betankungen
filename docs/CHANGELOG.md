@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-19
+**Stand:** 2026-04-20
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,19 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Governance: Die repo-seitige Artefaktmatrix ist jetzt als
+  eigener Vertrag verankert. `docs/policies/POL-004-artifact-domain-matrix.md`
+  trennt Tracker-, PR-, Merge-, Tag- und Prompt-/Template-Domaenen mit
+  explizitem Zweck, erlaubter Struktur, unzulaessiger Struktur und
+  Pruefpfad. `AGENTS.md`, `docs/GIT_WORKFLOW.md`, `POL-001`,
+  `scripts/projtrack_lint.sh`, `docs/BACKLOG.md`, `docs/STATUS.md`,
+  `docs/SPRINTS.md`, `docs/backlog/README.md` und
+  `.github/pull_request_template.md` fuehren jetzt denselben Stand:
+  `# Notes` bleibt tracker-spezifisch, PR-Bodies sind exklusiv auf
+  `## Summary` und `## Validation` begrenzt, Merge-Commit-Messages bleiben
+  kompakt, und Tag-Messages behalten ihre eigene
+  `## Summary`/`## Validation`/`## Impact`-Domaene. Es wurden keine Runtime-
+  Aenderungen eingefuehrt. (2026-04-20)
 - [General] Docs/Audit: Die Governance-Guardrails-, Artefakt-Policy- und
   Template-Propagation-Baseline ist jetzt als externer Audit-Lauf
   dokumentiert. Der Befund trennt Tracker-, PR-, Merge-, Tag- und Prompt-

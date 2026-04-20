@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-19
+**Stand:** 2026-04-20
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -66,6 +66,10 @@
   - Der `btkgit`-Smoke-Pfad nutzt einen Clone-only-Fixture-Rahmen mit
     lokalem Bare-Remote und echter `main`-Ref; lokale Signing-Overrides
     gehoeren nicht zur Strategie.
+  - Die Governance-Artefaktmatrix ist jetzt repo-seitig explizit getrennt:
+    `POL-004` zieht Tracker-, PR-, Merge-, Tag- und Prompt-/Template-Domaenen
+    auseinander, haelt `# Notes` als tracker-spezifische Form und begrenzt
+    PR-Bodies exklusiv auf `## Summary` und `## Validation`.
   - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
     auf `1.4.0` bleibt aktiv.
   - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
