@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-20
+**Stand:** 2026-04-24
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,15 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Process: `knowledge_archive/` ist kontrolliert
+  externalisiert. Die historische Snippet-Kopie liegt jetzt unter
+  `/home/christof/Projekte/Audit/Betankungen/evidence/legacy/knowledge_archive/`,
+  `docs/legacy/knowledge_archive.md` definiert den kanonischen
+  Produkt-Repo-Bridge-Vertrag, und `knowledge_archive/README.md` bleibt nur
+  als knappe Uebergangsbruecke fuer alte Pfade. Aktive Einstiegstexte,
+  AGENTS-Regeln, Purity-Hinweis und Smoke-Strukturcheck pruefen damit nicht
+  mehr den alten Snippet-Bestand als Repo-Pflichtpfad. Es wurden keine
+  Runtime- oder Produktfeatures eingefuehrt. (2026-04-24)
 - [General] Docs/Governance: `AGENTS.md` und `docs/GIT_WORKFLOW.md`
   operationalisieren die Artefaktmatrix aus `POL-004` jetzt noch enger und
   wortgleich an den kritischen Kanten. PR-Bodies bleiben eine exklusive
@@ -1114,6 +1123,9 @@ ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Knowledge-Archive-Externalisierung, Bridge-Vertrag und Smoke-/Doku-Sync
+  erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
+  (2026-04-24)
 - Doku-Sync, Public-Truth-Plausibilisierung und Scope-Zuschnitt erfolgten
   mit Unterstuetzung durch AI-Tools als Sparringspartner. (2026-04-19)
 - Entry-Signal-Schaerfung, Tracker-Sync und die zugehoerige

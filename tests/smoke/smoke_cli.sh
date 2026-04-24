@@ -2,11 +2,12 @@
 set -euo pipefail
 
 # smoke_cli.sh
-# UPDATED: 2026-04-14
+# UPDATED: 2026-04-24
 # Leichtgewichtiger Smoke-Test fuer Struktur + Kernkommandos.
 # Erweitert um First-Run-/Bootstrap-Faelle, robuste CLI-Guardrails und
 # signaturkonforme btkgit-Fixtures ueber Clone-only/Bare-Remote fuer den
-# 1.4.0-Readiness-Rahmen.
+# 1.4.0-Readiness-Rahmen sowie den externalisierten knowledge_archive-Bridge-
+# Vertrag.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 FAILS=0
@@ -144,7 +145,8 @@ print_plan() {
   printf '[LIST] Pfad vorhanden: tests/domain_policy\n'
   printf '[LIST] Pfad vorhanden: tests/regression\n'
   printf '[LIST] Pfad vorhanden: tests/smoke\n'
-  printf '[LIST] Pfad vorhanden: knowledge_archive\n'
+  printf '[LIST] Pfad vorhanden: docs/legacy/knowledge_archive.md\n'
+  printf '[LIST] Pfad vorhanden: knowledge_archive/README.md\n'
   printf '[LIST] Pfad vorhanden: .releases\n'
   printf '[LIST] Pfad vorhanden: .backup\n'
   printf '[LIST] kpr dry-run\n'
@@ -1399,7 +1401,8 @@ require_path "$ROOT_DIR/scripts"
 require_path "$ROOT_DIR/tests/domain_policy"
 require_path "$ROOT_DIR/tests/regression"
 require_path "$ROOT_DIR/tests/smoke"
-require_path "$ROOT_DIR/knowledge_archive"
+require_path "$ROOT_DIR/docs/legacy/knowledge_archive.md"
+require_path "$ROOT_DIR/knowledge_archive/README.md"
 require_path "$ROOT_DIR/.releases"
 require_path "$ROOT_DIR/.backup"
 

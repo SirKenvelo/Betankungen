@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-20
+**Stand:** 2026-04-24
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -126,8 +126,12 @@
 - Release-Logging via `scripts/kpr.sh` (kompatibel via Root-Wrapper `kpr.sh`)
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)
 - Restore-Ablauf dokumentiert in `RESTORE.md`
-- Legacy-Wissensarchiv in `knowledge_archive/` (read-only; Git-Historie ist
-  der primaere Rueckgriff fuer fruehere Implementationsstaende)
+- Legacy-Wissensarchiv externalisiert:
+  `docs/legacy/knowledge_archive.md` ist der Produkt-Repo-Bridge-Vertrag,
+  die Snippet-Kopie liegt unter
+  `/home/christof/Projekte/Audit/Betankungen/evidence/legacy/knowledge_archive/`;
+  Git-Historie bleibt der primaere Rueckgriff fuer fruehere
+  Implementationsstaende
 - Smoke-Checks unter `tests/smoke/smoke_cli.sh` (kompatibel via `tests/smoke_cli.sh`)
 
 ## Datenmodell & Domain-Logik (erledigt)

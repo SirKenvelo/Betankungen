@@ -1,5 +1,5 @@
 # System-Architektur & Design-Dokumentation
-**Stand:** 2026-04-17
+**Stand:** 2026-04-24
 
 Dieses Dokument beschreibt die zentralen Designentscheidungen, die Architekturprinzipien und die langfristige Roadmap des Projekts **"Betankungen"**.
 
@@ -88,6 +88,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 - [x] **I18n Runtime Mini-Rollout (S4C3/3):** Erste risikoarme Meta-/Konfigurationsmeldungen laufen ueber `Tr()` (u. a. Config-Status, First-Run-Hinweise, generische Systemmeldung), ohne breite Help-/Fehlertext-Migration.
 - [x] **Build-Truth:** `make build`, CI und Editor-Frontends fuehren denselben FPC-CLI-Build fuer `src/Betankungen.lpr` aus.
 - [x] **FPC-/CLI-Purity:** Der aktive Source-, Build- und Testpfad ist ohne Lazarus-/LCL-Abhaengigkeit; historische Erwaehnungen bleiben auf explizite Legacy-Kontexte begrenzt, und `scripts/lazarus_purity_check.sh` blockiert neue Drift im lokalen Verify-Pfad sowie in der CI fail-fast.
+- [x] **Externalisierter Knowledge-Archive-Vertrag:** Das fruehere `knowledge_archive/` ist keine aktive Snippet-Ablage im Produkt-Repo mehr; der Produktvertrag liegt in `docs/legacy/knowledge_archive.md`, die Snippet-Kopie liegt extern unter `/home/christof/Projekte/Audit/Betankungen/evidence/legacy/knowledge_archive/`, und die Git-Historie bleibt der primaere Rueckgriff fuer fruehere Implementationsstaende.
 - [x] **Logging-System:** Global steuerbares Logging mit Debug-Tabelle und Trace-Ausgaben.
 - [x] **Demo-DB:** Separater Seed-Workflow via `--seed` und Nutzung via `--demo`.
 - [x] **Tabellen-Renderer:** Leichtgewichtige Tabellen-Ausgabe via `TTable` (Stats).
@@ -209,7 +210,7 @@ Siehe `CHANGELOG.md`, Version `0.6.0` plus `[Unreleased]` (0.7.x-Workstream).
 
 ### Version 0.6.0 – Fundament fuer Fahrzeug-Domain — abgeschlossen
 *Ziel: stabile Struktur fuer spaeteres Multi-Car ohne sofortigen Feature-Ausbau.*
-- [x] Projektstruktur fuer Legacy-Wissensarchiv/Backups/Skripte/Tests ist etabliert (`knowledge_archive/` bleibt read-only im Repo; Git-Historie ist der primaere Rueckgriff fuer fruehere Implementationsstaende).
+- [x] Projektstruktur fuer externalisiertes Legacy-Wissensarchiv/Backups/Skripte/Tests ist etabliert (`docs/legacy/knowledge_archive.md` ist der Repo-Bridge-Vertrag; Git-Historie bleibt der primaere Rueckgriff fuer fruehere Implementationsstaende).
 - [x] Technische Basis `cars` + `fuelups.car_id` + `missed_previous` ist im aktuellen Arbeitsstand vorhanden.
 - [x] Domain-Policy-Matrix v1 als Regression-Fundament aufgebaut (inkl. Gap-/Date-/Cost-/Price-/Stats-Guards).
 - [x] Release-Zuordnung und fachliche Konsolidierung als 0.6.0-Rahmen dokumentiert (Hauptauto-Flow ohne Multi-Car-CLI-Ausbau).
