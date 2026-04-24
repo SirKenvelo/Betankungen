@@ -3,7 +3,7 @@ set -euo pipefail
 
 # lazarus_purity_check.sh
 # CREATED: 2026-04-17
-# UPDATED: 2026-04-17
+# UPDATED: 2026-04-24
 # Fail-fast-Guardrail fuer den aktiven FPC-/CLI-Baum ohne Lazarus-/LCL-Drift.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -149,7 +149,8 @@ if violations:
         file=sys.stderr,
     )
     print(
-        "[INFO] Historical docs, tracker archives and knowledge_archive/ are "
+        "[INFO] Historical docs, tracker archives and the knowledge_archive "
+        "bridge are "
         "deliberately excluded from this guardrail.",
         file=sys.stderr,
     )

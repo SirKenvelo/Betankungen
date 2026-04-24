@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-04-20
+**Stand:** 2026-04-24
 
 <INSTRUCTIONS>
 
@@ -153,11 +153,12 @@
 - Leitplanke: Wiki bleibt kuratierter Einstieg, tiefe/finale Details verbleiben in `docs/` (Source of Truth).
 
 ## Knowledge-Archive-Regeln
-- `knowledge_archive/` ist als Legacy-/Read-only-Bestand eingefroren.
-- Neue Archiv-Snippets werden repo-seitig nicht mehr verpflichtend erzeugt und sind kein Standardpfad fuer normale Codeaenderungen mehr.
+- `knowledge_archive/` ist keine aktive Snippet-Ablage im Produkt-Repo mehr; der kanonische Repo-Bridge-Vertrag liegt in `docs/legacy/knowledge_archive.md`.
+- Die externalisierte Legacy-Kopie liegt unter `/home/christof/Projekte/Audit/Betankungen/evidence/legacy/knowledge_archive/`.
+- Neue Archiv-Snippets werden repo-seitig nicht mehr erzeugt und sind kein Standardpfad fuer normale Codeaenderungen mehr.
 - Fuer fruehere Implementationsstaende ist die Git-Historie der primaere Rueckgriff.
-- Der vorhandene Bestand in `knowledge_archive/` bleibt zunaechst lesbar erhalten und wird nicht rueckwirkend umgeschrieben.
-- Eine spaetere vollstaendige Herausloesung aus dem Repository bleibt als optionaler Folgeschritt moeglich, ist aber nicht Teil des laufenden Standards.
+- `knowledge_archive/README.md` bleibt vorerst nur als knappe Uebergangsbruecke fuer alte Pfade im Repo.
+- Historische Changelog-/Sprint-/Audit-Referenzen auf den frueheren Repo-Pfad werden nicht rueckwirkend umgeschrieben.
 
 ## Priorisierung von Änderungen & Dokumentations-Pflicht
 Nach Änderungen muss die KI die Relevanz für die Dokumentation (insb. im `docs`-Ordner) wie folgt bewerten:
