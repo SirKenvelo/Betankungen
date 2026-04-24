@@ -43,6 +43,7 @@
 ### Public-Repo-Governance (verbindlich)
 - `main` wird als geschuetzter Release-Branch behandelt; direkte Pushes auf `main` sind nicht der Standardpfad.
 - Standardablauf fuer Aenderungen: `main`-Stand beobachtend pruefen, bei Bedarf bewusst fast-forward aktualisieren -> Feature-Branch erstellen -> Aenderungen committen/pushen -> PR gegen `main` -> Merge nach gruenem `verify`/Regelcheck.
+- Pull Requests werden standardmaessig als `ready for review` erstellt, nicht als Draft. Draft-PRs sind nur zulaessig, wenn der Task dies explizit fordert oder ein sauber dokumentierter Sonderfall vorliegt.
 - Die kanonische Artefaktmatrix und die domainenscharfe `Notes`-Policy liegen in `docs/policies/POL-004-artifact-domain-matrix.md`.
 - PR-Beschreibungen folgen einer exklusiven H2-Allowlist: erlaubt sind nur `## Summary` und `## Validation`.
 - Freie Zusatz-H2s in PR-Bodies sind unzulaessig; das gilt insbesondere fuer `## Note`, `## Notes`, `## Scope Notes`, `## Follow-Ups` und aehnliche Driftmuster.
