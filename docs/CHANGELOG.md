@@ -10,6 +10,12 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Governance: `AGENTS.md` und `docs/GIT_WORKFLOW.md`
+  verankern den PR-Normalfall jetzt explizit als `ready for review`.
+  Draft-PRs sind damit kein Komfort- oder Vorsichtsdefault mehr, sondern nur
+  bei explizitem Task oder dokumentiertem Sonderfall zulaessig. Die externe
+  Prompt-Vorlage und Prompt-Ablage-Regel geben denselben Default weiter; es
+  wurden keine Runtime-Aenderungen eingefuehrt. (2026-04-24)
 - [General] Docs/Process: `knowledge_archive/` ist kontrolliert
   externalisiert. Die historische Snippet-Kopie liegt jetzt unter
   `/home/christof/Projekte/Audit/Betankungen/evidence/legacy/knowledge_archive/`,

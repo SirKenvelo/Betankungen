@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-04-20
+**Stand:** 2026-04-24
 
 ## Ziel
 
@@ -188,6 +188,10 @@ Es ist **nicht erforderlich**, alles erst am Ende zu pushen.
 ### Standard
 
 - genau **ein PR pro Sprint**
+- Der Normalfall fuer abgeschlossene Arbeitsbloecke ist `ready for review`.
+- Draft-PRs sind kein neutraler Default und werden nur erstellt, wenn der
+  Task dies explizit fordert oder ein begruendeter Sonderfall im PR-Kontext
+  dokumentiert wird.
 
 ### Titel-Konvention
 
@@ -355,7 +359,7 @@ Lineare Historie verhindert Merge Commits und widerspricht der gewuenschten Trac
 4. Hash per Git abfragen
 5. regelmaessig pushen
 6. PR erstellen (einmal pro Sprint)
-7. PR sauber dokumentieren
+7. PR als `ready for review` erstellen und sauber dokumentieren
 8. Merge via **Create a merge commit**
 9. Branch loeschen
 
