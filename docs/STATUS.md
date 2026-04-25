@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-24
+**Stand:** 2026-04-25
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -77,6 +77,11 @@
     und Tag-Messages behalten ihre separate
     `## Summary`/`## Validation`/`## Impact`-Domaene mit
     `--cleanup=verbatim`.
+  - Die Steuerungsdoku ist entmischt: `docs/SPRINTS.md` fuehrt nur noch
+    echte Sprint-Narrative, waehrend `docs/GENERAL_STREAMS.md` die
+    nicht-sprintgebundenen General-/Governance-/Audit-/Pflegebloecke
+    verlustfrei uebernimmt. `scripts/projtrack_lint.sh` blockiert neue
+    General-Stream-/Traceability-Backfill-Bloecke in `docs/SPRINTS.md`.
   - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
     auf `1.4.0` bleibt aktiv.
   - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
@@ -122,6 +127,7 @@
   - `BACKLOG/` und `tasks/` als lesbarer Legacy-Bestand
   - `CHANGELOG.md`
   - `DESIGN_PRINCIPLES.md`
+  - `GENERAL_STREAMS.md`
   - `SPRINTS.md`
 - Release-Logging via `scripts/kpr.sh` (kompatibel via Root-Wrapper `kpr.sh`)
 - Git-loser Snapshot-Workflow via `scripts/backup_snapshot.sh` (`.backup/YYYY-MM-DD_HHMM` + `.backup/index.json`)

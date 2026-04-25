@@ -3,9 +3,10 @@ set -euo pipefail
 
 # projtrack_lint.sh
 # CREATED: 2026-03-13
-# UPDATED: 2026-04-20
-# Lint fuer Tracker-Dateien unter docs/issues + docs/backlog gemaess POL-001.
-# Dieser Linter prueft bewusst nur die Tracker-Domaene, nicht PR-/Merge-/Tag-Artefakte.
+# UPDATED: 2026-04-25
+# Lint fuer Tracker-Dateien unter docs/issues + docs/backlog gemaess POL-001
+# und fuer enge Steuerungsdoku-Grenzen.
+# Dieser Linter prueft bewusst nicht PR-/Merge-/Tag-Artefakte.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -42,6 +43,7 @@ TYPE_ISSUE = {"bug", "incident", "problem"}
 TYPE_BACKLOG = {"feature", "improvement", "refactor", "debt", "research"}
 TYPE_TASK = {"task"}
 RE_FORBIDDEN_TRACKER_HEADING = re.compile(r"^## (Note|Notes)\b")
+RE_FORBIDDEN_SPRINT_STEERING_HEADING = re.compile(r"^## (General-Stream|Traceability-Backfill)\b")
 
 
 @dataclass
@@ -301,6 +303,34 @@ def scan_tracker_heading_style(docs: list[TrackerDoc]) -> None:
                 )
 
 
+def scan_steering_doc_boundaries() -> None:
+    sprints = root / "docs" / "SPRINTS.md"
+    general_streams = root / "docs" / "GENERAL_STREAMS.md"
+
+    if not sprints.exists():
+        errors.append("docs/SPRINTS.md fehlt.")
+        return
+
+    try:
+        lines = sprints.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError as exc:
+        errors.append(f"docs/SPRINTS.md: konnte Datei nicht lesen: {exc}")
+        return
+
+    for i, line in enumerate(lines, start=1):
+        if RE_FORBIDDEN_SPRINT_STEERING_HEADING.match(line):
+            errors.append(
+                f"docs/SPRINTS.md:{i}: nicht-sprintgebundener Steuerungsblock "
+                f"'{line.strip()}' gehoert nach docs/GENERAL_STREAMS.md."
+            )
+
+    if not general_streams.exists():
+        errors.append(
+            "docs/GENERAL_STREAMS.md fehlt; nicht-sprintgebundene Steuerungsbloecke "
+            "brauchen eine eigene Zielablage."
+        )
+
+
 def main() -> int:
     docs = collect_tracker_docs()
 
@@ -330,6 +360,7 @@ def main() -> int:
         validate_meta(doc, known_ids_all)
 
     scan_tracker_heading_style(docs)
+    scan_steering_doc_boundaries()
     scan_code_refs(known_ids_all)
 
     for w in warnings:

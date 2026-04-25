@@ -1,5 +1,5 @@
 # Git- und PR-Workflow fuer Betankungen
-**Stand:** 2026-04-24
+**Stand:** 2026-04-25
 
 ## Ziel
 
@@ -83,6 +83,18 @@ Die kanonische Artefaktmatrix liegt in
   oder Tag-H2s als PR-Schema weitergereicht werden.
 - Pruefpfad: `.github/pull_request_template.md`, externe Prompt-/Template-
   Quellen in der Audit-Ablage, manuelle Governance-Reviews.
+
+### Steuerungsdokumente
+
+- Zweck: laufende Projektsteuerung ohne Vermischung von Sprint-Traceability
+  und nicht-sprintgebundener Pflegearbeit.
+- Erlaubte Struktur: `docs/SPRINTS.md` fuehrt ausschliesslich echte
+  Sprint-Narrative; `docs/GENERAL_STREAMS.md` sammelt General-/Governance-/
+  Audit-/Pflegebloecke ohne Sprint-Commit-Folge.
+- Unzulaessige Struktur: neue `## General-Stream`- oder
+  `## Traceability-Backfill`-Bloecke in `docs/SPRINTS.md`.
+- Pruefpfad: `scripts/projtrack_lint.sh` und Review der betroffenen
+  Steuerungsdoku.
 
 ## Branch-Strategie
 

@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-24
+**Stand:** 2026-04-25
 CLI-Projekt mit Free Pascal, Linux und SQLite
 
 ---
@@ -112,6 +112,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/DEV_DIARY.md`: kuratierte Entwicklungschronik (Entscheidungen,
   Huerden, Learnings); sichtbar im Handoff, aber bewusst sekundär zu
   `docs/CHANGELOG.md` und `docs/SPRINTS.md`.
+- `docs/GENERAL_STREAMS.md`: nicht-sprintgebundene General-/Governance-/
+  Audit-/Pflegebloecke ohne Sprint-Commit-Folge.
 - `docs/TEST_MATRIX.md`: kanonische Teststrategie mit Ebenen, Coverage-Matrix, Release-Gates und offenen UX-/Robustheitsfragen.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/ROADMAP_1_4_0.md`: abgeschlossener Gate-/Freeze-/Release-Closeout-
@@ -139,7 +141,7 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/policies/templates/`: Vorlagen fuer neue `ISS`/`BL`/`TSK`-Eintraege gemaess `POL-001`.
 - `docs/tasks/`: globale `TSK-xxxx`-Eintraege (z. B. fuer Legacy-Backlog-Parents).
 - `docs/CHANGELOG.md`: laufende, datierte Aenderungen.
-- `docs/SPRINTS.md`: Sprint-Narrative und Commit-Folgen.
+- `docs/SPRINTS.md`: reine Sprint-Narrative und Commit-Folgen.
 - `docs/ROADMAP_1_2_0.md`: verbindlicher Gate-Plan der abgeschlossenen 1.2.0-Linie.
 - `docs/CONTRACT_HARDENING_1_2_0.md`: Verify-/Contract-Hardening-Matrix fuer Gate 3 der 1.2.0-Linie.
 - `docs/RELEASE_1_2_0_PREFLIGHT.md`: Preflight-Blueprint und Doku-Gates fuer Gate 4/5 der 1.2.0-Linie.
@@ -153,6 +155,44 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/RELEASE_1_0_0_PREFLIGHT.md`: Scope-Freeze + Release-Preflight fuer die 1.0.0-Linie.
 - `docs/CONTRACT_HARDENING_1_0_0.md`: Policy-abgeleitete Contract-Hardening-Checklist (Gate 2 / Sprint 13).
 - `docs/wiki/README.md`: versionierte Wiki-v1-Quellseiten (Public-Readiness-Einstieg).
+
+## Docs-Root-Klassifikation
+
+Der `docs/`-Root bleibt ein Einstieg fuer aktive Steuerungs-, Architektur- und
+Statusdokumente. Neue Detaildokumente sollen bevorzugt in passende
+Unterordner wandern; eine harte Root-Allowlist ist erst sinnvoll, wenn der
+historische Bestand weiter bereinigt ist.
+
+**Darf im Root bleiben**
+- Aktive Einstiegs- und Steuerungsdoku: `README.md`, `README_EN.md`,
+  `STATUS.md`, `CHANGELOG.md`, `SPRINTS.md`, `GENERAL_STREAMS.md`,
+  `GIT_WORKFLOW.md`, `BACKLOG.md`, `DEV_DIARY.md`, `TEST_MATRIX.md`.
+- Aktive Architektur-/Produktgrundlagen: `ARCHITECTURE.md`,
+  `ARCHITECTURE_EN.md`, `MODULES_ARCHITECTURE.md`, `VISION.md`,
+  `CONSTRAINTS.md`, `DESIGN_PRINCIPLES.md`, `BENUTZERHANDBUCH.md`,
+  `RESTORE.md`.
+
+**Soll spaeter verschoben werden**
+- Release-/Roadmap-/Preflight-Dokumente nach `docs/releases/`:
+  `ROADMAP_*.md`, `RELEASE_*_PREFLIGHT.md`, `DEV_START_GATE_1_4_0.md`.
+- Contract-Dokumente nach `docs/contracts/`: `CONTRACT_HARDENING_*.md`,
+  `EXPORT_CONTRACT.md`, `EXPORT_PACKAGE_CONTRACT.md`,
+  `FUEL_PRICE_POLLING_HISTORY_CONTRACT_1_3_0.md`.
+- Research-/Audit-/UX-Einzeldokumente nach `docs/research/` oder einen
+  fachlich engeren Zielordner: `FUEL_PRICE_API_EVALUATION_1_3_0.md`,
+  `FUEL_PRICE_POLLING_RUNTIME_1_3_0.md`,
+  `LAZARUS_PURITY_AUDIT_2026-04-17.md`, `UI_ASCII_DRAW.md`,
+  `VIN_POLICY_UX_PREP.md`.
+
+**Wird in diesem Block bereits verschoben**
+- Keine Root-Dateien. Dieser Block entmischt zuerst die Steuerungsdoku und
+  klassifiziert den Root; physische Datei-Umzuege bleiben Folgearbeit, damit
+  Link-Anpassungen separat reviewbar sind.
+
+**Bleibt bewusst historisch/legacy**
+- `BL-0011_SCOPE_DECISION_1_4_0.md` bleibt als historischer
+  Scope-Entscheid zur 1.4.0-Linie lesbar, bis ein passender Legacy- oder
+  Release-Zielort separat geschnitten wird.
 
 ## Open-Source-Hinweis
 
@@ -199,6 +239,9 @@ Details zur Regelbasis:
 - `btkgit`: repo-lokaler Workflow-Wrapper fuer Sync/Preflight/Readiness und konservatives Cleanup (Wrapper auf `scripts/btkgit.sh`)
 - `data/`: entkoppelte Daten-Assets (u. a. `dev_messages.b64` fuer optionale Easter-Egg-Messages)
 - `migrations/`: historisches SQL-Archiv fuer fruehere manuelle Migrationen
+- `output/`: lokaler, nicht versionierter Lauf-/Exportbereich fuer temporaere
+  Ausgaben; keine kanonische Source of Truth und kein Ersatz fuer
+  `.artifacts/`, `.releases/` oder Doku unter `docs/`
 - `docs/legacy/knowledge_archive.md`: Bridge zum externalisierten
   Legacy-Wissensarchiv; Git-Historie bleibt der primaere Rueckgriff fuer
   fruehere Implementationsstaende
@@ -589,7 +632,8 @@ Beispiel:
 - `scripts/sprint_docs_lint.sh`
 
 ### `scripts/projtrack_lint.sh`
-Lint fuer den Tracker-Bereich gemaess `docs/policies/POL-001-tracker-standard.md`.
+Lint fuer den Tracker-Bereich gemaess `docs/policies/POL-001-tracker-standard.md`
+und fuer enge Steuerungsdoku-Grenzen.
 
 **Checks (v1-Scope)**
 - Frontmatter-Pflichtfelder in `docs/issues/**/issue.md`, `docs/backlog/**/item.md`, `docs/backlog/**/tasks/TSK-*.md`
@@ -597,6 +641,8 @@ Lint fuer den Tracker-Bereich gemaess `docs/policies/POL-001-tracker-standard.md
 - Referenzpruefung fuer `related` und `parent`
 - Duplicate-ID-Check innerhalb des neuen Tracker-Bereichs
 - Code-Referenzen `TODO(...)`, `FIXME(...)`, `NOTE(...)`, `REF(...)` auf vorhandene IDs
+- keine neuen `General-Stream`-/`Traceability-Backfill`-Bloecke in
+  `docs/SPRINTS.md`
 
 Beispiel:
 - `scripts/projtrack_lint.sh`

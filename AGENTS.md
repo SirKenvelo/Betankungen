@@ -1,5 +1,5 @@
 # AGENTS
-**Stand:** 2026-04-24
+**Stand:** 2026-04-25
 
 <INSTRUCTIONS>
 
@@ -122,7 +122,8 @@
 ## Dokumentations-Management
 - Dokumentation im `docs`-Ordner bei Hoch/Mittel-Priorität selbstständig mitpflegen.
 - `docs/CHANGELOG.md` bei JEDER Änderung aktualisieren (inkl. aktuellem Datum).
-- `docs/SPRINTS.md` als Sprint-Narrative mitfuehren (Status, Zielbild, Commit-Reihenfolge, relevante Hashes/Artefakte, Abschluss-Tag pro Sprint).
+- `docs/SPRINTS.md` als reine Sprint-Narrative mitfuehren (Status, Zielbild, Commit-Reihenfolge, relevante Hashes/Artefakte, Abschluss-Tag pro Sprint).
+- Nicht-sprintgebundene General-/Governance-/Audit-/Pflegebloecke gehoeren nach `docs/GENERAL_STREAMS.md`, nicht nach `docs/SPRINTS.md`.
 - CHANGELOG-Einträge neutral und feature-zentriert unter `[Unreleased] -> Changed` erfassen (kein personenbezogenes Framing als Abschnittsueberschrift).
 - Attribution transparent, aber dezent ueber `[Unreleased] -> Tooling / Assistance` halten (ein kurzer Sammelhinweis reicht).
 - Sprint-/Commit-Traceability ist verpflichtend: Bei Sprint-Arbeit muessen Eintraege unter `[Unreleased] -> Changed` mit einem Prefix im Format `[SxCy/z]` beginnen (Beispiel: `[S1C1/4]`).
