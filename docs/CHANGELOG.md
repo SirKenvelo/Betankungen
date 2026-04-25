@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-24
+**Stand:** 2026-04-25
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,17 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Docs/Governance: Die Steuerungsdoku ist wieder
+  domainenscharf getrennt. `docs/SPRINTS.md` fuehrt nur noch echte
+  Sprint-Narrative, `docs/GENERAL_STREAMS.md` uebernimmt die bisherigen
+  nicht-sprintgebundenen General-/Governance-/Audit-/Pflegebloecke
+  verlustfrei, und `scripts/projtrack_lint.sh` blockiert neue
+  General-Stream-/Traceability-Backfill-Bloecke in `docs/SPRINTS.md`.
+  `docs/README.md` klassifiziert den aktuellen `docs/`-Root, benennt
+  spaetere Zielordner fuer Release-, Contract- und Research-Dokumente und
+  rahmt `output/` als lokalen, nicht versionierten Lauf-/Exportbereich.
+  Es wurden keine Runtime-, CLI-, Parser- oder Datenmodell-Aenderungen
+  eingefuehrt. (2026-04-25)
 - [General] Docs/Governance: `AGENTS.md` und `docs/GIT_WORKFLOW.md`
   verankern den PR-Normalfall jetzt explizit als `ready for review`.
   Draft-PRs sind damit kein Komfort- oder Vorsichtsdefault mehr, sondern nur
