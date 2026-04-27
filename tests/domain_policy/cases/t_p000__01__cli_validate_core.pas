@@ -1,3 +1,20 @@
+{
+  t_p000__01__cli_validate_core.pas
+  ---------------------------------------------------------------------------
+  CREATED: 2026-02-20
+  UPDATED: 2026-04-27
+  AUTHOR : Christof Kempinski
+  In-Process-Regressionstest fuer den zentralen CLI-Validate-Layer.
+
+  Verantwortlichkeiten:
+  - Prueft den Kernvertrag von `u_cli_validate` ueber direkte `TCommand`-Faelle.
+  - Sichert Meta-, Action-, Target- und Format-Policies ohne Prozess-Wrapper.
+
+  Hinweis:
+  - Bewusster Boundary-Test: Parse-Details gehoeren in Parser-Faelle, dieser
+    Test fokussiert den reinen Validator-Contract.
+  ---------------------------------------------------------------------------
+}
 program t_p000__01__cli_validate_core;
 
 {$mode objfpc}{$H+}

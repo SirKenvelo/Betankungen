@@ -2,13 +2,15 @@
   u_cli_parse.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-02-19
-  UPDATED: 2026-04-07
+  UPDATED: 2026-04-27
   AUTHOR : Christof Kempinski
   Zentrale CLI-Parsing-Unit fuer den Kommandozustand.
 
   Verantwortlichkeiten:
   - Parst CLI-Argumente in den zentralen Zustand `TCommand`.
-  - Fuehrt die regelbasierte Validierung der CLI-Kombinationen aus.
+  - Fuehrt lokale Syntax-, Arity- und Exklusivitaetschecks des Parserpfads aus.
+  - Normalisiert Parse-Hilfswerte wie Period- oder Maintenance-Source-Eingaben.
+  - Delegiert zentrale CLI-Policy-Validierung an `u_cli_validate`.
   - Liefert im Fehlerfall konsistente Fehlertexte und Fokus-Markierungen.
   ---------------------------------------------------------------------------
 }

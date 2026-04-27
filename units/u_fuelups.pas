@@ -2,19 +2,21 @@
   u_fuelups.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-08
+  UPDATED: 2026-04-27
   AUTHOR : Christof Kempinski
   Fachmodul fuer Erfassung und Auflistung von Betankungsvorgaengen.
 
   Verantwortlichkeiten:
   - Fuehrt den interaktiven Add-Flow fuer fuelups aus.
-  - Listet fuelups in Standard- oder Detailansicht.
+  - Listet fuelups in Standardansicht und delegiert die Detailansicht an `u_view_fuelups`.
   - Validiert Odometer-/Lueckenlogik und Pflichtfelder vor Persistenz.
+  - Normalisiert lokale Receipt-Pfade auf kanonische `file://`-Links.
 
   Design-Prinzipien:
   - Datentransfer: `TFuelupInput` entkoppelt Dialogdaten von SQL-Schreibvorgaengen.
   - Praezision: Werte werden als skalierte Integer verarbeitet.
-  - UI-Konsistenz: Ausgabeformat liegt in `u_fmt`.
+  - Fuelups bleiben append-only; Edit/Delete fuer Historieneintraege liegen bewusst ausserhalb dieser Unit.
+  - Gemeinsame Ausgabeformate liegen in `u_fmt`, read-only Detail-Views in `u_view_fuelups`.
 
   Hinweis:
   - Erfordert foreign_keys=ON und eine valide stations/cars-Datenbasis.

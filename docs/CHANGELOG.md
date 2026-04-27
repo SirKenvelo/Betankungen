@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-25
+**Stand:** 2026-04-27
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,18 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Maintenance/Headers: Die im Audit priorisierten Header-Hotspots
+  wurden gezielt auf den aktuellen Rollenstand gezogen. `units/u_stats.pas`
+  beschreibt jetzt Fuelup-/Fleet-/Cost-Stats inkl. optionaler
+  Maintenance-Companion-Integration und Prozess-/JSON-Fallback-Grenze,
+  `units/u_stations.pas` rahmt Geodaten-/Plus-Code-Policies
+  `P-080..P-088`, `units/u_maintenance_db.pas` nennt Schema-, Event-CRUD-
+  und Stats-Verantwortung, `units/u_fuelups.pas` fuehrt Receipt-Link-,
+  append-only- und Detail-View-Grenzen klarer, `units/u_cli_parse.pas`
+  schaerft die Parse-vs-Validate-Trennung, und
+  `tests/domain_policy/cases/t_p000__01__cli_validate_core.pas` hat jetzt
+  einen eigenen Rollenheader. Es wurden bewusst keine Runtime-, CLI-,
+  Datenmodell- oder Build-Aenderungen eingefuehrt. (2026-04-27)
 - [General] Docs/Governance: Die Steuerungsdoku ist wieder
   domainenscharf getrennt. `docs/SPRINTS.md` fuehrt nur noch echte
   Sprint-Narrative, `docs/GENERAL_STREAMS.md` uebernimmt die bisherigen
@@ -1140,6 +1152,9 @@ ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 - [S1C2/4] Tests/Smoke: `tests/smoke/smoke_cars_crud.sh` Stats-CSV-Scope auf feldbasierte Contract-Checks umgestellt (Header `idx,dist_km,liters_ml,avg_l_per_100km_x100,total_cents`, numerische Typguards, Rowcount `fuelups_count(car)-1`, DB-abgeleitete Token-Validation und Foreign-Guards ohne grep-Regexe). (2026-03-02)
 
 ### Tooling / Assistance
+- Header-/Kommentar-Nachpflege, Scope-Begrenzung und repo-seitiger
+  Traceability-Sync erfolgten mit Unterstuetzung durch AI-Tools als
+  Sparringspartner. (2026-04-27)
 - Knowledge-Archive-Externalisierung, Bridge-Vertrag und Smoke-/Doku-Sync
   erfolgten mit Unterstuetzung durch AI-Tools als Sparringspartner.
   (2026-04-24)

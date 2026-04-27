@@ -2,9 +2,9 @@
   u_stats.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-03-18
+  UPDATED: 2026-04-27
   AUTHOR : Christof Kempinski
-  Statistik-Funktionen fuer Betankungen.
+  Statistik- und Integrationsfunktionen fuer Betankungen.
 
   Verantwortlichkeiten:
   - Auswertung von Tankvorgaengen (fuelups) fuer Volltank-Zyklen.
@@ -17,10 +17,14 @@
   - Jahresaggregation fuer `--stats fuelups --yearly` (Text + JSON kind "fuelups_yearly").
   - Fleet-Stats-Basis fuer `--stats fleet` (MVP-Text/JSON-Ausgabe).
   - Cost-Stats-Basis fuer `--stats cost` (Text/JSON, fuel-basiert, inkl. Scope-Filter).
+  - Optionale Maintenance-Companion-Integration fuer Cost-Stats via Prozessaufruf.
 
   Hinweise:
   - Erwartet die Tabelle fuelups inkl. car_id, is_full_tank, odometer_km, liters_ml, total_cents.
   - Zeitraumgrenzen werden intern als [from inklusiv, to_excl exklusiv] verarbeitet.
+  - Maintenance-Stats werden nur optional ueber das Companion-Binary geladen; bei fehlendem Binary,
+    unpassendem JSON (`maintenance_stats_v1`) oder nicht unterstuetztem Period-Scope faellt der Core
+    bewusst auf lokale Fuel-/Cost-Daten plus Hinweistext zurueck.
   ---------------------------------------------------------------------------
 }
 unit u_stats;
@@ -1596,6 +1600,9 @@ begin
   end;
 end;
 
+// Integrationsgrenze: Der Core spricht optional das Maintenance-Companion-
+// Binary an, erwartet `maintenance_stats_v1`-JSON und faellt bei Scope- oder
+// Laufzeitgrenzen bewusst auf lokale Cost-Stats mit Hinweistext zurueck.
 procedure ResolveMaintenanceFromModule(
   const ScopeCarId: Integer;
   const PeriodEnabled: Boolean;
