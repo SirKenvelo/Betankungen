@@ -2,14 +2,16 @@
   u_maintenance_db.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-03-14
-  UPDATED: 2026-03-14
+  UPDATED: 2026-04-27
   AUTHOR : Christof Kempinski
-  DB-Schemaverwaltung fuer das Companion-Modul `betankungen-maintenance`.
+  DB-Schema-, CRUD- und Stats-Helfer fuer `betankungen-maintenance`.
 
   Verantwortlichkeiten:
   - Aufloesung eines stabilen Default-DB-Pfads fuer das Modul.
   - Idempotente Initialisierung/Migration des Modul-Schemas.
   - Persistenz einer separaten Modul-Schema-Version (`module_meta.schema_version`).
+  - Event-CRUD fuer `maintenance_events`.
+  - Listen- und Stats-Abfragen fuer die CLI-/Companion-Ausgabe.
   ---------------------------------------------------------------------------
 }
 unit u_maintenance_db;

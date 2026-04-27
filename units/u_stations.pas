@@ -2,7 +2,7 @@
   u_stations.pas
   ---------------------------------------------------------------------------
   CREATED: 2026-01-17
-  UPDATED: 2026-04-01
+  UPDATED: 2026-04-27
   AUTHOR : Christof Kempinski
   Fachmodul fuer Stammdatenverwaltung von Tankstellen (stations).
 
@@ -10,11 +10,14 @@
   - Implementiert Add/List/Edit/Delete fuer stations.
   - Bietet kompakte und detaillierte Listendarstellung.
   - Sichert Adress-Eindeutigkeit ueber DB-Constraints + Fehlermapping.
+  - Validiert Stammdaten, Geokoordinaten und Plus-Codes gemaess `P-080..P-088`.
+  - Normalisiert volle und lokale Plus-Codes ueber vorhandene Koordinaten.
 
   Design-Entscheidungen:
   - Atomare Schreiboperationen per Transaktion.
   - Konsistentes CLI-Layout via feste Spaltenbreiten.
   - Defensive Eingabepruefung vor DB-Schreibvorgaengen.
+  - Bewusst kein vollstaendiger Open-Location-Code-Decoder ausserhalb des aktuellen CLI-Contracts.
 
   Hinweis:
   - Jede Betankung referenziert stations; diese Unit ist daher
@@ -315,6 +318,9 @@ begin
   end;
 end;
 
+// Der Recovery-Pfad deckt bewusst nur die fuer den aktuellen Contract
+// benoetigte Short-/Pair-Code-Ergaenzung ueber Referenzkoordinaten ab und
+// ist kein allgemeiner Open-Location-Code-Decoder.
 function RecoverFullPlusCodeFromCoordinates(
   const ShortCode: string;
   const LatitudeE6, LongitudeE6: Int64
