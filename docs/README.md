@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-25
+**Stand:** 2026-05-03
 CLI-Projekt mit Free Pascal, Linux und SQLite
 
 ---
@@ -70,6 +70,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
 - Aktueller technischer Stand: `APP_VERSION=1.4.0`.
 - Die abgeschlossene Gate-/Closeout-Doku der stabilen Linie liegt in
   `docs/ROADMAP_1_4_0.md`.
+- Der naechste geplante Produktpfad ist jetzt repo-seitig als vorbereitete,
+  aber noch nicht aktivierte Roadmap dokumentiert:
+  `docs/ROADMAP_1_5_0.md`.
 - Der historische Vorstart-Gate bleibt in `docs/DEV_START_GATE_1_4_0.md`
   nachvollziehbar; der eigentliche Dev-Start wurde bereits in Sprint 30 per
   separatem Aktivierungs-Commit vollzogen.
@@ -95,6 +98,9 @@ Das Hauptprogramm steuert – die Units arbeiten.
     Blocker wuerde dokumentiert statt umgangen.
 - Der Post-Release-Zustand bleibt bewusst auf `1.4.0`; eine automatische
   `1.5.0-dev`-Linie wurde nicht gestartet.
+- `docs/ROADMAP_1_5_0.md` beschreibt den vorbereiteten Folgepfad fuer
+  `BL-0034`, aktiviert die Linie aber noch nicht; `APP_VERSION=1.4.0`
+  bleibt bis zu einem separaten Dev-Start unveraendert.
 - Historische Gate-Plaene bleiben als Abschlussdoku verfuegbar:
   `docs/ROADMAP_1_3_0.md`, `docs/ROADMAP_1_2_0.md`,
   `docs/ROADMAP_1_1_0.md`, `docs/ROADMAP_1_0_0.md`.
@@ -118,6 +124,8 @@ Details und Fortschritt: `docs/STATUS.md` und `docs/ARCHITECTURE.md`.
 - `docs/ARCHITECTURE_EN.md`: kompakte englische Architektur-Zusammenfassung.
 - `docs/ROADMAP_1_4_0.md`: abgeschlossener Gate-/Freeze-/Release-Closeout-
   Rahmen fuer die `1.4.0`-Linie.
+- `docs/ROADMAP_1_5_0.md`: vorbereiteter Gate-Plan fuer die moegliche
+  `1.5.0`-Produktlinie auf Basis von `BL-0034`; noch kein aktiver Dev-Start.
 - `docs/RELEASE_1_4_0_PREFLIGHT.md`: dokumentierter lokaler Gate-4-/Gate-5-
   Closeout fuer `1.4.0` (Verify + Governance + Dry-Runs + Finalisierung).
 - `docs/DEV_START_GATE_1_4_0.md`: historischer Go-/No-Go-Stand vor dem

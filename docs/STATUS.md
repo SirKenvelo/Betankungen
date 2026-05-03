@@ -1,5 +1,5 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-04-25
+**Stand:** 2026-05-03
 **Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
@@ -85,6 +85,25 @@
   - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
     auf `1.4.0` bleibt aktiv.
   - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
+
+## Roadmap 1.5.0 - verbindlicher Fahrplan (geplant, noch nicht aktiv)
+
+- Der vorbereitete Gate-Plan liegt in `docs/ROADMAP_1_5_0.md`.
+- Die Linie ist noch nicht aktiv; `APP_VERSION=1.4.0` bleibt bis zu einem
+  separaten Dev-Start unveraendert.
+- Geplanter Produktschnitt:
+  - `BL-0034` als fokussierte Produktlinie
+  - erster echter Realflow: `--add fuelups`
+  - TTY-only-Komfortpfad
+  - dauerhafter Prompt-Fallback fuer Non-TTY, Pipes, CI, Tests und
+    Notfallpfade
+  - keine zweite Fachlogik im Formular-Layer
+- Bewusst ausserhalb der Linie:
+  - `BL-0032`
+  - generisches Voll-TUI-Framework
+  - Big-Bang-Umbau weiterer Add-/Edit-Flows
+- Der Fahrplan beschreibt eine vorbereitete Produktlinie, startet aber
+  ausdruecklich noch keine `1.5.0-dev`-Entwicklung.
 
 ## Audit-Block - Lazarus-Purity Baseline (2026-04-17)
 
