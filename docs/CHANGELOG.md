@@ -1,5 +1,5 @@
 # CHANGELOG
-**Stand:** 2026-04-27
+**Stand:** 2026-05-03
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
@@ -10,6 +10,14 @@ Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
 ohne automatisch eine `1.5.0-dev`-Linie zu starten.
 
 ### Changed
+- [General] Planning/Roadmap: Die vorbereitete Folgeplanung fuer `1.5.0`
+  ist jetzt repo-seitig angelegt. `docs/ROADMAP_1_5_0.md` beschreibt
+  `BL-0034` als fokussierte moegliche Produktlinie mit `--add fuelups` als
+  erstem Realflow, TTY-only-Komfortpfad, dauerhaftem Prompt-Fallback,
+  Minimal-Generik und ausdruecklicher Abgrenzung zu `BL-0032`. `docs/STATUS.md`
+  und `docs/README.md` fuehren denselben Stand: die Roadmap ist vorbereitet,
+  aber eine aktive `1.5.0-dev`-Linie wurde noch nicht gestartet und
+  `APP_VERSION=1.4.0` bleibt unveraendert. (2026-05-03)
 - [General] Maintenance/Headers: Die im Audit priorisierten Header-Hotspots
   wurden gezielt auf den aktuellen Rollenstand gezogen. `units/u_stats.pas`
   beschreibt jetzt Fuelup-/Fleet-/Cost-Stats inkl. optionaler
