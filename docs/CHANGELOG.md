@@ -1,15 +1,23 @@
 # CHANGELOG
-**Stand:** 2026-05-03
+**Stand:** 2026-05-06
 
 Alle wichtigen Änderungen an diesem Projekt werden hier dokumentiert.
 
 ## [Unreleased]
 ### Zielversion
-Stabiler Stand `1.4.0` (`APP_VERSION=1.4.0`)
-Ziel: den final freigegebenen `1.4.0`-Stand fuer Pflege und Audits halten,
-ohne automatisch eine `1.5.0-dev`-Linie zu starten.
+Aktive Linie `1.5.0-dev` (`APP_VERSION=1.5.0-dev`)
+Ziel: die freigegebene `1.5.0-dev`-Linie fuer `BL-0034` bewusst aktiv
+halten, ohne Gate 2 oder inhaltliche Folgearbeit vorwegzunehmen.
 
 ### Changed
+- [General] Release/Dev-Start: Die `1.5.0-dev`-Linie ist jetzt bewusst als
+  eigener Gate-1-Aktivierungsblock gestartet. `src/Betankungen.lpr` fuehrt
+  `APP_VERSION=1.5.0-dev`; `docs/STATUS.md` und `docs/ROADMAP_1_5_0.md`
+  dokumentieren dieselbe aktive Linie mit abgeschlossenem Gate 1 und noch
+  nicht gestartetem Gate 2. `README.md` wurde minimal auf den aktiven
+  Repository-Stand gezogen. `BL-0034` wurde dabei noch nicht umgesetzt, es
+  wurden keine neuen Tasks geschnitten und `BL-0032` blieb ausdruecklich
+  ausserhalb der Linie. (2026-05-06)
 - [General] Planning/Roadmap: Die vorbereitete Folgeplanung fuer `1.5.0`
   ist jetzt repo-seitig angelegt. `docs/ROADMAP_1_5_0.md` beschreibt
   `BL-0034` als fokussierte moegliche Produktlinie mit `--add fuelups` als

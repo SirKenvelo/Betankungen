@@ -1,6 +1,6 @@
 # Aktueller Projektstatus – Betankungen
-**Stand:** 2026-05-03
-**Zielversion:** Stabile Linie `1.4.0` (technischer Stand `APP_VERSION=1.4.0`; Gate 4 und Gate 5 abgeschlossen; Post-Release-Hold aktiv)
+**Stand:** 2026-05-06
+**Zielversion:** Aktive Linie `1.5.0-dev` (technischer Stand `APP_VERSION=1.5.0-dev`; Gate 1 abgeschlossen, Gate 2 noch nicht gestartet)
 
 ## Roadmap 1.4.0 - verbindlicher Fahrplan (abgeschlossen)
 
@@ -82,15 +82,16 @@
     nicht-sprintgebundenen General-/Governance-/Audit-/Pflegebloecke
     verlustfrei uebernimmt. `scripts/projtrack_lint.sh` blockiert neue
     General-Stream-/Traceability-Backfill-Bloecke in `docs/SPRINTS.md`.
-  - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; der dokumentierte Hold
-    auf `1.4.0` bleibt aktiv.
-  - Eine neue `1.5.0-dev`-Linie wurde bewusst nicht automatisch gestartet.
+  - Gate 4 und Gate 5 sind dokumentiert abgeschlossen; `1.4.0` bleibt die
+    letzte stabile Release-Version.
+  - Die neue `1.5.0-dev`-Linie wurde am 2026-05-06 bewusst per separatem
+    Dev-Start aktiviert.
 
-## Roadmap 1.5.0 - verbindlicher Fahrplan (geplant, noch nicht aktiv)
+## Roadmap 1.5.0 - verbindlicher Fahrplan (aktiv, Gate 1 abgeschlossen)
 
 - Der vorbereitete Gate-Plan liegt in `docs/ROADMAP_1_5_0.md`.
-- Die Linie ist noch nicht aktiv; `APP_VERSION=1.4.0` bleibt bis zu einem
-  separaten Dev-Start unveraendert.
+- Die Linie ist jetzt aktiv; `APP_VERSION=1.5.0-dev` bildet die technische
+  Entwicklungsbasis.
 - Geplanter Produktschnitt:
   - `BL-0034` als fokussierte Produktlinie
   - erster echter Realflow: `--add fuelups`
@@ -102,8 +103,12 @@
   - `BL-0032`
   - generisches Voll-TUI-Framework
   - Big-Bang-Umbau weiterer Add-/Edit-Flows
-- Der Fahrplan beschreibt eine vorbereitete Produktlinie, startet aber
-  ausdruecklich noch keine `1.5.0-dev`-Entwicklung.
+- Gate-Stand:
+  - Gate 1 abgeschlossen am 2026-05-06 (separater Dev-Start auf
+    `APP_VERSION=1.5.0-dev` und Repo-Sync auf die aktive Linie).
+  - Gate 2 noch nicht gestartet.
+- `BL-0034` bleibt inhaltlich unangetastet; der aktuelle Block aktiviert nur
+  die Entwicklungsbasis und den verbindlichen Scope-Rahmen.
 
 ## Audit-Block - Lazarus-Purity Baseline (2026-04-17)
 

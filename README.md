@@ -1,5 +1,5 @@
 # Betankungen
-**Stand:** 2026-04-19
+**Stand:** 2026-05-06
 
 CLI-first fuel tracking and full-tank cycle statistics tool for local SQLite
 data, built with Free Pascal as a Linux CLI application.
@@ -67,13 +67,17 @@ need to add a station before the first fuel-up flow.
 - Stable release consumption: the current public handoff for `1.4.0` uses
   source-build guidance via `make build`; binary assets are only expected when
   a release explicitly ships them
-- Technical runtime state: `APP_VERSION=1.4.0`
-- Active repository line: stable hold on `1.4.0`
-- Gate 4 and Gate 5 for `1.4.0` are complete; exploratory follow-up blocks
-  `BL-0032` and `BL-0034` remain outside the released line
+- Technical runtime state: `APP_VERSION=1.5.0-dev`
+- Active repository line: `1.5.0-dev` is active as a dedicated Gate-1
+  dev-start block for the planned `BL-0034` product line
+- `1.4.0` remains the latest stable release, while the active repository line
+  now prepares the next focused TUI form cycle
 - Release closeout record for the stable line:
   `docs/ROADMAP_1_4_0.md`, `docs/RELEASE_1_4_0_PREFLIGHT.md`
-- No automatic `1.5.0-dev` line was started after the release
+- The `1.5.0-dev` line was activated explicitly as a separate scope-start
+  block; `BL-0034` itself is not implemented yet and `BL-0032` stays out of
+  scope
+- Active roadmap for the dev line: `docs/ROADMAP_1_5_0.md`
 - `tests/smoke/smoke_cli.sh` exercises `btkgit` through a local bare remote
   with a real `main` ref and a fresh clone instead of overriding Git signing
   policy
