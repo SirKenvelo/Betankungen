@@ -1,13 +1,14 @@
 # Verbindlicher Fahrplan bis Version 1.5.0
-**Stand:** 2026-05-03
-**Status:** geplant (keine aktive `-dev`-Linie; technischer Stand `APP_VERSION=1.4.0`)
+**Stand:** 2026-05-06
+**Status:** aktiv (`APP_VERSION=1.5.0-dev`; Gate 1 abgeschlossen, Gate 2 noch nicht gestartet)
 
 ## Ausgangslage
 
 - `1.4.0` wurde am 2026-04-15 final freigegeben und bleibt aktuell der
   stabile technische Stand.
-- Eine automatische Fortschreibung auf `1.5.0-dev` wurde bewusst nicht
-  gestartet; die aktuelle Produktwahrheit bleibt `APP_VERSION=1.4.0`.
+- Der Dev-Start fuer `1.5.0-dev` wurde am 2026-05-06 bewusst als separater
+  Gate-1-Aktivierungsblock ausgefuehrt; die aktuelle Produktwahrheit ist
+  jetzt `APP_VERSION=1.5.0-dev`.
 - `BL-0033` ist geliefert und stellt den ersten read-only Referenzscreen fuer
   `Betankungen --list fuelups --detail` bereit.
 - `ADR-0015` ist `accepted` und legt die CLI-first-TUI-Evolutionsstrategie
@@ -72,11 +73,11 @@
 
 Exit-Kriterium:
 - `--add fuelups` ist als erster Ziel-Flow verbindlich benannt.
-- Es ist klar dokumentiert, dass `1.5.0-dev` erst mit separatem
-  Aktivierungs-Commit startet.
+- `1.5.0-dev` ist per separatem Aktivierungsblock gestartet, ohne bereits
+  Gate-2-Arbeit oder BL-0034-Umsetzung mitzuziehen.
 
 Status:
-- geplant.
+- abgeschlossen am 2026-05-06.
 
 ### Gate 2: Scope-Freeze / Form-Contract
 
@@ -144,21 +145,24 @@ Status:
 
 ## Formale Startregel
 
-Diese Roadmap ist eine verbindliche Produktplanung im Repository, aber noch
-kein Start einer aktiven `1.5.0-dev`-Linie.
+Diese Roadmap ist jetzt die verbindliche aktive Produktlinie fuer den
+`1.5.0-dev`-Zyklus.
 
-Der eigentliche Zyklusstart erfolgt erst, wenn:
+Der Dev-Start ist bewusst eng ausgefuehrt worden:
 
-- Chris und Lena den Scope freigeben,
-- ein separater Dev-Start explizit beschlossen wird,
-- und `APP_VERSION` in einem eigenen Aktivierungs-Commit auf `1.5.0-dev`
-  angehoben wird.
+- `APP_VERSION` wurde in einem separaten Aktivierungsblock auf
+  `1.5.0-dev` angehoben.
+- Gate 1 ist damit abgeschlossen.
+- Gate 2 ist noch nicht gestartet.
+- `BL-0034` bleibt weiterhin unimplementiert; diese Roadmap aktiviert nur die
+  Entwicklungsbasis und den verbindlichen Scope-Rahmen.
 
-Bis dahin bleibt:
+Weiterhin gilt:
 
-- `APP_VERSION=1.4.0`
-- `1.4.0` der stabile technische Stand
-- diese Roadmap eine vorbereitete, aber noch nicht aktivierte Produktlinie
+- `1.4.0` bleibt die letzte stabile Release-Version.
+- `BL-0032` bleibt ausserhalb dieser Linie.
+- Es wurden keine neuen Tasks geschnitten und keine Folge-Gates
+  vorweggenommen.
 
 ## Verbindliche Abweichungsregel
 
